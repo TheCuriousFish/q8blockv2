@@ -284,11 +284,11 @@
     .tag-ink   { color: rgba(17,20,24,0.4); }
 
     .s2 {
-      font-family: var(--fh);
+      font-family: var(--fb);
       font-size: clamp(1.9rem, 4vw, 2.9rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.022em;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.018em;
       margin-bottom: 0.7rem;
     }
     .s2-dark  { color: var(--ink); }
@@ -315,15 +315,18 @@
       background: var(--white);
       padding: 7rem 1.5rem;
     }
-    .proof-head { margin-bottom: 3rem; }
+    .proof-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
 
     .mockup {
       border-radius: 14px;
       background: var(--white);
       box-shadow: 0 28px 70px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.04);
       overflow: hidden;
-      max-width: 880px;
-      margin: 0 auto;
     }
     .mockup-bar {
       background: #F0F0F0;
@@ -517,7 +520,7 @@
     }
     .faq-head { margin-bottom: 3.5rem; }
 
-    .faq-list { max-width: 780px; }
+    .faq-list { max-width: 780px; margin: 0 auto; }
 
     .faq-item {
       border-bottom: 1px solid rgba(17,20,24,0.09);
@@ -633,7 +636,7 @@
       margin-bottom: 0.65rem;
     }
     .footer-logo em { color: var(--c1); font-style: normal; }
-    .footer-desc { font-size: 0.82rem; line-height: 1.7; max-width: 28ch; }
+    .footer-desc { font-size: 0.82rem; line-height: 1.7; max-width: 28ch; color: rgba(230,242,246,0.72); }
 
     .footer-col-title {
       font-size: 0.67rem;
@@ -662,18 +665,16 @@
       margin: 0 auto;
       padding-top: 2rem;
       border-top: 1px solid rgba(188,225,236,0.07);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-align: center;
       font-size: 0.77rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      color: rgba(230,242,246,0.72);
     }
 
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 860px) {
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
+      .proof-cols { grid-template-columns: 1fr; gap: 3rem; }
       .footer-inner { grid-template-columns: 1fr; gap: 2.2rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
@@ -720,10 +721,7 @@
     </p>
 
     <div class="hero-btns" id="heroBtns">
-      <a href="https://wa.me/96594139666" class="btn btn-wa" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.489 2.027 7.797L0 32l8.418-2.003A15.95 15.95 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.747-1.832l-.484-.287-5 1.191 1.213-4.869-.315-.5A13.263 13.263 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.273-9.946c-.398-.199-2.352-1.161-2.717-1.293-.365-.133-.63-.199-.895.199-.266.398-1.028 1.293-1.26 1.558-.232.265-.464.298-.862.1-.398-.2-1.681-.619-3.202-1.975-1.183-1.055-1.982-2.358-2.214-2.756-.232-.398-.025-.613.175-.811.178-.177.398-.464.597-.696.199-.232.265-.398.398-.663.133-.266.066-.498-.033-.697-.1-.2-.895-2.155-1.227-2.951-.323-.775-.65-.67-.895-.683-.232-.012-.498-.015-.763-.015-.265 0-.697.1-1.062.498-.365.398-1.393 1.361-1.393 3.316 0 1.955 1.427 3.844 1.626 4.109.199.265 2.808 4.288 6.804 6.016.951.41 1.692.655 2.27.838.954.303 1.823.26 2.51.158.766-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/></svg>
-        Message Us on WhatsApp
-      </a>
+      <a href="#cta" class="btn btn-solid">Contact Us</a>
       <a href="#pricing" class="btn btn-ghost">View Plans</a>
     </div>
   </div>
@@ -738,21 +736,27 @@
 <!-- ─── PROOF ────────────────────────────────────────────────── -->
 <section id="proof">
   <div class="container">
-    <div class="proof-head">
-      <span class="tag tag-muted reveal">Real Results</span>
-      <h2 class="s2 s2-dark reveal">Page 1 Rankings That<br>Bring Real Customers</h2>
-      <p class="sp sp-muted reveal">Not vanity metrics. Actual positions, actual calls.</p>
-    </div>
+    <div class="proof-cols">
 
-    <div class="reveal">
-      <div class="mockup">
-        <div class="mockup-bar">
-          <span class="dot dot-r"></span>
-          <span class="dot dot-y"></span>
-          <span class="dot dot-g"></span>
-        </div>
-        <img src="assets/proof.png" alt="SEO ranking report — page 1 results in Kuwait">
+      <div>
+        <span class="tag tag-muted reveal">Real Results</span>
+        <h2 class="s2 s2-dark reveal">Page 1 Rankings That<br>Bring Real Customers</h2>
+        <p class="sp sp-muted reveal" style="margin-top:1rem;">
+          Every client we take on gets the same commitment — we don't stop until your business is where it needs to be. Page 1 isn't a bonus for us, it's the baseline. The results you see here reflect a process we've refined across real local businesses in Kuwait: targeted keywords, consistent content, and backlinks that actually move rankings. No shortcuts, no vague reports — just measurable positions and the calls that follow.
+        </p>
       </div>
+
+      <div class="reveal">
+        <div class="mockup">
+          <div class="mockup-bar">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+          </div>
+          <img src="assets/proof.png" alt="SEO ranking report — page 1 results in Kuwait">
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1040,7 +1044,6 @@
 
   <div class="footer-bottom">
     <span>&copy; 2026 Q8Block. All rights reserved.</span>
-    <span>q8block.com</span>
   </div>
 </footer>
 
