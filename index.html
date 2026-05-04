@@ -361,24 +361,25 @@
 
     /* ─── PROOF 2 — slideshow ─────────────────────────── */
     #proof2 {
-      background: var(--dark2);
+      background: var(--light);
       padding: 7rem 1.5rem;
       overflow: hidden;
     }
-    #proof2 .s2 { color: #E6F2F6; }
-    #proof2 .sp { color: rgba(230,242,246,0.52); margin-top: 0.5rem; }
-    #proof2 .tag { color: rgba(188,225,236,0.5); margin-bottom: 0.8rem; }
+    #proof2 .s2 { color: var(--ink); }
+    #proof2 .sp { color: var(--muted); margin-top: 0.5rem; }
+    #proof2 .tag { color: var(--muted); margin-bottom: 0.8rem; }
 
     .slideshow {
       position: relative;
       margin-top: 3rem;
       border-radius: 14px;
       overflow: hidden;
-      background: var(--dark);
+      background: var(--ink);
       aspect-ratio: 16 / 9;
       max-width: 960px;
       margin-left: auto;
       margin-right: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.12);
     }
     .slide {
       position: absolute;
@@ -386,7 +387,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background: var(--dark);
+      background: var(--ink);
       transition: transform 0.65s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease;
     }
     /* states */
@@ -404,88 +405,85 @@
     .ss-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: rgba(188,225,236,0.25);
+      background: rgba(17,20,24,0.18);
       transition: background 0.3s ease, transform 0.3s ease;
       cursor: pointer;
     }
-    .ss-dot.active { background: var(--c1); transform: scale(1.4); }
+    .ss-dot.active { background: var(--ink); transform: scale(1.4); }
 
     /* ─── WHAT YOU GET ─────────────────────────────────── */
     #wyg {
-      background: var(--dark);
+      background: var(--white);
       padding: 7rem 1.5rem;
     }
-    #wyg .s2  { color: #E6F2F6; max-width: 22ch; }
-    #wyg .sp  { color: rgba(230,242,246,0.48); margin-top: 0.6rem; margin-bottom: 3.5rem; }
-    #wyg .tag { color: rgba(188,225,236,0.45); }
+    #wyg .s2  { color: var(--ink); }
+    #wyg .sp  { color: var(--muted); margin-top: 0.6rem; margin-bottom: 3.5rem; }
 
     .wyg-bento {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      grid-template-rows: auto auto;
-      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
     }
     .wyg-card {
-      background: rgba(188,225,236,0.05);
-      border: 1px solid rgba(188,225,236,0.1);
-      border-radius: 16px;
-      padding: 2.2rem;
+      background: var(--white);
+      border: 1px solid rgba(17,20,24,0.08);
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.06);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
-    .wyg-card-full { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 2rem;
-      background: rgba(188,225,236,0.09);
-      border-color: rgba(188,225,236,0.22);
+    .wyg-card:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .wyg-ill { width: 100%; display: block; }
+    .wyg-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      flex: 1;
     }
-    .wyg-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: rgba(188,225,236,0.1);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .wyg-icon svg { width: 22px; height: 22px; stroke: var(--c1); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
     .wyg-title {
       font-family: 'Fraunces', serif;
       font-optical-sizing: auto;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      color: #E6F2F6;
-      line-height: 1.25;
+      color: var(--ink);
+      line-height: 1.3;
     }
     .wyg-desc {
-      font-size: 0.88rem;
-      color: rgba(230,242,246,0.48);
+      font-size: 0.875rem;
+      color: var(--muted);
       line-height: 1.7;
     }
     .wyg-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(34,197,94,0.12);
-      border: 1px solid rgba(34,197,94,0.25);
-      color: #4ADE80;
+      background: #DCFCE7;
+      color: #15803D;
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       padding: 0.35rem 0.8rem;
       border-radius: 100px;
-      margin-top: 0.25rem;
+      margin-top: 0.4rem;
       width: fit-content;
     }
 
     @media (max-width: 860px) {
       .wyg-bento { grid-template-columns: 1fr; }
-      .wyg-card-full { flex-direction: column; align-items: flex-start; }
     }
 
     /* ─── PRICING ─────────────────────────────────────── */
     #pricing {
-      background: var(--light);
+      background: var(--dark2);
       padding: 7rem 1.5rem;
     }
+    #pricing .s2  { color: #E6F2F6; }
+    #pricing .tag { color: rgba(188,225,236,0.5); }
+    #pricing .sp  { color: rgba(230,242,246,0.5); }
     .pricing-card {
       max-width: 680px;
       margin: 3rem auto 0;
@@ -928,35 +926,185 @@
 
     <div class="wyg-bento reveal">
 
+      <!-- Card 1: Digital Presence -->
       <div class="wyg-card">
-        <div class="wyg-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div>
+        <svg class="wyg-ill" viewBox="0 0 300 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="195" fill="#EFF8FB"/>
+          <ellipse cx="255" cy="38" rx="62" ry="55" fill="#BCE1EC" opacity="0.18"/>
+          <!-- Browser frame -->
+          <rect x="22" y="26" width="216" height="150" rx="11" fill="#15293A"/>
+          <!-- Toolbar -->
+          <rect x="22" y="26" width="216" height="34" rx="11" fill="#1D3A4C"/>
+          <rect x="22" y="48" width="216" height="12" fill="#1D3A4C"/>
+          <!-- Traffic lights -->
+          <circle cx="41" cy="43" r="5" fill="#FF6961"/>
+          <circle cx="56" cy="43" r="5" fill="#FFBD44"/>
+          <circle cx="71" cy="43" r="5" fill="#00CA4E"/>
+          <!-- URL bar -->
+          <rect x="88" y="36" width="136" height="16" rx="5" fill="#0C1820"/>
+          <circle cx="98" cy="44" r="3" fill="#22C55E" opacity="0.6"/>
+          <!-- Page bg -->
+          <rect x="30" y="62" width="200" height="106" fill="#F7FAFC"/>
+          <!-- Map area right -->
+          <rect x="148" y="66" width="74" height="98" fill="#D4EDF7"/>
+          <line x1="148" y1="86" x2="222" y2="86" stroke="#BCE1EC" stroke-width="0.8"/>
+          <line x1="148" y1="106" x2="222" y2="106" stroke="#BCE1EC" stroke-width="0.8"/>
+          <line x1="148" y1="126" x2="222" y2="126" stroke="#BCE1EC" stroke-width="0.8"/>
+          <line x1="148" y1="146" x2="222" y2="146" stroke="#BCE1EC" stroke-width="0.8"/>
+          <line x1="168" y1="66" x2="168" y2="164" stroke="#BCE1EC" stroke-width="0.8"/>
+          <line x1="192" y1="66" x2="192" y2="164" stroke="#BCE1EC" stroke-width="0.8"/>
+          <line x1="148" y1="116" x2="222" y2="116" stroke="white" stroke-width="2.5"/>
+          <line x1="180" y1="66" x2="180" y2="164" stroke="white" stroke-width="2.5"/>
+          <!-- Pin -->
+          <path d="M180 78c-6 0-10 5-10 11 0 8 10 20 10 20s10-12 10-20c0-6-4-11-10-11z" fill="#BCE1EC"/>
+          <circle cx="180" cy="89" r="4" fill="white"/>
+          <!-- Listing panel left -->
+          <rect x="30" y="66" width="115" height="98" fill="white"/>
+          <line x1="148" y1="66" x2="148" y2="164" stroke="#EFF8FB" stroke-width="2"/>
+          <!-- Photo placeholder -->
+          <rect x="30" y="66" width="115" height="36" fill="#BCE1EC" opacity="0.28"/>
+          <rect x="68" y="75" width="40" height="27" rx="2" fill="#BCE1EC" opacity="0.55"/>
+          <rect x="76" y="70" width="24" height="32" rx="2" fill="#ABD9E7" opacity="0.75"/>
+          <rect x="84" y="82" width="8" height="9" rx="1" fill="#EFF8FB"/>
+          <!-- Name bar -->
+          <rect x="38" y="108" width="74" height="7" rx="3" fill="#111418"/>
+          <!-- Stars -->
+          <circle cx="40" cy="123" r="3.5" fill="#FBB040"/>
+          <circle cx="49" cy="123" r="3.5" fill="#FBB040"/>
+          <circle cx="58" cy="123" r="3.5" fill="#FBB040"/>
+          <circle cx="67" cy="123" r="3.5" fill="#FBB040"/>
+          <circle cx="76" cy="123" r="3.5" fill="#FBB040"/>
+          <!-- Meta lines -->
+          <rect x="38" y="133" width="58" height="5" rx="2" fill="#6B7585" opacity="0.3"/>
+          <rect x="38" y="143" width="68" height="5" rx="2" fill="#6B7585" opacity="0.2"/>
+          <!-- CTA button -->
+          <rect x="38" y="153" width="60" height="16" rx="6" fill="#BCE1EC"/>
+          <!-- Floating phone bubble -->
+          <circle cx="262" cy="58" r="24" fill="#22C55E" opacity="0.08"/>
+          <circle cx="262" cy="58" r="15" fill="#22C55E" opacity="0.12"/>
+          <rect x="253" y="42" width="18" height="30" rx="6" fill="#15293A"/>
+          <rect x="256" y="46" width="12" height="20" rx="3" fill="#0C1820"/>
+          <circle cx="262" cy="68" r="2" fill="#BCE1EC" opacity="0.45"/>
+          <circle cx="262" cy="58" r="28" stroke="#22C55E" stroke-width="1.5" opacity="0.15" fill="none"/>
+        </svg>
+        <div class="wyg-body">
           <div class="wyg-title">Your business online, handled</div>
           <div class="wyg-desc">Website, hosting, and maintenance — all covered. We build it, we run it, you focus on your business.</div>
         </div>
       </div>
 
+      <!-- Card 2: Analytics & Reporting -->
       <div class="wyg-card">
-        <div class="wyg-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div>
+        <svg class="wyg-ill" viewBox="0 0 300 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="195" fill="#EFF8FB"/>
+          <ellipse cx="42" cy="165" rx="65" ry="55" fill="#BCE1EC" opacity="0.15"/>
+          <!-- Dashboard frame -->
+          <rect x="18" y="18" width="198" height="160" rx="12" fill="#15293A"/>
+          <!-- Header bar -->
+          <rect x="18" y="18" width="198" height="36" rx="12" fill="#1D3A4C"/>
+          <rect x="18" y="42" width="198" height="12" fill="#1D3A4C"/>
+          <!-- Header label -->
+          <rect x="30" y="30" width="64" height="7" rx="3" fill="#BCE1EC" opacity="0.4"/>
+          <!-- Period pill -->
+          <rect x="172" y="27" width="34" height="14" rx="5" fill="#0C1820"/>
+          <rect x="176" y="31" width="26" height="6" rx="2" fill="#BCE1EC" opacity="0.25"/>
+          <!-- Chart area -->
+          <rect x="26" y="58" width="182" height="86" rx="6" fill="#0C1820" opacity="0.4"/>
+          <!-- Grid lines -->
+          <line x1="26" y1="78" x2="208" y2="78" stroke="rgba(188,225,236,0.1)" stroke-width="1"/>
+          <line x1="26" y1="98" x2="208" y2="98" stroke="rgba(188,225,236,0.1)" stroke-width="1"/>
+          <line x1="26" y1="118" x2="208" y2="118" stroke="rgba(188,225,236,0.1)" stroke-width="1"/>
+          <!-- Bars (growing left to right) -->
+          <rect x="36" y="124" width="16" height="20" rx="4" fill="#BCE1EC" opacity="0.22"/>
+          <rect x="58" y="116" width="16" height="28" rx="4" fill="#BCE1EC" opacity="0.28"/>
+          <rect x="80" y="120" width="16" height="24" rx="4" fill="#BCE1EC" opacity="0.25"/>
+          <rect x="102" y="106" width="16" height="38" rx="4" fill="#BCE1EC" opacity="0.35"/>
+          <rect x="124" y="96" width="16" height="48" rx="4" fill="#BCE1EC" opacity="0.45"/>
+          <rect x="146" y="88" width="16" height="56" rx="4" fill="#BCE1EC" opacity="0.55"/>
+          <rect x="168" y="68" width="16" height="76" rx="4" fill="#BCE1EC"/>
+          <!-- Trend line -->
+          <polyline points="44,130 66,120 88,126 110,110 132,100 154,90 176,72" stroke="#22C55E" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="176" cy="72" r="4.5" fill="#22C55E"/>
+          <circle cx="176" cy="72" r="8" fill="#22C55E" opacity="0.2"/>
+          <!-- Stat row -->
+          <rect x="26" y="152" width="86" height="20" rx="5" fill="rgba(188,225,236,0.08)"/>
+          <rect x="33" y="156" width="28" height="5" rx="2" fill="#22C55E" opacity="0.7"/>
+          <rect x="33" y="164" width="52" height="4" rx="2" fill="#BCE1EC" opacity="0.22"/>
+          <rect x="122" y="152" width="86" height="20" rx="5" fill="rgba(188,225,236,0.08)"/>
+          <rect x="129" y="156" width="28" height="5" rx="2" fill="#BCE1EC" opacity="0.5"/>
+          <rect x="129" y="164" width="52" height="4" rx="2" fill="#BCE1EC" opacity="0.22"/>
+          <!-- Floating rank card -->
+          <rect x="228" y="22" width="62" height="76" rx="12" fill="white"/>
+          <!-- Card top dark -->
+          <rect x="228" y="22" width="62" height="28" rx="12" fill="#111418"/>
+          <rect x="228" y="38" width="62" height="12" fill="#111418"/>
+          <rect x="238" y="30" width="30" height="5" rx="2" fill="#BCE1EC" opacity="0.45"/>
+          <!-- Rank arrow: #2 → #1 -->
+          <rect x="236" y="68" width="14" height="18" rx="3" fill="#DDE8EC"/>
+          <line x1="234" y1="60" x2="252" y2="74" stroke="#FF6961" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M258 70 L268 56" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M264 54 L268 57 L265 62" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="258" y="64" width="14" height="18" rx="3" fill="#BCE1EC"/>
+          <!-- Floating mini bar chart card -->
+          <rect x="228" y="108" width="62" height="62" rx="12" fill="white"/>
+          <rect x="235" y="120" width="8" height="34" rx="3" fill="#BCE1EC" opacity="0.3"/>
+          <rect x="248" y="110" width="8" height="44" rx="3" fill="#BCE1EC" opacity="0.55"/>
+          <rect x="261" y="102" width="8" height="52" rx="3" fill="#BCE1EC"/>
+          <path d="M270 128 L276 118 L282 128" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <line x1="276" y1="118" x2="276" y2="142" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="wyg-body">
           <div class="wyg-title">You always know what's happening</div>
           <div class="wyg-desc">Live dashboard, monthly ranking reports, full visibility. No black boxes, no guessing.</div>
         </div>
       </div>
 
-      <div class="wyg-card wyg-card-full">
-        <div class="wyg-icon" style="width:56px;height:56px;border-radius:14px;">
-          <svg viewBox="0 0 24 24" style="width:26px;height:26px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div style="flex:1;">
-          <div class="wyg-title" style="font-size:1.45rem;">We only win if you win</div>
-          <div class="wyg-desc" style="max-width:55ch;">If we don't deliver results within 6 months, you get your money back. No fine print, no excuses — just a promise we're confident enough to put in writing.</div>
+      <!-- Card 3: Guarantee -->
+      <div class="wyg-card">
+        <svg class="wyg-ill" viewBox="0 0 300 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="195" fill="#EFF8FB"/>
+          <!-- Decorative rings -->
+          <circle cx="150" cy="95" r="84" stroke="#BCE1EC" stroke-width="1" opacity="0.35" fill="none"/>
+          <circle cx="150" cy="95" r="62" stroke="#BCE1EC" stroke-width="1" opacity="0.45" fill="none"/>
+          <circle cx="150" cy="95" r="40" stroke="#BCE1EC" stroke-width="1.5" opacity="0.3" fill="none"/>
+          <!-- Shield shadow -->
+          <ellipse cx="152" cy="175" rx="46" ry="8" fill="#BCE1EC" opacity="0.3"/>
+          <!-- Shield body -->
+          <path d="M150 22 L204 44 L204 102 C204 136 178 162 150 174 C122 162 96 136 96 102 L96 44 Z" fill="#BCE1EC"/>
+          <!-- Shield inner highlight -->
+          <path d="M150 34 L192 52 L192 102 C192 128 170 150 150 162 C130 150 108 128 108 102 L108 52 Z" fill="#ABD9E7" opacity="0.55"/>
+          <!-- Checkmark -->
+          <path d="M127 98 L143 114 L175 80" stroke="#0C1820" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- 6-month badge -->
+          <rect x="94" y="152" width="112" height="30" rx="15" fill="#111418"/>
+          <rect x="108" y="162" width="84" height="6" rx="3" fill="#BCE1EC" opacity="0.7"/>
+          <rect x="116" y="172" width="68" height="5" rx="2" fill="#BCE1EC" opacity="0.35"/>
+          <!-- Stars -->
+          <circle cx="112" cy="138" r="5" fill="#FBB040"/>
+          <circle cx="127" cy="138" r="5" fill="#FBB040"/>
+          <circle cx="142" cy="138" r="5" fill="#FBB040"/>
+          <circle cx="157" cy="138" r="5" fill="#FBB040"/>
+          <circle cx="172" cy="138" r="5" fill="#FBB040"/>
+          <!-- Verified badge top right -->
+          <circle cx="246" cy="48" r="22" fill="#22C55E" opacity="0.12"/>
+          <circle cx="246" cy="48" r="15" fill="#22C55E" opacity="0.18"/>
+          <circle cx="246" cy="48" r="9" fill="#22C55E" opacity="0.25"/>
+          <path d="M239 48 L244 53 L254 42" stroke="#22C55E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Money icon bottom left -->
+          <circle cx="54" cy="148" r="20" fill="#BCE1EC" opacity="0.18"/>
+          <circle cx="54" cy="148" r="13" fill="#BCE1EC" opacity="0.25"/>
+          <circle cx="54" cy="148" r="8" fill="#BCE1EC" opacity="0.4"/>
+          <rect x="52" y="141" width="4" height="14" rx="2" fill="#15293A"/>
+          <rect x="47" y="145" width="14" height="4" rx="2" fill="#15293A"/>
+          <!-- Sparkles -->
+          <path d="M255 135 L257 128 L259 135 L266 133 L259 137 L257 144 L255 137 L248 133 Z" fill="#BCE1EC" opacity="0.55"/>
+          <path d="M60 58 L62 52 L64 58 L70 56 L64 60 L62 66 L60 60 L54 56 Z" fill="#BCE1EC" opacity="0.4"/>
+        </svg>
+        <div class="wyg-body">
+          <div class="wyg-title">We only win if you win</div>
+          <div class="wyg-desc">If we don't deliver results within 6 months, you get your money back. No fine print, no excuses.</div>
           <div class="wyg-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             6-Month Money Back Guarantee
           </div>
         </div>
@@ -970,9 +1118,9 @@
 <!-- ─── PRICING ──────────────────────────────────────────────── -->
 <section id="pricing">
   <div class="container">
-    <span class="tag tag-ink reveal">Transparent Pricing</span>
-    <h2 class="s2 s2-dark reveal">Pick Your Plan</h2>
-    <p class="sp sp-muted reveal">Slide to see exactly what you get. No hidden fees.</p>
+    <span class="tag reveal">Transparent Pricing</span>
+    <h2 class="s2 reveal">Pick Your Plan</h2>
+    <p class="sp reveal">Slide to see exactly what you get. No hidden fees.</p>
 
     <div class="pricing-card reveal">
       <div class="price-display">
@@ -1435,11 +1583,15 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 const plans = Array.from({ length: 46 }, (_, i) => {
   const pct   = i / 45;
   const price = 50 + i * 10;
-  const blogs = Math.round(10 + pct * 50);
-  const keys  = Math.round(20 + pct * 180);
-  const links = Math.round(1  + pct * 14);
-  const dr    = Math.round((5 + pct * 45) / 5) * 5;
-  return { price, blogs, keys, links: `${links} — DR ${dr}+` };
+  const blogs = Math.round(10 + pct * 90);
+  const keys  = Math.round(20 + pct * 480);
+  const dr    = Math.round(10 + pct * 290);
+  let bk;
+  if (price <= 90)  bk = '1–2';
+  else if (price <= 150) bk = '2–3';
+  else if (price <= 300) bk = '3–4';
+  else bk = '5–6';
+  return { price, blogs, keys, links: `${bk} — DR ${dr}+` };
 });
 
 const slider   = document.getElementById('planSlider');
