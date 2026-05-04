@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المدونة — شركة كويت بلوك</title>
+  <meta name="description" content="مقالات عملية في السيو المحلي للأعمال الجادة في الكويت — من فريق كويت بلوك.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --c1:#BCE1EC;--c2:#ABD9E7;--dark:#070D12;--dark2:#0C1820;--white:#ffffff;--light:#F2F7FA;--ink:#111418;--muted:#6B7585;--fh:'Tajawal',system-ui,sans-serif;--fb:'Tajawal',system-ui,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); background: var(--white); color: var(--ink); overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; background: rgba(7,13,18,0); transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease; }
+    nav.pinned { background: rgba(7,13,18,0.88); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(188,225,236,0.08); }
+    .nav-logo { font-family: var(--fh); font-weight: 800; font-size: 1.18rem; color: var(--white); text-decoration: none; }
+    .nav-logo em { color: var(--c1); font-style: normal; }
+    .nav-links { display: flex; align-items: center; list-style: none; gap: 0.1rem; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(230,242,246,0.48); text-decoration: none; padding: 0.42rem 0.85rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #E6F2F6; background: rgba(188,225,236,0.08); }
+    .nav-cta { font-size: 0.9rem; font-weight: 700; color: var(--dark); background: var(--c1); padding: 0.48rem 1.2rem; border-radius: 7px; text-decoration: none; transition: transform 0.22s ease, box-shadow 0.22s ease; }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(188,225,236,0.28); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .lang-switch { font-size: 0.78rem; font-weight: 600; color: rgba(230,242,246,0.5); text-decoration: none; border: 1px solid rgba(188,225,236,0.18); padding: 0.3rem 0.7rem; border-radius: 6px; transition: color 0.2s, border-color 0.2s; }
+    .lang-switch:hover { color: var(--c1); border-color: rgba(188,225,236,0.45); }
+    .page-hero { background: var(--dark); padding: 9rem 1.5rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(188,225,236,0.07), transparent 70%); pointer-events: none; }
+    .hero-tag { display: inline-block; font-size: 0.85rem; font-weight: 700; color: rgba(188,225,236,0.5); margin-bottom: 1rem; }
+    .page-hero h1 { font-family: var(--fh); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); color: #E6F2F6; line-height: 1.2; margin-bottom: 1rem; }
+    .page-hero p { font-size: 0.97rem; color: rgba(230,242,246,0.45); max-width: 44ch; margin: 0 auto; }
+    .blog-section { padding: 5rem 1.5rem 7rem; max-width: 1080px; margin: 0 auto; }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; margin-top: 3.5rem; }
+    .blog-card { border-radius: 18px; overflow: hidden; border: 1px solid rgba(17,20,24,0.08); background: var(--white); box-shadow: 0 4px 24px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: box-shadow 0.25s ease, transform 0.25s ease; text-decoration: none; color: inherit; }
+    .blog-card:hover { box-shadow: 0 16px 56px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .card-thumb { width: 100%; aspect-ratio: 16/9; background: var(--dark2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .card-thumb svg { opacity: 0.18; }
+    .card-thumb .thumb-label { position: absolute; bottom: 1rem; right: 1rem; font-size: 0.75rem; font-weight: 700; color: var(--c1); background: rgba(7,13,18,0.6); backdrop-filter: blur(8px); padding: 0.3rem 0.7rem; border-radius: 5px; }
+    .card-body { padding: 1.6rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+    .card-category { font-size: 0.78rem; font-weight: 700; color: var(--c1); }
+    .card-title { font-family: var(--fh); font-weight: 800; font-size: 1.1rem; line-height: 1.4; color: var(--ink); }
+    .card-excerpt { font-size: 0.9rem; line-height: 1.75; color: var(--muted); flex: 1; }
+    .card-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--muted); padding-top: 0.75rem; border-top: 1px solid rgba(17,20,24,0.06); }
+    .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
+    .card-read { margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+    .card-read svg { transition: transform 0.2s ease; }
+    .blog-card:hover .card-read svg { transform: translateX(-4px); }
+    @media (max-width: 860px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
+    footer { background: var(--dark2); border-top: 1px solid rgba(188,225,236,0.07); padding: 4rem 1.5rem 2rem; color: rgba(230,242,246,0.42); }
+    .footer-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { font-family: var(--fh); font-weight: 800; font-size: 1.3rem; color: var(--white); display: block; margin-bottom: 0.65rem; }
+    .footer-logo em { color: var(--c1); font-style: normal; }
+    .footer-desc { font-size: 0.85rem; line-height: 1.8; max-width: 28ch; color: rgba(230,242,246,0.72); }
+    .footer-col-title { font-size: 0.75rem; font-weight: 700; color: rgba(188,225,236,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-links a { font-size: 0.87rem; color: rgba(230,242,246,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--c1); }
+    .nap { font-size: 0.85rem; line-height: 1.9; color: rgba(230,242,246,0.55); }
+    .nap strong { color: rgba(230,242,246,0.75); font-weight: 700; display: block; margin-bottom: 0.3rem; }
+    .nap a { color: var(--c1); text-decoration: none; }
+    .footer-bottom { max-width: 1080px; margin: 0 auto; border-top: 1px solid rgba(188,225,236,0.07); padding-top: 1.5rem; font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 760px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">Q8<em>block</em></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="blog.html" class="active">المدونة</a></li>
+    <li><a href="terms.html">الشروط</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="../blog.html" class="lang-switch">English</a>
+    <a href="../index.html#cta" class="nav-cta">تواصل معنا</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag">مقالات</span>
+  <h1>مدونة كويت بلوك</h1>
+  <p>معرفة عملية في السيو للأعمال الجادة في الكويت.</p>
+</div>
+
+<section class="blog-section">
+  <div class="blog-grid">
+
+    <a href="blog-1.html" class="blog-card">
+      <div class="card-thumb">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="10" y="10" width="100" height="60" rx="6" fill="#BCE1EC"/><rect x="20" y="22" width="40" height="6" rx="2" fill="#EFF8FB"/><rect x="20" y="34" width="60" height="4" rx="2" fill="#EFF8FB" opacity="0.6"/><rect x="20" y="44" width="50" height="4" rx="2" fill="#EFF8FB" opacity="0.4"/><circle cx="90" cy="28" r="14" fill="#ABD9E7"/><path d="M84 28 L89 33 L97 22" stroke="#15293A" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="thumb-label">سيو محلي</span>
+      </div>
+      <div class="card-body">
+        <div class="card-category">سيو محلي</div>
+        <div class="card-title">كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت</div>
+        <div class="card-excerpt">معظم الأعمال في الكويت تعتمد على الإنستغرام والتوصيات الشفهية. إليك لماذا Google هو أعلى مصدر للزيارات ذات النية الشرائية — وكيف تستحوذ عليه.</div>
+        <div class="card-meta">
+          <span>مايو 2026</span>
+          <span class="dot"></span>
+          <span>7 دقائق</span>
+        </div>
+        <span class="card-read">
+          اقرأ المقال
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="blog-2.html" class="blog-card">
+      <div class="card-thumb">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="10" y="10" width="100" height="60" rx="6" fill="#1D3A4C"/><rect x="20" y="18" width="80" height="44" rx="4" fill="#BCE1EC" opacity="0.12"/><rect x="26" y="26" width="30" height="4" rx="2" fill="#BCE1EC" opacity="0.5"/><circle cx="34" cy="40" r="10" fill="#BCE1EC" opacity="0.2"/><circle cx="34" cy="40" r="6" fill="#BCE1EC" opacity="0.3"/><circle cx="34" cy="40" r="3" fill="#BCE1EC"/><rect x="50" y="35" width="44" height="4" rx="2" fill="#BCE1EC" opacity="0.4"/><circle cx="60" cy="58" r="4" fill="#FBB040"/><circle cx="70" cy="58" r="4" fill="#FBB040"/><circle cx="80" cy="58" r="4" fill="#FBB040"/><circle cx="90" cy="58" r="4" fill="#FBB040"/><circle cx="100" cy="58" r="4" fill="#FBB040"/></svg>
+        <span class="thumb-label">Google Business</span>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Google Business Profile</div>
+        <div class="card-title">الدليل الشامل لملف Google Business Profile للأعمال في الكويت</div>
+        <div class="card-excerpt">ملفك التجاري على Google هو أول ما يراه العملاء في الخرائط والبحث المحلي. أتقنه والمكالمات ستأتي — أهمله والمنافسون سيتقدمون.</div>
+        <div class="card-meta">
+          <span>أبريل 2026</span>
+          <span class="dot"></span>
+          <span>9 دقائق</span>
+        </div>
+        <span class="card-read">
+          اقرأ المقال
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="blog-3.html" class="blog-card">
+      <div class="card-thumb">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="10" y="10" width="100" height="60" rx="6" fill="#0C1820"/><rect x="22" y="50" width="12" height="18" rx="3" fill="#BCE1EC" opacity="0.25"/><rect x="40" y="40" width="12" height="28" rx="3" fill="#BCE1EC" opacity="0.4"/><rect x="58" y="28" width="12" height="40" rx="3" fill="#BCE1EC" opacity="0.6"/><rect x="76" y="18" width="12" height="50" rx="3" fill="#BCE1EC"/><polyline points="28,52 46,42 64,30 82,20" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="82" cy="20" r="4" fill="#22C55E"/></svg>
+        <span class="thumb-label">استراتيجية</span>
+      </div>
+      <div class="card-body">
+        <div class="card-category">استراتيجية</div>
+        <div class="card-title">لماذا السيو المحلي أفضل من الإعلانات المدفوعة للأعمال الصغيرة في الكويت</div>
+        <div class="card-excerpt">الإعلانات المدفوعة تتوقف بمجرد أن تتوقف عن الدفع. السيو المحلي يتراكم مع الوقت. نقارن الأرقام ونُظهر أيهما يبني عملاً أكثر ديمومة.</div>
+        <div class="card-meta">
+          <span>مارس 2026</span>
+          <span class="dot"></span>
+          <span>5 دقائق</span>
+        </div>
+        <span class="card-read">
+          اقرأ المقال
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-logo">Q8<em>block</em></span>
+      <p class="footer-desc">وكالة السيو المحلي في الكويت. نبني مواقع ونصنّفها لتجلب اتصالات حقيقية لعملك.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">التنقل</div>
+      <ul class="footer-links">
+        <li><a href="../index.html">الرئيسية</a></li>
+        <li><a href="blog.html">المدونة</a></li>
+        <li><a href="terms.html">الشروط</a></li>
+        <li><a href="../index.html#cta">تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="nap">
+      <div class="footer-col-title">التواصل</div>
+      <strong>شركة كويت بلوك</strong>
+      <a href="tel:+96594139666">94139666</a><br>
+      محافظة الأحمدي، المنقف،<br>
+      قطعة 004، شارع 14،<br>
+      مبنى ناصر فالح شناز السبيعي،<br>
+      الدور الأول، محل 9
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 كويت بلوك. جميع الحقوق محفوظة.</span>
+    <a href="../blog.html" style="color:rgba(230,242,246,0.38);font-size:0.78rem;text-decoration:none;">English</a>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('pinned', window.scrollY > 50); }, { passive: true });
+</script>
+</body>
+</html>

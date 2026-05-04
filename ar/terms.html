@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شروط الخدمة — شركة كويت بلوك</title>
+  <meta name="description" content="شروط الخدمة لشركة كويت بلوك، وكالة السيو المحلي في الكويت.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --c1:#BCE1EC;--c2:#ABD9E7;--dark:#070D12;--dark2:#0C1820;--white:#ffffff;--light:#F2F7FA;--ink:#111418;--muted:#6B7585;--fh:'Tajawal',system-ui,sans-serif;--fb:'Tajawal',system-ui,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); background: var(--white); color: var(--ink); overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; background: rgba(7,13,18,0); transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease; }
+    nav.pinned { background: rgba(7,13,18,0.88); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(188,225,236,0.08); }
+    .nav-logo { font-family: var(--fh); font-weight: 800; font-size: 1.18rem; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo em { color: var(--c1); font-style: normal; }
+    .nav-links { display: flex; align-items: center; list-style: none; gap: 0.1rem; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(230,242,246,0.48); text-decoration: none; padding: 0.42rem 0.85rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #E6F2F6; background: rgba(188,225,236,0.08); }
+    .nav-cta { font-family: var(--fb); font-size: 0.9rem; font-weight: 700; color: var(--dark); background: var(--c1); padding: 0.48rem 1.2rem; border-radius: 7px; text-decoration: none; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(188,225,236,0.28); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .lang-switch { font-size: 0.78rem; font-weight: 600; color: rgba(230,242,246,0.5); text-decoration: none; border: 1px solid rgba(188,225,236,0.18); padding: 0.3rem 0.7rem; border-radius: 6px; transition: color 0.2s, border-color 0.2s; }
+    .lang-switch:hover { color: var(--c1); border-color: rgba(188,225,236,0.45); }
+    .page-hero { background: var(--dark); padding: 9rem 1.5rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(188,225,236,0.07), transparent 70%); pointer-events: none; }
+    .hero-tag { display: inline-block; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; color: rgba(188,225,236,0.5); margin-bottom: 1rem; }
+    .page-hero h1 { font-family: var(--fh); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.6rem); color: #E6F2F6; line-height: 1.2; margin-bottom: 1rem; }
+    .page-hero p { font-size: 0.95rem; color: rgba(230,242,246,0.45); }
+    .terms-wrap { max-width: 1080px; margin: 0 auto; padding: 5rem 1.5rem 7rem; display: grid; grid-template-columns: 1fr 220px; gap: 4rem; align-items: start; }
+    .terms-toc { position: sticky; top: 80px; }
+    .toc-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1rem; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+    .toc-list a { font-size: 0.85rem; font-weight: 500; color: var(--muted); text-decoration: none; padding: 0.38rem 0.65rem; border-radius: 6px; border-right: 2px solid transparent; display: block; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+    .toc-list a:hover { color: var(--ink); background: var(--light); border-right-color: var(--c1); }
+    .terms-body { min-width: 0; }
+    .terms-body .updated { font-size: 0.8rem; color: var(--muted); margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .terms-section { margin-bottom: 3.5rem; scroll-margin-top: 90px; }
+    .terms-section h2 { font-family: var(--fh); font-weight: 800; font-size: 1.45rem; color: var(--ink); line-height: 1.25; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .terms-section p { font-size: 0.97rem; line-height: 2; color: #2E3440; margin-bottom: 1rem; }
+    .terms-section ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin: 1rem 0; }
+    .terms-section ul li { font-size: 0.97rem; line-height: 1.8; color: #2E3440; padding-right: 1.4rem; position: relative; }
+    .terms-section ul li::before { content: ''; position: absolute; right: 0; top: 0.75em; width: 5px; height: 5px; border-radius: 50%; background: var(--c1); }
+    .terms-highlight { background: var(--light); border-right: 3px solid var(--c1); border-radius: 8px 0 0 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .terms-highlight p { margin: 0; }
+    @media (max-width: 760px) { .terms-wrap { grid-template-columns: 1fr; gap: 2rem; } .terms-toc { position: static; background: var(--light); border-radius: 12px; padding: 1.25rem; } }
+    footer { background: var(--dark2); border-top: 1px solid rgba(188,225,236,0.07); padding: 4rem 1.5rem 2rem; color: rgba(230,242,246,0.42); }
+    .footer-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { font-family: var(--fh); font-weight: 800; font-size: 1.3rem; color: var(--white); display: block; margin-bottom: 0.65rem; }
+    .footer-logo em { color: var(--c1); font-style: normal; }
+    .footer-desc { font-size: 0.85rem; line-height: 1.8; max-width: 28ch; color: rgba(230,242,246,0.72); }
+    .footer-col-title { font-size: 0.75rem; font-weight: 700; color: rgba(188,225,236,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-links a { font-size: 0.87rem; color: rgba(230,242,246,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--c1); }
+    .nap { font-size: 0.85rem; line-height: 1.9; color: rgba(230,242,246,0.55); }
+    .nap strong { color: rgba(230,242,246,0.75); font-weight: 700; display: block; margin-bottom: 0.3rem; }
+    .nap a { color: var(--c1); text-decoration: none; }
+    .footer-bottom { max-width: 1080px; margin: 0 auto; border-top: 1px solid rgba(188,225,236,0.07); padding-top: 1.5rem; font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 760px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">Q8<em>block</em></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="blog.html">المدونة</a></li>
+    <li><a href="terms.html" class="active">الشروط</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="../terms.html" class="lang-switch">English</a>
+    <a href="../index.html#cta" class="nav-cta">تواصل معنا</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag">قانوني</span>
+  <h1>شروط الخدمة</h1>
+  <p>آخر تحديث: مايو 2026</p>
+</div>
+
+<div class="terms-wrap">
+
+  <main class="terms-body">
+    <p class="updated">تاريخ السريان: 1 مايو 2026 &nbsp;·&nbsp; آخر تحديث: 1 مايو 2026</p>
+
+    <div class="terms-section" id="agreement">
+      <h2>1. الموافقة على الشروط</h2>
+      <p>بتعاملك مع شركة كويت بلوك ("Q8Block" أو "نحن")، فإنك ("العميل") توافق على الالتزام بشروط الخدمة هذه. يُرجى قراءتها بعناية قبل توقيع أي اتفاقية خدمة أو إجراء أي دفع.</p>
+      <p>تنطبق هذه الشروط على جميع الخدمات التي تقدمها كويت بلوك، بما في ذلك السيو المحلي، إدارة ملف نشاط Google التجاري، تطوير المواقع الإلكترونية، إنشاء المحتوى، وبناء الروابط.</p>
+    </div>
+
+    <div class="terms-section" id="services">
+      <h2>2. الخدمات</h2>
+      <p>تقدم كويت بلوك خدمات تحسين محركات البحث المحلية (SEO) المصممة للأعمال التجارية في الكويت. قد تشمل خدماتنا:</p>
+      <ul>
+        <li>البحث عن الكلمات المفتاحية المحلية ووضع الاستراتيجية</li>
+        <li>تحسين وإدارة ملف نشاط Google التجاري</li>
+        <li>إنشاء المواقع الإلكترونية والاستضافة والصيانة التقنية</li>
+        <li>محتوى شهري (مقالات ومدونات)</li>
+        <li>بناء روابط من نطاقات ذات سلطة وصلة</li>
+        <li>تقارير تصنيف شهرية وتتبع الأداء</li>
+      </ul>
+    </div>
+
+    <div class="terms-section" id="payment">
+      <h2>3. شروط الدفع</h2>
+      <p>يتم إصدار الفواتير شهريًا وتُدفع مسبقًا في بداية كل دورة فوترة. طرق الدفع المقبولة تشمل التحويل البنكي والدفع الإلكتروني (كي-نت أو ما يعادله).</p>
+      <ul>
+        <li>تُصدر الفواتير في بداية كل شهر.</li>
+        <li>يُستحق الدفع خلال 5 أيام عمل من تاريخ الفاتورة.</li>
+        <li>قد يؤدي التأخر في الدفع إلى إيقاف مؤقت للخدمات.</li>
+        <li>جميع الأسعار بالدينار الكويتي (د.ك) وتشمل أي ضرائب مطبقة.</li>
+      </ul>
+    </div>
+
+    <div class="terms-section" id="obligations">
+      <h2>4. التزامات العميل</h2>
+      <p>لتمكين كويت بلوك من تقديم النتائج، يوافق العميل على:</p>
+      <ul>
+        <li>توفير الوصول في الوقت المناسب إلى أي حسابات مطلوبة للعمل.</li>
+        <li>تزويدنا بمعلومات دقيقة عن النشاط التجاري.</li>
+        <li>الرد على طلبات الموافقة أو المعلومات في غضون 5 أيام عمل.</li>
+        <li>الامتناع عن إجراء تغييرات غير معتمدة على الصفحات أو القوائم التي تديرها كويت بلوك.</li>
+      </ul>
+    </div>
+
+    <div class="terms-section" id="results">
+      <h2>5. النتائج وإخلاء المسؤولية</h2>
+      <p>السيو عملية مستمرة تعتمد على عوامل خارجية عديدة، بما في ذلك تحديثات خوارزمية Google ونشاط المنافسين. لا يمكن ضمان ترتيب محدد أو حجم زيارات بعينه.</p>
+      <div class="terms-highlight">
+        <p>لن تستخدم كويت بلوك أساليب سيو مخالفة للقواعد (حشو الكلمات المفتاحية، النص المخفي، مزارع الروابط وغيرها) التي قد تؤدي إلى عقوبات من Google.</p>
+      </div>
+    </div>
+
+    <div class="terms-section" id="refund">
+      <h2>6. سياسة الاسترداد</h2>
+      <p>تقدم كويت بلوك <strong>ضمان نتائج لمدة 6 أشهر</strong>. إذا لم يتحقق أي تحسن قابل للقياس في تصنيفات الكلمات المفتاحية المحلية بعد 6 أشهر متواصلة من الخدمة المتواصلة وتعاون العميل الكامل، يحق للعميل استرداد كامل رسوم آخر 6 أشهر.</p>
+      <ul>
+        <li>يُبطل الضمان إذا أخفق العميل في الوفاء بالتزاماته.</li>
+        <li>يجب تقديم طلبات الاسترداد كتابيًا خلال 14 يومًا من انتهاء فترة الـ 6 أشهر.</li>
+      </ul>
+    </div>
+
+    <div class="terms-section" id="law">
+      <h2>7. القانون الحاكم</h2>
+      <p>تخضع شروط الخدمة هذه وتُفسَّر وفقًا لقوانين دولة الكويت. تخضع أي نزاعات ناشئة عن هذه الشروط للاختصاص الحصري لمحاكم الكويت.</p>
+    </div>
+
+    <div class="terms-section" id="contact">
+      <h2>8. التواصل</h2>
+      <p>للاستفسار عن هذه الشروط، يُرجى التواصل معنا مباشرة:</p>
+      <ul>
+        <li><strong>الشركة:</strong> شركة كويت بلوك</li>
+        <li><strong>الهاتف / واتساب:</strong> <a href="tel:+96594139666" style="color:var(--c1);">94139666</a></li>
+        <li><strong>العنوان:</strong> محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9</li>
+      </ul>
+    </div>
+  </main>
+
+  <aside class="terms-toc">
+    <div class="toc-title">محتويات الصفحة</div>
+    <ul class="toc-list">
+      <li><a href="#agreement">1. الموافقة على الشروط</a></li>
+      <li><a href="#services">2. الخدمات</a></li>
+      <li><a href="#payment">3. شروط الدفع</a></li>
+      <li><a href="#obligations">4. التزامات العميل</a></li>
+      <li><a href="#results">5. النتائج</a></li>
+      <li><a href="#refund">6. سياسة الاسترداد</a></li>
+      <li><a href="#law">7. القانون الحاكم</a></li>
+      <li><a href="#contact">8. التواصل</a></li>
+    </ul>
+  </aside>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-logo">Q8<em>block</em></span>
+      <p class="footer-desc">وكالة السيو المحلي في الكويت. نبني مواقع ونصنّفها لتجلب اتصالات حقيقية لعملك.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">التنقل</div>
+      <ul class="footer-links">
+        <li><a href="../index.html">الرئيسية</a></li>
+        <li><a href="blog.html">المدونة</a></li>
+        <li><a href="terms.html">الشروط</a></li>
+        <li><a href="../index.html#cta">تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="nap">
+      <div class="footer-col-title">التواصل</div>
+      <strong>شركة كويت بلوك</strong>
+      <a href="tel:+96594139666">94139666</a><br>
+      محافظة الأحمدي، المنقف،<br>
+      قطعة 004، شارع 14،<br>
+      مبنى ناصر فالح شناز السبيعي،<br>
+      الدور الأول، محل 9
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 كويت بلوك. جميع الحقوق محفوظة.</span>
+    <a href="../terms.html" style="color:rgba(230,242,246,0.38);font-size:0.78rem;text-decoration:none;">English</a>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('pinned', window.scrollY > 50); }, { passive: true });
+</script>
+</body>
+</html>

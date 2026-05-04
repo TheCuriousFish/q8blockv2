@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Q8Block Kuwait SEO Agency</title>
+  <meta name="description" content="Terms of service for Q8Block, Kuwait's local SEO agency.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --c1: #BCE1EC; --c2: #ABD9E7;
+      --dark: #070D12; --dark2: #0C1820;
+      --white: #ffffff; --light: #F2F7FA;
+      --ink: #111418; --muted: #6B7585;
+      --fh: 'Syne', system-ui, sans-serif;
+      --fb: 'Manrope', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+    /* ─── NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+      background: rgba(7,13,18,0);
+      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+    }
+    nav.pinned {
+      background: rgba(7,13,18,0.88);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(188,225,236,0.08);
+    }
+    .nav-logo { font-family: var(--fh); font-weight: 800; font-size: 1.18rem; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo em { color: var(--c1); font-style: normal; }
+    .nav-links { display: flex; align-items: center; list-style: none; gap: 0.1rem; }
+    .nav-links a { font-size: 0.84rem; font-weight: 500; color: rgba(230,242,246,0.48); text-decoration: none; padding: 0.42rem 0.85rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #E6F2F6; background: rgba(188,225,236,0.08); }
+    .nav-cta { font-family: var(--fb); font-size: 0.84rem; font-weight: 700; color: var(--dark); background: var(--c1); padding: 0.48rem 1.2rem; border-radius: 7px; text-decoration: none; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(188,225,236,0.28); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .lang-switch { font-size: 0.78rem; font-weight: 600; color: rgba(230,242,246,0.5); text-decoration: none; border: 1px solid rgba(188,225,236,0.18); padding: 0.3rem 0.7rem; border-radius: 6px; transition: color 0.2s, border-color 0.2s; }
+    .lang-switch:hover { color: var(--c1); border-color: rgba(188,225,236,0.45); }
+
+    /* ─── PAGE HERO */
+    .page-hero {
+      background: var(--dark);
+      padding: 9rem 1.5rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(188,225,236,0.07), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(188,225,236,0.5);
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: 'Fraunces', serif; font-optical-sizing: auto; font-weight: 700;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      color: #E6F2F6; line-height: 1.15; letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .page-hero p { font-size: 0.95rem; color: rgba(230,242,246,0.45); }
+
+    /* ─── CONTENT */
+    .terms-wrap {
+      max-width: 1080px; margin: 0 auto;
+      padding: 5rem 1.5rem 7rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .terms-toc {
+      position: sticky; top: 80px;
+    }
+    .toc-title {
+      font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+    .toc-list a {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      padding: 0.38rem 0.65rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      display: block;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .toc-list a:hover { color: var(--ink); background: var(--light); border-left-color: var(--c1); }
+
+    .terms-body { min-width: 0; }
+    .terms-body .updated {
+      font-size: 0.8rem; color: var(--muted); margin-bottom: 3rem;
+      padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .terms-section { margin-bottom: 3.5rem; scroll-margin-top: 90px; }
+    .terms-section h2 {
+      font-family: 'Fraunces', serif; font-optical-sizing: auto; font-weight: 700;
+      font-size: 1.45rem; color: var(--ink); line-height: 1.25;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .terms-section p { font-size: 0.94rem; line-height: 1.8; color: #2E3440; margin-bottom: 1rem; }
+    .terms-section p:last-child { margin-bottom: 0; }
+    .terms-section ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin: 1rem 0; }
+    .terms-section ul li {
+      font-size: 0.94rem; line-height: 1.7; color: #2E3440;
+      padding-left: 1.4rem; position: relative;
+    }
+    .terms-section ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.62em;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--c1);
+    }
+    .terms-highlight {
+      background: var(--light);
+      border-left: 3px solid var(--c1);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .terms-highlight p { margin: 0; }
+
+    @media (max-width: 760px) {
+      .terms-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .terms-toc { position: static; background: var(--light); border-radius: 12px; padding: 1.25rem; }
+    }
+
+    /* ─── FOOTER */
+    footer { background: var(--dark2); border-top: 1px solid rgba(188,225,236,0.07); padding: 4rem 1.5rem 2rem; color: rgba(230,242,246,0.42); }
+    .footer-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { font-family: var(--fh); font-weight: 800; font-size: 1.3rem; color: var(--white); letter-spacing: -0.02em; display: block; margin-bottom: 0.65rem; }
+    .footer-logo em { color: var(--c1); font-style: normal; }
+    .footer-desc { font-size: 0.82rem; line-height: 1.7; max-width: 28ch; color: rgba(230,242,246,0.72); }
+    .footer-col-title { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(188,225,236,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-links a { font-size: 0.84rem; color: rgba(230,242,246,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--c1); }
+    .nap { font-size: 0.82rem; line-height: 1.9; color: rgba(230,242,246,0.55); }
+    .nap strong { color: rgba(230,242,246,0.75); font-weight: 600; display: block; margin-bottom: 0.3rem; }
+    .nap a { color: var(--c1); text-decoration: none; }
+    .footer-bottom { max-width: 1080px; margin: 0 auto; border-top: 1px solid rgba(188,225,236,0.07); padding-top: 1.5rem; font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    @media (max-width: 760px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } .footer-bottom { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Q8<em>block</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="terms.html" class="active">Terms</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="ar/terms.html" class="lang-switch">العربية</a>
+    <a href="index.html#cta" class="nav-cta">Contact Us</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="hero-tag">Legal</span>
+  <h1>Terms of Service</h1>
+  <p>Last updated: May 2026</p>
+</div>
+
+<div class="terms-wrap">
+
+  <aside class="terms-toc">
+    <div class="toc-title">On this page</div>
+    <ul class="toc-list">
+      <li><a href="#agreement">1. Agreement</a></li>
+      <li><a href="#services">2. Services</a></li>
+      <li><a href="#payment">3. Payment</a></li>
+      <li><a href="#obligations">4. Client Obligations</a></li>
+      <li><a href="#ip">5. Intellectual Property</a></li>
+      <li><a href="#results">6. Results & Disclaimer</a></li>
+      <li><a href="#refund">7. Refund Policy</a></li>
+      <li><a href="#liability">8. Limitation of Liability</a></li>
+      <li><a href="#termination">9. Termination</a></li>
+      <li><a href="#law">10. Governing Law</a></li>
+      <li><a href="#contact">11. Contact</a></li>
+    </ul>
+  </aside>
+
+  <main class="terms-body">
+    <p class="updated">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 1 May 2026</p>
+
+    <div class="terms-section" id="agreement">
+      <h2>1. Agreement to Terms</h2>
+      <p>By engaging the services of Kuwait Block ("Q8Block", "we", "us", or "our"), you ("Client") agree to be bound by these Terms of Service. Please read them carefully before signing any service agreement or making any payment.</p>
+      <p>These Terms apply to all services provided by Q8Block, including but not limited to local SEO, Google Business Profile management, website development, content creation, and backlink building. If you do not agree with any part of these Terms, please do not engage our services.</p>
+    </div>
+
+    <div class="terms-section" id="services">
+      <h2>2. Services</h2>
+      <p>Q8Block provides local search engine optimisation (SEO) services tailored to businesses operating in Kuwait. Our services may include:</p>
+      <ul>
+        <li>Local keyword research and strategy</li>
+        <li>Google Business Profile (GBP) optimisation and management</li>
+        <li>Website creation, hosting, and technical maintenance</li>
+        <li>Monthly content (blog posts and landing pages)</li>
+        <li>Backlink building from relevant, authoritative domains</li>
+        <li>Monthly ranking reports and performance tracking</li>
+      </ul>
+      <p>The exact scope of services is defined in the individual service agreement signed between Q8Block and the Client. Q8Block reserves the right to adjust its service offerings over time; any changes that affect your active plan will be communicated in advance.</p>
+    </div>
+
+    <div class="terms-section" id="payment">
+      <h2>3. Payment Terms</h2>
+      <p>Services are billed on a monthly basis, payable in advance at the start of each billing cycle. Accepted payment methods include bank transfer and mobile payment (KNET, MyFatoorah, or equivalent) as communicated at the time of onboarding.</p>
+      <ul>
+        <li>Invoices are issued at the beginning of each month.</li>
+        <li>Payment is due within 5 business days of invoice date.</li>
+        <li>Late payment may result in a temporary pause of active services.</li>
+        <li>All prices are listed in Kuwaiti Dinar (KD) and are inclusive of any applicable VAT.</li>
+      </ul>
+      <p>Q8Block does not charge setup fees unless explicitly stated in your service agreement. Prices may be reviewed annually; existing clients will receive at least 30 days' written notice before any price increase takes effect.</p>
+    </div>
+
+    <div class="terms-section" id="obligations">
+      <h2>4. Client Obligations</h2>
+      <p>To enable Q8Block to deliver results, the Client agrees to:</p>
+      <ul>
+        <li>Provide timely access to any accounts required for the work (Google Business Profile, Google Search Console, website CMS, etc.).</li>
+        <li>Supply accurate business information, including NAP (name, address, phone number), operating hours, and service descriptions.</li>
+        <li>Respond to requests for approval or information within 5 business days.</li>
+        <li>Refrain from making unapproved changes to any website pages or GBP listings managed by Q8Block.</li>
+        <li>Notify Q8Block promptly of any changes to business information, services, or hours of operation.</li>
+      </ul>
+      <p>Q8Block is not liable for delays or underperformance caused by the Client's failure to fulfil these obligations.</p>
+    </div>
+
+    <div class="terms-section" id="ip">
+      <h2>5. Intellectual Property</h2>
+      <p>All content created by Q8Block — including written articles, landing pages, and optimised copy — remains the intellectual property of Q8Block until full payment has been received for the period in which it was produced.</p>
+      <p>Upon settlement of all outstanding invoices, ownership of content produced specifically for the Client transfers to the Client. Website templates, proprietary tools, internal frameworks, and methodology documents remain the exclusive property of Q8Block at all times.</p>
+      <p>The Client may not reproduce, resell, or distribute any Q8Block-produced content or methodology without prior written consent.</p>
+    </div>
+
+    <div class="terms-section" id="results">
+      <h2>6. Results & Disclaimer</h2>
+      <p>SEO is an ongoing process that depends on many external factors, including Google algorithm updates, competitor activity, and search volume. While Q8Block applies proven, white-hat strategies tailored to the Kuwaiti market, no specific ranking position or traffic volume can be guaranteed.</p>
+      <div class="terms-highlight">
+        <p>Q8Block will not use black-hat or unethical SEO techniques (keyword stuffing, hidden text, link farms, etc.) that could result in penalties from Google. If a penalty is incurred due to actions taken solely by Q8Block without client instruction, we will remediate at no additional cost.</p>
+      </div>
+      <p>Timelines for results vary based on the competitiveness of the target keywords, the current state of the Client's online presence, and the plan selected. Typical improvement in local rankings is observable within 3–6 months of consistent service.</p>
+    </div>
+
+    <div class="terms-section" id="refund">
+      <h2>7. Refund Policy</h2>
+      <p>Q8Block offers a <strong>6-month results guarantee</strong>. If, after 6 consecutive months of uninterrupted service and full Client cooperation, your business has not achieved measurable improvement in local keyword rankings as tracked in your monthly reports, you are eligible for a full refund of the most recent 6 months of service fees.</p>
+      <ul>
+        <li>The guarantee is void if the Client fails to fulfil the obligations in Section 4.</li>
+        <li>The guarantee is void if the Client has made unauthorised changes to managed pages or listings.</li>
+        <li>Refund requests must be submitted in writing within 14 days of the end of the 6-month period.</li>
+        <li>Payments made for months during which service was paused due to non-payment are not included in the refund calculation.</li>
+      </ul>
+      <p>Outside of the 6-month guarantee, all monthly fees paid are non-refundable once the work for that month has commenced.</p>
+    </div>
+
+    <div class="terms-section" id="liability">
+      <h2>8. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, Q8Block's total liability to the Client for any claim arising from or related to these Terms or the services provided shall not exceed the total fees paid by the Client in the 3 months preceding the event giving rise to the claim.</p>
+      <p>Q8Block shall not be liable for any indirect, consequential, or incidental damages, including loss of revenue, loss of data, or loss of business opportunity, even if Q8Block has been advised of the possibility of such damages.</p>
+    </div>
+
+    <div class="terms-section" id="termination">
+      <h2>9. Termination</h2>
+      <p>Either party may terminate the service agreement by providing 30 days' written notice. Q8Block will continue to deliver services during this notice period, and the Client remains responsible for payment of fees accrued during this time.</p>
+      <p>Q8Block reserves the right to terminate immediately, without notice, in cases of non-payment exceeding 15 days, violation of these Terms, or requests to perform unethical or illegal SEO activities.</p>
+      <p>Upon termination, Q8Block will provide the Client with a final ranking report and transfer ownership of all fully paid-for content. Access to managed accounts will be returned to the Client within 5 business days.</p>
+    </div>
+
+    <div class="terms-section" id="law">
+      <h2>10. Governing Law</h2>
+      <p>These Terms of Service are governed by and construed in accordance with the laws of the State of Kuwait. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of Kuwait.</p>
+    </div>
+
+    <div class="terms-section" id="contact">
+      <h2>11. Contact</h2>
+      <p>For questions about these Terms, please reach out to us directly:</p>
+      <ul>
+        <li><strong>Company:</strong> Kuwait Block — شركة كويت بلوك</li>
+        <li><strong>Phone / WhatsApp:</strong> <a href="tel:+96594139666" style="color:var(--c1);">+965 94139666</a></li>
+        <li><strong>Address:</strong> Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9</li>
+      </ul>
+    </div>
+  </main>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-logo">Q8<em>block</em></span>
+      <p class="footer-desc">Kuwait's local SEO agency. We build and rank websites that generate real calls for your business.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="index.html#cta">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="nap">
+      <div class="footer-col-title">Contact</div>
+      <strong>Kuwait Block — شركة كويت بلوك</strong>
+      <a href="tel:+96594139666">+965 94139666</a><br>
+      Al Ahmadi Governorate, Mangaf,<br>
+      Block 004, Street 14,<br>
+      Nasser Falih Shnaz Al Subaie Building,<br>
+      Floor 1, Unit 9
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Q8Block. All rights reserved.</span>
+    <a href="ar/terms.html" style="color:rgba(230,242,246,0.38);font-size:0.78rem;text-decoration:none;">العربية</a>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('pinned', window.scrollY > 50);
+}, { passive: true });
+</script>
+</body>
+</html>
