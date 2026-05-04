@@ -7,7 +7,7 @@
   <meta name="description" content="Kuwait's local SEO agency. We build and rank local websites that generate calls for your business.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@700&family=DM+Serif+Display&family=Space+Grotesk:wght@700&family=Outfit:wght@700&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,6 +28,62 @@
 
     html { scroll-behavior: smooth; }
     body { font-family: var(--fb); background: var(--dark); color: var(--ink); overflow-x: hidden; }
+
+    /* ─── LIGHTBOX ───────────────────────────────────── */
+    .lb {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(7,13,18,0.94);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      cursor: zoom-out;
+    }
+    .lb.open { opacity: 1; pointer-events: all; }
+    .lb img { max-width: 92vw; max-height: 90vh; border-radius: 10px; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+    .mockup img { cursor: zoom-in; }
+
+    /* ─── FONT PREVIEW (temporary — pick one and we remove the rest) ─── */
+    #font-preview {
+      background: var(--white);
+      padding: 5rem 1.5rem;
+      border-bottom: 2px dashed #E0E0E0;
+    }
+    #font-preview .fp-note {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #D0242B;
+      margin-bottom: 3rem;
+    }
+    .fp-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .fp-label {
+      min-width: 160px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      flex-shrink: 0;
+    }
+    .fp-text {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+    .fp-1 { font-family: 'Playfair Display', serif; }
+    .fp-2 { font-family: 'DM Serif Display', serif; }
+    .fp-3 { font-family: 'Space Grotesk', sans-serif; }
+    .fp-4 { font-family: 'Outfit', sans-serif; }
+    .fp-5 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 
     /* ─── NAV ─────────────────────────────────────────── */
     nav {
@@ -468,12 +524,7 @@
       gap: 1.25rem;
       width: max-content;
       padding: 0.5rem 0 1rem;
-      animation: marquee 38s linear infinite;
-    }
-    .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      will-change: transform;
     }
 
     .t-card {
@@ -733,6 +784,34 @@
 </section>
 
 
+<!-- ─── FONT PREVIEW (temp) ──────────────────────────────────── -->
+<section id="font-preview">
+  <div class="container">
+    <p class="fp-note">Font preview — pick one, tell me the number</p>
+    <div class="fp-row">
+      <span class="fp-label">1 — Playfair Display</span>
+      <span class="fp-text fp-1">Page 1 Rankings That Bring Real Customers</span>
+    </div>
+    <div class="fp-row">
+      <span class="fp-label">2 — DM Serif Display</span>
+      <span class="fp-text fp-2">Page 1 Rankings That Bring Real Customers</span>
+    </div>
+    <div class="fp-row">
+      <span class="fp-label">3 — Space Grotesk</span>
+      <span class="fp-text fp-3">Page 1 Rankings That Bring Real Customers</span>
+    </div>
+    <div class="fp-row">
+      <span class="fp-label">4 — Outfit</span>
+      <span class="fp-text fp-4">Page 1 Rankings That Bring Real Customers</span>
+    </div>
+    <div class="fp-row">
+      <span class="fp-label">5 — Fraunces</span>
+      <span class="fp-text fp-5">Page 1 Rankings That Bring Real Customers</span>
+    </div>
+  </div>
+</section>
+
+
 <!-- ─── PROOF ────────────────────────────────────────────────── -->
 <section id="proof">
   <div class="container">
@@ -742,7 +821,7 @@
         <span class="tag tag-muted reveal">Real Results</span>
         <h2 class="s2 s2-dark reveal">Page 1 Rankings That<br>Bring Real Customers</h2>
         <p class="sp sp-muted reveal" style="margin-top:1rem;">
-          Every client we take on gets the same commitment — we don't stop until your business is where it needs to be. Page 1 isn't a bonus for us, it's the baseline. The results you see here reflect a process we've refined across real local businesses in Kuwait: targeted keywords, consistent content, and backlinks that actually move rankings. No shortcuts, no vague reports — just measurable positions and the calls that follow.
+          We don't stop until you're on Page 1. Our process — targeted keywords, consistent content, quality backlinks — is built around one outcome: your phone ringing.
         </p>
       </div>
 
@@ -779,7 +858,7 @@
 
       <div class="slider-wrap">
         <div class="slider-ends"><span>KD 50</span><span>KD 500</span></div>
-        <input type="range" id="planSlider" min="0" max="9" value="0" step="1">
+        <input type="range" id="planSlider" min="0" max="45" value="0" step="1">
       </div>
 
       <div class="features">
@@ -1226,18 +1305,16 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
 
 /* ─── Pricing slider */
-const plans = [
-  { price: 50,  blogs: 10, keys: 20,  links: '1 — DR 5+'  },
-  { price: 100, blogs: 15, keys: 35,  links: '2 — DR 15+' },
-  { price: 150, blogs: 20, keys: 50,  links: '3 — DR 20+' },
-  { price: 200, blogs: 25, keys: 65,  links: '4 — DR 25+' },
-  { price: 250, blogs: 30, keys: 80,  links: '5 — DR 30+' },
-  { price: 300, blogs: 35, keys: 100, links: '6 — DR 35+' },
-  { price: 350, blogs: 40, keys: 120, links: '8 — DR 40+' },
-  { price: 400, blogs: 45, keys: 140, links: '10 — DR 45+' },
-  { price: 450, blogs: 50, keys: 160, links: '12 — DR 50+' },
-  { price: 500, blogs: 60, keys: 200, links: '15 — DR 50+' },
-];
+/* 46 steps: 50 KD → 500 KD in 10 KD increments */
+const plans = Array.from({ length: 46 }, (_, i) => {
+  const pct   = i / 45;
+  const price = 50 + i * 10;
+  const blogs = Math.round(10 + pct * 50);
+  const keys  = Math.round(20 + pct * 180);
+  const links = Math.round(1  + pct * 14);
+  const dr    = Math.round((5 + pct * 45) / 5) * 5;
+  return { price, blogs, keys, links: `${links} — DR ${dr}+` };
+});
 
 const slider   = document.getElementById('planSlider');
 const priceNum = document.getElementById('priceNum');
@@ -1253,7 +1330,7 @@ function pop(el) {
 }
 
 function setTrack(step) {
-  const pct = (step / 9) * 100;
+  const pct = (step / 45) * 100;
   slider.style.background =
     `linear-gradient(to right, var(--ink) ${pct}%, #DDE8EC ${pct}%)`;
 }
@@ -1271,6 +1348,57 @@ function apply(step) {
 
 apply(0);
 slider.addEventListener('input', () => apply(+slider.value));
+
+
+/* ─── Proof image lightbox */
+(function () {
+  const img = document.querySelector('.mockup img');
+  if (!img) return;
+  const lb = document.createElement('div');
+  lb.className = 'lb';
+  lb.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+  document.body.appendChild(lb);
+  img.addEventListener('click', () => lb.classList.add('open'));
+  lb.addEventListener('click',  () => lb.classList.remove('open'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+})();
+
+
+/* ─── Seamless marquee (JS — no CSS animation reset gap) */
+(function () {
+  const track = document.querySelector('.marquee-track');
+  if (!track) return;
+  const items  = [...track.children];
+  const half   = items.length / 2;
+  let x        = 0;
+  let paused   = false;
+  const speed  = 0.46; // px per frame
+
+  track.closest('.marquee-outer').addEventListener('mouseenter', () => paused = true);
+  track.closest('.marquee-outer').addEventListener('mouseleave', () => paused = false);
+
+  function halfWidth() {
+    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+    let w = 0;
+    for (let i = 0; i < half; i++) w += items[i].offsetWidth + gap;
+    return w;
+  }
+
+  let hw = 0;
+  function init() {
+    hw = halfWidth();
+    if (hw < 10) { requestAnimationFrame(init); return; }
+    (function tick() {
+      if (!paused) {
+        x += speed;
+        if (x >= hw) x -= hw;
+        track.style.transform = `translateX(${-x}px)`;
+      }
+      requestAnimationFrame(tick);
+    })();
+  }
+  requestAnimationFrame(init);
+})();
 
 
 /* ─── FAQ accordion */
