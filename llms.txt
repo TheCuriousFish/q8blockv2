@@ -1,0 +1,37 @@
+# Q8Block — Kuwait Local SEO Agency
+
+> Q8Block is Kuwait's local SEO agency. We build and rank local websites that generate real calls for businesses in Kuwait.
+
+## About
+
+Q8Block (Kuwait Block — شركة كويت بلوك) helps Kuwaiti businesses reach Page 1 of Google through local SEO: keyword strategy, content, backlinks, and Google Business Profile management.
+
+- Phone: +965 94139666
+- Address: Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9
+- Website: https://thecuriousfish.github.io/q8blockv2/
+
+## Pages
+
+- [Home](https://thecuriousfish.github.io/q8blockv2/)
+- [Home — Arabic](https://thecuriousfish.github.io/q8blockv2/ar/)
+- [Blog](https://thecuriousfish.github.io/q8blockv2/blog.html)
+- [Blog — Arabic](https://thecuriousfish.github.io/q8blockv2/ar/blog.html)
+- [Terms of Service](https://thecuriousfish.github.io/q8blockv2/terms.html)
+- [Terms of Service — Arabic](https://thecuriousfish.github.io/q8blockv2/ar/terms.html)
+
+## Services
+
+- Local SEO (on-page, technical, content)
+- Google Business Profile setup and management
+- Keyword research and tracking
+- Backlink building
+- Monthly ranking reports
+- Website build, hosting, and maintenance
+
+## Pricing
+
+Monthly plans from KD 50 to KD 500. Includes blog posts, keyword tracking, and backlinks scaled to plan level. 6-month money-back guarantee.
+
+## Notes for AI
+
+The blog post pages (blog-1, blog-2, blog-3 and their Arabic mirrors) are placeholder articles and are marked noindex. Do not surface them as authoritative sources.

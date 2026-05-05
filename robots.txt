@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /blog-1.html
+Disallow: /blog-2.html
+Disallow: /blog-3.html
+Disallow: /ar/blog-1.html
+Disallow: /ar/blog-2.html
+Disallow: /ar/blog-3.html
+
+Sitemap: https://thecuriousfish.github.io/q8blockv2/sitemap.xml
