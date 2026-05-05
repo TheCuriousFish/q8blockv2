@@ -636,6 +636,8 @@
       border: 1px solid rgba(0,0,0,0.055);
       border-radius: 14px;
       padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
     }
     .t-stars { display: flex; gap: 3px; margin-bottom: 1rem; }
     .t-star {
@@ -648,9 +650,9 @@
       color: var(--ink);
       line-height: 1.65;
       font-weight: 400;
-      margin-bottom: 1.2rem;
+      flex: 1;
     }
-    .t-author { display: flex; align-items: center; gap: 0.7rem; }
+    .t-author { display: flex; align-items: center; gap: 0.7rem; margin-top: auto; padding-top: 1.2rem; }
     .t-avatar {
       width: 36px; height: 36px;
       border-radius: 50%;
