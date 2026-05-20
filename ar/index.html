@@ -150,8 +150,8 @@
     .wyg-ill { width: 260px; flex-shrink: 0; background: #EFF8FB; display: flex; align-items: center; justify-content: center; padding: 2.75rem 2.5rem; }
     .wyg-ill svg { width: 100%; height: auto; display: block; }
     .wyg-body { padding: 2.5rem 2.75rem; display: flex; flex-direction: column; justify-content: center; gap: 0.55rem; }
-    .wyg-title { font-family: var(--fh); font-size: 1.15rem; font-weight: 800; color: var(--ink); line-height: 1.3; }
-    .wyg-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+    .wyg-title { font-family: var(--fh); font-size: 1.25rem; font-weight: 800; color: var(--ink); line-height: 1.3; }
+    .wyg-desc { font-size: 0.96rem; color: var(--muted); line-height: 1.75; }
     .wyg-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: #DCFCE7; color: #15803D; font-size: 0.78rem; font-weight: 700; padding: 0.35rem 0.8rem; border-radius: 100px; margin-top: 0.4rem; width: fit-content; }
 
     @media (max-width: 720px) { .wyg-card { flex-direction: column; } .wyg-ill { width: 100%; padding: 2rem; min-height: 180px; } }
@@ -316,7 +316,7 @@
 
       <div>
         <span class="tag tag-muted reveal">تصنيفات مثبتة</span>
-        <h2 class="s2 s2-dark reveal">تصنيفات الصفحة الأولى<br>التي تدفع العملاء للاتصال بك</h2>
+        <h2 class="s2 s2-dark reveal">تصنيفات الصفحة الأولى<br>التي تجلب الاتصالات ورسائل الواتساب</h2>
         <p class="sp sp-muted reveal" style="margin-top:1rem;">
           لا نتوقف حتى تصل إلى الصفحة الأولى. عمليتنا — الكلمات المفتاحية المستهدفة والمحتوى المتسق والروابط الخلفية عالية الجودة — مبنية حول نتيجة واحدة: رنين هاتفك.
         </p>
@@ -463,24 +463,61 @@
       <div class="wyg-card">
         <div class="wyg-ill">
           <svg viewBox="0 0 130 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Ribbon tails behind the seal -->
-            <path d="M45 90 L30 142 L55 128 L80 142 L65 90 Z" fill="#ABD9E7" opacity="0.6"/>
-            <path d="M85 90 L70 142 L95 128 L120 142 L105 90 Z" fill="#ABD9E7" opacity="0.4"/>
-            <!-- Outer glowing circle -->
-            <circle cx="65" cy="65" r="54" fill="#15293A" stroke="#BCE1EC" stroke-width="2" stroke-dasharray="4 2"/>
-            <!-- Inner seal circle -->
-            <circle cx="65" cy="65" r="46" fill="#BCE1EC"/>
-            <!-- Shield emblem inside the seal -->
-            <path d="M65 35 L89 45 L89 68 C89 83 79 96 65 101 C51 96 41 83 41 68 L41 45 Z" fill="#15293A"/>
-            <!-- Checkmark inside the shield -->
-            <path d="M52 66 L61 75 L78 54" stroke="#BCE1EC" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Star accents -->
-            <path d="M65 24 L66.5 27 L69.5 27 L67 29 L68 32 L65 30 L62 32 L63 29 L60.5 27 L63.5 27 Z" fill="#BCE1EC"/>
+            <!-- Circular celebration background -->
+            <circle cx="65" cy="70" r="50" fill="#15293A" stroke="#1D3A4C" stroke-width="2"/>
+            <circle cx="65" cy="70" r="42" fill="#0C1820" opacity="0.4"/>
+
+            <!-- Google-colored celebration confetti/sparkles -->
+            <!-- Blue Sparkle -->
+            <path d="M28 45 L30 49 L34 50 L30 51 L28 55 L26 51 L22 50 L26 49 Z" fill="#4285F4"/>
+            <!-- Red Sparkle -->
+            <path d="M102 42 L104 46 L108 47 L104 48 L102 52 L100 48 L96 47 L100 46 Z" fill="#EA4335"/>
+            <!-- Green Sparkle -->
+            <path d="M35 95 L37 99 L41 100 L37 101 L35 105 L33 101 L29 100 L33 99 Z" fill="#34A853"/>
+            <!-- Yellow Sparkle -->
+            <path d="M95 92 L97 96 L101 97 L97 98 L95 102 L93 98 L89 97 L93 96 Z" fill="#FBBC05"/>
+            
+            <!-- Tiny floating dots -->
+            <circle cx="48" cy="38" r="2" fill="#EA4335"/>
+            <circle cx="82" cy="35" r="2.5" fill="#4285F4"/>
+            <circle cx="26" cy="74" r="2" fill="#34A853"/>
+            <circle cx="104" cy="72" r="3" fill="#FBBC05"/>
+
+            <!-- Trophy shadow / glow -->
+            <ellipse cx="65" cy="112" rx="25" ry="6" fill="#FBBC05" opacity="0.2"/>
+
+            <!-- Trophy Structure -->
+            <!-- Base of the trophy -->
+            <rect x="47" y="106" width="36" height="10" rx="2" fill="#1D3A4C"/>
+            <path d="M51 106 L53 96 H77 L79 106 Z" fill="#0C1820"/>
+            <!-- Stem -->
+            <rect x="61" y="82" width="8" height="15" fill="#FBBC05"/>
+            <path d="M57 93 H73 L70 96 H60 Z" fill="#F9AB00"/>
+            
+            <!-- Trophy Cup Body -->
+            <!-- Main Goblet -->
+            <path d="M42 46 H88 V70 C88 82.5 77.5 90 65 90 C52.5 90 42 82.5 42 70 Z" fill="#FBBC05"/>
+            <!-- Highlights/Details on Goblet -->
+            <path d="M42 46 H54 V90 C46.5 86 42 79 42 70 Z" fill="#FFE082" opacity="0.4"/>
+            <path d="M88 46 H76 V90 C83.5 86 88 79 88 70 Z" fill="#F9AB00" opacity="0.4"/>
+            
+            <!-- Trophy Cup Lip/Rim -->
+            <ellipse cx="65" cy="46" rx="23" ry="4" fill="#FFE082"/>
+            <ellipse cx="65" cy="46" rx="20" ry="2.5" fill="#F9AB00"/>
+
+            <!-- Trophy Handles -->
+            <!-- Left Handle -->
+            <path d="M42 52 C34 52 32 68 42 72 M42 56 C37 56 36 66 42 68" stroke="#FFE082" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <!-- Right Handle -->
+            <path d="M88 52 C96 52 98 68 88 72 M88 56 C93 56 94 66 88 68" stroke="#FFE082" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+            <!-- Star engraving on the cup center -->
+            <path d="M65 58 L67.5 63.5 L73.5 64 L69 68.2 L70.5 74 L65 71 L59.5 74 L61 68.2 L56.5 64 L62.5 63.5 Z" fill="#FFF"/>
           </svg>
         </div>
         <div class="wyg-body">
-          <div class="wyg-title">تصدر الصفحة الأولى، أو استرد أموالك</div>
-          <div class="wyg-desc">إذا لم نضع نشاطك التجاري في الصفحة الأولى من Google للكلمات المستهدفة خلال 6 أشهر، سنعيد لك كل دينار دفعته. بدون شروط معقدة، وبدون أعذار.</div>
+          <div class="wyg-title">تصدّر أو استرد أموالك</div>
+          <div class="wyg-desc">نحدد هدفاً واضحاً لعدد المكالمات التي يجب أن يتلقاها نشاطك التجاري. إذا لم نصل إلى هذا الهدف خلال 6 أشهر، فستسترد أموالك بالكامل. بدون شروط معقدة، وبدون أعذار.</div>
           <div class="wyg-badge">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             ضمان استرداد المال لمدة 6 أشهر بالكامل
