@@ -107,7 +107,7 @@
       flex: 1;
       width: 100%;
       max-width: 1100px;
-      margin: 90px auto 40px;
+      margin: 40px auto 20px;
       padding: 0 1.5rem;
       z-index: 2;
       position: relative;
@@ -311,7 +311,7 @@
       margin-bottom: 0.15rem;
     }
 
-    .input-text, .input-email, select {
+    .input-text, .input-email, select, textarea {
       background: #ffffff;
       border: 1px solid rgba(15, 23, 42, 0.15);
       border-radius: 8px;
@@ -323,10 +323,10 @@
       transition: border-color 0.25s, box-shadow 0.25s;
       width: 100%;
     }
-    .input-text::placeholder, .input-email::placeholder {
+    .input-text::placeholder, .input-email::placeholder, textarea::placeholder {
       color: #94A3B8;
     }
-    .input-text:focus, .input-email:focus, select:focus {
+    .input-text:focus, .input-email:focus, select:focus, textarea:focus {
       border-color: var(--c1);
       box-shadow: 0 0 0 3px rgba(26, 138, 158, 0.12);
     }
@@ -968,17 +968,7 @@
 
 <canvas id="particles"></canvas>
 
-<nav id="nav">
-  <a href="../index.html" class="nav-logo">Q8<em>block</em></a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="../blog.html">Blog</a></li>
-    <li><a href="../terms.html">Terms</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="../index.html#cta" class="nav-cta">Contact Us</a>
-  </div>
-</nav>
+
 
 <div class="onboarding-wrap">
   <div class="form-header">
@@ -1134,6 +1124,7 @@
                         <span class="checkbox-label">Patio Construction</span>
                       </label>
                       <div class="price-range-inputs" id="price_patio_construction" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_patio_construction_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_patio_construction_max" placeholder="Max $" class="price-input">
@@ -1148,6 +1139,7 @@
                         <span class="checkbox-label">Patio Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_patio_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_patio_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_patio_installation_max" placeholder="Max $" class="price-input">
@@ -1162,6 +1154,7 @@
                         <span class="checkbox-label">Custom Patio Design</span>
                       </label>
                       <div class="price-range-inputs" id="price_custom_patio_design" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_custom_patio_design_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_custom_patio_design_max" placeholder="Max $" class="price-input">
@@ -1176,6 +1169,7 @@
                         <span class="checkbox-label">Paver Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_paver_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_paver_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_paver_installation_max" placeholder="Max $" class="price-input">
@@ -1190,6 +1184,7 @@
                         <span class="checkbox-label">Concrete Work</span>
                       </label>
                       <div class="price-range-inputs" id="price_concrete_work" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_concrete_work_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_concrete_work_max" placeholder="Max $" class="price-input">
@@ -1204,6 +1199,7 @@
                         <span class="checkbox-label">Driveway Installation & Replacement</span>
                       </label>
                       <div class="price-range-inputs" id="price_driveway_installation_replacement" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_driveway_installation_replacement_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_driveway_installation_replacement_max" placeholder="Max $" class="price-input">
@@ -1218,6 +1214,7 @@
                         <span class="checkbox-label">Walkway Construction</span>
                       </label>
                       <div class="price-range-inputs" id="price_walkway_construction" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_walkway_construction_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_walkway_construction_max" placeholder="Max $" class="price-input">
@@ -1232,6 +1229,7 @@
                         <span class="checkbox-label">Outdoor Stair Construction</span>
                       </label>
                       <div class="price-range-inputs" id="price_outdoor_stair_construction" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_outdoor_stair_construction_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_outdoor_stair_construction_max" placeholder="Max $" class="price-input">
@@ -1246,6 +1244,7 @@
                         <span class="checkbox-label">Retaining Walls</span>
                       </label>
                       <div class="price-range-inputs" id="price_retaining_walls" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_retaining_walls_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_retaining_walls_max" placeholder="Max $" class="price-input">
@@ -1263,6 +1262,7 @@
                         <span class="checkbox-label">Excavation Services</span>
                       </label>
                       <div class="price-range-inputs" id="price_excavation_services" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_excavation_services_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_excavation_services_max" placeholder="Max $" class="price-input">
@@ -1277,6 +1277,7 @@
                         <span class="checkbox-label">Grading & Leveling</span>
                       </label>
                       <div class="price-range-inputs" id="price_grading_leveling" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_grading_leveling_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_grading_leveling_max" placeholder="Max $" class="price-input">
@@ -1291,6 +1292,7 @@
                         <span class="checkbox-label">Site Preparation</span>
                       </label>
                       <div class="price-range-inputs" id="price_site_preparation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_site_preparation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_site_preparation_max" placeholder="Max $" class="price-input">
@@ -1305,6 +1307,7 @@
                         <span class="checkbox-label">Drainage Solutions</span>
                       </label>
                       <div class="price-range-inputs" id="price_drainage_solutions" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_drainage_solutions_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_drainage_solutions_max" placeholder="Max $" class="price-input">
@@ -1319,6 +1322,7 @@
                         <span class="checkbox-label">Land Clearing</span>
                       </label>
                       <div class="price-range-inputs" id="price_land_clearing" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_land_clearing_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_land_clearing_max" placeholder="Max $" class="price-input">
@@ -1336,6 +1340,7 @@
                         <span class="checkbox-label">Natural Stone Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_natural_stone_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_natural_stone_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_natural_stone_installation_max" placeholder="Max $" class="price-input">
@@ -1350,6 +1355,7 @@
                         <span class="checkbox-label">Decorative Rock Landscaping</span>
                       </label>
                       <div class="price-range-inputs" id="price_decorative_rock_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_decorative_rock_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_decorative_rock_landscaping_max" placeholder="Max $" class="price-input">
@@ -1364,6 +1370,7 @@
                         <span class="checkbox-label">Boulder Placement</span>
                       </label>
                       <div class="price-range-inputs" id="price_boulder_placement" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_boulder_placement_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_boulder_placement_max" placeholder="Max $" class="price-input">
@@ -1395,6 +1402,7 @@
                         <span class="checkbox-label">Lawn Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_lawn_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_lawn_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_lawn_installation_max" placeholder="Max $" class="price-input">
@@ -1409,6 +1417,7 @@
                         <span class="checkbox-label">Sod Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_sod_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_sod_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_sod_installation_max" placeholder="Max $" class="price-input">
@@ -1423,6 +1432,7 @@
                         <span class="checkbox-label">Artificial Turf Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_artificial_turf_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_artificial_turf_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_artificial_turf_installation_max" placeholder="Max $" class="price-input">
@@ -1437,6 +1447,7 @@
                         <span class="checkbox-label">Lawn Repair</span>
                       </label>
                       <div class="price-range-inputs" id="price_lawn_repair" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_lawn_repair_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_lawn_repair_max" placeholder="Max $" class="price-input">
@@ -1454,6 +1465,7 @@
                         <span class="checkbox-label">Garden Bed Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_garden_bed_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_garden_bed_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_garden_bed_installation_max" placeholder="Max $" class="price-input">
@@ -1468,6 +1480,7 @@
                         <span class="checkbox-label">Shrub Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_shrub_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_shrub_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_shrub_installation_max" placeholder="Max $" class="price-input">
@@ -1482,6 +1495,7 @@
                         <span class="checkbox-label">Tree Planting</span>
                       </label>
                       <div class="price-range-inputs" id="price_tree_planting" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_tree_planting_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_tree_planting_max" placeholder="Max $" class="price-input">
@@ -1496,6 +1510,7 @@
                         <span class="checkbox-label">Seasonal Flower Planting</span>
                       </label>
                       <div class="price-range-inputs" id="price_seasonal_flower_planting" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_seasonal_flower_planting_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_seasonal_flower_planting_max" placeholder="Max $" class="price-input">
@@ -1513,6 +1528,7 @@
                         <span class="checkbox-label">Lawn Mowing</span>
                       </label>
                       <div class="price-range-inputs" id="price_lawn_mowing" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_lawn_mowing_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_lawn_mowing_max" placeholder="Max $" class="price-input">
@@ -1527,6 +1543,7 @@
                         <span class="checkbox-label">Fertilization</span>
                       </label>
                       <div class="price-range-inputs" id="price_fertilization" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_fertilization_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_fertilization_max" placeholder="Max $" class="price-input">
@@ -1541,6 +1558,7 @@
                         <span class="checkbox-label">Weed Control</span>
                       </label>
                       <div class="price-range-inputs" id="price_weed_control" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_weed_control_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_weed_control_max" placeholder="Max $" class="price-input">
@@ -1555,6 +1573,7 @@
                         <span class="checkbox-label">Mulching</span>
                       </label>
                       <div class="price-range-inputs" id="price_mulching" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_mulching_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_mulching_max" placeholder="Max $" class="price-input">
@@ -1569,6 +1588,7 @@
                         <span class="checkbox-label">Seasonal Cleanup</span>
                       </label>
                       <div class="price-range-inputs" id="price_seasonal_cleanup" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_seasonal_cleanup_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_seasonal_cleanup_max" placeholder="Max $" class="price-input">
@@ -1599,6 +1619,7 @@
                         <span class="checkbox-label">Tree Trimming</span>
                       </label>
                       <div class="price-range-inputs" id="price_tree_trimming" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_tree_trimming_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_tree_trimming_max" placeholder="Max $" class="price-input">
@@ -1613,6 +1634,7 @@
                         <span class="checkbox-label">Tree Removal</span>
                       </label>
                       <div class="price-range-inputs" id="price_tree_removal" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_tree_removal_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_tree_removal_max" placeholder="Max $" class="price-input">
@@ -1627,6 +1649,7 @@
                         <span class="checkbox-label">Stump Grinding</span>
                       </label>
                       <div class="price-range-inputs" id="price_stump_grinding" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_stump_grinding_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_stump_grinding_max" placeholder="Max $" class="price-input">
@@ -1641,6 +1664,7 @@
                         <span class="checkbox-label">Arborist Services</span>
                       </label>
                       <div class="price-range-inputs" id="price_arborist_services" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_arborist_services_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_arborist_services_max" placeholder="Max $" class="price-input">
@@ -1655,6 +1679,7 @@
                         <span class="checkbox-label">Emergency Tree Removal</span>
                       </label>
                       <div class="price-range-inputs" id="price_emergency_tree_removal" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_emergency_tree_removal_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_emergency_tree_removal_max" placeholder="Max $" class="price-input">
@@ -1669,6 +1694,7 @@
                         <span class="checkbox-label">Tree Health Inspection</span>
                       </label>
                       <div class="price-range-inputs" id="price_tree_health_inspection" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_tree_health_inspection_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_tree_health_inspection_max" placeholder="Max $" class="price-input">
@@ -1699,6 +1725,7 @@
                         <span class="checkbox-label">Irrigation System Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_irrigation_system_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_irrigation_system_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_irrigation_system_installation_max" placeholder="Max $" class="price-input">
@@ -1713,6 +1740,7 @@
                         <span class="checkbox-label">Irrigation System Design</span>
                       </label>
                       <div class="price-range-inputs" id="price_irrigation_system_design" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_irrigation_system_design_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_irrigation_system_design_max" placeholder="Max $" class="price-input">
@@ -1727,6 +1755,7 @@
                         <span class="checkbox-label">Sprinkler Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_sprinkler_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_sprinkler_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_sprinkler_installation_max" placeholder="Max $" class="price-input">
@@ -1741,6 +1770,7 @@
                         <span class="checkbox-label">Sprinkler Repair</span>
                       </label>
                       <div class="price-range-inputs" id="price_sprinkler_repair" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_sprinkler_repair_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_sprinkler_repair_max" placeholder="Max $" class="price-input">
@@ -1755,6 +1785,7 @@
                         <span class="checkbox-label">Leak Detection & Repair</span>
                       </label>
                       <div class="price-range-inputs" id="price_leak_detection_repair" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_leak_detection_repair_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_leak_detection_repair_max" placeholder="Max $" class="price-input">
@@ -1769,6 +1800,7 @@
                         <span class="checkbox-label">Drip Irrigation Systems</span>
                       </label>
                       <div class="price-range-inputs" id="price_drip_irrigation_systems" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_drip_irrigation_systems_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_drip_irrigation_systems_max" placeholder="Max $" class="price-input">
@@ -1783,6 +1815,7 @@
                         <span class="checkbox-label">Smart Irrigation Controllers</span>
                       </label>
                       <div class="price-range-inputs" id="price_smart_irrigation_controllers" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_smart_irrigation_controllers_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_smart_irrigation_controllers_max" placeholder="Max $" class="price-input">
@@ -1797,6 +1830,7 @@
                         <span class="checkbox-label">Irrigation Maintenance Plans</span>
                       </label>
                       <div class="price-range-inputs" id="price_irrigation_maintenance_plans" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_irrigation_maintenance_plans_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_irrigation_maintenance_plans_max" placeholder="Max $" class="price-input">
@@ -1811,6 +1845,7 @@
                         <span class="checkbox-label">Winterization & System Startup</span>
                       </label>
                       <div class="price-range-inputs" id="price_winterization_system_startup" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_winterization_system_startup_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_winterization_system_startup_max" placeholder="Max $" class="price-input">
@@ -1841,6 +1876,7 @@
                         <span class="checkbox-label">Outdoor Living Space Design</span>
                       </label>
                       <div class="price-range-inputs" id="price_outdoor_living_space_design" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_outdoor_living_space_design_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_outdoor_living_space_design_max" placeholder="Max $" class="price-input">
@@ -1855,6 +1891,7 @@
                         <span class="checkbox-label">Backyard Remodeling</span>
                       </label>
                       <div class="price-range-inputs" id="price_backyard_remodeling" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_backyard_remodeling_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_backyard_remodeling_max" placeholder="Max $" class="price-input">
@@ -1869,6 +1906,7 @@
                         <span class="checkbox-label">Outdoor Kitchens</span>
                       </label>
                       <div class="price-range-inputs" id="price_outdoor_kitchens" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_outdoor_kitchens_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_outdoor_kitchens_max" placeholder="Max $" class="price-input">
@@ -1883,6 +1921,7 @@
                         <span class="checkbox-label">Fire Pits</span>
                       </label>
                       <div class="price-range-inputs" id="price_fire_pits" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_fire_pits_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_fire_pits_max" placeholder="Max $" class="price-input">
@@ -1897,6 +1936,7 @@
                         <span class="checkbox-label">Pergola Installation</span>
                       </label>
                       <div class="price-range-inputs" id="price_pergola_installation" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_pergola_installation_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_pergola_installation_max" placeholder="Max $" class="price-input">
@@ -1911,6 +1951,7 @@
                         <span class="checkbox-label">Gazebo Construction</span>
                       </label>
                       <div class="price-range-inputs" id="price_gazebo_construction" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_gazebo_construction_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_gazebo_construction_max" placeholder="Max $" class="price-input">
@@ -1925,6 +1966,7 @@
                         <span class="checkbox-label">Shade Structures</span>
                       </label>
                       <div class="price-range-inputs" id="price_shade_structures" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_shade_structures_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_shade_structures_max" placeholder="Max $" class="price-input">
@@ -1939,6 +1981,7 @@
                         <span class="checkbox-label">Outdoor Seating Areas</span>
                       </label>
                       <div class="price-range-inputs" id="price_outdoor_seating_areas" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_outdoor_seating_areas_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_outdoor_seating_areas_max" placeholder="Max $" class="price-input">
@@ -1953,6 +1996,7 @@
                         <span class="checkbox-label">Outdoor Entertainment Areas</span>
                       </label>
                       <div class="price-range-inputs" id="price_outdoor_entertainment_areas" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_outdoor_entertainment_areas_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_outdoor_entertainment_areas_max" placeholder="Max $" class="price-input">
@@ -1967,6 +2011,7 @@
                         <span class="checkbox-label">Pool Landscaping</span>
                       </label>
                       <div class="price-range-inputs" id="price_pool_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_pool_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_pool_landscaping_max" placeholder="Max $" class="price-input">
@@ -1997,6 +2042,7 @@
                         <span class="checkbox-label">Commercial Landscape Maintenance</span>
                       </label>
                       <div class="price-range-inputs" id="price_commercial_landscape_maintenance" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_commercial_landscape_maintenance_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_commercial_landscape_maintenance_max" placeholder="Max $" class="price-input">
@@ -2011,6 +2057,7 @@
                         <span class="checkbox-label">Office Landscaping Services</span>
                       </label>
                       <div class="price-range-inputs" id="price_office_landscaping_services" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_office_landscaping_services_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_office_landscaping_services_max" placeholder="Max $" class="price-input">
@@ -2025,6 +2072,7 @@
                         <span class="checkbox-label">Retail Property Landscaping</span>
                       </label>
                       <div class="price-range-inputs" id="price_retail_property_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_retail_property_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_retail_property_landscaping_max" placeholder="Max $" class="price-input">
@@ -2039,6 +2087,7 @@
                         <span class="checkbox-label">Apartment Complex Landscaping</span>
                       </label>
                       <div class="price-range-inputs" id="price_apartment_complex_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_apartment_complex_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_apartment_complex_landscaping_max" placeholder="Max $" class="price-input">
@@ -2053,6 +2102,7 @@
                         <span class="checkbox-label">HOA Landscaping Maintenance</span>
                       </label>
                       <div class="price-range-inputs" id="price_hoa_landscaping_maintenance" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_hoa_landscaping_maintenance_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_hoa_landscaping_maintenance_max" placeholder="Max $" class="price-input">
@@ -2067,6 +2117,7 @@
                         <span class="checkbox-label">Industrial Property Grounds Maintenance</span>
                       </label>
                       <div class="price-range-inputs" id="price_industrial_property_grounds_maintenance" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_industrial_property_grounds_maintenance_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_industrial_property_grounds_maintenance_max" placeholder="Max $" class="price-input">
@@ -2081,6 +2132,7 @@
                         <span class="checkbox-label">Contract Maintenance Services</span>
                       </label>
                       <div class="price-range-inputs" id="price_contract_maintenance_services" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_contract_maintenance_services_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_contract_maintenance_services_max" placeholder="Max $" class="price-input">
@@ -2111,6 +2163,7 @@
                         <span class="checkbox-label">Xeriscaping (Drought-Resistant Landscaping)</span>
                       </label>
                       <div class="price-range-inputs" id="price_xeriscaping_drought_resistant_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_xeriscaping_drought_resistant_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_xeriscaping_drought_resistant_landscaping_max" placeholder="Max $" class="price-input">
@@ -2125,6 +2178,7 @@
                         <span class="checkbox-label">Eco-Friendly Landscaping</span>
                       </label>
                       <div class="price-range-inputs" id="price_eco_friendly_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_eco_friendly_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_eco_friendly_landscaping_max" placeholder="Max $" class="price-input">
@@ -2139,6 +2193,7 @@
                         <span class="checkbox-label">Native Plant Landscaping</span>
                       </label>
                       <div class="price-range-inputs" id="price_native_plant_landscaping" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_native_plant_landscaping_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_native_plant_landscaping_max" placeholder="Max $" class="price-input">
@@ -2153,6 +2208,7 @@
                         <span class="checkbox-label">Artificial Green Walls</span>
                       </label>
                       <div class="price-range-inputs" id="price_artificial_green_walls" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_artificial_green_walls_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_artificial_green_walls_max" placeholder="Max $" class="price-input">
@@ -2167,6 +2223,7 @@
                         <span class="checkbox-label">Water-Efficient Landscape Design</span>
                       </label>
                       <div class="price-range-inputs" id="price_water_efficient_landscape_design" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_water_efficient_landscape_design_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_water_efficient_landscape_design_max" placeholder="Max $" class="price-input">
@@ -2181,6 +2238,7 @@
                         <span class="checkbox-label">Turf Replacement Services</span>
                       </label>
                       <div class="price-range-inputs" id="price_turf_replacement_services" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_turf_replacement_services_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_turf_replacement_services_max" placeholder="Max $" class="price-input">
@@ -2211,6 +2269,7 @@
                         <span class="checkbox-label">Weekly Lawn Maintenance</span>
                       </label>
                       <div class="price-range-inputs" id="price_weekly_lawn_maintenance" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_weekly_lawn_maintenance_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_weekly_lawn_maintenance_max" placeholder="Max $" class="price-input">
@@ -2225,6 +2284,7 @@
                         <span class="checkbox-label">Monthly Maintenance Plans</span>
                       </label>
                       <div class="price-range-inputs" id="price_monthly_maintenance_plans" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_monthly_maintenance_plans_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_monthly_maintenance_plans_max" placeholder="Max $" class="price-input">
@@ -2239,6 +2299,7 @@
                         <span class="checkbox-label">Seasonal Maintenance (Spring/Fall)</span>
                       </label>
                       <div class="price-range-inputs" id="price_seasonal_maintenance_spring_fall" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_seasonal_maintenance_spring_fall_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_seasonal_maintenance_spring_fall_max" placeholder="Max $" class="price-input">
@@ -2253,6 +2314,7 @@
                         <span class="checkbox-label">Full-Service Property Maintenance</span>
                       </label>
                       <div class="price-range-inputs" id="price_full_service_property_maintenance" style="display:none;">
+                        <span class="price-range-label" style="font-size: 0.74rem; color: #64748B; font-weight: 600; margin-right: 0.2rem;">Price Range:</span>
                         <input type="number" name="srv_full_service_property_maintenance_min" placeholder="Min $" class="price-input">
                         <span>-</span>
                         <input type="number" name="srv_full_service_property_maintenance_max" placeholder="Max $" class="price-input">
@@ -2263,6 +2325,12 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.45rem;">
+            <label for="additional_services">Additional Services We Might Have Missed</label>
+            <span class="label-desc">Specify any other services you offer that were not listed above (one per line).</span>
+            <textarea id="additional_services" name="additional_services" class="input-text" rows="4" placeholder="e.g. Hydroseeding&#10;Lawn Aeration&#10;Holiday Lighting" style="resize: vertical; font-family: var(--fb);"></textarea>
           </div>
         </div>
 
@@ -2295,29 +2363,29 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Dallas</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_north_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_north_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">North Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_east_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_east_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">East Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_west_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_west_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">West Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_south_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_south_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">South Dallas</span>
                     </label>
@@ -2328,59 +2396,59 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Central Districts</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_downtown_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_downtown_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Downtown Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_uptown_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_uptown_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Uptown Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_deep_ellum" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_deep_ellum" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Deep Ellum</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_design_district" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_design_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Design District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_arts_district" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_arts_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Arts District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_victory_park" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_victory_park" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Victory Park</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_medical_district" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_medical_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Medical District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_love_field_area" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_love_field_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Love Field Area</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_smu_district" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_smu_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">SMU District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_central_districts_park_cities" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_central_districts_park_cities" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Park Cities</span>
                     </label>
@@ -2391,69 +2459,69 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Neighborhoods</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_oak_lawn" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_oak_lawn" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Oak Lawn</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_preston_hollow" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_preston_hollow" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Preston Hollow</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_lakewood" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_lakewood" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lakewood</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_bishop_arts_district" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_bishop_arts_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Bishop Arts District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_highland_park" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_highland_park" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Highland Park</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_university_park" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_university_park" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">University Park</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_lower_greenville" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_lower_greenville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lower Greenville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_knox_henderson" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_knox_henderson" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Knox / Henderson</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_old_east_dallas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_old_east_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Old East Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_old_lake_highlands" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_old_lake_highlands" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Old Lake Highlands</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_casa_view" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_casa_view" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Casa View</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_neighborhoods_pleasant_grove" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_neighborhoods_pleasant_grove" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Pleasant Grove</span>
                     </label>
@@ -2464,129 +2532,129 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Dallas County Suburbs</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_irving" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_irving" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Irving</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_las_colinas" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_las_colinas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Las Colinas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_valley_ranch" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_valley_ranch" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Valley Ranch</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_grand_prairie" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_grand_prairie" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Grand Prairie</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_garland" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_garland" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Garland</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_mesquite" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_mesquite" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Mesquite</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_richardson" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_richardson" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Richardson</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_carrollton" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_carrollton" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Carrollton</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_farmers_branch" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_farmers_branch" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Farmers Branch</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_addison" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_addison" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Addison</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_coppell" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_coppell" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Coppell</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_rowlett" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_rowlett" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Rowlett</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_sachse" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_sachse" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Sachse</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_wylie" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_wylie" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Wylie</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_rockwall" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_rockwall" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Rockwall</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_seagoville" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_seagoville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Seagoville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_balch_springs" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_balch_springs" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Balch Springs</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_duncanville" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_duncanville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Duncanville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_desoto" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_desoto" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">DeSoto</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_cedar_hill" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_cedar_hill" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Cedar Hill</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_lancaster" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_lancaster" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lancaster</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_hutchins" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_hutchins" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Hutchins</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_glenn_heights" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_glenn_heights" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Glenn Heights</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_cockrell_hill" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_county_suburbs_cockrell_hill" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Cockrell Hill</span>
                     </label>
@@ -2597,24 +2665,24 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Dallas Sub-Areas / Communities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_sub_areas_communities_smu_area" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_sub_areas_communities_smu_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">SMU Area</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_sub_areas_communities_park_cities" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_sub_areas_communities_park_cities" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Park Cities</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_dallas_county_dallas_sub_areas_communities_lake_highlands_area" value="Yes">
+                      <input type="checkbox" name="area_dallas_county_dallas_sub_areas_communities_lake_highlands_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lake Highlands Area</span>
                     </label>
@@ -2643,29 +2711,29 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Fort Worth</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_north_fort_worth" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_north_fort_worth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">North Fort Worth</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_south_fort_worth" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_south_fort_worth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">South Fort Worth</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_east_fort_worth" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_east_fort_worth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">East Fort Worth</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_west_fort_worth" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_fort_worth_west_fort_worth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">West Fort Worth</span>
                     </label>
@@ -2676,44 +2744,44 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Central Districts</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_downtown_fort_worth" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_downtown_fort_worth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Downtown Fort Worth</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_near_southside" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_near_southside" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Near Southside</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_cultural_district" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_cultural_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Cultural District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_stockyards_district" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_stockyards_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Stockyards District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_west_7th_district" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_west_7th_district" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">West 7th District</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_alliance_area" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_alliance_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Alliance Area</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_clearfork_area" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_central_districts_clearfork_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Clearfork Area</span>
                     </label>
@@ -2724,39 +2792,39 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Neighborhoods</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_arlington_heights" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_arlington_heights" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Arlington Heights</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_tanglewood" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_tanglewood" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Tanglewood</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_fairmount" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_fairmount" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Fairmount</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_mistletoe_heights" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_mistletoe_heights" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Mistletoe Heights</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_rivercrest" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_rivercrest" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Rivercrest</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_ridglea_hills" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_neighborhoods_ridglea_hills" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Ridglea Hills</span>
                     </label>
@@ -2767,159 +2835,159 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Tarrant County Suburbs</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_arlington" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_arlington" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Arlington</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_grand_prairie" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_grand_prairie" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Grand Prairie</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_mansfield" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_mansfield" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Mansfield</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_keller" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_keller" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Keller</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_southlake" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_southlake" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Southlake</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_grapevine" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_grapevine" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Grapevine</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_colleyville" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_colleyville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Colleyville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_bedford" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_bedford" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Bedford</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_euless" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_euless" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Euless</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_hurst" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_hurst" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Hurst</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_north_richland_hills" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_north_richland_hills" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">North Richland Hills</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_haltom_city" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_haltom_city" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Haltom City</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_watauga" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_watauga" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Watauga</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_saginaw" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_saginaw" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Saginaw</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_haslet" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_haslet" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Haslet</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_blue_mound" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_blue_mound" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Blue Mound</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_white_settlement" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_white_settlement" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">White Settlement</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_forest_hill" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_forest_hill" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Forest Hill</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_everman" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_everman" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Everman</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_benbrook" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_benbrook" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Benbrook</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_burleson" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_burleson" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Burleson</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_crowley" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_crowley" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Crowley</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_lake_worth" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_lake_worth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lake Worth</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_pantego" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_pantego" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Pantego</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_dalworthington_gardens" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_dalworthington_gardens" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Dalworthington Gardens</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_edgecliff_village" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_edgecliff_village" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Edgecliff Village</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_westworth_village" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_westworth_village" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Westworth Village</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_river_oaks" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_river_oaks" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">River Oaks</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_sansom_park" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_sansom_park" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Sansom Park</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_kennedale" value="Yes">
+                      <input type="checkbox" name="area_tarrant_county_fort_worth_region_tarrant_county_suburbs_kennedale" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Kennedale</span>
                     </label>
@@ -2948,29 +3016,29 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Core Cities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_core_cities_plano" value="Yes">
+                      <input type="checkbox" name="area_collin_county_core_cities_plano" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Plano</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_core_cities_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_core_cities_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Frisco</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_core_cities_mckinney" value="Yes">
+                      <input type="checkbox" name="area_collin_county_core_cities_mckinney" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">McKinney</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_core_cities_allen" value="Yes">
+                      <input type="checkbox" name="area_collin_county_core_cities_allen" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Allen</span>
                     </label>
@@ -2981,69 +3049,69 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Secondary Cities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_richardson" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_richardson" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Richardson</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_melissa" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_melissa" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Melissa</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_anna" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_anna" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Anna</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_princeton" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_princeton" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Princeton</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_wylie" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_wylie" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Wylie</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_farmersville" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_farmersville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Farmersville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_lucas" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_lucas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lucas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_fairview" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_fairview" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Fairview</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_blue_ridge" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_blue_ridge" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Blue Ridge</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_lowry_crossing" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_lowry_crossing" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lowry Crossing</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_nevada" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_nevada" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Nevada</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_secondary_cities_westminster" value="Yes">
+                      <input type="checkbox" name="area_collin_county_secondary_cities_westminster" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Westminster</span>
                     </label>
@@ -3054,84 +3122,84 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">City Areas / Communities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_west_plano" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_west_plano" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">West Plano</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_east_plano" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_east_plano" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">East Plano</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_west_allen" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_west_allen" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">West Allen</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_east_allen" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_east_allen" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">East Allen</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_north_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_north_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">North Frisco</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_south_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_south_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">South Frisco</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_west_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_west_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">West Frisco</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_east_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_east_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">East Frisco</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_stonebridge_ranch_mckinney" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_stonebridge_ranch_mckinney" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Stonebridge Ranch (McKinney)</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_craig_ranch_mckinney" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_craig_ranch_mckinney" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Craig Ranch (McKinney)</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_legacy_west_plano" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_legacy_west_plano" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Legacy West (Plano)</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_the_star_district_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_the_star_district_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">The Star District (Frisco)</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_panther_creek_frisco" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_panther_creek_frisco" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Panther Creek (Frisco)</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_mckinney_historic_downtown" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_mckinney_historic_downtown" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">McKinney Historic Downtown</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_collin_county_city_areas_communities_adriatica_village_mckinney" value="Yes">
+                      <input type="checkbox" name="area_collin_county_city_areas_communities_adriatica_village_mckinney" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Adriatica Village (McKinney)</span>
                     </label>
@@ -3160,29 +3228,29 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Core Cities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_core_cities_denton" value="Yes">
+                      <input type="checkbox" name="area_denton_county_core_cities_denton" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Denton</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_core_cities_lewisville" value="Yes">
+                      <input type="checkbox" name="area_denton_county_core_cities_lewisville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lewisville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_core_cities_flower_mound" value="Yes">
+                      <input type="checkbox" name="area_denton_county_core_cities_flower_mound" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Flower Mound</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_core_cities_the_colony" value="Yes">
+                      <input type="checkbox" name="area_denton_county_core_cities_the_colony" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">The Colony</span>
                     </label>
@@ -3193,84 +3261,84 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Secondary Cities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_corinth" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_corinth" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Corinth</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_lake_dallas" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_lake_dallas" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lake Dallas</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_hickory_creek" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_hickory_creek" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Hickory Creek</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_shady_shores" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_shady_shores" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Shady Shores</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_argyle" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_argyle" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Argyle</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_bartonville" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_bartonville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Bartonville</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_double_oak" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_double_oak" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Double Oak</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_copper_canyon" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_copper_canyon" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Copper Canyon</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_hackberry" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_hackberry" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Hackberry</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_justin" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_justin" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Justin</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_ponder" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_ponder" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Ponder</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_krum" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_krum" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Krum</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_northlake" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_northlake" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Northlake</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_dish" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_dish" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">DISH</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_secondary_cities_cross_roads" value="Yes">
+                      <input type="checkbox" name="area_denton_county_secondary_cities_cross_roads" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Cross Roads</span>
                     </label>
@@ -3281,24 +3349,24 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Communities / Areas</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_communities_areas_castle_hills_lewisville" value="Yes">
+                      <input type="checkbox" name="area_denton_county_communities_areas_castle_hills_lewisville" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Castle Hills (Lewisville)</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_communities_areas_highland_village" value="Yes">
+                      <input type="checkbox" name="area_denton_county_communities_areas_highland_village" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Highland Village</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_denton_county_communities_areas_savannah_aubrey_area" value="Yes">
+                      <input type="checkbox" name="area_denton_county_communities_areas_savannah_aubrey_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Savannah (Aubrey area)</span>
                     </label>
@@ -3327,29 +3395,29 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Core Cities</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_core_cities_rockwall" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_core_cities_rockwall" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Rockwall</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_core_cities_heath" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_core_cities_heath" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Heath</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_core_cities_fate" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_core_cities_fate" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Fate</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_core_cities_royse_city" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_core_cities_royse_city" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Royse City</span>
                     </label>
@@ -3360,24 +3428,24 @@
                   <div class="node-header">
                     <button type="button" class="expand-btn" onclick="toggleNode(this)">▸</button>
                     <label class="custom-checkbox">
-                      <input type="checkbox" onchange="checkChildren(this)">
+                      <input type="checkbox" onchange="checkChildren(this)" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label" style="font-weight: 700;">Areas</span>
                     </label>
                   </div>
                   <div class="node-children">
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_areas_lake_ray_hubbard_area" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_areas_lake_ray_hubbard_area" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Lake Ray Hubbard Area</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_areas_rockwall_harbor" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_areas_rockwall_harbor" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Rockwall Harbor</span>
                     </label>
                     <label class="custom-checkbox">
-                      <input type="checkbox" name="area_rockwall_county_areas_downtown_rockwall" value="Yes">
+                      <input type="checkbox" name="area_rockwall_county_areas_downtown_rockwall" value="Yes" checked>
                       <span class="checkbox-box"></span>
                       <span class="checkbox-label">Downtown Rockwall</span>
                     </label>
@@ -3403,87 +3471,87 @@
                   </div>
                 <div style="margin-left: 0.8rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 1px solid rgba(15, 23, 42, 0.06); padding-left: 0.8rem;">
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_forney" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_forney" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Forney</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_terrell" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_terrell" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Terrell</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_kaufman" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_kaufman" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Kaufman</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_greenville" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_greenville" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Greenville</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_ennis" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_ennis" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Ennis</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_waxahachie" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_waxahachie" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Waxahachie</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_midlothian" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_midlothian" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Midlothian</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_red_oak" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_red_oak" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Red Oak</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_alvarado" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_alvarado" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Alvarado</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_joshua" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_joshua" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Joshua</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_cleburne" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_cleburne" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Cleburne</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_palmer" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_palmer" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Palmer</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_ferris" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_ferris" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Ferris</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_itasca" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_itasca" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Itasca</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_maypearl" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_maypearl" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Maypearl</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_milford" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_milford" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Milford</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_outer_east_southeast_metro_bardwell" value="Yes">
+                    <input type="checkbox" name="area_outer_east_southeast_metro_bardwell" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Bardwell</span>
                   </label>
@@ -3508,82 +3576,82 @@
                   </div>
                 <div style="margin-left: 0.8rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 1px solid rgba(15, 23, 42, 0.06); padding-left: 0.8rem;">
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_little_elm" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_little_elm" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Little Elm</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_prosper" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_prosper" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Prosper</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_celina" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_celina" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Celina</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_aubrey" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_aubrey" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Aubrey</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_oak_point" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_oak_point" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Oak Point</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_krugerville" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_krugerville" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Krugerville</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_providence_village" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_providence_village" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Providence Village</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_van_alstyne" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_van_alstyne" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Van Alstyne</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_anna" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_anna" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Anna</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_melissa" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_melissa" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Melissa</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_sanger" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_sanger" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Sanger</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_gunter" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_gunter" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Gunter</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_howe" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_howe" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Howe</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_tioga" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_tioga" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Tioga</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_collinsville" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_collinsville" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Collinsville</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_north_expansion_belt_tom_bean" value="Yes">
+                    <input type="checkbox" name="area_north_expansion_belt_tom_bean" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Tom Bean</span>
                   </label>
@@ -3608,62 +3676,62 @@
                   </div>
                 <div style="margin-left: 0.8rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 1px solid rgba(15, 23, 42, 0.06); padding-left: 0.8rem;">
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_windsong_ranch_prosper" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_windsong_ranch_prosper" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Windsong Ranch (Prosper)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_light_farms_celina" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_light_farms_celina" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Light Farms (Celina)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_mustang_lakes_celina" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_mustang_lakes_celina" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Mustang Lakes (Celina)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_trinity_falls_mckinney" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_trinity_falls_mckinney" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Trinity Falls (McKinney)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_savannah_little_elm" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_savannah_little_elm" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Savannah (Little Elm)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_paloma_creek_little_elm" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_paloma_creek_little_elm" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Paloma Creek (Little Elm)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_union_park_little_elm" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_union_park_little_elm" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Union Park (Little Elm)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_harvest_argyle_area" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_harvest_argyle_area" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Harvest (Argyle area)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_sandbrock_ranch_aubrey" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_sandbrock_ranch_aubrey" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Sandbrock Ranch (Aubrey)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_phillips_creek_ranch_frisco" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_phillips_creek_ranch_frisco" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Phillips Creek Ranch (Frisco)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_starwood_frisco" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_starwood_frisco" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Starwood (Frisco)</span>
                   </label>
                   <label class="custom-checkbox">
-                    <input type="checkbox" name="area_master_planned_communities_stonebriar_frisco" value="Yes">
+                    <input type="checkbox" name="area_master_planned_communities_stonebriar_frisco" value="Yes" checked>
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Stonebriar (Frisco)</span>
                   </label>
@@ -3671,6 +3739,12 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.45rem;">
+            <label for="additional_areas">Additional Service Areas We Might Have Missed</label>
+            <span class="label-desc">Specify any other cities, neighborhoods, or counties you serve (one per line).</span>
+            <textarea id="additional_areas" name="additional_areas" class="input-text" rows="4" placeholder="e.g. Waxahachie&#10;Kaufman&#10;75001" style="resize: vertical; font-family: var(--fb);"></textarea>
           </div>
         </div>
 
@@ -3745,40 +3819,12 @@
         <div class="success-icon-wrap">✔</div>
         <h2>Request Submitted Successfully!</h2>
         <p>Thank you for choosing our landscaping services! We have received your request and are excited to help transform your outdoor space. A detailed payment link and further instructions will be sent to you soon. Have a wonderful day!</p>
-        <a href="../index.html" class="success-back-btn">Return to Home</a>
       </div>
     </div>
   </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div>
-      <a href="../index.html" class="footer-logo">Q8<em>block</em></a>
-      <p class="footer-desc">Kuwait's leading local SEO and web setup agency. Building high-performing business sites that dominate search results.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Navigation</div>
-      <ul class="footer-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../blog.html">Blog</a></li>
-        <li><a href="../terms.html">Terms</a></li>
-      </ul>
-    </div>
-    <div class="nap">
-      <div class="footer-col-title">Contact</div>
-      <strong>Kuwait Block — شركة كويت بلوك</strong>
-      <a href="tel:+96594139666">+965 94139666</a><br>
-      Al Ahmadi Governorate, Mangaf,<br>
-      Block 004, Street 14,<br>
-      Nasser Falih Shnaz Al Subaie Building,<br>
-      Floor 1, Unit 9
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 Q8Block. All rights reserved.</span>
-  </div>
-</footer>
+<div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem; font-size: 0.8rem; color: #94A3B8; font-weight: 500; letter-spacing: 0.02em; z-index: 2; position: relative;">Made by Q8block</div>
 
 <script>
   let currentStep = 1;
@@ -4040,7 +4086,10 @@
     servicesListEl.innerHTML = '';
     
     const serviceCheckboxes = document.querySelectorAll('input[name^="srv_"]:checked');
-    if (serviceCheckboxes.length > 0) {
+    const addServicesVal = document.getElementById('additional_services').value.trim();
+    const additionalServices = addServicesVal ? addServicesVal.split(/\r?\n/).map(s => s.trim()).filter(Boolean) : [];
+    
+    if (serviceCheckboxes.length > 0 || additionalServices.length > 0) {
       serviceCheckboxes.forEach(cb => {
         const row = cb.closest('.service-option-row');
         const name = row.querySelector('.checkbox-label').textContent.trim();
@@ -4061,6 +4110,13 @@
         }
         servicesListEl.appendChild(li);
       });
+      
+      additionalServices.forEach(srv => {
+        const li = document.createElement('li');
+        li.className = 'review-pill';
+        li.textContent = `+ ${srv}`;
+        servicesListEl.appendChild(li);
+      });
     } else {
       const li = document.createElement('li');
       li.style.color = '#64748B';
@@ -4073,12 +4129,22 @@
     areasListEl.innerHTML = '';
     
     const areaCheckboxes = document.querySelectorAll('input[name^="area_"]:checked');
-    if (areaCheckboxes.length > 0) {
+    const addAreasVal = document.getElementById('additional_areas').value.trim();
+    const additionalAreas = addAreasVal ? addAreasVal.split(/\r?\n/).map(a => a.trim()).filter(Boolean) : [];
+    
+    if (areaCheckboxes.length > 0 || additionalAreas.length > 0) {
       areaCheckboxes.forEach(cb => {
         const label = cb.closest('.custom-checkbox').querySelector('.checkbox-label').textContent.trim();
         const li = document.createElement('li');
         li.className = 'review-pill';
         li.textContent = label;
+        areasListEl.appendChild(li);
+      });
+      
+      additionalAreas.forEach(area => {
+        const li = document.createElement('li');
+        li.className = 'review-pill';
+        li.textContent = `+ ${area}`;
         areasListEl.appendChild(li);
       });
     } else {
