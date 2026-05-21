@@ -1,0 +1,206 @@
+Region/County,Main Area/City,Sub Area/Neighborhood
+DALLAS COUNTY,Dallas,North Dallas
+DALLAS COUNTY,Dallas,East Dallas
+DALLAS COUNTY,Dallas,West Dallas
+DALLAS COUNTY,Dallas,South Dallas
+DALLAS COUNTY,Central Districts,Downtown Dallas
+DALLAS COUNTY,Central Districts,Uptown Dallas
+DALLAS COUNTY,Central Districts,Deep Ellum
+DALLAS COUNTY,Central Districts,Design District
+DALLAS COUNTY,Central Districts,Arts District
+DALLAS COUNTY,Central Districts,Victory Park
+DALLAS COUNTY,Central Districts,Medical District
+DALLAS COUNTY,Central Districts,Love Field Area
+DALLAS COUNTY,Central Districts,SMU District
+DALLAS COUNTY,Central Districts,Park Cities
+DALLAS COUNTY,Neighborhoods,Oak Lawn
+DALLAS COUNTY,Neighborhoods,Preston Hollow
+DALLAS COUNTY,Neighborhoods,Lakewood
+DALLAS COUNTY,Neighborhoods,Bishop Arts District
+DALLAS COUNTY,Neighborhoods,Highland Park
+DALLAS COUNTY,Neighborhoods,University Park
+DALLAS COUNTY,Neighborhoods,Lower Greenville
+DALLAS COUNTY,Neighborhoods,Knox / Henderson
+DALLAS COUNTY,Neighborhoods,Old East Dallas
+DALLAS COUNTY,Neighborhoods,Old Lake Highlands
+DALLAS COUNTY,Neighborhoods,Casa View
+DALLAS COUNTY,Neighborhoods,Pleasant Grove
+DALLAS COUNTY,Dallas County Suburbs,Irving
+DALLAS COUNTY,Dallas County Suburbs,Las Colinas
+DALLAS COUNTY,Dallas County Suburbs,Valley Ranch
+DALLAS COUNTY,Dallas County Suburbs,Grand Prairie
+DALLAS COUNTY,Dallas County Suburbs,Garland
+DALLAS COUNTY,Dallas County Suburbs,Mesquite
+DALLAS COUNTY,Dallas County Suburbs,Richardson
+DALLAS COUNTY,Dallas County Suburbs,Carrollton
+DALLAS COUNTY,Dallas County Suburbs,Farmers Branch
+DALLAS COUNTY,Dallas County Suburbs,Addison
+DALLAS COUNTY,Dallas County Suburbs,Coppell
+DALLAS COUNTY,Dallas County Suburbs,Rowlett
+DALLAS COUNTY,Dallas County Suburbs,Sachse
+DALLAS COUNTY,Dallas County Suburbs,Wylie
+DALLAS COUNTY,Dallas County Suburbs,Rockwall
+DALLAS COUNTY,Dallas County Suburbs,Seagoville
+DALLAS COUNTY,Dallas County Suburbs,Balch Springs
+DALLAS COUNTY,Dallas County Suburbs,Duncanville
+DALLAS COUNTY,Dallas County Suburbs,DeSoto
+DALLAS COUNTY,Dallas County Suburbs,Cedar Hill
+DALLAS COUNTY,Dallas County Suburbs,Lancaster
+DALLAS COUNTY,Dallas County Suburbs,Hutchins
+DALLAS COUNTY,Dallas County Suburbs,Glenn Heights
+DALLAS COUNTY,Dallas County Suburbs,Cockrell Hill
+DALLAS COUNTY,Dallas Sub-Areas / Communities,SMU Area
+DALLAS COUNTY,Dallas Sub-Areas / Communities,Park Cities
+DALLAS COUNTY,Dallas Sub-Areas / Communities,Lake Highlands Area
+TARRANT COUNTY (FORT WORTH REGION),Fort Worth,North Fort Worth
+TARRANT COUNTY (FORT WORTH REGION),Fort Worth,South Fort Worth
+TARRANT COUNTY (FORT WORTH REGION),Fort Worth,East Fort Worth
+TARRANT COUNTY (FORT WORTH REGION),Fort Worth,West Fort Worth
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,Downtown Fort Worth
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,Near Southside
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,Cultural District
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,Stockyards District
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,West 7th District
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,Alliance Area
+TARRANT COUNTY (FORT WORTH REGION),Central Districts,Clearfork Area
+TARRANT COUNTY (FORT WORTH REGION),Neighborhoods,Arlington Heights
+TARRANT COUNTY (FORT WORTH REGION),Neighborhoods,Tanglewood
+TARRANT COUNTY (FORT WORTH REGION),Neighborhoods,Fairmount
+TARRANT COUNTY (FORT WORTH REGION),Neighborhoods,Mistletoe Heights
+TARRANT COUNTY (FORT WORTH REGION),Neighborhoods,Rivercrest
+TARRANT COUNTY (FORT WORTH REGION),Neighborhoods,Ridglea Hills
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Arlington
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Grand Prairie
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Mansfield
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Keller
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Southlake
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Grapevine
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Colleyville
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Bedford
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Euless
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Hurst
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,North Richland Hills
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Haltom City
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Watauga
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Saginaw
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Haslet
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Blue Mound
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,White Settlement
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Forest Hill
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Everman
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Benbrook
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Burleson
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Crowley
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Lake Worth
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Pantego
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Dalworthington Gardens
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Edgecliff Village
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Westworth Village
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,River Oaks
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Sansom Park
+TARRANT COUNTY (FORT WORTH REGION),Tarrant County Suburbs,Kennedale
+COLLIN COUNTY,Core Cities,Plano
+COLLIN COUNTY,Core Cities,Frisco
+COLLIN COUNTY,Core Cities,McKinney
+COLLIN COUNTY,Core Cities,Allen
+COLLIN COUNTY,Secondary Cities,Richardson
+COLLIN COUNTY,Secondary Cities,Melissa
+COLLIN COUNTY,Secondary Cities,Anna
+COLLIN COUNTY,Secondary Cities,Princeton
+COLLIN COUNTY,Secondary Cities,Wylie
+COLLIN COUNTY,Secondary Cities,Farmersville
+COLLIN COUNTY,Secondary Cities,Lucas
+COLLIN COUNTY,Secondary Cities,Fairview
+COLLIN COUNTY,Secondary Cities,Blue Ridge
+COLLIN COUNTY,Secondary Cities,Lowry Crossing
+COLLIN COUNTY,Secondary Cities,Nevada
+COLLIN COUNTY,Secondary Cities,Westminster
+COLLIN COUNTY,City Areas / Communities,West Plano
+COLLIN COUNTY,City Areas / Communities,East Plano
+COLLIN COUNTY,City Areas / Communities,West Allen
+COLLIN COUNTY,City Areas / Communities,East Allen
+COLLIN COUNTY,City Areas / Communities,North Frisco
+COLLIN COUNTY,City Areas / Communities,South Frisco
+COLLIN COUNTY,City Areas / Communities,West Frisco
+COLLIN COUNTY,City Areas / Communities,East Frisco
+COLLIN COUNTY,City Areas / Communities,Stonebridge Ranch (McKinney)
+COLLIN COUNTY,City Areas / Communities,Craig Ranch (McKinney)
+COLLIN COUNTY,City Areas / Communities,Legacy West (Plano)
+COLLIN COUNTY,City Areas / Communities,The Star District (Frisco)
+COLLIN COUNTY,City Areas / Communities,Panther Creek (Frisco)
+COLLIN COUNTY,City Areas / Communities,McKinney Historic Downtown
+COLLIN COUNTY,City Areas / Communities,Adriatica Village (McKinney)
+DENTON COUNTY,Core Cities,Denton
+DENTON COUNTY,Core Cities,Lewisville
+DENTON COUNTY,Core Cities,Flower Mound
+DENTON COUNTY,Core Cities,The Colony
+DENTON COUNTY,Secondary Cities,Corinth
+DENTON COUNTY,Secondary Cities,Lake Dallas
+DENTON COUNTY,Secondary Cities,Hickory Creek
+DENTON COUNTY,Secondary Cities,Shady Shores
+DENTON COUNTY,Secondary Cities,Argyle
+DENTON COUNTY,Secondary Cities,Bartonville
+DENTON COUNTY,Secondary Cities,Double Oak
+DENTON COUNTY,Secondary Cities,Copper Canyon
+DENTON COUNTY,Secondary Cities,Hackberry
+DENTON COUNTY,Secondary Cities,Justin
+DENTON COUNTY,Secondary Cities,Ponder
+DENTON COUNTY,Secondary Cities,Krum
+DENTON COUNTY,Secondary Cities,Northlake
+DENTON COUNTY,Secondary Cities,DISH
+DENTON COUNTY,Secondary Cities,Cross Roads
+DENTON COUNTY,Communities / Areas,Castle Hills (Lewisville)
+DENTON COUNTY,Communities / Areas,Highland Village
+DENTON COUNTY,Communities / Areas,Savannah (Aubrey area)
+ROCKWALL COUNTY,Core Cities,Rockwall
+ROCKWALL COUNTY,Core Cities,Heath
+ROCKWALL COUNTY,Core Cities,Fate
+ROCKWALL COUNTY,Core Cities,Royse City
+ROCKWALL COUNTY,Areas,Lake Ray Hubbard Area
+ROCKWALL COUNTY,Areas,Rockwall Harbor
+ROCKWALL COUNTY,Areas,Downtown Rockwall
+OUTER EAST / SOUTHEAST METRO,,Forney
+OUTER EAST / SOUTHEAST METRO,,Terrell
+OUTER EAST / SOUTHEAST METRO,,Kaufman
+OUTER EAST / SOUTHEAST METRO,,Greenville
+OUTER EAST / SOUTHEAST METRO,,Ennis
+OUTER EAST / SOUTHEAST METRO,,Waxahachie
+OUTER EAST / SOUTHEAST METRO,,Midlothian
+OUTER EAST / SOUTHEAST METRO,,Red Oak
+OUTER EAST / SOUTHEAST METRO,,Alvarado
+OUTER EAST / SOUTHEAST METRO,,Joshua
+OUTER EAST / SOUTHEAST METRO,,Cleburne
+OUTER EAST / SOUTHEAST METRO,,Palmer
+OUTER EAST / SOUTHEAST METRO,,Ferris
+OUTER EAST / SOUTHEAST METRO,,Itasca
+OUTER EAST / SOUTHEAST METRO,,Maypearl
+OUTER EAST / SOUTHEAST METRO,,Milford
+OUTER EAST / SOUTHEAST METRO,,Bardwell
+NORTH EXPANSION BELT,,Little Elm
+NORTH EXPANSION BELT,,Prosper
+NORTH EXPANSION BELT,,Celina
+NORTH EXPANSION BELT,,Aubrey
+NORTH EXPANSION BELT,,Oak Point
+NORTH EXPANSION BELT,,Krugerville
+NORTH EXPANSION BELT,,Providence Village
+NORTH EXPANSION BELT,,Van Alstyne
+NORTH EXPANSION BELT,,Anna
+NORTH EXPANSION BELT,,Melissa
+NORTH EXPANSION BELT,,Sanger
+NORTH EXPANSION BELT,,Gunter
+NORTH EXPANSION BELT,,Howe
+NORTH EXPANSION BELT,,Tioga
+NORTH EXPANSION BELT,,Collinsville
+NORTH EXPANSION BELT,,Tom Bean
+MASTER PLANNED COMMUNITIES,,Windsong Ranch (Prosper)
+MASTER PLANNED COMMUNITIES,,Light Farms (Celina)
+MASTER PLANNED COMMUNITIES,,Mustang Lakes (Celina)
+MASTER PLANNED COMMUNITIES,,Trinity Falls (McKinney)
+MASTER PLANNED COMMUNITIES,,Savannah (Little Elm)
+MASTER PLANNED COMMUNITIES,,Paloma Creek (Little Elm)
+MASTER PLANNED COMMUNITIES,,Union Park (Little Elm)
+MASTER PLANNED COMMUNITIES,,Harvest (Argyle area)
+MASTER PLANNED COMMUNITIES,,Sandbrock Ranch (Aubrey)
+MASTER PLANNED COMMUNITIES,,Phillips Creek Ranch (Frisco)
+MASTER PLANNED COMMUNITIES,,Starwood (Frisco)
+MASTER PLANNED COMMUNITIES,,Stonebriar (Frisco)
