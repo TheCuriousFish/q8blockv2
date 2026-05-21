@@ -18,8 +18,6 @@
       --fh: 'Syne', system-ui, sans-serif;
       --fb: 'Noto Sans Arabic', system-ui, sans-serif;
       --accent-teal: #1a8a9e;
-      --accent-blue: #4285F4;
-      --accent-green: #22C55E;
     }
     html { scroll-behavior: smooth; }
     body { font-family: var(--fb); background: var(--white); color: var(--ink); overflow-x: hidden; }
@@ -51,8 +49,38 @@
     .row-label { grid-column: 1 / -1; font-family: var(--fh); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 2.5rem 0 0.5rem; border-bottom: 1px solid rgba(17,20,24,0.06); margin-bottom: 0.5rem; }
     .row-label:first-child { padding-top: 0; }
 
-    /* ═══ STYLE 1: GRADIENT HEADER BAND + ICON ═══ */
-    .card-style-1 {
+    /* ═══ STYLE A: DARK PREMIUM ═══ */
+    .card-style-a {
+      border-radius: 18px; overflow: hidden;
+      background: var(--dark2);
+      border: 1px solid rgba(188,225,236,0.08);
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+      text-decoration: none; color: inherit;
+    }
+    .card-style-a:hover { box-shadow: 0 24px 64px rgba(0,0,0,0.35); transform: translateY(-5px); border-color: rgba(188,225,236,0.2); }
+    .card-style-a .sa-accent { height: 4px; width: 100%; }
+    .card-style-a .sa-accent.acc-teal    { background: linear-gradient(90deg, #1a8a9e, #BCE1EC); }
+    .card-style-a .sa-accent.acc-blue    { background: linear-gradient(90deg, #4285F4, #93c5fd); }
+    .card-style-a .sa-accent.acc-emerald { background: linear-gradient(90deg, #22C55E, #86efac); }
+    .card-style-a .sa-body { padding: 1.8rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+    .card-style-a .sa-icon-row { display: flex; align-items: center; justify-content: space-between; }
+    .card-style-a .sa-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(188,225,236,0.08); border: 1px solid rgba(188,225,236,0.12);
+      display: flex; align-items: center; justify-content: center; color: var(--c1);
+    }
+    .card-style-a .sa-category { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c1); }
+    .card-style-a .card-title { font-family: var(--fb); font-weight: 700; font-size: 1.12rem; line-height: 1.55; color: #E6F2F6; }
+    .card-style-a .card-excerpt { font-size: 0.84rem; line-height: 1.85; color: rgba(230,242,246,0.5); flex: 1; }
+    .card-style-a .card-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: rgba(230,242,246,0.35); padding-top: 0.75rem; border-top: 1px solid rgba(188,225,236,0.08); }
+    .card-style-a .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(230,242,246,0.25); }
+    .card-style-a .card-read { margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--c1); }
+    .card-style-a .card-read svg { transition: transform 0.2s ease; }
+    .card-style-a:hover .card-read svg { transform: translateX(-4px); }
+
+    /* ═══ STYLE B: REAL IMAGE ═══ */
+    .card-style-b {
       border-radius: 18px; overflow: hidden;
       border: 1px solid rgba(17,20,24,0.06);
       background: var(--white);
@@ -61,75 +89,54 @@
       transition: box-shadow 0.3s ease, transform 0.3s ease;
       text-decoration: none; color: inherit;
     }
-    .card-style-1:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.1); transform: translateY(-5px); }
-    .card-style-1 .s1-band { height: 140px; display: flex; align-items: center; justify-content: center; position: relative; }
-    .card-style-1 .s1-band.band-teal    { background: linear-gradient(135deg, #0C1820 0%, #1a8a9e 50%, #BCE1EC 100%); }
-    .card-style-1 .s1-band.band-blue    { background: linear-gradient(135deg, #0C1820 0%, #1D3A6E 50%, #4285F4 100%); }
-    .card-style-1 .s1-band.band-emerald { background: linear-gradient(135deg, #0C1820 0%, #14532d 50%, #22C55E 100%); }
-    .card-style-1 .s1-icon { width: 64px; height: 64px; border-radius: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--white); }
-    .card-style-1 .s1-pill { position: absolute; top: 1rem; right: 1rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,0.3); backdrop-filter: blur(8px); padding: 0.25rem 0.65rem; border-radius: 50px; }
-    .card-style-1 .s1-body { padding: 1.6rem; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
-    .card-style-1 .card-title { font-family: var(--fb); font-weight: 700; font-size: 1.12rem; line-height: 1.55; color: var(--ink); }
-    .card-style-1 .card-excerpt { font-size: 0.84rem; line-height: 1.85; color: var(--muted); flex: 1; }
-    .card-style-1 .card-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); padding-top: 0.75rem; border-top: 1px solid rgba(17,20,24,0.06); }
-    .card-style-1 .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
-    .card-style-1 .card-read { margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--ink); }
-    .card-style-1 .card-read svg { transition: transform 0.2s ease; }
-    .card-style-1:hover .card-read svg { transform: translateX(-4px); }
+    .card-style-b:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.12); transform: translateY(-5px); }
+    .card-style-b .sb-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .card-style-b .sb-body { padding: 1.6rem; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
+    .card-style-b .sb-category { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-teal); }
+    .card-style-b .card-title { font-family: var(--fb); font-weight: 700; font-size: 1.12rem; line-height: 1.55; color: var(--ink); }
+    .card-style-b .card-excerpt { font-size: 0.84rem; line-height: 1.85; color: var(--muted); flex: 1; }
+    .card-style-b .card-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); padding-top: 0.75rem; border-top: 1px solid rgba(17,20,24,0.06); }
+    .card-style-b .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
+    .card-style-b .card-read { margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+    .card-style-b .card-read svg { transition: transform 0.2s ease; }
+    .card-style-b:hover .card-read svg { transform: translateX(-4px); }
 
-    /* ═══ STYLE 2: SPLIT NUMBER CARD ═══ */
-    .card-style-2 {
+    /* ═══ STYLE C: BORDERED ACCENT ═══ */
+    .card-style-c {
       border-radius: 18px; overflow: hidden;
       border: 1px solid rgba(17,20,24,0.06);
       background: var(--white);
       box-shadow: 0 4px 24px rgba(0,0,0,0.04);
-      display: flex; flex-direction: row;
-      min-height: 280px;
+      display: flex; flex-direction: column;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
       text-decoration: none; color: inherit;
     }
-    .card-style-2:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.1); transform: translateY(-5px); }
-    .card-style-2 .s2-numbar { width: 90px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; position: relative; }
-    .card-style-2 .s2-numbar.nb-teal    { background: linear-gradient(180deg, #0C1820, #1a8a9e); }
-    .card-style-2 .s2-numbar.nb-blue    { background: linear-gradient(180deg, #0C1820, #1D3A6E); }
-    .card-style-2 .s2-numbar.nb-emerald { background: linear-gradient(180deg, #0C1820, #14532d); }
-    .card-style-2 .s2-num { font-family: var(--fh); font-weight: 800; font-size: 2.6rem; color: var(--white); opacity: 0.85; line-height: 1; }
-    .card-style-2 .s2-numbar svg { color: rgba(255,255,255,0.5); }
-    .card-style-2 .s2-content { padding: 1.6rem; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
-    .card-style-2 .card-category { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-teal); }
-    .card-style-2 .card-title { font-family: var(--fb); font-weight: 700; font-size: 1.08rem; line-height: 1.55; color: var(--ink); }
-    .card-style-2 .card-excerpt { font-size: 0.84rem; line-height: 1.85; color: var(--muted); flex: 1; }
-    .card-style-2 .card-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); padding-top: 0.75rem; border-top: 1px solid rgba(17,20,24,0.06); }
-    .card-style-2 .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
-    .card-style-2 .card-read { margin-top: auto; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--ink); }
-    .card-style-2 .card-read svg { transition: transform 0.2s ease; }
-    .card-style-2:hover .card-read svg { transform: translateX(-4px); }
-
-    /* ═══ STYLE 3: MINIMALIST ICON CARD ═══ */
-    .card-style-3 {
-      border-radius: 18px; border: 1px solid rgba(17,20,24,0.06);
-      background: var(--light); padding: 1.75rem;
-      display: flex; flex-direction: column; gap: 1.1rem;
-      transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-      text-decoration: none; color: inherit; height: 100%;
+    .card-style-c:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.1); transform: translateY(-5px); }
+    .card-style-c .sc-topbar { height: 5px; width: 100%; }
+    .card-style-c .sc-topbar.tb-teal    { background: linear-gradient(90deg, #0C1820, #1a8a9e, #BCE1EC); }
+    .card-style-c .sc-topbar.tb-blue    { background: linear-gradient(90deg, #0C1820, #1D3A6E, #4285F4); }
+    .card-style-c .sc-topbar.tb-emerald { background: linear-gradient(90deg, #0C1820, #14532d, #22C55E); }
+    .card-style-c .sc-body { padding: 1.8rem; display: flex; flex-direction: column; gap: 0.85rem; flex: 1; }
+    .card-style-c .sc-head { display: flex; align-items: flex-start; gap: 1rem; }
+    .card-style-c .sc-icon {
+      flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .card-style-3:hover { background: var(--white); border-color: rgba(188,225,236,0.8); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(188,225,236,0.18); }
-    .card-style-3 .style3-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(17,20,24,0.06); padding-bottom: 0.75rem; }
-    .card-style-3 .style3-logo { font-family: var(--fh); font-weight: 800; font-size: 0.78rem; color: var(--dark); }
-    .card-style-3 .style3-logo em { color: #1a6d80; font-style: normal; }
-    .card-style-3 .style3-category { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; }
-    .card-style-3 .style3-title-wrap { display: flex; gap: 1rem; align-items: flex-start; }
-    .card-style-3 .style3-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: rgba(188,225,236,0.35); display: flex; align-items: center; justify-content: center; color: var(--dark); }
-    .card-style-3 .card-title { font-family: var(--fb); font-weight: 700; font-size: 1.15rem; line-height: 1.55; margin: 0; color: var(--ink); }
-    .card-style-3 .card-excerpt { font-size: 0.86rem; line-height: 1.85; color: var(--muted); margin: 0; flex: 1; }
-    .card-style-3 .style3-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(17,20,24,0.06); padding-top: 0.85rem; }
-    .card-style-3 .card-meta { border-top: none; padding-top: 0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); }
-    .card-style-3 .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
-    .card-style-3 .card-read { font-size: 0.82rem; font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; gap: 0.4rem; }
-    .card-style-3 .card-read svg { transition: transform 0.2s ease; }
-    .card-style-3:hover .card-read svg { transform: translateX(-4px); }
+    .card-style-c .sc-icon.ic-teal    { background: rgba(26,138,158,0.1); color: #1a8a9e; }
+    .card-style-c .sc-icon.ic-blue    { background: rgba(66,133,244,0.1); color: #4285F4; }
+    .card-style-c .sc-icon.ic-emerald { background: rgba(34,197,94,0.1); color: #22C55E; }
+    .card-style-c .sc-head-text { display: flex; flex-direction: column; gap: 0.3rem; }
+    .card-style-c .sc-category { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-teal); }
+    .card-style-c .card-title { font-family: var(--fb); font-weight: 700; font-size: 1.1rem; line-height: 1.55; color: var(--ink); }
+    .card-style-c .card-excerpt { font-size: 0.84rem; line-height: 1.85; color: var(--muted); flex: 1; }
+    .card-style-c .sc-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; border-top: 1px solid rgba(17,20,24,0.06); }
+    .card-style-c .card-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); }
+    .card-style-c .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: 0.4; }
+    .card-style-c .card-read { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+    .card-style-c .card-read svg { transition: transform 0.2s ease; }
+    .card-style-c:hover .card-read svg { transform: translateX(-4px); }
 
-    @media (max-width: 860px) { .blog-grid { grid-template-columns: 1fr 1fr; } .card-style-2 { flex-direction: column; } .card-style-2 .s2-numbar { width: 100%; height: 80px; flex-direction: row; } }
+    @media (max-width: 860px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
 
     /* ─── FOOTER */
@@ -173,17 +180,18 @@
 <section class="blog-section">
   <div class="blog-grid">
 
-    <!-- ═══ ROW 1: GRADIENT HEADER BAND + ICON ═══ -->
-    <div class="row-label">النمط ١ — شريط تدرج لوني</div>
+    <!-- ═══ ROW 1: DARK PREMIUM ═══ -->
+    <div class="row-label">النمط أ — بطاقة داكنة فاخرة</div>
 
-    <a href="blog-1.html" class="card-style-1">
-      <div class="s1-band band-teal">
-        <span class="s1-pill">سيو محلي</span>
-        <div class="s1-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 10 13 14 9"/></svg>
+    <a href="blog-1.html" class="card-style-a">
+      <div class="sa-accent acc-teal"></div>
+      <div class="sa-body">
+        <div class="sa-icon-row">
+          <div class="sa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 10 13 14 9"/></svg>
+          </div>
+          <span class="sa-category">سيو محلي</span>
         </div>
-      </div>
-      <div class="s1-body">
         <div class="card-title">كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت</div>
         <div class="card-excerpt">معظم الأعمال في الكويت تعتمد على الإنستغرام والتوصيات الشفهية. إليك لماذا Google هو أعلى مصدر للزيارات ذات النية الشرائية — وكيف تستحوذ عليه.</div>
         <div class="card-meta"><span>مايو 2026</span><span class="dot"></span><span>7 دقائق</span></div>
@@ -191,14 +199,15 @@
       </div>
     </a>
 
-    <a href="blog-2.html" class="card-style-1">
-      <div class="s1-band band-blue">
-        <span class="s1-pill">Google Business</span>
-        <div class="s1-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <a href="blog-2.html" class="card-style-a">
+      <div class="sa-accent acc-blue"></div>
+      <div class="sa-body">
+        <div class="sa-icon-row">
+          <div class="sa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span class="sa-category">جوجل بزنس</span>
         </div>
-      </div>
-      <div class="s1-body">
         <div class="card-title">الدليل الشامل لملف Google Business Profile للأعمال في الكويت</div>
         <div class="card-excerpt">ملفك التجاري على Google هو أول ما يراه العملاء في الخرائط والبحث المحلي. أتقنه والمكالمات ستأتي — أهمله والمنافسون سيتقدمون.</div>
         <div class="card-meta"><span>أبريل 2026</span><span class="dot"></span><span>9 دقائق</span></div>
@@ -206,14 +215,15 @@
       </div>
     </a>
 
-    <a href="blog-3.html" class="card-style-1">
-      <div class="s1-band band-emerald">
-        <span class="s1-pill">استراتيجية</span>
-        <div class="s1-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <a href="blog-3.html" class="card-style-a">
+      <div class="sa-accent acc-emerald"></div>
+      <div class="sa-body">
+        <div class="sa-icon-row">
+          <div class="sa-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <span class="sa-category">استراتيجية</span>
         </div>
-      </div>
-      <div class="s1-body">
         <div class="card-title">لماذا السيو المحلي أفضل من الإعلانات المدفوعة للأعمال الصغيرة في الكويت</div>
         <div class="card-excerpt">الإعلانات المدفوعة تتوقف بمجرد أن تتوقف عن الدفع. السيو المحلي يتراكم مع الوقت. نقارن الأرقام ونُظهر أيهما يبني عملاً أكثر ديمومة.</div>
         <div class="card-meta"><span>مارس 2026</span><span class="dot"></span><span>5 دقائق</span></div>
@@ -222,16 +232,13 @@
     </a>
 
 
-    <!-- ═══ ROW 2: SPLIT NUMBER CARD ═══ -->
-    <div class="row-label">النمط ٢ — شريط رقمي تحريري</div>
+    <!-- ═══ ROW 2: REAL IMAGE ═══ -->
+    <div class="row-label">النمط ب — صورة حقيقية</div>
 
-    <a href="blog-1.html" class="card-style-2">
-      <div class="s2-numbar nb-teal">
-        <span class="s2-num">01</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </div>
-      <div class="s2-content">
-        <div class="card-category">سيو محلي</div>
+    <a href="blog-1.html" class="card-style-b">
+      <img src="../img/blog/seo-kuwait.png" alt="سيو محلي في الكويت" class="sb-img">
+      <div class="sb-body">
+        <span class="sb-category">سيو محلي</span>
         <div class="card-title">كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت</div>
         <div class="card-excerpt">معظم الأعمال في الكويت تعتمد على الإنستغرام والتوصيات الشفهية. إليك لماذا Google هو أعلى مصدر للزيارات ذات النية الشرائية — وكيف تستحوذ عليه.</div>
         <div class="card-meta"><span>مايو 2026</span><span class="dot"></span><span>7 دقائق</span></div>
@@ -239,13 +246,10 @@
       </div>
     </a>
 
-    <a href="blog-2.html" class="card-style-2">
-      <div class="s2-numbar nb-blue">
-        <span class="s2-num">02</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      </div>
-      <div class="s2-content">
-        <div class="card-category">Google Business Profile</div>
+    <a href="blog-2.html" class="card-style-b">
+      <img src="../img/blog/gbp-map.png" alt="جوجل بزنس بروفايل" class="sb-img">
+      <div class="sb-body">
+        <span class="sb-category">جوجل بزنس</span>
         <div class="card-title">الدليل الشامل لملف Google Business Profile للأعمال في الكويت</div>
         <div class="card-excerpt">ملفك التجاري على Google هو أول ما يراه العملاء في الخرائط والبحث المحلي. أتقنه والمكالمات ستأتي — أهمله والمنافسون سيتقدمون.</div>
         <div class="card-meta"><span>أبريل 2026</span><span class="dot"></span><span>9 دقائق</span></div>
@@ -253,13 +257,10 @@
       </div>
     </a>
 
-    <a href="blog-3.html" class="card-style-2">
-      <div class="s2-numbar nb-emerald">
-        <span class="s2-num">03</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      </div>
-      <div class="s2-content">
-        <div class="card-category">استراتيجية</div>
+    <a href="blog-3.html" class="card-style-b">
+      <img src="../img/blog/strategy-growth.png" alt="استراتيجية نمو السيو" class="sb-img">
+      <div class="sb-body">
+        <span class="sb-category">استراتيجية</span>
         <div class="card-title">لماذا السيو المحلي أفضل من الإعلانات المدفوعة للأعمال الصغيرة في الكويت</div>
         <div class="card-excerpt">الإعلانات المدفوعة تتوقف بمجرد أن تتوقف عن الدفع. السيو المحلي يتراكم مع الوقت. نقارن الأرقام ونُظهر أيهما يبني عملاً أكثر ديمومة.</div>
         <div class="card-meta"><span>مارس 2026</span><span class="dot"></span><span>5 دقائق</span></div>
@@ -268,60 +269,66 @@
     </a>
 
 
-    <!-- ═══ ROW 3: MINIMALIST ICON CARD ═══ -->
-    <div class="row-label">النمط ٣ — بطاقة بأيقونة بسيطة</div>
+    <!-- ═══ ROW 3: BORDERED ACCENT ═══ -->
+    <div class="row-label">النمط ج — بطاقة بإطار ملون</div>
 
-    <a href="blog-1.html" class="card-style-3">
-      <div class="style3-header">
-        <span class="style3-category">سيو محلي</span>
-        <span class="style3-logo">Q8<em>block</em></span>
-      </div>
-      <div class="style3-title-wrap">
-        <div class="style3-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 10 13 14 9"/></svg>
+    <a href="blog-1.html" class="card-style-c">
+      <div class="sc-topbar tb-teal"></div>
+      <div class="sc-body">
+        <div class="sc-head">
+          <div class="sc-icon ic-teal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8 11 10 13 14 9"/></svg>
+          </div>
+          <div class="sc-head-text">
+            <span class="sc-category">سيو محلي</span>
+            <div class="card-title">كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت</div>
+          </div>
         </div>
-        <div class="card-title">كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت</div>
-      </div>
-      <p class="card-excerpt">معظم الأعمال في الكويت تعتمد على الإنستغرام والتوصيات الشفهية. إليك لماذا Google هو أعلى مصدر للزيارات ذات النية الشرائية — وكيف تستحوذ عليه.</p>
-      <div class="style3-footer">
-        <div class="card-meta"><span>مايو 2026</span><span class="dot"></span><span>7 دقائق</span></div>
-        <span class="card-read">اقرأ المقال <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        <div class="card-excerpt">معظم الأعمال في الكويت تعتمد على الإنستغرام والتوصيات الشفهية. إليك لماذا Google هو أعلى مصدر للزيارات ذات النية الشرائية — وكيف تستحوذ عليه.</div>
+        <div class="sc-footer">
+          <div class="card-meta"><span>مايو 2026</span><span class="dot"></span><span>7 دقائق</span></div>
+          <span class="card-read">اقرأ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </div>
       </div>
     </a>
 
-    <a href="blog-2.html" class="card-style-3">
-      <div class="style3-header">
-        <span class="style3-category">جوجل بزنس</span>
-        <span class="style3-logo">Q8<em>block</em></span>
-      </div>
-      <div class="style3-title-wrap">
-        <div class="style3-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <a href="blog-2.html" class="card-style-c">
+      <div class="sc-topbar tb-blue"></div>
+      <div class="sc-body">
+        <div class="sc-head">
+          <div class="sc-icon ic-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="sc-head-text">
+            <span class="sc-category">جوجل بزنس</span>
+            <div class="card-title">الدليل الشامل لملف Google Business Profile للأعمال في الكويت</div>
+          </div>
         </div>
-        <div class="card-title">الدليل الشامل لملف Google Business Profile للأعمال في الكويت</div>
-      </div>
-      <p class="card-excerpt">ملفك التجاري على Google هو أول ما يراه العملاء في الخرائط والبحث المحلي. أتقنه والمكالمات ستأتي — أهمله والمنافسون سيتقدمون.</p>
-      <div class="style3-footer">
-        <div class="card-meta"><span>أبريل 2026</span><span class="dot"></span><span>9 دقائق</span></div>
-        <span class="card-read">اقرأ المقال <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        <div class="card-excerpt">ملفك التجاري على Google هو أول ما يراه العملاء في الخرائط والبحث المحلي. أتقنه والمكالمات ستأتي — أهمله والمنافسون سيتقدمون.</div>
+        <div class="sc-footer">
+          <div class="card-meta"><span>أبريل 2026</span><span class="dot"></span><span>9 دقائق</span></div>
+          <span class="card-read">اقرأ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </div>
       </div>
     </a>
 
-    <a href="blog-3.html" class="card-style-3">
-      <div class="style3-header">
-        <span class="style3-category">استراتيجية</span>
-        <span class="style3-logo">Q8<em>block</em></span>
-      </div>
-      <div class="style3-title-wrap">
-        <div class="style3-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <a href="blog-3.html" class="card-style-c">
+      <div class="sc-topbar tb-emerald"></div>
+      <div class="sc-body">
+        <div class="sc-head">
+          <div class="sc-icon ic-emerald">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="sc-head-text">
+            <span class="sc-category">استراتيجية</span>
+            <div class="card-title">لماذا السيو المحلي أفضل من الإعلانات المدفوعة للأعمال الصغيرة في الكويت</div>
+          </div>
         </div>
-        <div class="card-title">لماذا السيو المحلي أفضل من الإعلانات المدفوعة للأعمال الصغيرة في الكويت</div>
-      </div>
-      <p class="card-excerpt">الإعلانات المدفوعة تتوقف بمجرد أن تتوقف عن الدفع. السيو المحلي يتراكم مع الوقت. نقارن الأرقام ونُظهر أيهما يبني عملاً أكثر ديمومة.</p>
-      <div class="style3-footer">
-        <div class="card-meta"><span>مارس 2026</span><span class="dot"></span><span>5 دقائق</span></div>
-        <span class="card-read">اقرأ المقال <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        <div class="card-excerpt">الإعلانات المدفوعة تتوقف بمجرد أن تتوقف عن الدفع. السيو المحلي يتراكم مع الوقت. نقارن الأرقام ونُظهر أيهما يبني عملاً أكثر ديمومة.</div>
+        <div class="sc-footer">
+          <div class="card-meta"><span>مارس 2026</span><span class="dot"></span><span>5 دقائق</span></div>
+          <span class="card-read">اقرأ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+        </div>
       </div>
     </a>
 
