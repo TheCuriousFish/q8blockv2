@@ -76,7 +76,7 @@
       gap: 0.5rem;
       font-size: 0.8rem;
       font-weight: 500;
-      color: rgba(230,242,246,0.55);
+      color: rgba(188,225,236,0.95);
       list-style: none;
       align-items: center;
     }
@@ -129,7 +129,7 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: rgba(230,242,246,0.45);
+      color: rgba(188,225,236,0.95);
     }
     .author-name {
       font-size: 0.92rem;
@@ -237,8 +237,9 @@
 
     .post-body h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; font-weight: 700; font-size: 1.65rem; color: var(--ink); margin: 3.5rem 0 1.2rem; line-height: 1.3; border-bottom: 1px solid rgba(17,20,24,0.05); padding-bottom: 0.5rem; scroll-margin-top: 90px; }
     .post-body h3 { font-family: var(--fb); font-size: 1.15rem; font-weight: 800; color: var(--ink); margin: 2rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-    .post-body p { font-size: 0.98rem; line-height: 1.75; color: #2E3440; margin-bottom: 1.5rem; }
     .post-body strong { color: var(--ink); font-weight: 700; }
+    .post-body a { color: var(--c1); font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .post-body a:hover { opacity: 0.85; text-decoration: none; }
 
     /* Visual layout images */
     .section-img { width: 100%; height: auto; border-radius: 12px; margin: 1.5rem 0 2rem; border: 1px solid rgba(17,20,24,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
@@ -270,6 +271,7 @@
     .takeaways-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
     .takeaways-box li { font-size: 0.9rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 0.75rem; color: rgba(230,242,246,0.8); }
     .takeaways-box li::before { content: '✦'; color: var(--c1); font-weight: 800; }
+    .takeaways-box li strong { color: var(--c1); }
 
     /* Interactive Checklist */
     .checklist-progress-container { background: var(--light); border: 1px solid rgba(17,20,24,0.06); border-radius: 14px; padding: 2rem; margin: 3rem 0; }
@@ -390,7 +392,7 @@
   <aside class="toc-sidebar">
     <div class="toc-title">Table of Contents</div>
     <ul class="toc-list">
-      <li class="toc-item"><a href="#algorithm-blueprint">1. The Map Pack Blueprint</a></li>
+      <li class="toc-item"><a href="#introduction">1. Modern Local Search</a></li>
       <li class="toc-item"><a href="#phase-1-setup">2. Core Profile Compliance</a></li>
       <li class="toc-item"><a href="#phase-2-reviews">3. The Social Proof Engine</a></li>
       <li class="toc-item"><a href="#phase-3-engagement">4. Interaction & Engagement</a></li>
@@ -401,7 +403,8 @@
   </aside>
 
   <article class="post-body">
-    <p>Optimizing your local presence in today's search landscape is no longer about matching simple keywords. With Google utilizing advanced vector embeddings and tracking physical real-world data points, local businesses must configure their assets correctly to rank in the highly coveted Local 3-Pack. In fact, according to a recent <a href="https://www.brightlocal.com/research/local-business-websites-report/" rel="nofollow noopener noreferrer">BrightLocal Study</a> (2023), over 56% of users who interact with a Google Business Profile make a direct action, making local profiles your most effective customer acquisition channel.</p>
+    <h2 id="introduction">Modern Local Search: Beyond Simple Keyword Matching</h2>
+    <p>Optimizing your local presence in today's search landscape is no longer about matching simple keywords.<br><br>With Google utilizing advanced vector embeddings and tracking physical real-world data points, local businesses must configure their assets correctly to rank in the highly coveted Local 3-Pack.<br><br>In fact, according to a recent <a href="https://www.brightlocal.com/research/local-business-websites-report/" target="_blank" rel="nofollow noopener noreferrer">BrightLocal Study</a> (2023), over 56% of users who interact with a Google Business Profile make a direct action, making local profiles your most effective customer acquisition channel.</p>
 
     <div class="takeaways-box">
       <h4>Executive Takeaways</h4>
@@ -412,11 +415,7 @@
       </ul>
     </div>
 
-    <h2 id="algorithm-blueprint">The Local Search Blueprint: Decoding the Three Pillars of Google's Map Pack Algorithm</h2>
-    <img src="img/blog/gbp-blueprint.webp" class="section-img" alt="Google Map Pack Algorithm Blueprint illustration" />
-    <p>Google's local algorithm is heavily defined by three main factors: <strong>Relevance</strong> (how well a listing matches a searcher's query), <strong>Distance</strong> (how far the business is from the searcher), and <strong>Prominence</strong> (how well-known or authoritative the business is). While optimization allows you to maximize your prominence and relevance, certain core environmental constraints are predetermined by the search engine itself.</p>
-
-    <p>These passive constraints dictate the maximum ranking radius of a profile. Proximity to the searcher is the single strongest passive constraint; businesses must ensure that they optimize actively controllable signals to outrank competitors who are physically closer to the searcher.</p>
+    <p>Google's local algorithm is heavily defined by three main factors: <strong>Relevance</strong> (how well a listing matches a searcher's query), <strong>Distance</strong> (how far the business is from the searcher), and <strong>Prominence</strong> (how well-known or authoritative the business is). While optimization allows you to maximize your prominence and relevance, certain core environmental constraints are predetermined by the search engine itself.<br><br>These passive constraints dictate the maximum ranking radius of a profile. Proximity to the searcher is the single strongest passive constraint; businesses must ensure that they optimize actively controllable signals to outrank competitors who are physically closer to the searcher.</p>
 
     <h2 id="phase-1-setup">Phase 1: Core Setup, Category Integrity & Compliance</h2>
     <img src="img/blog/gbp-setup.webp" class="section-img" alt="Google Business Profile Setup and Category illustration" />

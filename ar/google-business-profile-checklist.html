@@ -76,7 +76,7 @@
       gap: 0.5rem;
       font-size: 0.8rem;
       font-weight: 500;
-      color: rgba(230,242,246,0.55);
+      color: rgba(188,225,236,0.95);
       list-style: none;
       align-items: center;
     }
@@ -129,7 +129,7 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: rgba(230,242,246,0.45);
+      color: rgba(188,225,236,0.95);
     }
     .author-name {
       font-size: 0.92rem;
@@ -237,8 +237,9 @@
 
     .post-body h2 { font-family: var(--fh); font-weight: 700; font-size: 1.5rem; color: var(--ink); margin: 3.5rem 0 1.2rem; line-height: 1.35; border-bottom: 1px solid rgba(17,20,24,0.05); padding-bottom: 0.5rem; scroll-margin-top: 90px; }
     .post-body h3 { font-family: var(--fb); font-size: 1.15rem; font-weight: 800; color: var(--ink); margin: 2rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-    .post-body p { font-size: 0.98rem; line-height: 1.85; color: #2E3440; margin-bottom: 1.5rem; }
     .post-body strong { color: var(--ink); font-weight: 700; }
+    .post-body a { color: var(--c1); font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .post-body a:hover { opacity: 0.85; text-decoration: none; }
 
     /* Visual layout images */
     .section-img { width: 100%; height: auto; border-radius: 12px; margin: 1.5rem 0 2rem; border: 1px solid rgba(17,20,24,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
@@ -270,6 +271,7 @@
     .takeaways-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
     .takeaways-box li { font-size: 0.9rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 0.75rem; color: rgba(230,242,246,0.8); }
     .takeaways-box li::before { content: '✦'; color: var(--c1); font-weight: 800; }
+    .takeaways-box li strong { color: var(--c1); }
 
     /* Interactive Checklist */
     .checklist-progress-container { background: var(--light); border: 1px solid rgba(17,20,24,0.06); border-radius: 14px; padding: 2rem; margin: 3rem 0; }
@@ -390,7 +392,7 @@
   <aside class="toc-sidebar">
     <div class="toc-title">جدول المحتويات</div>
     <ul class="toc-list">
-      <li class="toc-item"><a href="#algorithm-blueprint">1. مخطط الخرائط خوارزمية</a></li>
+      <li class="toc-item"><a href="#introduction">1. السيو المحلي الحديث</a></li>
       <li class="toc-item"><a href="#phase-1-setup">2. الامتثال وتهيئة الملف</a></li>
       <li class="toc-item"><a href="#phase-2-reviews">3. محرك الإثبات الاجتماعي</a></li>
       <li class="toc-item"><a href="#phase-3-engagement">4. التفاعل والتحويلات</a></li>
@@ -401,7 +403,8 @@
   </aside>
 
   <article class="post-body">
-    <p>لم يعد تحسين ظهورك المحلي في نتائج بحث خرائط جوجل يقتصر على مجرد حشو الكلمات المفتاحية. مع تطور محركات البحث واعتماد جوجل على خوارزميات الذكاء الاصطناعي لفهم نوايا المستخدمين، أصبح تحسين أدواتك وملفك التجاري يمثل الركيزة الأساسية للظهور في قائمة الثلاثة الأوائل (Local 3-Pack). تشير دراسة حديثة من <a href="https://www.brightlocal.com/research/local-business-websites-report/" rel="nofollow noopener noreferrer">BrightLocal</a> (2023) إلى أن أكثر من 56٪ من الزيارات للملف التجاري تنتهي باتخاذ إجراء مباشر، مما يجعل ملفك القناة الأكثر فاعلية لجلب العملاء.</p>
+    <h2 id="introduction">السيو المحلي الحديث: ما وراء مطابقة الكلمات المفتاحية البسيطة</h2>
+    <p>لم يعد تحسين ظهورك المحلي في نتائج بحث خرائط جوجل يقتصر على مجرد حشو الكلمات المفتاحية.<br><br>مع تطور محركات البحث واعتماد جوجل على خوارزميات الذكاء الاصطناعي لفهم نوايا المستخدمين، أصبح تحسين أدواتك وملفك التجاري يمثل الركيزة الأساسية للظهور في قائمة الثلاثة الأوائل (Local 3-Pack).<br><br>تشير دراسة حديثة من <a href="https://www.brightlocal.com/research/local-business-websites-report/" target="_blank" rel="nofollow noopener noreferrer">BrightLocal</a> (2023) إلى أن أكثر من 56٪ من الزيارات للملف التجاري تنتهي باتخاذ إجراء مباشر، مما يجعل ملفك القناة الأكثر فاعلية لجلب العملاء.</p>
 
     <div class="takeaways-box">
       <h4>ملخص النقاط الأساسية</h4>
@@ -412,11 +415,7 @@
       </ul>
     </div>
 
-    <h2 id="algorithm-blueprint">مخطط خوارزمية الخرائط: فهم الركائز الثلاث لمحرك البحث المحلي</h2>
-    <img src="../img/blog/gbp-blueprint.webp" class="section-img" alt="مخطط خوارزمية خرائط جوجل" />
-    <p>تقوم جوجل بترتيب نتائج البحث في الخرائط بناءً على ثلاثة عوامل رئيسية: <strong>الصلة</strong> (مدى مطابقة الملف لطلب البحث)، <strong>المسافة</strong> (الموقع الجغرافي للباحث عن الخدمة)، و<strong>البروز أو الشهرة</strong> (مدى قوة وسلطة العمل التجاري). في حين يمكنك تحسين الصلة والبروز، فإن هناك قيوداً جغرافية وبيئية خارجة عن تحكمك المباشر.</p>
-
-    <p>تحدد هذه القيود الجغرافية النطاق الأقصى لظهور ملفك التجاري. وتعتبر المسافة الجغرافية العامل الأقوى؛ لذا يجب على أصحاب الأعمال تحسين الإشارات التي يتحكمون بها للتفوق على المنافسين القريبين جغرافياً من الباحث.</p>
+    <p>تقوم جوجل بترتيب نتائج البحث في الخرائط بناءً على ثلاثة عوامل رئيسية: <strong>الصلة</strong> (مدى مطابقة الملف لطلب البحث)، <strong>المسافة</strong> (الموقع الجغرافي للباحث عن الخدمة)، و<strong>البروز أو الشهرة</strong> (مدى قوة وسلطة العمل التجاري). في حين يمكنك تحسين الصلة والبروز، فإن هناك قيوداً جغرافية وبيئية خارجة عن تحكمك المباشر.<br><br>تحدد هذه القيود الجغرافية النطاق الأقصى لظهور ملفك التجاري. وتعتبر المسافة الجغرافية العامل الأقوى؛ لذا يجب على أصحاب الأعمال تحسين الإشارات التي يتحكمون بها للتفوق على المنافسين القريبين جغرافياً من الباحث.</p>
 
     <h2 id="phase-1-setup">المرحلة الأولى: إعداد الملف التجاري والامتثال الأساسي</h2>
     <img src="../img/blog/gbp-setup.webp" class="section-img" alt="تجهيز الملف التجاري وإعداد الفئات" />
