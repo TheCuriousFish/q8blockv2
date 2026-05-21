@@ -448,20 +448,7 @@
       display: flex;
       flex-direction: column;
       gap: 1.1rem;
-      max-height: 400px;
-      overflow-y: auto;
       padding-right: 0.5rem;
-    }
-    .hierarchy-container::-webkit-scrollbar {
-      width: 6px;
-    }
-    .hierarchy-container::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.02);
-      border-radius: 10px;
-    }
-    .hierarchy-container::-webkit-scrollbar-thumb {
-      background: rgba(15, 23, 42, 0.1);
-      border-radius: 10px;
     }
 
     .category-card {
@@ -508,16 +495,26 @@
       transform: rotate(180deg);
     }
     
-    .category-body {
-      display: none;
-      padding: 1.25rem;
-      border-top: 1px solid rgba(15, 23, 42, 0.06);
+    .category-body-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .category-card.expanded .category-body-wrapper {
+      grid-template-rows: 1fr;
+    }
+    .category-body-inner {
+      overflow: hidden;
+      display: flex;
       flex-direction: column;
       gap: 1.25rem;
+      padding: 0 1.25rem;
       background: rgba(248, 250, 252, 0.4);
+      transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .category-card.expanded .category-body {
-      display: flex;
+    .category-card.expanded .category-body-inner {
+      padding: 1.25rem;
+      border-top: 1px solid rgba(15, 23, 42, 0.06);
     }
 
     .subcategory-section {
@@ -731,19 +728,10 @@
 
     /* Review Table & Cards */
     .review-scroll {
-      max-height: 400px;
-      overflow-y: auto;
       padding-right: 0.5rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-    }
-    .review-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-    .review-scroll::-webkit-scrollbar-thumb {
-      background: rgba(15, 23, 42, 0.1);
-      border-radius: 10px;
     }
     .review-block {
       background: rgba(241, 245, 249, 0.6);
@@ -1134,7 +1122,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="subcategory-title">Core Services</div>
                   <div class="service-option-row">
@@ -1382,6 +1371,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Softscaping (Plants & Green Areas) -->
@@ -1393,7 +1383,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="subcategory-title">Lawn Services</div>
                   <div class="service-option-row">
@@ -1585,6 +1576,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Tree Services -->
@@ -1596,7 +1588,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="service-option-row">
                     <div class="service-top-row">
@@ -1683,6 +1676,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Irrigation & Water Systems -->
@@ -1694,7 +1688,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="service-option-row">
                     <div class="service-top-row">
@@ -1823,6 +1818,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Outdoor Living & Luxury Features -->
@@ -1834,7 +1830,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="service-option-row">
                     <div class="service-top-row">
@@ -1977,6 +1974,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Commercial Landscaping -->
@@ -1988,7 +1986,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="service-option-row">
                     <div class="service-top-row">
@@ -2089,6 +2088,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Specialty & Modern Landscaping -->
@@ -2100,7 +2100,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="service-option-row">
                     <div class="service-top-row">
@@ -2187,6 +2188,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Category Card: Maintenance Packages -->
@@ -2198,7 +2200,8 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
                 <div class="subcategory-section">
                   <div class="service-option-row">
                     <div class="service-top-row">
@@ -2257,6 +2260,7 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2280,11 +2284,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-1', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-1', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-1', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-1', false)">Clear All</button>
+                  </div>
                 <!-- Sub-region/City Folder: Dallas -->
                 <div class="area-node">
                   <div class="node-header">
@@ -2615,6 +2620,7 @@
                     </label>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: TARRANT COUNTY (FORT WORTH REGION) -->
@@ -2626,11 +2632,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-2', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-2', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-2', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-2', false)">Clear All</button>
+                  </div>
                 <!-- Sub-region/City Folder: Fort Worth -->
                 <div class="area-node">
                   <div class="node-header">
@@ -2918,6 +2925,7 @@
                     </label>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: COLLIN COUNTY -->
@@ -2929,11 +2937,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-3', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-3', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-3', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-3', false)">Clear All</button>
+                  </div>
                 <!-- Sub-region/City Folder: Core Cities -->
                 <div class="area-node">
                   <div class="node-header">
@@ -3128,6 +3137,7 @@
                     </label>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: DENTON COUNTY -->
@@ -3139,11 +3149,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-4', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-4', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-4', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-4', false)">Clear All</button>
+                  </div>
                 <!-- Sub-region/City Folder: Core Cities -->
                 <div class="area-node">
                   <div class="node-header">
@@ -3293,6 +3304,7 @@
                     </label>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: ROCKWALL COUNTY -->
@@ -3304,11 +3316,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-5', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-5', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-5', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-5', false)">Clear All</button>
+                  </div>
                 <!-- Sub-region/City Folder: Core Cities -->
                 <div class="area-node">
                   <div class="node-header">
@@ -3370,6 +3383,7 @@
                     </label>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: OUTER EAST / SOUTHEAST METRO -->
@@ -3381,11 +3395,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-6', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-6', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-6', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-6', false)">Clear All</button>
+                  </div>
                 <div style="margin-left: 0.8rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 1px solid rgba(15, 23, 42, 0.06); padding-left: 0.8rem;">
                   <label class="custom-checkbox">
                     <input type="checkbox" name="area_outer_east_southeast_metro_forney" value="Yes">
@@ -3473,6 +3488,7 @@
                     <span class="checkbox-label">Bardwell</span>
                   </label>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: NORTH EXPANSION BELT -->
@@ -3484,11 +3500,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-7', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-7', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-7', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-7', false)">Clear All</button>
+                  </div>
                 <div style="margin-left: 0.8rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 1px solid rgba(15, 23, 42, 0.06); padding-left: 0.8rem;">
                   <label class="custom-checkbox">
                     <input type="checkbox" name="area_north_expansion_belt_little_elm" value="Yes">
@@ -3571,6 +3588,7 @@
                     <span class="checkbox-label">Tom Bean</span>
                   </label>
                 </div>
+                </div>
               </div>
             </div>
             <!-- Region/County Card: MASTER PLANNED COMMUNITIES -->
@@ -3582,11 +3600,12 @@
                 </div>
                 <span class="category-toggle-arrow">▼</span>
               </div>
-              <div class="category-body">
-                <div class="region-utility-bar">
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-8', true)">Select All</button>
-                  <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-8', false)">Clear All</button>
-                </div>
+              <div class="category-body-wrapper">
+                <div class="category-body-inner">
+                  <div class="region-utility-bar">
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-8', true)">Select All</button>
+                    <button type="button" class="util-btn" onclick="bulkCheckRegion('area-card-8', false)">Clear All</button>
+                  </div>
                 <div style="margin-left: 0.8rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 1px solid rgba(15, 23, 42, 0.06); padding-left: 0.8rem;">
                   <label class="custom-checkbox">
                     <input type="checkbox" name="area_master_planned_communities_windsong_ranch_prosper" value="Yes">
@@ -3648,6 +3667,7 @@
                     <span class="checkbox-box"></span>
                     <span class="checkbox-label">Stonebriar (Frisco)</span>
                   </label>
+                </div>
                 </div>
               </div>
             </div>
@@ -3880,7 +3900,7 @@
     card.classList.add('expanded');
     
     // Find all checkboxes in the card body
-    const checkboxes = card.querySelector('.category-body').querySelectorAll('input[type="checkbox"]');
+    const checkboxes = card.querySelector('.category-body-inner').querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(cb => {
       cb.checked = isChecked;
     });
