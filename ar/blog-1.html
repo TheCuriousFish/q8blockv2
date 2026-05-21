@@ -3,61 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت — كويت بلوك</title>
-  <meta name="robots" content="noindex">
+  <title>دليل تحسين جوجل بزنس بروفايل: استراتيجية السيو المحلي في الكويت — كويت بلوك</title>
+  <meta name="description" content="دليل عملي مدعوم بالبيانات لتحسين ملفك التجاري على جوجل لجلب المزيد من الاتصالات والمبيعات لعملك في الكويت.">
+  <meta name="robots" content="index, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --c1:#BCE1EC;--c2:#ABD9E7;--dark:#070D12;--dark2:#0C1820;--white:#ffffff;--light:#F2F7FA;--ink:#111418;--muted:#6B7585;--fh:'Tajawal',system-ui,sans-serif;--fb:'Tajawal',system-ui,sans-serif; }
+    :root {
+      --c1: #BCE1EC;
+      --c2: #ABD9E7;
+      --dark: #070D12;
+      --dark2: #0C1820;
+      --white: #ffffff;
+      --light: #F2F7FA;
+      --ink: #111418;
+      --muted: #6B7585;
+      --fh: 'Syne', system-ui, sans-serif;
+      --fb: 'Noto Sans Arabic', system-ui, sans-serif;
+      --accent-teal: #1a8a9e;
+      --accent-blue: #4285F4;
+      --accent-green: #22C55E;
+      --accent-red: #EF4444;
+    }
     html { scroll-behavior: smooth; }
     body { font-family: var(--fb); background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+    /* Nav */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; background: rgba(7,13,18,0); transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease; }
     nav.pinned { background: rgba(7,13,18,0.88); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(188,225,236,0.08); }
-    .nav-logo { font-family: var(--fh); font-weight: 800; font-size: 1.18rem; color: var(--white); text-decoration: none; }
+    .nav-logo { font-family: var(--fh); font-weight: 800; font-size: 1.18rem; color: var(--white); text-decoration: none; letter-spacing: -0.02em; }
     .nav-logo em { color: var(--c1); font-style: normal; }
     .nav-links { display: flex; align-items: center; list-style: none; gap: 0.1rem; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: rgba(230,242,246,0.48); text-decoration: none; padding: 0.42rem 0.85rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a { font-size: 0.84rem; font-weight: 500; color: rgba(230,242,246,0.48); text-decoration: none; padding: 0.42rem 0.85rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
     .nav-links a:hover { color: #E6F2F6; background: rgba(188,225,236,0.08); }
-    .nav-cta { font-size: 0.9rem; font-weight: 700; color: var(--dark); background: var(--c1); padding: 0.48rem 1.2rem; border-radius: 7px; text-decoration: none; transition: transform 0.22s ease, box-shadow 0.22s ease; }
+    .nav-cta { font-family: var(--fb); font-size: 0.84rem; font-weight: 700; color: var(--dark); background: var(--c1); padding: 0.48rem 1.2rem; border-radius: 7px; text-decoration: none; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; }
     .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(188,225,236,0.28); }
     .nav-right { display: flex; align-items: center; gap: 0.75rem; }
     .lang-switch { font-size: 0.78rem; font-weight: 600; color: rgba(230,242,246,0.5); text-decoration: none; border: 1px solid rgba(188,225,236,0.18); padding: 0.3rem 0.7rem; border-radius: 6px; transition: color 0.2s, border-color 0.2s; }
     .lang-switch:hover { color: var(--c1); border-color: rgba(188,225,236,0.45); }
-    .post-hero { background: var(--dark); padding: 9rem 1.5rem 5rem; position: relative; overflow: hidden; }
+
+    /* Post hero */
+    .post-hero { background: var(--dark); padding: 9rem 1.5rem 5rem; position: relative; overflow: hidden; text-align: center; }
     .post-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(188,225,236,0.07), transparent 70%); pointer-events: none; }
     .post-hero-inner { max-width: 740px; margin: 0 auto; }
-    .post-category { display: inline-block; font-size: 0.8rem; font-weight: 700; color: var(--c1); margin-bottom: 1.25rem; }
-    .post-hero h1 { font-family: var(--fh); font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); color: #E6F2F6; line-height: 1.3; margin-bottom: 1.5rem; }
-    .post-meta { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: rgba(230,242,246,0.4); }
+    .post-category { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c1); margin-bottom: 1.25rem; }
+    .post-hero h1 { font-family: var(--fb); font-weight: 700; font-size: clamp(1.9rem, 4.5vw, 2.5rem); color: #E6F2F6; line-height: 1.4; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+    .post-meta { display: flex; align-items: center; justify-content: center; gap: 0.6rem; font-size: 0.82rem; color: rgba(230,242,246,0.4); }
     .post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: 0.5; }
+
+    /* Article */
     .post-wrap { max-width: 740px; margin: 0 auto; padding: 4rem 1.5rem 7rem; }
-    .post-body h2 { font-family: var(--fh); font-weight: 800; font-size: 1.5rem; color: var(--ink); margin: 2.75rem 0 1rem; line-height: 1.3; }
-    .post-body h3 { font-family: var(--fh); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin: 2rem 0 0.75rem; }
-    .post-body p { font-size: 1rem; line-height: 2; color: #2E3440; margin-bottom: 1.35rem; }
-    .post-body ul, .post-body ol { margin: 1.1rem 0 1.35rem 0; padding-right: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; }
-    .post-body li { font-size: 1rem; line-height: 1.85; color: #2E3440; }
+    .post-body h2 { font-family: var(--fb); font-weight: 700; font-size: 1.5rem; color: var(--ink); margin: 2.75rem 0 1rem; line-height: 1.4; border-bottom: 1px solid rgba(17,20,24,0.05); padding-bottom: 0.5rem; }
+    .post-body h3 { font-family: var(--fb); font-size: 1.15rem; font-weight: 800; color: var(--ink); margin: 2rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .post-body p { font-size: 0.98rem; line-height: 1.85; color: #2E3440; margin-bottom: 1.25rem; }
     .post-body strong { color: var(--ink); font-weight: 700; }
-    .post-callout { background: var(--light); border-right: 3px solid var(--c1); border-radius: 8px 0 0 8px; padding: 1.25rem 1.5rem; margin: 2rem 0; }
-    .post-callout p { margin: 0; font-size: 0.97rem; }
-    .post-divider { border: none; border-top: 1px solid rgba(17,20,24,0.08); margin: 2.5rem 0; }
+
+    /* Checklists and UI components */
+    .metric-pill { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .metric-pill.high { background: rgba(34,197,94,0.1); color: var(--accent-green); }
+    .metric-pill.warn { background: rgba(239,68,68,0.1); color: var(--accent-red); }
+    .metric-pill.info { background: rgba(66,133,244,0.1); color: var(--accent-blue); }
+    .metric-pill.static { background: rgba(107,117,133,0.1); color: var(--muted); }
+
+    /* Takeaways Box */
+    .takeaways-box { background: var(--dark); border-radius: 14px; padding: 1.8rem; margin: 2rem 0; border-right: 4px solid var(--c1); border-left: none; color: #E6F2F6; }
+    .takeaways-box h4 { font-family: var(--fb); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--c1); margin-bottom: 1rem; }
+    .takeaways-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .takeaways-box li { font-size: 0.9rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 0.75rem; color: rgba(230,242,246,0.8); }
+    .takeaways-box li::before { content: '✦'; color: var(--c1); font-weight: 800; }
+
+    /* Custom actionable checklist */
+    .action-checklist { margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.85rem; }
+    .action-item { background: var(--light); border: 1px solid rgba(17,20,24,0.04); border-radius: 10px; padding: 1rem 1.25rem; display: flex; align-items: flex-start; gap: 0.85rem; }
+    .action-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(26,138,158,0.1); color: var(--accent-teal); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; margin-top: 0.1rem; }
+    .action-content { display: flex; flex-direction: column; gap: 0.25rem; }
+    .action-title { font-size: 0.92rem; font-weight: 700; color: var(--ink); }
+    .action-desc { font-size: 0.85rem; line-height: 1.5; color: var(--muted); }
+
+    /* Comparison grid */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    .compare-card { padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(17,20,24,0.06); }
+    .compare-card.positive { background: rgba(34,197,94,0.02); border-top: 3px solid var(--accent-green); }
+    .compare-card.negative { background: rgba(239,68,68,0.02); border-top: 3px solid var(--accent-red); }
+    .compare-header { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem; }
+    .positive .compare-header { color: var(--accent-green); }
+    .negative .compare-header { color: var(--accent-red); }
+    .compare-body { font-size: 0.85rem; line-height: 1.6; color: var(--muted); }
+
+    /* CTA box */
     .post-cta { background: var(--dark2); border-radius: 16px; padding: 2.5rem; text-align: center; margin-top: 4rem; }
-    .post-cta h3 { font-family: var(--fh); font-weight: 800; font-size: 1.4rem; color: #E6F2F6; margin-bottom: 0.6rem; }
-    .post-cta p { font-size: 0.92rem; color: rgba(230,242,246,0.5); margin-bottom: 1.5rem; }
-    .post-cta a { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--c1); color: var(--dark); font-weight: 700; font-size: 0.92rem; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .post-cta h3 { font-family: var(--fb); font-weight: 700; font-size: 1.4rem; color: #E6F2F6; margin-bottom: 0.6rem; }
+    .post-cta p { font-size: 0.9rem; color: rgba(230,242,246,0.5); margin-bottom: 1.5rem; }
+    .post-cta a { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--c1); color: var(--dark); font-weight: 700; font-size: 0.9rem; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .post-cta a:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(188,225,236,0.25); }
+
+    /* Footer */
     footer { background: var(--dark2); border-top: 1px solid rgba(188,225,236,0.07); padding: 4rem 1.5rem 2rem; color: rgba(230,242,246,0.42); }
     .footer-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
-    .footer-logo { font-family: var(--fh); font-weight: 800; font-size: 1.3rem; color: var(--white); display: block; margin-bottom: 0.65rem; }
+    .footer-logo { font-family: var(--fh); font-weight: 800; font-size: 1.3rem; color: var(--white); letter-spacing: -0.02em; display: block; margin-bottom: 0.65rem; }
     .footer-logo em { color: var(--c1); font-style: normal; }
-    .footer-desc { font-size: 0.85rem; line-height: 1.8; max-width: 28ch; color: rgba(230,242,246,0.72); }
-    .footer-col-title { font-size: 0.75rem; font-weight: 700; color: rgba(188,225,236,0.4); margin-bottom: 1rem; }
+    .footer-desc { font-size: 0.82rem; line-height: 1.7; max-width: 28ch; color: rgba(230,242,246,0.72); }
+    .footer-col-title { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(188,225,236,0.4); margin-bottom: 1rem; }
     .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .footer-links a { font-size: 0.87rem; color: rgba(230,242,246,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-links a { font-size: 0.84rem; color: rgba(230,242,246,0.55); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--c1); }
-    .nap { font-size: 0.85rem; line-height: 1.9; color: rgba(230,242,246,0.55); }
-    .nap strong { color: rgba(230,242,246,0.75); font-weight: 700; display: block; margin-bottom: 0.3rem; }
+    .nap { font-size: 0.82rem; line-height: 1.9; color: rgba(230,242,246,0.55); }
+    .nap strong { color: rgba(230,242,246,0.75); font-weight: 600; display: block; margin-bottom: 0.3rem; }
     .nap a { color: var(--c1); text-decoration: none; }
     .footer-bottom { max-width: 1080px; margin: 0 auto; border-top: 1px solid rgba(188,225,236,0.07); padding-top: 1.5rem; font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
     @media (max-width: 760px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
@@ -81,13 +134,13 @@
 <div class="post-hero">
   <div class="post-hero-inner">
     <span class="post-category">سيو محلي</span>
-    <h1>كيف تجعل نشاطك التجاري في الصفحة الأولى من Google في الكويت</h1>
+    <h1>دليل تحسين جوجل بزنس بروفايل: استراتيجية السيو المحلي للسيطرة على البحث</h1>
     <div class="post-meta">
       <span>فريق كويت بلوك</span>
       <span class="dot"></span>
       <span>مايو 2026</span>
       <span class="dot"></span>
-      <span>7 دقائق للقراءة</span>
+      <span>6 دقائق للقراءة</span>
     </div>
   </div>
 </div>
@@ -95,56 +148,123 @@
 <div class="post-wrap">
   <article class="post-body">
 
-    <p>معظم الأعمال التجارية في الكويت تتعامل مع Google كأمر ثانوي. تعتمد على متابعي إنستغرام ومجموعات واتساب والتوصيات الشفهية — وهذا يعمل، حتى يتوقف عن العمل. الأعمال التي تكسب عملاء جدداً باستمرار هي تلك التي تظهر حين يبحث شخص ما عن "تصليح مكيف السالمية" أو "أفضل محاسب الكويت" في الساعة الحادية عشرة مساءً.</p>
+    <p>تواجه الشركات المحلية في الكويت بيئة رقمية فريدة. في حين يعتمد الكثيرون كلياً على متابعي إنستقرام ومجموعات واتساب، فإن 56% من إجراءات البحث على ملفات Google Business Profile تنتهي بنقرات مباشرة إلى موقع الشركة الإلكتروني ([BrightLocal](https://www.brightlocal.com/research/local-business-websites-report/)، 2023). تحسين هذا الملف هو الخطوة الأولى والأهم للحصول على اتصالات ومبيعات مباشرة.</p>
 
-    <p>هذا هو السيو المحلي. وهو أكثر قابلية للتحقيق مما يعتقد معظم الناس — إذا فهمت ما الذي يكافئه Google فعلاً.</p>
-
-    <h2>لماذا البحث على Google مختلف عن كل القنوات الأخرى</h2>
-
-    <p>حين يجدك شخص على إنستغرام، لم يكن يبحث عنك. حين يجدك على Google، كان يبحث عنك. هذا الفارق في النية ضخم جداً. بحث من قبيل "سباك الكويت 24 ساعة" يأتي من شخص يحتاج سباكاً <em>الآن</em>. لا توجد منصة أخرى تلتقط هذه اللحظة.</p>
-
-    <h2>الركائز الثلاث للسيو المحلي</h2>
-
-    <h3>1. ملف نشاطك التجاري على Google</h3>
-    <p>هذا هو أعلى رافعة يمكنك استخدامها لتعزيز ظهورك المحلي. ملف Google Business Profile هو ما يظهر في "حزمة الخرائط" — تلك النتائج الثلاثة العلوية مع النجوم والخريطة التي تهيمن على عمليات البحث المحلية. ملف كامل ومحدث بانتظام مع صور حقيقية وساعات دقيقة وتقييمات أصلية سيتفوق على المنافسين الذين يتجاهلونه.</p>
-
-    <div class="post-callout">
-      <p><strong>نصيحة سريعة:</strong> إذا كان ملفك التجاري على Google يُظهر رقم هاتف خاطئاً أو ساعات غير دقيقة أو لا توجد صور، صحّح ذلك اليوم. Google يعاقب المعلومات التجارية غير المتسقة.</p>
+    <div class="takeaways-box">
+      <h4>خلاصة القول</h4>
+      <ul>
+        <li><strong>التصنيفات الرئيسية</strong> تمثل أقوى عامل ترتيب وتأثير على خرائط جوجل.</li>
+        <li><strong>وتيرة المراجعات المستمرة</strong> والمراجعات الغنية بالكلمات المفتاحية المكتوبة من العملاء أهم بكثير من المراجعات المفاجئة المزيفة.</li>
+        <li><strong>الربط بموقعك الإلكتروني</strong> يغذي قوة ملفك التجاري؛ فكلما كان موقعك قوياً، تصدر ملفك خرائط جوجل.</li>
+      </ul>
     </div>
 
-    <h3>2. السيو الداخلي لموقعك</h3>
-    <p>Google يقرأ موقعك ليفهم ما تفعله وأين تفعله. صفحاتك تحتاج إلى توصيل خدماتك وموقعك بوضوح. هذا يعني:</p>
-    <ul>
-      <li>صفحات مخصصة لكل خدمة (وليس صفحة واحدة تسرد كل شيء)</li>
-      <li>إشارات الموقع الجغرافي في العناوين والمحتوى</li>
-      <li>سرعة تحميل عالية — مستخدمو الجوال في الكويت يغادرون المواقع البطيئة بسرعة</li>
-      <li>بيانات منظمة لمساعدة Google على فهم نوع عملك</li>
-    </ul>
+    <h2>كيف تعمل خوارزمية الخرائط المحلية في جوجل؟</h2>
+    
+    <span class="metric-pill static">قيود النظام الخارجي</span>
+    <p>يقيم جوجل ترتيب الخرائط بناءً على ثلاثة عوامل: الصلة، والمسافة، والبروز ([Google Help](https://support.google.com/business/answer/7091)، 2024). بعض العناصر، مثل مسافة المستخدم من مكتبك (القرب الجغرافي) أو عمر حسابك، خارجة عن إرادتك تماماً. من المهم فهم هذه القيود لتوجيه جهدك التسويقي نحو العوامل القابلة للتحسين الفعلي.</p>
 
-    <h3>3. الروابط الخلفية من مواقع ذات صلة</h3>
-    <p>الروابط الخلفية هي مواقع أخرى ترتبط بموقعك. يعاملها Google كأصوات ثقة. رابط من موقع إخباري كويتي معروف أو دليل محلي يحمل قيمة أكبر بكثير من 50 رابطاً من مدونات غير ذات صلة. الجودة تتفوق على الكمية دائماً.</p>
+    <p>على سبيل المثال، لا يمكنك تغيير مكان وجود العميل أثناء قيامه بالبحث، ولكن يمكنك بناء عوامل تحسين قوية لتوسيع نصف قطر ترتيب ملفك التجاري وتجاوز المنافسين القريبين جغرافياً.</p>
 
-    <hr class="post-divider">
+    <h2>المرحلة 1: تصنيفات الملف التجاري والالتزام بالمعايير</h2>
+    
+    <span class="metric-pill high">عامل تأثير حاسم</span>
+    <p>يعد تعيين التصنيف الرئيسي لعملك بشكل صحيح هو الخطوة الأكثر حيوية: تستخدم خرائط جوجل الفئة الرئيسية كآلية فرس وفهرسة أساسية. يؤدي اختيار تصنيف رئيسي خاطئ إلى حجب نشاطك التجاري تماماً من نتائج البحث.</p>
 
-    <h2>كم من الوقت يستغرق ذلك؟</h2>
+    <div class="action-checklist">
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">اختر الفئة الرئيسية بدقة</span>
+          <span class="action-desc">تحقق من الفئات الرئيسية للمنافسين المتصدرين. اختر الفئة الأكثر دقة وتخصصاً (مثال: "عيادة أسنان تجميلية" بدلاً من "عيادة" فقط).</span>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">إضافة الفئات الإضافية</span>
+          <span class="action-desc">أضف ما يصل إلى 5 فئات ثانوية داعمة لتوسيع نطاق ظهورك، وتجنب إضافة فئات غير ذات صلة قد تشتت فهم خوارزمية جوجل لعملك.</span>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">محاذاة موقع الدبوس على الخريطة</span>
+          <span class="action-desc">ضع دبوس الخريطة بدقة شديدة عند مدخل مكتبك أو محلك التجاري لتسهيل اتجاهات القيادة للعملاء.</span>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">تعريف الخدمات المخصصة</span>
+          <span class="action-desc">املأ علامة تبويب الخدمات بالكامل. اكتب عناوين وأوصاف خدمات واضحة تتضمن الكلمات المفتاحية التي يبحث عنها عملاؤك.</span>
+        </div>
+      </div>
+    </div>
 
-    <p>الإجابة الصادقة: 3–6 أشهر لرؤية حركة ملموسة، 6–12 شهراً للوصول إلى الصفحة الأولى للكلمات التنافسية. المدة تعتمد على مدى تنافسية فئتك، وقوة حضورك الرقمي الحالي، ومدى اتساق العمل شهراً بعد شهر.</p>
+    <h2>المرحلة 2: محرك المراجعات والتقييمات</h2>
+    
+    <span class="metric-pill high">إشارة ترتيب قوية</span>
+    <p>تعد المراجعات التي تحتوي على نصوص وكلمات مفتاحية طبيعية إشارة قوية جداً؛ حيث يقرأ 98% من المستهلكين المراجعات قبل التعامل مع الشركات المحلية ([BrightLocal](https://www.brightlocal.com/research/local-consumer-review-survey/)، 2023). يحلل جوجل النصوص لفهم الكلمات مثل "أفضل شركة سيو في الكويت".</p>
 
-    <h2>ما الذي يجب أن تفعله أولاً</h2>
-    <ol>
-      <li>احصل على ملف Google Business Profile وأكمل بياناته بالكامل</li>
-      <li>راجع موقعك بحثاً عن إشارات الخدمة والموقع الجغرافي المفقودة</li>
-      <li>ابنِ قائمة من 10–20 كلمة مفتاحية يبحث عنها عملاؤك فعلاً</li>
-      <li>انشر محتوى شهرياً منتظماً يستهدف تلك الكلمات المفتاحية</li>
-      <li>سجّل في الأدلة والمصادر المحلية الكويتية</li>
-    </ol>
+    <div class="compare-grid">
+      <div class="compare-card positive">
+        <div class="compare-header">✦ الأسلوب الصحيح</div>
+        <div class="compare-body">الحصول على مراجعة أو مراجعتين مفصلتين أسبوعياً من عملاء حقيقيين يصفون فيها الخدمة التي حصلوا عليها، مع الرد السريع على كل مراجعة.</div>
+      </div>
+      <div class="compare-card negative">
+        <div class="compare-header">⚠️ تحذير مهم</div>
+        <div class="compare-body">شراء 50 تقييماً وهمياً بدون نص في يوم واحد، أو تجاهل تقييمات العملاء، مما يعرض الملف التجاري للإغلاق الفوري من جوجل.</div>
+      </div>
+    </div>
+
+    <p>اجعل جمع المراجعات جزءاً أساسياً من عملية تسليم الخدمة لعملائك. اطلب منهم كتابة تفاصيل الخدمة المحددة التي حصلوا عليها (مثل "علاج عصب الأسنان" أو "استراتيجية السيو المحلي") لتغذية خوارزمية جوجل بالكلمات المفتاحية المناسبة.</p>
+
+    <h2>المرحلة 3: تفاعل ونقرات المستخدمين</h2>
+    
+    <span class="metric-pill info">تفاعل المستخدمين</span>
+    <p>تخبر نقرات وإجراءات المستخدمين جوجل أن نشاطك التجاري نشط وحقيقي ويفضله العملاء. تعد طلبات اتجاهات القيادة، ومكالمات الهاتف، ونقرات الواتساب أو الرسائل إشارات قوية لتأكيد بروز نشاطك التجاري.</p>
+
+    <p>لزيادة هذا التفاعل، يجب الحفاظ على دقة ساعات العمل المنشورة (حيث يؤثر فلتر "مفتوح الآن" بشكل كبير على ترتيب وظهور الملف) مع نشر التحديثات الأسبوعية على جوجل بانتظام.</p>
+
+    <h2>المرحلة 4: العلاقة بين الملف التجاري وموقعك الإلكتروني</h2>
+    
+    <span class="metric-pill high">رابط فني رئيسي</span>
+    <p>الصفحة التي يربطها ملفك التجاري على جوجل بموقعك تمثل حجر الأساس لقوتك: يتحقق جوجل من صحة تفاصيل عملك على هذه الصفحة. إذا كان موقعك بطيئاً أو يفتقر إلى بيانات Schema المهيكلة، فسينعكس ذلك سلباً على ترتيبك في الخريطة.</p>
+
+    <div class="action-checklist">
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">مطابقة بيانات NAP (الاسم، العنوان، الهاتف)</span>
+          <span class="action-desc">تأكد من مطابقة الاسم والعنوان ورقم الهاتف تماماً بين موقعك الإلكتروني والملف التجاري على جوجل، مع إضافتها في كود JSON-LD Schema.</span>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">إنشاء صفحات خدمات مستقلة</span>
+          <span class="action-desc">بدلاً من تكديس كل خدماتك في الصفحة الرئيسية للموقع، قم ببناء صفحة مستقلة لكل خدمة رئيسية لبناء سلطة موضوعية لعملك.</span>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-icon">✓</span>
+        <div class="action-content">
+          <span class="action-title">تحسين سرعة تحميل الموقع</span>
+          <span class="action-desc">تأكد من تحميل موقعك في أقل من 2.5 ثانية على الهاتف الجوال لمنع الزوار من الخروج السريع والعودة لنتائج الخريطة.</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>الخطوات القادمة</h2>
+    <p>تحسين ملف Google Business Profile ليس مهمة لمرة واحدة فقط. بل يتطلب إدارة مستمرة للمراجعات، وتحديث منشورات جوجل بانتظام، والحفاظ على موقع إلكتروني سريع ومتوافق برمجياً. تعامل مع ملفك كواجهة متجرك الرقمي لجلب العملاء والاتصالات باستمرار.</p>
 
     <div class="post-cta">
-      <h3>مستعد للظهور في الصفحة الأولى؟</h3>
-      <p>نحن نتولى كل شيء — الاستراتيجية، المحتوى، الروابط، والتقارير. أنت تركّز على إدارة عملك.</p>
+      <h3>هل أنت مستعد لتصدر نتائج خرائط جوجل؟</h3>
+      <p>نحن نقوم ببناء وإدارة وتحسين أصول السيو المحلي للشركات في الكويت لجلب اتصالات حقيقية لعملك.</p>
       <a href="https://wa.me/96594139666" target="_blank" rel="noopener">
         <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.489 2.027 7.797L0 32l8.418-2.003A15.95 15.95 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm7.273 20.387c-.398-.199-2.352-1.161-2.717-1.293-.365-.133-.63-.199-.895.199-.266.398-1.028 1.293-1.26 1.558-.232.265-.464.298-.862.1-.398-.2-1.681-.619-3.202-1.975-1.183-1.055-1.982-2.358-2.214-2.756-.232-.398-.025-.613.175-.811.178-.177.398-.464.597-.696.199-.232.265-.398.398-.663.133-.266.066-.498-.033-.697-.1-.2-.895-2.155-1.227-2.951-.323-.775-.65-.67-.895-.683-.232-.012-.498-.015-.763-.015-.265 0-.697.1-1.062.498-.365.398-1.393 1.361-1.393 3.316 0 1.955 1.427 3.844 1.626 4.109.199.265 2.808 4.288 6.804 6.016.951.41 1.692.655 2.27.838.954.303 1.823.26 2.51.158.766-.114 2.352-.961 2.684-1.889.332-.928.332-1.724.232-1.889-.099-.166-.365-.265-.763-.464z"/></svg>
-        راسلنا على واتساب
+        تحدث معنا عبر الواتساب
       </a>
     </div>
 
