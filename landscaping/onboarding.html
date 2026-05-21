@@ -2329,7 +2329,7 @@
 
           <div class="form-group" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.45rem;">
             <label for="additional_services">Additional Services We Might Have Missed</label>
-            <span class="label-desc">Specify any other services you offer that were not listed above (one per line).</span>
+            <span class="label-desc">Specify any other services you offer that were not listed above (one per line). You may also specify price ranges (e.g. Patio Expansion - $2000-$3500).</span>
             <textarea id="additional_services" name="additional_services" class="input-text" rows="4" placeholder="e.g. Hydroseeding&#10;Lawn Aeration&#10;Holiday Lighting" style="resize: vertical; font-family: var(--fb);"></textarea>
           </div>
         </div>
@@ -3744,7 +3744,7 @@
           <div class="form-group" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.45rem;">
             <label for="additional_areas">Additional Service Areas We Might Have Missed</label>
             <span class="label-desc">Specify any other cities, neighborhoods, or counties you serve (one per line).</span>
-            <textarea id="additional_areas" name="additional_areas" class="input-text" rows="4" placeholder="e.g. Waxahachie&#10;Kaufman&#10;75001" style="resize: vertical; font-family: var(--fb);"></textarea>
+            <textarea id="additional_areas" name="additional_areas" class="input-text" rows="4" placeholder="e.g. Waxahachie&#10;Kaufman&#10;Rockwall" style="resize: vertical; font-family: var(--fb);"></textarea>
           </div>
         </div>
 
@@ -3809,7 +3809,7 @@
           <!-- SUBMIT BUTTON (Only visible on Step 4) -->
           <button type="submit" class="btn btn-primary" id="submit-btn" style="display:none;">
             <span class="spinner" id="btn-spinner"></span>
-            Submit &amp; Setup
+            Submit
           </button>
         </div>
       </form>
@@ -4203,7 +4203,7 @@
     
     const formData = new FormData(form);
     
-    fetch("/", {
+    fetch(window.location.pathname, {
       method: "POST",
       body: formData
     })
