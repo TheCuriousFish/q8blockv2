@@ -238,8 +238,14 @@
     .post-body h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; font-weight: 700; font-size: 1.65rem; color: var(--ink); margin: 3.5rem 0 1.2rem; line-height: 1.3; border-bottom: 1px solid rgba(17,20,24,0.05); padding-bottom: 0.5rem; scroll-margin-top: 90px; }
     .post-body h3 { font-family: var(--fb); font-size: 1.15rem; font-weight: 800; color: var(--ink); margin: 2rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
     .post-body strong { color: var(--ink); font-weight: 700; }
-    .post-body a { color: var(--c1); font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .post-body a { color: #97DCDB; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
     .post-body a:hover { opacity: 0.85; text-decoration: none; }
+
+    /* Algorithm Pillars grid */
+    .algorithm-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 1.8rem 0; }
+    .pillar-card { background: var(--light); padding: 1.25rem; border-radius: 8px; border-left: 3px solid var(--accent-teal); border-right: none; }
+    .pillar-card strong { display: block; font-size: 0.95rem; margin-bottom: 0.4rem; color: var(--ink); }
+    .pillar-card span { font-size: 0.86rem; color: var(--muted); line-height: 1.5; }
 
     /* Visual layout images */
     .section-img { width: 100%; height: auto; border-radius: 12px; margin: 1.5rem 0 2rem; border: 1px solid rgba(17,20,24,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
@@ -268,9 +274,9 @@
     /* Takeaways Box */
     .takeaways-box { background: var(--dark); border-radius: 14px; padding: 1.8rem; margin: 2rem 0; border-left: 4px solid var(--c1); color: #E6F2F6; }
     .takeaways-box h4 { font-family: var(--fb); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--c1); margin-bottom: 1rem; }
-    .takeaways-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-    .takeaways-box li { font-size: 0.9rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 0.75rem; color: rgba(230,242,246,0.8); }
-    .takeaways-box li::before { content: '✦'; color: var(--c1); font-weight: 800; }
+    .takeaways-box ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    .takeaways-box li { position: relative; padding-left: 1.5rem; font-size: 0.9rem; line-height: 1.6; color: rgba(230,242,246,0.8); text-align: left; }
+    .takeaways-box li::before { content: '✦'; position: absolute; left: 0; top: 0.1rem; color: var(--c1); font-weight: 800; }
     .takeaways-box li strong { color: var(--c1); }
 
     /* Interactive Checklist */
@@ -415,340 +421,367 @@
       </ul>
     </div>
 
-    <p>Google's local algorithm is heavily defined by three main factors: <strong>Relevance</strong> (how well a listing matches a searcher's query), <strong>Distance</strong> (how far the business is from the searcher), and <strong>Prominence</strong> (how well-known or authoritative the business is). While optimization allows you to maximize your prominence and relevance, certain core environmental constraints are predetermined by the search engine itself.<br><br>These passive constraints dictate the maximum ranking radius of a profile. Proximity to the searcher is the single strongest passive constraint; businesses must ensure that they optimize actively controllable signals to outrank competitors who are physically closer to the searcher.</p>
+    <p>Google's local algorithm is heavily defined by three main ranking factors:</p>
+    <div class="algorithm-pillars">
+      <div class="pillar-card">
+        <strong>Relevance</strong>
+        <span>How closely your business category, services, and profile data match the user's search query intent.</span>
+      </div>
+      <div class="pillar-card">
+        <strong>Distance</strong>
+        <span>The physical proximity of your business location to the user or to the center of the local search area.</span>
+      </div>
+      <div class="pillar-card">
+        <strong>Prominence</strong>
+        <span>The online authority, review volume, organic SEO links, and overall popularity of your business.</span>
+      </div>
+    </div>
+    <p>While strategic optimization allows you to maximize relevance and prominence, distance remains a passive constraint determined by the searcher's coordinates.<br><br>These passive boundaries dictate your ranking radius, meaning businesses must optimize every controllable factor to outrank physically closer competitors.</p>
 
     <h2 id="phase-1-setup">Phase 1: Core Setup, Category Integrity & Compliance</h2>
     <img src="img/blog/gbp-setup.webp" class="section-img" alt="Google Business Profile Setup and Category illustration" />
-    <p>Compliance and listing settings form the structural foundation of your local optimization. Your <strong>Primary Category</strong> is the single most critical ranking signal within Google's Maps index. A wrong selection here will permanently prevent you from appearing for your target searches. Similarly, name keyword optimization and compliance must be managed carefully to avoid spam filters while maintaining high algorithmic relevance.</p>
-<details class="factor-accordion" open>
-    <summary>Core Setup & Compliance Factors (41 Factors)</summary>
+    <p>Compliance and listing settings form the structural foundation of your local optimization.<br><br>Configuring these core elements correctly ensures that Google's crawling algorithms index your business with high authority.</p>
+
+    <h3 id="setup-category">1. Primary Category Alignment (Impact: 100/100)</h3>
+    <p>Your primary category is the single most critical ranking signal in Google's Map Pack algorithm.<br><br>Choosing the wrong category will instantly prevent you from ranking for your core services, as Google matches search intent directly to category classifications.<br><br>Select the category that represents your core revenue driver, rather than secondary services.</p>
+
+    <h3 id="setup-keywords">2. Keywords in Business Title (Impact: 98/100)</h3>
+    <p>Including your target service and location keywords in your business title carries massive search weight.<br><br>However, artificial keyword stuffing carries a high risk of listing suspension from Google's spam filters.<br><br>In Kuwait, local businesses must align their official registered name with strategic keywords in a natural, compliant manner to maintain visibility.</p>
+
+    <h3 id="setup-hours">3. Operating Hours Integrity (Impact: 83/100)</h3>
+    <p>Google prioritizes businesses that are physically open at the time of a user's search.<br><br>Setting incorrect hours leads to a poor user experience and actively lowers your visibility during peak transactional times.<br><br>Ensure your holiday hours and daily schedules are constantly updated to reflect operational reality.</p>
+
+    <h3 id="setup-map-pin">4. Address Verification & Map Pin Precision (Impact: 73/100)</h3>
+    <p>Your physical map coordinates anchor your proximity relevance.<br><br>Setting your map pin precisely on your building entrance prevents navigation confusion for customers and Google's mapping crawlers.<br><br>Service Area Businesses (SABs) that operate on-site must configure their service radius accurately while keeping their residential address hidden to comply with Guidelines.</p>
+<details class="factor-accordion" >
+    <summary>Compliance & Setup Factor Rankings Summary (0-100 Scale) (41 Factors)</summary>
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">227</div>
-        <div class="factor-info">
-          <div class="factor-name">Primary GBP Category <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 227 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">223</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Business Title <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 223 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">189</div>
-        <div class="factor-info">
-          <div class="factor-name">Business is Open at Time of Search (Business Hours) <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 189 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">176</div>
-        <div class="factor-info">
-          <div class="factor-name">Address Is Showing on GBP (Not SAB) <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 176 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">173</div>
-        <div class="factor-info">
-          <div class="factor-name">Additional GBP Categories <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 173 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">165</div>
-        <div class="factor-info">
-          <div class="factor-name">Proper Placement of the Map Pin <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 165 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">153</div>
-        <div class="factor-info">
-          <div class="factor-name">HTML NAP Matching GBP NAP <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 153 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">147</div>
-        <div class="factor-info">
-          <div class="factor-name">Completeness of GBP <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 147 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">134</div>
-        <div class="factor-info">
-          <div class="factor-name">Proper Hours Set on GBP <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 134 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">134</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of GBP Predefined Services <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 134 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">133</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Searches for Business Name <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 133 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">123</div>
-        <div class="factor-info">
-          <div class="factor-name">Verified GBP <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 123 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">122</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Custom Service Titles <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 122 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">118</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Services <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 118 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">117</div>
-        <div class="factor-info">
-          <div class="factor-name">Topical (Product/Service) Keyword Relevance Across Entire Website <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 117 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">106</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of GBP Custom Services <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 106 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
         <div class="factor-score-badge">100</div>
         <div class="factor-info">
-          <div class="factor-name">Proper Category Associations on Aggregators and Tier 1 Citation Sources <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 100 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Primary GBP Category</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 100/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">98</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Products Added to GBP via Merchant Center <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 98 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in GBP Business Title</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 98/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">92</div>
+        <div class="factor-score-badge">83</div>
         <div class="factor-info">
-          <div class="factor-name">User Added Attributes in GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 92 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Business is Open at Time of Search (Business Hours)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 83/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">92</div>
+        <div class="factor-score-badge">78</div>
         <div class="factor-info">
-          <div class="factor-name">Business Title in Anchor Text of Inbound Links to Domain <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 92 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">90</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Identifies as Attributes on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 90 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">89</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Products <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 89 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">88</div>
-        <div class="factor-info">
-          <div class="factor-name">Enhancement/Completeness of Citations <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 88 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">87</div>
-        <div class="factor-info">
-          <div class="factor-name">Business Title in Anchor Text of Inbound Links to GBP Landing Page URL <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 87 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Age of Business (GBP Opening Date) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 82 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Crowd Sourced Attributes <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 79 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Business on Expert Curated Best of and Similar Lists <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 79 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Address Is Showing on GBP (Not SAB)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 78/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">76</div>
         <div class="factor-info">
-          <div class="factor-name">Local Area Code on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 76 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Additional GBP Categories</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 76/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">69</div>
+        <div class="factor-score-badge">73</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Service Descriptions <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 69 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Proper Placement of the Map Pin</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 73/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">64</div>
+        <div class="factor-score-badge">67</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Products Added to GBP via NMX <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 64 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">HTML NAP Matching GBP NAP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 67/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">60</div>
+        <div class="factor-score-badge">65</div>
         <div class="factor-info">
-          <div class="factor-name">Comprehensive Google Q&A Section with Owner-Seeded FAQs <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 60 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Completeness of GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 65/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">56</div>
+        <div class="factor-score-badge">59</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Appointment URL <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 56 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Proper Hours Set on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 59/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">59</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of GBP Predefined Services</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 59/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">59</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Searches for Business Name</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 59/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Setting Service Areas in GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 54 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Verified GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 54/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Google Q&A <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 54 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in GBP Custom Service Titles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 54/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">54</div>
+        <div class="factor-score-badge">52</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image ALT attributes on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 54 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in GBP Services</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 52/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">53</div>
+        <div class="factor-score-badge">52</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Social Media Users Mentioning The Business <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 53 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Topical (Product/Service) Keyword Relevance Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 52/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">47</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Products on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 47 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Presence of GBP Custom Services</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 47/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">44</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Questions Asked in Google Q&A <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 44 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Proper Category Associations on Aggregators and Tier 1 Citation Sources</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">43</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image ALT attributes Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 43 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Presence of Products Added to GBP via Merchant Center</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 43/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">41</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Description <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 41 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">User Added Attributes in GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Business Title in Anchor Text of Inbound Links to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">40</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Identifies as Attributes on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 40/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">39</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Products</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 39/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">39</div>
+        <div class="factor-info">
+          <div class="factor-name">Enhancement/Completeness of Citations</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 39/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">38</div>
+        <div class="factor-info">
+          <div class="factor-name">Business Title in Anchor Text of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 38/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">36</div>
+        <div class="factor-info">
+          <div class="factor-name">Age of Business (GBP Opening Date)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 36/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Crowd Sourced Attributes</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 35/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Business on Expert Curated Best of and Similar Lists</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 35/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Local Area Code on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 33/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Service Descriptions</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">28</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Products Added to GBP via NMX</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 28/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">26</div>
         <div class="factor-info">
-          <div class="factor-name">Participation in Adwords, Adwords Express, Hotel Finder, or other paid Google products <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 26 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Comprehensive Google Q&A Section with Owner-Seeded FAQs</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 26/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">25</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Appointment URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 25/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Setting Service Areas in GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Google Q&A</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image ALT attributes on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">23</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Social Media Users Mentioning The Business</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 23/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">21</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Products on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 21/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Questions Asked in Google Q&A</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 19/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image ALT attributes Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 19/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">18</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Description</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 18/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">11</div>
+        <div class="factor-info">
+          <div class="factor-name">Participation in Adwords, Adwords Express, Hotel Finder, or other paid Google products</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 11/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
@@ -774,194 +807,194 @@
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">181</div>
+        <div class="factor-score-badge">80</div>
         <div class="factor-info">
-          <div class="factor-name">High Numerical Google Ratings (e.g. 4-5) <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 181 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">High Numerical Google Ratings (e.g. 4-5)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 80/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">170</div>
+        <div class="factor-score-badge">75</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Native Google Reviews (w/text) <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 170 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">164</div>
-        <div class="factor-info">
-          <div class="factor-name">Recency of Reviews <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 164 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">154</div>
-        <div class="factor-info">
-          <div class="factor-name">Sustained Influx of Reviews Over Time (rather than bursts) <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 154 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">120</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Engagement Signals on GBP (scrolling through listing, clicking on sections, reacting to reviews, etc) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 120 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">117</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Native Google Reviews <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 117 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">116</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Native Google Ratings (no text) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 116 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">112</div>
-        <div class="factor-info">
-          <div class="factor-name">Positive Sentiment in Review Text <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 112 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">111</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews with Photos <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 111 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">High Numerical Ratings by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">96</div>
-        <div class="factor-info">
-          <div class="factor-name">Authority of Third-Party Sites on Which Reviews are Present <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 96 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">90</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews with Videos <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 90 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 82 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Third-Party Sites on Which Reviews are Present <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 79 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews on Industry-Specific Sites <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 79 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">76</div>
-        <div class="factor-info">
-          <div class="factor-name">High Numerical Third-Party Ratings (e.g. 4-5) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 76 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Native Google Reviews (w/text)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 75/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">72</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Third-Party Traditional Reviews (e.g. Yelp, TripAdvisor, Yellowpages, etc) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 72 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Recency of Reviews</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 72/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">70</div>
+        <div class="factor-score-badge">68</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Owner Responses to Most Reviews <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 70 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Sustained Influx of Reviews Over Time (rather than bursts)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 68/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">67</div>
+        <div class="factor-score-badge">53</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Third-Party Reviews <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 67 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Engagement Signals on GBP (scrolling through listing, clicking on sections, reacting to reviews, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 53/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">67</div>
+        <div class="factor-score-badge">52</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews with Answers to Review Questions <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 67 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in Native Google Reviews</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 52/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">66</div>
+        <div class="factor-score-badge">51</div>
         <div class="factor-info">
-          <div class="factor-name">BBB Accredited <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 66 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Native Google Ratings (no text)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 51/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">63</div>
+        <div class="factor-score-badge">49</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Third-Party Unstructured Reviews (e.g. blogs, newspapers, magazines) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 63 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Positive Sentiment in Review Text</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 49/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">50</div>
+        <div class="factor-score-badge">49</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Reactions to Reviews <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 50 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Reviews with Photos</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 49/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">High Numerical Ratings by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">42</div>
+        <div class="factor-info">
+          <div class="factor-name">Authority of Third-Party Sites on Which Reviews are Present</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 42/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">40</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews with Videos</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 40/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">36</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 36/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Third-Party Sites on Which Reviews are Present</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 35/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews on Industry-Specific Sites</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 35/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">High Numerical Third-Party Ratings (e.g. 4-5)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 33/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">32</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Third-Party Traditional Reviews (e.g. Yelp, TripAdvisor, Yellowpages, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 32/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">31</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Owner Responses to Most Reviews</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 31/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Third-Party Reviews</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews with Answers to Review Questions</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">BBB Accredited</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 29/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">28</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Owner Responses to Reviews <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 28 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Third-Party Unstructured Reviews (e.g. blogs, newspapers, magazines)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 28/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reactions to Reviews</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 22/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">12</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Owner Responses to Reviews</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 12/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
@@ -976,314 +1009,314 @@
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">156</div>
+        <div class="factor-score-badge">69</div>
         <div class="factor-info">
-          <div class="factor-name">Click-Through Rate from Local Pack/Maps Search Results <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 156 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">126</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL from Locally-Relevant Domains <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 126 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">125</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Domain from Locally-Relevant Domains <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 125 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">113</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Requests for Driving Directions From GBP <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 113 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">108</div>
-        <div class="factor-info">
-          <div class="factor-name">Photo & Video Quality (resolution, clarity, not stock, etc) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 108 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Clicks to Call Business From GBP <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 102 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Unstructured Citations (Newspaper Articles, Blog Posts, Gov Sites, Industry Associations) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">99</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Citations from Locally-Relevant Domains <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 99 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">95</div>
-        <div class="factor-info">
-          <div class="factor-name">Photos Match Target Keywords <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 95 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">94</div>
-        <div class="factor-info">
-          <div class="factor-name">Quanitity of User-Uploaded Photos <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 94 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">93</div>
-        <div class="factor-info">
-          <div class="factor-name">Relevancy of Photos to Categories <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 93 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">89</div>
-        <div class="factor-info">
-          <div class="factor-name">Recency of Photos Uploaded to GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 89 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">86</div>
-        <div class="factor-info">
-          <div class="factor-name">Relevancy of Videos to Categories <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 86 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">84</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Photos on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 84 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Recency of Videos Uploaded to GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 82 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">81</div>
-        <div class="factor-info">
-          <div class="factor-name">Length of Dwell Time on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 81 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">76</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Unstructured Citations (Newspaper Articles, Blog Posts) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 76 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">72</div>
-        <div class="factor-info">
-          <div class="factor-name">Length of Dwell Time on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 72 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">71</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Videos on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 71 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">68</div>
-        <div class="factor-info">
-          <div class="factor-name">Click-Through Rate from Organic Search Results <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 68 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">64</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Bookings Through Google Booking Partners <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 64 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">63</div>
-        <div class="factor-info">
-          <div class="factor-name">Number of Bookings Through GBP Booking Feature <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 63 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">57</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Clicks on WhatsApp / SMS <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 57 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Click-Through Rate from Local Pack/Maps Search Results</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 69/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">56</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Social Media Updates on GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 56 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL from Locally-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 56/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">55</div>
         <div class="factor-info">
-          <div class="factor-name">Frequency of Google Posts/Updates <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 55 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Inbound Links to Domain from Locally-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 55/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">55</div>
+        <div class="factor-score-badge">50</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of 360 Tours / Immersive View <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 55 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Requests for Driving Directions From GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 50/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">54</div>
+        <div class="factor-score-badge">48</div>
         <div class="factor-info">
-          <div class="factor-name">Quanitity of Reactions to Photos/Videos <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 54 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Photo & Video Quality (resolution, clarity, not stock, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 48/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">54</div>
+        <div class="factor-score-badge">45</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Engagement Signals on Website (scrolling pages, clicking on things, etc) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 54 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">51</div>
-        <div class="factor-info">
-          <div class="factor-name">GBP Booking Feature is Enabled <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 51 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">49</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Google Posts/Updates <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 49 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">46</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Visible Keyword Text on Photos (overlay, not metadata) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 46 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Clicks to Call Business From GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">44</div>
         <div class="factor-info">
-          <div class="factor-name">Recency of Posts on Social Profiles <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 44 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quality/Authority of Unstructured Citations (Newspaper Articles, Blog Posts, Gov Sites, Industry Associations)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">43</div>
+        <div class="factor-score-badge">44</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Google Posts/Updates <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 43 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Citations from Locally-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">42</div>
+        <div class="factor-info">
+          <div class="factor-name">Photos Match Target Keywords</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 42/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Quanitity of User-Uploaded Photos</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Relevancy of Photos to Categories</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">39</div>
+        <div class="factor-info">
+          <div class="factor-name">Recency of Photos Uploaded to GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 39/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">38</div>
         <div class="factor-info">
-          <div class="factor-name">Quality of Posts on Social Profiles <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 38 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Relevancy of Videos to Categories</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 38/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">37</div>
         <div class="factor-info">
-          <div class="factor-name">Whatsapp/SMS is Enabled <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 37 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Photos on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 37/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">34</div>
+        <div class="factor-score-badge">36</div>
         <div class="factor-info">
-          <div class="factor-name">Linking Out to Authority Topically Relevant Sites <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 34 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Recency of Videos Uploaded to GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 36/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">34</div>
+        <div class="factor-score-badge">36</div>
         <div class="factor-info">
-          <div class="factor-name">Frequency of Posts on Social Profiles <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 34 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Length of Dwell Time on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 36/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Unstructured Citations (Newspaper Articles, Blog Posts)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 33/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">32</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Posts on Social Profiles <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 32 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Length of Dwell Time on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 32/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">23</div>
+        <div class="factor-score-badge">31</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Geo-tagged Photos <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 23 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Videos on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 31/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Click-Through Rate from Organic Search Results</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">28</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Bookings Through Google Booking Partners</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 28/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">28</div>
+        <div class="factor-info">
+          <div class="factor-name">Number of Bookings Through GBP Booking Feature</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 28/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">25</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Clicks on WhatsApp / SMS</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 25/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">25</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Social Media Updates on GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 25/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Frequency of Google Posts/Updates</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of 360 Tours / Immersive View</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Quanitity of Reactions to Photos/Videos</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Engagement Signals on Website (scrolling pages, clicking on things, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">GBP Booking Feature is Enabled</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 22/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Google Posts/Updates</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 22/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">20</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Visible Keyword Text on Photos (overlay, not metadata)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 20/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Recency of Posts on Social Profiles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 19/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Google Posts/Updates</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 19/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">17</div>
+        <div class="factor-info">
+          <div class="factor-name">Quality of Posts on Social Profiles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 17/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">16</div>
+        <div class="factor-info">
+          <div class="factor-name">Whatsapp/SMS is Enabled</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 16/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Linking Out to Authority Topically Relevant Sites</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 15/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Frequency of Posts on Social Profiles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 15/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">14</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Posts on Social Profiles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 14/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">10</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Geo-tagged Photos</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 10/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
@@ -1298,610 +1331,610 @@
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">213</div>
+        <div class="factor-score-badge">94</div>
         <div class="factor-info">
-          <div class="factor-name">Physical Address in City of Search <span class="metric-pill high">High Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 213 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">146</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page Title Tag <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 146 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">142</div>
-        <div class="factor-info">
-          <div class="factor-name">Geographic (City/Neighborhood) Keyword Relevance of Content <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 142 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">137</div>
-        <div class="factor-info">
-          <div class="factor-name">Removal of spam listings through spam fighting <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 137 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">135</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page Headings (H1, H2, etc) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 135 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">132</div>
-        <div class="factor-info">
-          <div class="factor-name">Dedicated Page for Each Service <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 132 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">127</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Inbound Links to GBP Landing Page URL <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 127 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">124</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Primary Search Engines (Google Maps, Bing Maps, Apple Maps) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 124 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">122</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Inbound Links to Domain <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 122 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">122</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Landing Page URL from Industry-Relevant Domains <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 122 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">118</div>
-        <div class="factor-info">
-          <div class="factor-name">Website's Degree of Focus on a Specific Niche <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 118 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">114</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Domain from Industry-Relevant Domains <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 114 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">110</div>
-        <div class="factor-info">
-          <div class="factor-name">Internal Links TO GBP Landing Page from Other Pages of Website <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 110 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">108</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Anchor Text of Inbound Links to GBP Landing Page URL <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 108 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">107</div>
-        <div class="factor-info">
-          <div class="factor-name">Internal Linking Across Entire Website <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 107 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">105</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Structured Citations <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 105 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">104</div>
-        <div class="factor-info">
-          <div class="factor-name">Reference to Location Specific Entities on GBP Landing Page <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 104 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">103</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Anchor Text of Internal Links <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 103 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">103</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 103 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Title Tags Across Entire Website <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 102 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Website Uses HTTPS by default <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 102 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Domain Authority of Website <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 102 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Domain <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 102 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Age of GBP (Original Creation Date) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Mobile-friendly/Responsive Website <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Inbound Links to Domain <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Inbound Links to GBP Landing Page URL <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Key Sites (Yellowpages, Yelp, D&B, CityGrid) <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 101 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">100</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Anchor Text of Inbound Links to Domain <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 100 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">100</div>
-        <div class="factor-info">
-          <div class="factor-name">Prominence on Key Industry-Relevant Domains <span class="metric-pill info">Medium Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 100 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">99</div>
-        <div class="factor-info">
-          <div class="factor-name">Page Authority of GBP Landing Page URL <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 99 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">97</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Domain Name <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 97 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">97</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Quality Content on Service Pages <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 97 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">95</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Citations from Industry-Relevant Domains <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 95 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">93</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Anchor Text to GBP Landing Page URL <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 93 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">93</div>
-        <div class="factor-info">
-          <div class="factor-name">Sustained Influx of Links Over Time (rather than bursts) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 93 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">92</div>
-        <div class="factor-info">
-          <div class="factor-name">Freshness of Content on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 92 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">92</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Headings (H1, H2, etc) Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 92 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">91</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Data Aggregators (Infogroup, Localeze, Foursquare/Factual) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 91 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">90</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Quality Content on Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 90 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">87</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page URL <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 87 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">85</div>
-        <div class="factor-info">
-          <div class="factor-name">Loadtime of GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 85 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">84</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Anchor Text to Domain <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 84 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Content on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 82 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">80</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Text Surrounding Links to GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 80 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">78</div>
-        <div class="factor-info">
-          <div class="factor-name">Freshness of Content Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 78 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">78</div>
-        <div class="factor-info">
-          <div class="factor-name">Internal Links FROM GBP Landing Page to Other Pages of Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 78 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">78</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Structured Citations (IYPs, Data Aggregators) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 78 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">77</div>
-        <div class="factor-info">
-          <div class="factor-name">Freshness of Content on Service Pages <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 77 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">76</div>
-        <div class="factor-info">
-          <div class="factor-name">Frequency of Owner/Manager Activity <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 76 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">75</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Text Surrounding Links to Domain <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 75 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">74</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Place Topics Matching Keywords <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 74 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">73</div>
-        <div class="factor-info">
-          <div class="factor-name">NAP in Schema/JSON-LD on GBP Landing Page URL <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 73 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">70</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Other Citation Sources <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 70 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">69</div>
-        <div class="factor-info">
-          <div class="factor-name">Embedded Google Map for Location on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 69 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">69</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Unlinked Brand Mentions <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 69 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">68</div>
-        <div class="factor-info">
-          <div class="factor-name">Scannable Content Structure Across Entire Website (headings, bullet points, images, etc) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 68 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">66</div>
-        <div class="factor-info">
-          <div class="factor-name">Social Profiles Are Linked to GBP <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 66 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">66</div>
-        <div class="factor-info">
-          <div class="factor-name">Proper Site Architecture Organized Into Topic Areas <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 66 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">65</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of FAQs on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 65 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">65</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Text Surrounding Unlinked Brand Mentions <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 65 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Physical Address in City of Search</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 94/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">64</div>
         <div class="factor-info">
-          <div class="factor-name">Loadtime of Pages Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 64 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in GBP Landing Page Title Tag</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 64/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">61</div>
+        <div class="factor-score-badge">63</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of FAQs on Service Pages <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 61 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Geographic (City/Neighborhood) Keyword Relevance of Content</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 63/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">60</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in URLs Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 60 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Removal of spam listings through spam fighting</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 60/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">59</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Landing Page Headings (H1, H2, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 59/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">58</div>
         <div class="factor-info">
-          <div class="factor-name">Matching Google Account Domain to GBP Landing Page Domain <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 58 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Dedicated Page for Each Service</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 58/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">56</div>
+        <div class="factor-info">
+          <div class="factor-name">Quality/Authority of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 56/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">55</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page Meta Description <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 55 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Consistency of Citations on Primary Search Engines (Google Maps, Bing Maps, Apple Maps)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 55/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">55</div>
+        <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Sustained Output of Content Over Time (rather than bursts) <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 55 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quality/Authority of Inbound Links to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 54/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">49</div>
+        <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Website Content Marked Up in Schema <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 49 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Quantity of Inbound Links to Landing Page URL from Industry-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 54/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">52</div>
+        <div class="factor-info">
+          <div class="factor-name">Website's Degree of Focus on a Specific Niche</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 52/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">50</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Inbound Links to Domain from Industry-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 50/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">48</div>
+        <div class="factor-info">
+          <div class="factor-name">Internal Links TO GBP Landing Page from Other Pages of Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 48/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">48</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Anchor Text of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 48/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">47</div>
+        <div class="factor-info">
+          <div class="factor-name">Internal Linking Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 47/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">46</div>
+        <div class="factor-info">
+          <div class="factor-name">Quality/Authority of Structured Citations</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 46/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">46</div>
+        <div class="factor-info">
+          <div class="factor-name">Reference to Location Specific Entities on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 46/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Anchor Text of Internal Links</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Title Tags Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Website Uses HTTPS by default</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Domain Authority of Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Inbound Links to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 45/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Age of GBP (Original Creation Date)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Mobile-friendly/Responsive Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Inbound Links to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Consistency of Citations on Key Sites (Yellowpages, Yelp, D&B, CityGrid)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Anchor Text of Inbound Links to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Prominence on Key Industry-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Page Authority of GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 44/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">43</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image Filenames on GBP Landing Page <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 43 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in Domain Name</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 43/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">43</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Quality Content on Service Pages</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 43/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">42</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Citations from Industry-Relevant Domains</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 42/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Anchor Text to GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Sustained Influx of Links Over Time (rather than bursts)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Freshness of Content on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Headings (H1, H2, etc) Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 41/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">40</div>
         <div class="factor-info">
-          <div class="factor-name">Engagement on Social Profiles <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 40 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Consistency of Citations on Data Aggregators (Infogroup, Localeze, Foursquare/Factual)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 40/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">40</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Quality Content on Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 40/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">38</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 38/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">37</div>
+        <div class="factor-info">
+          <div class="factor-name">Loadtime of GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 37/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">37</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Anchor Text to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 37/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">36</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Content on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 36/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Text Surrounding Links to GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 35/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">34</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image Filenames Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 34 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Freshness of Content Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 34/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">34</div>
+        <div class="factor-info">
+          <div class="factor-name">Internal Links FROM GBP Landing Page to Other Pages of Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 34/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">34</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Structured Citations (IYPs, Data Aggregators)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 34/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">34</div>
+        <div class="factor-info">
+          <div class="factor-name">Freshness of Content on Service Pages</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 34/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">33</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Meta Descriptions Across Entire Website <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 33 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Frequency of Owner/Manager Activity</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 33/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Text Surrounding Links to Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 33/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Place Topics Matching Keywords</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 33/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">32</div>
+        <div class="factor-info">
+          <div class="factor-name">NAP in Schema/JSON-LD on GBP Landing Page URL</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 32/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">31</div>
+        <div class="factor-info">
+          <div class="factor-name">Consistency of Citations on Other Citation Sources</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 31/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">30</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Keywords in Image Metadata Fields <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 30 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Embedded Google Map for Location on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Unlinked Brand Mentions</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Scannable Content Structure Across Entire Website (headings, bullet points, images, etc)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 30/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Social Profiles Are Linked to GBP</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 29/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Proper Site Architecture Organized Into Topic Areas</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 29/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of FAQs on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 29/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Text Surrounding Unlinked Brand Mentions</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 29/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">28</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of XML Sitemap <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 28 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Loadtime of Pages Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 28/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">27</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of FAQs on Service Pages</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 27/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">26</div>
         <div class="factor-info">
-          <div class="factor-name">Length of Title Tag <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 26 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Keywords in URLs Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 26/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">25</div>
+        <div class="factor-score-badge">26</div>
         <div class="factor-info">
-          <div class="factor-name">Follower Count on Social Profiles <span class="metric-pill static">Low Impact</span></div>
-          <div class="factor-desc">A key signal representing a rank influence factor score of 25 point metrics. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+          <div class="factor-name">Matching Google Account Domain to GBP Landing Page Domain</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 26/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Landing Page Meta Description</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Sustained Output of Content Over Time (rather than bursts)</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 24/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">Website Content Marked Up in Schema</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 22/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image Filenames on GBP Landing Page</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 19/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">18</div>
+        <div class="factor-info">
+          <div class="factor-name">Engagement on Social Profiles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 18/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image Filenames Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 15/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Meta Descriptions Across Entire Website</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 15/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">13</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Keywords in Image Metadata Fields</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 13/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">12</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of XML Sitemap</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 12/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">11</div>
+        <div class="factor-info">
+          <div class="factor-name">Length of Title Tag</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 11/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">11</div>
+        <div class="factor-info">
+          <div class="factor-name">Follower Count on Social Profiles</div>
+          <div class="factor-desc">A key signal representing a normalized rank influence score of 11/100. Proactive alignment secures a higher topical positioning on Google Maps search indexing.</div>
         </div>
       </div>
     

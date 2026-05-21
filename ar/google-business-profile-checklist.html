@@ -238,8 +238,14 @@
     .post-body h2 { font-family: var(--fh); font-weight: 700; font-size: 1.5rem; color: var(--ink); margin: 3.5rem 0 1.2rem; line-height: 1.35; border-bottom: 1px solid rgba(17,20,24,0.05); padding-bottom: 0.5rem; scroll-margin-top: 90px; }
     .post-body h3 { font-family: var(--fb); font-size: 1.15rem; font-weight: 800; color: var(--ink); margin: 2rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
     .post-body strong { color: var(--ink); font-weight: 700; }
-    .post-body a { color: var(--c1); font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .post-body a { color: #97DCDB; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
     .post-body a:hover { opacity: 0.85; text-decoration: none; }
+
+    /* Algorithm Pillars grid */
+    .algorithm-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 1.8rem 0; }
+    .pillar-card { background: var(--light); padding: 1.25rem; border-radius: 8px; border-right: 3px solid var(--accent-teal); border-left: none; }
+    .pillar-card strong { display: block; font-size: 0.95rem; margin-bottom: 0.4rem; color: var(--ink); }
+    .pillar-card span { font-size: 0.86rem; color: var(--muted); line-height: 1.5; }
 
     /* Visual layout images */
     .section-img { width: 100%; height: auto; border-radius: 12px; margin: 1.5rem 0 2rem; border: 1px solid rgba(17,20,24,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
@@ -268,9 +274,9 @@
     /* Takeaways Box */
     .takeaways-box { background: var(--dark); border-radius: 14px; padding: 1.8rem; margin: 2rem 0; border-right: 4px solid var(--c1); color: #E6F2F6; }
     .takeaways-box h4 { font-family: var(--fb); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--c1); margin-bottom: 1rem; }
-    .takeaways-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-    .takeaways-box li { font-size: 0.9rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 0.75rem; color: rgba(230,242,246,0.8); }
-    .takeaways-box li::before { content: '✦'; color: var(--c1); font-weight: 800; }
+    .takeaways-box ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    .takeaways-box li { position: relative; padding-right: 1.5rem; padding-left: 0; font-size: 0.9rem; line-height: 1.6; color: rgba(230,242,246,0.8); text-align: right; }
+    .takeaways-box li::before { content: '✦'; position: absolute; right: 0; left: auto; top: 0.1rem; color: var(--c1); font-weight: 800; }
     .takeaways-box li strong { color: var(--c1); }
 
     /* Interactive Checklist */
@@ -415,340 +421,367 @@
       </ul>
     </div>
 
-    <p>تقوم جوجل بترتيب نتائج البحث في الخرائط بناءً على ثلاثة عوامل رئيسية: <strong>الصلة</strong> (مدى مطابقة الملف لطلب البحث)، <strong>المسافة</strong> (الموقع الجغرافي للباحث عن الخدمة)، و<strong>البروز أو الشهرة</strong> (مدى قوة وسلطة العمل التجاري). في حين يمكنك تحسين الصلة والبروز، فإن هناك قيوداً جغرافية وبيئية خارجة عن تحكمك المباشر.<br><br>تحدد هذه القيود الجغرافية النطاق الأقصى لظهور ملفك التجاري. وتعتبر المسافة الجغرافية العامل الأقوى؛ لذا يجب على أصحاب الأعمال تحسين الإشارات التي يتحكمون بها للتفوق على المنافسين القريبين جغرافياً من الباحث.</p>
+    <p>تقوم جوجل بترتيب نتائج البحث في الخرائط بناءً على ثلاثة عوامل ترتيب رئيسية:</p>
+    <div class="algorithm-pillars">
+      <div class="pillar-card">
+        <strong>الصلة (Relevance)</strong>
+        <span>مدى مطابقة نشاطك التجاري وفئته والخدمات التي تقدمها مع نية وجملة بحث المستخدم.</span>
+      </div>
+      <div class="pillar-card">
+        <strong>المسافة (Distance)</strong>
+        <span>القرب الجغرافي لموقع نشاطك الفعلي من موقع الباحث أو من مركز منطقة البحث المحددة.</span>
+      </div>
+      <div class="pillar-card">
+        <strong>الشهرة والبروز (Prominence)</strong>
+        <span>سلطة العلامة التجارية عبر الإنترنت، وحجم المراجعات، وقوة السيو العضوي لموقعك الإلكتروني.</span>
+      </div>
+    </div>
+    <p>في حين يمكنك التحكم في تحسين الصلة والبروز، تظل المسافة قيداً خارجاً عن تحكمك المباشر.<br><br>تحدد هذه القيود الجغرافية النطاق الأقصى لظهور ملفك التجاري، مما يستدعي تحسين كافة العوامل الأخرى للتفوق على المنافسين الأقرب جغرافياً.</p>
 
     <h2 id="phase-1-setup">المرحلة الأولى: إعداد الملف التجاري والامتثال الأساسي</h2>
     <img src="../img/blog/gbp-setup.webp" class="section-img" alt="تجهيز الملف التجاري وإعداد الفئات" />
-    <p>يمثل الامتثال للإرشادات وتعديل بيانات الملف القاعدة الأساسية لعملية التحسين. تعد <strong>الفئة الرئيسية</strong> لملفك على جوجل العامل الأقوى في محرك بحث الخرائط؛ فالاختيار الخاطئ سيؤدي لحجب ملفك تماماً عن العملاء المحتملين.</p>
-<details class="factor-accordion" open>
-    <summary>عوامل الإعداد الأساسية والامتثال (41 عاملاً)</summary>
+    <p>يمثل الامتثال للإرشادات وتعديل بيانات الملف القاعدة الأساسية لعملية التحسين.<br><br>تجهيز هذه العناصر الهيكلية بشكل صحيح يضمن فهم خوارزميات جوجل لنشاطك وتصنيفه بسلطة عالية.</p>
+
+    <h3 id="setup-category">1. ملاءمة الفئة الرئيسية (تأثير: 100/100)</h3>
+    <p>تعد الفئة الرئيسية لملفك التجاري العامل الأقوى على الإطلاق في خوارزمية ترتيب خرائط جوجل.<br><br>أي اختيار خاطئ للفئة سيحجب ملفك فوراً عن الظهور للخدمات الأساسية التي تقدمها، حيث تطابق جوجل نية الباحث مع الفئات بدقة متناهية.<br><br>اختر الفئة التي تمثل محرك الدخل الأساسي لعملك وليس الخدمات الفرعية.</p>
+
+    <h3 id="setup-keywords">2. الكلمات المفتاحية في الاسم التجاري (تأثير: 98/100)</h3>
+    <p>يمنح وجود الكلمات المفتاحية والخدمات المستهدفة في اسم الملف وزناً خوارزمياً هائلاً.<br><br>ولكن حشو الكلمات المفتاحية بشكل مصطنع قد يعرض ملفك التجاري للإيقاف المباشر من فلاتر جوجل.<br><br>في الكويت، يتعين على الشركات مواءمة أسمائها الرسمية مع الكلمات المفتاحية الذكية بشكل طبيعي لتفادي العقوبات.</p>
+
+    <h3 id="setup-hours">3. دقة ساعات العمل الرسمية (تأثير: 83/100)</h3>
+    <p>تعطي جوجل أولوية ترتيب كبيرة للأنشطة المفتوحة فعلياً وقت بحث المستخدم.<br><br>إن ضبط ساعات عمل غير دقيقة يضر بتجربة العميل ويقلل من ظهورك في الأوقات التي يبحث فيها الباحثون عن إجراء صفقات فورية.<br><br>احرص على تحديث ساعات العمل الخاصة بالعطلات الرسمية والأنشطة اليومية بانتظام.</p>
+
+    <h3 id="setup-map-pin">4. دقة دبوس الخريطة وإثبات العنوان (تأثير: 73/100)</h3>
+    <p>تحدد إحداثيات موقعك الجغرافي الدقيقة مدى صلتك الجغرافية بالباحثين.<br><br>يمنع تثبيت دبوس الخريطة بدقة على مدخل مبناك أي تشتيت للعملاء أو خوارزميات الزحف والخرائط الخاصة بجوجل.<br><br>بالنسبة للشركات التي تقدم خدماتها في مناطق محددة (SABs)، يجب تهيئة نطاق الخدمة بدقة مع إخفاء العنوان السكني للالتزام بالقوانين.</p>
+<details class="factor-accordion" >
+    <summary>ملخص ترتيب عوامل التحسين والامتثال (مقياس 0-100) (41 عاملاً)</summary>
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">227</div>
-        <div class="factor-info">
-          <div class="factor-name">Primary GBP Category <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 227 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">223</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Business Title <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 223 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">189</div>
-        <div class="factor-info">
-          <div class="factor-name">Business is Open at Time of Search (Business Hours) <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 189 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">176</div>
-        <div class="factor-info">
-          <div class="factor-name">Address Is Showing on GBP (Not SAB) <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 176 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">173</div>
-        <div class="factor-info">
-          <div class="factor-name">Additional GBP Categories <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 173 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">165</div>
-        <div class="factor-info">
-          <div class="factor-name">Proper Placement of the Map Pin <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 165 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">153</div>
-        <div class="factor-info">
-          <div class="factor-name">HTML NAP Matching GBP NAP <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 153 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">147</div>
-        <div class="factor-info">
-          <div class="factor-name">Completeness of GBP <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 147 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">134</div>
-        <div class="factor-info">
-          <div class="factor-name">Proper Hours Set on GBP <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 134 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">134</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of GBP Predefined Services <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 134 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">133</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Searches for Business Name <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 133 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">123</div>
-        <div class="factor-info">
-          <div class="factor-name">Verified GBP <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 123 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">122</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Custom Service Titles <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 122 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">118</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Services <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 118 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">117</div>
-        <div class="factor-info">
-          <div class="factor-name">Topical (Product/Service) Keyword Relevance Across Entire Website <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 117 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">106</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of GBP Custom Services <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 106 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
         <div class="factor-score-badge">100</div>
         <div class="factor-info">
-          <div class="factor-name">Proper Category Associations on Aggregators and Tier 1 Citation Sources <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 100 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Primary GBP Category</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 100/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">98</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Products Added to GBP via Merchant Center <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 98 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in GBP Business Title</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 98/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">92</div>
+        <div class="factor-score-badge">83</div>
         <div class="factor-info">
-          <div class="factor-name">User Added Attributes in GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 92 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Business is Open at Time of Search (Business Hours)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 83/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">92</div>
+        <div class="factor-score-badge">78</div>
         <div class="factor-info">
-          <div class="factor-name">Business Title in Anchor Text of Inbound Links to Domain <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 92 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">90</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Identifies as Attributes on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 90 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">89</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Products <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 89 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">88</div>
-        <div class="factor-info">
-          <div class="factor-name">Enhancement/Completeness of Citations <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 88 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">87</div>
-        <div class="factor-info">
-          <div class="factor-name">Business Title in Anchor Text of Inbound Links to GBP Landing Page URL <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 87 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Age of Business (GBP Opening Date) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 82 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Crowd Sourced Attributes <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 79 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Business on Expert Curated Best of and Similar Lists <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 79 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Address Is Showing on GBP (Not SAB)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 78/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">76</div>
         <div class="factor-info">
-          <div class="factor-name">Local Area Code on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 76 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Additional GBP Categories</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 76/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">69</div>
+        <div class="factor-score-badge">73</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Service Descriptions <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 69 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Proper Placement of the Map Pin</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 73/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">64</div>
+        <div class="factor-score-badge">67</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Products Added to GBP via NMX <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 64 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">HTML NAP Matching GBP NAP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 67/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">60</div>
+        <div class="factor-score-badge">65</div>
         <div class="factor-info">
-          <div class="factor-name">Comprehensive Google Q&A Section with Owner-Seeded FAQs <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 60 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Completeness of GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 65/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">56</div>
+        <div class="factor-score-badge">59</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Appointment URL <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 56 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Proper Hours Set on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 59/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">59</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of GBP Predefined Services</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 59/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">59</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Searches for Business Name</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 59/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Setting Service Areas in GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 54 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Verified GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 54/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Google Q&A <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 54 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in GBP Custom Service Titles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 54/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">54</div>
+        <div class="factor-score-badge">52</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image ALT attributes on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 54 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in GBP Services</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 52/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">53</div>
+        <div class="factor-score-badge">52</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Social Media Users Mentioning The Business <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 53 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Topical (Product/Service) Keyword Relevance Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 52/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">47</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Products on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 47 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Presence of GBP Custom Services</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 47/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">44</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Questions Asked in Google Q&A <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 44 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Proper Category Associations on Aggregators and Tier 1 Citation Sources</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">43</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image ALT attributes Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 43 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Presence of Products Added to GBP via Merchant Center</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 43/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">41</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Description <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 41 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">User Added Attributes in GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Business Title in Anchor Text of Inbound Links to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">40</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Identifies as Attributes on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 40/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">39</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Products</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 39/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">39</div>
+        <div class="factor-info">
+          <div class="factor-name">Enhancement/Completeness of Citations</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 39/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">38</div>
+        <div class="factor-info">
+          <div class="factor-name">Business Title in Anchor Text of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 38/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">36</div>
+        <div class="factor-info">
+          <div class="factor-name">Age of Business (GBP Opening Date)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 36/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Crowd Sourced Attributes</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 35/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Business on Expert Curated Best of and Similar Lists</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 35/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Local Area Code on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 33/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Service Descriptions</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">28</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Products Added to GBP via NMX</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 28/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">26</div>
         <div class="factor-info">
-          <div class="factor-name">Participation in Adwords, Adwords Express, Hotel Finder, or other paid Google products <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 26 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Comprehensive Google Q&A Section with Owner-Seeded FAQs</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 26/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">25</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Appointment URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 25/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Setting Service Areas in GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Google Q&A</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image ALT attributes on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">23</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Social Media Users Mentioning The Business</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 23/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">21</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Products on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 21/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Questions Asked in Google Q&A</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 19/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image ALT attributes Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 19/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">18</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Description</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 18/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">11</div>
+        <div class="factor-info">
+          <div class="factor-name">Participation in Adwords, Adwords Express, Hotel Finder, or other paid Google products</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 11/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
@@ -774,194 +807,194 @@
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">181</div>
+        <div class="factor-score-badge">80</div>
         <div class="factor-info">
-          <div class="factor-name">High Numerical Google Ratings (e.g. 4-5) <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 181 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">High Numerical Google Ratings (e.g. 4-5)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 80/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">170</div>
+        <div class="factor-score-badge">75</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Native Google Reviews (w/text) <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 170 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">164</div>
-        <div class="factor-info">
-          <div class="factor-name">Recency of Reviews <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 164 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">154</div>
-        <div class="factor-info">
-          <div class="factor-name">Sustained Influx of Reviews Over Time (rather than bursts) <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 154 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">120</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Engagement Signals on GBP (scrolling through listing, clicking on sections, reacting to reviews, etc) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 120 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">117</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Native Google Reviews <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 117 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">116</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Native Google Ratings (no text) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 116 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">112</div>
-        <div class="factor-info">
-          <div class="factor-name">Positive Sentiment in Review Text <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 112 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">111</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews with Photos <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 111 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">High Numerical Ratings by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">96</div>
-        <div class="factor-info">
-          <div class="factor-name">Authority of Third-Party Sites on Which Reviews are Present <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 96 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">90</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews with Videos <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 90 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 82 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Third-Party Sites on Which Reviews are Present <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 79 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">79</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews on Industry-Specific Sites <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 79 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">76</div>
-        <div class="factor-info">
-          <div class="factor-name">High Numerical Third-Party Ratings (e.g. 4-5) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 76 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Native Google Reviews (w/text)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 75/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">72</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Third-Party Traditional Reviews (e.g. Yelp, TripAdvisor, Yellowpages, etc) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 72 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Recency of Reviews</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 72/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">70</div>
+        <div class="factor-score-badge">68</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Owner Responses to Most Reviews <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 70 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Sustained Influx of Reviews Over Time (rather than bursts)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 68/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">67</div>
+        <div class="factor-score-badge">53</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Third-Party Reviews <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 67 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Engagement Signals on GBP (scrolling through listing, clicking on sections, reacting to reviews, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 53/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">67</div>
+        <div class="factor-score-badge">52</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Reviews with Answers to Review Questions <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 67 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in Native Google Reviews</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 52/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">66</div>
+        <div class="factor-score-badge">51</div>
         <div class="factor-info">
-          <div class="factor-name">BBB Accredited <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 66 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Native Google Ratings (no text)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 51/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">63</div>
+        <div class="factor-score-badge">49</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Third-Party Unstructured Reviews (e.g. blogs, newspapers, magazines) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 63 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Positive Sentiment in Review Text</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 49/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">50</div>
+        <div class="factor-score-badge">49</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Reactions to Reviews <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 50 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Reviews with Photos</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 49/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">High Numerical Ratings by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">42</div>
+        <div class="factor-info">
+          <div class="factor-name">Authority of Third-Party Sites on Which Reviews are Present</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 42/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">40</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews with Videos</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 40/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">36</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews by Authority Reviewers (e.g. Yelp Elite, Google Local Guides, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 36/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Third-Party Sites on Which Reviews are Present</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 35/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews on Industry-Specific Sites</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 35/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">High Numerical Third-Party Ratings (e.g. 4-5)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 33/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">32</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Third-Party Traditional Reviews (e.g. Yelp, TripAdvisor, Yellowpages, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 32/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">31</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Owner Responses to Most Reviews</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 31/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Third-Party Reviews</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reviews with Answers to Review Questions</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">BBB Accredited</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 29/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">28</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Owner Responses to Reviews <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 28 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Third-Party Unstructured Reviews (e.g. blogs, newspapers, magazines)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 28/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Reactions to Reviews</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 22/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">12</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Owner Responses to Reviews</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 12/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
@@ -976,314 +1009,314 @@
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">156</div>
+        <div class="factor-score-badge">69</div>
         <div class="factor-info">
-          <div class="factor-name">Click-Through Rate from Local Pack/Maps Search Results <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 156 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">126</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL from Locally-Relevant Domains <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 126 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">125</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Domain from Locally-Relevant Domains <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 125 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">113</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Requests for Driving Directions From GBP <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 113 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">108</div>
-        <div class="factor-info">
-          <div class="factor-name">Photo & Video Quality (resolution, clarity, not stock, etc) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 108 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Clicks to Call Business From GBP <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 102 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Unstructured Citations (Newspaper Articles, Blog Posts, Gov Sites, Industry Associations) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">99</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Citations from Locally-Relevant Domains <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 99 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">95</div>
-        <div class="factor-info">
-          <div class="factor-name">Photos Match Target Keywords <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 95 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">94</div>
-        <div class="factor-info">
-          <div class="factor-name">Quanitity of User-Uploaded Photos <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 94 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">93</div>
-        <div class="factor-info">
-          <div class="factor-name">Relevancy of Photos to Categories <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 93 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">89</div>
-        <div class="factor-info">
-          <div class="factor-name">Recency of Photos Uploaded to GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 89 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">86</div>
-        <div class="factor-info">
-          <div class="factor-name">Relevancy of Videos to Categories <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 86 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">84</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Photos on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 84 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Recency of Videos Uploaded to GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 82 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">81</div>
-        <div class="factor-info">
-          <div class="factor-name">Length of Dwell Time on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 81 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">76</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Unstructured Citations (Newspaper Articles, Blog Posts) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 76 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">72</div>
-        <div class="factor-info">
-          <div class="factor-name">Length of Dwell Time on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 72 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">71</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Videos on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 71 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">68</div>
-        <div class="factor-info">
-          <div class="factor-name">Click-Through Rate from Organic Search Results <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 68 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">64</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Bookings Through Google Booking Partners <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 64 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">63</div>
-        <div class="factor-info">
-          <div class="factor-name">Number of Bookings Through GBP Booking Feature <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 63 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">57</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Clicks on WhatsApp / SMS <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 57 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Click-Through Rate from Local Pack/Maps Search Results</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 69/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">56</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Social Media Updates on GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 56 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL from Locally-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 56/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">55</div>
         <div class="factor-info">
-          <div class="factor-name">Frequency of Google Posts/Updates <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 55 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Inbound Links to Domain from Locally-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 55/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">55</div>
+        <div class="factor-score-badge">50</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of 360 Tours / Immersive View <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 55 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Requests for Driving Directions From GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 50/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">54</div>
+        <div class="factor-score-badge">48</div>
         <div class="factor-info">
-          <div class="factor-name">Quanitity of Reactions to Photos/Videos <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 54 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Photo & Video Quality (resolution, clarity, not stock, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 48/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">54</div>
+        <div class="factor-score-badge">45</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Engagement Signals on Website (scrolling pages, clicking on things, etc) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 54 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">51</div>
-        <div class="factor-info">
-          <div class="factor-name">GBP Booking Feature is Enabled <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 51 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">49</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Google Posts/Updates <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 49 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">46</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Visible Keyword Text on Photos (overlay, not metadata) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 46 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Clicks to Call Business From GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">44</div>
         <div class="factor-info">
-          <div class="factor-name">Recency of Posts on Social Profiles <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 44 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quality/Authority of Unstructured Citations (Newspaper Articles, Blog Posts, Gov Sites, Industry Associations)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">43</div>
+        <div class="factor-score-badge">44</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Google Posts/Updates <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 43 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Citations from Locally-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">42</div>
+        <div class="factor-info">
+          <div class="factor-name">Photos Match Target Keywords</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 42/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Quanitity of User-Uploaded Photos</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Relevancy of Photos to Categories</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">39</div>
+        <div class="factor-info">
+          <div class="factor-name">Recency of Photos Uploaded to GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 39/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">38</div>
         <div class="factor-info">
-          <div class="factor-name">Quality of Posts on Social Profiles <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 38 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Relevancy of Videos to Categories</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 38/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">37</div>
         <div class="factor-info">
-          <div class="factor-name">Whatsapp/SMS is Enabled <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 37 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Photos on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 37/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">34</div>
+        <div class="factor-score-badge">36</div>
         <div class="factor-info">
-          <div class="factor-name">Linking Out to Authority Topically Relevant Sites <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 34 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Recency of Videos Uploaded to GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 36/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">34</div>
+        <div class="factor-score-badge">36</div>
         <div class="factor-info">
-          <div class="factor-name">Frequency of Posts on Social Profiles <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 34 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Length of Dwell Time on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 36/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Unstructured Citations (Newspaper Articles, Blog Posts)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 33/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">32</div>
         <div class="factor-info">
-          <div class="factor-name">Quantity of Posts on Social Profiles <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 32 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Length of Dwell Time on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 32/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">23</div>
+        <div class="factor-score-badge">31</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Geo-tagged Photos <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 23 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Videos on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 31/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Click-Through Rate from Organic Search Results</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">28</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Bookings Through Google Booking Partners</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 28/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">28</div>
+        <div class="factor-info">
+          <div class="factor-name">Number of Bookings Through GBP Booking Feature</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 28/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">25</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Clicks on WhatsApp / SMS</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 25/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">25</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Social Media Updates on GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 25/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Frequency of Google Posts/Updates</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of 360 Tours / Immersive View</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Quanitity of Reactions to Photos/Videos</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Engagement Signals on Website (scrolling pages, clicking on things, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">GBP Booking Feature is Enabled</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 22/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Google Posts/Updates</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 22/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">20</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Visible Keyword Text on Photos (overlay, not metadata)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 20/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Recency of Posts on Social Profiles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 19/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Google Posts/Updates</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 19/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">17</div>
+        <div class="factor-info">
+          <div class="factor-name">Quality of Posts on Social Profiles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 17/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">16</div>
+        <div class="factor-info">
+          <div class="factor-name">Whatsapp/SMS is Enabled</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 16/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Linking Out to Authority Topically Relevant Sites</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 15/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Frequency of Posts on Social Profiles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 15/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">14</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Posts on Social Profiles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 14/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">10</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Geo-tagged Photos</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 10/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
@@ -1298,610 +1331,610 @@
     <div class="factor-content">
   
       <div class="factor-row">
-        <div class="factor-score-badge">213</div>
+        <div class="factor-score-badge">94</div>
         <div class="factor-info">
-          <div class="factor-name">Physical Address in City of Search <span class="metric-pill high">تأثير قوي</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 213 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">146</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page Title Tag <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 146 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">142</div>
-        <div class="factor-info">
-          <div class="factor-name">Geographic (City/Neighborhood) Keyword Relevance of Content <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 142 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">137</div>
-        <div class="factor-info">
-          <div class="factor-name">Removal of spam listings through spam fighting <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 137 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">135</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page Headings (H1, H2, etc) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 135 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">132</div>
-        <div class="factor-info">
-          <div class="factor-name">Dedicated Page for Each Service <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 132 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">127</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Inbound Links to GBP Landing Page URL <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 127 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">124</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Primary Search Engines (Google Maps, Bing Maps, Apple Maps) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 124 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">122</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Inbound Links to Domain <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 122 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">122</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Landing Page URL from Industry-Relevant Domains <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 122 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">118</div>
-        <div class="factor-info">
-          <div class="factor-name">Website's Degree of Focus on a Specific Niche <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 118 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">114</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Domain from Industry-Relevant Domains <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 114 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">110</div>
-        <div class="factor-info">
-          <div class="factor-name">Internal Links TO GBP Landing Page from Other Pages of Website <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 110 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">108</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Anchor Text of Inbound Links to GBP Landing Page URL <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 108 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">107</div>
-        <div class="factor-info">
-          <div class="factor-name">Internal Linking Across Entire Website <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 107 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">105</div>
-        <div class="factor-info">
-          <div class="factor-name">Quality/Authority of Structured Citations <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 105 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">104</div>
-        <div class="factor-info">
-          <div class="factor-name">Reference to Location Specific Entities on GBP Landing Page <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 104 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">103</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Anchor Text of Internal Links <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 103 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">103</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 103 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Title Tags Across Entire Website <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 102 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Website Uses HTTPS by default <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 102 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Domain Authority of Website <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 102 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">102</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Inbound Links to Domain <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 102 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Age of GBP (Original Creation Date) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Mobile-friendly/Responsive Website <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Inbound Links to Domain <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Inbound Links to GBP Landing Page URL <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">101</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Key Sites (Yellowpages, Yelp, D&B, CityGrid) <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 101 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">100</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Anchor Text of Inbound Links to Domain <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 100 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">100</div>
-        <div class="factor-info">
-          <div class="factor-name">Prominence on Key Industry-Relevant Domains <span class="metric-pill info">تأثير متوسط</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 100 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">99</div>
-        <div class="factor-info">
-          <div class="factor-name">Page Authority of GBP Landing Page URL <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 99 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">97</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Domain Name <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 97 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">97</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Quality Content on Service Pages <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 97 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">95</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Citations from Industry-Relevant Domains <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 95 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">93</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Anchor Text to GBP Landing Page URL <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 93 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">93</div>
-        <div class="factor-info">
-          <div class="factor-name">Sustained Influx of Links Over Time (rather than bursts) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 93 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">92</div>
-        <div class="factor-info">
-          <div class="factor-name">Freshness of Content on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 92 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">92</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Headings (H1, H2, etc) Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 92 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">91</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Data Aggregators (Infogroup, Localeze, Foursquare/Factual) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 91 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">90</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Quality Content on Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 90 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">87</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page URL <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 87 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">85</div>
-        <div class="factor-info">
-          <div class="factor-name">Loadtime of GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 85 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">84</div>
-        <div class="factor-info">
-          <div class="factor-name">Diversity of Anchor Text to Domain <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 84 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">82</div>
-        <div class="factor-info">
-          <div class="factor-name">Volume of Content on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 82 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">80</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Text Surrounding Links to GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 80 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">78</div>
-        <div class="factor-info">
-          <div class="factor-name">Freshness of Content Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 78 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">78</div>
-        <div class="factor-info">
-          <div class="factor-name">Internal Links FROM GBP Landing Page to Other Pages of Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 78 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">78</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Structured Citations (IYPs, Data Aggregators) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 78 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">77</div>
-        <div class="factor-info">
-          <div class="factor-name">Freshness of Content on Service Pages <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 77 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">76</div>
-        <div class="factor-info">
-          <div class="factor-name">Frequency of Owner/Manager Activity <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 76 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">75</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Text Surrounding Links to Domain <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 75 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">74</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of Place Topics Matching Keywords <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 74 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">73</div>
-        <div class="factor-info">
-          <div class="factor-name">NAP in Schema/JSON-LD on GBP Landing Page URL <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 73 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">70</div>
-        <div class="factor-info">
-          <div class="factor-name">Consistency of Citations on Other Citation Sources <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 70 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">69</div>
-        <div class="factor-info">
-          <div class="factor-name">Embedded Google Map for Location on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 69 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">69</div>
-        <div class="factor-info">
-          <div class="factor-name">Quantity of Unlinked Brand Mentions <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 69 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">68</div>
-        <div class="factor-info">
-          <div class="factor-name">Scannable Content Structure Across Entire Website (headings, bullet points, images, etc) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 68 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">66</div>
-        <div class="factor-info">
-          <div class="factor-name">Social Profiles Are Linked to GBP <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 66 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">66</div>
-        <div class="factor-info">
-          <div class="factor-name">Proper Site Architecture Organized Into Topic Areas <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 66 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">65</div>
-        <div class="factor-info">
-          <div class="factor-name">Presence of FAQs on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 65 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
-        </div>
-      </div>
-    
-      <div class="factor-row">
-        <div class="factor-score-badge">65</div>
-        <div class="factor-info">
-          <div class="factor-name">Keywords in Text Surrounding Unlinked Brand Mentions <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 65 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Physical Address in City of Search</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 94/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">64</div>
         <div class="factor-info">
-          <div class="factor-name">Loadtime of Pages Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 64 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in GBP Landing Page Title Tag</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 64/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">61</div>
+        <div class="factor-score-badge">63</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of FAQs on Service Pages <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 61 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Geographic (City/Neighborhood) Keyword Relevance of Content</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 63/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">60</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in URLs Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 60 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Removal of spam listings through spam fighting</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 60/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">59</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Landing Page Headings (H1, H2, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 59/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">58</div>
         <div class="factor-info">
-          <div class="factor-name">Matching Google Account Domain to GBP Landing Page Domain <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 58 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Dedicated Page for Each Service</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 58/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">56</div>
+        <div class="factor-info">
+          <div class="factor-name">Quality/Authority of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 56/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">55</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in GBP Landing Page Meta Description <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 55 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Consistency of Citations on Primary Search Engines (Google Maps, Bing Maps, Apple Maps)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 55/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">55</div>
+        <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Sustained Output of Content Over Time (rather than bursts) <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 55 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quality/Authority of Inbound Links to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 54/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">49</div>
+        <div class="factor-score-badge">54</div>
         <div class="factor-info">
-          <div class="factor-name">Website Content Marked Up in Schema <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 49 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Quantity of Inbound Links to Landing Page URL from Industry-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 54/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">52</div>
+        <div class="factor-info">
+          <div class="factor-name">Website's Degree of Focus on a Specific Niche</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 52/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">50</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Inbound Links to Domain from Industry-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 50/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">48</div>
+        <div class="factor-info">
+          <div class="factor-name">Internal Links TO GBP Landing Page from Other Pages of Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 48/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">48</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Anchor Text of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 48/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">47</div>
+        <div class="factor-info">
+          <div class="factor-name">Internal Linking Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 47/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">46</div>
+        <div class="factor-info">
+          <div class="factor-name">Quality/Authority of Structured Citations</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 46/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">46</div>
+        <div class="factor-info">
+          <div class="factor-name">Reference to Location Specific Entities on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 46/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Anchor Text of Internal Links</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Title Tags Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Website Uses HTTPS by default</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Domain Authority of Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">45</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Inbound Links to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 45/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Age of GBP (Original Creation Date)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Mobile-friendly/Responsive Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Inbound Links to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Inbound Links to GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Consistency of Citations on Key Sites (Yellowpages, Yelp, D&B, CityGrid)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Anchor Text of Inbound Links to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Prominence on Key Industry-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">44</div>
+        <div class="factor-info">
+          <div class="factor-name">Page Authority of GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 44/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">43</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image Filenames on GBP Landing Page <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 43 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in Domain Name</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 43/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">43</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Quality Content on Service Pages</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 43/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">42</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Citations from Industry-Relevant Domains</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 42/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Anchor Text to GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Sustained Influx of Links Over Time (rather than bursts)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Freshness of Content on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">41</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Headings (H1, H2, etc) Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 41/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">40</div>
         <div class="factor-info">
-          <div class="factor-name">Engagement on Social Profiles <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 40 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Consistency of Citations on Data Aggregators (Infogroup, Localeze, Foursquare/Factual)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 40/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">40</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Quality Content on Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 40/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">38</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 38/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">37</div>
+        <div class="factor-info">
+          <div class="factor-name">Loadtime of GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 37/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">37</div>
+        <div class="factor-info">
+          <div class="factor-name">Diversity of Anchor Text to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 37/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">36</div>
+        <div class="factor-info">
+          <div class="factor-name">Volume of Content on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 36/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">35</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Text Surrounding Links to GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 35/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">34</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Image Filenames Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 34 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Freshness of Content Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 34/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">34</div>
+        <div class="factor-info">
+          <div class="factor-name">Internal Links FROM GBP Landing Page to Other Pages of Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 34/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">34</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Structured Citations (IYPs, Data Aggregators)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 34/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">34</div>
+        <div class="factor-info">
+          <div class="factor-name">Freshness of Content on Service Pages</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 34/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">33</div>
         <div class="factor-info">
-          <div class="factor-name">Keywords in Meta Descriptions Across Entire Website <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 33 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Frequency of Owner/Manager Activity</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 33/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Text Surrounding Links to Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 33/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">33</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Place Topics Matching Keywords</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 33/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">32</div>
+        <div class="factor-info">
+          <div class="factor-name">NAP in Schema/JSON-LD on GBP Landing Page URL</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 32/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">31</div>
+        <div class="factor-info">
+          <div class="factor-name">Consistency of Citations on Other Citation Sources</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 31/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">30</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of Keywords in Image Metadata Fields <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 30 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Embedded Google Map for Location on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Quantity of Unlinked Brand Mentions</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">30</div>
+        <div class="factor-info">
+          <div class="factor-name">Scannable Content Structure Across Entire Website (headings, bullet points, images, etc)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 30/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Social Profiles Are Linked to GBP</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 29/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Proper Site Architecture Organized Into Topic Areas</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 29/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of FAQs on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 29/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">29</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Text Surrounding Unlinked Brand Mentions</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 29/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">28</div>
         <div class="factor-info">
-          <div class="factor-name">Presence of XML Sitemap <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 28 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Loadtime of Pages Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 28/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">27</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of FAQs on Service Pages</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 27/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
         <div class="factor-score-badge">26</div>
         <div class="factor-info">
-          <div class="factor-name">Length of Title Tag <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 26 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Keywords in URLs Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 26/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
       <div class="factor-row">
-        <div class="factor-score-badge">25</div>
+        <div class="factor-score-badge">26</div>
         <div class="factor-info">
-          <div class="factor-name">Follower Count on Social Profiles <span class="metric-pill static">تأثير منخفض</span></div>
-          <div class="factor-desc">عامل تحسين رئيسي يمثل نقاط تأثير بمقدار 25 نقطة في خوارزمية خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+          <div class="factor-name">Matching Google Account Domain to GBP Landing Page Domain</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 26/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in GBP Landing Page Meta Description</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">24</div>
+        <div class="factor-info">
+          <div class="factor-name">Sustained Output of Content Over Time (rather than bursts)</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 24/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">22</div>
+        <div class="factor-info">
+          <div class="factor-name">Website Content Marked Up in Schema</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 22/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">19</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image Filenames on GBP Landing Page</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 19/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">18</div>
+        <div class="factor-info">
+          <div class="factor-name">Engagement on Social Profiles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 18/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Image Filenames Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 15/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">15</div>
+        <div class="factor-info">
+          <div class="factor-name">Keywords in Meta Descriptions Across Entire Website</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 15/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">13</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of Keywords in Image Metadata Fields</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 13/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">12</div>
+        <div class="factor-info">
+          <div class="factor-name">Presence of XML Sitemap</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 12/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">11</div>
+        <div class="factor-info">
+          <div class="factor-name">Length of Title Tag</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 11/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
+        </div>
+      </div>
+    
+      <div class="factor-row">
+        <div class="factor-score-badge">11</div>
+        <div class="factor-info">
+          <div class="factor-name">Follower Count on Social Profiles</div>
+          <div class="factor-desc">عامل تحسين رئيسي يمثل درجة تأثير مصنفة بـ 11/100 في خوارزمية ترتيب خرائط جوجل. تهيئة هذا عامل تضمن ترتيباً أفضل في الفهرسة.</div>
         </div>
       </div>
     
