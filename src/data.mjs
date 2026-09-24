@@ -60,9 +60,14 @@ export const JOURNEY_ROWS = [
 
 /* ── Section 7: eleven cards, every SEO client. Every percentage is reproduced
       in copy.md's derivation table. `clicks` is the site's real monthly click
-      series from design/proof-data.md, used to draw the card's sparkline plate;
-      a site with fewer than three complete months gets an empty dashed plate,
-      because one month is not a curve.
+      series from design/proof-data.md. It is NO LONGER DRAWN — see the
+      2026-09-25 note at the end of this block — and is kept only as the
+      record, exactly like `period`. Do not put a chart back on these cards.
+
+      `logo` names the client's own logo, derived into
+      src/img/logo-<logo>.webp from the source kept in
+      design/client-logos/<domain>.<ext>. Every client has one, so every card
+      is full; build-spec §20 records which asset each one came from.
 
       Card 11, movingcompanykw.com, resolved by Ahmad 2026-09-24: "Moving
       company is a valid company. You can put that in, no problem." It carries
@@ -84,31 +89,39 @@ export const JOURNEY_ROWS = [
         windows and is not worried about checkability; §7 now carries ONE line
         under the whole section instead of eleven on the cards. The field stays
         here as the record of which two complete months each percentage was
-        computed from — copy.md's derivation table is the public version. ── */
+        computed from — copy.md's derivation table is the public version.
+
+      REVISED 2026-09-25 (Ahmad: "many boxes are empty ... scratch the graph
+      idea and just put images. Or their logos. Actually, would be better.
+      Yeah, their logos."). THE PLATE IS THE CLIENT'S LOGO, not a chart. The
+      four New project sites have one complete month each, so they had no
+      curve to draw and rendered as an empty dashed plate — that is what read
+      as broken. Every client has a logo, so every card is now full. The
+      percentages and the New project tags are untouched. ── */
 export const WORK = [
-  { site: 'q8carwash.com', url: 'https://q8carwash.com/',
+  { site: 'q8carwash.com', url: 'https://q8carwash.com/', logo: 'q8carwash',
     figure: '+900%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
     clicks: [8, 21, 43, 105, 171, 193, 158, 148, 97, 118, 104, 72, 80] },
-  { site: 'mashame3.com', url: 'https://mashame3.com/',
+  { site: 'mashame3.com', url: 'https://mashame3.com/', logo: 'mashame3',
     figure: '+883%', period: { ar: 'مارس 2026 إلى أغسطس 2026', en: 'March 2026 to August 2026' },
     clicks: [12, 31, 83, 86, 122, 118] },
-  { site: 'kuwaityclean.com', url: 'https://kuwaityclean.com/',
+  { site: 'kuwaityclean.com', url: 'https://kuwaityclean.com/', logo: 'kuwaityclean',
     figure: '+326%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
     clicks: [83, 65, 79, 89, 125, 127, 188, 107, 83, 154, 330, 372, 354] },
-  { site: 'kwcarwash.com', url: 'https://kwcarwash.com/',
+  { site: 'kwcarwash.com', url: 'https://kwcarwash.com/', logo: 'kwcarwash',
     figure: '+270%', period: { ar: 'ديسمبر 2025 إلى أغسطس 2026', en: 'December 2025 to August 2026' },
     clicks: [23, 46, 72, 82, 97, 106, 108, 105, 85] },
-  { site: 'kwtclean.com', url: 'https://kwtclean.com/',
+  { site: 'kwtclean.com', url: 'https://kwtclean.com/', logo: 'kwtclean',
     figure: '+222%', period: { ar: 'مايو 2026 إلى أغسطس 2026', en: 'May 2026 to August 2026' },
     clicks: [7, 165, 354, 452, 531] },
-  { site: 'carwashkw.com', url: 'https://carwashkw.com/',
+  { site: 'carwashkw.com', url: 'https://carwashkw.com/', logo: 'carwashkw',
     figure: '+32%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
     clicks: [334, 389, 321, 287, 240, 211, 227, 199, 225, 287, 437, 386, 440] },
-  { site: 'betikcleaner.com', url: 'https://betikcleaner.com/', isNew: true },
-  { site: 'anharpest.com', url: 'https://anharpest.com/', isNew: true },
-  { site: 'alghadeerclean.com', url: 'https://alghadeerclean.com/', isNew: true },
-  { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', isNew: true },
-  { site: 'movingcompanykw.com', url: 'https://movingcompanykw.com/' },
+  { site: 'betikcleaner.com', url: 'https://betikcleaner.com/', logo: 'betikcleaner', isNew: true },
+  { site: 'anharpest.com', url: 'https://anharpest.com/', logo: 'anharpest', isNew: true },
+  { site: 'alghadeerclean.com', url: 'https://alghadeerclean.com/', logo: 'alghadeerclean', isNew: true },
+  { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', logo: 'ragwaclean', isNew: true },
+  { site: 'movingcompanykw.com', url: 'https://movingcompanykw.com/', logo: 'movingcompanykw' },
 ];
 
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
@@ -218,7 +231,7 @@ export const COPY = {
        contact CTA — the only two contact labels are still اتصل الآن / واتساب. */
     strip: {
       pill: 'عرض محدود',
-      line: 'ستة أشهر مجانية لشركات الخدمات',
+      line: 'ستة أشهر مجانًا لشركات خدمية',
       countdownLabel: 'يغلق التسجيل خلال',
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
       spots: (n) => `<span dir="ltr">${n}</span> مقاعد متبقية`,
@@ -229,7 +242,7 @@ export const COPY = {
     /* ── 3. The problem ── */
     problem: {
       eyebrow: 'المشكلة',
-      h2: 'ملفك على جوجل يعمل<br class="brk"> <span class="hl">وما عندك موقع إلكتروني</span>',
+      h2: 'ملفك على جوجل يعمل<br class="brk"> <span class="hl">وما عندك موقع إلكتروني؟</span>',
       lead: 'ملفك على جوجل يضعك على الخريطة داخل نطاق ضيق حول عنوانك، وهذا كل ما يستطيعه. الموقع يأخذ الطلب نفسه ويوسعه: كل منطقة تخدمها، وكل سؤال يكتبه العميل قبل أن يتصل، وكل إجابة تقدمها مساعدات الذكاء الاصطناعي. الفارق بين الاثنين هو عمل قائم لا يصلك اليوم.',
       cards: [
         { title: 'الخريطة تتوقف عند حدود حيّك', body: 'ملف النشاط التجاري يظهر في نطاق ضيق حول عنوانك المسجل. الموقع الإلكتروني يظهر في كل مدينة وكل حي تستهدفه بصفحة مخصصة.' },
@@ -442,9 +455,11 @@ export const COPY = {
     blog: {
       eyebrow: 'المدونة',
       h1: 'مقالات لأصحاب <span class="hl">الأنشطة الخدمية</span>',
-      lead: 'نكتب هنا عما يجعل العميل يجد نشاطك على جوجل وفي إجابات الذكاء الاصطناعي، وعما تستطيع أن تفعله بنفسك دون أن تدفع لأحد. بلا مصطلحات تقنية.',
+      lead: null, // board B draws no intro under the blog heading (Ahmad, replica request)
       by: 'بقلم أحمد عويهان',
-      readMore: 'اقرأ المقال',
+      /* `Read more` on blog-B.png, which Ahmad asked to be replicated word for
+         word; copy-pages §B2 had `اقرأ المقال` / `Read the article`. */
+      readMore: 'اقرأ المزيد',
       /* 3–10 minutes takes the plural دقائق; the digits are wrapped dir="ltr". */
       readTime: (n) => `<span dir="ltr">${n}</span> ${n <= 2 ? 'دقيقة' : n <= 10 ? 'دقائق' : 'دقيقة'} قراءة`,
       home: 'الرئيسية',
@@ -477,7 +492,7 @@ export const COPY = {
     offerPage: {
       pill: 'عرض محدود',
       h1: 'ستة أشهر <span class="hl">مجانية</span>،<br class="brk"> بدون عقد',
-      lead: 'هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. دون التزام.',
+      lead: 'هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. دون التزام.',
       countdownLabel: 'يغلق التسجيل خلال',
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
       spots: (n) => `<span dir="ltr">${n}</span> مقاعد متبقية`,
@@ -601,7 +616,7 @@ export const COPY = {
 
     strip: {
       pill: 'Limited offer',
-      line: 'Six months free for service companies',
+      line: '6 months free, service firms',
       countdownLabel: 'Registration closes in',
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
       spots: (n) => `<span dir="ltr">${n}</span> seats left`,
@@ -611,7 +626,7 @@ export const COPY = {
 
     problem: {
       eyebrow: 'The problem',
-      h2: 'Your Google profile works.<br class="brk"> You have <span class="hl">no website.</span>',
+      h2: 'Your Google profile works.<br class="brk"> But <span class="hl">no website?</span>',
       lead: 'Your Google profile puts you on the map inside a narrow radius around your address, and that is as far as it reaches. A website takes the same demand and widens it: every area you serve, every question a customer types before he calls, and every answer an AI assistant gives. The gap between the two is real work that is not reaching you yet.',
       cards: [
         { title: 'The map stops at<br class="brk"> your district', body: 'A business profile shows inside a narrow radius around your registered address. A website shows in every city and district you target, with a page built for it.' },
@@ -799,9 +814,9 @@ export const COPY = {
     blog: {
       eyebrow: 'Blog',
       h1: 'Articles for local <span class="hl">service owners</span>',
-      lead: 'We write here about what makes a customer find your business on Google and in AI answers, and about what you can do yourself without paying anyone. No jargon.',
+      lead: null, // board B draws no intro under the blog heading (Ahmad, replica request)
       by: 'By Ahmad Owaihan',
-      readMore: 'Read the article',
+      readMore: 'Read more',   // blog-B.png, verbatim
       readTime: (n) => `${n} min read`,
       home: 'Home',
       blog: 'Blog',
@@ -830,7 +845,7 @@ export const COPY = {
     offerPage: {
       pill: 'Limited offer',
       h1: 'Six months <span class="hl">free</span>,<br class="brk"> no contract.',
-      lead: 'This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. No commitment.',
+      lead: 'This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We get your business found on Google and in AI, turning those visits into calls and customers. No commitment.',
       countdownLabel: 'Registration closes in',
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
       spots: (n) => `<span dir="ltr">${n}</span> seats left`,

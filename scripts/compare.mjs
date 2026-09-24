@@ -183,7 +183,7 @@ for (const loc of LOCALES) {
    same class vocabulary and the same custom properties as the boarded pages,
    and must introduce no colour of its own. A page that starts growing its own
    one-off components is the drift this check exists to catch. */
-const BOARDLESS = ['/about/', '/contact/', '/terms/', '/blog/why-your-google-profile-stops-growing/'];
+const BOARDLESS = ['/about/', '/contact/', '/terms/', '/blog/complete-guide-to-local-seo/'];
 const KNOWN_TOKENS = ['--orange', '--orange-ink-light', '--ink', '--ink-invert', '--muted-on-light',
   '--muted-on-dark', '--bg-white', '--bg-light', '--bg-dark', '--bg-footer', '--bg-panel',
   '--hairline-light', '--hairline-dark'];

@@ -340,7 +340,8 @@ Nothing on this page is generated fresh. Nothing is substituted.
 | §5 deliverable icons ×6 | **`design/icons/v2/*-sq.png`** — 512 x 512 transparent PNGs, heavy near-black strokes with bright orange accents, trimmed and squared. Use these files directly. | Order follows `copy.md` §5 items 1–6: `website-build-sq.png`, `service-area-pages-sq.png`, `google-visibility-sq.png`, `ai-visibility-sq.png`, `backlinks-authority-sq.png`, `hosting-security-sq.png`. Converted to WebP at **240 x 240** (4x the slot, alpha preserved) into `src/img/icon-<name>.webp`. Render at **60 x 60px**. Do not regenerate, do not substitute, do not reorder. **Re-cut 2026-09-24 (fix pass):** `*-sq.png` had been squared onto an **opaque near-white canvas**, so at the 60 x 60 slot every mark sat on a faint grey tile that `s5.png` does not draw — the board puts the marks straight on the card. Every low-saturation pixel at or above 200 is now knocked out to transparent before the 240 x 240 WebP is written; the near-black strokes and the orange accents are untouched (orange averages ~120 with a wide channel spread). Re-run it with the snippet in §14. **Superseded 2026-09-24:** the first set, `design/icons/*.png`, was 240 x 179 **landscape and opaque** — at the 60 x 60 slot it letterboxed and read as a faint grey smudge, nothing like the bold marks `s5.png` draws. Those files stay on disk for reference and are no longer referenced by the build. `contact-sheet.png`, `sheet.png` and `icon-1..6.png` are untrimmed originals — do not ship them. |
 | §6 stage illustrations ×3 | **`design/icons/journey/*.png`** — cropped from `journey-D.png` as part of this spec | `s6-month1-build.png` (board crop `x194,y403 640x552`), `s6-month2-discovered.png` (`x1024,y424`), `s6-month6-traction.png` (`x1891,y404`). All three are 640 x 552px transparent PNGs on one shared canvas; render at **343 x 296px**, `object-fit: contain`. Do not regenerate and do not swap in different drawings. |
 | §6 sparkline | **Inline SVG**, drawn from the five real monthly rows in `copy.md` §6 | Full container width (1320px), 5 dots of **10px diameter** at 327.5px pitch, **2.5px** `#FF5F29` stroke, rising left → right over a **39px** band. Dot y-centres measured: 751.6, 747.1, 742.2, 735.5, 724.3 (board css). |
-| §7 card charts ×10 | **Real Google Search Console captures** from the named client accounts | WebP, never upscaled past native width. A generated chart is a fabricated result and a launch blocker. |
+| §7 card plates ×11 | **Each client's own logo**, fetched from that client's live site and kept at `design/client-logos/<domain>.<ext>` | Derived into `src/img/logo-<slug>.webp`, one shared 640x334 canvas, `object-fit: contain`. Full record in **§20**, sources in `copy.md`'s section 7 logo table. Superseded the card chart 2026-09-25 (Ahmad). No brand mark is invented, redrawn or recoloured. |
+| ~~§7 card charts ×10~~ | **Retired 2026-09-25.** The plate was an inline SVG of the site's real monthly click series; the four newest clients had one complete month each, so they drew nothing and rendered an empty dashed slot. Ahmad: `many boxes are empty ... scratch the graph idea`. | The old rule still stands for anything that comes back: a generated chart is a fabricated result and a launch blocker, and a Search Console capture may only ship if it is real and unedited. §6 was a separate renderer and nothing in this pass went near it. |
 | §7 card links | Real live client sites, `rel="nofollow noopener" target="_blank"` | Never a generated mockup |
 | §2 / §8 / §9 / §10 | No images | |
 
@@ -386,8 +387,8 @@ Measured layout, locked:
 | Card body | **23px / 300** Latin, `#949BA6`, line-height 1.15 on the board (pitch 26.3px); use **1.35** in the build so Latin descenders clear |
 | Card titles | The board draws **`Build` / `Get discovered` / `Get traction`** and those are the shipping titles, in `copy.md` §6. Arabic is the MSA equivalent triad `البناء` / `الظهور` / `النمو`. The **month labels above them keep their real months** (`MONTH ONE, APRIL 2026`), which is deliberately more precise than the board's plain `MONTH 1` |
 | Card body length | **Two lines**, as the board draws. The build had drifted to six and nine lines, which tripled the card height and cost the section its punch. At 1440 the cards now measure **587px** (en) / **605px** (ar) against the board's 494px; the difference is the figure row, which the board does not carry and §8 below requires |
-| Cards → sparkline | 33px (card bottom css 694.3, sparkline top 727.3) |
-| Sparkline | full 1320px container width, **2.5px** `#FF5F29` stroke, five **10px** dots at 327.5px pitch, 39px total rise, dots y 751.6 / 747.1 / 742.2 / 735.5 / 724.3 |
+| Cards → sparkline | ~~33px (card bottom css 694.3, sparkline top 727.3)~~ **Removed 2026-09-25, see §21.** The board's geometry below is kept for the record only; do not rebuild it. |
+| Sparkline | ~~full 1320px container width, **2.5px** `#FF5F29` stroke, five **10px** dots at 327.5px pitch, 39px total rise, dots y 751.6 / 747.1 / 742.2 / 735.5 / 724.3~~ **Removed at Ahmad's instruction, 2026-09-25 — "there is this orange graph under the three images... it looks ugly." Deliberate, approved divergence from `journey-D.png`; §21 has the fix and the re-measured spacing. A future pass comparing the build to that board should NOT restore this element.** |
 
 The three figures (`7`, `165`, `531`) are not on the board. Place each inside its card between the title and
 the body, at the **card body size (23px) in weight 600, `#FF5F29`**, matching how §7 prints its metric.
@@ -1808,5 +1809,596 @@ exactly where a contrast regression would land.** All four rows, 3 runs each:
 `/en/blog/` mobile was **95** in §17.9 and is now **100**, which is §17.7b's shared `--fs-eyebrow` floor
 landing on the page it predicted it would (§17.7b's closing paragraph) — confirmed rather than assumed.
 The new orange `.read-more` cost nothing, which is what the weight-700 / 19px-floor shape was for.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+---
+
+## 19. The blog list as an exact replica of `blog-B.png`, 2026-09-25. Measured, not eyeballed
+
+§18.5 tightened the blog list and Ahmad looked at it again and said it was **ugly**, and that he wanted
+a replica:
+
+> "I want you to make it exactly like the image in Higgsfield. Even the blog titles. Because what you
+> did looks ugly. I want it to be exactly like the image you showed me, which is B. Everything in it.
+> Even the titles and everything. Which means we're going to edit even the blog posts themselves. I
+> want a replica."
+
+So this pass took the board as the spec for the **words as well as the layout**: all six posts were
+retitled and rewritten to the board's titles, and every layout number below was measured off the PNG.
+§18.5 had already been told the rows were too tall and had fixed half of it by eye; this is the
+measured version.
+
+### 19.1 How the board was measured, and the two conversion factors
+
+`blog-B.png` is 2688x1520 for a 1440 screen, so `css = board x 0.535714` (§0). A script in the scratch
+folder scans it for horizontal hairlines, flood-fills the orange blocks for their exact rects, and
+splits each text column into ink bands with their colour, height, width and baseline pitch. Nothing
+below is read off the image by eye.
+
+**Board ink cannot be turned into a font size without a conversion factor, and the factor has to come
+from inside the board**, because the board's face is not Alexandria. Two were derived, each anchoring
+on a size §2 already locked from this same board family:
+
+| For | Anchor | Factor |
+|---|---|---|
+| ascender-to-descender strings | board H1 ink **70.7** <-> the locked **80px** H2 | **x 1.1315** |
+| cap-height-only strings (all caps, no descender) | board eyebrow cap **17.1** <-> the locked **22px** eyebrow | **x 1.2865** |
+
+And Alexandria's own metrics, measured with canvas `TextMetrics` on the shipped subset rather than
+assumed: **cap 0.72 em, ascender+descender 0.98 em.** §2.3 worked from 0.89. The real 0.98 is why the
+board's display leading is not reachable — see 19.4.
+
+One thing the board simply cannot give: **Alexandria is ~29 % wider per character than the board's
+face.** `The Complete Guide to` measures **517.1px** at 44px/700 in Alexandria against the board's
+**418.9**. Matching the board's ink WIDTH would mean setting the title at 35px, three quarters of the
+board's apparent size. **Cap height is the quantity matched; width is not matchable and is not chased.**
+
+### 19.2 The measured table
+
+CSS column is at a 1440 viewport. The board's own container is 1344.1; this site's is the locked
+**1320** (§5.1), so proportions are carried across, not absolute x positions.
+
+| Item | Board (css) | Built | Δ |
+|---|---|---|---|
+| Page surface | **#FEFEFE top to bottom** — sampled at nine points, there is no `--bg-light` band behind the heading | `.blog-page .page-head` opts out of the band; about, contact, terms and 404 keep it | — |
+| Eyebrow `BLOG` | cap **17.1**, orange, uppercase | `--fs-eyebrow` 22px | 17.1 x 1.2865 = 22.0 ✓ |
+| H1 ink | **70.7** tall, 835.2 wide | `--fs-h2` **80px** | unchanged, and this is the anchor |
+| H1 ink -> panel rule | **19.8** | 32 + the B1 lead | see 19.5 |
+| Panel top / bottom rule | y **140.9** / **428.0**, 1px `#DEE1E4` | `1px solid var(--hairline-light)`, radius 0 | ✓ |
+| Panel height | **287.1** | **330.3** | **+43.2** |
+| Panel padding | l 19.3 / t 17.1 / b 18.2 | **18px** (measures 19) | ✓ |
+| Featured art | **670.2 x 252.3 = 2.657:1** | 657.3 x 247.5 | ✓ exact at 1320 |
+| Art -> text gap | **45.0** | **44** | ✓ |
+| Text column | 782 -> 1373 = **591.0** | **580.7** | ✓ |
+| Art : text split | **1.132 : 1** | `minmax(0,1.132fr) minmax(0,1fr)` | ✓ |
+| Drawing inside the art block | **71 % wide, 78 % tall** | the `-wide` derivative scales the drawing by height to 78 % | ✓ |
+| Category label | cap ~13 -> **16.7px**, orange, uppercase, bold | **19px / 700**, `--orange-ink-light` | **+2.3**, the §17.7b floor |
+| label -> title | 8.6 ink | 8 | ✓ |
+| Featured title | cap **33.2** -> **42.7px**; pitch **39.1**; 3 lines | **44px** (`--fs-h3-s6`) / **46.2** | +1.3 size, **+7.1 leading** |
+| Title block | **117** | **138.6** | **+21.6** |
+| title -> excerpt | 19.3 ink | 14 | ✓ |
+| Featured excerpt | ink **19.5** -> **22.1px**; pitch **24.4** = 1.11; 3 lines | **22px / 1.15**; 3 lines | ✓ size, +1 leading |
+| excerpt -> read more | 13.3 ink | 12 | ✓ |
+| Read more | orange, underlined, bold, **`→`** | 19px / 700 + an inline SVG arrow | see 19.3 |
+| Rule under the panel | **18** below, full container | **18**, 1320 wide | ✓ |
+| Columns | 652.5 and 645.0, gutter **46.6** | 637 each, gutter **46** | ✓ |
+| Thumbnail | **100.2-103.9 wide x 85.2-92.7 tall** — the board's five are not square and not consistent | **100 x 88**, `object-fit: cover` off the 240² crop | ✓ |
+| Thumb -> text | **30.0**, both columns | **30** | ✓ |
+| Row pitch | **114.1 / 111.9** | **126** | **+11.9** |
+| Row padding-block | ~13 | 14 | ✓ |
+| Row date | cap **11.8** -> **15.2px**, grey, UPPERCASE | `--fs-meta` **15px** / 500 | ✓ |
+| date -> title | 5.9 ink | 4 | ✓ |
+| Row title | ink **20.4-20.9** -> **23.1px**, black | **23px / 700 / 1.1** | ✓ |
+| title -> excerpt | 7.5 ink | 5 | ✓ |
+| Row excerpt | ink **16.1** -> **18.2px**; pitch **20.4** = 1.13; **2 lines** | **18px / 1.2**; 2 lines | ✓ size, +1 leading |
+| Row rules | per column, none under the last row of each | `:nth-last-child(-n+2)` | ✓ |
+
+**The type scale came out right.** Every size the board gives — 22 eyebrow, 80 H1, 42.7 title, 22.1
+featured excerpt, 15.2 date, 23.1 row title, 18.2 row excerpt — lands within 0.2px of a value already
+in §2 or derived here. §18.5's 21px row title was the one real miss: the board says 23.
+
+### 19.3 Three things the board draws that the build did not
+
+1. **The category label.** `blog-B.png` draws an orange `SEO` above the featured title. §18.5.2 D
+   deliberately left the slot empty because `copy-pages.md` §B2 said *"no category chips"*. Ahmad
+   overruled it. Every post now carries a `category` in frontmatter and the featured panel renders it.
+   It takes the §17.7b shape (700 weight, 19px floor) because `--orange-ink-light` is 3.67:1 and only
+   qualifies as large text — same trade `.eyebrow`, `.work-metric` and `.read-more` already make. **No
+   third orange was introduced.**
+2. **The rows lost their byline, read time and read-more.** The board draws a bare uppercase date, the
+   title and a two-line excerpt, and nothing else. §16.11 item 3 had put a read-more on every row to
+   satisfy §B2's six fields; §B2 is now overridden for this page. With the byline gone **each row holds
+   exactly one link**, so the title link stretches over the whole row — the tap target the read-more
+   used to be, with one link instead of two. There is now no outbound link on the list page; the author
+   link to `ahmadowaihan.com` still sits on every post page.
+3. **`Read more →`, with a drawn arrow.** The board's arrow is U+2192, which is in **neither**
+   Alexandria subset's `unicode-range` — the Latin face carries U+2191 and U+2193 and stops. Typing the
+   character would have dropped the one line Ahmad singled out into a fallback font. It is an inline
+   SVG in `currentColor`, mirrored under `dir="rtl"` by CSS.
+
+**The board's dates are not used.** It draws `APR 12, 2025`, `MAR 28, 2025` and so on; those are model
+inventions and the posts are all 2026-09-24. Only the TREATMENT is the board's — uppercase and tracked
+on Latin, neither on Arabic (§2.3). Ahmad: `I want to be honest and no fake.`
+
+### 19.4 What still differs, and why it is not fixable by turning a dial
+
+**The featured title block is 138.6 against the board's 117, and it is leading, not size.** The board
+draws three lines at a **39.1** pitch on a cap of 33.2 — a line-height of about **0.85 em**. Alexandria's
+ascender+descender measures **0.98 em**, so anything under 1.0 clips and 1.05 (§2.3's floor, now
+confirmed by measurement rather than the 0.89 it assumed) leaves 3.1px of air at 44px. The board's face
+is both narrower and shorter-bodied than Alexandria. Dropping the size to reach the height would make
+the title visibly smaller than the board's, which is the opposite of the ask.
+
+That 21.6 is most of the panel's +43.2. The rest is the category label's accessibility floor (+4) and
+the excerpt's +1 leading (+3).
+
+**Rows are 126 against 114.1.** 28 of that is padding, 97 is content: date 19.5, title 25.3, excerpt
+43.2 and the two gaps. The board fits the same three elements in 88 by running ~1.13 leading on all
+three. The excerpts were rewritten to the board's **two lines** — that was the big win, worth 23px a row
+— and pushing the leading below 1.2 to find the last 12px would set Arabic unreadably tight for nothing
+Ahmad asked for.
+
+**The B1 intro paragraph is on the page and is not on the board.** It is approved copy in
+`copy-pages.md` §B1 and deleting site copy is a copy decision, not a layout one, so it stayed and the
+rhythm around it was tightened instead: the grey band is gone, `.page-head` closes at 32 and `#posts`
+opens at 0 where the pair used to be 72 + 72. **This is the one remaining difference Ahmad can close in
+one word**, and it is the largest single reason the board and the build do not register line for line.
+
+### 19.5 The content: six posts retitled and rewritten
+
+Titles are `blog-B.png`'s, character for character, with Arabic mirrors; the table is `copy-pages.md`
+§B5a. Slugs follow the titles. **They knowingly break this site's no-jargon rule** — `rank` is banned as
+a selling word everywhere else and the reader is an owner with no website — and that is Ahmad's call,
+stated twice for this page. The bodies are not exempt: each one explains the term in its own title in
+plain words the first time it appears and then writes plainly.
+
+The six are real rewrites, not re-headed drafts. Material that still fitted was carried over (the three
+ceilings, the service/area page logic, the NAP-consistency passages, the AI-quotability criteria);
+keyword research, measurement and citations had no predecessor and were written fresh. Two sonnet
+writers took three articles each, Arabic first and English as its mirror, section for section, under the
+standing no-invented-facts rules.
+
+| Slug | AR words | EN words | `##` |
+|---|---|---|---|
+| complete-guide-to-local-seo | 643 | 874 | 6 |
+| keyword-research-for-local-seo | 720 | 965 | 6 |
+| on-page-seo-basics-for-local-sites | 688 | 893 | 7 |
+| google-business-profile-optimization | 677 | 999 | 6 |
+| measuring-local-seo-success | 625 | 851 | 6 |
+| building-local-citations-that-matter | 616 | 850 | 6 |
+
+**Excerpt length is now a build constraint, not a style preference.** Two lines on a row, three on the
+featured panel. The first draft's excerpts ran 122-136 characters and every row went to three lines and
+154.5px; cut to 98-108 they fit two and the rows came down to 126.
+
+### 19.6 The featured slot is pinned, and the code says so
+
+Ahmad, looking at the board:
+
+> "it is amazing how the featured one, the big one, says The Complete Guide to Local SEO for Small
+> Businesses, which is perfect for our business. And that will remain there no matter how many blog
+> posts we have."
+
+`build.mjs` has **`FEATURED_SLUG`**, a single named constant, resolved **by slug and not by position**
+in `blogPage()` — so reordering `LIST_ORDER` cannot move the panel, and a missing slug throws at build
+time rather than silently featuring something else. The comment above it says in as many words not to
+rewrite it as `LIST_ORDER[0]`, a date sort or a `featured: true` flag the newest post could also set.
+Adding post seven means adding one line to `LIST_ORDER`.
+
+### 19.7 Artwork: re-mapped, not regenerated
+
+**Nothing was generated.** The six existing drawings were re-mapped to the new slugs by subject, and
+the source PNGs were then **renamed on disk** so `design/blog-art/<slug>.png` is true again (§16.9).
+The table is the record of which drawing moved where:
+
+| New slug (and new filename) | Was | Why it fits |
+|---|---|---|
+| complete-guide-to-local-seo | `why-your-google-profile-stops-growing` | pin, radius, buildings — a business in its own area |
+| keyword-research-for-local-seo | `what-to-ask-before-paying-for-seo` | a clipboard of ticks and **question marks** — the questions people type |
+| on-page-seo-basics-for-local-sites | `how-ai-assistants-decide-what-to-quote` | a page and the sentence quoted out of it |
+| google-business-profile-optimization | `what-to-do-with-your-google-profile` | storefront, stars, checklist |
+| measuring-local-seo-success | `why-a-slow-website-loses-customers` | a stopwatch and a rising arrow |
+| building-local-citations-that-matter | `page-per-service-and-area` | a web of listings and pins joined by lines |
+
+**Every new title found a drawing; none was invented and none was substituted with a stand-in.**
+
+Three changes to how they are cut (§16.9 cut two outputs; there are now three):
+
+1. **A `-wide` derivative, 1344x506.** The board draws the featured art at **2.657:1** and the sources
+   are 1.787:1. The drawing is scaled by HEIGHT to the board's 78 % and the flat field extends around
+   it. **Contained, never cropped**: five of the six drawings are taller than a 2.657:1 frame and four
+   are wider than a square, so a crop clips them — the first attempt lost part of every illustration.
+2. **The field is flattened first.** The generated PNGs are not perfectly flat orange, so filling the
+   extend margin with one sampled colour left a visible rectangular seam around each drawing. The modal
+   field colour is taken and every pixel within tolerance is written to exactly that value.
+3. **A sharp trap worth recording: one resize per pipeline.** `.resize(a).extend(…).resize(b)` does not
+   do two resizes — the second **replaces** the first, so the wide files came out 2163x617 instead of
+   1344x506 and the panel rendered a 1:3.5 strip with the art 60px short. Scale, write to a buffer,
+   extend in a second pipeline.
+
+### 19.8 Verification
+
+The loop that was skipped last round was run: **the board-over-build pair was looked at, in both
+locales, and the build was changed until it matched** — four passes. The pairs are in the scratch
+folder.
+
+| Gate | Result |
+|---|---|
+| `compare.mjs`, `/blog/` and `/en/blog/` over `blog-B.png` | pairs inspected by eye, both locales; `MISSING selectors: 0` |
+| `shots.mjs`, 24 routes x 1440x900 and 390x844, both locales | `broken=0`, `errors=0`, `overflow=false` on every row |
+| `scripts/seo-audit.mjs` | **0 high** |
+| Lighthouse, `/blog/`, `/en/blog/` and one post page | accessibility **100**, performance **99+**, CLS **0.000** |
+| Sitemap and `llms.txt` | both generated from `PAGES`/`POSTS`, so both followed the rename; **0** references to an old slug anywhere in `site/` |
+
+`scripts/compare.mjs`'s `BOARDLESS` list held `/blog/why-your-google-profile-stops-growing/` and was
+repointed at `/blog/complete-guide-to-local-seo/`; it would otherwise have checked a 404.
+
+**Nothing in this pass was committed, pushed or deployed.**
+
+---
+
+## 20. §7's plate becomes the client's logo, 2026-09-25. The four empty cards are gone
+
+Ahmad, looking at the built slideshow: `The client slideshow, many boxes are empty. I think since the
+website lacks images, we should scratch the graph idea and just put images. If you can extract good
+images for each project and put them there. Or their logos. Actually, would be better. Yeah, their
+logos.`
+
+**He is describing a real defect, not a preference.** `workPlate()` drew the site's own monthly click
+series and needed at least three complete months to draw a line. betikcleaner, anharpest, alghadeerclean
+and ragwaclean have **one** complete month each and movingcompanykw has no honest window at all
+(`copy.md` §7 card 11), so five of the eleven cards rendered a bare dashed slot with nothing in it —
+and on a three-across slideshow that is most of a screen of empty boxes. Every client has a logo, so a
+logo fills every card. **Only the plate changed.** The site name, every growth percentage, every
+`مشروع جديد` / `New project` tag, the source line, the carousel and its whole accessibility contract are
+untouched.
+
+### 20.1 Where every logo came from
+
+Fetched from each client's own live site on 2026-09-25 and kept byte-for-byte at
+`design/client-logos/<domain>.<ext>`. Preference order: header logo image → inline SVG logo → `og:image`
+→ favicon / apple-touch-icon; and between two versions of the same mark, the higher resolution one and
+the one drawn for a **light** surface. **Nothing is invented, redrawn or recoloured** — the only
+operations are crop, scale and, for one light-on-dark lockup, compositing on that site's own background
+colour. `copy.md`'s section 7 logo table is the client-facing version of this list.
+
+| # | Site | Source asset | Native | Why this one |
+|---|---|---|---|---|
+| 1 | q8carwash.com | `/images/logo-badge.webp` | 332x274 opaque | The header brand is **type only** (`Posefore` + `Wash & Polish` in CSS). This badge is the site's own `LocalBusiness` → `image` in its JSON-LD. No favicon, no apple-touch-icon on the site |
+| 2 | mashame3.com | `/favicon.svg` | vector | The header brand is **type only** (`<h1>مؤسسة المشامع</h1>`) and the `og:image` is a photo of a technician. The favicon is a real mark — a white snowflake on the brand blue — and it is vector, so resolution is free |
+| 3 | kuwaityclean.com | `/images/icons/brand-logo-colorful.webp` | 439x136 alpha | The header logo, used as the favicon too |
+| 4 | kwcarwash.com | `/images/optimized/logo.webp` | 400x400 opaque | The header brand is an inline icon plus type; this is the site's favicon and its only logo file. `og:image` is a car-interior photo |
+| 5 | kwtclean.com | `/images/logo.png` | 200x188 alpha | The header logo. PNG over the site's own WebP of the same mark: identical pixels, lossless source |
+| 6 | carwashkw.com | `/images/logo.webp` | 1563x1563 opaque | The header logo, `alt="Master Wash Logo"`, and the site's favicon and `og:image` |
+| 7 | betikcleaner.com | `/assets/brand/betik-cleaner-primary-rtl.svg` | vector | The header logo, the full lockup, drawn dark-on-light |
+| 8 | anharpest.com | `/assets/logo/logo-ar.svg` | vector | The header logo. See 20.3 — it is a light-on-dark lockup |
+| 9 | alghadeerclean.com | `/icon-512.png` | 512x512 alpha | The header logo `/images/logo-mark.webp` is the same mark at **166x165**, which the plate would have had to upscale ~1.8x. This is the identical mark at 512 from the site's own `site.webmanifest` |
+| 10 | ragwaclean.com | `/assets/images/brand/ragwa-mark.svg` | vector | The header logo |
+| 11 | movingcompanykw.com | **none — see 20.4** | — | The one client of the eleven that ships no logo file at all |
+
+### 20.2 The derivation, and why it is equal AREA and not a bounding box fit
+
+One uniform output per client: `src/img/logo-<slug>.webp`, **640x334 transparent**, which is the plate's
+270:155 at roughly 2x the rendered slot. Every `<img>` therefore carries the **same** explicit
+`width="640" height="334"`, so eleven different logos cannot move the layout.
+
+1. **Rasterise big.** SVG sources are rendered at ~1400px wide by raising sharp's `density`, never by
+   upscaling a small raster. No raster source is ever enlarged before step 4.
+2. **Take off the dead margin.** A transparent source is trimmed on alpha. An **opaque** source is
+   trimmed against its own corner colour and re-padded by 7% in that same colour, so it keeps its own
+   ground and only the padding goes. Where the ground already runs to the edge the trim finds nothing.
+3. **Scale by equal optical area**, `k = sqrt(0.44 x 640 x 334 / inkArea)`, clamped to 614x307 (96% and
+   92% of the canvas). **This is the step that makes eleven logos read as one set.** A plain
+   `min(W/w, H/h)` fit — the obvious implementation — sizes by bounding box, so a square mark comes out
+   at 307px tall next to a 3.4:1 wordmark at 167px tall and reads as roughly twice the logo. Equal area
+   puts a square at ~307 and a wide wordmark at ~565 wide, which is what the eye reads as the same size.
+4. **Centre on the shared canvas** and encode WebP `quality 86, alphaQuality 100, effort 6`. q92 cost
+   168 kB for the set against 144 kB at q86 with no visible difference on the two heaviest files, both
+   of which are flat-colour art.
+
+| # | Site | Ink box after step 2 | Ratio | Placed in the 640x334 canvas | kB |
+|---|---|---|---|---|---|
+| 1 | q8carwash.com | 332x274 | 1.21 | 338x279 | 13.5 |
+| 2 | mashame3.com | 1067x1067 | 1.00 | 307x307 | 7.7 |
+| 3 | kuwaityclean.com | 394x124 | 3.18 | 547x172 | 25.3 |
+| 4 | kwcarwash.com | 360x213 | 1.69 | 399x236 | 11.7 |
+| 5 | kwtclean.com | 200x188 | 1.06 | 316x297 | 28.0 |
+| 6 | carwashkw.com | 1563x1128 | 1.39 | 361x261 | 9.9 |
+| 7 | betikcleaner.com | 1237x365 | 3.39 | 565x167 | 17.5 |
+| 8 | anharpest.com | 1377x544 | 2.53 | 488x193 | 6.2 |
+| 9 | alghadeerclean.com | 369x367 | 1.01 | 308x306 | 5.4 |
+| 10 | ragwaclean.com | 1161x1115 | 1.04 | 313x301 | 11.3 |
+| 11 | movingcompanykw.com | 2232x667 | 3.35 | 561x168 | 7.0 |
+
+**Total 143.6 kB for eleven logos.** Only two are enlarged at all: kwtclean 1.58x from a 200px source and
+kuwaityclean 1.24x from 439px. Both are flat vector-style art and hold up; neither client ships anything
+larger (checked: no `@2x`, no SVG, no manifest, no larger favicon).
+
+### 20.3 The two logos that could not simply be dropped on a light plate
+
+* **anharpest.com is a dark site.** Its header sits on `hsl(154 22% 5% / .82)` over `--color-ground:
+  #0D1512`, and `logo-ar.svg` is drawn for it: the word `انهار` and the check ring are **`#EAF2EC`**, a
+  near-white. On a light plate the wordmark all but disappears and only the green sub-line survives —
+  measured by rendering it on white, grey and near-black. The mark-only `favicon-256.png` would have
+  read, but it drops the wordmark, so the client becomes unidentifiable. **The lockup is composited on
+  `#0D1512`, the site's own ground token, with a 19% margin.** That is the logo exactly as anharpest.com
+  itself displays it. Recolouring the ring to work on white would have been redrawing the mark, which is
+  out.
+* **kwcarwash.com's mark is white with a thin teal outline** on the brand's pale mint field, and the
+  mark occupied only 316x169 of a 400x400 tile. At the plate size the outline vanished and the tile read
+  as an empty mint square. Step 2's crop takes the dead mint off — the mark now fills the frame and the
+  script is legible. The mint is the client's own ground colour and is untouched; this is a crop, not an
+  edit. It is still the lowest-contrast logo of the eleven, because the client's logo is low contrast.
+
+### 20.4 movingcompanykw.com has no logo, and what it got instead
+
+Checked and empty: no header or footer logo image, no inline SVG lockup (the nav carries a **generic**
+truck glyph, not a brand mark), no `favicon.ico`, no `favicon.svg`, no `apple-touch-icon`, no
+`site.webmanifest`, no `/images/logo.*`. Its `og:image` is a photograph of a removal job. Its brand, on
+the site, **is type**:
+
+```html
+<a href="/" class="nav-logo">
+  <span class="nav-logo-name">شركة منيف للنقل</span>
+  <span class="nav-logo-sub">Muneef Transport · Kuwait</span>
+</a>
+```
+
+So the card carries **that wordmark, reproduced**: `Noto Kufi Arabic` 800 `#ffffff` over `Outfit` 600
+`#c8962c`, on `#0b1929`. Every one of those values — both strings, both typefaces, all three colours —
+is read straight out of `movingcompanykw.com/styles.css` (`--font-ar-display`, `--font-en`, `--white`,
+`--gold`, `--navy`). Rendered in Chrome at 2x with both fonts confirmed loaded
+(`document.fonts.check` true for each), then cropped and scaled like every other logo. **This is a
+reproduction of what the site already shows, not a designed mark**, and it is the only card where the
+plate is not a client-supplied file. If the client ever ships a real logo, drop it into
+`design/client-logos/movingcompanykw.com.*` and re-derive.
+
+### 20.5 The plate, and why it is white and not the board's grey
+
+```css
+.work-plate {
+  background: var(--bg-panel);              /* #FFFFFF */
+  border: 1px solid var(--hairline-light);  /* #D2D7DD */
+  width: 100%; aspect-ratio: 270 / 155;
+  display: grid; place-items: center;
+  padding: clamp(8px, calc(14/14.4 * 1vw), 16px);
+}
+.work-plate img { width: 100%; height: 100%; object-fit: contain; }
+```
+
+`.work-plate:empty` and `.work-plate svg` are **deleted** with the chart, and so is `workPlate()`'s
+generator in `src/render.mjs`. **§6 was a separate renderer and nothing in this pass went near it.**
+
+**The board draws this plate grey, and grey was tried and rejected.** `s7.png` fills the plate with
+`#F2F3F5`. Three of the eleven logos carry their own ground — and q8carwash's badge is on **pure white**
+(corners measured `255,255,255`, 57% of the file near-white), so on a grey plate it renders as a white
+rectangle floating inside a grey one. Screenshotted both ways at 1440 and the grey version is exactly
+the jumble this pass exists to remove. White plus the site's own hairline is also the surface language
+every other panel on the page already uses (`.card-light`, `.faq-item`), so nothing new was introduced.
+Measured at 1440: plate **366x210**, image **336x180**. At 390: plate **244x140** in a 294px card.
+
+**This is now a recorded, deliberate board/build difference, like the offer boards in §18.5.3.** Running
+`compare.mjs` will show `s7.png` drawing four chart cards for `Sunrise Dental`, `Lakeview HVAC`,
+`Pinecrest Plumbing` and `Maple Ridge Roofing` with figures to match. Those are model-invented clients
+and model-invented numbers (§13.2), the build has shipped eleven real clients since §15.5, and the plate
+is now a logo. **Do not "fix" §7 back towards its board.**
+
+### 20.6 The one rule this pass deliberately breaks: the logos are NOT lazy
+
+§7's image rule is "all below-the-fold images: WebP, `loading="lazy"`, explicit width/height". These
+eleven are the exception, and it was measured before it was decided.
+
+Eight of the eleven cards are clipped sideways by the carousel, so `loading="lazy"` only fetches a card's
+logo as that card slides in. Measured with `loading="lazy"`, `/en/` at 1440, §7 scrolled into view and
+then left alone:
+
+| | logos loaded, t = 0 … 12s |
+|---|---|
+| `loading="lazy"` | `0 5 5 5 5 6 6 6 6 7 7 7 7` of 11 |
+| shipped (no lazy) | `11 11 11 11 11 11 11 11 11 11 11 11 11` of 11 |
+
+With lazy, `shots.mjs` reported **broken=6** at 1440 and **broken=8** at 390 in both locales — every
+unloaded plate. A card that auto-advances into view with no logo in it is precisely the empty box this
+pass exists to remove, so the attribute is off and `fetchpriority="low"` is on instead: the 144 kB
+queues behind the hero and costs nothing above the fold. **Lighthouse performance did not move** (20.8).
+
+The price is one **low** finding in `scripts/seo-audit.mjs`: `more than 4 images not lazy loaded`, `/`
+and `/en/`, 11 each. It cannot be avoided with eleven cards and a threshold of four, and the audit is a
+shared skill tool that is not edited from inside a client (§16.12). Accepted knowingly.
+
+`alt=""` on every logo: the card prints the client's domain as real text immediately under the plate, so
+an alt would read the same name twice to a screen reader.
+
+### 20.7 The slideshow is unchanged, and was re-measured to prove it
+
+Nothing in `src/app.js` was touched. §18.2's exact condition was reproduced — cursor parked at 720,450
+and §7 scrolled under it, then nothing touched for twelve seconds, `/` and `/en/` at 1440x900:
+
+| | scrollLeft at 0..12s |
+|---|---|
+| `/en/` | `0 0 0 0 0 448 448 448 448 896 896 896 896` |
+| `/` (RTL) | `0 0 0 0 0 -448 -448 -448 -448 -896 -896 -896 -896` |
+
+RTL still advances negative, which is Chrome's convention and what `sign` in `app.js` is for.
+`prefers-reduced-motion: reduce` emulated: scrollLeft **0** after 10 seconds untouched, both locales.
+Keyboard on the focused track: `0 → ArrowRight 448 → next button 896 → prev button 448`. A real
+`mousemove` onto the cards holds it at `448` for 9 seconds. Focusable nodes in `#work`: **14** — the
+track, eleven card links and two buttons. **CLS 0.0000** measured live during auto-advance in both
+locales.
+
+### 20.8 Verification
+
+**All eleven cards were looked at**, at their real 424px card width, in both locales — the track
+unwrapped so all eleven are on screen at once rather than judging the three the slider happens to show.
+Every logo is present, legible, correctly proportioned and optically centred; no plate is empty and none
+is visibly cropped. Arabic is identical and no logo is mirrored by `dir="rtl"`.
+
+**`shots.mjs`** (copied to scratch, `BASE=http://localhost:8823`), both locales at 1440x900 and 390x844:
+`broken=0`, `errors=0`, `overflow=false`, 8 sections on every row. Heights `ar` 8127 / `en` 8602 at 1440
+and 10895 / 11102 at 390.
+
+**`compare.mjs`** (copied to scratch): runs clean, `MISSING selectors: 0`. The `work` pair differs from
+`s7.png` by design — see 20.5.
+
+**`node scripts/seo-audit.mjs`: 0 high** (18 medium, 9 low). The only finding this pass added is the one
+low in 20.6.
+
+**Lighthouse**, three runs per configuration, medians:
+
+| Page | Preset | Perf | A11y | Best practices | SEO | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|---|
+| `/` | mobile | **99** | **100** | 100 | 100 | 1727ms | 94ms | **0.000** |
+| `/` | desktop | **100** | **100** | 100 | 100 | 404ms | 0ms | **0.000** |
+| `/en/` | mobile | **100** | **100** | 100 | 100 | 1654ms | 43ms | **0.000** |
+| `/en/` | desktop | **100** | **100** | 100 | 100 | 404ms | 0ms | **0.000** |
+
+**Nothing in this pass was committed, pushed or deployed.**
+
+---
+
+## 21. Ahmad's third revision pass, 2026-09-25. Three fixes: §3's missing question mark, the §6 sparkline, and the offer's "what we do" line
+
+Three precise fixes, run alongside two other agents working on the blog pages and §7's client logos — none
+of that is touched here. Verified with `compare.mjs` and `shots.mjs` copied into a scratch folder (imports
+do not resolve inside the client repo; `puppeteer-core` and `sharp` live in scratch only), `node
+scripts/seo-audit.mjs`, and a Lighthouse sweep. Nothing here is committed, pushed or deployed.
+
+### 21.1 §3's headline was missing the question mark its own hero pairs it with
+
+The hero H1 ends in `؟` (`تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟`, §15.6) and §18.1 rewrote §3's
+headline to be its pair — the same rhetorical question, asked once as the hook and once as the stated
+problem. It shipped without the mark, so the pair did not read as intended.
+
+| | Arabic | English |
+|---|---|---|
+| Was | ملفك على جوجل يعمل وما عندك موقع إلكتروني | Your Google profile works. You have no website. |
+| Now | ملفك على جوجل يعمل وما عندك موقع إلكتروني**؟** | Your Google profile works. You have no website**?** |
+
+The English keeps its existing internal period (`works.`) and only the closing mark changes from nothing to
+`?` — matching what the fix asked for exactly, not a rewrite of the sentence. The orange highlight stays on
+the same phrase (`وما عندك موقع إلكتروني؟` / `no website?`); the highlight block is `background-size: 100%
+1em` (§4), a percentage of the inline box, so it resizes to the one extra character with no CSS change.
+Measured after, both locales still wrap at exactly two lines at every required width, and the highlight
+still sits on the same 78%-down band it always has.
+
+### 21.2 The §6 sparkline is gone
+
+Ahmad: `there is this orange graph under the three images. If we can remove that, that would be perfect
+because it looks ugly.`
+
+`sparkline()` (`src/render.mjs`) and its call site inside `journey()` are deleted, along with the `.spark`
+CSS rule. The three illustrations, the month labels, the titles, the figures, the precision note, the
+baseline paragraph and the source caption are untouched, as instructed.
+
+**Closing the gap it left.** Removing the sparkline also removed the 72px block that used to sit between
+the card grid and the notes below it (a 33px gap, then 39px of svg); `.journey-notes`'s own
+`margin-block-start: 56px` was left as-is, so the cards now step straight into that 56px gap instead of
+through the sparkline. Measured at 1440, en/ar identical:
+
+| | Before (§8, with sparkline) | After |
+|---|---|---|
+| Card grid bottom → sparkline/notes | 33 + 39 (svg) + 56 = **128px** | **56px** |
+| `.journey-notes` → `.journey-foot` | 28px | 28px (unchanged) |
+| `#journey` padding-block-end | 72px (`--pad-sec`) | **96px** (`--pad-sec` + 24px, `#journey`-only) |
+
+The section itself got shorter — that is the point of deleting a 72px element — but a section that only
+closed the internal gap and left the shared 72px `--pad-sec` at the bottom read top-heavy against the
+approved board's proportions once the sparkline's own visual weight at the base of the band was gone.
+`#journey` alone now takes `padding-block-end: calc(var(--pad-sec) + 24px)` (96px at 1440/1920, scaling
+with `--pad-sec` at every breakpoint since it is `calc`, not a fixed override) so the band still closes with
+comparable weight to before, rather than ending on the shared, unmodified 72px every other section uses.
+Checked by eye against `journey-D.png` at 1440 and 390, both locales (see §21.4) — the cards, the notes and
+the WhatsApp close read as one balanced band, not a hole where the graphic used to be.
+
+**This is a deliberate, approved divergence from `journey-D.png`**, which draws a sparkline under its three
+cards. `compare.mjs`'s §8 sparkline geometry row is marked removed, not deleted, in §8 above, so a future
+pass comparing the build to that board does not "restore" it.
+
+### 21.3 The offer's "what we do" line led with mechanics, not the benefit
+
+Ahmad: `one thing I don't like in the paragraph is what we do, which is we build website, then we write its
+pages. It sounds very basic and stupid. Let's just talk bring the benefit immediately. We get your business
+found in Google and AI. Because that will make the paragraph way shorter and easier to read.`
+
+B1's subhead (offer hero) had four sentences: who the offer is for, the six months/no fee, the "what we do"
+clause, and "No commitment." Only the third sentence changed:
+
+| | Arabic | English |
+|---|---|---|
+| Was (26 / ~34 words) | نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. | We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. |
+| Now (15 / 17 words) | نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | We get your business found on Google and in AI, turning those visits into calls and customers. |
+
+The benefit leads, the build-it/write-it mechanics are dropped (already told in B2's included list, so
+nothing is lost, only not repeated here), and each language is roughly half its former length — Ahmad's own
+words, "We get your business found in Google and AI," are close to verbatim in the English. The Arabic
+reuses `نجعل عملاءك يجدونك`, the exact construction the hero H1 and §4 block B's title already use, so the
+voice stays consistent instead of inventing a new one. The opening sentence (`هذا العرض مخصص لشركات الخدمات
+في السعودية` / `This offer is for service companies in Saudi Arabia`, the eligibility condition §18.3 added)
+and the closing `دون التزام.` / `No commitment.` are untouched — neither was Ahmad's complaint and both
+carry required information. No dashes, no emojis, no figures, no prices, and `rank`/`ترتيب`/`يتصدر` do not
+appear, per the standing rules.
+
+**The same fix also solved the phone strip's fourth row, §18.6's open item.** §18.3 changed the homepage
+offer-strip line to `ستة أشهر مجانية لشركات الخدمات` / `Six months free for service companies` to carry the
+same eligibility qualifier, and §18.6 measured that this pushed the strip from three rows to four at 390px
+because the English line could no longer share row 1 with the pill (pill + line = 410px against a 350px
+inner box, 60px over). Shortened to `ستة أشهر مجانًا لشركات خدمية` / `6 months free, service firms` — same
+qualifier, fewer pixels (`شركات خدمية`, "service firms/companies" as an adjective phrase, is shorter than
+the genitive `شركات الخدمات`; `مجانًا` swaps the adjective `مجانية` for the equally standard adverb; English
+swaps `companies` for `firms` and `Six` for the numeral `6`, which the strip already uses for the spots
+count). Measured at 390, both locales single-row-safe with margin to spare:
+
+| | Pill + line width | Inner box | Margin | Rows |
+|---|---|---|---|---|
+| Arabic, before (§18.6) | 358px | 350px | over by 8px | 4 |
+| Arabic, now | 203px | 350px | **147px** | **3** |
+| English, before (§18.6) | 410px | 350px | over by 60px | 4 |
+| English, now | 197px | 350px | **153px** | **3** |
+
+The homepage strip is back to the three rows §15.3/§18.3 intended, in both locales, with no meaning lost —
+`copy.md` §2 has the line and the rationale.
+
+### 21.4 Verification run
+
+Scripts copied into a scratch folder and run from there — imports do not resolve inside the client repo,
+`puppeteer-core` and `sharp` live in scratch only. Real Chrome at
+`C:/Program Files/Google/Chrome/Application/chrome.exe`.
+
+Two other agents were mid-edit on `build.mjs`, `src/render.mjs` and `content/blog/` for the whole of this
+pass (the blog rebuild and §7's client-logo swap), so the live repo's build broke and un-broke several times
+while this work was going on — never from anything touched here. Rather than block on someone else's WIP or
+touch files outside this scope, verification ran against an isolated scratch copy of the repo (`src/`,
+`content/`, `build.mjs`, `brand/`) with a throwaway, scratch-only patch to `blogList()` to unblock that one
+build (their `build.mjs` was already calling it with a new `{featured, rows}` shape their own `render.mjs`
+didn't accept yet) — never applied to the live repo. Once both other agents finished, `node build.mjs` in
+the live repo succeeded on its own (82 files) with no changes needed here, confirming the live site now
+carries this pass plus theirs together.
+
+**`compare.mjs`, homepage pairs, both locales at 1440:** `problem` and `journey` checked by eye against
+`s3.png` and `journey-D.png` — headline pair reads as intended with the `؟`, highlight block sizes correctly
+to the longer string, no sparkline, spacing reads as one balanced band. `MISSING selectors: 0` across all 24
+board pairs (home, blog list, offer x2 locales) — no section was renamed or broken.
+
+**First screen balance — header + hero + strip, next section at the fold, all six combinations:**
+
+| Viewport | Locale | Header | Hero | Strip | Hero+Strip | `#problem` top | Match viewport |
+|---|---|---|---|---|---|---|---|
+| 1440x900 | en / ar | 112 | 822 | 78 | 900 | 900 | yes / yes |
+| 1920x1200 | en / ar | 112 | 1121 | 79 | 1200 | 1200 | yes / yes |
+| 390x844 | en / ar | 72 | 726.8 | 117.2 | 844 | 844 | yes / yes |
+
+Hero internal scroll is 0 on all six. The 390 strip height (117.2px) is back to §15.1's original three-row
+figure, not §18.6's 142px four-row figure — confirming §21.3's fix.
+
+**`shots.mjs`, `ar`/`en`/`offer-ar`/`offer-en` at 1440x900 and 390x844 — 8 rows:** `broken=0`, `errors=0`,
+`overflow=false` on every row, at every width.
+
+**`node scripts/seo-audit.mjs`: 0 high.** (23 medium, 7 low — both counts differ from §18.7's 17/11 only
+because the blog agent's content swap changed page count and word counts on blog pages; nothing counted here
+touches §3, §6 or the offer page.)
+
+**Lighthouse, `/`, `/en/`, `/offer/`, `/en/offer/`, mobile and desktop:** accessibility **100** on all 8,
+performance **99** mobile / **100** desktop on all 4 pages, CLS **0.000** on all 8.
 
 **Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.

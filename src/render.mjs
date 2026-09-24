@@ -215,20 +215,10 @@ export function included(t) {
 }
 
 /* ── §6 The journey.
-      The sparkline is the board's own measured geometry (build-spec §7):
-      1320px wide, 2.5px stroke, five 10px dots at 327.5px pitch over a
-      39px band, dot y-centres 751.6 / 747.1 / 742.2 / 735.5 / 724.3 css,
-      here expressed relative to the band. ─────────────────────────────── */
-function sparkline() {
-  const ys = [32.3, 27.8, 22.9, 16.2, 5.0];
-  const xs = [5, 332.5, 660, 987.5, 1315];
-  const pts = xs.map((x, i) => `${x},${ys[i]}`).join(' ');
-  const dots = xs.map((x, i) => `<circle cx="${x}" cy="${ys[i]}" r="5" fill="#FF5F29"/>`).join('');
-  return `<svg class="spark" viewBox="0 0 1320 39" width="1320" height="39" preserveAspectRatio="none" role="presentation" focusable="false">
-      <polyline points="${pts}" fill="none" stroke="#FF5F29" stroke-width="2.5" vector-effect="non-scaling-stroke"/>${dots}
-    </svg>`;
-}
-
+      No sparkline under the cards any more — removed at Ahmad's instruction,
+      2026-09-25 (build-spec §21): "there is this orange graph under the
+      three images... it looks ugly." Deliberate divergence from
+      journey-D.png, which draws one; do not restore it. ─────────────────── */
 const JOURNEY_ART = ['/assets/img/journey-1.webp', '/assets/img/journey-2.webp', '/assets/img/journey-3.webp'];
 
 export function journey(t) {
@@ -246,7 +236,6 @@ export function journey(t) {
       <p class="lead">${esc(t.journey.lead)}</p>
       <p class="site-label">${esc(t.journey.siteLabel)}</p>
       <div class="journey-grid">${cards}</div>
-      ${sparkline()}
       <div class="journey-notes">
         <p>${esc(t.journey.precision)}</p>
         <p>${t.journey.baseline[0]}</p>
@@ -261,26 +250,30 @@ export function journey(t) {
 }
 
 /* ── §7 Our work.
-      The plate is the site's own real monthly click series from
-      design/proof-data.md, drawn as inline SVG the same way §6's sparkline
-      is. Nothing is generated, smoothed or invented; a site with a single
-      complete month gets an empty plate, because one month is not a curve. */
-function workPlate(clicks) {
-  const W = 270, H = 155, P = 20;
-  if (!clicks || clicks.length < 3) {
-    // No "First data month: August 2026" label any more — Ahmad called it "not
-    // sexy". The empty plate is a bare dashed slot and the card's only
-    // description is its "New project" tag.
-    return `<div class="work-plate"></div>`;
-  }
-  const max = Math.max(...clicks), min = Math.min(...clicks);
-  const span = max - min || 1;
-  const step = (W - P * 2) / (clicks.length - 1);
-  const pts = clicks.map((v, i) => `${(P + i * step).toFixed(1)},${(H - P - ((v - min) / span) * (H - P * 2)).toFixed(1)}`);
-  const dots = pts.map((p) => { const [x, y] = p.split(','); return `<circle cx="${x}" cy="${y}" r="3.5" fill="#FF5F29"/>`; }).join('');
-  return `<div class="work-plate"><svg viewBox="0 0 ${W} ${H}" role="presentation" focusable="false">
-      <polyline points="${pts.join(' ')}" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/>${dots}
-    </svg></div>`;
+      THE PLATE IS THE CLIENT'S OWN LOGO (Ahmad, 2026-09-25). It used to be
+      the site's real monthly click series drawn as inline SVG, and a site
+      with fewer than three complete months had no curve to draw, so the four
+      newest clients rendered an empty dashed plate — the "many boxes are
+      empty" he complained about. Every client has a logo, so every card is
+      full. `workPlate()`'s chart generator is DELETED. §6's own chart was a
+      separate function and nothing in this pass went near §6.
+
+      Every logo is the same 640x334 canvas (build-spec §20), so one explicit
+      width/height covers all eleven and the set cannot shift layout. The
+      alt is empty on purpose: the card already prints the site name as real
+      text, so an alt here would read the client's name twice in a row.
+
+      NOT `loading="lazy"`, and this is the one place on the page that breaks
+      §7's below-the-fold rule. Eight of the eleven cards are clipped sideways
+      by the carousel, so a lazy image there is only fetched as its card slides
+      in — measured: 5 of 11 loaded when §7 came into view and still only 7
+      after twelve seconds of auto-advance. A card that arrives with no logo is
+      the empty box this whole pass exists to remove. `fetchpriority="low"`
+      instead, so the 143 kB queues behind the hero and costs nothing above the
+      fold. */
+const LOGO_W = 640, LOGO_H = 334;
+function workPlate(c) {
+  return `<div class="work-plate"><img src="/assets/img/logo-${c.logo}.webp" width="${LOGO_W}" height="${LOGO_H}" alt="" decoding="async" fetchpriority="low"></div>`;
 }
 
 // Rebuilt as a slideshow 2026-09-24, to Ahmad's list:
@@ -302,7 +295,7 @@ export function work(t) {
         ? `<p class="work-metric"><span class="num">${esc(c.figure)}</span> ${esc(t.work.metricLabel)}</p>`
         : '';
     return `<a class="card-light work-card" href="${c.url}" rel="nofollow noopener" target="_blank">
-      ${workPlate(c.clicks)}
+      ${workPlate(c)}
       <p class="work-site">${esc(c.site).replace(/\.([a-z]+)$/, '<wbr>.$1')}</p>
       ${metric}
       <span class="work-link">${esc(t.work.linkLabel)}<span class="arrow" aria-hidden="true">&rarr;</span></span>
@@ -632,37 +625,54 @@ function cardMeta(t, post) {
   return `<p class="card-meta">${post.dateLabel}<span class="dot" aria-hidden="true">&middot;</span>${post.readLabel}<span class="dot" aria-hidden="true">&middot;</span><a class="byline" href="${post.authorUrl}" rel="author">${esc(t.blog.by)}</a></p>`;
 }
 
-/* The list page, layout B, approved 2026-09-24 (design/boards/blog-B.png):
-   one wide featured panel (art one side, label, title, excerpt and a read-more
-   link the other), a hairline rule, then the remaining five as a two column
-   list with small square thumbnails and a hairline between rows.
+/* The board draws `Read more →` with a long thin arrow, not the `›` chevron
+   the rest of the site uses. U+2192 is NOT in either Alexandria subset's
+   unicode-range (the Latin face carries U+2191 and U+2193 and stops), so
+   typing the character would silently fall out of the brand font on the one
+   line Ahmad singled out. It is drawn instead, in `currentColor`, and
+   mirrored under `dir="rtl"` by CSS. */
+const ARROW = '<svg class="arw" viewBox="0 0 26 12" width="26" height="12" aria-hidden="true" focusable="false"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>';
+
+/* The list page, layout B, approved 2026-09-24 and rebuilt as an exact replica
+   2026-09-25 (design/boards/blog-B.png, measured in build-spec §19).
+
+   Ahmad: "I want it to be exactly like the image you showed me, which is B.
+   Everything in it. Even the titles and everything." So this markup is the
+   board's, not copy-pages.md §B2's six-field card:
+
+     featured panel — a full-bleed orange art block one side; a small orange
+       CATEGORY label, the title, the excerpt and an orange `Read more →` the
+       other. No date, no read time, no byline: the board draws none.
+     five rows — a small orange square, an UPPERCASE date, the title and a
+       two line excerpt. No read-more on the rows; the board draws it on the
+       featured panel only, and with the byline gone each row now holds exactly
+       ONE link, so the title link stretches over the whole row instead.
+
+   §B2's "no category chips" and its read-more-on-every-card were overridden by
+   Ahmad for this page specifically; both overrides are recorded in
+   copy-pages.md §B2 so the next agent does not revert them as drift.
+
    Both grids are logical, so the art and the thumbnails sit inline-start:
    left under `dir="ltr"`, right under `dir="rtl"`, with no RTL-specific rule. */
-export function blogList(t, posts) {
-  const [lead, ...rest] = posts;
-  const rows = rest.map((p) => `<li class="post-row">
-      <a class="row-art" href="${p.path}" tabindex="-1" aria-hidden="true">
-        <img src="${p.thumb}" width="240" height="240" alt="" loading="lazy" decoding="async">
-      </a>
+export function blogList(t, { featured, rows: posts }) {
+  const rows = posts.map((p) => `<li class="post-row">
+      <img class="row-art" src="${p.thumb}" width="240" height="240" alt="" loading="lazy" decoding="async">
       <div class="row-text">
-        ${cardMeta(t, p)}
-        <h3 class="h3"><a href="${p.path}">${esc(p.title)}</a></h3>
+        <p class="row-date">${p.dateLabel}</p>
+        <h3 class="row-title"><a href="${p.path}">${esc(p.title)}</a></h3>
         <p class="row-excerpt">${esc(p.excerpt)}</p>
-        <a class="read-more" href="${p.path}">${esc(t.blog.readMore)}<span class="chev" aria-hidden="true">&rsaquo;</span></a>
       </div>
     </li>`).join('');
 
   return `<section id="posts" class="sec">
     <div class="wrap">
       <article class="feature">
-        <a class="feature-art" href="${lead.path}" tabindex="-1" aria-hidden="true">
-          <img src="${lead.art}" width="1344" height="752" alt="" fetchpriority="high" decoding="async">
-        </a>
+        <img class="feature-art" src="${featured.wide}" width="1344" height="506" alt="" fetchpriority="high" decoding="async">
         <div class="feature-text">
-          ${cardMeta(t, lead)}
-          <h2 class="feature-title"><a href="${lead.path}">${esc(lead.title)}</a></h2>
-          <p class="body">${esc(lead.excerpt)}</p>
-          <a class="read-more" href="${lead.path}">${esc(t.blog.readMore)}<span class="chev" aria-hidden="true">&rsaquo;</span></a>
+          <p class="feature-cat">${esc(featured.category)}</p>
+          <h2 class="feature-title"><a href="${featured.path}">${esc(featured.title)}</a></h2>
+          <p class="feature-excerpt">${esc(featured.excerpt)}</p>
+          <a class="read-more" href="${featured.path}">${esc(t.blog.readMore)}${ARROW}</a>
         </div>
       </article>
       <ul class="post-rows">${rows}</ul>

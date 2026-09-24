@@ -181,19 +181,25 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر مجانية لشركات الخدمات | Six months free for service companies |
+| Line | ستة أشهر مجانًا لشركات خدمية | 6 months free, service firms |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
 | Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA, same row | اطلع على العرض | See the offer |
 
+**Line shortened 2026-09-25 (build-spec §21).** `ستة أشهر مجانية لشركات الخدمات` /
+`Six months free for service companies` was the string §18.3 added to carry the "service companies"
+qualifier, but it pushed the phone strip to four rows (§18.6) because the English could no longer share
+a row with the pill at 390px. Shortened to keep the same qualifier in fewer pixels — `شركات خدمية` /
+`service firms` reads the same and the band is back to three rows on a phone, in both locales.
+
 ### Static state, countdown removed and spots empty
 
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر مجانية لشركات الخدمات | Six months free for service companies |
+| Line | ستة أشهر مجانًا لشركات خدمية | 6 months free, service firms |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
 | CTA, same row | اطلع على العرض | See the offer |
 
@@ -222,8 +228,14 @@ display lines are in his voice; **every other Arabic string in this file stays p
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | المشكلة | The problem |
-| Headline | ملفك على جوجل يعمل وما عندك موقع إلكتروني | Your Google profile works. You have no website. |
-| Highlighted phrase | وما عندك موقع إلكتروني | no website. |
+| Headline | ملفك على جوجل يعمل وما عندك موقع إلكتروني؟ | Your Google profile works. You have no website? |
+| Highlighted phrase | وما عندك موقع إلكتروني؟ | no website? |
+
+**Question mark added 2026-09-25 (build-spec §21).** The hero H1 ends in `؟`
+(`تبي عملاءك يجدونك...؟`, §15.6) and this headline is its pair — the same rhetorical question asked twice,
+once as a hook and once as the problem. It shipped without the mark, so the pair did not read as intended.
+Both languages now close on a question mark; the highlight still sits on the same phrase, one character
+longer.
 
 **The subhead was re-read against the new headline and is unchanged.** It still follows from it: the profile
 reaches a narrow radius and that is all it can do, a website would widen the same demand, and it closes on
@@ -488,6 +500,17 @@ not say `results may vary`.
 `1px #EBEBEB` hairline, the site name, one figure, and a `view case study` style link. Real client sites
 only. No generated mockup is ever presented as a client.
 
+**The plate at the top of the card is THE CLIENT'S OWN LOGO (Ahmad, 2026-09-25), not a chart.** His
+words: `The client slideshow, many boxes are empty. I think since the website lacks images, we should
+scratch the graph idea and just put images. If you can extract good images for each project and put them
+there. Or their logos. Actually, would be better. Yeah, their logos.` The plate used to draw the site's
+real monthly click series, and the four newest clients have one complete month each, so they had no curve
+and rendered a bare dashed slot — that is what read as broken. Every client has a logo, so every card is
+now full. **Nothing else on the card moved**: the site name, the growth percentage, the `New project`
+tags and the case study link are exactly as they were, and every percentage below is unchanged. Each logo
+is taken from that client's own live site; the sources are listed in the logo table at the end of this
+file and the derivation is in `build-spec.md` §20. No brand mark is invented, redrawn or recoloured.
+
 **Rebuilt 2026-09-24. This is the biggest change on the page.** Ahmad's decisions, in his order:
 1. **Show every SEO client, not four.** Eleven sites, not a shortlist of the four best. A page that shows
    four and has eleven is hiding something a prospect will find anyway.
@@ -529,7 +552,12 @@ original reason for leaving it out — that the grid might ship with ten — no 
 | Metric label | نمو النقرات | Click growth |
 | New project tag | مشروع جديد | New project |
 | Link label | افتح الموقع | View case study |
-| Screenshot caption, where a capture is shown | لقطة من Google Search Console | Capture from Google Search Console |
+
+**The card carries no caption under the logo and the logo carries no `alt` text.** The card already
+prints the client's domain as real text directly under the plate, so an alt would read the same name
+twice in a row to a screen reader. The retired
+`لقطة من Google Search Console` / `Capture from Google Search Console` caption went with the charts: no
+card shows a Search Console capture and none is planned.
 
 **Revised again 2026-09-24. Three things came off every card and the section became a slideshow.**
 Ahmad's instructions, in his words and in full:
@@ -543,6 +571,8 @@ Ahmad's instructions, in his words and in full:
    exact months in the derivation table at the end of this file, so nothing became uncheckable.
 4. **`أول شهر بيانات: أغسطس 2026` / `First data month: August 2026` is gone from the empty plates.** He
    called it not sexy. Those four cards carry their `مشروع جديد` / `New project` tag and nothing else.
+   **Superseded 2026-09-25:** there are no empty plates any more. Those four cards keep the tag and now
+   carry their client's logo in the plate, the same as the other seven.
 
 **Build rules for this section, all five are hard.**
 * Every outbound card link is `rel="nofollow"` plus `target="_blank"` and `rel` also carries `noopener`,
@@ -584,10 +614,16 @@ from one of its own troughs, for example March 2026 at 1 click, and that is cher
 thing the numbers rule exists to stop. The `New project` tag is not available to it either, because the
 site is not new: it has recorded data across the whole fourteen month window, so the tag would be a lie.
 
-So the card shows **the site name and the link, and nothing else** — no figure, no tag, no period line,
-and an empty dashed plate (the sector label came off this card with all the others). One card without a
-figure sitting beside ten that have one is normal and honest, and it is the only version of this card
-that does not require inventing something. Nothing on this page may be fake (Ahmad, 2026-09-24).
+So the card shows **the site name and the link, and nothing else** — no figure, no tag and no period
+line (the sector label came off this card with all the others). One card without a figure sitting beside
+ten that have one is normal and honest, and it is the only version of this card that does not require
+inventing something. Nothing on this page may be fake (Ahmad, 2026-09-24).
+
+**Its plate, 2026-09-25.** It used to be an empty dashed slot; it now carries the client's wordmark like
+every other card. movingcompanykw.com is the one client of the eleven that ships **no logo file at all**
+— its header brand is type, not an image — so the wordmark is set in the site's own two typefaces, in
+the site's own colours, from the site's own strings. That is a reproduction of what the site already
+displays, not a new brand mark, and it is recorded in full in `build-spec.md` §20.
 
 **Build note.** Ahmad confirms which client names may be shown publicly before this section ships. Every
 percentage is reproduced in the derivation table at the end of this file with the exact rows it came from,
@@ -735,12 +771,28 @@ half of the market.
 3. **The spots figure is the `[SPOTS]` build slot, never a typed number.** The board rendered
    a spots figure of its own, which the image model invented. No spots number is ever written into this file.
 
+**Fourth fix, 2026-09-25 (build-spec §21): the "what we do" sentence led with mechanics, not benefit.**
+Ahmad: `one thing I don't like in the paragraph is what we do, which is we build website, then we write its
+pages. It sounds very basic and stupid. Let's just talk bring the benefit immediately. We get your business
+found in Google and AI. Because that will make the paragraph way shorter and easier to read.` The clause
+`نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك،
+وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك` / `We build your website and write every page, so the
+customer searching for your service discovers you on Google and in AI answers and calls you, and those
+calls become clients and revenue` (26 Arabic words, ~34 English) is now
+`نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك` /
+`We get your business found on Google and in AI, turning those visits into calls and customers` (15 Arabic
+words, 17 English) — the benefit first, the build-and-write mechanics dropped since they are already told
+in B2, and roughly half the length. The Arabic reuses `نجعل عملاءك يجدونك`, the same construction the hero
+H1 and §4's block B title already use, so the voice stays consistent site-wide. The "for service companies
+in Saudi Arabia" opening sentence and the "No commitment" closer are untouched — neither was Ahmad's
+complaint and both carry required information (§18.3's eligibility condition, and the no-contract promise).
+
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
 | Headline | ستة أشهر مجانية، بدون عقد | Six months free, no contract. |
 | Highlighted word | مجانية | free |
-| Subhead | هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. دون التزام. | This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. No commitment. |
+| Subhead | هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. دون التزام. | This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We get your business found on Google and in AI, turning those visits into calls and customers. No commitment. |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
@@ -940,6 +992,11 @@ One row per card. Every percentage below was computed from two complete months e
 `proof-data.md`, clicks only, rounded to a whole percent, formula `(later − earlier) ÷ earlier`. Both
 months are printed on the card itself, so the reader can do the same arithmetic.
 
+**Unchanged by the 2026-09-25 logo pass.** Every figure in this table is exactly what it was. What
+changed is only what sits above the figure: the card's plate was a chart drawn from the same `clicks`
+series, and it is now the client's logo. The `clicks` arrays stay in `src/data.mjs` as the record, the
+way `period` does, and are no longer drawn. The logo sources are the table under this one.
+
 | # | Site | Figure shown | Derived from, exactly | Check |
 |---|---|---|---|---|
 | 1 | kwtclean.com | +222% | May 2026 `165` clicks to August 2026 `531` clicks | 531 ÷ 165 = 3.218, so +221.8%, printed +222% |
@@ -981,6 +1038,37 @@ card prints whichever month it landed on so nothing is hidden:
 is not in the eleven. Its own numbers are tiny, 0 to 2 clicks a month, which is exactly why the site is
 being rebuilt. `skyscraper`, `fightclub` and `alamana` are not SEO clients and have no Search Console
 property in the export, so there is no data for them and they get no card.
+
+## Section 7 logo table
+
+One row per card, in the shipping order. Every logo was fetched from the client's own live site on
+2026-09-25 and the source file is kept byte-for-byte at `design/client-logos/<domain>.<ext>`. The
+preference order was header logo image, then inline SVG logo, then `og:image`, then favicon or
+apple-touch-icon; where a client ships more than one version of the same mark, the higher resolution one
+and the one drawn for a light surface were taken. **No brand mark was invented, redrawn or recoloured.**
+`build-spec.md` §20 has the pixel record.
+
+| # | Site | Logo taken from | What it is |
+|---|---|---|---|
+| 1 | q8carwash.com | `/images/logo-badge.webp` | The Posefore car badge, the `LocalBusiness` image in the site's own JSON-LD. The header brand is type only |
+| 2 | mashame3.com | `/favicon.svg` | The blue snowflake mark. The header brand is type only, and the `og:image` is a photograph of a technician |
+| 3 | kuwaityclean.com | `/images/icons/brand-logo-colorful.webp` | The header logo, `KUWAITY CLEAN` with the colour house mark |
+| 4 | kwcarwash.com | `/images/optimized/logo.webp` | The `Wash & Polish` script on the brand's mint field. The header brand is an icon plus type |
+| 5 | kwtclean.com | `/images/logo.png` | The header logo, the four-colour house mark |
+| 6 | carwashkw.com | `/images/logo.webp` | The header logo, `Master Wash`, on its navy badge |
+| 7 | betikcleaner.com | `/assets/brand/betik-cleaner-primary-rtl.svg` | The header logo, the full `بيتك كلينر / BETIK CLEANER` lockup |
+| 8 | anharpest.com | `/assets/logo/logo-ar.svg` | The header logo. anharpest.com is a dark site and this is its light-on-dark lockup, so it sits on the site's own `#0D1512` ground |
+| 9 | alghadeerclean.com | `/icon-512.png` | The same mark as the 166px header logo, at 512px, from the site's own `site.webmanifest` |
+| 10 | ragwaclean.com | `/assets/images/brand/ragwa-mark.svg` | The header logo, the bubble mark |
+| 11 | movingcompanykw.com | **no logo file exists** | The site's wordmark, set in the site's own typefaces and colours — see below |
+
+**movingcompanykw.com is the one client with no logo asset.** Its header and footer brand is type:
+`شركة منيف للنقل` above `Muneef Transport · Kuwait`, with an unrelated generic truck icon beside it in
+the nav. There is no logo image anywhere on the site, no favicon, no apple-touch-icon and no manifest,
+and its `og:image` is a photograph of a removal service. So the card carries the wordmark it already
+shows, set from the site's own stylesheet: `Noto Kufi Arabic` 800 in `#ffffff` over `Outfit` 600 in
+`#c8962c`, on the site's own header navy `#0b1929`. Every string, typeface and colour is read off
+movingcompanykw.com; nothing is designed. If the client ever ships a real mark, replace the file.
 
 ## Geography register
 

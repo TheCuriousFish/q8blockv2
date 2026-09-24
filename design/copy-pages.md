@@ -280,29 +280,67 @@ Six posts ship with it, written in `content/blog/`.
 
 ## B2. The card
 
-Every card carries the same six fields and nothing else. No category chips, no tags, no share icons,
-no comment counts, no thumbnails of a person.
+**Rewritten 2026-09-25. The six-field card below is superseded on the LIST PAGE by `blog-B.png`.**
+Ahmad looked at the built list, called it ugly and said: *"I want it to be exactly like the image in
+Higgsfield... I want it to be exactly like the image you showed me, which is B. Everything in it. Even
+the titles and everything. Which means we're going to edit even the blog posts themselves. I want a
+replica."* The board is now the card spec, and it draws two different cards. The three overrides it
+forces are listed under the tables so nobody reverts them later as drift.
+
+### B2a. The featured panel — one, pinned
 
 | Field | Source | Arabic | English |
 |---|---|---|---|
+| Category label | post frontmatter `category` | السيو | SEO |
 | Title | post frontmatter `title` | the post title | the post title |
-| Excerpt | post frontmatter `excerpt` | one line, never truncated mid word | one line, never truncated mid word |
-| Date | post frontmatter `date` | 24 سبتمبر 2026 | 24 September 2026 |
-| Author | fixed byline, links to `https://ahmadowaihan.com/` | بقلم أحمد عويهان | By Ahmad Owaihan |
-| Read time | computed from the post, not typed by hand | 5 دقائق قراءة | 5 min read |
-| Read more | text link with a chevron, never a button | اقرأ المقال | Read the article |
+| Excerpt | post frontmatter `excerpt` | three lines at the built width | three lines at the built width |
+| Read more | text link with an arrow, never a button | اقرأ المزيد | Read more |
+
+No date, no read time, no byline: the board draws none on this panel.
+
+**The featured slot is PINNED to `complete-guide-to-local-seo` and is not "the newest post".** Ahmad:
+*"it is amazing how the featured one, the big one, says The Complete Guide to Local SEO for Small
+Businesses, which is perfect for our business. And that will remain there no matter how many blog posts
+we have."* It is `FEATURED_SLUG` in `build.mjs`, resolved by slug and not by position, with a comment
+saying not to make it dynamic. Adding a post means adding it to `LIST_ORDER`.
+
+### B2b. The list rows — five, in the board's order
+
+| Field | Source | Arabic | English |
+|---|---|---|---|
+| Date | post frontmatter `date` | 24 سبتمبر 2026 | 24 SEPTEMBER 2026 |
+| Title | post frontmatter `title` | the post title | the post title |
+| Excerpt | post frontmatter `excerpt` | two lines at the built width | two lines at the built width |
+
+No category, no read time, no byline, no read-more: the board draws none of them on a row. With the
+byline gone each row holds exactly one link, so the title link stretches over the whole row and the
+thumbnail with it — which is also the phone tap target the read-more used to be.
+
+### The three overrides, and what they cost
+
+1. **Category chips are allowed on this page.** The rule above used to read *"No category chips, no
+   tags"* and build-spec §18.5.2 D left the board's `SEO` label undrawn for exactly that reason. Ahmad
+   overruled it. Every post now carries a `category` in frontmatter; only the featured panel renders it.
+2. **The byline and the read time leave the list page.** Both still appear on every post page (§B3), so
+   the author link to `https://ahmadowaihan.com/` is not lost from the site — only from this one page,
+   where the board has no room drawn for it. There is now **no outbound link on the list page.**
+3. **`Read more` replaces `Read the article` / `اقرأ المقال`,** because that is what the board draws,
+   and it takes an arrow rather than the site's `›` chevron.
 
 **Build rules for the card.**
-* The author link carries `rel="author"` and opens in the same tab. It is the only outbound link on the
-  list page.
-* The read time is computed from the rendered word count of that post at build time. The `read` value in
-  frontmatter is the author's estimate and the build may recompute it, but nobody types a number onto a
-  card by hand.
 * Dates render as the day, the month name and the year in the page's own language, matching the
-  `24 سبتمبر 2026` / `24 September 2026` form already used in the homepage source caption.
+  `24 سبتمبر 2026` / `24 September 2026` form already used in the homepage source caption. English
+  uppercases and tracks it the way the board draws it; Arabic takes neither (no case, and tracking
+  breaks joined letterforms).
+* **The board's own dates are not used.** It draws `APR 12, 2025` and similar, which are model
+  inventions. The real publication date is printed. Ahmad: *"I want to be honest and no fake."* Only
+  the treatment is the board's.
 * The six posts all carry the same publication date, because they are the launch set and dating them
   apart would invent a publishing history the site does not have. If Ahmad wants them staggered, the
   dates are one edit each in frontmatter.
+* Excerpts are written to the line count the board draws — two lines on a row, three on the featured
+  panel — at the built column widths. That is a copy constraint, not a CSS one: an excerpt that runs
+  long adds a line to its row and the list stops matching the board.
 
 ## B3. The post page
 
@@ -338,9 +376,10 @@ fields this site's blog list and post template need.
 
 ```yaml
 ---
-title: the post title, eight words or fewer, English in sentence case
+title: the post title, eight words or fewer
 description: the meta description, one or two sentences
 excerpt: one line for the card, different from the description
+category: SEO
 date: 2026-09-24
 author: Ahmad Owaihan
 authorUrl: https://ahmadowaihan.com/
@@ -352,15 +391,40 @@ read: 5
 
 | Field | Rule |
 |---|---|
-| `title` | Eight words or fewer. No dashes, no emojis. English titles in sentence case. |
+| `title` | Eight words or fewer. No dashes, no emojis. **The six launch titles are taken off `blog-B.png` exactly as it draws them** (2026-09-25, below), which is why they are in Title Case and use SEO vocabulary; that is deliberate and Ahmad's instruction, not drift. Anything written after them goes back to sentence case. |
 | `description` | For the `<meta name="description">` of the post page. Never identical to the excerpt. |
-| `excerpt` | One line, used on the blog card. It is a sentence, not a truncation of the first paragraph. |
+| `excerpt` | One line, used on the blog card. It is a sentence, not a truncation of the first paragraph. It has to fit **two lines** on a row and **three** on the featured panel (§B2). |
+| `category` | Added 2026-09-25 for the board's featured label. Rendered on the featured panel only. |
 | `date` | ISO, `YYYY-MM-DD`. Rendered per locale by the template, never typed into the body. |
 | `author` | `Ahmad Owaihan` in the English file, `أحمد عويهان` in the Arabic file. |
 | `authorUrl` | `https://ahmadowaihan.com/` on every post, both languages. |
 | `slug` | The same English slug in both languages, so `/blog/<slug>/` and `/en/blog/<slug>/` pair up. |
 | `lang` | `ar` or `en`, matching the filename suffix. |
 | `read` | Whole minutes, the author's estimate. The build may recompute it from the word count. |
+
+### B5a. The six launch titles, 2026-09-25
+
+Read off `design/boards/blog-B.png`. The English is the board's wording, character for character; the
+Arabic is its mirror. The featured post is first and is pinned there (§B2a).
+
+| # | Slug | English | Arabic |
+|---|---|---|---|
+| **F** | `complete-guide-to-local-seo` | The Complete Guide to Local SEO for Small Businesses | الدليل الكامل للسيو المحلي للأنشطة الصغيرة |
+| 1 | `keyword-research-for-local-seo` | Keyword Research for Local SEO | البحث عن الكلمات المفتاحية للسيو المحلي |
+| 2 | `on-page-seo-basics-for-local-sites` | On-Page SEO Basics for Local Sites | أساسيات السيو داخل صفحات الموقع المحلي |
+| 3 | `google-business-profile-optimization` | Google Business Profile Optimization | تحسين ملف نشاطك التجاري على جوجل |
+| 4 | `measuring-local-seo-success` | Measuring Local SEO Success | قياس نجاح السيو المحلي |
+| 5 | `building-local-citations-that-matter` | Building Local Citations That Matter | بناء الاستشهادات المحلية التي تهم |
+
+Rows 1-5 are in the order the board draws them: the grid is two columns filled row by row, so 1 and 2
+sit on the board's first row, 3 and 4 on its second, 5 alone on its third.
+
+**These titles knowingly break the site's own no-jargon rule, and that is Ahmad's call, twice stated.**
+Everywhere else on this site `rank` is banned as a selling word and technical vocabulary is avoided,
+because the reader is a business owner with no website. The board's titles are SEO vocabulary and he
+asked for the board. **The bodies are not exempt:** every article explains the term in its own title in
+plain words the first time it appears, and then writes plainly. No article stacks more jargon on top of
+the title it was given.
 
 Filenames are `content/blog/<slug>.ar.md` and `content/blog/<slug>.en.md`. The Arabic file is written
 first and the English file is its mirror, section for section.

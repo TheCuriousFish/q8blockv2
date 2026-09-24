@@ -27,18 +27,18 @@ Six articles, each published in Arabic at /blog/<slug>/ and in English at
 /en/blog/<slug>/. All were published on 2026-09-24, written by Ahmad Owaihan
 (Ahmad Owaihan, https://ahmadowaihan.com/).
 
-- [Why your Google profile stops growing](https://q8block.com/en/blog/why-your-google-profile-stops-growing/) — Almost every local business reaches a ceiling on its Google Business Profile. These are the three things that build that ceiling, and what changes once you have a website.
-  Arabic: [لماذا يتوقف ملفك على جوجل عن النمو](https://q8block.com/blog/why-your-google-profile-stops-growing/)
-- [What to do with your Google profile](https://q8block.com/en/blog/what-to-do-with-your-google-profile/) — Practical work on your Google Business Profile you can do yourself today: categories, services, service areas, questions and answers, reviews, and keeping your details identical everywhere.
-  Arabic: [ما يجب أن تفعله بملفك على جوجل](https://q8block.com/blog/what-to-do-with-your-google-profile/)
-- [What a page per service and area does](https://q8block.com/en/blog/page-per-service-and-area/) — Why one service business needs dozens of pages instead of a single page listing everything, and the difference between a page built for an area and the same page with the place name swapped.
-  Arabic: [ماذا تفعل صفحة لكل خدمة ولكل منطقة](https://q8block.com/blog/page-per-service-and-area/)
-- [How AI assistants decide what to quote](https://q8block.com/en/blog/how-ai-assistants-decide-what-to-quote/) — AI assistants answer local questions by citing pages that are written and indexed. This is what makes a page quotable, and what leaves a whole business out of the answer.
-  Arabic: [كيف تختار مساعدات الذكاء الاصطناعي ما تقتبسه](https://q8block.com/blog/how-ai-assistants-decide-what-to-quote/)
-- [Why a slow website loses customers](https://q8block.com/en/blog/why-a-slow-website-loses-customers/) — The real and repetitive causes of slow websites, why slowness costs you calls you never see, and what you can ask about without understanding any code.
-  Arabic: [لماذا يخسر الموقع البطيء العملاء](https://q8block.com/blog/why-a-slow-website-loses-customers/)
-- [What to ask before paying for SEO](https://q8block.com/en/blog/what-to-ask-before-paying-for-seo/) — Seven questions that separate the people who know the work from the people selling talk, what an honest answer to each one sounds like, and the warning signs that should end the call.
-  Arabic: [أسئلة تسألها قبل أن تدفع لشركة سيو](https://q8block.com/blog/what-to-ask-before-paying-for-seo/)
+- [The Complete Guide to Local SEO for Small Businesses](https://q8block.com/en/blog/complete-guide-to-local-seo/) — Local SEO explained for a small service business: what it actually is, the three things it depends on, and the order to do them in.
+  Arabic: [الدليل الكامل للسيو المحلي للأنشطة الصغيرة](https://q8block.com/blog/complete-guide-to-local-seo/)
+- [Keyword Research for Local SEO](https://q8block.com/en/blog/keyword-research-for-local-seo/) — How to find the words your customers actually type before they call, using only what you already have, without paying for software.
+  Arabic: [البحث عن الكلمات المفتاحية للسيو المحلي](https://q8block.com/blog/keyword-research-for-local-seo/)
+- [On-Page SEO Basics for Local Sites](https://q8block.com/en/blog/on-page-seo-basics-for-local-sites/) — What belongs on a service page so Google and an AI assistant can both tell what it is, who it is for and where you work.
+  Arabic: [أساسيات السيو داخل صفحات الموقع المحلي](https://q8block.com/blog/on-page-seo-basics-for-local-sites/)
+- [Google Business Profile Optimization](https://q8block.com/en/blog/google-business-profile-optimization/) — The fields inside your Google Business Profile that change how often you appear, and the ones that only change how you look.
+  Arabic: [تحسين ملف نشاطك التجاري على جوجل](https://q8block.com/blog/google-business-profile-optimization/)
+- [Measuring Local SEO Success](https://q8block.com/en/blog/measuring-local-seo-success/) — Which numbers tell you the work is paying off, which ones look good and mean nothing, and the one number a service business should lead on.
+  Arabic: [قياس نجاح السيو المحلي](https://q8block.com/blog/measuring-local-seo-success/)
+- [Building Local Citations That Matter](https://q8block.com/en/blog/building-local-citations-that-matter/) — A citation is your business name, address and phone written on someone else’s site. Which ones are worth having and which are noise.
+  Arabic: [بناء الاستشهادات المحلية التي تهم](https://q8block.com/blog/building-local-citations-that-matter/)
 
 ## What is included on every project
 

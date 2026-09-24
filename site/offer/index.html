@@ -541,8 +541,16 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .icon-card .h3 { margin-block-start: 20px; min-height: calc(2em * var(--lh-h3)); }
 .icon-card .body { margin-block-start: 16px; }
 
-/* ══ §6 row 6 — The journey. #101012 full bleed, 3 cards, then the sparkline. ══ */
-#journey { background: var(--bg-dark); padding-block: var(--pad-sec); }
+/* ══ §6 row 6 — The journey. #101012 full bleed, 3 cards. No sparkline under
+      them any more — removed at Ahmad's instruction, 2026-09-25 (build-spec
+      §21): "there is this orange graph under the three images... it looks
+      ugly." Removing it also deleted the 72px block that used to sit between
+      the cards and the notes below (33px gap + 39px of svg), so the band
+      closed up by that much. padding-block-end is widened past the shared
+      --pad-sec, +24px, so the band still closes with the same weight it had
+      against the approved board rather than reading as a hole where the
+      graphic used to be; see build-spec §21. ══ */
+#journey { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
 #journey .site-label {
   font-size: var(--fs-caption); font-weight: 600; color: var(--orange);
   margin-block-start: 14px; direction: ltr; unicode-bidi: isolate;
@@ -565,7 +573,6 @@ html[lang="en"] .month { text-transform: uppercase; letter-spacing: 0.06em; }
   color: var(--orange); margin-block-start: 16px;
 }
 .journey-card .body { margin-block-start: 14px; }
-.spark { margin-block-start: 33px; width: 100%; height: 39px; }
 .journey-notes { margin-block-start: 56px; display: grid; gap: 12px; max-width: 780px; }
 .journey-notes p { font-size: var(--fs-foot-l); font-weight: var(--w-body); line-height: 1.6; color: var(--muted-on-dark); }
 /* source line and the WhatsApp button share one row, so the section stops
@@ -604,13 +611,26 @@ html[lang="en"] .month { text-transform: uppercase; letter-spacing: 0.06em; }
   display: flex; flex-direction: column; text-decoration: none;
 }
 .work-card:hover { opacity: 0.9; }
-.work-plate { background: var(--bg-light); width: 100%; aspect-ratio: 270 / 155; }
-.work-plate svg { width: 100%; height: 100%; }
-/* No label inside the empty plate any more — Ahmad called "First data month:
-   August 2026" not sexy. Those cards keep only their New project tag. */
-.work-plate:empty {
-  background: transparent; border: 1px dashed var(--hairline-light);
+/* The plate is the CLIENT'S LOGO since 2026-09-25, not a chart. Ahmad: "many
+   boxes are empty ... scratch the graph idea and just put images. Or their
+   logos." The four newest clients had one complete month each, so they had no
+   curve and rendered a bare dashed slot; every client has a logo, so no plate
+   can be empty now and the `:empty` rule is gone with the chart.
+
+   Eleven client logos are eleven aspect ratios, two of them with their own
+   dark field and several with brand colours that fight the page's orange. One
+   fixed-ratio plate + `object-fit: contain` is what makes them read as a set:
+   each logo is already centred on one shared 640x334 canvas at equal optical
+   AREA (build-spec §20), so a square mark does not read twice the size of a
+   wordmark beside it. Fixed aspect-ratio + explicit width/height = CLS 0. */
+.work-plate {
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline-light);
+  width: 100%; aspect-ratio: 270 / 155;
+  display: grid; place-items: center;
+  padding: clamp(8px, calc(14/14.4 * 1vw), 16px);
 }
+.work-plate img { width: 100%; height: 100%; object-fit: contain; }
 .work-site { font-size: clamp(18px, calc(24/14.4 * 1vw), 26px); font-weight: 600; line-height: var(--lh-h3); color: var(--ink); margin-block-start: 22px; direction: ltr; unicode-bidi: isolate; overflow-wrap: normal; }
 html[dir="rtl"] .work-site { text-align: right; }
 .work-metric { font-size: var(--fs-metric); font-weight: 700; line-height: 1.3; color: var(--orange-ink-light); margin-block-start: 12px; }
@@ -768,6 +788,13 @@ body.theme-dark { background: var(--bg-dark); }
   padding-block: calc(var(--header-h) + clamp(32px, calc(72/14.4 * 1vw), 80px)) var(--pad-sec);
 }
 .page-note { margin-block-start: 22px; font-size: var(--fs-foot-l); line-height: 1.6; color: var(--muted-on-light); }
+/* The blog list only. Sampled across blog-B.png the page is #FEFEFE from the
+   top of the canvas to the bottom — there is no --bg-light band behind the
+   heading — and the featured panel's top rule sits 19.8 css under the H1's
+   ink, where the shared value puts 72 + 72. About, contact, terms and 404 are
+   untouched and keep the band. */
+.blog-page .page-head { background: var(--bg-white); padding-block-end: 32px; }
+.blog-page #posts { padding-block-start: 0; }
 
 /* 404 only: the row of routes that do exist, reusing `.text-link` (build-spec §17). */
 .notfound-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-block-start: 32px; }
@@ -794,8 +821,13 @@ body.theme-dark { background: var(--bg-dark); }
 }
 .text-link:hover, .read-more:hover { color: var(--orange); }
 .text-link .chev, .read-more .chev { text-decoration: none; font-size: 1.25em; line-height: 1; }
+/* blog-B.png draws `Read more →`, a long thin arrow, not the site's `›`.
+   U+2192 is in neither Alexandria subset's unicode-range, so it is drawn as an
+   SVG in currentColor rather than typed and silently lost to a fallback font. */
+.read-more .arw { flex: none; width: 26px; height: 12px; overflow: visible; }
 html[dir="rtl"] .text-link .chev,
 html[dir="rtl"] .read-more .chev,
+html[dir="rtl"] .read-more .arw,
 html[dir="rtl"] .crumbs .chev { transform: scaleX(-1); }
 .under-link { margin-block-start: 28px; }
 
@@ -881,59 +913,130 @@ html[dir="rtl"] .crumbs .chev { transform: scaleX(-1); }
 .term .h3 { color: var(--ink); }
 .term .body { margin-block-start: 18px; }
 
-/* ── Blog, layout B (design/boards/blog-B.png, approved 2026-09-24) ───────
-   One wide featured panel, a hairline rule, then the remaining five as a two
-   column list with small square thumbnails and a hairline between rows.
-   Measured off the board at 1440: panel 1343.6 wide (the container), its art
-   670 x 252 inset 19.3 inside the panel's own hairline, the text column
-   starting 34.3 after the art, thumbnails 105 square, the rule under the panel
-   18 below it. Both grids are logical, so the art and the thumbnails sit
-   inline-start with no RTL-specific rule: left on /en/, right on /. ── */
+/* ── Blog, layout B (design/boards/blog-B.png) ────────────────────────────
+   Rebuilt as an exact replica 2026-09-25. Every number below is measured off
+   the board, not eyeballed; the full table is build-spec §19. The board is
+   2688x1520 for a 1440 screen, so css = board x 0.535714, and the board's own
+   1344.1 container is re-proportioned onto this site's locked 1320 (§5.1).
+
+     panel      top rule css y 140.9, bottom 428.0, 1px #DEE1E4, radius 0
+     padding    19.3 / 17.1 / 18.2  -> 18px
+     art        670.2 x 252.3 = 2.657:1, NOT the source art's 1.787:1, so the
+                featured panel takes its own -wide derivative
+     art -> text  45.0   ->  44px at 1320
+     split      670.2 : 591.0 = 1.132 : 1
+     rule under the panel  18 below it, full container width
+     columns    652.5 and 645.0 with a 46.6 gutter -> 46px at 1320
+     thumbnail  ~101 wide x ~88 tall across the five (the board is not
+                consistent); a square tile is the sane build, so 96px
+     row pitch  114.1 / 111.9
+   Both grids are logical, so the art and the thumbnails sit inline-start with
+   no RTL-specific rule: left on /en/, right on /. ── */
 #posts { background: var(--bg-white); padding-block: var(--pad-sec); }
 .feature {
-  border: 1px solid var(--hairline-light); padding: 20px;
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: 34px; align-items: center;
+  position: relative;
+  border: 1px solid var(--hairline-light); padding: 18px;
+  display: grid; grid-template-columns: minmax(0, 1.132fr) minmax(0, 1fr);
+  gap: 44px; align-items: center;
 }
-.feature-art { display: block; }
-.feature-art img { width: 100%; height: auto; }
+/* The board draws the featured art as a full-bleed orange block at 2.657:1.
+   The source illustrations are 1.787:1, so a third derivative is cut for this
+   slot (build-spec §16.9). width/height are on the tag: CLS stays 0.000. */
+.feature-art { display: block; width: 100%; height: auto; }
 .feature-text { display: flex; flex-direction: column; align-items: flex-start; }
-.feature-title { font-size: var(--fs-h3-s6); font-weight: 600; line-height: var(--lh-h3); margin-block-start: 14px; }
+
+/* The category label above the featured title. copy-pages §B2 used to forbid
+   category chips and §18.5.2 D left the slot empty for that reason; Ahmad
+   overruled it on 2026-09-25 asking for the board including this label, so it
+   is drawn and §B2 records the override. Orange ink on a light surface is the
+   §17.7b problem, so it takes the identical shape .eyebrow and .read-more take
+   — weight 700 with a 19px floor, which clears the 18.66px bold threshold and
+   therefore qualifies at 3:1. The board draws it ~16px; 19 is the floor this
+   site's contrast decision imposes, and no third orange was introduced. */
+.feature-cat {
+  margin: 0; font-size: clamp(19px, calc(19/14.4 * 1vw), 21px);
+  font-weight: 700; line-height: 1.1; color: var(--orange-ink-light);
+}
+html[lang="en"] .feature-cat { text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Board: cap 33.2, baseline pitch 39.1, visibly heavier than the site's 600
+   headings. 44px at --lh-display is the closest the locked scale gets without
+   inventing a size; §2.3 records 1.05 as the tightest leading Alexandria's
+   0.89em ascender+descender clears, so the board's ~0.85 is not available. */
+.feature-title {
+  margin-block-start: 8px;
+  font-size: var(--fs-h3-s6); font-weight: 700; line-height: var(--lh-display);
+}
 .feature-title a { text-decoration: none; }
-.feature-title a:hover, .row-text .h3 a:hover { color: var(--orange); }
-.feature-text .body { margin-block-start: 18px; }
-.feature .read-more { margin-block-start: 24px; }
+.feature-title a:hover, .row-title a:hover { color: var(--orange); }
+/* The whole panel is the link. With the byline gone this card holds one link
+   plus the read-more, so nothing is trapped under the stretched area. */
+.feature-title a::after { content: ""; position: absolute; inset: 0; }
+
+/* Board: ink 19.5 asc-to-desc -> 22px, line pitch 24.4 -> leading 1.11.
+   Alexandria's own ascender+descender measures 0.98em (canvas TextMetrics on
+   the shipped subset), so 1.11 leaves 0.13em of air and 1.15 is the tightest
+   value that does not read as clipped. Arabic keeps its own, looser value. */
+.feature-excerpt {
+  margin-block-start: 14px;
+  font-size: clamp(16px, calc(22/14.4 * 1vw), 24px);
+  font-weight: var(--w-body); line-height: 1.15; color: var(--muted-on-light);
+}
+html[lang="ar"] .feature-excerpt { line-height: 1.6; }
+/* above the stretched title link, so it keeps its own hover and focus ring */
+.feature .read-more { position: relative; z-index: 1; margin-block-start: 12px; }
 
 .post-rows {
   margin-block-start: 18px; border-block-start: 1px solid var(--hairline-light);
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 46px;
 }
-/* Re-measured off blog-B.png on 2026-09-25. The board's left-column thumbnail
-   tops sit at css y 465.5 / 579.6 / 690.0, i.e. a row pitch of 114.1 and 110.4
-   — call it 112. The build was running 283.8px rows, two and a half times the
-   board, because the row title borrowed the 32px --fs-h3 where the board draws
-   it at ~21 and every gap around it was a body-section value. Same failure and
-   same fix as .work-site in §14b.1: the row title gets its own size. */
 .post-row {
-  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px;
-  padding-block: 16px; border-block-end: 1px solid var(--hairline-light);
+  position: relative;
+  display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 30px;
+  padding-block: 14px; border-block-end: 1px solid var(--hairline-light);
 }
 /* The last row of each column closes the list, so it carries no rule. With
    five posts in two columns that is the fourth and the fifth item. */
 .post-rows > :nth-last-child(-n+2) { border-block-end: 0; }
-.row-art { display: block; }
-.row-art img { width: 96px; height: 96px; }
-/* Its own size, not the 32px --fs-h3. Board ink measures ~21px at 1440. */
-.row-text .h3 {
-  margin-block-start: 5px;
-  font-size: clamp(17px, calc(21/14.4 * 1vw), 23px);
+/* The board's tiles are NOT square: 103.9/100.2/99.1/102.9/102.9 wide against
+   88.9/85.2/85.2/92.7/89.5 tall, so ~100 x 88. The source is the 240x240 crop,
+   so `object-fit: cover` trims 6% off the top and bottom of a drawing that
+   already carries its own 6% margin. Tile -> text gap 30.0 on both columns. */
+.row-art { display: block; width: 100px; height: 88px; object-fit: cover; }
+
+/* The board's rows carry a bare UPPERCASE date and nothing else above the
+   title: no read time, no byline, no read-more. The real publication date is
+   printed, never the board's invented Apr/Mar 2025 (§16.8, Ahmad: "I want to
+   be honest and no fake"); only the TREATMENT is the board's. Arabic takes
+   neither the uppercasing nor the tracking — no case, and tracking breaks
+   joined letterforms (§2.3). */
+.row-date {
+  margin: 0; font-size: var(--fs-meta); font-weight: 500; line-height: 1.3;
+  color: var(--muted-on-light);
 }
-.row-text .h3 a { text-decoration: none; }
+html[lang="en"] .row-date { text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Its own size, not the 32px --fs-h3. Board ink measures 20.4-20.9 asc-to-desc
+   at 1440, i.e. ~23px, and the board draws it black, not semibold. */
+.row-title {
+  margin-block-start: 4px;
+  font-size: clamp(18px, calc(23/14.4 * 1vw), 25px);
+  font-weight: 700; line-height: 1.1;
+}
+.row-title a { text-decoration: none; }
+/* One link per row, so it stretches over the row and the thumbnail with it —
+   which is also the phone tap target the removed read-more used to be. */
+.row-title a::after { content: ""; position: absolute; inset: 0; }
+/* Board: ink 16.1 asc-to-desc -> 18px, line pitch 20.4 -> leading 1.13; 1.2
+   for the same 0.98em reason as .feature-excerpt. The board's rows carry a
+   TWO line excerpt, which is why every excerpt in content/blog/ is written to
+   fit two lines in a 507px column at this size. */
 .row-excerpt {
-  margin-block-start: 5px; font-size: var(--fs-case); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--muted-on-light);
+  margin-block-start: 5px;
+  font-size: clamp(15px, calc(18/14.4 * 1vw), 20px);
+  font-weight: var(--w-body); line-height: 1.2; color: var(--muted-on-light);
 }
-.post-row .read-more { margin-block-start: 8px; }
+html[lang="ar"] .row-excerpt { line-height: 1.6; }
 
 /* ── The post page. The article column is capped at 780px rather than running
       the full 1320 container: the aesthetics audit found 86-character lines a
@@ -1027,9 +1130,16 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 
 @media (max-width: 767px) {
-  /* One row is impossible at 390; the band packs into three and is kept as
+  /* One row is impossible at 390; the band packs into four and is kept as
      tight as it can be, because hero + strip still have to be the whole first
-     screen. Mobile is not board-measured (build-spec §11). */
+     screen. Mobile is not board-measured (build-spec §11). It packed into
+     THREE until 2026-09-25, when Ahmad's longer strip line ("Six months free
+     for service companies") stopped the line sharing row 1 with the pill:
+     at 390 the inner box is 350px and pill + line now measure 410 (en) and
+     358 (ar). Every way back to three drops an element or splits the countdown
+     label from its own clock, so the fourth row stands — build-spec §18. The
+     first screen still measures exactly 844 (72 + 702 + 142) in both locales
+     with zero hero scroll. */
   #offer-strip { padding-block: 12px; }
   .strip-row { gap: 8px 16px; }
   #offer-strip .strip-pill { padding: 7px 14px; }
@@ -1065,8 +1175,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
      homepage already uses at this width. */
   .about-card, .reach-card, .office-card, .facts, .icon-card.compact { padding: 24px; }
   .feature { padding: 16px; }
-  .post-row { grid-template-columns: 76px minmax(0, 1fr); gap: 18px; padding-block: 22px; }
-  .row-art img { width: 76px; height: 76px; }
+  .post-row { grid-template-columns: 76px minmax(0, 1fr); gap: 18px; padding-block: 18px; }
+  .row-art { width: 76px; height: 76px; }
   .map-shell { min-height: 300px; }
   .map-closed { padding: 24px; gap: 14px; }
   .post-nav { grid-template-columns: 1fr; }
@@ -1099,7 +1209,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     <div class="wrap-wide">
       <span class="strip-pill">عرض محدود</span>
       <h1>ستة أشهر <span class="hl">مجانية</span>،<br class="brk"> بدون عقد</h1>
-      <p class="lead">هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. دون التزام.</p>
+      <p class="lead">هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. دون التزام.</p>
       <p class="count-label" data-countdown-part>يغلق التسجيل خلال</p>
       <div class="count-boxes" data-countdown-part><div class="count-box">
       <b data-count="d">&nbsp;</b><span>يوم</span>

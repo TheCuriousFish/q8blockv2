@@ -127,23 +127,41 @@ function dateLabel(t, iso) {
     : `${d} ${month} ${y}`;
 }
 
-// The six posts, per locale, in the order the blog list prints them. The
-// featured panel takes the first: `why-your-google-profile-stops-growing`,
-// Ahmad's pick, because it describes the visitor's own situation.
-const POST_ORDER = [
-  'why-your-google-profile-stops-growing',
-  'what-to-do-with-your-google-profile',
-  'page-per-service-and-area',
-  'how-ai-assistants-decide-what-to-quote',
-  'why-a-slow-website-loses-customers',
-  'what-to-ask-before-paying-for-seo',
+/* ── The featured slot is PINNED. Do not make it dynamic. ────────────────────
+   Ahmad, 2026-09-25, looking at design/boards/blog-B.png:
+
+     "it is amazing how the featured one, the big one, says The Complete Guide
+      to Local SEO for Small Businesses, which is perfect for our business.
+      And that will remain there no matter how many blog posts we have."
+
+   So the featured panel is a deliberate editorial choice about ONE evergreen
+   pillar, not "the newest post". Whoever adds post seven, seventy or seven
+   hundred: add the slug to LIST_ORDER and leave this alone. Do NOT rewrite
+   this as `LIST_ORDER[0]`, a `date` sort, a `featured: true` flag that the
+   newest post can also set, or anything else that lets the slot move on its
+   own. If the pillar ever changes, it changes here, by hand, on purpose. */
+const FEATURED_SLUG = 'complete-guide-to-local-seo';
+
+/* The list rows, in the order blog-B.png draws them. The grid is two columns
+   filled row by row, so this order puts 1 and 2 on the board's first row,
+   3 and 4 on its second and 5 alone on its third. */
+const LIST_ORDER = [
+  'keyword-research-for-local-seo',
+  'on-page-seo-basics-for-local-sites',
+  'google-business-profile-optimization',
+  'measuring-local-seo-success',
+  'building-local-citations-that-matter',
 ];
+
+// Every post, for the page/sitemap loop and for prev/next. The featured post
+// leads it because it is also the pillar the others hang off.
+const POST_ORDER = [FEATURED_SLUG, ...LIST_ORDER];
 
 function loadPosts(t) {
   return POST_ORDER.map((slug) => {
     const file = path.join(CONTENT, `${slug}.${t.lang}.md`);
     const { data, body } = frontmatter(fs.readFileSync(file, 'utf8'));
-    for (const k of ['title', 'description', 'excerpt', 'date', 'author', 'authorUrl', 'slug', 'lang']) {
+    for (const k of ['title', 'description', 'excerpt', 'category', 'date', 'author', 'authorUrl', 'slug', 'lang']) {
       if (!data[k]) throw new Error(`${path.basename(file)}: frontmatter is missing ${k}`);
     }
     if (data.slug !== slug) throw new Error(`${path.basename(file)}: slug ${data.slug} does not match the filename`);
@@ -154,8 +172,9 @@ function loadPosts(t) {
     return {
       ...data, html, words, read,
       ...t.paths.post(slug),
-      art: `/assets/img/blog-${slug}.webp`,
-      thumb: `/assets/img/blog-${slug}-sq.webp`,
+      art: `/assets/img/blog-${slug}.webp`,             // 1344x752, the post hero
+      wide: `/assets/img/blog-${slug}-wide.webp`,       // 1344x506, the featured panel (board ratio 2.657:1)
+      thumb: `/assets/img/blog-${slug}-sq.webp`,        // 240x240, the 100px list thumbnail
       dateLabel: dateLabel(t, data.date),
       readLabel: t.blog.readTime(read),
     };
@@ -416,12 +435,21 @@ ${footer(t, self)}
    used exactly as copy.md writes it, so the site has one closing argument
    and not three (copy-pages.md §B4). */
 function blogPage(t, posts) {
+  // The pin is resolved here, by slug, not by position — so a reorder of
+  // LIST_ORDER can never quietly move the featured panel. See FEATURED_SLUG.
+  const featured = posts.find((p) => p.slug === FEATURED_SLUG);
+  if (!featured) throw new Error(`FEATURED_SLUG ${FEATURED_SLUG} is not one of the posts`);
+  const rows = posts.filter((p) => p.slug !== FEATURED_SLUG);
   const body = [
     pageHead(t, { eyebrow: t.blog.eyebrow, h1: t.blog.h1, lead: t.blog.lead }),
-    blogList(t, posts), finalCall(t),
+    blogList(t, { featured, rows }), finalCall(t),
   ].join('\n');
   return shell({
-    t, page: 'blog', self: t.paths.blog, meta: t.meta.blog, body,
+    // blog-B.png draws the WHOLE page on the white surface — there is no
+    // --bg-light band behind the heading, and the panel's top rule sits 19.8
+    // css under the H1's ink. `.page-head` keeps its grey band on about,
+    // contact, terms and 404; only this page opts out. See styles.css.
+    t, page: 'blog', self: t.paths.blog, meta: t.meta.blog, body, bodyClass: 'blog-page',
     jsonLd: [orgLd(t), blogLd(t, posts)],
   });
 }
