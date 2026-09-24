@@ -631,7 +631,11 @@ function cardMeta(t, post) {
    typing the character would silently fall out of the brand font on the one
    line Ahmad singled out. It is drawn instead, in `currentColor`, and
    mirrored under `dir="rtl"` by CSS. */
-const ARROW = '<svg class="arw" viewBox="0 0 26 12" width="26" height="12" aria-hidden="true" focusable="false"><path d="M0 6h22M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>';
+/* blog-B.png's arrow is 14.5 css wide against the 26 this used to draw, and
+   its gap to the text is 9.1. U+2192 is in neither Alexandria subset's
+   unicode-range, so it stays an inline SVG in currentColor rather than being
+   typed and silently lost to a fallback font. */
+const ARROW = '<svg class="arw" viewBox="0 0 15 7" width="15" height="7" aria-hidden="true" focusable="false"><path d="M0 3.5h12.6M9.7 0.7l2.9 2.8-2.9 2.8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/></svg>';
 
 /* The list page, layout B, approved 2026-09-24 and rebuilt as an exact replica
    2026-09-25 (design/boards/blog-B.png, measured in build-spec §19).
@@ -656,9 +660,9 @@ const ARROW = '<svg class="arw" viewBox="0 0 26 12" width="26" height="12" aria-
    left under `dir="ltr"`, right under `dir="rtl"`, with no RTL-specific rule. */
 export function blogList(t, { featured, rows: posts }) {
   const rows = posts.map((p) => `<li class="post-row">
-      <img class="row-art" src="${p.thumb}" width="240" height="240" alt="" loading="lazy" decoding="async">
+      <img class="row-art" src="${p.thumb.src}" width="${p.thumb.w}" height="${p.thumb.h}" alt="" loading="lazy" decoding="async">
       <div class="row-text">
-        <p class="row-date">${p.dateLabel}</p>
+        <p class="row-date">${p.dateShort}</p>
         <h3 class="row-title"><a href="${p.path}">${esc(p.title)}</a></h3>
         <p class="row-excerpt">${esc(p.excerpt)}</p>
       </div>
@@ -667,12 +671,12 @@ export function blogList(t, { featured, rows: posts }) {
   return `<section id="posts" class="sec">
     <div class="wrap">
       <article class="feature">
-        <img class="feature-art" src="${featured.wide}" width="1344" height="506" alt="" fetchpriority="high" decoding="async">
+        <img class="feature-art" src="${featured.wide.src}" width="${featured.wide.w}" height="${featured.wide.h}" alt="" fetchpriority="high" decoding="async">
         <div class="feature-text">
           <p class="feature-cat">${esc(featured.category)}</p>
           <h2 class="feature-title"><a href="${featured.path}">${esc(featured.title)}</a></h2>
           <p class="feature-excerpt">${esc(featured.excerpt)}</p>
-          <a class="read-more" href="${featured.path}">${esc(t.blog.readMore)}${ARROW}</a>
+          <a class="read-more" href="${featured.path}">${esc(t.blog.readMore)}<span class="vh">: ${esc(featured.title)}</span>${ARROW}</a>
         </div>
       </article>
       <ul class="post-rows">${rows}</ul>
@@ -702,7 +706,7 @@ export function postArticle(t, post, { prev, next }) {
       </nav>
       <h1 class="post-title">${esc(post.title)}</h1>
       ${cardMeta(t, post)}
-      <img class="post-art" src="${post.art}" width="1344" height="752" alt="" fetchpriority="high" decoding="async">
+      <img class="post-art" src="${post.art.src}" width="${post.art.w}" height="${post.art.h}" alt="" fetchpriority="high" decoding="async">
       <div class="prose">${post.html}</div>
       <p class="under-link"><a class="text-link" href="${t.paths.blog.path}">${esc(t.blog.back)}<span class="chev" aria-hidden="true">&rsaquo;</span></a></p>
       <nav class="post-nav" aria-label="${esc(t.blog.more)}">${nav}</nav>

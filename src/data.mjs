@@ -454,7 +454,11 @@ export const COPY = {
     /* ── Blog, /blog/ and /blog/<slug>/ ── */
     blog: {
       eyebrow: 'المدونة',
-      h1: 'مقالات لأصحاب <span class="hl">الأنشطة الخدمية</span>',
+      /* The Arabic mirror of blog-B.png's `Insights for better growth.`, with
+         the orange block over the same first half. MSA, same register as the
+         rest of the body copy, and `نمو` is growth in the plain business
+         sense, not a ranking claim (copy-pages.md §B rule 4). */
+      h1: '<span class="hl">رؤى من أجل</span> نمو أفضل.',
       lead: null, // board B draws no intro under the blog heading (Ahmad, replica request)
       by: 'بقلم أحمد عويهان',
       /* `Read more` on blog-B.png, which Ahmad asked to be replicated word for
@@ -813,7 +817,11 @@ export const COPY = {
 
     blog: {
       eyebrow: 'Blog',
-      h1: 'Articles for local <span class="hl">service owners</span>',
+      /* blog-B.png draws this heading, word for word and with the orange block
+         on `Insights for`, and Ahmad asked for the board copied exactly. The
+         board also sets it materially smaller than the other secondary pages'
+         H1 — see .blog-page .page-head h1 in styles.css. */
+      h1: '<span class="hl">Insights for</span> better growth.',
       lead: null, // board B draws no intro under the blog heading (Ahmad, replica request)
       by: 'By Ahmad Owaihan',
       readMore: 'Read more',   // blog-B.png, verbatim

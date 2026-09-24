@@ -17,12 +17,12 @@
 <meta property="og:title" content="بناء الاستشهادات المحلية التي تهم | Q8 block">
 <meta property="og:description" content="الاستشهاد هو اسم نشاطك وعنوانه ورقمه مكتوبًا في موقع ليس موقعك. أي هذه المواقع يستحق، وأيها ضجيج.">
 <meta property="og:url" content="https://q8block.com/blog/building-local-citations-that-matter/">
-<meta property="og:image" content="https://q8block.com/assets/img/blog-building-local-citations-that-matter.webp">
+<meta property="og:image" content="https://q8block.com/assets/img/blog-building-local-citations-that-matter-wide.webp">
 <meta property="og:image:alt" content="بناء الاستشهادات المحلية التي تهم">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="بناء الاستشهادات المحلية التي تهم | Q8 block">
 <meta name="twitter:description" content="الاستشهاد هو اسم نشاطك وعنوانه ورقمه مكتوبًا في موقع ليس موقعك. أي هذه المواقع يستحق، وأيها ضجيج.">
-<meta name="twitter:image" content="https://q8block.com/assets/img/blog-building-local-citations-that-matter.webp">
+<meta name="twitter:image" content="https://q8block.com/assets/img/blog-building-local-citations-that-matter-wide.webp">
 <meta name="theme-color" content="#FF5F29">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <style>/* ══════════════════════════════════════════════════════════════════════════
@@ -795,8 +795,48 @@ body.theme-dark { background: var(--bg-dark); }
    heading — and the featured panel's top rule sits 19.8 css under the H1's
    ink, where the shared value puts 72 + 72. About, contact, terms and 404 are
    untouched and keep the band. */
-.blog-page .page-head { background: var(--bg-white); padding-block-end: 32px; }
+.blog-page .page-head { background: var(--bg-white); padding-block-end: 19px; }
 .blog-page #posts { padding-block-start: 0; }
+/* Board, ink to ink: the `BLOG` baseline sits 15.5 css above the H1's cap and
+   the panel's top rule 20.4 css below the H1's descender. The shared 16px
+   eyebrow margin plus Alexandria's half-leading makes the first gap 32.7, so
+   on this page the margin goes to 0 and the section's closing padding to 21.
+   Every other page keeps §5.3's eyebrow 16 / H1 28 rhythm. */
+.blog-page .page-head .eyebrow { margin-block-end: 0; }
+
+/* blog-B.png draws ONE orange, #FD5521 sampled off the board, for the fills
+   AND for every piece of orange text on it: the BLOG eyebrow, the SEO label
+   and Read more. The site normally darkens text orange to #E85319 (§14),
+   because #FF5F29 measures 3.03:1 on #FEFEFE and does not clear even the
+   large-text floor. The board's own value measures 3.20:1, which DOES clear
+   3:1 — and all three of these already carry §17.7b's 19px/700 large-text
+   shape, so the board's orange qualifies on every one of them. Verified, not
+   assumed: Lighthouse accessibility on /blog/ and /en/blog/ is 100 with this
+   in place. Scoped to this page, because it is this board that specifies it;
+   the rest of the site keeps #E85319. */
+.blog-page { --orange-ink-light: #FD5521; }
+
+/* The blog H1 is the board's, and the board draws it MUCH smaller than the
+   shared --fs-h2 the other secondary pages take. Measured on blog-B.png at
+   native 2688x1520 (css = board x 0.535714):
+
+     cap of the `I` in `Insights`   88 board px = 47.1 css
+     Alexandria's own cap            0.70 em (canvas TextMetrics, shipped subset)
+     -> font-size                    47.1 / 0.70 = 67px, not 80
+     stem / cap on the board         23/88 = 0.261; Alexandria 700 is 0.257
+                                     and 600 is 0.229, so the board is 700
+     lines                           one, and 67px/700 sets
+                                     `Insights for better growth.` in 903px
+                                     inside the 1320 container
+
+   Arabic keeps the §9 ratio the two --fs-h2 tokens already carry (60/80 =
+   0.75), because Alexandria draws Arabic materially larger at the same px:
+   67 x 0.75 = 50. Blog list only; about, contact and terms keep --fs-h2. */
+.blog-page .page-head h1 {
+  font-size: clamp(30px, calc(67/14.4 * 1vw), 74px);
+  font-weight: 700;
+}
+html[lang="ar"] .blog-page .page-head h1 { font-size: clamp(24px, calc(50/14.4 * 1vw), 55px); }
 
 /* 404 only: the row of routes that do exist, reusing `.text-link` (build-spec §17). */
 .notfound-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-block-start: 32px; }
@@ -820,13 +860,25 @@ body.theme-dark { background: var(--bg-dark); }
 .read-more {
   color: var(--orange-ink-light); font-weight: 700;
   font-size: clamp(19px, calc(19/14.4 * 1vw), 21px);
+  /* board ink 15.6 tall; `normal` gives Alexandria a 23px box at 19px */
+  line-height: 1.1;
+  /* The board runs the underline the whole 117.3 from the R to the point of
+     the arrow. text-decoration cannot: this box is an inline-flex, so the
+     rule stops at the text and neither the 8px gap nor the SVG carries it.
+     A border on the box is the same 2px line across all three. */
+  text-decoration: none;
+  border-block-end: 1px solid currentColor;   /* board measures 1.07 css */
+  padding-block-end: 3px;
 }
 .text-link:hover, .read-more:hover { color: var(--orange); }
 .text-link .chev, .read-more .chev { text-decoration: none; font-size: 1.25em; line-height: 1; }
 /* blog-B.png draws `Read more →`, a long thin arrow, not the site's `›`.
    U+2192 is in neither Alexandria subset's unicode-range, so it is drawn as an
    SVG in currentColor rather than typed and silently lost to a fallback font. */
-.read-more .arw { flex: none; width: 26px; height: 12px; overflow: visible; }
+/* Board: the arrow measures 14.5 css wide and sits 9.1 after the text, and the
+   underline runs the full 117.3 from the R to the arrow's point — i.e. under
+   the arrow, not stopping at the text. */
+.read-more .arw { flex: none; width: 15px; height: 7px; overflow: visible; }
 html[dir="rtl"] .text-link .chev,
 html[dir="rtl"] .read-more .chev,
 html[dir="rtl"] .read-more .arw,
@@ -937,15 +989,32 @@ html[dir="rtl"] .crumbs .chev { transform: scaleX(-1); }
 #posts { background: var(--bg-white); padding-block: var(--pad-sec); }
 .feature {
   position: relative;
-  border: 1px solid var(--hairline-light); padding: 18px;
+  border: 1px solid var(--hairline-light); padding: 17px;
   display: grid; grid-template-columns: minmax(0, 1.132fr) minmax(0, 1fr);
-  gap: 44px; align-items: center;
+  gap: 44px; align-items: stretch;
 }
 /* The board draws the featured art as a full-bleed orange block at 2.657:1.
    The source illustrations are 1.787:1, so a third derivative is cut for this
    slot (build-spec §16.9). width/height are on the tag: CLS stays 0.000. */
-.feature-art { display: block; width: 100%; height: auto; }
-.feature-text { display: flex; flex-direction: column; align-items: flex-start; }
+/* The board draws the art block flush with the text column: its top edge is
+   level with the SEO label at 17.1 under the panel rule and its bottom edge
+   level with Read more at 17.7 above it, 251.8 css of a 251.1 inner height.
+   So the panel stretches its two columns and the art fills its own, which
+   also keeps the two flush on the Arabic page where the same copy sets
+   taller. The derivative is already the board 2.657:1, so cover has about 1%
+   to take and takes it off a field that bleeds off the crop anyway. */
+.feature-art { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* The board's text column does not run the full 591 css it is given: the
+   longest title line measures 416.8 and the longest excerpt line 390.5, and
+   in both cases the next word would have fitted — so the board sets a measure
+   of about 430 and breaks there. Alexandria runs 15-21% wider per line at a
+   matched cap height, so the same COPY needs about 520 to break in the same
+   places; 430 would push the featured title from the board's three lines to
+   four. 520 is the board's measure converted, not a different decision. */
+.feature-text {
+  display: flex; flex-direction: column; align-items: flex-start;
+  max-width: clamp(300px, calc(520/14.4 * 1vw), 560px);
+}
 
 /* The category label above the featured title. copy-pages §B2 used to forbid
    category chips and §18.5.2 D left the slot empty for that reason; Ahmad
@@ -961,32 +1030,47 @@ html[dir="rtl"] .crumbs .chev { transform: scaleX(-1); }
 }
 html[lang="en"] .feature-cat { text-transform: uppercase; letter-spacing: 0.06em; }
 
-/* Board: cap 33.2, baseline pitch 39.1, visibly heavier than the site's 600
-   headings. 44px at --lh-display is the closest the locked scale gets without
-   inventing a size; §2.3 records 1.05 as the tightest leading Alexandria's
-   0.89em ascender+descender clears, so the board's ~0.85 is not available. */
+/* Board: the cap of the `B` in `Businesses` measures 53 board px = 28.4 css,
+   which at Alexandria's 0.70 em cap is 40px, not the 44 --fs-h3-s6 gives. The
+   board sets it in three lines at a 39.1 pitch, i.e. a leading of about 0.98
+   em on a 40px face; --lh-display 1.05 is the tightest Alexandria clears, so
+   the three lines come out 126 against the board's 117 (build-spec §19.4). */
 .feature-title {
-  margin-block-start: 8px;
-  font-size: var(--fs-h3-s6); font-weight: 700; line-height: var(--lh-display);
+  /* board, ink to ink: label baseline -> title cap = 10.2; at 8px the build
+     draws 15.0, because Alexandria adds half-leading on both sides. */
+  margin-block-start: 3px;
+  font-size: clamp(26px, calc(40/14.4 * 1vw), 44px);
+  font-weight: 700; line-height: var(--lh-display);
 }
+/* Measured, not assumed: Alexandria ink for the three lines this title sets
+   — The Complete Guide to, with its p descender, being the tallest — runs
+   0.79 em above the baseline and 0.20 below, 0.99 em in all (canvas
+   TextMetrics on the shipped subset). A 1.00 line box therefore holds the
+   ink with nothing clipped and no two lines overlapping, and takes the three
+   lines from 126 to 120 against the board 117.3. Section 2.3 floor of 1.05
+   was derived from an assumed 0.89 em and stands everywhere else. LATIN
+   ONLY: Alexandria Arabic runs 1.34-1.37 em, so Arabic keeps --lh-display. */
+html[lang="en"] .feature-title { line-height: 1; }
 .feature-title a { text-decoration: none; }
 .feature-title a:hover, .row-title a:hover { color: var(--orange); }
 /* The whole panel is the link. With the byline gone this card holds one link
    plus the read-more, so nothing is trapped under the stretched area. */
 .feature-title a::after { content: ""; position: absolute; inset: 0; }
 
-/* Board: ink 19.5 asc-to-desc -> 22px, line pitch 24.4 -> leading 1.11.
-   Alexandria's own ascender+descender measures 0.98em (canvas TextMetrics on
-   the shipped subset), so 1.11 leaves 0.13em of air and 1.15 is the tightest
-   value that does not read as clipped. Arabic keeps its own, looser value. */
+/* Board: the `L` of `Learn` caps at 26 board px = 13.9 css, i.e. 20px at
+   Alexandria's 0.70 em cap, and the three lines run at a 24.4 pitch — a
+   leading of 1.22, which Alexandria clears comfortably. Arabic keeps its own,
+   looser value. */
 .feature-excerpt {
-  margin-block-start: 14px;
-  font-size: clamp(16px, calc(22/14.4 * 1vw), 24px);
-  font-weight: var(--w-body); line-height: 1.15; color: var(--muted-on-light);
+  /* board: title descender -> excerpt cap = 20.4; at 14px the build draws 25.2 */
+  margin-block-start: 9px;
+  font-size: clamp(16px, calc(20/14.4 * 1vw), 22px);
+  font-weight: var(--w-body); line-height: 1.22; color: var(--muted-on-light);
 }
 html[lang="ar"] .feature-excerpt { line-height: 1.6; }
 /* above the stretched title link, so it keeps its own hover and focus ring */
-.feature .read-more { position: relative; z-index: 1; margin-block-start: 12px; }
+/* board: excerpt descender -> `Read more` cap = 13.3; at 12px the build draws 21.4 */
+.feature .read-more { position: relative; z-index: 1; margin-block-start: 4px; }
 
 .post-rows {
   margin-block-start: 18px; border-block-start: 1px solid var(--hairline-light);
@@ -995,16 +1079,26 @@ html[lang="ar"] .feature-excerpt { line-height: 1.6; }
 .post-row {
   position: relative;
   display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 30px;
-  padding-block: 14px; border-block-end: 1px solid var(--hairline-light);
+  padding-block: 13px; border-block-end: 1px solid var(--hairline-light);
 }
 /* The last row of each column closes the list, so it carries no rule. With
    five posts in two columns that is the fourth and the fifth item. */
 .post-rows > :nth-last-child(-n+2) { border-block-end: 0; }
-/* The board's tiles are NOT square: 103.9/100.2/99.1/102.9/102.9 wide against
-   88.9/85.2/85.2/92.7/89.5 tall, so ~100 x 88. The source is the 240x240 crop,
-   so `object-fit: cover` trims 6% off the top and bottom of a drawing that
-   already carries its own 6% margin. Tile -> text gap 30.0 on both columns. */
-.row-art { display: block; width: 100px; height: 88px; object-fit: cover; }
+/* The board's tiles are NOT square: 99.6/99.1 wide against 88.4/90.0/84.1/
+   86.3/84.6 tall, so ~100 x 88. The source is now the board's OWN tile, cut
+   from blog-B.png at ~240x21x with its orange field included — which is why
+   nothing here paints an orange plate behind the image. `object-fit: cover`
+   only has 1-3% to trim, because the crop is already the tile's shape.
+   Tile -> text gap 30.0 on both columns. */
+/* height is AUTO, and that is the board being matched rather than a shortcut.
+   The board's five tiles are 88.4 / 90.0 / 84.1 / 86.3 / 84.6 css tall on a
+   ~99.5 width because they are five different crops, and each -sq derivative
+   carries its own crop's shape. At a fixed height object-fit: cover trimmed
+   the on-page tile into its ink, which on that crop reaches the top and the
+   bottom edge. At auto the five render 89.2 / 90.4 / 85.8 / 87.1 / 86.3 —
+   the board's own heights, with nothing cropped and no ink on an edge.
+   width/height are still on every tag, so CLS stays 0. */
+.row-art { display: block; width: 100px; height: auto; }
 
 /* The board's rows carry a bare UPPERCASE date and nothing else above the
    title: no read time, no byline, no read-more. The real publication date is
@@ -1012,30 +1106,35 @@ html[lang="ar"] .feature-excerpt { line-height: 1.6; }
    be honest and no fake"); only the TREATMENT is the board's. Arabic takes
    neither the uppercasing nor the tracking — no case, and tracking breaks
    joined letterforms (§2.3). */
+/* Board: the `A` of `APR` caps at 18 board px = 9.6 css = 14px at 0.70 em, one
+   under the shared --fs-meta. #686F79 on #FEFEFE is 5.12:1, so the smaller
+   size is still AA at any weight. */
 .row-date {
-  margin: 0; font-size: var(--fs-meta); font-weight: 500; line-height: 1.3;
+  margin: 0; font-size: clamp(13px, calc(14/14.4 * 1vw), 15px);
+  font-weight: 500; line-height: 1.25;
   color: var(--muted-on-light);
 }
 html[lang="en"] .row-date { text-transform: uppercase; letter-spacing: 0.06em; }
 
-/* Its own size, not the 32px --fs-h3. Board ink measures 20.4-20.9 asc-to-desc
-   at 1440, i.e. ~23px, and the board draws it black, not semibold. */
+/* Its own size, not the 32px --fs-h3. Board: the leading capital of each of
+   the five row titles caps at 26 board px = 13.9 css, i.e. 20px at 0.70 em.
+   The board draws them black, not semibold. */
 .row-title {
   margin-block-start: 4px;
-  font-size: clamp(18px, calc(23/14.4 * 1vw), 25px);
+  font-size: clamp(17px, calc(20/14.4 * 1vw), 22px);
   font-weight: 700; line-height: 1.1;
 }
 .row-title a { text-decoration: none; }
 /* One link per row, so it stretches over the row and the thumbnail with it —
    which is also the phone tap target the removed read-more used to be. */
 .row-title a::after { content: ""; position: absolute; inset: 0; }
-/* Board: ink 16.1 asc-to-desc -> 18px, line pitch 20.4 -> leading 1.13; 1.2
-   for the same 0.98em reason as .feature-excerpt. The board's rows carry a
-   TWO line excerpt, which is why every excerpt in content/blog/ is written to
-   fit two lines in a 507px column at this size. */
+/* Board: the leading capital caps at 22 board px = 11.8 css = 17px at 0.70 em,
+   and the two lines run at a 20.4 pitch — a leading of 1.20. The board's rows
+   carry a TWO line excerpt, which is why every excerpt in content/blog/ is
+   written to fit two lines in a 507px column at this size. */
 .row-excerpt {
   margin-block-start: 5px;
-  font-size: clamp(15px, calc(18/14.4 * 1vw), 20px);
+  font-size: clamp(14px, calc(17/14.4 * 1vw), 19px);
   font-weight: var(--w-body); line-height: 1.2; color: var(--muted-on-light);
 }
 html[lang="ar"] .row-excerpt { line-height: 1.6; }
@@ -1178,7 +1277,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .about-card, .reach-card, .office-card, .facts, .icon-card.compact { padding: 24px; }
   .feature { padding: 16px; }
   .post-row { grid-template-columns: 76px minmax(0, 1fr); gap: 18px; padding-block: 18px; }
-  .row-art { width: 76px; height: 76px; }
+  /* the board's tile is ~1.13:1, not square, so the phone tile keeps that ratio */
+  .row-art { width: 76px; height: auto; }
   .map-shell { min-height: 300px; }
   .map-closed { padding: 24px; gap: 14px; }
   .post-nav { grid-template-columns: 1fr; }
@@ -1187,7 +1287,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 </style>
 <script defer src="/assets/app.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"بناء الاستشهادات المحلية التي تهم","description":"الاستشهاد هو اسم نشاطك وعنوانه ورقمه مكتوبًا في موقع ليس موقعك. أي هذه المواقع يستحق، وأيها ضجيج.","url":"https://q8block.com/blog/building-local-citations-that-matter/","mainEntityOfPage":"https://q8block.com/blog/building-local-citations-that-matter/","datePublished":"2026-09-24","dateModified":"2026-09-24","inLanguage":"ar","image":"https://q8block.com/assets/img/blog-building-local-citations-that-matter.webp","author":{"@type":"Person","name":"أحمد عويهان","url":"https://ahmadowaihan.com/"},"publisher":{"@type":"Organization","name":"Q8 block","url":"https://q8block.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"بناء الاستشهادات المحلية التي تهم","description":"الاستشهاد هو اسم نشاطك وعنوانه ورقمه مكتوبًا في موقع ليس موقعك. أي هذه المواقع يستحق، وأيها ضجيج.","url":"https://q8block.com/blog/building-local-citations-that-matter/","mainEntityOfPage":"https://q8block.com/blog/building-local-citations-that-matter/","datePublished":"2026-09-24","dateModified":"2026-09-24","inLanguage":"ar","image":"https://q8block.com/assets/img/blog-building-local-citations-that-matter-wide.webp","author":{"@type":"Person","name":"أحمد عويهان","url":"https://ahmadowaihan.com/"},"publisher":{"@type":"Organization","name":"Q8 block","url":"https://q8block.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://q8block.com/"},{"@type":"ListItem","position":2,"name":"المدونة","item":"https://q8block.com/blog/"},{"@type":"ListItem","position":3,"name":"بناء الاستشهادات المحلية التي تهم","item":"https://q8block.com/blog/building-local-citations-that-matter/"}]}</script>
 </head>
 <body>
@@ -1214,7 +1314,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       </nav>
       <h1 class="post-title">بناء الاستشهادات المحلية التي تهم</h1>
       <p class="card-meta"><span dir="ltr">24</span> سبتمبر <span dir="ltr">2026</span><span class="dot" aria-hidden="true">&middot;</span><span dir="ltr">4</span> دقائق قراءة<span class="dot" aria-hidden="true">&middot;</span><a class="byline" href="https://ahmadowaihan.com/" rel="author">بقلم أحمد عويهان</a></p>
-      <img class="post-art" src="/assets/img/blog-building-local-citations-that-matter.webp" width="1344" height="752" alt="" fetchpriority="high" decoding="async">
+      <img class="post-art" src="/assets/img/blog-building-local-citations-that-matter-wide.webp" width="1440" height="542" alt="" fetchpriority="high" decoding="async">
       <div class="prose"><p>صاحب نشاط بحث عن اسم شركته في جوجل ليرى ما يظهر عنه، فوجد قائمة قديمة من دليل تجاري نسيه منذ سنوات، فيها عنوانه السابق ورقم هاتف توقف عن استخدامه منذ زمن. لم يكتب هذه القائمة بنفسه، ولا يعرف من كتبها أصلًا، لكنها موجودة الآن وتقول عن نشاطه شيئًا مختلفًا تمامًا عما يقوله موقعه أو ملفه على جوجل.</p>
 <p>هذه القائمة استشهاد، وهي أبسط مما تبدو عليه، ومعرفة الفرق بين ما يستحق تصحيحه وما لا يستحق وقتك أصلًا توفر عليك الكثير من الجهد الضائع.</p>
 <h2>ما هو الاستشهاد بجملة واحدة</h2>

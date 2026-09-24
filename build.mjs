@@ -117,6 +117,17 @@ function markdown(body) {
 const WPM = { en: 200, ar: 140 };
 const readTime = (words, lang) => Math.max(1, Math.round(words / WPM[lang]));
 
+/* Every blog image's intrinsic size, written by scripts/blog-art.mjs when it
+   cuts the derivatives out of the board crops. It lives in src/ and not in
+   src/img/ on purpose: the build copies everything in src/img/ into the public
+   output, and a manifest is not a public asset. */
+const ART_SIZES = JSON.parse(fs.readFileSync(path.join(SRC, 'blog-art.json'), 'utf8'));
+function img(file) {
+  const s = ART_SIZES[file];
+  if (!s) throw new Error(`${file} is not in src/blog-art.json — re-run scripts/blog-art.mjs`);
+  return { src: `/assets/img/${file}`, w: s.w, h: s.h };
+}
+
 // 2026-09-24 -> `24 September 2026` / `24 سبتمبر 2026`, with every digit run
 // isolated on the Arabic page (build-spec §10).
 function dateLabel(t, iso) {
@@ -125,6 +136,19 @@ function dateLabel(t, iso) {
   return t.lang === 'ar'
     ? `<span dir="ltr">${d}</span> ${month} <span dir="ltr">${y}</span>`
     : `${d} ${month} ${y}`;
+}
+
+/* The list ROW carries the board's short date and the post page keeps the long
+   one. blog-B.png draws `APR 12, 2025`, 82.5 css wide; the long form sets
+   `24 SEPTEMBER 2026` at 169, which is twice the board and wraps the row at
+   narrower widths. Only the SHAPE is the board's: the date printed is the real
+   publication date, never the board's invented 2025 spread (build-spec §19.3,
+   Ahmad: "I want to be honest and no fake"). Arabic has no conventional
+   three-letter month, so the Arabic row keeps the long form. */
+function dateLabelShort(t, iso) {
+  if (t.lang === 'ar') return dateLabel(t, iso);
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${t.months[m - 1].slice(0, 3)} ${d}, ${y}`;
 }
 
 /* ── The featured slot is PINNED. Do not make it dynamic. ────────────────────
@@ -172,10 +196,19 @@ function loadPosts(t) {
     return {
       ...data, html, words, read,
       ...t.paths.post(slug),
-      art: `/assets/img/blog-${slug}.webp`,             // 1344x752, the post hero
-      wide: `/assets/img/blog-${slug}-wide.webp`,       // 1344x506, the featured panel (board ratio 2.657:1)
-      thumb: `/assets/img/blog-${slug}-sq.webp`,        // 240x240, the 100px list thumbnail
+      /* All three are cut from the APPROVED BOARD's own tiles by
+         scripts/blog-art.mjs (design/blog-art-board/, not design/blog-art/).
+         `img()` carries each file's real intrinsic size out of
+         src/blog-art.json so every tag gets a truthful width/height and CLS
+         stays 0 — the board's tiles are not square and not all the same shape,
+         so one hard-coded pair would be wrong for five of the six. */
+      /* One wide frame does the featured panel, the post hero and the
+         og:image: 2.657:1 is the only art ratio blog-B.png gives. */
+      art: img(`blog-${slug}-wide.webp`),    // 1440x542, post hero + og:image
+      wide: img(`blog-${slug}-wide.webp`),   // 1440x542, the featured panel
+      thumb: img(`blog-${slug}-sq.webp`),    // the board tile itself, ~240x21x
       dateLabel: dateLabel(t, data.date),
+      dateShort: dateLabelShort(t, data.date),
       readLabel: t.blog.readTime(read),
     };
   });
@@ -289,7 +322,7 @@ function postLd(t, p) {
     datePublished: p.date,
     dateModified: p.date,
     inLanguage: t.lang,
-    image: NAP.origin + p.art,
+    image: NAP.origin + p.art.src,
     author: { '@type': 'Person', name: p.author, url: p.authorUrl },
     publisher: { '@type': 'Organization', name: 'Q8 block', url: NAP.origin + '/' },
   };
@@ -466,7 +499,7 @@ function postPage(t, posts, i) {
     // one og:image on the site; no other page has a picture to point at.
     meta: {
       title: `${post.title} | Q8 block`, description: post.description,
-      ogAlt: post.title, ogImage: post.art,
+      ogAlt: post.title, ogImage: post.art.src,
     },
     body, jsonLd: [postLd(t, post), crumbLd(t, post)],
   });

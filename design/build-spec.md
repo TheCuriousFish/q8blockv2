@@ -1988,6 +1988,11 @@ Adding post seven means adding one line to `LIST_ORDER`.
 
 ### 19.7 Artwork: re-mapped, not regenerated
 
+> **SUPERSEDED the same day by §19.9.** Everything below is what the pass did and why, and it was
+> still the wrong answer: re-mapping a separately generated illustration set is not cropping the
+> board. The artwork the site ships now is cut out of `blog-B.png` itself and `design/blog-art/` is
+> referenced by nothing. Read §19.9 before touching any of this.
+
 **Nothing was generated.** The six existing drawings were re-mapped to the new slugs by subject, and
 the source PNGs were then **renamed on disk** so `design/blog-art/<slug>.png` is true again (§16.9).
 The table is the record of which drawing moved where:
@@ -2033,6 +2038,186 @@ folder.
 
 `scripts/compare.mjs`'s `BOARDLESS` list held `/blog/why-your-google-profile-stops-growing/` and was
 repointed at `/blog/complete-guide-to-local-seo/`; it would otherwise have checked a 404.
+
+**Nothing in this pass was committed, pushed or deployed.**
+
+
+### 19.9 The artwork is cut out of the board, the heading is the board's, 2026-09-25
+
+Ahmad, looking at the replica:
+
+> "you keep using the same images that we generated and you're holding on to them when I'm asking you
+> to completely get rid of them and copy exactly what we have in the board."
+
+He is right and §19.7 is the mistake he is describing. `references/lessons.md` says it in as many
+words — *"Photographs in the build are cropped out of the approved boards ... Never substitute a
+different photo."* — and §19.7 substituted six, then congratulated itself for not inventing any.
+
+**The rule for this page from now on: blog artwork comes out of the board and is never regenerated.**
+
+#### a. Where the six drawings come from
+
+`design/blog-art-board/` holds six crops taken off `design/boards/blog-B.png` at its native
+2688x1520 by colour-component detection, one per post. They are the board's own tiles, orange field
+included, because on the board the orange IS the artwork — which is also why nothing in the CSS paints
+an orange plate behind them.
+
+| File | Board crop | Drawing | Slot |
+|---|---|---|---|
+| `complete-guide-to-local-seo.png` | 1249x470 | browser, bar chart, circled arrow | the featured panel |
+| `keyword-research-for-local-seo.png` | 184x164 | document with a magnifier | left column, row 1 |
+| `on-page-seo-basics-for-local-sites.png` | 185x167 | document with a pencil | right column, row 1 |
+| `google-business-profile-optimization.png` | 183x157 | map pin on a road web | left column, row 2 |
+| `measuring-local-seo-success.png` | 183x161 | bar chart with a rising arrow | right column, row 2 |
+| `building-local-citations-that-matter.png` | 183x158 | browser with a link glyph | left column, row 3 |
+
+The mapping was checked against the board by eye before anything was wired, in both directions.
+
+`design/blog-art/` — the generated set — is **left on disk and referenced by nothing**. A grep for it
+across `build.mjs`, `src/` and `scripts/` returns only this file and the comment at the top of
+`scripts/blog-art.mjs` saying it is dead.
+
+#### b. How the three derivatives are cut now
+
+`scripts/blog-art.mjs` reads `design/blog-art-board/` and writes, per post:
+
+| Output | Size | How |
+|---|---|---|
+| `blog-<slug>-sq.webp` | the crop's own, ~234x20x | **the board tile as the board drew it**, re-encoded and nothing else |
+| `blog-<slug>-wide.webp` | 1440x542 | the featured crop resized; the five tiles composed on their own flat field at 78% height |
+
+**Two frames, not three.** The first cut kept the old 1344x752 post hero as well, and filling a frame
+that tall meant scaling a 194px drawing past 2.5x — the post pages came out soft with the drawing
+stranded in orange. **2.657:1 is the only art ratio `blog-B.png` gives**, so the wide derivative is now
+the featured panel, the post hero and the og:image alike, and the same drawing renders at 229 css on a
+780 column, a 1.2x scale.
+
+**Every crop is inset 3px on each side first.** The crops end exactly at the board's tile edge, so
+their outermost rows carried a pixel of the white panel behind them; those rows sit outside the field
+flattening's tolerance, survived it, and drew a hairline across the top and bottom of every composed
+frame. Inset, they are gone — and the ink boxes came out smaller and truer for it (the keyword tile's
+went 202x194 -> 186x156).
+
+**Flattening is used only where a margin is added.** Its tolerance also nibbles the edge of the darker
+red circle the board draws behind the featured artwork and left speckle across the bottom-left of the
+post hero. The tile and the featured panel need no margin, so both take the crop untouched; only the
+five composed wide frames take the flattened one.
+
+It also writes **`src/blog-art.json`**, every file's intrinsic size, which `build.mjs` reads so each
+`<img>` carries its own true width and height. The board's five tiles are five different shapes, so a
+single hard-coded pair would have been wrong for four of them and CLS would not have stayed 0. The
+manifest lives in `src/` and not `src/img/` because the build copies all of `src/img/` into the public
+output.
+
+**`.row-art` now has `height: auto`, and that is the board being matched rather than a shortcut.** The
+board's five tiles are 88.4 / 90.0 / 84.1 / 86.3 / 84.6 css tall on a ~99.5 width because they are five
+different crops. At a fixed 88 with `object-fit: cover`, the on-page tile — whose ink reaches its own
+top and bottom edge — lost 5.7px of drawing. At `auto` the five render 89.2 / 90.4 / 85.8 / 87.1 / 86.3,
+which is the board's own set of heights, with nothing cropped and no ink touching an edge.
+
+#### c. The heading is the board's
+
+| | Was | Now |
+|---|---|---|
+| English | Articles for local **service owners** | **Insights for** better growth. |
+| Arabic | مقالات لأصحاب **الأنشطة الخدمية** | **رؤى من أجل** نمو أفضل. |
+| Highlight | on the END of the line, 99% of the container | on the START of the line, as the board draws it |
+| Size | `--fs-h2`, 80px / 600 | **67px / 700**, blog list only |
+
+**Where 67px comes from, measured not guessed.** The cap of the `I` in `Insights` is 88 board px, i.e.
+47.1 css at 1440. Alexandria's cap is 0.70 em on the shipped subset (canvas `TextMetrics`), so the
+board's size is 47.1 / 0.70 = 67px. The built page now renders that same `I` at **88 raster px against
+the board's 88** — the cap heights are identical, which is the quantity §19.1 already says is the one
+to match. The weight comes from the same measurement: the board's stem is 23 px on an 88 cap, 0.261,
+and Alexandria's stem/cap is 0.229 at 600 and 0.257 at 700. Arabic takes 50px, the 60/80 ratio the two
+`--fs-h2` tokens already carry, because Alexandria draws Arabic materially larger at the same px.
+
+#### d. Closing the density gap
+
+The board's canvas is 814.3 css tall at 1440 (735 at a matched 1300). Every number below is the board
+measured at native resolution against the built page shot at a 1440 viewport with `deviceScaleFactor
+2688/1440`, so one raster pixel is one board pixel and the two are compared without any conversion.
+
+| | Board | Build, before | Build, after |
+|---|---|---|---|
+| Content region at 1300 | **735** | 840 | **741** |
+| Eyebrow ink -> panel top rule | 110.9 | 125.9 | 113.0 |
+| Featured panel | 287.1 | 330.3 | 291.0 |
+| Featured text column | ~256 | 292.3 | 255.0 |
+| Row pitch | 111-120 | 126 | 115.3-117.4 |
+| List block | 330 | 378 | 350 |
+
+What moved, and the board number behind each:
+
+1. **H1 67px/700** (cap 47.1) and **the eyebrow's 16px margin to 0** — the board puts `BLOG`'s baseline
+   15.5 above the H1's cap, and the shared §5.3 rhythm plus Alexandria's half-leading made it 32.7.
+2. **`.page-head` closes at 19** — the board puts the panel's rule 20.4 under the H1's descender.
+3. **Featured title 40px** (board cap 28.4 -> 40.6) and, Latin only, **`line-height: 1`**. §19.4 called
+   1.05 the floor on an assumed 0.89 em body; measured, Alexandria's ink for these three lines is
+   **0.99 em**, so a 1.00 line box holds it with nothing clipped and no two lines overlapping. Arabic
+   keeps `--lh-display`, because Alexandria's Arabic runs 1.34-1.37 em.
+4. **Featured excerpt 20px / 1.22** — board cap 13.9 and a 24.4 line pitch, both now exact.
+5. **The three gaps inside the panel measured ink to ink**: label -> title 10.2, title -> excerpt 20.4,
+   excerpt -> `Read more` 13.3. In CSS that is 3 / 9 / 4, not 8 / 14 / 12, because Alexandria adds
+   half-leading at both ends of every one of them.
+6. **`align-items: stretch` on the panel.** The board draws the art flush with the text column, 17.1
+   under the rule and 17.7 above it; the build centred it and left white above and below. The panel's
+   padding went 18 -> 17 with it.
+7. **Rows: date 14, title 20, excerpt 17/1.2, padding-block 13** — board caps 9.6, 13.9, 11.8 and a
+   20.4 excerpt pitch. The rows are now tile-driven, the way the board's are.
+8. **The row date is the board's shape**: `SEP 24, 2026`, 82.5 css on the board against 169 for
+   `24 SEPTEMBER 2026`. Only the shape — the date printed is still the real one (§19.3).
+9. **`Read more`**: the arrow 26px -> 15px (board 14.5), and the underline is now a border on the
+   inline-flex box so it runs under the arrow the way the board draws it; `text-decoration` stopped at
+   the text and skipped the gap and the SVG.
+
+#### e. The board's own orange, and what it cost
+
+`blog-B.png` uses **one** orange, `#FD5521`, for the fills and for every piece of orange text on it.
+The site darkens text orange to `#E85319` (§14) because `#FF5F29` measures 3.03:1 on `#FEFEFE` and
+does not clear even the large-text floor. **The board's own value measures 3.20:1**, and the eyebrow,
+the `SEO` label and `Read more` all already carry §17.7b's 19px/700 large-text shape — so the board's
+orange qualifies on all three. It is set on `.blog-page` only and **Lighthouse accessibility is 100
+with it in place**, verified, not assumed. The rest of the site keeps `#E85319`.
+
+#### f. What still differs from the board, and why
+
+1. **Every line of text is 10-40% wider.** Alexandria is a wider face than the board's at a matched cap
+   height (§19.1). At the same cap the H1 sets 903 against the board's 832, the `SEO` label 41 against
+   36, and the row excerpts fill their column where the board's stop at about 69% of it. **Cap height is
+   matched exactly; width is not matchable and is not chased.**
+2. **The row excerpts run the full column.** The board's are 60-70 characters and the site's are 98-108
+   — they are real descriptions of real articles, not the board's placeholder. Capping the measure to
+   the board's would take every row to three lines and add ~20px to each, which is the opposite of the
+   ask. **This is content being longer than the board's invention, not a spacing bug.**
+3. **All five rows carry the same date**, because all six posts really are dated 2026-09-24. The board
+   invented five spread dates (§19.3). Ahmad: `I want to be honest and no fake.`
+4. **The container is 1320, not the board's 1344.** §5.1 locks 1320 for the whole site and the header
+   and footer sit on it; widening the blog list alone would misalign its content against the logo and
+   the nav on the same screen. The board's proportions are carried onto 1320 instead (§19.2).
+5. **The featured panel is 291.0 against 287.1.** The board's `Read more` underline sits 3.1 below the
+   art's bottom edge, inside the panel's padding; in the build the underline is part of the text
+   column's height, so it pushes the panel instead of overlapping into the padding. 3.9px.
+6. **`Read more` is 700 where the board's is lighter**, and the eyebrow's cap is 15.5 against 14.5
+   because `--fs-eyebrow` is locked at 22. Both are §17.7b: at regular weight `#FD5521` needs 4.5:1 and
+   has 3.20, so the weight is what keeps accessibility at 100.
+7. **The Arabic page is 774.8 at a matched 1300 against the board's 735.** The board is English;
+   Alexandria's Arabic is larger at the same px and the row excerpt keeps its 1.6 leading, which §9
+   already provides for. The Arabic page is not a board mismatch, it is the Arabic scale.
+
+#### g. Verification
+
+| Gate | Result |
+|---|---|
+| Board over build at a matched 1300, both locales | looked at, four passes; **735 board / 741 build, ratio 1.009** on `/en/blog/` |
+| Cap heights, board vs build raster, ten elements | H1, `SEO`, featured title, featured excerpt, row excerpt exact; date, row title, eyebrow within 1.0 css |
+| `shots.mjs`, 24 routes x 1440x900 and 390x844 | `broken=0`, `errors=0`, `overflow=false` on every row |
+| `scripts/seo-audit.mjs` | **0 high** |
+| Lighthouse, `/blog/`, `/en/blog/` and a post page | accessibility **100**, performance **100**, best practices **100**, SEO **100**, CLS **0.000** on all three |
+
+Lighthouse SEO was **92** on `/en/blog/` before this pass and it was not the orange: `Read more` on its
+own is not a descriptive link name. The visible words stay the board's and a `.vh` span carries the
+article's title into the accessible name, which takes it to 100 and leaves accessibility at 100.
 
 **Nothing in this pass was committed, pushed or deployed.**
 

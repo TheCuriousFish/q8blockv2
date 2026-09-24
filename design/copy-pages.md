@@ -271,11 +271,24 @@ Six posts ship with it, written in `content/blog/`.
 
 ## B1. Heading
 
+**The headline is the board's, word for word, since 2026-09-25.** `design/boards/blog-B.png`
+draws `Insights for better growth.` with the orange block on `Insights for`, and Ahmad asked for the
+board copied exactly — *"you keep using the same images that we generated and you're holding on to
+them when I'm asking you to completely get rid of them and copy exactly what we have in the board."*
+The previous headline, `مقالات لأصحاب الأنشطة الخدمية` / `Articles for local service owners`, was
+written before the board existed and is superseded. The Arabic is a written mirror, not a gloss: MSA,
+the same register as the body copy, and `نمو` in the plain business sense — it is not a ranking claim
+and does not touch rule 4 above.
+
+The board also sets this H1 much smaller than the other three secondary pages: its cap measures 47.1
+css at 1440 against the shared `--fs-h2`'s 57.6, so the blog list alone takes 67px/700 (build-spec
+§19.9). The page meta title above is unchanged — it is the search result, not the heading.
+
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | المدونة | Blog |
-| Headline | مقالات لأصحاب الأنشطة الخدمية | Articles for local service owners |
-| Highlighted word | الأنشطة الخدمية | service owners |
+| Headline | رؤى من أجل نمو أفضل. | Insights for better growth. |
+| Highlighted words | رؤى من أجل | Insights for |
 | Intro | نكتب هنا عما يجعل العميل يجد نشاطك على جوجل وفي إجابات الذكاء الاصطناعي، وعما تستطيع أن تفعله بنفسك دون أن تدفع لأحد. بلا مصطلحات تقنية. | We write here about what makes a customer find your business on Google and in AI answers, and about what you can do yourself without paying anyone. No jargon. |
 
 ## B2. The card
