@@ -36,22 +36,134 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { COPY, NAP, CONFIG } from './src/data.mjs';
+import { COPY, NAP, CONFIG, INDEXNOW_KEY } from './src/data.mjs';
 import {
-  header, footer, hero, offerStrip, problem, whatWeDo, included, journey, work,
+  header, footer, firstScreen, problem, whatWeDo, included, journey, work,
   faq, finalCall, offerHero, offerIncluded, offerEligibility, offerNoContract,
   offerAfter, offerFaq, esc,
+  pageHead, aboutPrinciple, aboutDeliver, aboutNotDo, aboutCompany,
+  contactBlocks, contactOffice, termsBody, blogList, postArticle,
 } from './src/render.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(ROOT, 'src');
 const OUT = path.join(ROOT, 'site');
+const CONTENT = path.join(ROOT, 'content', 'blog');
 
 const CSS = fs.readFileSync(path.join(SRC, 'styles.css'), 'utf8');
 
+/* ══════════════════════════════════════════════════════════════════════════
+   The blog content layer: a frontmatter parser and a markdown renderer,
+   written here rather than installed. This repo has no dependencies and the
+   posts use four constructs and no more — `##`, `###`, paragraphs and
+   `**bold**` — so a parser is a dozen lines and a package is a supply chain.
+   The frontmatter shape is documented in design/copy-pages.md §B5.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+// `---\n key: value \n--- \n body`. Values are plain scalars: no nesting, no
+// lists, no anchors. A quoted value keeps its quotes off. Nothing is eval'd.
+function frontmatter(raw) {
+  const text = raw.replace(/^﻿/, '').replace(/\r\n/g, '\n');
+  const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!m) throw new Error('no frontmatter block');
+  const data = {};
+  for (const line of m[1].split('\n')) {
+    if (!line.trim() || /^\s*#/.test(line)) continue;
+    const at = line.indexOf(':');
+    if (at < 0) throw new Error(`frontmatter line without a colon: ${line}`);
+    const key = line.slice(0, at).trim();
+    let value = line.slice(at + 1).trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    data[key] = value;
+  }
+  return { data, body: m[2].trim() };
+}
+
+// The four constructs the posts use, and nothing else. Everything is escaped
+// first, so a post can never inject markup into the page.
+function markdown(body) {
+  const inline = (s) => esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s(])\*(?!\s)(.+?)(?<!\s)\*/g, '$1<em>$2</em>');
+  const out = [];
+  let list = null;
+  const closeList = () => { if (list) { out.push(`<ul>${list.join('')}</ul>`); list = null; } };
+  for (const block of body.split(/\n{2,}/)) {
+    const b = block.trim();
+    if (!b) continue;
+    const h = b.match(/^(#{2,4})\s+(.*)$/);
+    if (h) { closeList(); out.push(`<h${h[1].length}>${inline(h[2].trim())}</h${h[1].length}>`); continue; }
+    if (/^[-*]\s+/.test(b)) {
+      list = list || [];
+      for (const li of b.split('\n')) list.push(`<li>${inline(li.replace(/^[-*]\s+/, '').trim())}</li>`);
+      continue;
+    }
+    closeList();
+    out.push(`<p>${inline(b.replace(/\n/g, ' '))}</p>`);
+  }
+  closeList();
+  return out.join('\n');
+}
+
+/* Read time is COMPUTED from the rendered word count, never typed onto a card
+   by hand (copy-pages.md §B2). 200 words a minute for English and 140 for
+   Arabic — Arabic words carry more, and at this pair every one of the six
+   posts returns the SAME number in both languages, which matters because the
+   two pages are the same article. `read:` in frontmatter stays as the
+   author's own estimate and is not printed. */
+const WPM = { en: 200, ar: 140 };
+const readTime = (words, lang) => Math.max(1, Math.round(words / WPM[lang]));
+
+// 2026-09-24 -> `24 September 2026` / `24 سبتمبر 2026`, with every digit run
+// isolated on the Arabic page (build-spec §10).
+function dateLabel(t, iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  const month = t.months[m - 1];
+  return t.lang === 'ar'
+    ? `<span dir="ltr">${d}</span> ${month} <span dir="ltr">${y}</span>`
+    : `${d} ${month} ${y}`;
+}
+
+// The six posts, per locale, in the order the blog list prints them. The
+// featured panel takes the first: `why-your-google-profile-stops-growing`,
+// Ahmad's pick, because it describes the visitor's own situation.
+const POST_ORDER = [
+  'why-your-google-profile-stops-growing',
+  'what-to-do-with-your-google-profile',
+  'page-per-service-and-area',
+  'how-ai-assistants-decide-what-to-quote',
+  'why-a-slow-website-loses-customers',
+  'what-to-ask-before-paying-for-seo',
+];
+
+function loadPosts(t) {
+  return POST_ORDER.map((slug) => {
+    const file = path.join(CONTENT, `${slug}.${t.lang}.md`);
+    const { data, body } = frontmatter(fs.readFileSync(file, 'utf8'));
+    for (const k of ['title', 'description', 'excerpt', 'date', 'author', 'authorUrl', 'slug', 'lang']) {
+      if (!data[k]) throw new Error(`${path.basename(file)}: frontmatter is missing ${k}`);
+    }
+    if (data.slug !== slug) throw new Error(`${path.basename(file)}: slug ${data.slug} does not match the filename`);
+    if (data.lang !== t.lang) throw new Error(`${path.basename(file)}: lang ${data.lang} does not match the filename`);
+    const html = markdown(body);
+    const words = body.replace(/[#*]/g, ' ').split(/\s+/).filter(Boolean).length;
+    const read = readTime(words, t.lang);
+    return {
+      ...data, html, words, read,
+      ...t.paths.post(slug),
+      art: `/assets/img/blog-${slug}.webp`,
+      thumb: `/assets/img/blog-${slug}-sq.webp`,
+      dateLabel: dateLabel(t, data.date),
+      readLabel: t.blog.readTime(read),
+    };
+  });
+}
+
 /* ── the one page shell both pages use ──────────────────────────────────── */
-function shell({ t, page, meta, body, bodyClass = '', jsonLd = [] }) {
-  const self = page === 'offer' ? t.offer : t.home;
+function shell({ t, page, meta, body, bodyClass = '', jsonLd = [], self }) {
+  self = self || (page === 'offer' ? t.offer : t.home);
   const abs = (p) => NAP.origin + p;
   const arPath = t.lang === 'ar' ? self.path : self.otherPath;
   const enPath = t.lang === 'en' ? self.path : self.otherPath;
@@ -79,9 +191,11 @@ ${preload.map((f) => `<link rel="preload" as="font" type="font/woff2" href="/ass
 <meta property="og:title" content="${esc(meta.title)}">
 <meta property="og:description" content="${esc(meta.description)}">
 <meta property="og:url" content="${abs(self.path)}">
-<meta property="og:image:alt" content="${esc(meta.ogAlt)}">
-<meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#FF5F29">
+${meta.ogImage ? `<meta property="og:image" content="${abs(meta.ogImage)}">\n` : ''}<meta property="og:image:alt" content="${esc(meta.ogAlt)}">
+<meta name="twitter:card" content="${meta.ogImage ? 'summary_large_image' : 'summary'}">
+<meta name="twitter:title" content="${esc(meta.title)}">
+<meta name="twitter:description" content="${esc(meta.description)}">
+${meta.ogImage ? `<meta name="twitter:image" content="${abs(meta.ogImage)}">\n` : ''}<meta name="theme-color" content="#FF5F29">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <style>${CSS}</style>
 <script defer src="/assets/app.js"></script>
@@ -89,11 +203,11 @@ ${jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</sc
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
 <a class="skip" href="#main">${esc(t.skip)}</a>
-${header(t, page)}
+${header(t, page, self)}
 <main id="main">
 ${body}
 </main>
-${footer(t)}
+${footer(t, self)}
 </body>
 </html>
 `;
@@ -126,11 +240,59 @@ function faqLd(items) {
     })),
   };
 }
+// Blog structured data: the same six titles, dates and authors the page
+// prints, and nothing that is not on the page.
+function blogLd(t, posts) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: t.meta.blog.title.split(' | ')[0],
+    url: NAP.origin + t.paths.blog.path,
+    inLanguage: t.lang,
+    blogPost: posts.map((p) => ({
+      '@type': 'BlogPosting',
+      headline: p.title,
+      url: NAP.origin + p.path,
+      datePublished: p.date,
+      author: { '@type': 'Person', name: p.author, url: p.authorUrl },
+    })),
+  };
+}
+function postLd(t, p) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: p.title,
+    description: p.description,
+    url: NAP.origin + p.path,
+    mainEntityOfPage: NAP.origin + p.path,
+    datePublished: p.date,
+    dateModified: p.date,
+    inLanguage: t.lang,
+    image: NAP.origin + p.art,
+    author: { '@type': 'Person', name: p.author, url: p.authorUrl },
+    publisher: { '@type': 'Organization', name: 'Q8 block', url: NAP.origin + '/' },
+  };
+}
+function crumbLd(t, p) {
+  const at = [
+    [t.blog.home, t.paths.home.path],
+    [t.blog.blog, t.paths.blog.path],
+    [p.title, p.path],
+  ];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: at.map(([name, url], i) => ({
+      '@type': 'ListItem', position: i + 1, name, item: NAP.origin + url,
+    })),
+  };
+}
 
 /* ── the two page templates ─────────────────────────────────────────────── */
 function homePage(t) {
   const body = [
-    hero(t), offerStrip(t), problem(t), whatWeDo(t), included(t),
+    firstScreen(t), problem(t), whatWeDo(t), included(t),
     journey(t), work(t), faq(t), finalCall(t),
   ].join('\n');
   return shell({ t, page: 'home', meta: t.meta.home, body, jsonLd: [orgLd(t), faqLd(t.faq.items)] });
@@ -145,6 +307,139 @@ function offerPage(t) {
   return shell({
     t, page: 'offer', meta: t.meta.offer, body, bodyClass: 'theme-dark',
     jsonLd: [orgLd(t), faqLd(t.offerPage.b6.items)],
+  });
+}
+
+/* ── the four secondary pages ───────────────────────────────────────────── */
+
+function aboutPage(t) {
+  const a = t.about;
+  const body = [
+    pageHead(t, { eyebrow: a.eyebrow, h1: a.h1, lead: a.lead }),
+    aboutPrinciple(t), aboutDeliver(t), aboutNotDo(t), aboutCompany(t),
+    finalCall(t, { id: 'about-final', h2: a.final.h2, lead: a.final.lead }),
+  ].join('\n');
+  return shell({ t, page: 'about', self: t.paths.about, meta: t.meta.about, body, jsonLd: [orgLd(t)] });
+}
+
+function contactPage(t) {
+  const c = t.contact;
+  const body = [
+    pageHead(t, { eyebrow: c.eyebrow, h1: c.h1, lead: c.lead }),
+    contactBlocks(t), contactOffice(t),
+  ].join('\n');
+  return shell({ t, page: 'contact', self: t.paths.contact, meta: t.meta.contact, body, jsonLd: [orgLd(t)] });
+}
+
+function termsPage(t) {
+  const body = [
+    pageHead(t, { h1: t.terms.h1, lead: t.terms.lead, note: t.terms.updated }),
+    termsBody(t),
+  ].join('\n');
+  return shell({ t, page: 'terms', self: t.paths.terms, meta: t.meta.terms, body, jsonLd: [orgLd(t)] });
+}
+
+/* ── 404 — one file at the publish root, Netlify's own convention, served for
+   every missing URL in either locale (build-spec.md §17). It does not go
+   through shell(): a 404 is not part of the ar/en page-pair system, so its
+   canonical and both hreflang alternates self-reference the one file that
+   actually serves them, and its header/footer language link points at the
+   English homepage rather than at itself. Arabic primary, same header, same
+   footer, same tokens as every other page, with one English line for a
+   reader who followed a broken /en/ link — Netlify serves this exact file
+   under /en/ too, since the publish directory holds no per-locale 404. */
+function notFoundPage() {
+  const t = COPY.ar;
+  const self = { path: '/404.html', otherPath: '/en/' };
+  const title = 'الصفحة غير موجودة | Q8 block';
+  const description = 'هذا الرابط غير متاح على موقع Q8 block. عد إلى الصفحة الرئيسية أو تواصل معنا مباشرة.';
+  const links = [
+    { label: t.nav[0].label, href: t.paths.home.path },   // الرئيسية
+    { label: t.strip.cta, href: t.offer.path },            // اطلع على العرض
+    { label: t.nav[2].label, href: t.paths.blog.path },    // المدونة
+    { label: t.nav[4].label, href: t.paths.contact.path }, // تواصل معنا
+  ];
+  const body = `<section id="notfound" class="sec page-head">
+    <div class="wrap">
+      <p class="eyebrow">خطأ 404</p>
+      <h1 class="h2">هذه الصفحة غير موجودة</h1>
+      <p class="lead">الرابط الذي فتحته غير متاح، أو تم نقله. جرّب أحد الروابط التالية:</p>
+      <nav class="notfound-links" aria-label="روابط مفيدة">
+        ${links.map((l) => `<a class="text-link" href="${l.href}">${esc(l.label)}</a>`).join('')}
+      </nav>
+      <p class="page-note" dir="ltr">Looking for the English site? <a class="text-link" href="/en/">Go to the English homepage</a></p>
+    </div>
+  </section>`;
+  return `<!doctype html>
+<html lang="${t.lang}" dir="${t.dir}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="${NAP.origin}/404.html">
+<link rel="alternate" hreflang="ar" href="${NAP.origin}/404.html">
+<link rel="alternate" hreflang="en" href="${NAP.origin}/404.html">
+<link rel="alternate" hreflang="x-default" href="${NAP.origin}/404.html">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/alexandria-arabic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/alexandria-latin.woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Q8 block">
+<meta property="og:locale" content="ar_KW">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:url" content="${NAP.origin}/404.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+<meta name="theme-color" content="#FF5F29">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<style>${CSS}</style>
+<script defer src="/assets/app.js"></script>
+<script type="application/ld+json">${JSON.stringify(orgLd(t))}</script>
+</head>
+<body>
+<a class="skip" href="#main">${esc(t.skip)}</a>
+${header(t, 'notfound', self)}
+<main id="main">
+${body}
+</main>
+${footer(t, self)}
+</body>
+</html>
+`;
+}
+
+/* Both the list page and every post page close on the §9 final-call band,
+   used exactly as copy.md writes it, so the site has one closing argument
+   and not three (copy-pages.md §B4). */
+function blogPage(t, posts) {
+  const body = [
+    pageHead(t, { eyebrow: t.blog.eyebrow, h1: t.blog.h1, lead: t.blog.lead }),
+    blogList(t, posts), finalCall(t),
+  ].join('\n');
+  return shell({
+    t, page: 'blog', self: t.paths.blog, meta: t.meta.blog, body,
+    jsonLd: [orgLd(t), blogLd(t, posts)],
+  });
+}
+
+function postPage(t, posts, i) {
+  const post = posts[i];
+  const body = [
+    postArticle(t, post, { prev: posts[i - 1], next: posts[i + 1] }),
+    finalCall(t),
+  ].join('\n');
+  return shell({
+    t, page: 'post', self: { path: post.path, otherPath: post.otherPath },
+    // the post's own illustration is a real image of this page, so it is the
+    // one og:image on the site; no other page has a picture to point at.
+    meta: {
+      title: `${post.title} | Q8 block`, description: post.description,
+      ogAlt: post.title, ogImage: post.art,
+    },
+    body, jsonLd: [postLd(t, post), crumbLd(t, post)],
   });
 }
 
@@ -164,11 +459,29 @@ function copy(from, rel) {
 }
 
 /* ── the page set, in one place, so the sitemap cannot drift from it ────── */
+const POSTS = { ar: loadPosts(COPY.ar), en: loadPosts(COPY.en) };
+
 const PAGES = [
   { path: '/', file: 'index.html', build: () => homePage(COPY.ar), priority: '1.0' },
   { path: '/en/', file: 'en/index.html', build: () => homePage(COPY.en), priority: '1.0' },
   { path: '/offer/', file: 'offer/index.html', build: () => offerPage(COPY.ar), priority: '0.9' },
   { path: '/en/offer/', file: 'en/offer/index.html', build: () => offerPage(COPY.en), priority: '0.9' },
+  { path: '/about/', file: 'about/index.html', build: () => aboutPage(COPY.ar), priority: '0.8' },
+  { path: '/en/about/', file: 'en/about/index.html', build: () => aboutPage(COPY.en), priority: '0.8' },
+  { path: '/blog/', file: 'blog/index.html', build: () => blogPage(COPY.ar, POSTS.ar), priority: '0.8' },
+  { path: '/en/blog/', file: 'en/blog/index.html', build: () => blogPage(COPY.en, POSTS.en), priority: '0.8' },
+  { path: '/contact/', file: 'contact/index.html', build: () => contactPage(COPY.ar), priority: '0.8' },
+  { path: '/en/contact/', file: 'en/contact/index.html', build: () => contactPage(COPY.en), priority: '0.8' },
+  { path: '/terms/', file: 'terms/index.html', build: () => termsPage(COPY.ar), priority: '0.4' },
+  { path: '/en/terms/', file: 'en/terms/index.html', build: () => termsPage(COPY.en), priority: '0.4' },
+  // one page per post per language, from content/blog/, in POST_ORDER
+  ...['ar', 'en'].flatMap((lang) => POSTS[lang].map((p, i) => ({
+    path: p.path,
+    file: p.path.replace(/^\//, '') + 'index.html',
+    build: () => postPage(COPY[lang], POSTS[lang], i),
+    priority: '0.7',
+    lastmod: p.date,          // the post's own publication date, not the build date
+  }))),
 ];
 const EXTRA_URLS = ['/google-business-profile-checklist.html', '/en/google-business-profile-checklist.html'];
 
@@ -186,7 +499,7 @@ function sitemap() {
   const urls = PAGES.map((p) => `  <url>
     <loc>${NAP.origin}${p.path}</loc>
 ${alt(p.path)}
-    <lastmod>${today}</lastmod>
+    <lastmod>${p.lastmod || today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${p.priority}</priority>
   </url>`).join('\n');
@@ -227,8 +540,25 @@ function llms() {
 - [Home, English](${NAP.origin}/en/)
 - [The offer, Arabic](${NAP.origin}/offer/)
 - [The offer, English](${NAP.origin}/en/offer/)
+- [About us, Arabic](${NAP.origin}/about/)
+- [About us, English](${NAP.origin}/en/about/)
+- [Blog, Arabic](${NAP.origin}/blog/)
+- [Blog, English](${NAP.origin}/en/blog/)
+- [Contact us, Arabic](${NAP.origin}/contact/)
+- [Contact us, English](${NAP.origin}/en/contact/)
+- [Terms and conditions, Arabic](${NAP.origin}/terms/)
+- [Terms and conditions, English](${NAP.origin}/en/terms/)
 - [Google Business Profile checklist, Arabic](${NAP.origin}/google-business-profile-checklist.html)
 - [Google Business Profile checklist, English](${NAP.origin}/en/google-business-profile-checklist.html)
+
+## Articles
+
+Six articles, each published in Arabic at /blog/<slug>/ and in English at
+/en/blog/<slug>/. All were published on 2026-09-24, written by Ahmad Owaihan
+(${COPY.en.blog.by.replace('By ', '')}, https://ahmadowaihan.com/).
+
+${POSTS.en.map((p, i) => `- [${p.title}](${NAP.origin}${p.path}) — ${p.description}
+  Arabic: [${POSTS.ar[i].title}](${NAP.origin}${POSTS.ar[i].path})`).join('\n')}
 
 ## What is included on every project
 
@@ -275,9 +605,23 @@ else console.warn('!! google-business-profile-checklist.ar.html not found in src
 if (fs.existsSync(CHECKLIST_EN)) copy(CHECKLIST_EN, 'en/google-business-profile-checklist.html');
 else console.warn('!! google-business-profile-checklist.en.html not found in src/static/ — not copied');
 
+// The checklist pages' own illustrations. They shipped with broken relative
+// src paths from the old site's directory shape (build-spec.md §17) and were
+// never copied into site/ at all, so every img 404'd. Vendored once here from
+// _old/img/blog/, at the absolute path both HTML files now point at.
+const CHECKLIST_IMG_SRC = path.join(ROOT, '_old', 'img', 'blog');
+const CHECKLIST_IMGS = ['gbp-setup.webp', 'gbp-reviews.png', 'gbp-engagement.webp', 'gbp-website.webp', 'gbp-citations.webp', 'gbp-blueprint.webp'];
+for (const f of CHECKLIST_IMGS) {
+  const from = path.join(CHECKLIST_IMG_SRC, f);
+  if (fs.existsSync(from)) copy(from, `assets/img/checklist/${f}`);
+  else console.warn(`!! ${f} not found in _old/img/blog/ — not copied`);
+}
+
 write('robots.txt', robots());
 write('sitemap.xml', sitemap());
 write('llms.txt', llms());
+write('404.html', notFoundPage());
+write(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
 
 const c = CONFIG;
 const live = c.COUNTDOWN_END && Date.parse(c.COUNTDOWN_END) > Date.now();

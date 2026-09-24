@@ -68,16 +68,23 @@ No country, no region, no market.
 
 **Background** white, solid `#FFFFFF` on scroll.
 
-| Element | Arabic | English |
-|---|---|---|
-| Logo lockup | Q8 block | Q8 block |
-| Nav 1, to Section 4 | ما نقدمه | What we do |
-| Nav 2, to Section 6 | كيف نعمل | How it works |
-| Nav 3, to Section 7 | أعمالنا | Our work |
-| Nav 4, to `/offer` | العرض | The offer |
-| Nav 5, to Section 8 | أسئلة شائعة | FAQ |
-| Language link | English | العربية |
-| CTA | اتصل الآن | Call now |
+**Rebuilt 2026-09-24. Every scroll-to-section link is gone.** Ahmad: `I hate navigation scrollies.
+When I click on something and then it scrolls I hate that. Remove all navigation.` So no `#section`
+link appears in the header or the footer, and `scroll-behavior: smooth` is out of the stylesheet. The
+offer also left the nav: it lives in the banner under the hero, which is now a clickable bar.
+
+The five nav items point at five real pages. Arabic at `/`, English mirrors under `/en/`.
+
+| Element | Arabic | English | Href (ar / en) |
+|---|---|---|---|
+| Logo lockup | Q8 block | Q8 block | `/` · `/en/` |
+| Nav 1 | الرئيسية | Home | `/` · `/en/` |
+| Nav 2 | من نحن | About us | `/about/` · `/en/about/` |
+| Nav 3 | المدونة | Blog | `/blog/` · `/en/blog/` |
+| Nav 4 | الشروط والأحكام | Terms and conditions | `/terms/` · `/en/terms/` |
+| Nav 5 | تواصل معنا | Contact us | `/contact/` · `/en/contact/` |
+| Language link | English | العربية | the mirror of the current page |
+| CTA | اتصل الآن | Call now | `tel:` |
 
 **Logo note.** The approved board generated the wordmark as `Q8 digital`. That was a model slip. The mark
 reads `Q8 block`: orange square holding `Q8`, wordmark `block` beside it. The logo is HTML and CSS built
@@ -91,16 +98,23 @@ from `brand/logo/index.html`, never a generated image, so this costs nothing to 
 Two fixes against the board and nothing else: the wordmark reads `Q8 block`, and the small `Kuwait Block`
 line above the headline is deleted. Nobody changes the headline, the highlight, the CTAs or the layout.
 
-**Two lines were touched here on 2026-09-24, both under rules Ahmad gave the same day, both revertible in
-one edit.** The headline is untouched and stays exactly as approved.
+**Two lines were touched here earlier on 2026-09-24, both under rules Ahmad gave the same day, both
+revertible in one edit.** The English headline is untouched and stays exactly as approved; the Arabic
+headline was replaced later the same day by Ahmad himself, see the note under the table below.
 1. The subhead's `ثم نرفعه إلى الصفحة الأولى` / `then we rank it on the first page` was the rank promise
    the new rule forbids. It now reads as discoverability. Nothing else in the sentence moved.
 2. Trust point 1 read `We build it then we rank it`. Same reason, same fix.
 3. Trust point 4 is resolved, and the reasoning is written out under the trust row below.
 
+**The Arabic headline changed on 2026-09-24, and it is Ahmad's own line.** It now reads
+`تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟` — **deliberately Gulf colloquial** (`تبي`, not the
+MSA `هل تريد`) and **deliberately a question**. It is the hook, and it is the only colloquial string
+on the site: every other Arabic line in this file stays professional MSA. **Do not "correct" it.**
+The highlight stays on `يجدونك`. The English headline is unchanged.
+
 | Element | Arabic | English |
 |---|---|---|
-| Headline | نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي | Customers find you on Google and in AI. |
+| Headline | تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟ | Customers find you on Google and in AI. |
 | Highlighted word | يجدونك | find you |
 | Subhead | نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا تستشهد به مساعدات الذكاء الاصطناعي. | We build your whole website, then we get it found in local search and prepare it to be a source AI assistants cite. |
 | CTA primary | اتصل الآن | Call now |
@@ -146,6 +160,22 @@ No country here. The strip sells the shape of the offer; the conditions, includi
 The strip must render a complete, sensible band with `[COUNTDOWN]` removed and `[SPOTS]` empty, so two
 states are written.
 
+**Rebuilt 2026-09-24 on Ahmad's instruction, and this supersedes the old build note.** His words:
+`the link to check the offer says terms and details. Remove this because it's taking a whole row which
+I don't like. It should be inside the same row where it has all the information... I think the whole
+thing should be clickable. Also there should be a CTA somewhere. But no new rows please.`
+
+1. **The separate `الشروط والتفاصيل` / `Terms and details` row is deleted.** It does not appear anywhere
+   on the strip in either state.
+2. **Everything sits on one row:** pill, line, countdown label, countdown, spots line, CTA.
+3. **The whole band is the link to `/offer/`** (`/en/offer/` on English pages). The bar itself is the
+   `<a>`, so the full-bleed band is the hit area, and it has a visible hover state.
+4. **The pill stays and is now a label, not an action.** Ahmad likes the pill but noted it read like a
+   CTA. Now that the row carries a real CTA, the pill is an outline in brand orange and the CTA takes
+   the solid orange fill. Two things cannot both read as the action.
+5. `اطلع على العرض` / `See the offer` is a **navigation** CTA into the offer page. The site still has
+   exactly two contact CTA labels, `اتصل الآن` / `Call now` and `واتساب` / `WhatsApp`.
+
 ### Full state, countdown running
 
 | Element | Arabic | English |
@@ -156,7 +186,7 @@ states are written.
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
 | Spots line | `[SPOTS]` مقاعد لكل مدينة | `[SPOTS]` spots per city |
-| Link to `/offer` | الشروط والتفاصيل | Terms and details |
+| CTA, same row | اطلع على العرض | See the offer |
 
 ### Static state, countdown removed and spots empty
 
@@ -165,10 +195,7 @@ states are written.
 | Label pill | عرض محدود | Limited offer |
 | Line | ستة أشهر مجانية، بدون عقد | Six months free, no contract |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
-| Link to `/offer` | الشروط والتفاصيل | Terms and details |
-
-**Build note.** `الشروط والتفاصيل` / `Terms and details` is a navigation link to `/offer`, styled as an
-underlined text link with a chevron. It is not a third CTA label and never takes a button.
+| CTA, same row | اطلع على العرض | See the offer |
 
 ---
 
@@ -466,7 +493,14 @@ figure appears in the headline.
 | Eyebrow | أعمالنا | Our work |
 | Headline | مواقع بنيناها ويجدها العملاء اليوم | Sites we built that get found. |
 | Highlighted word | ويجدها العملاء | get found |
-| Subhead | كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة محسوبة من شهرين كاملين مكتوبين عليها، من Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد. | Every site here was built from scratch and is still running. The growth figure on each card is computed from the two complete months printed on it, from Google Search Console. The recent projects are labelled as what they are, because their data is not in yet. |
+| Subhead | كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة حقيقية، محسوبة من شهرين كاملين من بيانات Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد. | Every site here was built from scratch and is still running. The growth figure on each card is real, computed from two complete months of Google Search Console data. The recent projects are labelled as what they are, because their data is not in yet. |
+
+**Source line, ONE line under the whole section.** It replaces the eleven period lines that used to sit
+on the cards.
+
+| Arabic | English |
+|---|---|
+| كل الأرقام من Google Search Console، آخر شهر كامل هو أغسطس 2026 | All figures from Google Search Console, most recent complete month August 2026 |
 
 **Why the subhead does not print a count.** It would now be true — card 11 is resolved and the grid ships
 with eleven — so the count can be added in one edit whenever Ahmad wants it:
@@ -479,37 +513,49 @@ original reason for leaving it out — that the grid might ship with ten — no 
 | Field | Arabic | English |
 |---|---|---|
 | Metric label | نمو النقرات | Click growth |
-| Period label | per card, printed under the figure | per card, printed under the figure |
 | New project tag | مشروع جديد | New project |
 | Link label | افتح الموقع | View case study |
 | Screenshot caption, where a capture is shown | لقطة من Google Search Console | Capture from Google Search Console |
+
+**Revised again 2026-09-24. Three things came off every card and the section became a slideshow.**
+Ahmad's instructions, in his words and in full:
+1. **Sort by the biggest numbers first.** The order below is the shipping order and it is not the
+   chronological one any more.
+2. **The sector labels are gone.** `خدمات التنظيف` / `Cleaning services`, `غسيل السيارات` / `Car wash`,
+   `تكييف وتبريد` / `Air conditioning` and the rest are removed from every card and from the build data.
+3. **The date windows are gone from the cards.** He was explicit that he does not want them and is not
+   worried about a reader checking them. They are replaced by **one** source line under the whole
+   section (above), not eleven lines on eleven cards. Every percentage is still reproduced with its two
+   exact months in the derivation table at the end of this file, so nothing became uncheckable.
+4. **`أول شهر بيانات: أغسطس 2026` / `First data month: August 2026` is gone from the empty plates.** He
+   called it not sexy. Those four cards carry their `مشروع جديد` / `New project` tag and nothing else.
 
 **Build rules for this section, all five are hard.**
 * Every outbound card link is `rel="nofollow"` plus `target="_blank"` and `rel` also carries `noopener`,
   so the attribute reads `rel="nofollow noopener"` (Ahmad, 2026-09-24).
 * A `مشروع جديد` / `New project` card carries the tag in the slot where the percentage sits on the other
-  cards, in the same position and the same size. It is not smaller, greyed out or pushed to the end row.
-* The two months are printed on the card at readable size, never as a footnote or a tooltip. The claim has
-  to be checkable by the person looking at it.
+  cards, in the same position and the same size. It is not smaller, greyed out or pushed to the end.
+* Every percentage stays traceable: the two complete months it came from are in the derivation table
+  below, and the section prints the single source line above.
 * No card carries a Search Console capture unless the capture is real and unedited. The percentage alone is
   enough; a capture is optional per card.
-* The sector label is the only description a card carries. No card states a country.
+* A card carries the site name, the figure and the link. No card states a country.
 
-### The eleven cards, ordered by their most recent complete month
+### The eleven cards, ordered biggest figure first
 
-| # | Site | Sector, Arabic | Sector, English | Figure shown | Period, Arabic | Period, English |
-|---|---|---|---|---|---|---|
-| 1 | kwtclean.com | خدمات التنظيف | Cleaning services | +222% | مايو 2026 إلى أغسطس 2026 | May 2026 to August 2026 |
-| 2 | carwashkw.com | غسيل السيارات | Car wash | +32% | أغسطس 2025 إلى أغسطس 2026 | August 2025 to August 2026 |
-| 3 | kuwaityclean.com | خدمات التنظيف | Cleaning services | +326% | أغسطس 2025 إلى أغسطس 2026 | August 2025 to August 2026 |
-| 4 | mashame3.com | تكييف وتبريد | Air conditioning | +883% | مارس 2026 إلى أغسطس 2026 | March 2026 to August 2026 |
-| 5 | kwcarwash.com | غسيل السيارات | Car wash | +270% | ديسمبر 2025 إلى أغسطس 2026 | December 2025 to August 2026 |
-| 6 | q8carwash.com | غسيل السيارات | Car wash | +900% | أغسطس 2025 إلى أغسطس 2026 | August 2025 to August 2026 |
-| 7 | betikcleaner.com | خدمات التنظيف | Cleaning services | مشروع جديد / New project | first data month August 2026 | first data month August 2026 |
-| 8 | anharpest.com | مكافحة الحشرات | Pest control | مشروع جديد / New project | first data month August 2026 | first data month August 2026 |
-| 9 | alghadeerclean.com | خدمات التنظيف | Cleaning services | مشروع جديد / New project | first data month August 2026 | first data month August 2026 |
-| 10 | ragwaclean.com | تنظيف الواجهات | Facade cleaning | مشروع جديد / New project | first data month August 2026 | first data month August 2026 |
-| 11 | movingcompanykw.com | نقل الأثاث | Furniture moving | none — no figure, no tag | — | — |
+| # | Site | Figure shown | Computed from (not printed on the card) |
+|---|---|---|---|
+| 1 | q8carwash.com | +900% | August 2025 to August 2026 |
+| 2 | mashame3.com | +883% | March 2026 to August 2026 |
+| 3 | kuwaityclean.com | +326% | August 2025 to August 2026 |
+| 4 | kwcarwash.com | +270% | December 2025 to August 2026 |
+| 5 | kwtclean.com | +222% | May 2026 to August 2026 |
+| 6 | carwashkw.com | +32% | August 2025 to August 2026 |
+| 7 | betikcleaner.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 8 | anharpest.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 9 | alghadeerclean.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 10 | ragwaclean.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 11 | movingcompanykw.com | none — no figure, no tag | no honest window exists |
 
 **Card 11, movingcompanykw.com. RESOLVED by Ahmad, 2026-09-24: option B, and it is live.**
 
@@ -524,10 +570,10 @@ from one of its own troughs, for example March 2026 at 1 click, and that is cher
 thing the numbers rule exists to stop. The `New project` tag is not available to it either, because the
 site is not new: it has recorded data across the whole fourteen month window, so the tag would be a lie.
 
-So the card shows **the sector label, the site name and the link, and nothing else** — no chart plate, no
-figure, no period line. One card without a figure sitting beside ten that have one is normal and honest,
-and it is the only version of this card that does not require inventing something. Nothing on this page
-may be fake (Ahmad, 2026-09-24).
+So the card shows **the site name and the link, and nothing else** — no figure, no tag, no period line,
+and an empty dashed plate (the sector label came off this card with all the others). One card without a
+figure sitting beside ten that have one is normal and honest, and it is the only version of this card
+that does not require inventing something. Nothing on this page may be fake (Ahmad, 2026-09-24).
 
 **Build note.** Ahmad confirms which client names may be shown publicly before this section ships. Every
 percentage is reproduced in the derivation table at the end of this file with the exact rows it came from,
@@ -614,9 +660,19 @@ The address is the only place on the homepage where a location appears, and it i
 | Brand line | Q8 block | Q8 block |
 | Brand strapline | نبني المواقع ونجعل العملاء يجدونها | We build websites and get them found |
 | Column 1 title | الشركة | Company |
-| Column 2 title | ما نقدمه | What we do |
+| Column 2 title | الموارد | Resources |
 | Column 3 title | العرض | The offer |
 | Column 4 title | تواصل | Contact |
+
+**Footer links, rebuilt 2026-09-24 under the same no-scrollies rule as the header.** Every `#section`
+link is gone; every link below is a page.
+
+| Column | Arabic | English | Href (ar / en) |
+|---|---|---|---|
+| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا | Home · About us · Contact us | `/` · `/about/` · `/contact/` |
+| 2 الموارد / Resources | المدونة · قائمة ملف جوجل | Blog · Google profile checklist | `/blog/` · `/google-business-profile-checklist.html` |
+| 3 العرض / The offer | العرض · الشروط والأحكام | The offer · Terms and conditions | `/offer/` · `/terms/` |
+| 4 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
 | Address label | العنوان | Address |
 | Address value | محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9 | Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9 |
 | Phone label | الهاتف | Phone |
@@ -818,7 +874,7 @@ The offer questions live here and only here.
 
 | Slot | Where | Filled from |
 |---|---|---|
-| `[COUNTDOWN]` | Homepage Section 2, offer page B1 | Build config, end date set by Ahmad. Both must also render correctly with this element absent. |
+| `[COUNTDOWN]` | Homepage Section 2, offer page B1 | Build config, end date set by Ahmad. Both must also render correctly with this element absent. **Placeholder since 2026-09-24: `2026-10-04T23:59:59+03:00`, ten days out.** The previous value ran 98 days and Ahmad rejected it on sight — `should be less than 10. Ten days.` He sets the real date; it is one line, `CONFIG.COUNTDOWN_END` in `src/data.mjs`. |
 | `[SPOTS]` | Homepage Section 2, offer page B1 and B3 | Build config, number set by Ahmad. Never hardcoded into body copy anywhere else. |
 
 **`[SPOTS]`, the working number.** Ahmad's working figure is **around 9** seats per city. It lives in build

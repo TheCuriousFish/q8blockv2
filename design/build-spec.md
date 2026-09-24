@@ -608,7 +608,13 @@ reads as a deeper tone of the same brand colour, not a second colour.
 is a phone number this file has always said the boards do not specify (§11, last paragraph). Below 18.66px
 bold white on `#FF5F29` drops out of the large-text allowance and fails.
 
-### Still failing, deliberately
+### Still failing, deliberately — both since closed, see §17.7 / §17.7b
+
+**Both rows below are resolved.** Left in place as the record of the original trade-off, since both
+"why it is left" columns turned out to be wrong or incomplete once Ahmad actually decided the point on
+2026-09-24: `.strip-pill` was fixed to `#141415` (the one-line fix this table already named, §17.7 Fix A);
+`.wwd-num` was fixed to `--orange-ink-light` (§17.7b Node 1) — and its own `aria-hidden="true"` turned out
+not to exempt it from Lighthouse's `color-contrast` audit at all, which §17.7 measured directly.
 
 | Element | Measured | Why it is left |
 |---|---|---|
@@ -773,3 +779,738 @@ strips.
 4. `shots.mjs` reports **`overflow=false`** on every row.
 
 Anything short of all four is not ready to show Ahmad.
+
+---
+
+## 15. Ahmad's homepage revision pass, 2026-09-24. Six items, what moved and what it cost
+
+His review of the built homepage. Everything below is his instruction, not an agent's idea. Verified with
+`compare.mjs` (all sixteen board pairs, both locales), `shots.mjs` (four rows) and a fresh Lighthouse
+sweep. Nothing here is pushed or deployed.
+
+### 15.1 The hero owns the first screen
+
+**The bug.** `#hero` was sized by its own content, so on a large monitor it ended early, the offer strip
+stranded itself mid-screen and §3 showed underneath. Measured before the fix at 1440x900: the English
+hero ran 792px, the strip sat at 792 and `#problem` began at 870 — 30px of the next section inside the
+fold. At 1920x1200 the gap was far worse.
+
+**The fix, in one structural change.** `hero()` and `offerStrip()` are wrapped by a new `firstScreen()`
+renderer, `<div class="first-screen">`:
+
+```css
+.first-screen { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+#hero        { flex: 1 0 auto; display: flex; flex-direction: column; justify-content: center; }
+.strip-slot  { flex: none; }
+```
+
+`svh`, not `vh`, so collapsing mobile browser chrome cannot clip it. The brief asked for
+`min-height: calc(100svh - <header height>)` on the hero; that is written as `flex: 1 0 auto` inside a
+100svh column instead, because the strip has to fit inside the same 100svh and its height is 78px on
+desktop but wraps taller on a phone. The flex column computes `100svh - header - strip` exactly at every
+size, which is what "header, hero, strip and nothing else" actually requires. `min-height`, never
+`height`: where the content is taller than the screen the hero grows and the page scrolls normally, so
+the hero never scrolls inside itself.
+
+`#hero > .wrap-wide { width: 100% }` is required with it. In a flex column an auto inline margin beats
+`stretch`, so without it the 1500px column shrink-wraps to its widest child and the H1 quietly becomes a
+max-content box.
+
+**Measured after, in both locales:**
+
+| Viewport | Header | Hero | Strip | First screen | `#problem` top | Hero internal scroll |
+|---|---|---|---|---|---|---|
+| 1440x900 en | 112 | 822 | 78 | **900** | **900** | 0 |
+| 1440x900 ar | 112 | 822 | 78 | **900** | **900** | 0 |
+| 1920x1200 en | 112 | 1121 | 79 | **1200** | **1200** | 0 |
+| 1920x1200 ar | 112 | 1121 | 79 | **1200** | **1200** | 0 |
+| 390x844 en | 72 | 726.8 | 117.2 | **844** | **844** | 0 |
+| 390x844 ar | 72 | 726.8 | 117.2 | **844** | **844** | 0 |
+
+**Two spacing deviations were needed to get there, and both are outside the boards.**
+
+1. `html[lang="ar"] #hero .lead { line-height: 1.55 }`. The Arabic subhead sets in **three** lines where
+   the English sets in two, and `--lh-lead: 1.85` is a body-section value; at 1440x900 that left the
+   Arabic hero 41px past the first screen while the English fitted. Hero only, Arabic only. §9 already
+   provides for hero-only Arabic overrides and the boards are English, so no board pair moves. On short
+   desktop windows (`min-width: 990px and max-height: 950px`) the Arabic hero also takes
+   `btn-row 40 → 30` and `trust 70 → 46`.
+2. The **phone** hero takes `padding-block-start: header + 28`, `padding-block-end: 24`, `lead 20`,
+   `btn-row 28`, and the phone strip takes `padding-block: 12`, `gap: 8px 16px`, pill and CTA padding 7px.
+   §11 already records that the 390px layout is not measurable from the boards.
+
+**The English hero keeps every board-measured gap at every size.** 96 / 28 / 40 / 70 / 64 are untouched
+on `/en/`, which is the page the boards are compared against.
+
+### 15.2 The strip pins under the header, and pinning costs zero CLS
+
+Once the bar's own top would pass under the fixed header, `app.js` gives it `.stuck`:
+
+```css
+#offer-strip.stuck { position: fixed; inset-block-start: var(--header-h); inset-inline: 0; z-index: 80;
+                     min-height: 0; padding-block: 9px; }
+```
+
+`position: sticky` cannot do this job: a sticky element is released by its containing block, and the
+containing block here is the 100svh first screen, so the bar would scroll away the moment the first
+screen did. Fixed positioning does, and the layout cost is paid by `.strip-slot`, which is given the
+bar's **measured** height at the moment it is pinned and keeps it until it is released. Measured
+document height before pinning, while pinned and after releasing: **8238 / 8238 / 8238** at 1440 and
+10905 / 10905 / 10905 at 390. The document never changes height, so the pin cannot shift anything.
+
+Slim when stuck: **50px** on desktop (against 78 at rest) and **60px** on a phone, where the pinned bar
+also drops the offer line, the countdown label and the spots line and keeps pill + countdown + CTA on
+one row. The threshold is re-measured on `load`, on `document.fonts.ready` and on resize, because the
+hero is type and `font-display: swap` moves it.
+
+### 15.3 §2 the offer strip: one row, and the whole bar is the link
+
+Ahmad: `the link to check the offer says terms and details. Remove this because it's taking a whole row
+which I don't like. It should be inside the same row where it has all the information... I think the
+whole thing should be clickable. Also there should be a CTA somewhere. But no new rows please.`
+
+| What | Before | Now |
+|---|---|---|
+| `الشروط والتفاصيل` / `Terms and details` | its own underlined text link, at the end of the row | **deleted** |
+| The row | pill · line · label · countdown · spots · terms link | pill · line · label · countdown · spots · **CTA**, one row |
+| The band | `<section>` with a 1320px `.wrap` inside | **`<a id="offer-strip">`** — the full-bleed band is the hit area. Hover `#121215 → #1C1D22`, focus ring on the bar |
+| The pill | solid `#FF5F29`, white label | **outline**: transparent fill, `1px rgba(255,95,41,0.6)`, `#FF5F29` label, same 100px radius, same 700 weight |
+| The CTA | — | solid `#FF5F29` with **near-black** text, 3px radius, `اطلع على العرض` / `See the offer` |
+| The row container | `.wrap`, 1320px | **1500px**, the header + hero column. At 1920 the one row measures 1326px; inside 1320 it wrapped and the band doubled to 129px |
+
+**A contrast node closed itself.** §14 and §14b both record `.strip-pill` — white on `#FF5F29`, 3.03:1 —
+as the single node holding accessibility at 96, and both say the fix changes an approved board. Ahmad has
+now asked for the pill to stop reading as a CTA, which authorises the change. The outline pill is
+`#FF5F29` on `#121215` = **6.23:1**, and the CTA is `--ink` on `#FF5F29` = **6.52:1**, matching §4's
+black-on-orange rule. **The offer page's own hero pill is NOT touched** — that is an approved board and
+it is still Ahmad's call, so `/offer/` and `/en/offer/` keep the node.
+
+Both degraded states still produce one complete row: countdown expired (`app.js` removes every
+`[data-countdown-part]` and reveals the status line) and `SPOTS: null`.
+
+### 15.4 The countdown
+
+`CONFIG.COUNTDOWN_END` `2026-12-31T23:59:59+03:00` → **`2026-10-04T23:59:59+03:00`**, ten days from
+2026-09-24. Ahmad: the old value rendered 98 days, `should be less than 10. Ten days.` The comment above
+it in `src/data.mjs` says in as many words that Ahmad sets the real date and that it is one line.
+
+### 15.5 §7 Our work becomes a slideshow
+
+| Ahmad's instruction | What shipped |
+|---|---|
+| Sort by the biggest numbers first | q8carwash +900 · mashame3 +883 · kuwaityclean +326 · kwcarwash +270 · kwtclean +222 · carwashkw +32 · the four New project sites in natural order · movingcompanykw last. The order lives in `WORK` in `src/data.mjs`, not in the renderer |
+| Remove the sector labels | `.work-caption` and the `sector` field are **deleted** — from the markup, the CSS and the data, so they cannot drift back |
+| Remove the date windows | `.work-period` deleted. ONE line under the section instead: `كل الأرقام من Google Search Console، آخر شهر كامل هو أغسطس 2026` / `All figures from Google Search Console, most recent complete month August 2026`. Every percentage is still traceable in `copy.md`'s derivation table |
+| Remove `First data month: August 2026` | `workPlate()` no longer emits `data-empty` and `.work-plate:empty::after` is gone. The four empty plates are a bare dashed slot; those cards keep only their `New project` tag |
+| Three bigger cards, auto-scrolling | `.work-track` is a scroll-snap flex row; `.work-card` is `flex: 0 0 calc((100% - 48px) / 3)` = **424 x 405px** at 1440, against the old grid's 312 x 405. 2 across under 1100px, 1 across (84% width) under 768px |
+
+**Accessibility of the slideshow, in full.** It is plain CSS scroll-snap plus ~60 lines of vanilla JS in
+the existing deferred `app.js`. No library.
+
+* **Swipe** is the browser's own: the track is a native `overflow-x: auto` container with
+  `scroll-snap-type: inline mandatory` and `overscroll-behavior-inline: contain`.
+* **Keyboard** has three routes. The track is `tabindex="0"` with `role="group"`,
+  `aria-roledescription="carousel"` and an `aria-label`, which is the axe-recommended shape for a
+  focusable scroll region and gives native arrow-key scrolling; a `keydown` handler turns Left/Right
+  into one snapped card step and flips them under `dir="rtl"`. Every card is a real `<a>` in DOM order,
+  so Tab walks all eleven and the browser scrolls each into view.
+* **Visible controls**: two 52px buttons at the inline end, `aria-label` over an `aria-hidden` chevron
+  (so `label-content-name-mismatch` cannot fire), 3px radius, hover and focus states. `flex-end` is
+  logical, so they sit left in Arabic and the glyphs mirror with `scaleX(-1)`.
+* **`prefers-reduced-motion: reduce` → it never auto-advances at all**, and button and key steps become
+  instant (`scroll-behavior: auto`). The media query is also watched live.
+* **Pauses** on `mouseenter`, on `focusin`, on `pointerdown` (with a 5s idle release that re-checks hover
+  and focus), when the tab is hidden, and when the section leaves the viewport. The
+  `IntersectionObserver` uses **threshold 0**, never 0.2 — a wide section is rarely 20% on screen at once
+  and that silently disabled autoplay on an earlier build (lessons.md).
+* **RTL** advances correctly: Chrome reports `scrollLeft` as 0 at the start and negative toward the end
+  in RTL, so the module reads `direction` once and flips the sign. `go(1)` is "advance" in both locales.
+* **CLS**: card widths are `flex-basis` and the plates carry `aspect-ratio`, so nothing reflows, and
+  auto-advance moves `scrollLeft`, which is not a layout shift. Measured 0.000 on every run.
+
+The §7 subhead lost the phrase `مكتوبين عليها` / `printed on it`, which described two months the card no
+longer prints.
+
+### 15.6 The Arabic H1
+
+`نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي` →
+**`تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟`**
+
+Ahmad's own hook line. **Deliberately Gulf colloquial** (`تبي`, not the MSA `هل تريد`) and **deliberately
+a question.** It is the only colloquial string on the site; every other Arabic line stays professional
+MSA. Do not "correct" it. The English H1 is unchanged.
+
+The string got shorter on line 1 and gained a `؟` on line 2, so the break and the highlight were
+re-measured: **still two lines**, widths **768 / 1286** inside the 1332px column at 1440 (46px of air)
+and 844 / 1414 inside 1500 at 1920 (86px). The highlight block on `يجدونك` measures 311 x 97 at 1440,
+unchanged in geometry — §4's rule is percentage-based and did not move.
+
+### 15.7 Navigation
+
+Ahmad: `I hate navigation scrollies. When I click on something and then it scrolls I hate that. Remove
+all navigation.`
+
+* `scroll-behavior: smooth` is **out of the stylesheet**, and the `prefers-reduced-motion` override that
+  existed only to disable it went with it. `scroll-padding-block-start` stays, so the one remaining
+  fragment link still clears the fixed header.
+* **Every `#section` link is gone from the header and the footer.** The only `href` containing `#` on
+  either homepage is now `#main`, the accessibility skip link, and it jumps.
+* **The offer left the nav** and lives in the banner, which is now a clickable bar.
+* New header nav, five items plus the language link and the Call now button:
+  `الرئيسية` `/` · `من نحن` `/about/` · `المدونة` `/blog/` · `الشروط والأحكام` `/terms/` ·
+  `تواصل معنا` `/contact/`, mirrored under `/en/` as Home · About us · Blog · Terms and conditions ·
+  Contact us. At 1440 the header row measures 1332px against a 1332px column in both locales, so
+  nothing wraps.
+* Footer columns rebuilt on the same rule: **Company** (Home · About us · Contact us), **Resources**
+  (Blog · Google profile checklist), **The offer** (The offer · Terms and conditions), **Contact**
+  (Call now · WhatsApp + NAP).
+* Those four new pages are being built separately. **They 404 until that lands**, which is expected, and
+  they are deliberately NOT in `PAGES`, the sitemap or `llms.txt` yet — a sitemap entry for a page that
+  does not exist is an SEO finding.
+
+### 15.8 Two bugs this pass created and caught, both worth remembering
+
+**1. `var timer` is one binding for the whole of `app.js`.** Every job in that file lives in one IIFE, so
+the slideshow's `var timer` and the countdown's `var timer` were **the same variable**. The countdown
+block runs last, so it overwrote the slideshow's interval id — the slideshow's `stop()` then cleared the
+**countdown's** interval (the clock froze on its first render on all four pages) and leaked its own, so
+hover no longer paused the carousel. Caught by wrapping `setInterval`/`clearInterval` in the page and
+reading the trace: two 4200ms intervals alive, one of them unreachable. Fixed by renaming the slideshow's
+to `autoTimer` / `idleTimer`, with a comment at the declaration. **Keep every name in a new `app.js`
+block unique, or give the block its own function.** Verified after: the countdown ticks on `/`, `/en/`
+and `/offer/`, and the carousel advances once per 4.2s and stops dead on hover.
+
+**2. `compare.mjs` captured the RTL hero from the wrong x origin.** `captureBeyondViewport: true` takes a
+different code path when the clip fits inside the viewport, and on an RTL page that path returns the shot
+shifted ~215px with a white band down one side — the logo and the trust row's first item were cut off.
+It only bites when a clipped band is **≤ the viewport height**, which the hero band never was until the
+first screen became exactly 100svh. `scripts/compare.mjs` now passes
+`captureBeyondViewport: box.height > page.viewport().height`. This is a harness bug, not a page bug: plain
+viewport screenshots of the same page were always correct.
+
+A third, smaller thing went in with them: `section[id], .site-footer` now carry
+`scroll-margin-block-start: calc(var(--header-h) + 72px)`, so anything scrolled into view
+programmatically — the skip link, or a harness shooting a section by selector — clears the fixed header
+**and** the pinned offer bar instead of landing underneath them.
+
+---
+
+## 16. The four secondary pages, 2026-09-24. About, Contact, Blog and Terms
+
+§15.7 rebuilt the navigation around five real pages and recorded that four of them **404 until this
+lands**. This is that landing. Twenty new URLs, built from the homepage's approved components and
+nothing else, because three builds have now been scrapped for drifting from an approved design.
+
+Words come from **`design/copy-pages.md`**, verbatim, the way Part A and Part B come from `copy.md`.
+The one board involved is **`design/boards/blog-B.png`**, which Ahmad approved for the blog list.
+Nothing here is pushed, deployed or committed.
+
+### 16.1 What was built
+
+| Page | Arabic | English | Sections |
+|---|---|---|---|
+| About us | `/about/` | `/en/about/` | `#page-head` `#principle` `#deliver` `#not-do` `#company` `#about-final` |
+| Contact us | `/contact/` | `/en/contact/` | `#page-head` `#reach` `#office` (no final band: the page *is* the call) |
+| Blog list | `/blog/` | `/en/blog/` | `#page-head` `#posts` `#final` |
+| Terms | `/terms/` | `/en/terms/` | `#page-head` `#terms` |
+| Blog post x6 | `/blog/<slug>/` | `/en/blog/<slug>/` | `#post` `#final` |
+
+Twenty URLs: 4 page types x 2 locales = 8, plus 6 posts x 2 = 12.
+
+### 16.2 The content layer: a parser, not a package
+
+`content/blog/<slug>.<lang>.md`, twelve files, parsed in `build.mjs`. **No dependency was added to
+this repo** — it still builds on Node alone.
+
+* `frontmatter()` reads the `---` block as flat `key: value` scalars, strips a BOM, normalises CRLF,
+  and throws on a missing key, a slug that disagrees with the filename or a `lang` that disagrees with
+  it. Nothing is eval'd.
+* `markdown()` renders the four constructs the posts actually use — `##`, `###`, paragraphs and
+  `**bold**`, plus `-` lists for later posts. **Everything is escaped first**, so a post cannot inject
+  markup into the page.
+* `POST_ORDER` in `build.mjs` is the list order, and the featured panel takes the first entry:
+  **`why-your-google-profile-stops-growing`**, Ahmad's pick, because it describes the reader's own
+  situation — a working profile, no website, growth flat.
+
+**Read time is computed, never typed** (`copy-pages.md` §B2). 200 words a minute for English, 140 for
+Arabic, rounded. That pair was chosen for one reason: at it, **every post returns the same number in
+both languages**, which matters because the two pages are the same article.
+
+| Slug | AR words -> min | EN words -> min | frontmatter `read` |
+|---|---|---|---|
+| why-your-google-profile-stops-growing | 610 -> **4** | 861 -> **4** | 5 |
+| what-to-do-with-your-google-profile | 666 -> **5** | 918 -> **5** | 6 |
+| page-per-service-and-area | 582 -> **4** | 801 -> **4** | 5 |
+| how-ai-assistants-decide-what-to-quote | 569 -> **4** | 761 -> **4** | 5 |
+| why-a-slow-website-loses-customers | 581 -> **4** | 799 -> **4** | 5 |
+| what-to-ask-before-paying-for-seo | 620 -> **4** | 854 -> **4** | 6 |
+
+The computed value runs one minute under the author's estimate. `copy-pages.md` §B5 says `read:` is
+the author's estimate and the build may recompute it, so the printed number is the computed one and the
+frontmatter value is left untouched as the record of what the writer thought.
+
+### 16.3 The blog list is board B, measured
+
+`blog-B.png` is 2688x1520, so the same `css = board x 0.535714` as §0. Measured, and used:
+
+| Item | Board (css) | Built |
+|---|---|---|
+| Container | content 48.2 -> 1391.8 = **1343.6** wide | the locked **1320** body container (§5.1) |
+| Page H2 ink | **71.3** ascender to descender = Alexandria 600 at **80.3px** | `--fs-h2`, i.e. **80** — the locked §2 value, unchanged |
+| Featured panel | top rule at 140.9, bottom at 427.5, 1px hairline | `.feature`, `1px solid var(--hairline-light)`, 0px radius |
+| Panel padding | art inset **19.3** left, 17.1 top, 17.7 bottom | **20px** |
+| Featured art | **670 x 252**, i.e. 52 % of the panel | `minmax(0, 1.05fr)` of a two column grid |
+| Art -> text gap | **34.3** | **34px** |
+| Text column | 771.4 -> 1391.8 = **620** | `minmax(0, 1fr)` |
+| Rule under the panel | 18 below it, full container width | `.post-rows` `border-block-start`, `margin-block-start: 18px` |
+| Thumbnail | **105** square | **104px**, from a 240x240 WebP |
+| Row columns | two, ~648 each, ~44 gap | `repeat(2, minmax(0, 1fr))`, `column-gap: 48px` |
+| Row rules | per column, none under the last row of each | `border-block-end` on every row, removed by `:nth-last-child(-n+2)` |
+
+**Type comes from the locked scale, not from this board.** Featured title `--fs-h3-s6` (44/33),
+row titles `--fs-h3` (32/24), featured excerpt `--fs-body`, row excerpt `--fs-case`, and the read-more
+link takes the §7 `View case study` treatment. The board's own ink measures 46 / ~26 / 21-23 / 17-18,
+all inside the spread §2 already records, so no new size was invented.
+
+**RTL mirrors with no RTL-specific rule.** Both grids are logical, so the art and the thumbnails sit
+inline-start: left on `/en/blog/`, right on `/blog/`. Verified by screenshot in both directions
+against the board.
+
+### 16.4 The post page
+
+A readable measure, **780px**, not the 1320 container: the aesthetics audit named 86-character lines a
+real problem on this site, and an article is the one place it would be worst. Title `--fs-h3-s6`,
+prose `--fs-body` in the site's own body colour, `##` -> `--fs-h3`, `###` -> `--fs-body` at 600. Line
+height **1.6** for Latin prose and `--lh-body` (1.85) for Arabic: §11 records that long-form leading is
+not measurable from the boards, and Alexandria sets Arabic materially larger at the same size (§9).
+
+Breadcrumb (`Home > Blog`), byline linked to `https://ahmadowaihan.com/` with `rel="author"`, the
+computed date and read time, the illustration, the body, a back link and prev/next. Both the list page
+and every post page close on the §9 final-call band **as `copy.md` writes it**, so the site still has
+one closing argument (`copy-pages.md` §B4).
+
+### 16.5 Contact has no form, and Google is not contacted until the reader taps
+
+`lessons.md` and `copy-pages.md` are both explicit, and both were followed to the letter. Measured on
+the built page, in both locales:
+
+| Check | Measured |
+|---|---|
+| `<form>`, `<input>`, `<textarea>`, `<select>` on the page | **0** |
+| Requests to google / gstatic / googleapis **before** the tap | **0** |
+| `<iframe>` in the closed state | **0** |
+| `.map-shell` height before the tap / after it | **474.69 / 474.69** — the swap costs zero layout shift |
+| After the tap | one iframe, `maps?q=<address>&output=embed`, `title` in the page's own language, caption and directions link revealed |
+
+The placeholder is drawn by us: an inline SVG pin inside a hairline panel, the closed-state copy, and
+one `Show the map` button. `app.js` gained its **seventh job** for this, in its own function with its
+own names — §15.8's lesson about one shared `var` scope is now quoted at the top of that file.
+
+One CSS bug worth keeping: `.map-foot` is `display: flex`, and **`display` beats the `hidden`
+attribute**, so the caption and the directions link were visible in the closed state until
+`.map-foot[hidden] { display: none }` was added.
+
+Phone and address are NAP from `company.md` only, through `data.mjs`. Every digit run inside the Arabic
+address is wrapped `dir="ltr"` (§10), and `Q8 block` / `q8block.com` are isolated on a **span inside**
+the About fact cell, not with `dir="ltr"` on the cell — the attribute on the cell also flips its
+text-align, which left those two values hanging off the far side of the column.
+
+### 16.6 About and Terms
+
+About uses only real facts: the principle, the same six deliverables as §5 and offer B2 (titles only,
+so the §5 icon card drops its 226px floor), the two honest exclusions on §4's outline numerals, and a
+company block filled from `company.md`. **No founder story, no dates, no headcount, no licence
+number** — `copy-pages.md` records that the licence line is missing because `company.md` does not hold
+a CR number, and that it drops into the company block in one edit if Ahmad supplies one.
+
+Terms is seven plain blocks separated by hairlines, capped at an 860px measure, with the last-updated
+line under the intro. No jurisdiction, no liability, no refund policy, no notice period.
+
+### 16.7 What was added to the stylesheet, and what was not
+
+Everything reuses `.card-light`, `.icon-card`, `.wwd-block`, `.btn`, `.eyebrow`, `.lead`, `.body`,
+`.h2`, `.h3`, `.hl` and the final-call band. Three genuinely new things, all small:
+
+1. `.page-head` — the hero's rhythm (eyebrow 16 -> H1 28 -> lead) on `--bg-light`, start aligned, with
+   the H1 at `--fs-h2` for the reason measured in 16.3.
+2. `--fs-meta: clamp(14px, calc(15/14.4 * 1vw), 16px)` — the §6 month-label size with the phone floor
+   raised from 12 to 14, the same kind of floor-only change §14 made to `--fs-btn`. 15px at 1440 is
+   unchanged; 12px is too small for a byline.
+3. `.text-link` / `.read-more` — the §7 `View case study` treatment as a shared class, chevron
+   mirrored under `dir="rtl"`. It is navigation, never a third CTA label.
+
+**No `#anchor` navigation and no `scroll-behavior: smooth`** were introduced (§15.7). The only `href`
+containing `#` on any new page is `#main`, the skip link. The one `scroll-behavior: smooth` left in the
+stylesheet is still `.work-track`, the §7 slideshow, which no new page contains.
+
+A mobile trap worth recording: the contact page hit a **500px scrollWidth at 390** because
+`.office-grid` collapsed to `1fr`, and a bare `1fr` track floors at the item's min-content width —
+`.map-shell` carries `aspect-ratio: 16/10` with `min-height: 330px`, so its min-content width is
+330 x 1.6 = 528. `minmax(0, 1fr)` fixes it. Every collapsed grid on these pages uses `minmax(0, 1fr)`.
+
+### 16.8 Wiring
+
+* The header and footer links from §15.7 now resolve. `scripts/seo-audit.mjs` reported **20 high
+  "internal link to a missing page"** before this pass and **0** after.
+* `PAGES` in `build.mjs` holds all 26 URLs and the sitemap is generated from it, so the two cannot
+  drift. Every entry carries reciprocal `ar` / `en` / `x-default` alternates. Post entries carry the
+  **post's own date** as `lastmod`, not the build date.
+* Canonical plus `hreflang` `ar` / `en` / `x-default` -> Arabic on every new page, the same shape the
+  first four pages use. The language link in the header and the footer now swaps to the **mirror of
+  the page you are on**, not to the home page: `header(t, page, self)` and `footer(t, self)` take the
+  page's own `{path, otherPath}` pair, which lives in `t.paths` in `data.mjs` beside everything else.
+* `llms.txt` lists the six new pages and all six articles with their descriptions and both URLs.
+* `og:image` now exists on the twelve post pages, pointing at that post's own illustration. No other
+  page has a real image to point at, so none claims one.
+* **Post dates are all 2026-09-24 and were not staggered.** Ahmad: `I want to be honest and no fake.`
+
+### 16.9 Images
+
+`design/blog-art/<slug>.png`, 1344x752, one per post, already in the site's flat 2D language. Nothing
+was generated and nothing was substituted. Each one is converted twice, with `sharp` in a scratch
+folder:
+
+* `src/img/blog-<slug>.webp` — native 1344x752, q82, 8-27 kB. The featured panel and the post hero.
+* `src/img/blog-<slug>-sq.webp` — 240x240 for the 104px thumbnail. The square is cropped around the
+  illustration's **own ink box**, not blindly from the centre, so no drawing loses an element off an
+  edge (the ink box plus a margin, clamped to the canvas; the measured crops came out 647-682px of
+  752).
+
+Every one carries explicit `width` and `height`. **CLS measured 0.000 on all twelve Lighthouse
+configurations.**
+
+### 16.10 Verification
+
+**`shots.mjs`** (the client copy, extended in scratch to cover all 24 routes and to name the sections
+each page type must have) at **1440x900 and 390x844, both locales — 48 rows**:
+`broken=0, errors=0, overflow=false, h1=1, images without width/height=0` on every row.
+
+**Every new URL by HTTP**: 20 of 20 return **200**, the canonical matches the page, the three
+alternates are present and **reciprocal in both directions**, the page is in `sitemap.xml` with its
+alternates and in `llms.txt`, and every page carries JSON-LD (`Organization`, `Blog`, `BlogPosting` +
+`BreadcrumbList`).
+
+**No regression on the two pages that were already approved.** The homepage document heights are
+**identical** to the pre-pass sweep — 8175 / 8650 at 1440 and 10905 / 11081 at 390 — and a pixel diff
+of the four full-page shots against that sweep differs only in the offer strip's countdown digits
+(~500 pixels of 11.7 million, first differing row 853, which is the strip). The offer pages pass the
+same four conditions.
+
+**Lighthouse**, the harness in `<scratch>/lighthouse-run/`, three runs per configuration, medians in
+`notes/lighthouse.md`. **Performance 100 and CLS 0.000 on all twelve configurations**, best practices
+100, SEO 100. Accessibility is 100 on every Arabic page and on both post pages; the English blog and
+contact pages read 93-96 on a **single node** — `.eyebrow`, `#FF5F29` on `#F2F3F5`, 2.73:1. That is the
+orange-as-ink trade §14b made deliberately for board fidelity, and it is Ahmad's open decision, not a
+new finding. It costs more here than on the homepage only because these pages have fewer applicable
+audits, so the same binary failure carries more weight.
+
+### 16.11 What `copy-pages.md` could not be built exactly as written
+
+1. **`ابدأ بمكالمة واحدة`, About A6.** The named highlight is `مكالمة واحدة`, but Arabic joins the
+   preposition ب to the word, so highlighting exactly that phrase would split `بمكالمة`. The span
+   carries the prefix: `ابدأ <span class="hl">بمكالمة واحدة</span>`.
+2. **The featured panel's label slot.** `blog-B.png` draws a category label (`SEO`) above the featured
+   title, and §B2 forbids category chips. The slot carries the card's own meta line instead — date,
+   computed read time and the author link — which is three of the six fields §B2 requires on every
+   card. No category, no tag.
+3. **`Read more` on the list rows.** The board draws it on the featured panel only, but §B2 requires
+   all six fields on every card, so every row carries it. It doubles as the row's tap target on a
+   phone.
+4. **Read time.** Printed as computed, one minute under the frontmatter estimate on every post
+   (16.2). §B5 permits exactly this.
+
+### 16.12 Left open, and why
+
+* **The `.eyebrow` contrast node**, above. One line each, and both the token and the surface are
+  Ahmad's call. Unchanged from §14b.
+* **`scripts/seo-audit.mjs` reports 26 high findings that are one pre-existing false positive.** The
+  audit builds its page set from `index.html` files only, so the real, built, linked
+  `/google-business-profile-checklist.html` reads as a missing page — 24 "internal link to a missing
+  page" (one per page that links to it, so it grows with the page count) and 2 "sitemap lists a page
+  that does not exist". It was 4 of the 20 highs before this pass. **The script was not edited: it is
+  byte-identical to `.claude/skills/seo/scripts/seo-audit.mjs`, and a shared tool is not fixed from
+  inside a client.** The launch gate needs this closed in the skill.
+* **Three "thin page" mediums**: `/contact/` 114 words, `/en/contact/` 147, `/blog/` 281. The contact
+  page is short *because* it has no form and no invented copy, which is the design. Nothing was added
+  to reach 300 words.
+* **Seven "description outside 70 to 165 characters" lows.** Every description is verbatim from
+  `copy-pages.md` or from post frontmatter. Trimming them is a copy edit, not a build fix.
+
+---
+
+## 17. Medium-severity SEO close-out, 2026-09-24. 25 medium → 17 medium, 0 high held throughout
+
+Audit totals: **0 high, 25 medium, 11 low → 0 high, 17 medium, 11 low.** The zero-high launch gate
+never broke at any point in this pass. Nothing was committed, pushed or deployed.
+
+### 17.1 404 page
+
+Built from the homepage's own `header()`/`footer()` and the one stylesheet — no new visual language.
+Arabic primary (matches every other page's default), with **one English line and link** for a reader
+who followed a broken `/en/` link, because Netlify serves this exact file under `/en/` too (a single
+`site/404.html` at the publish root, its own convention — `netlify.toml` needed a comment, not a
+redirect rule). Says the page does not exist and offers the four routes that do: home, the offer, the
+blog, contact — reusing the exact nav/strip label strings already in `data.mjs` rather than writing new
+copy. `robots: noindex,follow`; canonical and all three hreflang alternates self-reference `/404.html`,
+since that one file is genuinely what serves both locales. `notFoundPage()` in `build.mjs`; new
+`.notfound-links` rule in `styles.css` (reuses `.text-link`, `.page-note`).
+
+It is **not** part of the ar/en page-pair system `shell()` builds for every other page, so it does not go
+through `shell()` — its head is hand-rolled with the same tags. It is also not linked from anywhere
+internally (a "page not found" link in the nav would be absurd) and not in the sitemap (inviting a
+crawler to index an error page is worse than leaving it out). Both of those are correct SEO practice, but
+the shared audit script did not know that: see §17.6.
+
+Confirmed by curl: `/`, `/en/`, and any nonexistent path under either all return **HTTP 404** with the
+built page's content (`<title>الصفحة غير موجودة | Q8 block</title>`).
+
+### 17.2 IndexNow key
+
+Generated once with `crypto.randomBytes(16).toString('hex')`: **`57376d59e41f6fbe081224d68d86aa8e`**
+(32-char hex). Locked as `INDEXNOW_KEY` in `src/data.mjs` with a comment saying why it must never be
+regenerated, and written verbatim to `site/57376d59e41f6fbe081224d68d86aa8e.txt` by `build.mjs` on every
+build. **IndexNow was never pinged and no external endpoint was called** — the site is not deployed and
+that stays Ahmad's decision.
+
+### 17.3 Open Graph — 14 medium → 13 medium, and why 12 of those 13 are staying open
+
+The audit's rule is `!og.title || !og.image`. `og:title` was already present everywhere; `og:image` was
+not, on 14 pages. `shell()` now also emits the Twitter equivalents (`twitter:title`, `twitter:description`,
+and `twitter:image`/`summary_large_image` when an image exists) on every page, and `og:locale` /
+`og:site_name` were already correct per locale.
+
+**Closed (2 of 14): the two checklist pages.** Each now points `og:image` and `twitter:image` at its own
+first real section illustration — `gbp-setup.webp` (EN) / `gbp-reviews.png` (AR, since the EN opening
+illustration doesn't exist in the Arabic copy) — a real image already on the page, not a generated one.
+
+**Left open (12 of 14, +1 new: the 404 page = 13):** home, offer, about, contact, the blog list and terms,
+in both locales, plus `/404.html`. **None of these has a real photo to point at** — the only imagery on
+the site is the six blog posts' own illustrations (already used, on the post pages only), the six 60×60
+deliverable icons, the three §3 problem-card crops and the three §6 journey stage illustrations, none of
+which represents "the page" the way a post's own art does. Per instruction: **no artwork was generated
+and no image that isn't there was pointed at.** `og:title`, `og:description`, `og:type`, `og:url`,
+`og:site_name`, `og:locale` and the Twitter text tags are complete on all 13; only `og:image` (and by
+extension `twitter:image`) is missing, and the medium finding is expected to stay open on these specific
+URLs until Ahmad supplies or approves a shared share-card image.
+
+### 17.4 Images without width/height (2) and no preloaded LCP image (2) — both closed, plus a bug found underneath them
+
+Both findings were on the two inherited checklist pages. Fixing them surfaced a real, pre-existing bug:
+**every image on both pages was 404ing.** The EN file pointed at a relative `img/blog/…` path never copied
+into `site/`; the AR file pointed at `../img/blog/…`, which resolves *above* the publish root entirely —
+a leftover from the old site's directory shape. Explicit `width="1024" height="1024"` (the images' real
+size, confirmed with `sharp`) would have silenced the audit either way, but shipping it on a permanently
+broken `src` wasn't the point of the fix, so the underlying path bug was closed too, within the same
+"image attributes only" limit: the five real illustrations were vendored from `_old/img/blog/` into
+`site/assets/img/checklist/` by `build.mjs`, and both HTML files' `src` attributes now point at that one
+absolute path. No copy, heading or paragraph on either page was touched.
+
+Each page also gets one `<link rel="preload" as="image">` for its first real content image —
+`gbp-setup.webp` (EN), `gbp-reviews.png` (AR) — the same file each page's `og:image` now uses.
+
+**Two more broken references found the same way, neither one an `<img>` tag so the audit never saw
+either.** The `shots.mjs` sweep (below) reported `errors=1–2` on all four checklist rows — nothing the
+SEO audit checks for. Both were the same class of bug as the five images: `.post-hero`'s CSS
+`background-image` pointed at `img/blog/gbp-blueprint.webp` (EN) / `../img/blog/gbp-blueprint.webp` (AR),
+404ing exactly like the five `<img>` tags did; and neither file had a `<link rel="icon">` at all, so every
+browser silently probed `/favicon.ico` and got a 404. `gbp-blueprint.webp` is now in the same vendored set
+at `/assets/img/checklist/`, referenced by absolute path; both pages now carry the same
+`<link rel="icon" href="/assets/img/favicon.svg">` every other page on the site already has. Re-swept
+after: **`errors=0` on all four checklist rows.**
+
+Verified in the browser: all 5 EN images and all 4 AR images load (200, correct natural dimensions), one
+`<main>` landmark and one `<h1>` on each page, preload tag present and pointed correctly.
+
+### 17.5 Thin pages — five found, five judged
+
+| Page | Words | Verdict |
+|---|---|---|
+| `/blog/` | 281 | **Left.** Already documented (§16.12): the list page's intro paragraph is `copy-pages.md`'s own B1 intro, verbatim; most of the page is cards and links by design (§B2 forbids padding a card with more fields). No filler added. |
+| `/contact/` | 114 | **Left.** By design — no form, no invented copy (`lessons.md`). |
+| `/en/contact/` | 147 | **Left.** Same. |
+| `/google-business-profile-checklist.html` | 0 → real count | **Fixed, not padded.** The 0 was a measurement bug: the audit counts words inside `<main>`, and this inherited page had no `<main>` landmark at all, so a genuinely long article (37-minute read) measured as empty. Wrapping the *existing* `post-hero` + `post-wrap` content in `<main>…</main>` — no word changed — fixed the false reading and is also a real accessibility improvement (a landmark region). |
+| `/en/google-business-profile-checklist.html` | 0 → real count | **Fixed, same way.** |
+
+**A sixth thin page appeared as a side effect: `/404.html`, 35 words.** Expected and accepted — the task
+brief itself named a 404 as the standing example of a page that is legitimately short. Not padded.
+
+### 17.6 Shared audit script: 404 pages don't belong in a sitemap or a link graph
+
+Adding `site/404.html` made the audit's own file-walker treat it as an ordinary page, which produced
+three **new high findings** that would have broken the launch gate: "missing from sitemap.xml" (a 404
+belongs out of the sitemap — putting it in invites indexing an error page), "orphan page" (a 404 must
+never be linked to internally — that would put a "page not found" link in the nav), and "unreachable
+from the home page" (Netlify serves it directly for any missing URL; there is no click path to seed a BFS
+walk with). All three are false positives against correct 404 behaviour, the same class of bug the
+2026-09-24 checklist-page fix closed earlier in this file. Fixed at the source — `isErrorPage(u) => u ===
+'/404.html'` — in **`.claude/skills/seo/scripts/seo-audit.mjs`** (the shared skill, not the client copy,
+per the standing rule two rows up), then the client's `clients/q8block/scripts/seo-audit.mjs` was
+re-synced byte-identical to it. The 404 page's own tags (title, description, canonical, exactly one H1,
+JSON-LD, OG) are still audited exactly like any other page — only the crawl-graph checks that don't apply
+to an error page were exempted.
+
+### 17.7 Two accessibility fixes, Ahmad's decision 2026-09-24 (relayed mid-pass, not part of the original brief)
+
+**Fix A — the offer page's "Limited offer" pill.** `.strip-pill` (only reachable now via `#offer-hero
+.strip-pill`; the homepage strip pill already got its own override in §15.3) had white text on the
+`#FF5F29` fill, 3.03:1 at a board-locked 18px — under the 18.66px bold large-text floor. Text changed to
+`#141415` (measured **6.07:1** on the same fill); **the fill itself did not move**. Matches the homepage
+strip pill's already-fixed state (6.23:1).
+
+**Fix B — orange as ink on light backgrounds.** New token `--orange-ink-light: #E85319`, used only for
+`.eyebrow` and `.work-metric` **on light surfaces**. `#FF5F29` as text measured 2.73:1 on `#F2F3F5` and
+3.03:1 on white, both under the 3:1 large-text floor even at weight 700. `#E85319` measures **3.33:1 /
+3.70:1** on the same two surfaces — real numbers, checked with the WCAG relative-luminance formula, not
+assumed. History that mattered here: `#CE340A` was tried for the same problem on 2026-09-24 and reverted
+because it sat 16 lightness points off the brand hue and read as a second colour next to a `#FF5F29`
+fill in the same viewport (§14b). `#E85319` is a hue-identical (2° off, same as `#CE340A`), 8-lightness-
+point step — half that gap. **Verified by eye at 1440**, section 5 (eyebrow directly above a `#FF5F29`
+highlight block) and the offer page's own pill: no visible clash in either screenshot: the eyebrow reads
+as a deeper tone of the same orange, not a second colour. `.on-dark .eyebrow { color: var(--orange) }`
+keeps the one dark-surface eyebrow (§6 journey) at the brand value, since `#FF5F29` on `#101012` is
+6.26:1+ and never needed the fix. **Every fill is unchanged** — buttons, highlight blocks, the logo
+square, illustrations, the sparklines, and the journey section's month label and figure (still `--orange`,
+confirmed in the CSS and in the Lighthouse run below).
+
+**Measured after, not claimed — this did not reach accessibility 100 everywhere:**
+
+| Page | Preset | Accessibility | Performance | CLS |
+|---|---|---|---|---|
+| `/offer/` and `/en/offer/` | mobile + desktop | **100** | 100 | 0.000 |
+| `/` and `/en/` | desktop | **96** | 100 | 0.000 |
+| `/` and `/en/` | mobile | **96** | 99–100 | 0.000 |
+
+The offer page reached 100 on all four combinations — Fix A closed its one node completely. The home
+page did not, on either preset, for two reasons, both measured directly from the Lighthouse `color-contrast`
+audit's own `node.explanation`, not inferred:
+
+1. **`.wwd-num` (the §4 outline step numerals `01 02 03`) fails everywhere, and `aria-hidden="true"` does
+   not exempt it.** `#FF5F29` on `#F2F3F5` is 2.73:1 against a 3:1 large-text requirement, at both 44px
+   (mobile) and 71px (desktop) — the size clears the large-text floor easily, the colour pair simply
+   doesn't reach 3:1. §14 had assumed `aria-hidden` kept this out of the audit because no screen reader
+   reads it; that assumption was wrong. Lighthouse's `color-contrast` audit checks what a sighted user
+   sees, and `aria-hidden` only removes an element from the accessibility tree, not from the page. Left
+   unfixed here: recolouring the numeral is the most visible change on the page for a decorative element,
+   and §14/§14b already record it as Ahmad's call, not an agent's.
+2. **On mobile only, `.eyebrow` (five instances) and `.work-metric` fall under the large-text floor and
+   need the full 4.5:1, not 3:1.** `--fs-eyebrow` and `--fs-strip` both bottom out at their clamp floors
+   on a narrow viewport — 14px and 15px — under the 18.66px-bold threshold that would allow 3:1. Measured
+   there: eyebrow 3.32–3.66:1, work-metric 3.66:1, both short of 4.5:1. `#E85319` was sized against the
+   3:1 large-text case, which is what the desktop measurement confirms it clears (no eyebrow/work-metric
+   failures on desktop, at any width ≥ roughly 1350px where the fluid clamp has grown past 18.66px) — it
+   was not sized against the mobile floor, and the brief's two fixes didn't ask for a new mobile-only
+   size. Not changed here without a decision: the fluid type scale's floors are measured, board-matched
+   values (§2), and raising one to buy contrast is the same category of trade-off §14b already reserves
+   for Ahmad.
+
+Both remaining nodes are reported, not silently left: this is the accurate, measured result of applying
+exactly the two fixes as specified, and accessibility on the home page is **96, not 100**, on every
+preset.
+
+### 17.7b Closing both remaining nodes, Ahmad's decision (second round, same day)
+
+The two nodes §17.7 left open were relayed back with explicit fixes and the instruction not to escalate
+them again. Both are now closed.
+
+**Node 1 — `.wwd-num`, 2.73:1.** Still the brand fill `#FF5F29`, just applied as a large (44–71px) decorative
+outline stroke, which only needs 3:1. Moved to `--orange-ink-light` (`#E85319`, already measured at 3.33:1
+on `#F2F3F5` in §14b/§17.7) — same size, same weight, same position, only the stroke colour moved.
+
+**Node 2 — the mobile-only `.eyebrow` / `.work-metric` shortfall.** Not a colour fix — §17.7 already showed
+`#E85319` clears 3:1 everywhere it is large enough to only need 3:1; the problem was purely that the 14px /
+15px mobile floors dropped both under the 18.66px-bold large-text threshold, which raises the bar to 4.5:1.
+Raised `--fs-eyebrow`'s floor 14px → **19px** and `--fs-metric`'s floor 15px → **19px**, both already weight
+700. 19px/700 clears 18.66px, so both re-qualify for 3:1, which `#E85319` clears. The fluid ceiling (22px /
+24px) and the desktop-width values are unchanged; this only raises what the clamp floors out at on a narrow
+viewport, and reads better there regardless.
+
+**Overflow check at 390px, both locales, per the instruction** — Arabic sets larger in Alexandria at the
+same nominal size, so it was checked specifically, not assumed: every `.eyebrow` (all six sections, both
+`/` and `/en/`) and every visible `.work-metric` measured `scrollWidth === clientWidth` at 390×844 (no
+overflow, no wrap), and `document.documentElement.scrollWidth` stayed exactly `390` on every page checked.
+No layout broke. Confirmed again for all 27 pages via a full `shots.mjs` resweep: **`broken=0`, `errors=0`,
+`overflow=false` on all 54 rows** (unchanged from the pre-fix sweep — this pass didn't move any of those
+numbers, it only had to not break them).
+
+**Lighthouse, re-run in full — 3 runs per configuration, medians, all four original pages:**
+
+| Page | Preset | Accessibility | Performance | Best Practices | SEO | CLS |
+|---|---|---|---|---|---|---|
+| `/` | mobile | **100** | 99 | 100 | 100 | 0.000 |
+| `/` | desktop | **100** | 100 | 100 | 100 | 0.000 |
+| `/en/` | mobile | **100** | 100 | 100 | 100 | 0.000 |
+| `/en/` | desktop | **100** | 100 | 100 | 100 | 0.000 |
+| `/offer/` | mobile | **100** | 100 | 100 | 100 | 0.000 |
+| `/offer/` | desktop | **100** | 100 | 100 | 100 | 0.000 |
+| `/en/offer/` | mobile | **100** | 100 | 100 | 100 | 0.000 |
+| `/en/offer/` | desktop | **100** | 100 | 100 | 100 | 0.000 |
+
+**Accessibility 100 on all eight page/preset combinations. Performance held at 99–100 and CLS at 0.000
+everywhere — no regression.** This is measured from `results/summary.json`, not assumed from the two fixes
+matching on paper.
+
+**Every fill re-confirmed `--orange` (`#FF5F29`), nothing else.** Grepped `src/styles.css` after the change:
+every `background: var(--orange)` / `background-image: linear-gradient(var(--orange), var(--orange))` rule
+— the logo square is HTML/CSS not a fill token, the buttons, the highlight blocks, the offer pill, the
+trust/§4 rules, both sparklines, the FAQ `+`/`−` icon, the countdown boxes — is untouched. `--orange-ink-light`
+appears in exactly three places in the whole stylesheet: `.eyebrow`, `.wwd-num`'s stroke, `.work-metric`.
+
+One incidental finding while re-checking `/en/blog/` in §17.9: its own page-head eyebrow sits on `--bg-light`
+at the same floor, so it was carrying the same mobile shortfall (§17.9 recorded 95 there before this round).
+Not separately re-measured after — `--fs-eyebrow`'s floor is a shared token, so the same fix applies to
+every page that uses `.eyebrow`, not just the four in the table above; the four in the table are what the
+brief asked to be re-verified with Lighthouse.
+
+### 17.8 What was deliberately not touched, and what was investigated and left off
+
+* The 12 non-post, non-checklist pages' missing `og:image` — **investigated on request, nothing fits.**
+  Checked every real, already-shipped asset on the site: the homepage hero deliberately carries no image
+  at all (§7 — "the LCP element is the H1"); the `design/boards/*.png` files are internal design
+  references the build measures itself against, never shipped as page content, so using a crop of one
+  would be pointing at an image that "is not there" in the sense that matters — it was never approved as
+  site content; the six 60×60 deliverable icons are single-service icons (512px source, shipped at
+  240×240) that would misrepresent every page except a services list, and are too low-resolution for a
+  1200×630 card regardless; the three journey illustrations are dark-surface artwork built for `#101012`,
+  not a generic card. **Nothing on the site is both real and page-appropriate for these 12 URLs. Tag left
+  off, as instructed when nothing fits.**
+* The seven "description outside 70–165 characters" lows and the two "title over 62 characters" lows —
+  pre-existing, copy-owned, unchanged by this pass.
+* `/blog/`, `/contact/`, `/en/contact/` thin-page mediums — by design, not padded (§17.5).
+
+### 17.9 Verification run
+
+* `node scripts/seo-audit.mjs`: **0 high, 17 medium, 11 low** (from 0/25/11). Re-run after the
+  favicon/blueprint fix in §17.4 — unchanged, as expected (neither finding is one the audit checks).
+* `scripts/shots.mjs`, copied into a scratch folder and run from there against all **27 built pages** —
+  every homepage/offer-page section plus about, contact, blog list, terms, the six posts × 2, the two
+  checklist pages and `/404.html` — at 1440×900 and 390×844, both locales: **`broken=0`, `errors=0`,
+  `overflow=false` on every one of the 54 rows.** (The checklist rows read `errors=1–2` before §17.4's
+  favicon/blueprint fix, `errors=0` after, re-swept separately to confirm.) One harness note for the next
+  agent: Git Bash rewrites a bare `/` inside an env var to the Git install path before `node` ever sees
+  it (`MSYS_NO_PATHCONV=1` fixes it) — it silently turned the homepage URL into
+  `http://localhost:8823C:/Program Files/Git/` and crashed the very first page load with no other clue.
+* `curl` on `/this-page-does-not-exist-xyz` and `/en/this-page-does-not-exist-xyz`: both **HTTP 404**,
+  body is the built `404.html`. Confirmed the file exists at `site/404.html`.
+* Lighthouse, the harness at `<scratch>/lighthouse-run/`, 3 runs per configuration, medians. **This is the
+  first-round result, immediately after Fix A/Fix B and before §17.7b's two follow-up fixes:**
+
+  | Page | Preset | Perf | A11y | CLS |
+  |---|---|---|---|---|
+  | `/`, `/en/` | mobile | 99–100 | 96 | 0.000 |
+  | `/`, `/en/` | desktop | 100 | 96 | 0.000 |
+  | `/offer/`, `/en/offer/` | mobile | 100 | 100 | 0.000 |
+  | `/offer/`, `/en/offer/` | desktop | 100 | 100 | 0.000 |
+  | `/blog/` | mobile / desktop | 100 | 100 / 100 | 0.000 |
+  | `/en/blog/` | mobile / desktop | 100 | **95** / 100 | 0.000 |
+
+  No performance regression at this point either: 99–100 and CLS 0.000 on every page and preset, matching
+  the pre-existing state recorded in §16.10. The 96 on the home page (both locales, both presets) and the
+  95 on `/en/blog/` mobile are the two nodes §17.7 names with exact ratios — not a regression from this
+  pass, since §16.10 already recorded 93–96 on English secondary pages for the same underlying reason
+  under the old single-orange rule.
+
+  **§17.7b's Node 1 / Node 2 fixes were re-verified with a second full Lighthouse pass** (own table
+  there): **accessibility 100 on all four original pages, both locales, both presets — 8 of 8** — with
+  performance still 99–100 and CLS still 0.000 on every one. `/en/blog/`'s 95 was not separately
+  re-measured (§17.7b) but shares the exact same token and floor as the four pages that were, so the same
+  fix applies to it.

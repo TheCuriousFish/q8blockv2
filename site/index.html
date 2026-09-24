@@ -19,6 +19,8 @@
 <meta property="og:url" content="https://q8block.com/">
 <meta property="og:image:alt" content="موقع إلكتروني يظهر في نتائج البحث المحلية وفي إجابات الذكاء الاصطناعي">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="نبني موقعك ليجدك عملاؤك في جوجل والذكاء الاصطناعي | Q8 block">
+<meta name="twitter:description" content="نبني لشركات الخدمات المحلية موقعًا كاملًا بصفحة مستقلة لكل خدمة ولكل منطقة، ثم نعمل على ظهوره في نتائج بحث جوجل وفي إجابات الذكاء الاصطناعي.">
 <meta name="theme-color" content="#FF5F29">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <style>/* ══════════════════════════════════════════════════════════════════════════
@@ -82,6 +84,21 @@
      rules on the pill — so the second orange cost visible design damage for zero
      Lighthouse points. See build-spec.md §14. */
   --orange: #FF5F29;
+  /* Orange as TEXT on a light surface only — bold eyebrows, the §7 metric,
+     and the §4 outline numeral's stroke (large-text at ~71/44px, needs 3:1
+     not 4.5:1). #FF5F29 measures 2.73:1 on #F2F3F5 and 3.03:1 on white —
+     both under 3:1. #CE340A cleared it (4.59:1) and was reverted the same
+     day: 16 lightness points off the brand hue read as a different colour
+     (brick vs tangerine) wherever the two shared a viewport. #E85319 is a
+     much smaller step — 3.33:1 on #F2F3F5, 3.70:1 on white — Ahmad's
+     decision, 2026-09-24 (build-spec.md §17). At small sizes (the eyebrow,
+     the §7 metric) this only clears 3:1, not 4.5:1, so both also needed a
+     19px/700 floor to stay qualified as large text at the mobile breakpoint
+     — see --fs-eyebrow / --fs-metric above and build-spec §17. Every FILL
+     still uses --orange only: buttons, highlight blocks, the logo square,
+     illustrations, sparklines. Dark surfaces also keep --orange (6.26:1+
+     there); see `.on-dark .eyebrow` below. */
+  --orange-ink-light: #E85319;
   --hairline-light: #D2D7DD;
   --hairline-dark: rgba(255, 255, 255, 0.08);
 
@@ -99,7 +116,12 @@
   --fs-caption:   clamp(15px, calc(21/14.4 * 1vw), 23px);
 
   /* not scaled per locale — sections 0–2, short labels and digit runs */
-  --fs-eyebrow:   clamp(14px, calc(22/14.4 * 1vw), 24px);
+  /* floor raised 14 → 19, 2026-09-24: at the old 14px floor bold #E85319 on a
+     light surface is 3.32–3.66:1, and 14px bold sits under the 18.66px
+     large-text threshold so the full 4.5:1 applies and it fails. 19px/700
+     clears 18.66px, re-qualifying for the 3:1 threshold #E85319 was sized
+     for. 22px at 1440 is unchanged; see build-spec.md §17. */
+  --fs-eyebrow:   clamp(19px, calc(22/14.4 * 1vw), 24px);
   --fs-hero-lead: clamp(18px, calc(27/14.4 * 1vw), 30px);
   --fs-trust:     clamp(15px, calc(20/14.4 * 1vw), 22px);
   /* floor raised 17 → 19: bold white on #FF5F29 is 3.03:1, which only satisfies
@@ -113,7 +135,8 @@
   --fs-count:     clamp(16px, calc(20/14.4 * 1vw), 22px);
   --fs-numeral:   clamp(44px, calc(76/14.4 * 1vw), 84px);
   --fs-month:     clamp(12px, calc(15/14.4 * 1vw), 16px);
-  --fs-metric:    clamp(15px, calc(20/14.4 * 1vw), 22px);
+  /* floor raised 15 → 19, same reason as --fs-eyebrow above (build-spec §17). */
+  --fs-metric:    clamp(19px, calc(20/14.4 * 1vw), 22px);
   --fs-case:      clamp(15px, calc(19/14.4 * 1vw), 21px);
   --fs-foot-h:    clamp(16px, calc(21/14.4 * 1vw), 23px);
   --fs-foot-l:    clamp(13px, calc(14/14.4 * 1vw), 16px);
@@ -159,8 +182,13 @@ html[lang="ar"] {
 
 /* ══ Reset ══ */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-block-start: calc(var(--header-h) + 16px); }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* No `scroll-behavior: smooth`, deliberately. Ahmad, 2026-09-24: "I hate
+   navigation scrollies. When I click on something and then it scrolls I hate
+   that." Every in-page #anchor is gone from the nav and the footer with it;
+   the only fragment link left on the page is the accessibility skip link, and
+   it now jumps. `scroll-padding-block-start` stays so that jump clears the
+   fixed header. */
+html { -webkit-text-size-adjust: 100%; scroll-padding-block-start: calc(var(--header-h) + 16px); }
 body {
   margin: 0;
   font-family: var(--font);
@@ -215,6 +243,11 @@ html[lang="ar"] .hl {
   background-position: 0% 21%;
 }
 
+/* Anything scrolled into view programmatically — the skip link, a review
+   harness shooting a section by selector — has to clear the fixed header and
+   the pinned offer bar, or its heading lands underneath them. */
+section[id], .site-footer { scroll-margin-block-start: calc(var(--header-h) + 72px); }
+
 /* ══ §5.1 Containers ══ */
 .sec { padding-inline: var(--pad-side); }
 .wrap { max-width: 1320px; margin-inline: auto; }
@@ -224,13 +257,18 @@ html[lang="ar"] .hl {
 /* ══ Shared type roles ══ */
 /* Weight 700, not 600: every board draws the eyebrow bold (hero-C, s5, journey-D
    checked at matched scale against a 400/500/600/700/800 ladder in Alexandria).
-   ONE colour on every surface, light and dark: the boards draw it that way, and a
-   per-surface orange made this component change colour three times down the page. */
+   Board-drawn as one colour everywhere; split back into a light/dark pair
+   2026-09-24 for contrast (--orange-ink-light above), this time with a value
+   close enough to the brand hue that it does not read as a second colour —
+   see the token comment for why the first attempt at this was reverted. */
 .eyebrow {
   font-size: var(--fs-eyebrow); font-weight: 700; line-height: 1.1;
-  color: var(--orange); margin: 0 0 16px;           /* §5.3 eyebrow → H2 = 16 */
+  color: var(--orange-ink-light); margin: 0 0 16px;  /* §5.3 eyebrow → H2 = 16 */
 }
 html[lang="en"] .eyebrow { text-transform: uppercase; letter-spacing: 0.06em; }
+/* The one eyebrow on a dark surface (§6 journey) keeps the brand orange:
+   #FF5F29 on #101012 is 6.26:1+, no contrast fix needed there. */
+.on-dark .eyebrow { color: var(--orange); }
 
 h1, h2 { font-weight: 600; line-height: var(--lh-display); letter-spacing: 0; }
 .h2 { font-size: var(--fs-h2); }
@@ -323,13 +361,43 @@ html[lang="ar"] .nav a { font-weight: 400; }
 .burger span::before, .burger span::after { content: ''; position: absolute; left: 0; width: 26px; height: 2px; background: currentColor; }
 .burger span::before { top: -8px; } .burger span::after { top: 8px; }
 
+/* ══ §1 + §2 — THE FIRST SCREEN ══
+   Revised 2026-09-24. The hero used to be sized by its own content, so on a
+   large monitor it ended early, the offer strip stranded itself mid-screen and
+   §3 peeked through underneath. Hero and strip now share one 100svh flex
+   column: the hero grows into whatever is left and the strip is pinned to the
+   bottom of it, so the first viewport is exactly header, hero, strip and
+   nothing else at 1440x900, at 1920x1200 and at 390x844.
+
+   `svh`, not `vh`, so a mobile browser's collapsing chrome cannot clip it.
+   The hero's effective floor is `calc(100svh - header - strip)` — written as
+   `flex: 1 0 auto` inside the 100svh column rather than as a literal calc(),
+   because the strip is 78px on desktop and wraps taller on a phone, and the
+   flex column tracks that on its own. `min-height`, never `height`: when the
+   content is taller than the screen (every phone) the hero grows and the page
+   scrolls normally instead of the hero scrolling inside itself. ══ */
+.first-screen {
+  min-height: 100vh;          /* fallback for anything without svh */
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ══ §6 row 1 — Hero. 1500px column, centred. No image: the LCP is the H1. ══ */
 #hero {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* centre the block in the space the header leaves */
   background: var(--bg-light);
   padding-block-start: calc(var(--header-h) + clamp(40px, calc(96/14.4 * 1vw), 106px));
   padding-block-end: clamp(32px, calc(64/14.4 * 1vw), 70px);
   text-align: center;
 }
+/* #hero is a flex column now. Without this the 1500px column would shrink-wrap
+   to its widest child (auto margins beat `stretch` in the cross axis), which
+   quietly turns the H1 into a max-content box. Keep it the full column. */
+#hero > .wrap-wide { width: 100%; }
 .hero-h1 { font-size: var(--fs-h1); }
 #hero .lead {
   max-width: 790px; margin-inline: auto; font-size: var(--fs-hero-lead);
@@ -347,20 +415,64 @@ html[lang="ar"] .nav a { font-weight: 400; }
 .trust li { padding-inline: clamp(14px, 2.4vw, 34px); flex: 1 1 0; }
 .trust li + li { border-inline-start: 2px solid var(--orange); }  /* §3.3 --rule-accent */
 
-/* ══ §6 row 2 — Offer strip. 78px tall, one centred row. Must read correctly
-      with the countdown removed and the spots line absent. ══ */
+/* ══ §6 row 2 — Offer strip. 78px tall, ONE centred row, and the whole band is
+      the link to /offer/. Rebuilt 2026-09-24 to Ahmad's instruction: the
+      separate "Terms and details" row is deleted, everything lives on one row,
+      the entire bar is clickable and the row carries a real CTA. Must still
+      read correctly with the countdown removed and the spots line absent. ══ */
+.strip-slot { flex: none; }        /* holds the bar's height in the flow while it is pinned */
 #offer-strip {
   background: var(--bg-strip); color: var(--ink-invert);
   padding-block: 19.5px; min-height: 78px;
   display: flex; align-items: center;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.2s ease;
 }
+#offer-strip:hover { background: #1C1D22; }
+#offer-strip:hover .strip-cta { opacity: 0.9; }
+#offer-strip:focus-visible { box-shadow: none; outline: 3px solid var(--orange); outline-offset: -3px; }
+
+/* Pinned state. app.js adds .stuck once the bar's own top passes under the
+   header; .strip-slot keeps the 78px in the flow, so the document height never
+   changes and CLS stays 0. Slim when stuck — it must not eat the page. */
+#offer-strip.stuck {
+  position: fixed; inset-block-start: var(--header-h); inset-inline: 0; z-index: 80;
+  min-height: 0; padding-block: 9px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+#offer-strip.stuck .strip-row { gap: 8px 18px; }
+#offer-strip.stuck .strip-pill { padding: 6px 14px; }
+#offer-strip.stuck .strip-cta { padding: 6px 16px; }
+
+/* The strip belongs to the first screen, so its row runs on the header + hero
+   1500px column, not the 1320px body column. At 1920 the one row measures
+   1326px: inside 1320 it wrapped to two rows and the band doubled to 129px,
+   which broke "one row" and pushed the fold. */
+#offer-strip > .wrap { max-width: 1500px; }
 .strip-row {
   display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
   gap: 12px 22px; width: 100%;
   font-size: var(--fs-strip); font-weight: 400; line-height: 1.2;
 }
+/* The pill is a LABEL, not the action. Ahmad likes it and it stays, but he
+   noted it read like a CTA — so the fill moved to the CTA beside it and the
+   pill became an outline. Same size, same 100px radius, same 700 weight, same
+   brand orange. #FF5F29 on #121215 is 6.23:1, so this also clears the one
+   contrast node that used to hold the homepage at 96. The offer page's own
+   hero pill is NOT touched: that is an approved board. */
+#offer-strip .strip-pill {
+  background: transparent; color: var(--orange);
+  border: 1px solid rgba(255, 95, 41, 0.6);
+  padding: 9px 18px;
+}
+/* The offer page's own hero pill, the last white-on-orange text on the site:
+   white on #FF5F29 is 3.03:1 and 18px is the board-locked size, under the
+   18.66px large-text floor even at weight 700. #141415 measures 6.07:1 on
+   the same fill — black on orange, fill unchanged — matching how the
+   homepage strip pill was already fixed (§15.3). Ahmad's decision,
+   2026-09-24 (build-spec.md §17). */
 .strip-pill {
-  background: var(--orange); color: #fff; border-radius: 100px;
+  background: var(--orange); color: #141415; border-radius: 100px;
   padding: 10px 18px; font-size: var(--fs-strip); font-weight: 700; line-height: 1;
 }
 .strip-line { font-weight: 600; }
@@ -372,10 +484,17 @@ html[lang="ar"] .nav a { font-weight: 400; }
   direction: ltr; unicode-bidi: isolate; min-width: 132px; text-align: center;
 }
 .strip-spots { color: var(--ink-invert); }
-.strip-link { color: var(--ink-invert); text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
-.strip-link:hover { color: var(--orange); }
-.strip-link .chev { display: inline-block; margin-inline-start: 6px; }
-html[dir="rtl"] .strip-link .chev { transform: scaleX(-1); }
+/* The action. Orange fill with near-black text, which is the site's own
+   black-on-orange rule (§4) and 6.52:1 rather than white's 3.03:1. */
+.strip-cta {
+  background: var(--orange); color: var(--ink);
+  font-size: var(--fs-strip); font-weight: 700; line-height: 1;
+  padding: 9px 20px; border-radius: 3px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: opacity 0.3s ease-in-out;
+}
+.strip-cta .chev { display: inline-block; }
+html[dir="rtl"] .strip-cta .chev { transform: scaleX(-1); }
 
 /* ══ §6 row 3 — The problem. 3 cards, 18px gaps. ══ */
 #problem { background: var(--bg-white); padding-block: var(--pad-sec); }
@@ -397,9 +516,13 @@ html[dir="rtl"] .strip-link .chev { transform: scaleX(-1); }
   content: ''; position: absolute; inset-block: 0; inset-inline-start: -41px;
   width: 2px; height: auto; background: var(--orange);
 }
+/* Stroke colour moved to --orange-ink-light 2026-09-24: this is text (an
+   outline numeral) on --bg-light, 71px/44px, comfortably large-text, and
+   #FF5F29 was 2.73:1 against the 3:1 floor. #E85319 is 3.33:1 on #F2F3F5.
+   Same size, same weight, same position — only the stroke colour moved. */
 .wwd-num {
   font-size: var(--fs-numeral); font-weight: 600; line-height: 1;
-  color: transparent; -webkit-text-stroke: 2.5px var(--orange);
+  color: transparent; -webkit-text-stroke: 2.5px var(--orange-ink-light);
   direction: ltr; margin-block-end: 22px;
 }
 .wwd-block .h3 { font-size: var(--fs-h3-s4); }
@@ -450,28 +573,68 @@ html[lang="en"] .month { text-transform: uppercase; letter-spacing: 0.06em; }
 .journey-foot { margin-block-start: 28px; display: flex; align-items: center; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap; }
 .journey-source { font-size: var(--fs-foot-l); line-height: 1.6; color: var(--muted-on-dark); }
 
-/* ══ §6 row 7 — Our work. 4-across, 24px gaps, 1px hairline. ══ */
+/* ══ §6 row 7 — Our work. A SLIDESHOW since 2026-09-24, not a 4-up grid.
+      Ahmad's list: sorted biggest number first (the order lives in data.mjs),
+      no sector labels, no date windows on the cards (one source line under the
+      whole section instead), no "first data month" text on the empty plates,
+      roughly three noticeably bigger cards visible and auto-advancing.
+      Plain CSS scroll-snap plus ~60 lines of vanilla JS in the existing
+      deferred app.js — no carousel library. ══ */
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
-.work-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-block-start: 40px; }
-.work-card { padding: 24px; min-height: 405px; display: flex; flex-direction: column; text-decoration: none; }
+.work-slider { margin-block-start: 40px; }
+.work-track {
+  display: flex; gap: 24px;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: inline mandatory;
+  scroll-behavior: smooth;                    /* the one place smooth survives: it is the slideshow, not navigation */
+  scrollbar-width: none; -ms-overflow-style: none;
+  padding-block-end: 4px;
+  overscroll-behavior-inline: contain;        /* a swipe past the last card does not walk the page back */
+}
+.work-track::-webkit-scrollbar { display: none; }
+.work-track:focus-visible { box-shadow: none; outline: 3px solid var(--orange); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .work-track { scroll-behavior: auto; } }
+
+/* 3 across inside the 1320px container: (1320 - 2x24) / 3 = 424px, against the
+   old grid's 312px. */
+.work-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  scroll-snap-align: start;
+  padding: 28px; min-height: 405px;    /* the board's card height, now at 424px wide instead of 312 */
+  display: flex; flex-direction: column; text-decoration: none;
+}
 .work-card:hover { opacity: 0.9; }
 .work-plate { background: var(--bg-light); width: 100%; aspect-ratio: 270 / 155; }
 .work-plate svg { width: 100%; height: 100%; }
+/* No label inside the empty plate any more — Ahmad called "First data month:
+   August 2026" not sexy. Those cards keep only their New project tag. */
 .work-plate:empty {
   background: transparent; border: 1px dashed var(--hairline-light);
-  display: grid; place-items: center;
 }
-.work-plate:empty::after {
-  content: attr(data-empty);
-  font-size: var(--fs-foot-l); font-weight: var(--w-body); line-height: 1.5;
-  color: var(--muted-on-light); padding-inline: 16px; text-align: center;
-}
-.work-caption { font-size: clamp(13px, calc(16/14.4 * 1vw), 17px); font-weight: var(--w-body); line-height: 1.3; color: var(--muted-on-light); margin-block-start: 18px; }
-.work-site { font-size: clamp(18px, calc(24/14.4 * 1vw), 26px); font-weight: 600; line-height: var(--lh-h3); color: var(--ink); margin-block-start: 10px; direction: ltr; unicode-bidi: isolate; overflow-wrap: normal; }
+.work-site { font-size: clamp(18px, calc(24/14.4 * 1vw), 26px); font-weight: 600; line-height: var(--lh-h3); color: var(--ink); margin-block-start: 22px; direction: ltr; unicode-bidi: isolate; overflow-wrap: normal; }
 html[dir="rtl"] .work-site { text-align: right; }
-.work-metric { font-size: var(--fs-metric); font-weight: 700; line-height: 1.3; color: var(--orange); margin-block-start: 12px; }
+.work-metric { font-size: var(--fs-metric); font-weight: 700; line-height: 1.3; color: var(--orange-ink-light); margin-block-start: 12px; }
 .work-metric .num { direction: ltr; unicode-bidi: isolate; display: inline-block; }
-.work-period { font-size: var(--fs-foot-l); font-weight: var(--w-body); line-height: 1.4; color: var(--muted-on-light); margin-block-start: 6px; }
+
+/* Visible controls, inline-end of the track. flex-end is logical, so they sit
+   left in Arabic; the chevron glyphs mirror with it. */
+.work-nav { display: flex; gap: 12px; justify-content: flex-end; margin-block-start: 22px; }
+.slide-btn {
+  width: 52px; height: 52px; border: 1px solid var(--hairline-light); border-radius: 3px;
+  color: var(--ink); cursor: pointer; font-size: 28px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.slide-btn:hover { background: var(--bg-light); border-color: var(--ink); }
+.slide-btn span { display: block; margin-block-end: 4px; }
+html[dir="rtl"] .slide-btn span { transform: scaleX(-1); }
+
+/* The one line that replaced eleven date windows. */
+.work-source {
+  margin-block-start: 22px; font-size: var(--fs-foot-l); font-weight: var(--w-body);
+  line-height: 1.5; color: var(--muted-on-light);
+}
+
 .work-link {
   margin-block-start: auto; padding-block-start: 18px;
   font-size: var(--fs-case); font-weight: 400; color: var(--ink);
@@ -585,9 +748,223 @@ body.theme-dark { background: var(--bg-dark); }
 #offer-faq h2 { font-size: var(--fs-h2); }
 #offer-faq .faq-list { max-width: 900px; margin-inline: 0; }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   THE FOUR SECONDARY PAGES — about, contact, blog and terms.
+
+   No new visual language, by instruction: every block below is built out of
+   the homepage's approved components and tokens — the hairline `.card-light`,
+   the §4 outline numeral, the §5 icon card, the §3 card padding, the §7 link
+   treatment and the §9 final-call band. The one board involved is
+   `design/boards/blog-B.png`, which Ahmad approved for the list page; its
+   measured numbers are in the comments where they are used.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* The head of every secondary page. Same rhythm as the hero (eyebrow 16 → H1
+   28 → lead), start aligned, on `--bg-light`, and the H1 takes `--fs-h2`:
+   blog-B.png measures its heading's ink at 71.3 css from ascender to
+   descender, which is Alexandria 600 at 80px — the locked §2 H2 exactly. */
+.page-head {
+  background: var(--bg-light);
+  padding-block: calc(var(--header-h) + clamp(32px, calc(72/14.4 * 1vw), 80px)) var(--pad-sec);
+}
+.page-note { margin-block-start: 22px; font-size: var(--fs-foot-l); line-height: 1.6; color: var(--muted-on-light); }
+
+/* 404 only: the row of routes that do exist, reusing `.text-link` (build-spec §17). */
+.notfound-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-block-start: 32px; }
+
+/* A text link with a chevron. Navigation, never a third button label: the two
+   CTA labels on this site are still Call now and WhatsApp only. */
+.text-link, .read-more {
+  font-size: var(--fs-case); font-weight: 400; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 6px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.text-link:hover, .read-more:hover { color: var(--orange); }
+.text-link .chev, .read-more .chev { text-decoration: none; font-size: 1.25em; line-height: 1; }
+html[dir="rtl"] .text-link .chev,
+html[dir="rtl"] .read-more .chev,
+html[dir="rtl"] .crumbs .chev { transform: scaleX(-1); }
+.under-link { margin-block-start: 28px; }
+
+/* The card meta line. copy-pages §B2: every card carries the same six fields,
+   so this line holds the date, the computed read time and the author, and the
+   author link is the only outbound link on the list page.
+   `--fs-meta` is the §6 month-label size with the phone floor raised from 12
+   to 14, the same kind of floor-only change §14 made to `--fs-btn`: 12px is
+   too small for a byline, and 15px at 1440 is unchanged. */
+:root { --fs-meta: clamp(14px, calc(15/14.4 * 1vw), 16px); }
+.card-meta {
+  font-size: var(--fs-meta); font-weight: 400; line-height: 1.5;
+  color: var(--muted-on-light);
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px;
+}
+.card-meta .dot { color: var(--hairline-light); }
+.card-meta .byline { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.card-meta .byline:hover { color: var(--orange); }
+
+/* ── About ─────────────────────────────────────────────────────────────── */
+#principle, #deliver, #not-do, #company { background: var(--bg-white); padding-block: var(--pad-sec); }
+#deliver, #company { background: var(--bg-light); }
+.about-card { padding: 36px; display: flex; flex-direction: column; }   /* §3 card padding */
+.about-card .body { margin-block-start: 16px; }
+#deliver .icons-grid { text-align: start; }
+/* A3 prints the six deliverable titles and no bodies, so the §5 card drops the
+   226px floor it needs when it carries two lines of body under the title. */
+.icon-card.compact { min-height: 0; padding: 28px 32px; }
+.icon-card.compact .h3 { min-height: 0; margin-block-start: 18px; }
+.wwd-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#not-do .wwd-grid { margin-block-start: 40px; }
+#not-do .wwd-block .body { max-width: 560px; }
+.facts { margin-block-start: 40px; padding: 36px; display: grid; }
+.fact { display: grid; grid-template-columns: minmax(140px, 230px) minmax(0, 1fr); gap: 8px 32px; }
+.fact + .fact { margin-block-start: 22px; padding-block-start: 22px; border-block-start: 1px solid var(--hairline-light); }
+.fact dt { font-size: var(--fs-body); font-weight: 600; line-height: var(--lh-body); color: var(--ink); }
+.fact dd { margin: 0; font-size: var(--fs-body); font-weight: var(--w-body); line-height: var(--lh-body); color: var(--muted-on-light); }
+
+/* ── Contact. NO FORM and no field of any kind: the absence is the design. ── */
+#reach { background: var(--bg-white); padding-block: var(--pad-sec); }
+#office { background: var(--bg-light); padding-block: var(--pad-sec); }
+.reach-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.reach-card { padding: 36px; display: flex; flex-direction: column; align-items: flex-start; }
+.reach-card .body { margin-block-start: 16px; }
+.reach-number { margin-block-start: 22px; font-size: var(--fs-h3); font-weight: 600; line-height: var(--lh-h3); }
+.reach-number a { text-decoration: none; }
+.reach-number a:hover { color: var(--orange); }
+.reach-cta { margin-block-start: auto; padding-block-start: 28px; }   /* both CTAs on one baseline */
+.office-grid { margin-block-start: 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 18px; }
+.office-card { padding: 36px; }
+.office-name { font-size: var(--fs-h3); font-weight: 600; line-height: var(--lh-h3); margin-block-end: 16px; }
+
+/* The map is one element with two states and the closed one is what loads.
+   Nothing from Google is requested until the reader taps: no iframe, no
+   script, no tile. The shell keeps its box across the swap, so the tap is
+   worth exactly 0 CLS. */
+.map { margin: 0; display: flex; flex-direction: column; }
+.map-shell {
+  position: relative; flex: 1 0 auto;
+  background: var(--bg-white); border: 1px solid var(--hairline-light);
+  aspect-ratio: 16 / 10; min-height: 330px;
+}
+.map-closed {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; gap: 18px; padding: 32px;
+}
+.map-closed .body { max-width: 470px; }
+.map-pin { width: 48px; height: 48px; }
+.map-shell iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.map-foot {
+  margin-block-start: 16px; display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 10px 24px;
+  font-size: var(--fs-foot-l); line-height: 1.6; color: var(--muted-on-light);
+}
+/* The caption and the directions link belong to the OPEN state. `display:flex`
+   beats the hidden attribute on its own, so the closed state has to say so. */
+.map-foot[hidden] { display: none; }
+
+/* ── Terms. Plain, short, and capped at a readable measure. ────────────── */
+#terms { background: var(--bg-white); padding-block: var(--pad-sec); }
+.terms-body { max-width: 860px; }
+.term + .term { margin-block-start: 40px; padding-block-start: 40px; border-block-start: 1px solid var(--hairline-light); }
+.term .h3 { color: var(--ink); }
+.term .body { margin-block-start: 18px; }
+
+/* ── Blog, layout B (design/boards/blog-B.png, approved 2026-09-24) ───────
+   One wide featured panel, a hairline rule, then the remaining five as a two
+   column list with small square thumbnails and a hairline between rows.
+   Measured off the board at 1440: panel 1343.6 wide (the container), its art
+   670 x 252 inset 19.3 inside the panel's own hairline, the text column
+   starting 34.3 after the art, thumbnails 105 square, the rule under the panel
+   18 below it. Both grids are logical, so the art and the thumbnails sit
+   inline-start with no RTL-specific rule: left on /en/, right on /. ── */
+#posts { background: var(--bg-white); padding-block: var(--pad-sec); }
+.feature {
+  border: 1px solid var(--hairline-light); padding: 20px;
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 34px; align-items: center;
+}
+.feature-art { display: block; }
+.feature-art img { width: 100%; height: auto; }
+.feature-text { display: flex; flex-direction: column; align-items: flex-start; }
+.feature-title { font-size: var(--fs-h3-s6); font-weight: 600; line-height: var(--lh-h3); margin-block-start: 14px; }
+.feature-title a { text-decoration: none; }
+.feature-title a:hover, .row-text .h3 a:hover { color: var(--orange); }
+.feature-text .body { margin-block-start: 18px; }
+.feature .read-more { margin-block-start: 24px; }
+
+.post-rows {
+  margin-block-start: 18px; border-block-start: 1px solid var(--hairline-light);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px;
+}
+.post-row {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 28px;
+  padding-block: 26px; border-block-end: 1px solid var(--hairline-light);
+}
+/* The last row of each column closes the list, so it carries no rule. With
+   five posts in two columns that is the fourth and the fifth item. */
+.post-rows > :nth-last-child(-n+2) { border-block-end: 0; }
+.row-art { display: block; }
+.row-art img { width: 104px; height: 104px; }
+.row-text .h3 { margin-block-start: 10px; }
+.row-text .h3 a { text-decoration: none; }
+.row-excerpt {
+  margin-block-start: 10px; font-size: var(--fs-case); font-weight: var(--w-body);
+  line-height: var(--lh-body); color: var(--muted-on-light);
+}
+.post-row .read-more { margin-block-start: 14px; }
+
+/* ── The post page. The article column is capped at 780px rather than running
+      the full 1320 container: the aesthetics audit found 86-character lines a
+      real problem elsewhere on this site. Arabic runs the same measure at its
+      own §9 scale, where Alexandria sets it materially larger. ── */
+.post { background: var(--bg-white); padding-block: calc(var(--header-h) + clamp(28px, calc(56/14.4 * 1vw), 64px)) var(--pad-sec); }
+.post > .wrap > * { max-width: 780px; margin-inline: auto; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--fs-meta); color: var(--muted-on-light); }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { color: var(--orange); }
+.crumbs .chev { display: inline-block; }
+.post-title { font-size: var(--fs-h3-s6); font-weight: 600; line-height: var(--lh-h3); margin-block-start: 18px; }
+.post .card-meta { margin-block-start: 18px; }
+.post-art { margin-block-start: 32px; width: 100%; height: auto; }
+.prose { margin-block-start: 36px; line-height: 1.6; }
+html[lang="ar"] .prose { line-height: var(--lh-body); }
+.prose p, .prose li {
+  font-size: var(--fs-body); font-weight: var(--w-body);
+  line-height: inherit; color: var(--muted-on-light);
+}
+.prose > * + * { margin-block-start: 22px; }
+.prose h2 { font-size: var(--fs-h3); font-weight: 600; line-height: var(--lh-h3); color: var(--ink); margin-block-start: 44px; }
+.prose h3 { font-size: var(--fs-body); font-weight: 600; line-height: var(--lh-h3); color: var(--ink); margin-block-start: 32px; }
+.prose strong { font-weight: 600; color: var(--ink); }
+.prose ul { display: grid; gap: 10px; }
+.prose li { padding-inline-start: 22px; position: relative; }
+.prose li::before { content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.62em; width: 8px; height: 8px; background: var(--orange); }
+.post .under-link { margin-block-start: 44px; }
+.post-nav {
+  margin-block-start: 28px; padding-block-start: 28px; border-block-start: 1px solid var(--hairline-light);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
+}
+.post-step { display: flex; flex-direction: column; gap: 8px; text-decoration: none; }
+.post-step.next { text-align: end; }
+.step-label { font-size: var(--fs-meta); color: var(--muted-on-light); }
+.step-title { font-size: var(--fs-body); font-weight: 600; line-height: var(--lh-h3); color: var(--ink); }
+.post-step:hover .step-title { color: var(--orange); }
+
 /* ══════════════════════════ Responsive ══════════════════════════ */
+/* The Arabic hero on a short desktop window. The Arabic subhead sets in THREE
+   lines where the English sets in two, and `--lh-lead: 1.85` is a body-section
+   value, so at 1440x900 the Arabic hero ran 41px past the first screen while
+   the English fitted with room. Hero only, Arabic only, short windows only —
+   §9 already provides for hero-only Arabic overrides, and the boards are
+   English, so no board pair moves. The English hero keeps every board-measured
+   gap at every size. */
+html[lang="ar"] #hero .lead { line-height: 1.55; }
+@media (min-width: 990px) and (max-height: 950px) {
+  html[lang="ar"] #hero .btn-row { margin-block-start: 30px; }
+  html[lang="ar"] #hero .trust { margin-block-start: 46px; }
+}
+
 @media (max-width: 1099px) {
-  .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-card { flex-basis: calc((100% - 24px) / 2); min-height: 0; }
 }
 
 @media (max-width: 989px) {
@@ -608,7 +985,17 @@ body.theme-dark { background: var(--bg-dark); }
   .wwd-grid { grid-template-columns: 1fr; row-gap: 44px; }
   .wwd-block + .wwd-block::before { display: none; }
   .icons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .problem-card, .icon-card, .journey-card, .work-card { min-height: 0; }
+  .problem-card, .icon-card, .journey-card { min-height: 0; }
+  /* Secondary pages: every two-up and the blog's two-column list go single.
+     `minmax(0, 1fr)` and not `1fr`: a bare 1fr track floors at the item's
+     min-content width, and `.map-shell` carries an aspect-ratio with a
+     min-height, so its min-content width is 330 x 1.6 = 528 and it pushed the
+     whole contact page to a 500px scrollWidth at 390. */
+  .reach-grid, .office-grid, .wwd-grid.two, .feature, .post-rows { grid-template-columns: minmax(0, 1fr); }
+  .feature { gap: 24px; }
+  .post-rows > :nth-last-child(-n+2) { border-block-end: 1px solid var(--hairline-light); }
+  .post-rows > :last-child { border-block-end: 0; }
+  .fact { grid-template-columns: 1fr; }
   .journey-card img { width: 100%; height: auto; aspect-ratio: 343 / 296; }
   .trust { flex-wrap: wrap; row-gap: 18px; }
   .trust li { flex: 1 1 44%; }
@@ -617,10 +1004,29 @@ body.theme-dark { background: var(--bg-dark); }
 }
 
 @media (max-width: 767px) {
-  #offer-strip { padding-block: 16px; }
-  .strip-row { gap: 10px 16px; }
+  /* One row is impossible at 390; the band packs into three and is kept as
+     tight as it can be, because hero + strip still have to be the whole first
+     screen. Mobile is not board-measured (build-spec §11). */
+  #offer-strip { padding-block: 12px; }
+  .strip-row { gap: 8px 16px; }
+  #offer-strip .strip-pill { padding: 7px 14px; }
+  .strip-cta { padding: 7px 16px; }
   .strip-sep { display: none; }
-  .icons-grid, .work-grid { grid-template-columns: 1fr; }
+  /* Phone hero: the board does not specify this layout, and the first screen
+     has to hold header + hero + strip at 390x844 in both locales. */
+  #hero { padding-block-start: calc(var(--header-h) + 28px); padding-block-end: 24px; }
+  #hero .lead { margin-block-start: 20px; }
+  #hero .btn-row { margin-block-start: 28px; }
+  /* Pinned on a phone the bar keeps only the label, the clock and the action,
+     so it stays one slim row instead of three. */
+  #offer-strip.stuck .strip-line,
+  #offer-strip.stuck .strip-label,
+  #offer-strip.stuck .strip-spots { display: none; }
+  #offer-strip.stuck .strip-row { flex-wrap: nowrap; justify-content: space-between; gap: 10px; }
+  #offer-strip.stuck .countdown { min-width: 0; }
+  .icons-grid { grid-template-columns: 1fr; }
+  .work-card { flex-basis: 84%; padding: 24px; }
+  .slide-btn { width: 48px; height: 48px; }
   .btn-row .btn { flex: 1 1 100%; }
   .trust li { flex: 1 1 100%; border-inline-start: 0 !important; padding-inline: 0; }
   .trust { flex-direction: column; row-gap: 14px; margin-block-start: 44px; }
@@ -631,6 +1037,18 @@ body.theme-dark { background: var(--bg-dark); }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  /* 44.2px tap target, DESIGN.md §8 */
+  /* secondary pages on a phone. The boards do not specify the 390px layout
+     (build-spec §11), so these follow the same collapsing strategy the
+     homepage already uses at this width. */
+  .about-card, .reach-card, .office-card, .facts, .icon-card.compact { padding: 24px; }
+  .feature { padding: 16px; }
+  .post-row { grid-template-columns: 76px minmax(0, 1fr); gap: 18px; padding-block: 22px; }
+  .row-art img { width: 76px; height: 76px; }
+  .map-shell { min-height: 300px; }
+  .map-closed { padding: 24px; gap: 14px; }
+  .post-nav { grid-template-columns: 1fr; }
+  .post-step.next { text-align: start; }
+  .reach-card .btn, .map-closed .btn { width: 100%; }
 }
 </style>
 <script defer src="/assets/app.js"></script>
@@ -646,7 +1064,7 @@ body.theme-dark { background: var(--bg-dark); }
     </a>
       <nav class="nav" id="nav">
         <button class="nav-close" type="button" aria-label="إغلاق">&times;</button>
-        <a href="/#what-we-do">ما نقدمه</a><a href="/#journey">كيف نعمل</a><a href="/#work">أعمالنا</a><a href="/offer/">العرض</a><a href="/#faq">أسئلة شائعة</a>
+        <a href="/">الرئيسية</a><a href="/about/">من نحن</a><a href="/blog/">المدونة</a><a href="/terms/">الشروط والأحكام</a><a href="/contact/">تواصل معنا</a>
         <a class="lang" href="/en/" hreflang="en" lang="en">English</a>
       </nav>
       <a class="header-cta" href="tel:+96594139666">اتصل الآن</a>
@@ -654,9 +1072,10 @@ body.theme-dark { background: var(--bg-dark); }
     </div></div>
   </header>
 <main id="main">
+<div class="first-screen">
 <section id="hero" class="sec-wide">
     <div class="wrap-wide">
-      <h1 class="hero-h1">نجعل عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي</h1>
+      <h1 class="hero-h1">تبي عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟</h1>
       <p class="lead">نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا تستشهد به مساعدات الذكاء الاصطناعي.</p>
       <div class="btn-row centred">
       <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
@@ -665,9 +1084,12 @@ body.theme-dark { background: var(--bg-dark); }
       <ul class="trust"><li>نبني الموقع ثم نُظهره في نتائج البحث</li><li>صفحة لكل خدمة ولكل منطقة</li><li>نتائج موثقة من Google Search Console</li><li>الاستضافة والنطاق والحماية علينا</li></ul>
     </div>
   </section>
-<section id="offer-strip" class="sec on-dark" data-countdown-end="2026-12-31T23:59:59+03:00">
-    <div class="wrap strip-row"><span class="strip-pill">عرض محدود</span><span class="strip-line">ستة أشهر مجانية، بدون عقد</span><span class="strip-sep" data-countdown-part aria-hidden="true">&middot;</span><span class="strip-label" data-countdown-part>يغلق التسجيل خلال</span><span class="countdown" data-countdown data-countdown-part>&nbsp;</span><span class="strip-sep" aria-hidden="true">&middot;</span><span class="strip-spots"><span dir="ltr">9</span> مقاعد لكل مدينة</span><span class="strip-spots" data-countdown-fallback hidden>التسجيل مفتوح الآن</span><span class="strip-sep" aria-hidden="true">&middot;</span><a class="strip-link" href="/offer/">الشروط والتفاصيل<span class="chev" aria-hidden="true">&rsaquo;</span></a></div>
-  </section>
+<div class="strip-slot">
+    <a id="offer-strip" class="sec on-dark" href="/offer/" data-countdown-end="2026-10-04T23:59:59+03:00">
+      <span class="wrap strip-row"><span class="strip-pill">عرض محدود</span><span class="strip-line">ستة أشهر مجانية، بدون عقد</span><span class="strip-sep" data-countdown-part aria-hidden="true">&middot;</span><span class="strip-label" data-countdown-part>يغلق التسجيل خلال</span><span class="countdown" data-countdown data-countdown-part>&nbsp;</span><span class="strip-sep" aria-hidden="true">&middot;</span><span class="strip-spots"><span dir="ltr">9</span> مقاعد لكل مدينة</span><span class="strip-spots" data-countdown-fallback hidden>التسجيل مفتوح الآن</span><span class="strip-cta">اطلع على العرض<span class="chev" aria-hidden="true">&rsaquo;</span></span></span>
+    </a>
+  </div>
+</div>
 <section id="problem" class="sec">
     <div class="wrap">
       <p class="eyebrow">المشكلة</p>
@@ -783,97 +1205,83 @@ body.theme-dark { background: var(--bg-dark); }
     <div class="wrap">
       <p class="eyebrow">أعمالنا</p>
       <h2 class="h2">مواقع بنيناها <span class="hl">ويجدها العملاء</span> اليوم</h2>
-      <p class="lead">كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة محسوبة من شهرين كاملين مكتوبين عليها، من Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.</p>
-      <div class="work-grid"><a class="card-light work-card" href="https://kwtclean.com/" rel="nofollow noopener" target="_blank">
+      <p class="lead">كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة حقيقية، محسوبة من شهرين كاملين من بيانات Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.</p>
+      <div class="work-slider" data-slider>
+        <div class="work-track" id="work-track" data-track tabindex="0" role="group"
+             aria-roledescription="carousel" aria-label="مواقع بنيناها"><a class="card-light work-card" href="https://q8carwash.com/" rel="nofollow noopener" target="_blank">
       <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
-      <polyline points="20.0,135.0 77.5,100.3 135.0,58.8 192.5,37.3 250.0,20.0" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="100.3" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="58.8" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="37.3" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="20.0" r="3.5" fill="#FF5F29"/>
+      <polyline points="20.0,135.0 39.2,126.9 58.3,113.2 77.5,74.7 96.7,33.7 115.8,20.0 135.0,41.8 154.2,48.0 173.3,79.7 192.5,66.6 211.7,75.3 230.8,95.2 250.0,90.2" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="39.2" cy="126.9" r="3.5" fill="#FF5F29"/><circle cx="58.3" cy="113.2" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="74.7" r="3.5" fill="#FF5F29"/><circle cx="96.7" cy="33.7" r="3.5" fill="#FF5F29"/><circle cx="115.8" cy="20.0" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="41.8" r="3.5" fill="#FF5F29"/><circle cx="154.2" cy="48.0" r="3.5" fill="#FF5F29"/><circle cx="173.3" cy="79.7" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="66.6" r="3.5" fill="#FF5F29"/><circle cx="211.7" cy="75.3" r="3.5" fill="#FF5F29"/><circle cx="230.8" cy="95.2" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="90.2" r="3.5" fill="#FF5F29"/>
     </svg></div>
-      <p class="work-caption">خدمات التنظيف</p>
-      <p class="work-site">kwtclean<wbr>.com</p>
-      <p class="work-metric"><span class="num">+222%</span> نمو النقرات</p>
-      <p class="work-period">مايو 2026 إلى أغسطس 2026</p>
-      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
-    </a><a class="card-light work-card" href="https://carwashkw.com/" rel="nofollow noopener" target="_blank">
-      <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
-      <polyline points="20.0,70.6 39.2,44.3 58.3,76.8 77.5,93.0 96.7,115.4 115.8,129.3 135.0,121.6 154.2,135.0 173.3,122.6 192.5,93.0 211.7,21.4 230.8,45.8 250.0,20.0" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="70.6" r="3.5" fill="#FF5F29"/><circle cx="39.2" cy="44.3" r="3.5" fill="#FF5F29"/><circle cx="58.3" cy="76.8" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="93.0" r="3.5" fill="#FF5F29"/><circle cx="96.7" cy="115.4" r="3.5" fill="#FF5F29"/><circle cx="115.8" cy="129.3" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="121.6" r="3.5" fill="#FF5F29"/><circle cx="154.2" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="173.3" cy="122.6" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="93.0" r="3.5" fill="#FF5F29"/><circle cx="211.7" cy="21.4" r="3.5" fill="#FF5F29"/><circle cx="230.8" cy="45.8" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="20.0" r="3.5" fill="#FF5F29"/>
-    </svg></div>
-      <p class="work-caption">غسيل السيارات</p>
-      <p class="work-site">carwashkw<wbr>.com</p>
-      <p class="work-metric"><span class="num">+32%</span> نمو النقرات</p>
-      <p class="work-period">أغسطس 2025 إلى أغسطس 2026</p>
-      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
-    </a><a class="card-light work-card" href="https://kuwaityclean.com/" rel="nofollow noopener" target="_blank">
-      <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
-      <polyline points="20.0,128.3 39.2,135.0 58.3,129.8 77.5,126.0 96.7,112.5 115.8,111.8 135.0,88.9 154.2,119.3 173.3,128.3 192.5,101.7 211.7,35.7 230.8,20.0 250.0,26.7" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="128.3" r="3.5" fill="#FF5F29"/><circle cx="39.2" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="58.3" cy="129.8" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="126.0" r="3.5" fill="#FF5F29"/><circle cx="96.7" cy="112.5" r="3.5" fill="#FF5F29"/><circle cx="115.8" cy="111.8" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="88.9" r="3.5" fill="#FF5F29"/><circle cx="154.2" cy="119.3" r="3.5" fill="#FF5F29"/><circle cx="173.3" cy="128.3" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="101.7" r="3.5" fill="#FF5F29"/><circle cx="211.7" cy="35.7" r="3.5" fill="#FF5F29"/><circle cx="230.8" cy="20.0" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="26.7" r="3.5" fill="#FF5F29"/>
-    </svg></div>
-      <p class="work-caption">خدمات التنظيف</p>
-      <p class="work-site">kuwaityclean<wbr>.com</p>
-      <p class="work-metric"><span class="num">+326%</span> نمو النقرات</p>
-      <p class="work-period">أغسطس 2025 إلى أغسطس 2026</p>
+      <p class="work-site">q8carwash<wbr>.com</p>
+      <p class="work-metric"><span class="num">+900%</span> نمو النقرات</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://mashame3.com/" rel="nofollow noopener" target="_blank">
       <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
       <polyline points="20.0,135.0 66.0,115.1 112.0,60.8 158.0,57.6 204.0,20.0 250.0,24.2" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="66.0" cy="115.1" r="3.5" fill="#FF5F29"/><circle cx="112.0" cy="60.8" r="3.5" fill="#FF5F29"/><circle cx="158.0" cy="57.6" r="3.5" fill="#FF5F29"/><circle cx="204.0" cy="20.0" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="24.2" r="3.5" fill="#FF5F29"/>
     </svg></div>
-      <p class="work-caption">تكييف وتبريد</p>
       <p class="work-site">mashame3<wbr>.com</p>
       <p class="work-metric"><span class="num">+883%</span> نمو النقرات</p>
-      <p class="work-period">مارس 2026 إلى أغسطس 2026</p>
+      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://kuwaityclean.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
+      <polyline points="20.0,128.3 39.2,135.0 58.3,129.8 77.5,126.0 96.7,112.5 115.8,111.8 135.0,88.9 154.2,119.3 173.3,128.3 192.5,101.7 211.7,35.7 230.8,20.0 250.0,26.7" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="128.3" r="3.5" fill="#FF5F29"/><circle cx="39.2" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="58.3" cy="129.8" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="126.0" r="3.5" fill="#FF5F29"/><circle cx="96.7" cy="112.5" r="3.5" fill="#FF5F29"/><circle cx="115.8" cy="111.8" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="88.9" r="3.5" fill="#FF5F29"/><circle cx="154.2" cy="119.3" r="3.5" fill="#FF5F29"/><circle cx="173.3" cy="128.3" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="101.7" r="3.5" fill="#FF5F29"/><circle cx="211.7" cy="35.7" r="3.5" fill="#FF5F29"/><circle cx="230.8" cy="20.0" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="26.7" r="3.5" fill="#FF5F29"/>
+    </svg></div>
+      <p class="work-site">kuwaityclean<wbr>.com</p>
+      <p class="work-metric"><span class="num">+326%</span> نمو النقرات</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://kwcarwash.com/" rel="nofollow noopener" target="_blank">
       <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
       <polyline points="20.0,135.0 48.8,103.9 77.5,68.7 106.3,55.2 135.0,34.9 163.8,22.7 192.5,20.0 221.3,24.1 250.0,51.1" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="48.8" cy="103.9" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="68.7" r="3.5" fill="#FF5F29"/><circle cx="106.3" cy="55.2" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="34.9" r="3.5" fill="#FF5F29"/><circle cx="163.8" cy="22.7" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="20.0" r="3.5" fill="#FF5F29"/><circle cx="221.3" cy="24.1" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="51.1" r="3.5" fill="#FF5F29"/>
     </svg></div>
-      <p class="work-caption">غسيل السيارات</p>
       <p class="work-site">kwcarwash<wbr>.com</p>
       <p class="work-metric"><span class="num">+270%</span> نمو النقرات</p>
-      <p class="work-period">ديسمبر 2025 إلى أغسطس 2026</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
-    </a><a class="card-light work-card" href="https://q8carwash.com/" rel="nofollow noopener" target="_blank">
+    </a><a class="card-light work-card" href="https://kwtclean.com/" rel="nofollow noopener" target="_blank">
       <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
-      <polyline points="20.0,135.0 39.2,126.9 58.3,113.2 77.5,74.7 96.7,33.7 115.8,20.0 135.0,41.8 154.2,48.0 173.3,79.7 192.5,66.6 211.7,75.3 230.8,95.2 250.0,90.2" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="39.2" cy="126.9" r="3.5" fill="#FF5F29"/><circle cx="58.3" cy="113.2" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="74.7" r="3.5" fill="#FF5F29"/><circle cx="96.7" cy="33.7" r="3.5" fill="#FF5F29"/><circle cx="115.8" cy="20.0" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="41.8" r="3.5" fill="#FF5F29"/><circle cx="154.2" cy="48.0" r="3.5" fill="#FF5F29"/><circle cx="173.3" cy="79.7" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="66.6" r="3.5" fill="#FF5F29"/><circle cx="211.7" cy="75.3" r="3.5" fill="#FF5F29"/><circle cx="230.8" cy="95.2" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="90.2" r="3.5" fill="#FF5F29"/>
+      <polyline points="20.0,135.0 77.5,100.3 135.0,58.8 192.5,37.3 250.0,20.0" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="100.3" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="58.8" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="37.3" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="20.0" r="3.5" fill="#FF5F29"/>
     </svg></div>
-      <p class="work-caption">غسيل السيارات</p>
-      <p class="work-site">q8carwash<wbr>.com</p>
-      <p class="work-metric"><span class="num">+900%</span> نمو النقرات</p>
-      <p class="work-period">أغسطس 2025 إلى أغسطس 2026</p>
+      <p class="work-site">kwtclean<wbr>.com</p>
+      <p class="work-metric"><span class="num">+222%</span> نمو النقرات</p>
+      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://carwashkw.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><svg viewBox="0 0 270 155" role="presentation" focusable="false">
+      <polyline points="20.0,70.6 39.2,44.3 58.3,76.8 77.5,93.0 96.7,115.4 115.8,129.3 135.0,121.6 154.2,135.0 173.3,122.6 192.5,93.0 211.7,21.4 230.8,45.8 250.0,20.0" fill="none" stroke="#FF5F29" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20.0" cy="70.6" r="3.5" fill="#FF5F29"/><circle cx="39.2" cy="44.3" r="3.5" fill="#FF5F29"/><circle cx="58.3" cy="76.8" r="3.5" fill="#FF5F29"/><circle cx="77.5" cy="93.0" r="3.5" fill="#FF5F29"/><circle cx="96.7" cy="115.4" r="3.5" fill="#FF5F29"/><circle cx="115.8" cy="129.3" r="3.5" fill="#FF5F29"/><circle cx="135.0" cy="121.6" r="3.5" fill="#FF5F29"/><circle cx="154.2" cy="135.0" r="3.5" fill="#FF5F29"/><circle cx="173.3" cy="122.6" r="3.5" fill="#FF5F29"/><circle cx="192.5" cy="93.0" r="3.5" fill="#FF5F29"/><circle cx="211.7" cy="21.4" r="3.5" fill="#FF5F29"/><circle cx="230.8" cy="45.8" r="3.5" fill="#FF5F29"/><circle cx="250.0" cy="20.0" r="3.5" fill="#FF5F29"/>
+    </svg></div>
+      <p class="work-site">carwashkw<wbr>.com</p>
+      <p class="work-metric"><span class="num">+32%</span> نمو النقرات</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://betikcleaner.com/" rel="nofollow noopener" target="_blank">
-      <div class="work-plate" data-empty="أول شهر بيانات: أغسطس 2026"></div>
-      <p class="work-caption">خدمات التنظيف</p>
+      <div class="work-plate"></div>
       <p class="work-site">betikcleaner<wbr>.com</p>
-      <p class="work-metric">مشروع جديد</p>
-      
+      <p class="work-metric work-tag">مشروع جديد</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://anharpest.com/" rel="nofollow noopener" target="_blank">
-      <div class="work-plate" data-empty="أول شهر بيانات: أغسطس 2026"></div>
-      <p class="work-caption">مكافحة الحشرات</p>
+      <div class="work-plate"></div>
       <p class="work-site">anharpest<wbr>.com</p>
-      <p class="work-metric">مشروع جديد</p>
-      
+      <p class="work-metric work-tag">مشروع جديد</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://alghadeerclean.com/" rel="nofollow noopener" target="_blank">
-      <div class="work-plate" data-empty="أول شهر بيانات: أغسطس 2026"></div>
-      <p class="work-caption">خدمات التنظيف</p>
+      <div class="work-plate"></div>
       <p class="work-site">alghadeerclean<wbr>.com</p>
-      <p class="work-metric">مشروع جديد</p>
-      
+      <p class="work-metric work-tag">مشروع جديد</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://ragwaclean.com/" rel="nofollow noopener" target="_blank">
-      <div class="work-plate" data-empty="أول شهر بيانات: أغسطس 2026"></div>
-      <p class="work-caption">تنظيف الواجهات</p>
+      <div class="work-plate"></div>
       <p class="work-site">ragwaclean<wbr>.com</p>
-      <p class="work-metric">مشروع جديد</p>
-      
+      <p class="work-metric work-tag">مشروع جديد</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a><a class="card-light work-card" href="https://movingcompanykw.com/" rel="nofollow noopener" target="_blank">
       <div class="work-plate"></div>
-      <p class="work-caption">نقل الأثاث</p>
       <p class="work-site">movingcompanykw<wbr>.com</p>
-      
       
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a></div>
+        <div class="work-nav">
+          <button class="slide-btn" type="button" data-slide="prev" aria-controls="work-track" aria-label="السابق"><span aria-hidden="true">&lsaquo;</span></button>
+          <button class="slide-btn" type="button" data-slide="next" aria-controls="work-track" aria-label="التالي"><span aria-hidden="true">&rsaquo;</span></button>
+        </div>
+      </div>
+      <p class="work-source">كل الأرقام من Google Search Console، آخر شهر كامل هو أغسطس 2026</p>
     </div>
   </section>
 <section id="faq" class="sec">
@@ -930,15 +1338,15 @@ body.theme-dark { background: var(--bg-dark); }
         </div>
         <div class="footer-col">
       <h3>الشركة</h3>
-      <a href="/">الصفحة الرئيسية</a><a href="/#work">أعمالنا</a><a href="/#faq">أسئلة شائعة</a>
+      <a href="/">الرئيسية</a><a href="/about/">من نحن</a><a href="/contact/">تواصل معنا</a>
       
     </div><div class="footer-col">
-      <h3>ما نقدمه</h3>
-      <a href="/#what-we-do">ما نقدمه</a><a href="/#included">ما يشمله العمل</a><a href="/#journey">كيف نعمل</a>
+      <h3>الموارد</h3>
+      <a href="/blog/">المدونة</a><a href="/google-business-profile-checklist.html">قائمة ملف جوجل</a>
       
     </div><div class="footer-col">
       <h3>العرض</h3>
-      <a href="/offer/">العرض</a><a href="/offer/#offer-eligibility">الشروط والتفاصيل</a><a href="/google-business-profile-checklist.html">قائمة ملف جوجل</a>
+      <a href="/offer/">العرض</a><a href="/terms/">الشروط والأحكام</a>
       
     </div><div class="footer-col">
       <h3>تواصل</h3>

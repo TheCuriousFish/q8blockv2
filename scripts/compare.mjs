@@ -81,7 +81,13 @@ for (const loc of LOCALES) {
         last
       );
       if (!box) { console.log('MISSING selector', sel.join(' .. ')); continue; }
-      shot = await page.screenshot({ clip: box, captureBeyondViewport: true });
+      // captureBeyondViewport takes a different code path when the clip fits inside the
+      // viewport, and on an RTL page that path captures from the wrong x origin: the shot
+      // comes back shifted by ~215px with a white band on one side. It only bites when a
+      // clipped band happens to be <= the viewport height, which the 100svh first screen now
+      // is exactly. Only ask to go beyond the viewport when the band actually does.
+      const vh = page.viewport().height;
+      shot = await page.screenshot({ clip: box, captureBeyondViewport: box.height > vh });
     } else {
       const el = await page.$(sel);
       if (!el) { console.log('MISSING selector', sel); continue; }

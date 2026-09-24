@@ -10,8 +10,35 @@
 - [Home, English](https://q8block.com/en/)
 - [The offer, Arabic](https://q8block.com/offer/)
 - [The offer, English](https://q8block.com/en/offer/)
+- [About us, Arabic](https://q8block.com/about/)
+- [About us, English](https://q8block.com/en/about/)
+- [Blog, Arabic](https://q8block.com/blog/)
+- [Blog, English](https://q8block.com/en/blog/)
+- [Contact us, Arabic](https://q8block.com/contact/)
+- [Contact us, English](https://q8block.com/en/contact/)
+- [Terms and conditions, Arabic](https://q8block.com/terms/)
+- [Terms and conditions, English](https://q8block.com/en/terms/)
 - [Google Business Profile checklist, Arabic](https://q8block.com/google-business-profile-checklist.html)
 - [Google Business Profile checklist, English](https://q8block.com/en/google-business-profile-checklist.html)
+
+## Articles
+
+Six articles, each published in Arabic at /blog/<slug>/ and in English at
+/en/blog/<slug>/. All were published on 2026-09-24, written by Ahmad Owaihan
+(Ahmad Owaihan, https://ahmadowaihan.com/).
+
+- [Why your Google profile stops growing](https://q8block.com/en/blog/why-your-google-profile-stops-growing/) — Almost every local business reaches a ceiling on its Google Business Profile. These are the three things that build that ceiling, and what changes once you have a website.
+  Arabic: [لماذا يتوقف ملفك على جوجل عن النمو](https://q8block.com/blog/why-your-google-profile-stops-growing/)
+- [What to do with your Google profile](https://q8block.com/en/blog/what-to-do-with-your-google-profile/) — Practical work on your Google Business Profile you can do yourself today: categories, services, service areas, questions and answers, reviews, and keeping your details identical everywhere.
+  Arabic: [ما يجب أن تفعله بملفك على جوجل](https://q8block.com/blog/what-to-do-with-your-google-profile/)
+- [What a page per service and area does](https://q8block.com/en/blog/page-per-service-and-area/) — Why one service business needs dozens of pages instead of a single page listing everything, and the difference between a page built for an area and the same page with the place name swapped.
+  Arabic: [ماذا تفعل صفحة لكل خدمة ولكل منطقة](https://q8block.com/blog/page-per-service-and-area/)
+- [How AI assistants decide what to quote](https://q8block.com/en/blog/how-ai-assistants-decide-what-to-quote/) — AI assistants answer local questions by citing pages that are written and indexed. This is what makes a page quotable, and what leaves a whole business out of the answer.
+  Arabic: [كيف تختار مساعدات الذكاء الاصطناعي ما تقتبسه](https://q8block.com/blog/how-ai-assistants-decide-what-to-quote/)
+- [Why a slow website loses customers](https://q8block.com/en/blog/why-a-slow-website-loses-customers/) — The real and repetitive causes of slow websites, why slowness costs you calls you never see, and what you can ask about without understanding any code.
+  Arabic: [لماذا يخسر الموقع البطيء العملاء](https://q8block.com/blog/why-a-slow-website-loses-customers/)
+- [What to ask before paying for SEO](https://q8block.com/en/blog/what-to-ask-before-paying-for-seo/) — Seven questions that separate the people who know the work from the people selling talk, what an honest answer to each one sounds like, and the warning signs that should end the call.
+  Arabic: [أسئلة تسألها قبل أن تدفع لشركة سيو](https://q8block.com/blog/what-to-ask-before-paying-for-seo/)
 
 ## What is included on every project
 

@@ -8,7 +8,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = path.join(ROOT, 'site');
 const files = [];
-(function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const f = path.join(d, e.name); if (e.isDirectory()) walk(f); else if (e.name === 'index.html') files.push(f); } })(SITE);
+(function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const f = path.join(d, e.name); if (e.isDirectory()) walk(f); else if (e.name.endsWith('.html')) files.push(f); } })(SITE);
+// Collect every .html page, not just index.html. Flat-file pages (e.g.
+// /google-business-profile-checklist.html) are real pages: when they were skipped,
+// every internal link and sitemap entry pointing at them was reported as a missing
+// page at HIGH severity. On q8block that was 26 false highs against a page that was
+// built, served and linked correctly (2026-09-24). url() already maps them right.
 
 const url = (f) => '/' + path.relative(SITE, f).replace(/\\/g, '/').replace(/index\.html$/, '');
 const pick = (h, re) => (h.match(re) || [])[1];
@@ -74,6 +79,15 @@ for (const [d, us] of descs) if (us.length > 1) add('high', 'duplicate descripti
 for (const [h, us] of h1s) if (us.length > 1) add('medium', 'duplicate H1', us.slice(0, 3).join(' , '), `${us.length} pages: ${h}`);
 
 // internal links: broken targets, orphans, click depth from the home page
+// /404.html is a Netlify convention, not a page in the site's own link graph:
+// it must never be linked to internally (that would put a "page not found"
+// link in the nav) and must never be listed in the sitemap (that would invite
+// crawling and indexing an error page). Without this exception a correctly
+// built error page was reported orphaned, unreachable and missing from the
+// sitemap — three false highs for doing exactly what a 404 page should
+// (2026-09-24, q8block). Its own tags (title, description, canonical, H1,
+// JSON-LD, OG…) are still audited like any other page.
+const isErrorPage = (u) => u === '/404.html';
 const set = new Set(pages.map((p) => p.url));
 const out = new Map(pages.map((p) => [p.url, []]));
 const inbound = new Map(pages.map((p) => [p.url, 0]));
@@ -81,16 +95,23 @@ for (const p of pages) {
   for (const l of new Set(p.links)) {
     if (/^(https?:|mailto:|tel:|#)/.test(l)) continue;
     const t = l.startsWith('/') ? l : path.posix.normalize(path.posix.join(p.url, l));
-    const norm = t.endsWith('/') ? t : `${t}/`;
+    // Directory URLs are normalised with a trailing slash; a flat file page is not.
+    // Appending '/' unconditionally turned /page.html into /page.html/, which never
+    // matched the page set, so a correctly built and linked flat page was reported BOTH
+    // as a missing link target AND as an orphan (2026-09-24, q8block: 26 false highs).
+    const norm = t.endsWith('/') || /[.]html$/.test(t) ? t : `${t}/`;
     if (/\.(webp|png|jpg|svg|xml|txt|js|css|mp4|ico|json)$/.test(t)) continue;
     if (!set.has(norm)) { add('high', 'internal link to a missing page', p.url, t); continue; }
     out.get(p.url).push(norm);
     inbound.set(norm, inbound.get(norm) + 1);
   }
 }
-for (const [u, n] of inbound) if (!n && u !== '/' && u !== '/en/') add('high', 'orphan page (nothing links to it)', u, '');
-const depth = new Map([['/', 0], ['/en/', 0]]);
-let frontier = ['/', '/en/'];
+for (const [u, n] of inbound) if (!n && u !== '/' && u !== '/en/' && !isErrorPage(u)) add('high', 'orphan page (nothing links to it)', u, '');
+// /404.html is reachable by definition — Netlify serves it directly for any
+// missing URL, with no click path required — so it seeds the frontier like
+// the two home pages rather than being walked to.
+const depth = new Map([['/', 0], ['/en/', 0], ['/404.html', 0]]);
+let frontier = ['/', '/en/', '/404.html'];
 while (frontier.length) {
   const next = [];
   for (const u of frontier) for (const t of out.get(u) || []) if (!depth.has(t)) { depth.set(t, depth.get(u) + 1); next.push(t); }
@@ -108,7 +129,7 @@ if (/<sitemapindex/.test(sm)) {
   sm = parts.map((p) => { const t = readSitemap(p); if (!t) add('high', 'sitemap index points at a file that does not exist', '/sitemap.xml', p); return t; }).join('\n');
 }
 const inSitemap = new Set([...sm.matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(/^https?:\/\/[^/]+/, '')));
-for (const p of pages) if (!inSitemap.has(p.url)) add('high', 'missing from sitemap.xml', p.url, '');
+for (const p of pages) if (!inSitemap.has(p.url) && !isErrorPage(p.url)) add('high', 'missing from sitemap.xml', p.url, '');
 for (const u of inSitemap) if (!set.has(u)) add('high', 'sitemap lists a page that does not exist', u, '');
 if (!fs.existsSync(path.join(SITE, 'robots.txt'))) add('high', 'robots.txt missing', '/', '');
 if (!fs.existsSync(path.join(SITE, '404.html'))) add('medium', '404 page missing', '/', '');

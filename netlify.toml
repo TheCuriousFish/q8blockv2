@@ -7,6 +7,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# --- 404 -----------------------------------------------------------------
+# No redirect rule needed: Netlify's own convention is to serve a 404.html at
+# the publish root for any unmatched path, in any directory (so /en/whatever
+# gets it too, from this same file). build.mjs writes site/404.html on every
+# build (design/build-spec.md §17).
+
 # --- Language flip -----------------------------------------------------------
 # The old site served English at / and Arabic at /ar/. The new site is Arabic
 # first at / with the English mirror at /en/. 478 links from client sites point

@@ -13,11 +13,24 @@
 export const CONFIG = {
   // Registration close date. ISO 8601 with the Kuwait/Riyadh offset (+03:00).
   // Set to null (or a date in the past) to ship the page with no countdown.
-  COUNTDOWN_END: '2026-12-31T23:59:59+03:00',
+  //
+  // AHMAD SETS THE REAL DATE. The value below is a placeholder: ten days out
+  // from 2026-09-24, because a 98-day countdown reads as no deadline at all
+  // ("should be less than 10. Ten days", 2026-09-24). Change this one line and
+  // the homepage strip and offer hero both follow.
+  COUNTDOWN_END: '2026-10-04T23:59:59+03:00',
 
   // Seats per city. Ahmad's working number is around 9. Set to null to hide the line.
   SPOTS: 9,
 };
+
+/* IndexNow key. Generated once, 2026-09-24 (32-char hex, `crypto.randomBytes(16)`),
+   and locked here so a rebuild can never issue a second, different key — IndexNow
+   keys must stay stable at the same filename for as long as the site pings that
+   endpoint. build.mjs writes it to site/<key>.txt verbatim. Recorded in
+   design/build-spec.md §17. The site is not deployed and IndexNow is never pinged
+   by this build; the key file is only prepared for when Ahmad decides to go live. */
+export const INDEXNOW_KEY = '57376d59e41f6fbe081224d68d86aa8e';
 
 /* ── NAP, from company.md. Fills slots only; never a source of copy. ── */
 export const NAP = {
@@ -26,6 +39,10 @@ export const NAP = {
   whatsapp: 'https://wa.me/96594139666',
   website: 'q8block.com',
   origin: 'https://q8block.com',
+  // The one query string the contact page's map uses, in both locales. It is
+  // the English NAP from company.md and nothing else — no coordinates, no
+  // place id, nothing invented. Google is not contacted until the reader taps.
+  mapQuery: 'Nasser Falih Shnaz Al Subaie Building, Street 14, Block 004, Mangaf, Al Ahmadi Governorate, Kuwait',
 };
 
 /* ── Section 6 build data: the five real Google Search Console rows for
@@ -42,45 +59,54 @@ export const JOURNEY_ROWS = [
 /* ── Section 7: eleven cards, every SEO client. Every percentage is reproduced
       in copy.md's derivation table. `clicks` is the site's real monthly click
       series from design/proof-data.md, used to draw the card's sparkline plate;
-      a site with fewer than three complete months gets an empty plate carrying
-      its first data month, because one month is not a curve.
+      a site with fewer than three complete months gets an empty dashed plate,
+      because one month is not a curve.
 
       Card 11, movingcompanykw.com, resolved by Ahmad 2026-09-24: "Moving
       company is a valid company. You can put that in, no problem." It carries
       NO percentage — August 2025's 27 clicks fell to 11 in August 2026 and
       every window that turns that into growth starts from one of its own
       troughs — and NO "New project" tag, because fourteen months of recorded
-      data makes that tag false. Sector, name and link, and nothing else. One
-      card without a figure beside ten that have one is honest; an invented
-      window would not be. ── */
+      data makes that tag false. Name and link, and nothing else. One card
+      without a figure beside ten that have one is honest; an invented window
+      would not be.
+
+      REVISED 2026-09-24 (Ahmad's homepage pass). Three changes:
+      * ORDER — biggest number first, his explicit instruction. The six sites
+        with a percentage lead, highest to lowest; then the four New project
+        sites in their natural order; then movingcompanykw.com last.
+      * SECTOR LABELS ARE GONE. "Cleaning services", "Car wash" and the rest
+        are removed from every card, so the field is removed from the data too
+        rather than left behind to drift.
+      * `period` IS NO LONGER PRINTED on the card. Ahmad does not want the date
+        windows and is not worried about checkability; §7 now carries ONE line
+        under the whole section instead of eleven on the cards. The field stays
+        here as the record of which two complete months each percentage was
+        computed from — copy.md's derivation table is the public version. ── */
 export const WORK = [
-  { site: 'kwtclean.com', url: 'https://kwtclean.com/', sector: { ar: 'خدمات التنظيف', en: 'Cleaning services' },
-    figure: '+222%', period: { ar: 'مايو 2026 إلى أغسطس 2026', en: 'May 2026 to August 2026' },
-    clicks: [7, 165, 354, 452, 531] },
-  { site: 'carwashkw.com', url: 'https://carwashkw.com/', sector: { ar: 'غسيل السيارات', en: 'Car wash' },
-    figure: '+32%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
-    clicks: [334, 389, 321, 287, 240, 211, 227, 199, 225, 287, 437, 386, 440] },
-  { site: 'kuwaityclean.com', url: 'https://kuwaityclean.com/', sector: { ar: 'خدمات التنظيف', en: 'Cleaning services' },
-    figure: '+326%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
-    clicks: [83, 65, 79, 89, 125, 127, 188, 107, 83, 154, 330, 372, 354] },
-  { site: 'mashame3.com', url: 'https://mashame3.com/', sector: { ar: 'تكييف وتبريد', en: 'Air conditioning' },
-    figure: '+883%', period: { ar: 'مارس 2026 إلى أغسطس 2026', en: 'March 2026 to August 2026' },
-    clicks: [12, 31, 83, 86, 122, 118] },
-  { site: 'kwcarwash.com', url: 'https://kwcarwash.com/', sector: { ar: 'غسيل السيارات', en: 'Car wash' },
-    figure: '+270%', period: { ar: 'ديسمبر 2025 إلى أغسطس 2026', en: 'December 2025 to August 2026' },
-    clicks: [23, 46, 72, 82, 97, 106, 108, 105, 85] },
-  { site: 'q8carwash.com', url: 'https://q8carwash.com/', sector: { ar: 'غسيل السيارات', en: 'Car wash' },
+  { site: 'q8carwash.com', url: 'https://q8carwash.com/',
     figure: '+900%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
     clicks: [8, 21, 43, 105, 171, 193, 158, 148, 97, 118, 104, 72, 80] },
-  { site: 'betikcleaner.com', url: 'https://betikcleaner.com/', sector: { ar: 'خدمات التنظيف', en: 'Cleaning services' },
-    isNew: true, period: { ar: 'أول شهر بيانات: أغسطس 2026', en: 'First data month: August 2026' } },
-  { site: 'anharpest.com', url: 'https://anharpest.com/', sector: { ar: 'مكافحة الحشرات', en: 'Pest control' },
-    isNew: true, period: { ar: 'أول شهر بيانات: أغسطس 2026', en: 'First data month: August 2026' } },
-  { site: 'alghadeerclean.com', url: 'https://alghadeerclean.com/', sector: { ar: 'خدمات التنظيف', en: 'Cleaning services' },
-    isNew: true, period: { ar: 'أول شهر بيانات: أغسطس 2026', en: 'First data month: August 2026' } },
-  { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', sector: { ar: 'تنظيف الواجهات', en: 'Facade cleaning' },
-    isNew: true, period: { ar: 'أول شهر بيانات: أغسطس 2026', en: 'First data month: August 2026' } },
-  { site: 'movingcompanykw.com', url: 'https://movingcompanykw.com/', sector: { ar: 'نقل الأثاث', en: 'Furniture moving' } },
+  { site: 'mashame3.com', url: 'https://mashame3.com/',
+    figure: '+883%', period: { ar: 'مارس 2026 إلى أغسطس 2026', en: 'March 2026 to August 2026' },
+    clicks: [12, 31, 83, 86, 122, 118] },
+  { site: 'kuwaityclean.com', url: 'https://kuwaityclean.com/',
+    figure: '+326%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    clicks: [83, 65, 79, 89, 125, 127, 188, 107, 83, 154, 330, 372, 354] },
+  { site: 'kwcarwash.com', url: 'https://kwcarwash.com/',
+    figure: '+270%', period: { ar: 'ديسمبر 2025 إلى أغسطس 2026', en: 'December 2025 to August 2026' },
+    clicks: [23, 46, 72, 82, 97, 106, 108, 105, 85] },
+  { site: 'kwtclean.com', url: 'https://kwtclean.com/',
+    figure: '+222%', period: { ar: 'مايو 2026 إلى أغسطس 2026', en: 'May 2026 to August 2026' },
+    clicks: [7, 165, 354, 452, 531] },
+  { site: 'carwashkw.com', url: 'https://carwashkw.com/',
+    figure: '+32%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    clicks: [334, 389, 321, 287, 240, 211, 227, 199, 225, 287, 437, 386, 440] },
+  { site: 'betikcleaner.com', url: 'https://betikcleaner.com/', isNew: true },
+  { site: 'anharpest.com', url: 'https://anharpest.com/', isNew: true },
+  { site: 'alghadeerclean.com', url: 'https://alghadeerclean.com/', isNew: true },
+  { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', isNew: true },
+  { site: 'movingcompanykw.com', url: 'https://movingcompanykw.com/' },
 ];
 
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
@@ -101,6 +127,21 @@ export const COPY = {
     lang: 'ar', dir: 'rtl', other: 'en', otherLabel: 'English',
     home: { path: '/', otherPath: '/en/' },
     offer: { path: '/offer/', otherPath: '/en/offer/' },
+    /* Every page's own {path, otherPath} pair, in one place: the canonical, the
+       two hreflang alternates, the header language link and the sitemap entry
+       all read from here, so they cannot drift apart. Kept under `paths`
+       because the copy blocks below already own the names `about`, `contact`,
+       `blog` and `terms`. */
+    paths: {
+      home: { path: '/', otherPath: '/en/' },
+      offer: { path: '/offer/', otherPath: '/en/offer/' },
+      about: { path: '/about/', otherPath: '/en/about/' },
+      contact: { path: '/contact/', otherPath: '/en/contact/' },
+      blog: { path: '/blog/', otherPath: '/en/blog/' },
+      terms: { path: '/terms/', otherPath: '/en/terms/' },
+      post: (slug) => ({ path: `/blog/${slug}/`, otherPath: `/en/blog/${slug}/` }),
+    },
+    months: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
 
     meta: {
       home: {
@@ -113,15 +154,40 @@ export const COPY = {
         description: 'ستة أشهر من العمل الكامل على الموقع وتحسين محركات البحث، لشركات الخدمات في السعودية، دون رسوم ودون عقد. الشروط والتفاصيل كاملة.',
         ogAlt: 'عرض ستة أشهر مجانية من Q8 block',
       },
+      about: {
+        title: 'نبني المواقع التي نتحمل مسؤوليتها | Q8 block',
+        description: 'نبني لشركات الخدمات المحلية موقعًا كاملًا، ولا نعمل إلا على المواقع التي نبنيها بأنفسنا، لأن الأساس التقني هو ما يحدد ظهور الموقع في بحث جوجل وفي إجابات الذكاء الاصطناعي.',
+        ogAlt: 'Q8 block، بناء المواقع لشركات الخدمات المحلية',
+      },
+      contact: {
+        title: 'تواصل معنا | Q8 block',
+        description: 'اتصل بنا أو راسلنا على واتساب. رقم الهاتف وعنوان المكتب وخريطة تُفتح عند طلبها. لا يوجد نموذج على هذه الصفحة.',
+        ogAlt: 'رقم هاتف Q8 block وعنوان المكتب',
+      },
+      blog: {
+        title: 'مقالات لأصحاب الأنشطة الخدمية | Q8 block',
+        description: 'مقالات عملية عن الظهور في بحث جوجل وفي إجابات الذكاء الاصطناعي، مكتوبة لصاحب نشاط خدمي، دون مصطلحات تقنية.',
+        ogAlt: 'مقالات Q8 block لأصحاب الأنشطة الخدمية',
+      },
+      terms: {
+        title: 'الشروط والأحكام | Q8 block',
+        description: 'ما تشمله خدمتنا وما لا تشمله، بلغة واضحة: بناء الموقع، والاستضافة والنطاق والحماية، وملف نشاطك على جوجل الذي يبقى لك.',
+        ogAlt: 'شروط وأحكام خدمة Q8 block',
+      },
     },
 
     /* ── 0. Header ── */
+    /* Rebuilt 2026-09-24. Ahmad: "I hate navigation scrollies. When I click on
+       something and then it scrolls I hate that. Remove all navigation."
+       Every in-page #anchor is gone from the header and the footer, and so is
+       `scroll-behavior: smooth`. The offer left the nav as well — it lives in
+       the banner directly under the hero. Five real pages only. */
     nav: [
-      { label: 'ما نقدمه', href: '/#what-we-do' },
-      { label: 'كيف نعمل', href: '/#journey' },
-      { label: 'أعمالنا', href: '/#work' },
-      { label: 'العرض', href: '/offer/' },
-      { label: 'أسئلة شائعة', href: '/#faq' },
+      { label: 'الرئيسية', href: '/' },
+      { label: 'من نحن', href: '/about/' },
+      { label: 'المدونة', href: '/blog/' },
+      { label: 'الشروط والأحكام', href: '/terms/' },
+      { label: 'تواصل معنا', href: '/contact/' },
     ],
     cta: { call: 'اتصل الآن', whatsapp: 'واتساب' },
     menuOpen: 'القائمة', menuClose: 'إغلاق',
@@ -129,7 +195,11 @@ export const COPY = {
 
     /* ── 1. Hero ── */
     hero: {
-      h1: 'نجعل عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي',
+      /* Ahmad's own hook line, 2026-09-24. Deliberately Gulf colloquial —
+         `تبي` not `هل تريد` — and it ends on a question mark. It is the ONLY
+         colloquial line on the site; every other Arabic string stays MSA.
+         Do not "correct" this to MSA. The highlight stays on `يجدونك`. */
+      h1: 'تبي عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
       lead: 'نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا تستشهد به مساعدات الذكاء الاصطناعي.',
       trust: [
         'نبني الموقع ثم نُظهره في نتائج البحث',
@@ -139,7 +209,11 @@ export const COPY = {
       ],
     },
 
-    /* ── 2. Offer strip ── */
+    /* ── 2. Offer strip ──
+       Rebuilt 2026-09-24. The separate `الشروط والتفاصيل` row is deleted:
+       Ahmad wanted everything on ONE row and the whole bar clickable, with a
+       real CTA inside that row. `cta` is a navigation label, not a third
+       contact CTA — the only two contact labels are still اتصل الآن / واتساب. */
     strip: {
       pill: 'عرض محدود',
       line: 'ستة أشهر مجانية، بدون عقد',
@@ -147,7 +221,7 @@ export const COPY = {
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
       spots: (n) => `<span dir="ltr">${n}</span> مقاعد لكل مدينة`,
       statusLine: 'التسجيل مفتوح الآن',
-      link: 'الشروط والتفاصيل',
+      cta: 'اطلع على العرض',
     },
 
     /* ── 3. The problem ── */
@@ -212,11 +286,21 @@ export const COPY = {
     work: {
       eyebrow: 'أعمالنا',
       h2: 'مواقع بنيناها <span class="hl">ويجدها العملاء</span> اليوم',
-      lead: 'كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة محسوبة من شهرين كاملين مكتوبين عليها، من Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.',
+      /* `مكتوبين عليها` / `printed on it` was dropped 2026-09-24: the two
+         months are no longer printed on the cards, so the sentence would have
+         been describing something the reader cannot see. One source line now
+         sits under the whole section instead. */
+      lead: 'كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة حقيقية، محسوبة من شهرين كاملين من بيانات Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.',
       metricLabel: 'نمو النقرات',
       newTag: 'مشروع جديد',
       linkLabel: 'افتح الموقع',
       plateCaption: 'النقرات الشهرية، Google Search Console',
+      /* ONE source line under the whole section, replacing the eleven date
+         windows that used to sit on the cards (Ahmad, 2026-09-24). */
+      source: 'كل الأرقام من Google Search Console، آخر شهر كامل هو أغسطس 2026',
+      carouselLabel: 'مواقع بنيناها',
+      prev: 'السابق',
+      next: 'التالي',
     },
 
     /* ── 8. FAQ ── */
@@ -243,19 +327,17 @@ export const COPY = {
       strapline: 'نبني المواقع ونجعل العملاء يجدونها',
       cols: [
         { title: 'الشركة', links: [
-          { label: 'الصفحة الرئيسية', href: '/' },
-          { label: 'أعمالنا', href: '/#work' },
-          { label: 'أسئلة شائعة', href: '/#faq' },
+          { label: 'الرئيسية', href: '/' },
+          { label: 'من نحن', href: '/about/' },
+          { label: 'تواصل معنا', href: '/contact/' },
         ] },
-        { title: 'ما نقدمه', links: [
-          { label: 'ما نقدمه', href: '/#what-we-do' },
-          { label: 'ما يشمله العمل', href: '/#included' },
-          { label: 'كيف نعمل', href: '/#journey' },
+        { title: 'الموارد', links: [
+          { label: 'المدونة', href: '/blog/' },
+          { label: 'قائمة ملف جوجل', href: '/google-business-profile-checklist.html' },
         ] },
         { title: 'العرض', links: [
           { label: 'العرض', href: '/offer/' },
-          { label: 'الشروط والتفاصيل', href: '/offer/#offer-eligibility' },
-          { label: 'قائمة ملف جوجل', href: '/google-business-profile-checklist.html' },
+          { label: 'الشروط والأحكام', href: '/terms/' },
         ] },
         { title: 'تواصل', links: [
           { label: 'اتصل الآن', href: 'tel:' },
@@ -266,6 +348,127 @@ export const COPY = {
       address: 'محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9',
       phoneLabel: 'الهاتف',
       legal: 'جميع الحقوق محفوظة لشركة كويت بلوك',
+    },
+
+    /* ═══ PART C. The four secondary pages ═══
+       Words come from design/copy-pages.md, verbatim, the same way Part A and
+       Part B come from design/copy.md. Highlighted phrases are the ones that
+       file names; never invent one. No figures, no geography beyond the
+       company's own NAP, no founder story, no dates, no headcount. ── */
+
+    /* ── About us, /about/ ── */
+    about: {
+      eyebrow: 'من نحن',
+      h1: 'نبني ما نتحمل <span class="hl">مسؤوليته</span>',
+      lead: 'Q8 block تبني لشركات الخدمات المحلية موقعًا كاملًا، بصفحة مستقلة لكل خدمة ولكل منطقة، ثم تتولى ظهوره في بحث جوجل وفي إجابات الذكاء الاصطناعي.',
+      principle: {
+        eyebrow: 'كيف نعمل',
+        h2: 'نعمل فقط على المواقع التي <span class="hl">نبنيها</span>',
+        lead: 'هذا القرار هو ما يميز طريقتنا، وهو أيضًا ما نرفض من أجله عملًا كل شهر. الأساس التقني للموقع هو ما يحدد إن كان العميل سيجده أصلًا، ولا نستطيع أن نتحمل مسؤولية نتيجة مبنية على أساس وضعه غيرنا.',
+        blocks: [
+          { title: 'الأساس يُبنى مرة واحدة', body: 'بنية الموقع وسرعته وطريقة كتابة صفحاته تُقرَّر في أول أسبوع من البناء، ويصعب تغييرها بعد ذلك دون إعادة بنائه. لذلك نبدأ من الصفر، لا من موقع جاهز نحاول إصلاحه.' },
+          { title: 'صفحة لكل خدمة ولكل منطقة', body: 'العميل لا يبحث باسم نشاطك، بل بالخدمة التي يريدها في المنطقة التي هو فيها. هذا يعني عشرات الصفحات، ولا تُضاف عشرات الصفحات إلى موقع لم يُصمَّم لها من البداية.' },
+          { title: 'المسؤولية كاملة أو لا شيء', body: 'لأننا بنينا الموقع، فكل ما يؤثر في ظهوره يبقى في أيدينا: الاستضافة والنطاق والحماية والتحديثات التقنية والمحتوى. لا يوجد طرف ثالث نحيل إليه السبب حين لا تسير الأمور.' },
+        ],
+      },
+      /* Same six deliverables as §5 and offer B2, same titles, titles only. */
+      deliver: {
+        h2: 'ما نقدمه في <span class="hl">كل مشروع</span>',
+        intro: 'العمل نفسه في كل مشروع نبدأه. التفاصيل الكاملة على الصفحة الرئيسية.',
+        items: [
+          'تصميم وتطوير موقع مخصص',
+          'صفحة مستقلة لكل خدمة ولكل منطقة',
+          'الظهور في نتائج بحث جوجل',
+          'الظهور في منصات الذكاء الاصطناعي',
+          'بناء الروابط والسلطة',
+          'الاستضافة والنطاق والحماية',
+        ],
+        link: { label: 'اقرأ التفاصيل على الصفحة الرئيسية', href: '/' },
+      },
+      notdo: {
+        h2: 'ما لا نقوم به',
+        items: [
+          'لا نعمل على موقع قائم بناه غيرنا. إن كان لديك موقع وتريد استبداله بالكامل بموقع نبنيه من الصفر، فهذا عمل نقوم به.',
+          'لا ندير ملف نشاطك على جوجل ولا نطلب صلاحية الدخول إليه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث. الملف يبقى لك بالكامل.',
+        ],
+      },
+      /* Facts only, from company.md. The address is NAP, not positioning. */
+      company: {
+        h2: 'الشركة',
+        rows: [
+          { label: 'الاسم المسجل', value: 'شركة كويت بلوك' },
+          { label: 'العلامة', value: 'Q8 block', ltr: true },
+          { label: 'المكتب', from: 'address' },
+          { label: 'الموقع', value: 'q8block.com', ltr: true },
+        ],
+      },
+      /* The highlight span carries the attached prefix ب, because Arabic joins
+         it to the word: copy-pages.md names `مكالمة واحدة` and splitting
+         `بمكالمة` would break the word. */
+      final: {
+        h2: 'ابدأ <span class="hl">بمكالمة واحدة</span>',
+        lead: 'نراجع معك ملفك على جوجل ونشرح كيف نبني الموقع وكيف نجعل عملاءك يجدونه.',
+      },
+    },
+
+    /* ── Contact us, /contact/. NO FORM, and no field of any kind. Nothing
+          from Google loads until the reader taps the map. ── */
+    contact: {
+      eyebrow: 'تواصل',
+      h1: 'تحدث إلينا <span class="hl">مباشرة</span>',
+      lead: 'لا يوجد نموذج على هذه الصفحة. اتصل أو راسلنا على واتساب، وتصل رسالتك إلينا مباشرة دون وسيط.',
+      call: {
+        title: 'اتصل بنا',
+        body: 'مكالمة واحدة نراجع فيها ملفك على جوجل ونقول لك مباشرة ما نستطيع بناءه لك.',
+      },
+      whatsapp: {
+        title: 'راسلنا على واتساب',
+        body: 'إن كان الاتصال غير مناسب الآن، اكتب لنا اسم نشاطك والخدمة التي تقدمها ونعود إليك.',
+      },
+      office: { title: 'المكتب', name: 'شركة كويت بلوك' },
+      map: {
+        title: 'الخريطة لا تُحمَّل إلا بطلبك',
+        line: 'نحمّل خرائط جوجل عند الضغط فقط، حتى تبقى الصفحة سريعة ولا يُطلب منك شيء لم تطلبه.',
+        button: 'إظهار الخريطة',
+        caption: 'خرائط جوجل، موقع المكتب',
+        directions: 'افتح في خرائط جوجل',
+        frameTitle: 'خرائط جوجل، موقع مكتب شركة كويت بلوك',
+      },
+    },
+
+    /* ── Blog, /blog/ and /blog/<slug>/ ── */
+    blog: {
+      eyebrow: 'المدونة',
+      h1: 'مقالات لأصحاب <span class="hl">الأنشطة الخدمية</span>',
+      lead: 'نكتب هنا عما يجعل العميل يجد نشاطك على جوجل وفي إجابات الذكاء الاصطناعي، وعما تستطيع أن تفعله بنفسك دون أن تدفع لأحد. بلا مصطلحات تقنية.',
+      by: 'بقلم أحمد عويهان',
+      readMore: 'اقرأ المقال',
+      /* 3–10 minutes takes the plural دقائق; the digits are wrapped dir="ltr". */
+      readTime: (n) => `<span dir="ltr">${n}</span> ${n <= 2 ? 'دقيقة' : n <= 10 ? 'دقائق' : 'دقيقة'} قراءة`,
+      home: 'الرئيسية',
+      blog: 'المدونة',
+      crumbLabel: 'مسار التنقل',
+      back: 'عد إلى كل المقالات',
+      prev: 'المقال السابق',
+      next: 'المقال التالي',
+      more: 'مقالات أخرى',
+    },
+
+    /* ── Terms and conditions, /terms/. Only what is already true and already
+          stated somewhere else on this site. ── */
+    terms: {
+      h1: 'الشروط والأحكام',
+      lead: 'هذه الصفحة مكتوبة لتُقرأ. تشرح ما نقدمه وما لا نقدمه، بنفس اللغة التي نتحدث بها معك في المكالمة. ولا تحتوي على بنود لم نقلها لك مباشرة.',
+      updated: 'آخر تحديث: <span dir="ltr">24</span> سبتمبر <span dir="ltr">2026</span>',
+      blocks: [
+        { title: 'ما هي الخدمة', body: 'نصمم ونبرمج موقعًا إلكترونيًا لنشاطك التجاري، بصفحة مستقلة لكل خدمة تقدمها ولكل منطقة تخدمها، ثم نعمل على ظهوره في نتائج بحث جوجل وفي إجابات مساعدات الذكاء الاصطناعي. العمل يشمل التهيئة الداخلية والتقنية، والمحتوى المكتوب لكل صفحة، وبناء الروابط وسلطة النطاق، ومتابعة شهرية. القائمة الكاملة بما يشمله العمل منشورة على الصفحة الرئيسية.' },
+        { title: 'نعمل على ما نبنيه', body: 'لا نتسلم موقعًا بناه غيرنا ونعمل عليه. الأساس التقني والبنية الداخلية هما ما يحددان إن كان العميل سيجد الموقع أصلًا، ولا نستطيع أن نتحمل مسؤولية نتيجة مبنية على أساس لم نضعه. إن كان لديك موقع قائم وتريد استبداله بالكامل بموقع نبنيه من الصفر، فهذا عمل نقوم به ضمن عملنا المعتاد.' },
+        { title: 'الاستضافة والنطاق والحماية', body: 'الاستضافة والنطاق وحماية الموقع وتحديثاته التقنية كلها جزء من الخدمة ونتولاها نحن، فلا تحتاج إلى إدارتها ولا إلى التعامل مع مزود منفصل. والموقع يُبنى لنشاطك التجاري وحده ولا يُستخدم لغيرك.' },
+        { title: 'ملفك على جوجل يبقى لك', body: 'إدارة ملف نشاطك التجاري على جوجل ليست ضمن الخدمة. لا نطلب صلاحية الدخول إلى الملف ولا نملكه ولا ندير محتواه. ما نقدمه هو قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثر ذلك في نتائج البحث. الملف وحسابه يبقيان تحت سيطرتك بالكامل، خلال العمل معنا وبعده.' },
+        { title: 'العرض المحدود', body: 'العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض.', link: { label: 'اقرأ شروط العرض', href: '/offer/' } },
+        { title: 'ما يُتفق عليه مباشرة', body: 'كل ما يخص مشروعك تحديدًا، من نطاق العمل والخدمات والمناطق التي تُبنى لها الصفحات إلى شروط الدفع وما يحدث إن أراد أي من الطرفين التوقف، يُتفق عليه معك مباشرة قبل بدء العمل ويُكتب لك. لن تجد هنا بندًا عامًا يقرر شيئًا لم تسمعه منا. إن لم يكن الأمر مكتوبًا في اتفاقك أو منشورًا على هذا الموقع، فهو غير قائم.' },
+        { title: 'تحديث هذه الصفحة', body: 'إن تغيّر شيء مما سبق، نحدّث هذه الصفحة ونغيّر تاريخ آخر تحديث أعلاها. وإن كان لديك سؤال عن أي بند هنا، اتصل بنا وسنجيبك مباشرة.', link: { label: 'تواصل معنا', href: '/contact/' } },
+      ],
     },
 
     /* ═══ PART B. The offer page ═══ */
@@ -324,6 +527,17 @@ export const COPY = {
     lang: 'en', dir: 'ltr', other: 'ar', otherLabel: 'العربية',
     home: { path: '/en/', otherPath: '/' },
     offer: { path: '/en/offer/', otherPath: '/offer/' },
+    paths: {
+      home: { path: '/en/', otherPath: '/' },
+      offer: { path: '/en/offer/', otherPath: '/offer/' },
+      about: { path: '/en/about/', otherPath: '/about/' },
+      contact: { path: '/en/contact/', otherPath: '/contact/' },
+      blog: { path: '/en/blog/', otherPath: '/blog/' },
+      terms: { path: '/en/terms/', otherPath: '/terms/' },
+      post: (slug) => ({ path: `/en/blog/${slug}/`, otherPath: `/blog/${slug}/` }),
+    },
+    months: ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'],
 
     meta: {
       home: {
@@ -336,14 +550,36 @@ export const COPY = {
         description: 'Six months of full website and search work for service companies in Saudi Arabia, with no fee and no contract. Full conditions and details.',
         ogAlt: 'The Q8 block six months free offer',
       },
+      about: {
+        title: 'We build the websites we take responsibility for | Q8 block',
+        description: 'We build local service businesses a full website, and we only work on the websites we build ourselves, because the technical foundation decides whether a site is found in Google search and in AI answers.',
+        ogAlt: 'Q8 block, building websites for local service businesses',
+      },
+      contact: {
+        title: 'Contact us | Q8 block',
+        description: 'Call us or message us on WhatsApp. Phone, office address, and a map that opens when you ask for it. There is no form on this page.',
+        ogAlt: 'The Q8 block phone number and office address',
+      },
+      blog: {
+        title: 'Articles for local service owners | Q8 block',
+        description: 'Practical articles on being found in Google search and in AI answers, written for a service business owner, without the jargon.',
+        ogAlt: 'Q8 block articles for local service owners',
+      },
+      terms: {
+        title: 'Terms and conditions | Q8 block',
+        description: 'What our service covers and what it does not, in plain language: the website build, hosting, domain and security, and the Google Business Profile that stays yours.',
+        ogAlt: 'The terms and conditions of the Q8 block service',
+      },
     },
 
+    /* See the Arabic nav above: every in-page #anchor is gone, and the offer
+       is in the banner, not the nav. */
     nav: [
-      { label: 'What we do', href: '/en/#what-we-do' },
-      { label: 'How it works', href: '/en/#journey' },
-      { label: 'Our work', href: '/en/#work' },
-      { label: 'The offer', href: '/en/offer/' },
-      { label: 'FAQ', href: '/en/#faq' },
+      { label: 'Home', href: '/en/' },
+      { label: 'About us', href: '/en/about/' },
+      { label: 'Blog', href: '/en/blog/' },
+      { label: 'Terms and conditions', href: '/en/terms/' },
+      { label: 'Contact us', href: '/en/contact/' },
     ],
     cta: { call: 'Call now', whatsapp: 'WhatsApp' },
     menuOpen: 'Menu', menuClose: 'Close',
@@ -367,7 +603,7 @@ export const COPY = {
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
       spots: (n) => `<span dir="ltr">${n}</span> spots per city`,
       statusLine: 'Registration is open now',
-      link: 'Terms and details',
+      cta: 'See the offer',
     },
 
     problem: {
@@ -427,11 +663,15 @@ export const COPY = {
     work: {
       eyebrow: 'Our work',
       h2: 'Sites we built that <span class="hl">get found.</span>',
-      lead: 'Every site here was built from scratch and is still running. The growth figure on each card is computed from the two complete months printed on it, from Google Search Console. The recent projects are labelled as what they are, because their data is not in yet.',
+      lead: 'Every site here was built from scratch and is still running. The growth figure on each card is real, computed from two complete months of Google Search Console data. The recent projects are labelled as what they are, because their data is not in yet.',
       metricLabel: 'Click growth',
       newTag: 'New project',
       linkLabel: 'View case study',
       plateCaption: 'Monthly clicks, Google Search Console',
+      source: 'All figures from Google Search Console, most recent complete month August 2026',
+      carouselLabel: 'Sites we built',
+      prev: 'Previous',
+      next: 'Next',
     },
 
     faq: {
@@ -456,18 +696,16 @@ export const COPY = {
       cols: [
         { title: 'Company', links: [
           { label: 'Home', href: '/en/' },
-          { label: 'Our work', href: '/en/#work' },
-          { label: 'FAQ', href: '/en/#faq' },
+          { label: 'About us', href: '/en/about/' },
+          { label: 'Contact us', href: '/en/contact/' },
         ] },
-        { title: 'What we do', links: [
-          { label: 'What we do', href: '/en/#what-we-do' },
-          { label: 'What is included', href: '/en/#included' },
-          { label: 'How it works', href: '/en/#journey' },
+        { title: 'Resources', links: [
+          { label: 'Blog', href: '/en/blog/' },
+          { label: 'Google profile checklist', href: '/en/google-business-profile-checklist.html' },
         ] },
         { title: 'The offer', links: [
           { label: 'The offer', href: '/en/offer/' },
-          { label: 'Terms and details', href: '/en/offer/#offer-eligibility' },
-          { label: 'Google profile checklist', href: '/en/google-business-profile-checklist.html' },
+          { label: 'Terms and conditions', href: '/en/terms/' },
         ] },
         { title: 'Contact', links: [
           { label: 'Call now', href: 'tel:' },
@@ -478,6 +716,112 @@ export const COPY = {
       address: 'Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9',
       phoneLabel: 'Phone',
       legal: 'All rights reserved, Kuwait Block',
+    },
+
+    /* ═══ PART C. The four secondary pages — the English mirror of the Arabic
+       above, section for section, from design/copy-pages.md. ═══ */
+
+    about: {
+      eyebrow: 'About us',
+      h1: 'We build what we take <span class="hl">responsibility</span> for',
+      lead: 'Q8 block builds local service businesses a full website, with a dedicated page for every service and every area, then takes on getting it found in Google search and in AI answers.',
+      principle: {
+        eyebrow: 'How we work',
+        h2: 'We only work on sites <span class="hl">we build</span>',
+        lead: 'This one decision is what makes the method work, and it is also why we turn work down. The technical foundation of a website decides whether a customer ever finds it, and we cannot take responsibility for a result built on somebody else’s foundation.',
+        blocks: [
+          { title: 'The foundation is built once', body: 'The structure of a site, its speed and the way its pages are written are all decided in the first week of the build, and they are hard to change afterwards without rebuilding. So we start from scratch rather than from a finished site we try to repair.' },
+          { title: 'A page for every service and area', body: 'A customer does not search for your business name. He searches for the service he wants in the area he is in. That means dozens of pages, and dozens of pages do not get bolted onto a site that was never designed to hold them.' },
+          { title: 'Whole responsibility or none', body: 'Because we built the site, everything that affects whether it is found stays in our hands: hosting, the domain, security, the technical updates and the content. There is no third party to point at when something does not work.' },
+        ],
+      },
+      deliver: {
+        h2: 'What <span class="hl">every project</span> includes',
+        intro: 'The same work on every project we start. The detail is on the homepage.',
+        items: [
+          'Custom website design and development',
+          'A dedicated page for every service and area',
+          'Google Search visibility',
+          'AI platform visibility',
+          'Backlinks and authority building',
+          'Hosting, domain and security',
+        ],
+        link: { label: 'Read the detail on the homepage', href: '/en/' },
+      },
+      notdo: {
+        h2: 'What we do not do',
+        items: [
+          'We do not work on an existing site somebody else built. If you have one and you want it replaced entirely by a site we build from scratch, that is work we do.',
+          'We do not manage your Google Business Profile and we do not ask for access to it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results. The profile stays entirely yours.',
+        ],
+      },
+      company: {
+        h2: 'The company',
+        rows: [
+          { label: 'Registered name', value: 'Kuwait Block' },
+          { label: 'Brand', value: 'Q8 block' },
+          { label: 'Office', from: 'address' },
+          { label: 'Website', value: 'q8block.com' },
+        ],
+      },
+      final: {
+        h2: 'Start with <span class="hl">one call</span>',
+        lead: 'We look at your Google profile with you and explain how we build the site and how we get it found.',
+      },
+    },
+
+    contact: {
+      eyebrow: 'Contact',
+      h1: 'Talk to us <span class="hl">directly</span>',
+      lead: 'There is no form on this page. Call or message us on WhatsApp and it reaches us directly, with nothing in between.',
+      call: {
+        title: 'Call us',
+        body: 'One call. We look at your Google profile and tell you straight away what we can build for you.',
+      },
+      whatsapp: {
+        title: 'Message us on WhatsApp',
+        body: 'If a call does not suit you now, send us the name of your business and the service you offer and we will come back to you.',
+      },
+      office: { title: 'The office', name: 'Kuwait Block' },
+      map: {
+        title: 'The map loads only when you ask',
+        line: 'We load Google Maps on tap only, so the page stays fast and nothing loads that you did not ask for.',
+        button: 'Show the map',
+        caption: 'Google Maps, the office location',
+        directions: 'Open in Google Maps',
+        frameTitle: 'Google Maps, the Kuwait Block office location',
+      },
+    },
+
+    blog: {
+      eyebrow: 'Blog',
+      h1: 'Articles for local <span class="hl">service owners</span>',
+      lead: 'We write here about what makes a customer find your business on Google and in AI answers, and about what you can do yourself without paying anyone. No jargon.',
+      by: 'By Ahmad Owaihan',
+      readMore: 'Read the article',
+      readTime: (n) => `${n} min read`,
+      home: 'Home',
+      blog: 'Blog',
+      crumbLabel: 'Breadcrumb',
+      back: 'Back to all articles',
+      prev: 'Previous article',
+      next: 'Next article',
+      more: 'More articles',
+    },
+
+    terms: {
+      h1: 'Terms and conditions',
+      lead: 'This page is written to be read. It says what we provide and what we do not, in the same language we use with you on the phone, and it contains nothing we have not already said to you directly.',
+      updated: 'Last updated: 24 September 2026',
+      blocks: [
+        { title: 'What the service is', body: 'We design and code a website for your business, with a dedicated page for every service you offer and every area you cover, then we work on it being found in Google search results and in the answers AI assistants give. The work includes the on page and technical optimisation, the content written for every page, the backlinks and domain authority work, and monthly tracking. The full list of what is included is published on the homepage.' },
+        { title: 'We work on what we build', body: 'We do not take over a website somebody else built and work on it. The technical foundation and the internal structure are what decide whether a customer ever finds the site, and we cannot take responsibility for a result built on a foundation we did not lay. If you have an existing website and you want it replaced entirely by one we build from scratch, that is part of our normal work.' },
+        { title: 'Hosting, domain and security', body: 'Hosting, the domain, site security and the technical updates are all part of the service and we run them, so you do not have to manage any of it or deal with a separate provider. The website is built for your business alone and is not used for anybody else.' },
+        { title: 'Your Google profile stays yours', body: 'Managing your Google Business Profile is not part of the service. We do not ask for access to it, we do not own it and we do not run its content. What we provide is a clear checklist for whoever manages the profile on your side, and then we track the effect in the search results. The profile and the account behind it stay entirely under your control, during the work and after it.' },
+        { title: 'The limited offer', body: 'The limited offer has its own conditions: who can register, what the six months cover, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion.', link: { label: 'Read the offer terms', href: '/en/offer/' } },
+        { title: 'What we agree directly', body: 'Everything specific to your project, from the scope of the work and which services and areas get pages to the payment arrangements and what happens if either side wants to stop, is agreed with you directly before the work starts and put in writing for you. You will not find a general clause here deciding something you have not heard from us. If it is not in your agreement or published on this site, it does not apply.' },
+        { title: 'Updates to this page', body: 'If anything above changes, we update this page and change the last updated date at the top of it. If you have a question about anything here, call us and we will answer you directly.', link: { label: 'Contact us', href: '/en/contact/' } },
+      ],
     },
 
     offerPage: {
