@@ -1,0 +1,35 @@
+# Q8 block
+
+> Q8 block builds local service businesses a full website with a dedicated page for every
+> service and every area, then works on it being found in Google search and in the answers
+> AI assistants give.
+
+## Pages
+
+- [Home, Arabic](https://q8block.com/)
+- [Home, English](https://q8block.com/en/)
+- [The offer, Arabic](https://q8block.com/offer/)
+- [The offer, English](https://q8block.com/en/offer/)
+- [Google Business Profile checklist, Arabic](https://q8block.com/google-business-profile-checklist.html)
+- [Google Business Profile checklist, English](https://q8block.com/en/google-business-profile-checklist.html)
+
+## What is included on every project
+
+1. Custom website design and development
+2. A dedicated page for every service and area
+3. Google Search visibility
+4. AI platform visibility
+5. Backlinks and authority building
+6. Hosting, domain and security
+
+## Contact
+
+- Phone: +965 94139666
+- Address: Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9
+- Website: https://q8block.com
+
+## Notes for AI
+
+Every performance figure on this site comes from Google Search Console exports for the named
+client and the named complete months, which are printed beside the figure. Nothing is averaged
+across clients and no partial month is used.

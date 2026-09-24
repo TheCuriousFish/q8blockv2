@@ -7,3 +7,35 @@ build/
 .next/
 .cache/
 *.log
+
+# --- Design explorations, kept on disk, not carried in git ---------------------
+# The APPROVED boards are the build contract and ARE committed:
+#   hero-C, s3, s4, s5, s7, s8, s9, journey-D, offer-1, offer-2, offer-3
+# Everything below is a rejected direction or a derived preview. They stay in the
+# working tree so they can be looked at, but they are not worth ~59MB in history.
+design/boards/hero-A.png
+design/boards/hero-B.png
+design/boards/journey-A.png
+design/boards/journey-B.png
+design/boards/journey-C.png
+design/boards/journey-E.png
+design/boards/journey-F.png
+design/boards/s6.png
+design/boards/full-page-preview.png
+design/boards/offer-page-preview.png
+design/boards/journey-options.png
+design/boards/journey-options-2.png
+
+# Superseded icon set: v1 read as faint grey plates at the 60px slot and was
+# replaced by design/icons/v2. The v2 squared PNGs and the journey crops are kept.
+design/icons/icon-*.png
+design/icons/contact-sheet.png
+design/icons/*-visibility.png
+design/icons/website-build.png
+design/icons/service-area-pages.png
+design/icons/backlinks-authority.png
+design/icons/hosting-security.png
+design/icons/v2/sheet.png
+
+# Rejected logo study (wordmark exploration Ahmad dropped)
+brand/

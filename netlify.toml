@@ -1,0 +1,64 @@
+# Netlify publishes ONLY the built output. The repo root also holds design boards,
+# the archived old site and build scripts, none of which belong on a public domain.
+[build]
+  publish = "site"
+  command = "node build.mjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# --- Language flip -----------------------------------------------------------
+# The old site served English at / and Arabic at /ar/. The new site is Arabic
+# first at / with the English mirror at /en/. 478 links from client sites point
+# at q8block.com/ and 478 at q8block.com/en/, so both must resolve.
+[[redirects]]
+  from = "/ar/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ar/*"
+  to = "/"
+  status = 301
+  force = true
+
+# --- Retired pages -----------------------------------------------------------
+# These are live today and would 404 after the rebuild. About, contact and blog
+# are deliberately deferred, so they point at the homepage until they exist.
+[[redirects]]
+  from = "/about.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/blog-2.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/blog-3.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/landscaping/onboarding.html"
+  to = "/"
+  status = 301
+
+# The Arabic checklist never exists in the new build; the one canonical copy does.
+[[redirects]]
+  from = "/ar/google-business-profile-checklist.html"
+  to = "/google-business-profile-checklist.html"
+  status = 301
+  force = true
