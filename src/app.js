@@ -131,7 +131,12 @@
     // scope, so a second `var timer` here is the SAME binding as the
     // countdown's below: the slideshow's stop() silently killed the countdown's
     // interval and leaked its own. Keep every name in this block unique.
-    var autoTimer = null, idleTimer = null, hold = false, onScreen = true;
+    var autoTimer = null, idleTimer = null, onScreen = true;
+    // Three independent reasons to pause, each with its own flag. One flag
+    // could not express them: `focusout` used to set `hold = false` while the
+    // pointer was still on the cards, so releasing one hold cancelled another.
+    var hovering = false, focused = false, pressing = false;
+    var held = function () { return hovering || focused || pressing; };
 
     var behavior = function () { return reduce && reduce.matches ? 'auto' : 'smooth'; };
     var stepPx = function () {
@@ -150,31 +155,44 @@
 
     var stop = function () { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } };
     var update = function () {
-      var run = onScreen && !hold && !document.hidden && !(reduce && reduce.matches);
+      var run = onScreen && !held() && !document.hidden && !(reduce && reduce.matches);
       if (run && !autoTimer) autoTimer = setInterval(function () { go(1); }, 4200);
       else if (!run) stop();
     };
+    // A press releases 5s after the last pointerup, and only the press: hover
+    // and focus keep their own flags and release on their own events.
     var releaseSoon = function () {
       clearTimeout(idleTimer);
-      idleTimer = setTimeout(function () {
-        hold = (slider.matches && slider.matches(':hover')) || slider.contains(document.activeElement);
-        update();
-      }, 5000);
+      idleTimer = setTimeout(function () { pressing = false; update(); }, 5000);
     };
-    var grab = function () { clearTimeout(idleTimer); hold = true; update(); };
-    var drop = function () { hold = false; update(); };
+    var press = function () { clearTimeout(idleTimer); pressing = true; update(); };
 
-    slider.addEventListener('mouseenter', grab);
-    slider.addEventListener('mouseleave', drop);
-    slider.addEventListener('focusin', grab);
-    slider.addEventListener('focusout', drop);
-    track.addEventListener('pointerdown', grab);
+    /* Hover-pause fires on a real pointer MOVE over the slider, never on
+       `mouseenter` alone — and this is the bug Ahmad saw ("the slideshow should
+       be automatically sliding. That is not happening. It's like a showcase").
+       Chrome re-evaluates the hover target after a scroll and dispatches
+       pointerenter + mouseover + mouseenter, and NO mousemove, when a section
+       scrolls under a stationary cursor. That is exactly how a desktop reader
+       reaches §7: the pointer rests mid-screen, the 1320 x 483 band scrolls
+       under it, `mouseenter` fired and the carousel was held paused for the
+       whole time it was on screen. Measured: scrollLeft stayed 0 for 12s with
+       the cursor parked at 720,450. `mousemove` is the discriminator — it fires
+       only when the reader actually moves the mouse, which is the hover the
+       pause is for. Verified event counts in build-spec §18. */
+    slider.addEventListener('mousemove', function () {
+      if (hovering) return;
+      hovering = true; update();
+    });
+    slider.addEventListener('mouseleave', function () { hovering = false; update(); });
+    slider.addEventListener('focusin', function () { focused = true; update(); });
+    slider.addEventListener('focusout', function () { focused = false; update(); });
+    track.addEventListener('pointerdown', press);
     window.addEventListener('pointerup', releaseSoon, { passive: true });
     document.addEventListener('visibilitychange', update);
 
     Array.prototype.forEach.call(slider.querySelectorAll('[data-slide]'), function (b) {
       b.addEventListener('click', function () {
-        grab();
+        press();
         go(b.getAttribute('data-slide') === 'next' ? 1 : -1);
         releaseSoon();
       });
@@ -186,7 +204,7 @@
       else if (e.key === 'ArrowLeft') dir = rtl ? 1 : -1;
       if (!dir) return;
       e.preventDefault();
-      grab();
+      press();
       go(dir);
       releaseSoon();
     });

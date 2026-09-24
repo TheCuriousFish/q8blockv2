@@ -779,6 +779,19 @@ body.theme-dark { background: var(--bg-dark); }
   text-decoration: underline; text-underline-offset: 6px;
   display: inline-flex; align-items: center; gap: 8px;
 }
+/* blog-B.png draws `Read more →` ORANGE and underlined, in a weight visibly
+   heavier than the body — Ahmad's "there is no orange on the page" was partly
+   this link. Orange ink on a light surface is the §14/§17.7b problem: #FF5F29
+   is 3.00:1 on #FEFEFE and fails at any size, and --orange-ink-light (#E85319)
+   is 3.67:1, which is the LARGE-text allowance only. So the link takes the
+   same shape §17.7b gave .eyebrow and .work-metric — weight 700 with a 19px
+   floor — which clears 18.66px bold and therefore qualifies at 3:1. The board
+   already draws it semibold, so this is the board being matched, not bent.
+   `.text-link` elsewhere on the site is NOT touched. */
+.read-more {
+  color: var(--orange-ink-light); font-weight: 700;
+  font-size: clamp(19px, calc(19/14.4 * 1vw), 21px);
+}
 .text-link:hover, .read-more:hover { color: var(--orange); }
 .text-link .chev, .read-more .chev { text-decoration: none; font-size: 1.25em; line-height: 1; }
 html[dir="rtl"] .text-link .chev,
@@ -895,22 +908,32 @@ html[dir="rtl"] .crumbs .chev { transform: scaleX(-1); }
   margin-block-start: 18px; border-block-start: 1px solid var(--hairline-light);
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px;
 }
+/* Re-measured off blog-B.png on 2026-09-25. The board's left-column thumbnail
+   tops sit at css y 465.5 / 579.6 / 690.0, i.e. a row pitch of 114.1 and 110.4
+   — call it 112. The build was running 283.8px rows, two and a half times the
+   board, because the row title borrowed the 32px --fs-h3 where the board draws
+   it at ~21 and every gap around it was a body-section value. Same failure and
+   same fix as .work-site in §14b.1: the row title gets its own size. */
 .post-row {
-  display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 28px;
-  padding-block: 26px; border-block-end: 1px solid var(--hairline-light);
+  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px;
+  padding-block: 16px; border-block-end: 1px solid var(--hairline-light);
 }
 /* The last row of each column closes the list, so it carries no rule. With
    five posts in two columns that is the fourth and the fifth item. */
 .post-rows > :nth-last-child(-n+2) { border-block-end: 0; }
 .row-art { display: block; }
-.row-art img { width: 104px; height: 104px; }
-.row-text .h3 { margin-block-start: 10px; }
+.row-art img { width: 96px; height: 96px; }
+/* Its own size, not the 32px --fs-h3. Board ink measures ~21px at 1440. */
+.row-text .h3 {
+  margin-block-start: 5px;
+  font-size: clamp(17px, calc(21/14.4 * 1vw), 23px);
+}
 .row-text .h3 a { text-decoration: none; }
 .row-excerpt {
-  margin-block-start: 10px; font-size: var(--fs-case); font-weight: var(--w-body);
+  margin-block-start: 5px; font-size: var(--fs-case); font-weight: var(--w-body);
   line-height: var(--lh-body); color: var(--muted-on-light);
 }
-.post-row .read-more { margin-block-start: 14px; }
+.post-row .read-more { margin-block-start: 8px; }
 
 /* ── The post page. The article column is capped at 780px rather than running
       the full 1320 container: the aesthetics audit found 86-character lines a
@@ -1076,7 +1099,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     <div class="wrap-wide">
       <span class="strip-pill">عرض محدود</span>
       <h1>ستة أشهر <span class="hl">مجانية</span>،<br class="brk"> بدون عقد</h1>
-      <p class="lead">ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. العرض متاح لشركات الخدمات في السعودية، دون التزام.</p>
+      <p class="lead">هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. دون التزام.</p>
       <p class="count-label" data-countdown-part>يغلق التسجيل خلال</p>
       <div class="count-boxes" data-countdown-part><div class="count-box">
       <b data-count="d">&nbsp;</b><span>يوم</span>
@@ -1088,7 +1111,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       <b data-count="s">&nbsp;</b><span>ثانية</span>
     </div></div>
       <p class="offer-spots" data-countdown-fallback hidden>التسجيل مفتوح الآن</p>
-      <p class="offer-spots"><span dir="ltr">9</span> مقاعد لكل مدينة</p>
+      <p class="offer-spots"><span dir="ltr">9</span> مقاعد متبقية</p>
       <div class="btn-row centred">
       <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       <a class="btn btn-outline" href="https://wa.me/96594139666" rel="noopener" target="_blank">واتساب</a>
@@ -1123,15 +1146,17 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <section id="offer-eligibility" class="sec offer-sec tint on-dark">
     <div class="wrap">
       <h2>شروط القبول</h2>
-      <p class="lead">العرض مخصص لشركات الخدمات في السعودية. ثلاثة شروط، وإن تحققت جميعها فنشاطك مؤهل.</p>
+      <p class="lead">العرض مخصص لشركات الخدمات في السعودية. أربعة شروط، وإن تحققت جميعها فنشاطك مؤهل.</p>
       <ul class="offer-rows"><li class="offer-row ruled">
-      <span class="n" aria-hidden="true">1</span><span class="t">سجل تجاري أو وثيقة عمل حر. أي منهما يكفي.</span>
+      <span class="n" aria-hidden="true">1</span><span class="t">نشاط خدمي. نعمل مع شركات الخدمات فقط.</span>
     </li><li class="offer-row ruled">
-      <span class="n" aria-hidden="true">2</span><span class="t">ملف نشاط تجاري على جوجل بعنوان مطابق للوثيقة.</span>
+      <span class="n" aria-hidden="true">2</span><span class="t">سجل تجاري أو وثيقة عمل حر. أي منهما يكفي.</span>
     </li><li class="offer-row ruled">
-      <span class="n" aria-hidden="true">3</span><span class="t">لا يوجد موقع إلكتروني قائم.</span>
+      <span class="n" aria-hidden="true">3</span><span class="t">ملف نشاط تجاري على جوجل بعنوان مطابق للوثيقة.</span>
+    </li><li class="offer-row ruled">
+      <span class="n" aria-hidden="true">4</span><span class="t">لا يوجد موقع إلكتروني قائم.</span>
     </li></ul>
-      <p class="offer-spots"><span dir="ltr">9</span> مقاعد لكل مدينة</p>
+      <p class="offer-spots"><span dir="ltr">9</span> مقاعد متبقية</p>
     </div>
   </section>
 <section id="offer-nocontract" class="sec">

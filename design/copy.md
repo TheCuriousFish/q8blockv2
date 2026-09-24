@@ -181,11 +181,11 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر مجانية، بدون عقد | Six months free, no contract |
+| Line | ستة أشهر مجانية لشركات الخدمات | Six months free for service companies |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
-| Spots line | `[SPOTS]` مقاعد لكل مدينة | `[SPOTS]` spots per city |
+| Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA, same row | اطلع على العرض | See the offer |
 
 ### Static state, countdown removed and spots empty
@@ -193,7 +193,7 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر مجانية، بدون عقد | Six months free, no contract |
+| Line | ستة أشهر مجانية لشركات الخدمات | Six months free for service companies |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
 | CTA, same row | اطلع على العرض | See the offer |
 
@@ -205,27 +205,41 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 No figures anywhere in this section. **The design is approved and unchanged. Only the headline row and the
 subhead were rewritten, 2026-09-24.**
 
-**Why the old headline was wrong.** It read `Your Google profile works. Your website does not.` The buyer
-this page is written for **has no website at all**, so telling him his website does not work describes
-somebody else's business and he stops reading. Ahmad's steer was to reframe it from failure to unrealised
-potential: the profile is already working, and a website multiplies what it returns.
+**Rewritten 2026-09-25 to state the PROBLEM. This supersedes both headlines that used to sit here.** The
+line that shipped, `ملفك على جوجل يعمل. والموقع يضاعف أثره` / `Your profile works. A website multiplies
+it.`, is the **solution sentence sitting inside the problem section**. Ahmad's correction: the problem is
+that the reader has a working Google profile **and no website behind it**, and his own line for it was
+`ملفك على جوجل يعمل وما عندك موقع إلكتروني`.
+
+The headline now says that and nothing else. Eight words in each language, the orange highlight on the half
+that carries the point — the absence of a website, never the profile.
+
+**The Arabic is deliberately Gulf colloquial** (`وما عندك`, not the MSA `وليس لديك`), because it is Ahmad's
+own line and because it pairs with the hero H1 he also wrote colloquially (`تبي عملاءك...`). Those two
+display lines are in his voice; **every other Arabic string in this file stays professional MSA**. Do not
+"correct" it, exactly as §1 says of the hero.
 
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | المشكلة | The problem |
-| Headline | ملفك على جوجل يعمل. والموقع يضاعف أثره | Your profile works. A website multiplies it. |
-| Highlighted word | يضاعف أثره | multiplies it |
+| Headline | ملفك على جوجل يعمل وما عندك موقع إلكتروني | Your Google profile works. You have no website. |
+| Highlighted phrase | وما عندك موقع إلكتروني | no website. |
 
-**Alternative headline, for Ahmad only. Not the default. Pick one or the other, never both.**
+**The subhead was re-read against the new headline and is unchanged.** It still follows from it: the profile
+reaches a narrow radius and that is all it can do, a website would widen the same demand, and it closes on
+`الفارق بين الاثنين هو عمل قائم لا يصلك اليوم` / `The gap between the two is real work that is not reaching
+you yet` — which is the cost of the absence the headline has just named. Nothing in it contradicts the new
+line, so nothing in it moved.
 
-| Element | Arabic | English |
-|---|---|---|
-| Alternative headline | ملفك يجلب المكالمات. والموقع يضاعفها | Your profile brings calls. A website multiplies them. |
-| Highlighted word | يضاعفها | multiplies them |
+**The three cards are unchanged and still read as consequences of the stated problem**: with no website the
+map stops at your district, a competitor page answers the question instead, and AI has no text about you to
+quote. Card 3 already says `بلا موقع` / `With no website` in as many words.
 
-It is sharper because it names the thing he actually counts, calls, instead of the abstract `أثره`. It is
-held back as the alternative only because `المكالمات` / `calls` is a stronger implicit claim than the
-approved cards below support, and the default headline stays safely inside what the page proves.
+**The two retired headlines, kept only so nobody reinstates one by accident.**
+`ملفك على جوجل يعمل. والموقع يضاعف أثره` / `Your profile works. A website multiplies it.` was the default and
+`ملفك يجلب المكالمات. والموقع يضاعفها` / `Your profile brings calls. A website multiplies them.` was the
+alternative held for Ahmad. Both describe the solution, which is the thing he rejected. Neither is the
+default any more and neither goes on the page.
 
 | Element | Arabic | English |
 |---|---|---|
@@ -719,18 +733,18 @@ half of the market.
    Ahmad has now said three times that a promise about position in search results, in either language, means
    nothing to a service owner who has no website. It is not a selling word anywhere in Part B.
 3. **The spots figure is the `[SPOTS]` build slot, never a typed number.** The board rendered
-   `178 spots per city`, which the image model invented. No spots number is ever written into this file.
+   a spots figure of its own, which the image model invented. No spots number is ever written into this file.
 
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
 | Headline | ستة أشهر مجانية، بدون عقد | Six months free, no contract. |
 | Highlighted word | مجانية | free |
-| Subhead | ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. العرض متاح لشركات الخدمات في السعودية، دون التزام. | Six months of the full work, with no fee. We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. The offer is open to service companies in Saudi Arabia, with no commitment. |
+| Subhead | هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. دون التزام. | This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. No commitment. |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
-| Spots line | `[SPOTS]` مقاعد لكل مدينة | `[SPOTS]` spots per city |
+| Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA primary | اتصل الآن | Call now |
 | CTA secondary | واتساب | WhatsApp |
 
@@ -757,25 +771,33 @@ Same six deliverables as homepage Section 5, same icons, listed here as the cont
 
 ## B3. Eligibility
 
-Three conditions, given equal visual weight to the inclusion list. The conditions are what make a free
+**Four** conditions, given equal visual weight to the inclusion list. The conditions are what make a free
 thing read as selective rather than desperate, so they are not tucked into small print.
+
+**Condition 1 added 2026-09-25, and it is deliberately first.** Ahmad: `We're not mentioning service
+companies. That should be clear because we don't work with anyone, only service companies. Even in the
+offer, it doesn't mention service companies.` The eligibility list is the part a reader actually reads and
+it is where he self-qualifies, so being a service business is condition **1**, ahead of the commercial
+registration, rather than a phrase inside the intro. The old three keep their wording exactly and renumber
+to 2, 3 and 4. No other offer term moved.
 
 | Element | Arabic | English |
 |---|---|---|
 | Block title | شروط القبول | Eligibility |
-| Intro | العرض مخصص لشركات الخدمات في السعودية. ثلاثة شروط، وإن تحققت جميعها فنشاطك مؤهل. | The offer is for service companies in Saudi Arabia. Three conditions, and if all three are met your business qualifies. |
+| Intro | العرض مخصص لشركات الخدمات في السعودية. أربعة شروط، وإن تحققت جميعها فنشاطك مؤهل. | The offer is for service companies in Saudi Arabia. Four conditions, and if all four are met your business qualifies. |
 
 | # | Arabic | English |
 |---|---|---|
-| 1 | سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. | A commercial registration or a freelance certificate. Either one is enough. |
-| 2 | ملف نشاط تجاري على جوجل بعنوان مطابق للوثيقة. | A Google Business Profile with an address matching that certificate. |
-| 3 | لا يوجد موقع إلكتروني قائم. | No existing website. |
+| 1 | نشاط خدمي. نعمل مع شركات الخدمات فقط. | A service business. We work with service companies only. |
+| 2 | سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. | A commercial registration or a freelance certificate. Either one is enough. |
+| 3 | ملف نشاط تجاري على جوجل بعنوان مطابق للوثيقة. | A Google Business Profile with an address matching that certificate. |
+| 4 | لا يوجد موقع إلكتروني قائم. | No existing website. |
 
 **Spots line, configurable slot**
 
 | Arabic | English |
 |---|---|
-| `[SPOTS]` مقاعد لكل مدينة | `[SPOTS]` spots per city |
+| `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 
 ## B4. No contract
 
@@ -877,11 +899,14 @@ The offer questions live here and only here.
 | `[COUNTDOWN]` | Homepage Section 2, offer page B1 | Build config, end date set by Ahmad. Both must also render correctly with this element absent. **Placeholder since 2026-09-24: `2026-10-04T23:59:59+03:00`, ten days out.** The previous value ran 98 days and Ahmad rejected it on sight — `should be less than 10. Ten days.` He sets the real date; it is one line, `CONFIG.COUNTDOWN_END` in `src/data.mjs`. |
 | `[SPOTS]` | Homepage Section 2, offer page B1 and B3 | Build config, number set by Ahmad. Never hardcoded into body copy anywhere else. |
 
-**`[SPOTS]`, the working number.** Ahmad's working figure is **around 9** seats per city. It lives in build
+**`[SPOTS]`, the working number.** Ahmad's working figure is **around 9** seats. It lives in build
 config and is set there once, so the three places above all read the same and one edit changes all three. It
-is never typed into body copy, a headline or a meta description in this file. The `178 spots per city` that
-appeared on a rendered B1 board was invented by the image model and is not a value from anywhere in this
-file. Both the homepage strip and B1 must also render correctly with the slot empty, using the
+is never typed into body copy, a headline or a meta description in this file. The board that rendered a
+spots figure of its own invented it; no such value comes from anywhere in this file.
+
+**"per city" came off the line on 2026-09-25.** Ahmad: `don't mention each city. It says just nine seats
+left. That's it.` The line now reads `[SPOTS] مقاعد متبقية` / `[SPOTS] seats left` in all three places —
+the homepage strip, B1 and B3 — and the number still comes from `CONFIG.SPOTS`, never typed into copy. Both the homepage strip and B1 must also render correctly with the slot empty, using the
 `التسجيل مفتوح الآن` / `Registration is open now` replacement line.
 
 ## Numbers on the page

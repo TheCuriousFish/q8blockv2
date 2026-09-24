@@ -8,7 +8,7 @@
    render a complete, sensible band when either one is switched off:
      COUNTDOWN_END = null  -> the countdown disappears, the strip/hero falls
                               back to "التسجيل مفتوح الآن / Registration is open now"
-     SPOTS         = null  -> the "N spots per city" line disappears
+     SPOTS         = null  -> the "N seats left" line disappears
    ───────────────────────────────────────────────────────────────────────── */
 export const CONFIG = {
   // Registration close date. ISO 8601 with the Kuwait/Riyadh offset (+03:00).
@@ -20,7 +20,9 @@ export const CONFIG = {
   // the homepage strip and offer hero both follow.
   COUNTDOWN_END: '2026-10-04T23:59:59+03:00',
 
-  // Seats per city. Ahmad's working number is around 9. Set to null to hide the line.
+  // Seats left. Ahmad's working number is around 9. Set to null to hide the line.
+  // "per city" came off the line on 2026-09-25: Ahmad — "don't mention each
+  // city. It says just nine seats left. That's it."
   SPOTS: 9,
 };
 
@@ -216,10 +218,10 @@ export const COPY = {
        contact CTA — the only two contact labels are still اتصل الآن / واتساب. */
     strip: {
       pill: 'عرض محدود',
-      line: 'ستة أشهر مجانية، بدون عقد',
+      line: 'ستة أشهر مجانية لشركات الخدمات',
       countdownLabel: 'يغلق التسجيل خلال',
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
-      spots: (n) => `<span dir="ltr">${n}</span> مقاعد لكل مدينة`,
+      spots: (n) => `<span dir="ltr">${n}</span> مقاعد متبقية`,
       statusLine: 'التسجيل مفتوح الآن',
       cta: 'اطلع على العرض',
     },
@@ -227,7 +229,7 @@ export const COPY = {
     /* ── 3. The problem ── */
     problem: {
       eyebrow: 'المشكلة',
-      h2: 'ملفك على جوجل يعمل.<br class="brk"> والموقع <span class="hl">يضاعف أثره</span>',
+      h2: 'ملفك على جوجل يعمل<br class="brk"> <span class="hl">وما عندك موقع إلكتروني</span>',
       lead: 'ملفك على جوجل يضعك على الخريطة داخل نطاق ضيق حول عنوانك، وهذا كل ما يستطيعه. الموقع يأخذ الطلب نفسه ويوسعه: كل منطقة تخدمها، وكل سؤال يكتبه العميل قبل أن يتصل، وكل إجابة تقدمها مساعدات الذكاء الاصطناعي. الفارق بين الاثنين هو عمل قائم لا يصلك اليوم.',
       cards: [
         { title: 'الخريطة تتوقف عند حدود حيّك', body: 'ملف النشاط التجاري يظهر في نطاق ضيق حول عنوانك المسجل. الموقع الإلكتروني يظهر في كل مدينة وكل حي تستهدفه بصفحة مخصصة.' },
@@ -475,10 +477,10 @@ export const COPY = {
     offerPage: {
       pill: 'عرض محدود',
       h1: 'ستة أشهر <span class="hl">مجانية</span>،<br class="brk"> بدون عقد',
-      lead: 'ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. العرض متاح لشركات الخدمات في السعودية، دون التزام.',
+      lead: 'هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نبني موقعك ونكتب صفحاته، ليجدك العميل الذي يبحث عن خدمتك في جوجل وفي إجابات الذكاء الاصطناعي فيتصل بك، وتتحول هذه المكالمات إلى عملاء وإلى إيرادات لنشاطك. دون التزام.',
       countdownLabel: 'يغلق التسجيل خلال',
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
-      spots: (n) => `<span dir="ltr">${n}</span> مقاعد لكل مدينة`,
+      spots: (n) => `<span dir="ltr">${n}</span> مقاعد متبقية`,
       statusLine: 'التسجيل مفتوح الآن',
 
       b2: { title: 'ما يشمله العرض', intro: 'الأشهر الستة تشمل العمل كاملًا، لا جزءًا منه.',
@@ -491,8 +493,9 @@ export const COPY = {
           'الاستضافة والنطاق والحماية',
         ] },
 
-      b3: { title: 'شروط القبول', intro: 'العرض مخصص لشركات الخدمات في السعودية. ثلاثة شروط، وإن تحققت جميعها فنشاطك مؤهل.',
+      b3: { title: 'شروط القبول', intro: 'العرض مخصص لشركات الخدمات في السعودية. أربعة شروط، وإن تحققت جميعها فنشاطك مؤهل.',
         items: [
+          'نشاط خدمي. نعمل مع شركات الخدمات فقط.',
           'سجل تجاري أو وثيقة عمل حر. أي منهما يكفي.',
           'ملف نشاط تجاري على جوجل بعنوان مطابق للوثيقة.',
           'لا يوجد موقع إلكتروني قائم.',
@@ -598,17 +601,17 @@ export const COPY = {
 
     strip: {
       pill: 'Limited offer',
-      line: 'Six months free, no contract',
+      line: 'Six months free for service companies',
       countdownLabel: 'Registration closes in',
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
-      spots: (n) => `<span dir="ltr">${n}</span> spots per city`,
+      spots: (n) => `<span dir="ltr">${n}</span> seats left`,
       statusLine: 'Registration is open now',
       cta: 'See the offer',
     },
 
     problem: {
       eyebrow: 'The problem',
-      h2: 'Your profile works.<br class="brk"> A website <span class="hl">multiplies it.</span>',
+      h2: 'Your Google profile works.<br class="brk"> You have <span class="hl">no website.</span>',
       lead: 'Your Google profile puts you on the map inside a narrow radius around your address, and that is as far as it reaches. A website takes the same demand and widens it: every area you serve, every question a customer types before he calls, and every answer an AI assistant gives. The gap between the two is real work that is not reaching you yet.',
       cards: [
         { title: 'The map stops at<br class="brk"> your district', body: 'A business profile shows inside a narrow radius around your registered address. A website shows in every city and district you target, with a page built for it.' },
@@ -827,10 +830,10 @@ export const COPY = {
     offerPage: {
       pill: 'Limited offer',
       h1: 'Six months <span class="hl">free</span>,<br class="brk"> no contract.',
-      lead: 'Six months of the full work, with no fee. We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. The offer is open to service companies in Saudi Arabia, with no commitment.',
+      lead: 'This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We build your website and write every page, so the customer searching for your service discovers you on Google and in AI answers and calls you, and those calls become clients and revenue. No commitment.',
       countdownLabel: 'Registration closes in',
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
-      spots: (n) => `<span dir="ltr">${n}</span> spots per city`,
+      spots: (n) => `<span dir="ltr">${n}</span> seats left`,
       statusLine: 'Registration is open now',
 
       b2: { title: 'What is included', intro: 'The six months cover the full work, not a part of it.',
@@ -843,8 +846,9 @@ export const COPY = {
           'Hosting, domain and security',
         ] },
 
-      b3: { title: 'Eligibility', intro: 'The offer is for service companies in Saudi Arabia. Three conditions, and if all three are met your business qualifies.',
+      b3: { title: 'Eligibility', intro: 'The offer is for service companies in Saudi Arabia. Four conditions, and if all four are met your business qualifies.',
         items: [
+          'A service business. We work with service companies only.',
           'A commercial registration or a freelance certificate. Either one is enough.',
           'A Google Business Profile with an address matching that certificate.',
           'No existing website.',

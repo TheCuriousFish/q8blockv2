@@ -25,8 +25,9 @@
                        null or a past date  ->  no countdown anywhere, and
                        the strip and the offer hero fall back to
                        "التسجيل مفتوح الآن / Registration is open now".
-       SPOTS           seats per city (Ahmad's working number is around 9).
-                       null or 0  ->  every "N spots per city" line is
+       SPOTS           seats left (Ahmad's working number is around 9). "per city"
+                       came off the line 2026-09-25 on his instruction.
+                       null or 0  ->  every "N seats left" line is
                        dropped and both pages still read correctly.
 
    Change them there, re-run this file, and all three places that print them

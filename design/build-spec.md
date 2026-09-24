@@ -527,7 +527,7 @@ Any display line that must break the same way at every width gets an explicit `<
 |---|---|---|
 | §1 H1 | `Customers <span class="hl">find you</span><br>on Google and in AI.` | `نجعل عملاءك <span class="hl">يجدونك</span><br>في جوجل وفي الذكاء الاصطناعي` |
 | §1 subhead | Natural wrap, container max-width **720px**. The board draws two lines of 677 / 655px, but the board's string is not the shipping string (`copy.md` §1 replaced `then we rank it on the first page` with the discoverability wording), so the break will land differently. Let it wrap; do **not** force a `<br>` to imitate a sentence that is no longer on the page. | Natural wrap, same container |
-| §3 H2 | `Your profile works.<br>A website <span class="hl">multiplies it.</span>` | `ملفك على جوجل يعمل.<br>والموقع <span class="hl">يضاعف أثره</span>` |
+| §3 H2 (rewritten 2026-09-25, §18) | `Your Google profile works.<br>You have <span class="hl">no website.</span>` | `ملفك على جوجل يعمل<br><span class="hl">وما عندك موقع إلكتروني</span>` |
 | §4 H2 | `We build the site.<br>We <span class="hl">get it found.</span>` | `نبني الموقع،<br>ثم نجعل عملاءك <span class="hl">يجدونه</span>` |
 | §9 H2 | `<span class="nb">Your customers are searching.</span><br class="brk"> <span class="hl nb">Be the answer.</span>` | `<span class="nb">عملاؤك يبحثون الآن.</span><br class="brk"> <span class="hl nb">كن أنت الإجابة</span>` |
 
@@ -1514,3 +1514,299 @@ brief asked to be re-verified with Lighthouse.
   performance still 99–100 and CLS still 0.000 on every one. `/en/blog/`'s 95 was not separately
   re-measured (§17.7b) but shares the exact same token and floor as the four pages that were, so the same
   fix applies to it.
+
+---
+
+## 18. Ahmad's second revision pass, 2026-09-25. Five fixes: §3's headline, the dead slideshow, "service companies", "per city", and the blog's missing orange
+
+His review of the built site. Everything below is his instruction. Verified with `compare.mjs` (now
+extended past the homepage — §18.5.3), `shots.mjs` across all 27 routes at both viewports,
+`scripts/seo-audit.mjs` and a fresh Lighthouse sweep. Nothing here is committed, pushed or deployed.
+
+### 18.1 §3's headline was the SOLUTION sitting in the problem section
+
+**The bug.** The section is called `المشكلة` / `The problem` and its headline read
+`ملفك على جوجل يعمل. والموقع يضاعف أثره` / `Your profile works. A website multiplies it.` That is the
+answer, not the problem. Ahmad: the problem is that the reader has a working Google profile **and no
+website behind it**, and his own line for it was `ملفك على جوجل يعمل وما عندك موقع إلكتروني`.
+
+| | Arabic | English |
+|---|---|---|
+| Was | ملفك على جوجل يعمل. والموقع **يضاعف أثره** | Your profile works. A website **multiplies it.** |
+| Now | ملفك على جوجل يعمل **وما عندك موقع إلكتروني** | Your Google profile works. You have **no website.** |
+
+Eight words in each language, the limit. The orange highlight sits on the half that carries the point —
+the **absence** of a website — never on the profile, which is the half that already works.
+
+**The Arabic is deliberately Gulf colloquial** (`وما عندك`, not the MSA `وليس لديك`). It is Ahmad's own
+line and it pairs with the hero H1 he also wrote colloquially, `تبي عملاءك يجدونك...` (§15.6). Those two
+display lines are in his voice and **every other Arabic string on the site stays professional MSA**. Do
+not "correct" either of them, and do not treat this as licence to write colloquially anywhere else.
+
+The English gains `Google` so it says which profile works, matching what his Arabic says outright.
+
+**The subhead was re-read against the new headline and did not have to move.** It says the profile reaches
+a narrow radius and that is all it can do, that a website widens the same demand, and it closes on
+`الفارق بين الاثنين هو عمل قائم لا يصلك اليوم` / `The gap between the two is real work that is not reaching
+you yet` — the cost of exactly the absence the headline now names. **The three cards are untouched** and
+still read as consequences of it; card 3 already says `بلا موقع` / `With no website` in as many words.
+
+§12's planned-break row moved with the headline. `copy.md` §3 records the change and keeps both retired
+headlines listed as retired, so nobody reinstates one.
+
+### 18.2 The slideshow was not auto-advancing, and the cause was `mouseenter`
+
+Ahmad: `the slideshow should be automatically sliding. That is not happening. It's like a showcase.`
+
+**Everything §15.5 built was working.** The timer starts, the `IntersectionObserver` is on threshold 0 and
+reports correctly, nothing is stuck paused on load, and the `autoTimer` / `idleTimer` rename left no
+dangling reference — all four checked directly by instrumenting `setInterval` / `clearInterval` and the
+observer in the page. With no pointer near the section the carousel advanced fine.
+
+**The cause is a real-world condition no code read would have found.** Chrome re-evaluates the hover target
+after a scroll, so when a section scrolls under a **stationary** cursor it dispatches
+`pointerenter` + `mouseover` + `mouseenter` — and **no `mousemove`**. That is exactly how a desktop reader
+arrives at §7: the pointer rests mid-screen, the 1320 x 483 band scrolls under it, `mouseenter` fires, and
+`hold` stayed true for the whole time the section was on screen.
+
+Measured, cursor parked at 720,450 and the section wheel-scrolled under it, `/en/` at 1440x900:
+
+| | scrollLeft at 0..12s |
+|---|---|
+| Before | `0 0 0 0 0 0 0 0 0 0 0 0 0` — dead for the full 12 seconds |
+| After `/en/` | `0 0 0 0 448 448 448 448 896 896 896 896 1312` |
+| After `/` (RTL) | `0 0 0 0 -448 -448 -448 -448 -896 -896 -896 -896 -1302` |
+
+RTL advances negative, which is Chrome's `scrollLeft` convention and what `sign` in `app.js` exists for:
+`go(1)` is "advance" in both locales. Instrumented event counts during that scroll:
+`{pointerenter: 1, mouseover: 1, mouseenter: 1}`, zero `mousemove`.
+
+**The fix, and it is not a rewrite.** Hover-pause now fires on a real `mousemove` over the slider instead
+of on `mouseenter`. A pointer the page scrolls under produces no `mousemove`, so autoplay keeps running;
+the moment the reader actually moves the mouse over the cards it pauses, which is the hover the pause was
+for. One flag per reason to pause — `hovering`, `focused`, `pressing` — replaces the single `hold`,
+because `focusout` used to set `hold = false` while the pointer was still on the cards, so releasing one
+hold cancelled another. The 5s idle release now clears only `pressing`.
+
+**Every accessibility behaviour §15.5 lists is intact and was re-verified**: no auto-advance under
+`prefers-reduced-motion` (measured: scrollLeft still `0` after 10s with the media feature emulated, both
+locales), pause on hover, on focus, on touch and when the tab is hidden, keyboard operable, all eleven
+cards in tab order, visible prev/next buttons.
+
+### 18.3 The offer has to say it is for SERVICE COMPANIES
+
+Ahmad: `I noticed an issue in our messaging. We're not mentioning service companies. That should be clear
+because we don't work with anyone, only service companies. Even in the offer, it doesn't mention service
+companies.`
+
+**1. Eligibility condition 1, ahead of the commercial registration.** The eligibility list is the part a
+reader actually reads and it is where he self-qualifies, so it is condition 1, not a phrase in the intro.
+The old three keep their wording exactly and renumber to 2, 3 and 4. The intro's `ثلاثة شروط` /
+`Three conditions` becomes `أربعة` / `Four`.
+
+| # | Arabic | English |
+|---|---|---|
+| **1 (new)** | نشاط خدمي. نعمل مع شركات الخدمات فقط. | A service business. We work with service companies only. |
+| 2 | سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. | A commercial registration or a freelance certificate. Either one is enough. |
+| 3 | ملف نشاط تجاري على جوجل بعنوان مطابق للوثيقة. | A Google Business Profile with an address matching that certificate. |
+| 4 | لا يوجد موقع إلكتروني قائم. | No existing website. |
+
+**2. The homepage strip line.** `ستة أشهر مجانية، بدون عقد` / `Six months free, no contract` →
+`ستة أشهر مجانية لشركات الخدمات` / `Six months free for service companies`. `بدون عقد` / `no contract` is
+not lost: it keeps its own full-width band in B4, the offer page H1, the page title and offer FAQ Q2.
+
+**3. The offer hero subhead states it in the first sentence** instead of the last. It opened on
+`ستة أشهر من العمل الكامل` and buried `العرض متاح لشركات الخدمات في السعودية` at the end of a five-line
+paragraph. It now opens `هذا العرض مخصص لشركات الخدمات في السعودية.` / `This offer is for service companies
+in Saudi Arabia.` and closes on `دون التزام.` / `No commitment.` **The lead got shorter, not longer** —
+one fewer clause overall, which helps §14b.4 item 4 (the seven-line lead crowding the 390x844 fold).
+
+**Every other offer term is exactly as it was. No prices anywhere.**
+
+### 18.4 "per city" is off the spots line
+
+Ahmad: `don't mention each city. It says just nine seats left. That's it.`
+
+`[SPOTS] مقاعد لكل مدينة` / `[SPOTS] spots per city` → **`[SPOTS] مقاعد متبقية` / `[SPOTS] seats left`**,
+in all three places it renders: the homepage strip, offer hero B1 and offer eligibility B3. One function
+per locale in `src/data.mjs`, so the three follow each other.
+
+**The number is still `CONFIG.SPOTS` and is never hardcoded.** `9` does not appear in body copy, a
+headline or a meta description anywhere, and both degraded states still render a complete band
+(`SPOTS: null` drops the line; an expired countdown reveals `التسجيل مفتوح الآن` / `Registration is open
+now`). `copy.md`'s slot register, its `[SPOTS]` note, the `src/data.mjs` config comments and `build.mjs`'s
+header comment all lost "per city" with it, so the phrase does not survive anywhere to be copied forward.
+
+### 18.5 The blog list did not look like the board it was approved from
+
+Ahmad looked at the blog list and said it does not look like the design he approved: **there is no orange
+on the page.** He was right, and the root cause is a process gap, not a one-off slip.
+
+#### 18.5.1 Why nobody caught it: `compare.mjs` only ever covered the homepage
+
+`scripts/compare.mjs` shipped with eight entries, all of them homepage sections. The blog, offer, about,
+contact, terms and post pages were **never in it**, so the board-over-build loop that §13.5 makes mandatory
+— the loop whose entire job is catching this class of drift — never ran on any of them. §16.10 verified
+those pages with `shots.mjs`, HTTP checks and Lighthouse, and every one of those gates passes on a page
+that looks nothing like its board. This is the alamana lesson (`lessons.md`, "The landing page IS the
+template") in a smaller form: every other gate was green because none of them asks whether the page looks
+like the approved design.
+
+#### 18.5.2 What was wrong, and what it measures now
+
+`design/boards/blog-B.png` draws the featured panel's illustration as a **full-bleed solid orange block**
+and each list thumbnail as a **solid orange tile** with the artwork knocked out on top. The build rendered
+both as pale grey plates with a small illustration floating inside, and dropped the orange from the
+read-more links.
+
+**A. New artwork.** The six sources at `design/blog-art/<slug>.png` were replaced with versions drawn on a
+solid `#FF5F29`-family field with near-black and white line art over it — same six slugs, same 1344x752.
+The build does **not** derive the WebP from those PNGs (it only copies `src/img/`), so §16.9's two-output
+conversion was re-run explicitly; the derivatives were stale by an hour otherwise and nothing would have
+changed on the page. The `-sq` crop still works unchanged: it finds the ink box by difference from the
+corner pixel, which is now the orange field rather than white, so it still squares around the drawing.
+
+| | Orange pixels, six featured illustrations | Orange pixels, six thumbnails |
+|---|---|---|
+| Before | **1.2 %** | **2.5 %** |
+| After | **83.3 %** | **65.9 %** |
+
+**B. The read-more link is orange, as the board draws it.** `#FF5F29` as ink on `#FEFEFE` is 3.00:1 and
+fails at any size, and `--orange-ink-light` (`#E85319`) is 3.67:1 — the **large-text** allowance only. So
+`.read-more` takes the identical shape §17.7b gave `.eyebrow` and `.work-metric`: weight 700 with a 19px
+floor, which clears the 18.66px bold threshold and therefore qualifies at 3:1. The board already draws the
+link semibold, so this is the board being matched, not bent. `.text-link` elsewhere on the site is **not**
+touched, and no third orange value was introduced.
+
+**C. The list rows were two and a half times the board's.** Board thumbnail tops measure css y 465.5 /
+579.6 / 690.0 at 1440, a row pitch of **114.1 and 110.4**. The build was running **283.8px** rows, because
+`.row-text .h3` borrowed the 32px `--fs-h3` where the board draws the row title at ~21px, and every gap
+around it was a body-section value. Same failure and same fix as `.work-site` in §14b.1: the row title gets
+its own size, `clamp(17px, calc(21/14.4 * 1vw), 23px)`. With the gaps and padding tightened
+(`padding-block` 26 → 16, column gap 28 → 24, thumbnail 104 → 96) rows now measure **198.3px**.
+
+**The residual 198.3 against the board's 112 is copy, not CSS, and it is deliberate.** The board's rows
+carry a bare date, a one-line title and a two-line excerpt. The build's rows carry all six fields
+`copy-pages.md` B2 requires — date, read time, byline, title, excerpt **and a read-more link** — and its
+excerpts run to three lines at the site's own body scale. The read-more alone is ~36px per row. Trimming
+either is a copy decision and belongs to Ahmad, exactly as §14b.4 item 6 left the §3 and §5 card lengths.
+
+**D. Deliberately NOT done: the featured panel's small label.** `blog-B.png` draws an orange `SEO` label
+above the featured title. That is a **category chip**, and `copy-pages.md` B2 says in as many words:
+`Every card carries the same six fields and nothing else. No category chips, no tags.` The board's own
+label text is model-invented like `Q8 digital` and `178 spots per city` before it (§13.2 — never read copy
+off a board), and the site has no category taxonomy to fill it from. The slot above the featured title is
+already occupied by the approved card-meta line. **Adding a label is new copy and it is Ahmad's call**, one
+line in `data.mjs` and one in `copy-pages.md` if he wants it.
+
+**Orange elements on `/en/blog/`, counted by a computed-style sweep (colour, background, border, fill,
+stroke, highlight gradient): 7 → 13.** The six read-more links are the difference. That count cannot see
+images, which is where the real change is: the seven artwork blocks it does not count went from 1.2 % and
+2.5 % orange to 83.3 % and 65.9 %.
+
+#### 18.5.3 `compare.mjs` now covers every page that has a board
+
+Rewritten from one page x one viewport to a `PAGES` list, each with its **own viewport**:
+
+| Page | Viewport | Boards |
+|---|---|---|
+| `/` and `/en/` | 1440x900 | `hero-C`, `s3`, `s4`, `s5`, `journey-D`, `s7`, `s8`, `s9` (unchanged) |
+| `/blog/` and `/en/blog/` | 1440x900 | `blog-B` over `#page-head`..`#posts` |
+| `/offer/` and `/en/offer/` | **390x844** | `offer-1` over header..`#offer-hero`, `offer-2` over `#offer-included`..`#offer-eligibility`, `offer-3` over `#offer-nocontract`..`#offer-final` |
+
+**The offer boards are PHONE boards.** `offer-1/2/3.png` are 1520x2688 **portrait** — a 390px screen — while
+every homepage board is 2688x1520 landscape at 1440. Shooting a phone board against a desktop build compares
+nothing, which is why the offer page is shot at 390x844. This matches `lessons.md` ("Board canvas = a 390px
+PHONE screen"); the homepage boards predate that rule.
+
+The run writes 24 pairs and reports `MISSING selectors: 0`, and exits non-zero if any selector is missing so
+a renamed section cannot pass silently.
+
+**About, contact, terms and the post pages are exempt from a board diff, and the exemption is checked, not
+assumed.** They have no board because §16 built them deliberately out of the homepage's already-approved
+components. A board pair would compare them against nothing. Instead `compare.mjs` loads the homepage class
+vocabulary and reports, per page, which classes are not in it — so a page growing its own one-off components
+shows up. Current state: about 8, terms 6, contact 14, post 15, and every one of them is a component §16.7
+names (`page-head`, `about-card`, `reach-grid`, `map-shell`, `prose`, `post-nav`…). None is a colour or a
+type token of its own.
+
+**Known, recorded board/build differences the offer pairs will always show**, so the next agent does not
+"fix" them back: `offer-1` draws the wordmark `Q8 digital` (model slip, `copy.md` §0), a spots figure the
+model invented, and the highlight on `no contract` where Ahmad moved it to `free`; `offer-2` draws three
+eligibility rows where the build now ships four (§18.3); `offer-3`'s heading
+`What happens after six months and three` is a truncated model sentence (`copy.md` B5).
+
+### 18.6 The one place something got taller: the phone offer strip
+
+`§6` calls the strip "one line tall on desktop" and the phone CSS said it "packs into three".
+
+**Desktop is unaffected and still exactly one row**, with room to spare, in both locales:
+
+| | 1440 | 1920 |
+|---|---|---|
+| Before | 78px, 1 row, content 1205 (ar) / 1219 (en) of 1320 | 79px, 1 row, content 1311 / 1327 of 1500 |
+| After | **78px, 1 row**, content 1233 / 1270 of 1320 | **79px, 1 row**, content 1342 / 1383 of 1500 |
+
+**At 390 the band went from three rows (117.2px) to four (142px)**, because Ahmad's longer strip line stops
+the line sharing row 1 with the pill: the inner box is 350px and pill + line now measure 410 (en) and 358
+(ar) against 333 and 341 before. Flex wrap follows DOM order, so the only routes back to three rows are to
+drop an element the page needs (the countdown label, or the seats line FIX 4 exists to show) or to reorder
+the phone strip so `Registration closes in` lands on a different row from its own clock. Both are worse than
+the extra row, and the English line cannot fit beside the pill at any font size the band can legibly use.
+
+**Nothing broke: §15.1's first-screen budget still balances exactly.** At 390x844 the hero absorbed the
+25px and the fold is still the fold, in both locales:
+
+| Viewport | Header | Hero | Strip | First screen | `#problem` top | Hero internal scroll |
+|---|---|---|---|---|---|---|
+| 1440x900, both | 112 | 822 | 78 | **900** | **900** | 0 |
+| 1920x1200, both | 112 | 1121 | 79 | **1200** | **1200** | 0 |
+| 390x844, both | 72 | 702 (was 726.8) | 142 | **844** | **844** | 0 |
+
+### 18.7 Verification run
+
+Scripts copied into a scratch folder and run from there, as always — imports do not resolve inside the
+client repo, and `puppeteer-core` and `sharp` live in scratch only. Real Chrome at
+`C:/Program Files/Google/Chrome/Application/chrome.exe`, `BASE=http://localhost:8823`.
+
+**`shots.mjs` across all 27 routes at 1440x900 and 390x844, both locales — 52 rows:**
+**`brokenImages = 0`, `errors = 0`, `horizontalOverflow = false` on every row.** Every row also carries an
+`h1`, and `scrollWidth === innerWidth` on all 52 (1440 and 390 exactly), so nothing overflows in either
+locale. The four homepage rows report `missingSections: 0` — all eight sections present.
+
+**`node scripts/seo-audit.mjs`: 0 high, 17 medium, 11 low** — byte-identical to §17.9's totals. No
+finding was introduced and none was resolved; this pass did not touch anything the audit checks.
+
+**`compare.mjs`, extended (§18.5.3): 24 pairs written, `MISSING selectors: 0`**, both locales, homepage at
+1440 and the offer page at 390. Every pair was looked at. The boardless component check reports no page
+inventing tokens or colours of its own.
+
+**Lighthouse**, the harness at `<scratch>/lighthouse-run/`, **3 runs per configuration, medians**:
+
+| Page | Preset | Perf | A11y | Best practices | SEO | CLS |
+|---|---|---|---|---|---|---|
+| `/` | mobile | 99 | **100** | 100 | 100 | **0.000** |
+| `/` | desktop | 100 | **100** | 100 | 100 | **0.000** |
+| `/en/` | mobile | 100 | **100** | 100 | 100 | **0.000** |
+| `/en/` | desktop | 100 | **100** | 100 | 100 | **0.000** |
+| `/offer/` | mobile | 99 | **100** | 100 | 100 | **0.000** |
+| `/offer/` | desktop | 100 | **100** | 100 | 100 | **0.000** |
+| `/en/offer/` | mobile | 100 | **100** | 100 | 100 | **0.000** |
+| `/en/offer/` | desktop | 100 | **100** | 100 | 100 | **0.000** |
+
+**Accessibility 100 on all eight, performance 99–100, CLS 0.000 everywhere** — no regression against
+§17.7b's table, which is the same eight rows at the same numbers.
+
+**The blog pages were measured too, because §18.5's read-more is a new orange text colour and that is
+exactly where a contrast regression would land.** All four rows, 3 runs each:
+
+| Page | Preset | Perf | A11y | CLS |
+|---|---|---|---|---|
+| `/blog/` | mobile / desktop | 100 / 100 | **100 / 100** | 0.000 / 0.000 |
+| `/en/blog/` | mobile / desktop | 100 / 100 | **100 / 100** | 0.000 / 0.000 |
+
+`/en/blog/` mobile was **95** in §17.9 and is now **100**, which is §17.7b's shared `--fs-eyebrow` floor
+landing on the page it predicted it would (§17.7b's closing paragraph) — confirmed rather than assumed.
+The new orange `.read-more` cost nothing, which is what the weight-700 / 19px-floor shape was for.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
