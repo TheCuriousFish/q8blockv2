@@ -2787,3 +2787,206 @@ Zero accessibility audit failures. CLS stays 0 with 11 runtime-appended cards be
 fixed `aspect-ratio` and every logo the same explicit `width`/`height`.
 
 **Nothing in this pass was committed, pushed or deployed.**
+
+## 23. The hero's bottom row becomes a credentials strip, 2026-09-25. Plus a new subhead and bigger CTAs
+
+Ahmad's fourth revision pass, hero only. Nothing outside `#hero` is touched, so the verification is sized
+to the change: the first-screen budget, screenshots looked at by eye, a structured-data grep and one
+Lighthouse run. `compare.mjs`, `seo-audit.mjs` and the full `shots.mjs` sweep were deliberately skipped
+(see 23.6). Nothing here is committed, pushed or deployed — **and the site is now live at q8block.com**,
+so Ahmad reviews this on `localhost:8823` first.
+
+### 23.1 The four trust points are gone, and one of them should never have been there
+
+The row under the CTAs carried four short claims separated by thin orange rules (`ul.trust`, §5.3's
+70px gap, `--rule-accent` between the items). All four and their rules are deleted.
+
+Ahmad spotted the actual defect: point 4, `الاستضافة والنطاق والحماية علينا` /
+`Hosting, domain and security included`, is **an offer deliverable sitting in the brand hero**. `copy.md`
+§1 records exactly how it got there — the point used to read `بدون عقد` / `No contract`, that was pulled
+because nobody had confirmed it was true outside the promotion, and Section 5's deliverable 6 was moved up
+to fill the hole. Filling a brand-hero slot from the offer's deliverable list is the same category error
+in the other direction, and it survived because the swap was recorded as "resolved".
+
+The other three were not wrong, but they were four lines of text in the single most valuable block on the
+site. Ahmad: `this is great real estate to put authority and trustability.`
+
+### 23.2 What replaced it: a Google mark and a tools strip, one hairline between them
+
+`credentials()` in `src/render.mjs`, `.cred` in `src/styles.css`. Two elements share the row.
+
+**(a) The Google rating mark.** Five filled stars and the word `Google`, the whole thing an `<a>` to
+Q8Block's own Google Business Profile, `target="_blank" rel="noopener"`.
+
+| Decision | What shipped | Why |
+|---|---|---|
+| Review count | **not shown** | Ahmad has few reviews and does not want the number on the page |
+| Review text | **not shown** | nothing quoted, paraphrased or scraped |
+| Rating structured data | **never emitted** | see 23.3 — the one thing in this pass that could cost a penalty |
+| Star colour | `--orange` `#FF5F29` | not a Google yellow. A mark drawn in the site's own accent reads as a brand credential; five gold stars in a box read as a copy of a Google widget |
+| Star size | `clamp(14px, 18/14.4vw, 20px)` | small enough that the row stays a credential, not a banner |
+| URL | `CONFIG.GBP_URL` in `src/data.mjs` | one line, commented, and the mark **does not render at all** when it is `null`, so the page can never link to the wrong profile |
+
+`GBP_URL` is `https://share.google/JMWP620SaaXf2GqNL` — the share link Google generated for the profile,
+Knowledge Graph `/g/11n3dddmb8`, `شركة كويت بلوك`, which is the registered Arabic name in `company.md`.
+It is **Ahmad's own** profile: an earlier candidate link found in the repo turned out to belong to a
+client, which is why it was held back until confirmed. The comment in `data.mjs` says in as many words not
+to "improve" it into a `maps.google.com/?cid=` or `place_id` URL — nobody has his CID, and a constructed
+link that resolves to the wrong business is far worse than a redirect.
+
+**One accuracy note for Ahmad, who believes this link carries SEO weight.** A link from a site to its own
+Google Business Profile is a weak signal at best. The direction that matters is the reverse: the website
+field **on the profile** pointing at `q8block.com`. No copy on the page claims or implies an SEO benefit
+from this link, and none should be added.
+
+**(b) The tools strip.** `الأدوات التي نعمل بها` / `THE TOOLS WE WORK WITH`, and under it Semrush, Ahrefs,
+Ubersuggest and Google Search Console in one muted ink.
+
+**The label is not `partners` and never becomes `partners`.** Ahmad floated the word and agreed it out in
+the same breath: these are **subscriptions**, not partnerships, and a false claim on a page whose whole
+argument is that its numbers are checkable is not worth the word. No wording on this row may imply
+endorsement, partnership, certification or a badge.
+
+Layout: `.cred` is a centred flex row, `gap: clamp(26px, 50/14.4vw, 56px)`, with a single
+`--hairline-light` rule as `border-inline-start` on `.cred-tools`. Below 990px the two halves stack and
+the hairline turns horizontal. `margin-block-start` is **76px** against the trust row's 70 — the new row
+is shorter, so the hero breathes more, which is what Ahmad asked for.
+
+### 23.3 No rating schema. This is the rule, not a preference
+
+This project's own lessons are: real written reviews only, never rating schema. Showing stars visually is
+fine. Marking them up as a rating on a handful of reviews is what earns a manual action, and it would
+contradict the one thing this site sells — that every figure on it can be checked.
+
+So: no rating or review structured data of any kind anywhere in the build. Verified by grep over the whole
+of `site/` after the final build, case-insensitively, for `aggregaterating`, `reviewcount`, `ratingvalue`,
+`"review"` and `schema.org/Review`: **0 matches** (23.6).
+
+**A comment in `src/styles.css` broke this check once and is worth remembering.** `build.mjs` inlines the
+stylesheet into every page, so a CSS comment that merely *named* those schema properties to explain the
+rule put the strings into all 82 built HTML files. The grep is run against the built output precisely
+because it cannot be satisfied by reading the template. The comment is reworded; the rule is unchanged.
+
+### 23.4 Where every tool logo came from, and the one muted treatment
+
+Sources fetched 2026-09-25 from each vendor's own brand, press or product page and kept byte-for-byte at
+`design/tool-logos/`. Nothing is redrawn, recoloured by hand or reconstructed.
+
+| Tool | Source | Native | Why this one |
+|---|---|---|---|
+| Semrush | official press kit, `semrush.com/news/presskits/logo-pack/` → `prowly-prod.s3…/827723/large-31cf…png` | 960x480 | The current lockup, `SEMRUSH / An Adobe Company`. The press kit ships three background variants; this is the one drawn for a light surface |
+| Ahrefs | media kit, `ahrefs.com/media-kit` → `/assets/esbuild/ahrefs-logo-blue-big-A7FHW2DZ.svg` | vector | The media kit's own logo asset, and it is vector, so resolution is free. Preferred over the kit's `primary-light` PNG (1020x640, same mark, raster) |
+| Ubersuggest | product page, `neilpatel.com/ubersuggest/` → `…/images/ubersuggest-v3/ubersuggest-logo.svg` | vector | The product's own wordmark. The app's `icon.svg` is only the `U` tile and drops the name |
+| Google Search Console | `search.google.com/search-console/about` → `gstatic.com/search-console/scfe/logo_search_console.svg` | vector (278x40) | Google's own product lockup, icon plus `Google Search Console`. The `search_console-128.png` product icon was rejected: the mark alone does not say which product it is |
+
+All four were fetched cleanly, so nothing fell back to a typeset wordmark.
+
+**The derivation** (`design/tool-logos/derive.mjs`, run from a scratch folder — `sharp` is not a repo
+dependency). Four brand palettes — purple, blue-and-orange, orange, and Google's four colours — cannot sit
+beside `#FF5F29` as themselves. They are a texture here, not a feature, so all four become one ink,
+`#6E747E`, baked into the WebP rather than applied as a CSS `filter`:
+
+1. Rasterise vectors at `density: 900`; never upscale a raster.
+2. Semrush's press asset is black on an **opaque white plate**, so its alpha is rebuilt as `255 − luminance`
+   — the plate goes, the mark stays exactly as drawn.
+3. Semrush, Ahrefs and Ubersuggest are solid single-colour lettering, so each is reduced to its own
+   coverage mask and filled with the one ink.
+4. Search Console is **not** silhouetted: its icon carries internal structure, and a flat fill turns it
+   into a blob. It is desaturated, then its ink mapped `[p10 … 255] → [tone … 255]` linearly, so the body
+   of the mark lands on the same tone as the other three while the icon keeps its light and dark parts. A
+   plain gain (the first attempt) blew the icon out to white.
+5. Trim the dead margin, scale to **3x** the CSS box, encode WebP `q92 / alphaQuality 100 / effort 6`.
+
+| Tool | Trimmed ink | Ratio | Intrinsic (3x) | CSS at 1440 | kB |
+|---|---|---|---|---|---|
+| Semrush | 534x129 | 4.14 | 273x66 | 91.0 x 22 | 12.5 |
+| Ahrefs | 20250x5676 | 3.57 | 182x51 | 60.7 x 17 | 4.7 |
+| Ubersuggest | 1875x300 | 6.25 | 281x45 | 93.7 x 15 | 8.8 |
+| Google Search Console | 3349x392 | 8.54 | 410x48 | 136.7 x 16 | 10.0 |
+
+**36 kB for the four.** Every `<img>` carries both intrinsic dimensions, so CLS stays 0 (verified, 23.6).
+They are **not** lazy — they are inside the first viewport, and §20.6 already records why a
+first-screen image must not be.
+
+**The heights are per-logo on purpose, and this is the same argument as §20.2 in the other direction.**
+§7's client logos share one canvas and are matched by equal optical **area**, because they sit on
+identical plates. These four sit on nothing, in a line, so they are matched on how big the **lettering**
+reads: a wordmark of four letters and a lockup of three words cannot share a height without one of them
+being wrong. Each gets its own `clamp()`, and the floors are what make the row fit a phone (23.5).
+
+### 23.5 More air, bigger CTAs, and what the phone cost
+
+**The CTAs, hero only.** Ahmad: `a little bit bigger`, and `Call now` stays the orange fill with
+`WhatsApp` outlined, as approved. One modest step, scoped to `#hero .btn-row` so §9's final-call band and
+the offer page keep their board sizes:
+
+| | Before | Now |
+|---|---|---|
+| Font size at 1440 | 23px (`--fs-btn`) | **25px** |
+| `.btn-primary` padding | 14px 50px | **16px 56px** |
+| `.btn-outline` padding | 12px 48px | **14px 54px** |
+| `min-width` ≥768px | 240px | **262px** |
+
+**The subhead.** Replaced with Ahmad's own line, verbatim, in `copy.md` §1. He chose it because NP
+Digital's hero runs a single line and ours was a three-clause paragraph. `#hero .lead`'s measure had to go
+with it: **790px → 1210px**, the narrowest value that sets both locales on **one** line at 1440 and 1920.
+Below about 1330 it wraps to two, and on a phone it is 2 lines in Arabic and 3 in English — that is as far
+as one line can be carried at 390px.
+
+**At 390 the strip did not need the budget broken.** The four marks take their `clamp()` floors
+(16/13/11/12px) and the row gap drops to 14px, which measures **325.8px inside a 350px inner box** — one
+row, both locales, no wrap. `.cred` stacks (Google mark, hairline, label, logos) and the hero CTAs drop
+back to `--fs-btn` with 15px/13px padding, because at 390 the buttons are already full-width and a bigger
+type size there buys nothing but height. The phone hero is **unchanged at 726.8px**: the new row is
+shorter than the four stacked trust points it replaced, and that paid for the taller buttons and the
+3-line English subhead with room left over.
+
+### 23.6 Verification
+
+Scope cut to the change: this pass touches `#hero` only. `compare.mjs` (hero-C is compared as
+header + hero + strip, and the row under the CTAs is a deliberate, Ahmad-instructed divergence from the
+board — same status as §21.2's sparkline), `seo-audit.mjs` (no link, metadata, canonical, sitemap or page
+count moved) and the full `shots.mjs` route sweep were all skipped as disproportionate.
+
+**1. The first-screen budget, §15.1's hard constraint, all six combinations.** Real Chrome,
+`deviceScaleFactor 1`, after `document.fonts.ready`:
+
+| Viewport | Locale | Header | Hero | Strip | First screen | `#problem` top | Viewport | Hero internal scroll | Subhead lines |
+|---|---|---|---|---|---|---|---|---|---|
+| 1440x900 | en | 112 | 822 | 78 | **900** | **900** | 900 | 0 | **1** |
+| 1440x900 | ar | 112 | 822 | 78 | **900** | **900** | 900 | 0 | **1** |
+| 1920x1200 | en | 112 | 1121 | 79 | **1200** | **1200** | 1200 | 0 | **1** |
+| 1920x1200 | ar | 112 | 1121 | 79 | **1200** | **1200** | 1200 | 0 | **1** |
+| 390x844 | en | 72 | 726.8 | 117.2 | **844** | **844** | 844 | 0 | 3 |
+| 390x844 | ar | 72 | 726.8 | 117.2 | **844** | **844** | 844 | 0 | 2 |
+
+Every figure is identical to §21.4's, to the pixel, in all six rows: header + hero + strip is exactly one
+viewport, the next section starts precisely at the fold, and the hero never scrolls inside itself.
+`document.scrollWidth > innerWidth` is `false` on all six. The credentials row measures 48px tall at 1440,
+51px at 1920 and 90px at 390, where it is stacked.
+
+**2. Screenshots, looked at.** `fold-1440-{en,ar}.png`, `fold-390-{en,ar}.png` and tight crops of the row
+itself, `deviceScaleFactor 2`. The strip reads as quiet credentials: four marks in one grey, all of a
+similar lettering size, no colour fighting the orange, no logo soup. The Google mark reads as a mark —
+five small orange stars and a word, no box, no number, no "5.0", nothing that looks like an embedded
+rating widget. At 390 the four logos hold one row and the Semrush sub-line degrades to texture, which is
+what it should be at that size.
+
+**3. Structured data.** Grepped over the whole of `site/` after the final build, case-insensitively:
+**0 matches**. It found 82 before the CSS comment described in 23.3 was reworded — which is exactly why
+the check is run against the built output and not the template.
+
+**4. Lighthouse**, `/en/` only, one run each on the final build:
+
+| | Perf | A11y | Best practices | SEO | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|
+| Desktop | **100** | **100** | 100 | 100 | 426ms | 0ms | **0.000** |
+| Mobile | **99** | **100** | 100 | 100 | 1880ms | 60ms | **0.000** |
+
+Zero accessibility audit failures. The `.cred-google` link's accessible name is
+`Q8 block على Google` / `Q8 block on Google`, which contains its visible text, so
+`label-content-name-mismatch` stays clean; the stars are `aria-hidden` decoration and each logo carries
+its product name as `alt`. `--fs-cred-label` at `#686F79` on `#F2F3F5` is 4.57:1, clearing AA at 14px
+without a weight floor.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.

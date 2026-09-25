@@ -98,6 +98,11 @@ from `brand/logo/index.html`, never a generated image, so this costs nothing to 
 Two fixes against the board and nothing else: the wordmark reads `Q8 block`, and the small `Kuwait Block`
 line above the headline is deleted. Nobody changes the headline, the highlight, the CTAs or the layout.
 
+**Three changes to this section since, all Ahmad's own instructions, all recorded below:** the Arabic
+headline (2026-09-24), and on 2026-09-25 the subhead and the row under the buttons. The CTA **labels**,
+**colours** and **order** are untouched — `Call now` is still the orange fill and `WhatsApp` the outline —
+only their size moved, one modest step, on his instruction (build-spec §23).
+
 **Two lines were touched here earlier on 2026-09-24, both under rules Ahmad gave the same day, both
 revertible in one edit.** The English headline is untouched and stays exactly as approved; the Arabic
 headline was replaced later the same day by Ahmad himself, see the note under the table below.
@@ -105,6 +110,11 @@ headline was replaced later the same day by Ahmad himself, see the note under th
    the new rule forbids. It now reads as discoverability. Nothing else in the sentence moved.
 2. Trust point 1 read `We build it then we rank it`. Same reason, same fix.
 3. Trust point 4 is resolved, and the reasoning is written out under the trust row below.
+
+**The subhead and the trust row were both replaced on 2026-09-25 (build-spec §23).** The subhead is now
+Ahmad's own one-line sentence; the four trust points are gone and the row carries a credentials strip
+instead. Everything from `The trust row` down is kept below as the record of what stood there, marked
+**superseded** — the old subhead is in the table row directly beneath it.
 
 **The Arabic headline changed on 2026-09-24, and it is Ahmad's own line.** It now reads
 `تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟` — **deliberately Gulf colloquial** (`تبي`, not the
@@ -116,11 +126,58 @@ The highlight stays on `يجدونك`. The English headline is unchanged.
 |---|---|---|
 | Headline | تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟ | Customers find you on Google and in AI. |
 | Highlighted word | يجدونك | find you |
-| Subhead | نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا تستشهد به مساعدات الذكاء الاصطناعي. | We build your whole website, then we get it found in local search and prepare it to be a source AI assistants cite. |
+| Subhead | نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put you in Google's results and in AI's answers, where your customer is looking. |
 | CTA primary | اتصل الآن | Call now |
 | CTA secondary | واتساب | WhatsApp |
 
-**Trust row, four points, separated by thin orange rules as on the board.**
+### The subhead, replaced 2026-09-25. Ahmad's own wording, verbatim
+
+The line above is his, word for word, in both languages. He chose it because NP Digital's hero runs a
+**single line** and ours was running a three-clause paragraph. It is one line at 1440 and at 1920 in both
+locales, two lines on the Arabic phone and three on the English phone — that is as far as one line can be
+carried at 390px. Do not lengthen it back and do not add a clause to it.
+
+Superseded: `نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا
+تستشهد به مساعدات الذكاء الاصطناعي.` / `We build your whole website, then we get it found in local search
+and prepare it to be a source AI assistants cite.`
+
+### The credentials row, 2026-09-25. It replaced the four trust points
+
+Ahmad: `this is great real estate to put authority and trustability.` The four trust points and their
+orange rules are **deleted**, because one of them had no business being in the brand hero: point 4,
+`الاستضافة والنطاق والحماية علينا` / `Hosting, domain and security included`, is Section 5 deliverable 6 —
+an **offer deliverable** — and it only ended up here because `بدون عقد` / `No contract` had to be pulled
+(the reasoning is kept below, marked superseded). Two elements share the row instead.
+
+**(a) The Google mark.** Five filled stars and the word `Google`, linking out to Q8Block's own Google
+Business Profile in a new tab (`rel="noopener"`). The URL is `CONFIG.GBP_URL` in `src/data.mjs`; with it
+set to `null` the mark does not render at all, so the page can never link to somebody else's profile.
+
+* **No review count.** Ahmad has few reviews and does not want the number on the page.
+* **No review text.** Nothing is quoted, paraphrased or scraped.
+* **No rating structured data, ever.** The stars are a visual mark and nothing more. Marking up a rating
+  on a handful of reviews is the thing that earns a manual action, and this site's whole argument is that
+  its numbers are checkable. Showing stars is fine; claiming a rating in schema is not. This is a standing
+  rule, not a preference — see build-spec §23.
+* The stars are drawn in the site's own `--orange`, not a Google yellow, so the mark reads as a brand
+  credential rather than as a copy of a Google widget.
+
+**(b) The tools strip.** Four logos under one small label.
+
+| Element | Arabic | English |
+|---|---|---|
+| Label | الأدوات التي نعمل بها | The tools we work with |
+| Logos | Semrush · Ahrefs · Ubersuggest · Google Search Console | same |
+
+**The label is not, and never becomes, `partners`.** Ahmad floated the word and agreed it out the same
+breath: these are **subscriptions**, not partnerships. Nothing on this row may imply endorsement,
+partnership, certification or a badge — no "official", no "certified", no "trusted by". The four marks are
+rendered in one muted ink so they read as a texture, not as four features competing with the page's
+orange.
+
+---
+
+### Superseded 2026-09-25: the trust row, four points, separated by thin orange rules as on the board.
 
 | # | Arabic | English |
 |---|---|---|
@@ -129,7 +186,7 @@ The highlight stays on `يجدونك`. The English headline is unchanged.
 | 3 | نتائج موثقة من Google Search Console | Results documented in Google Search Console |
 | 4 | الاستضافة والنطاق والحماية علينا | Hosting, domain and security included |
 
-### The fourth trust point, resolved 2026-09-24. Marked Ahmad-reversible.
+### Superseded: the fourth trust point, resolved 2026-09-24. Marked Ahmad-reversible.
 
 Point 4 used to read `بدون عقد` / `No contract`, which came out of the offer terms. The question was put to
 Ahmad twice and not answered, so the safe option is taken rather than left open: an offer term cannot sit

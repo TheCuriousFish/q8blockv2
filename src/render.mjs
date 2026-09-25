@@ -132,13 +132,65 @@ export function offerStrip(t) {
 }
 
 /* ── §1 Hero ─────────────────────────────────────────────────────────────── */
+
+/* The credentials row, §23. It replaced the four trust points, one of which
+   ("hosting, domain and security included") was an OFFER deliverable that had
+   drifted into the brand hero. Ahmad: "this is great real estate to put
+   authority and trustability."
+
+   Two elements share the row. The Google mark is five filled stars and the
+   word Google, linked to Q8Block's own Business Profile — NO review count
+   (he has few reviews and does not want the number shown) and NO review text.
+   The tools are the four subscriptions the work is actually done with, under a
+   label that says exactly that.
+
+   THE STARS ARE VISUAL ONLY. Nothing here emits `aggregateRating` or `Review`
+   structured data and nothing ever should: showing stars is fine, marking them
+   up as a rating on a handful of reviews is what earns a manual action. There
+   is no rating value, no count and no review body anywhere in this markup. */
+
+// Intrinsic pixel sizes, written by design/tool-logos/derive.mjs at 3x the CSS
+// box. Both dimensions are on every <img>, so four logos of four different
+// shapes cannot move the first screen — CLS stays 0.
+const TOOLS = [
+  { slug: 'semrush', name: 'Semrush', w: 273, h: 66 },
+  { slug: 'ahrefs', name: 'Ahrefs', w: 182, h: 51 },
+  { slug: 'ubersuggest', name: 'Ubersuggest', w: 281, h: 45 },
+  { slug: 'gsc', name: 'Google Search Console', w: 410, h: 48 },
+];
+
+const STAR = 'M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z';
+
+function stars(n = 5) {
+  const S = 24, GAP = 4, W = n * S + (n - 1) * GAP;
+  const paths = Array.from({ length: n }, (_, i) =>
+    `<path d="${STAR}" transform="translate(${i * (S + GAP)})"/>`).join('');
+  return `<svg class="cred-stars" viewBox="0 0 ${W} ${S}" width="${W}" height="${S}" fill="currentColor" aria-hidden="true" focusable="false">${paths}</svg>`;
+}
+
+function credentials(t) {
+  const c = t.hero.cred;
+  // Rendered only when Ahmad's own profile URL is configured. With GBP_URL
+  // null the mark disappears rather than linking somewhere wrong.
+  const google = CONFIG.GBP_URL
+    ? `<a class="cred-google" href="${CONFIG.GBP_URL}" target="_blank" rel="noopener" aria-label="${esc(c.googleLabel)}">
+        ${stars()}<span class="cred-word">${esc(c.googleWord)}</span>
+      </a>`
+    : '';
+  const tools = `<div class="cred-tools">
+      <p class="cred-label">${esc(c.toolsLabel)}</p>
+      <ul class="tool-row">${TOOLS.map((x) => `<li><img class="t-${x.slug}" src="/assets/img/tool-${x.slug}.webp" width="${x.w}" height="${x.h}" alt="${esc(x.name)}" decoding="async"></li>`).join('')}</ul>
+    </div>`;
+  return `<div class="cred${google ? '' : ' cred-solo'}">${google}${tools}</div>`;
+}
+
 export function hero(t) {
   return `<section id="hero" class="sec-wide">
     <div class="wrap-wide">
       <h1 class="hero-h1">${t.hero.h1}</h1>
       <p class="lead">${esc(t.hero.lead)}</p>
       ${ctaRow(t, { centred: true })}
-      <ul class="trust">${t.hero.trust.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+      ${credentials(t)}
     </div>
   </section>`;
 }

@@ -24,6 +24,23 @@ export const CONFIG = {
   // "per city" came off the line on 2026-09-25: Ahmad — "don't mention each
   // city. It says just nine seats left. That's it."
   SPOTS: 9,
+
+  // Q8Block's OWN Google Business Profile. The hero credentials row (§23)
+  // renders five stars plus the word Google and links out to it; with this set
+  // to null the whole mark disappears and the tools strip takes the row alone,
+  // so the page never links to a profile that is not his.
+  //
+  // This is the share link Google generated for the profile (Knowledge Graph
+  // /g/11n3dddmb8, شركة كويت بلوك — the registered Arabic name in company.md).
+  // Do NOT "improve" it into a maps.google.com/?cid= or place_id URL: nobody
+  // has his CID, and a constructed link that resolves to the wrong business is
+  // far worse than a redirect.
+  //
+  // The stars are a VISUAL mark only. There is no aggregateRating and no
+  // Review structured data anywhere in this build and there must never be:
+  // marking up a rating on a handful of reviews is what earns a manual action.
+  // No review count is shown either — Ahmad's decision, he has few reviews.
+  GBP_URL: 'https://share.google/JMWP620SaaXf2GqNL',
 };
 
 /* IndexNow key. Generated once, 2026-09-24 (32-char hex, `crypto.randomBytes(16)`),
@@ -235,13 +252,23 @@ export const COPY = {
          colloquial line on the site; every other Arabic string stays MSA.
          Do not "correct" this to MSA. The highlight stays on `يجدونك`. */
       h1: 'تبي عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
-      lead: 'نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا تستشهد به مساعدات الذكاء الاصطناعي.',
-      trust: [
-        'نبني الموقع ثم نُظهره في نتائج البحث',
-        'صفحة لكل خدمة ولكل منطقة',
-        'نتائج موثقة من Google Search Console',
-        'الاستضافة والنطاق والحماية علينا',
-      ],
+      /* Ahmad's own line, 2026-09-25, verbatim. It replaces the three-clause
+         paragraph that stood here: NP Digital's hero runs ONE line and this one
+         was a paragraph. Do not lengthen it back. */
+      lead: 'نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك',
+      /* The four trust points are gone (§23). One of them, "الاستضافة والنطاق
+         والحماية علينا", was an OFFER deliverable sitting in the brand hero —
+         it only got there when "بدون عقد" had to be pulled. The row now carries
+         credentials instead: the Google mark and the tools we pay for. */
+      cred: {
+        googleWord: 'Google',
+        googleLabel: 'Q8 block على Google',
+        /* NOT "partners" and never anything like it. Ahmad floated the word and
+           agreed it out: these are subscriptions, not partnerships, and a false
+           claim on a page whose whole argument is that its numbers are checkable
+           is not worth the word. No endorsement, no certification, no badge. */
+        toolsLabel: 'الأدوات التي نعمل بها',
+      },
     },
 
     /* ── 2. Offer strip ──
@@ -635,13 +662,14 @@ export const COPY = {
 
     hero: {
       h1: 'Customers <span class="hl">find you</span><br class="brk"> on Google and in AI.',
-      lead: 'We build your whole website, then we get it found in local search and prepare it to be a source AI assistants cite.',
-      trust: [
-        'We build it then we get it found',
-        'A page for every service and area',
-        'Results documented in Google Search Console',
-        'Hosting, domain and security included',
-      ],
+      // Ahmad's own line, 2026-09-25, verbatim. One line, not a paragraph.
+      lead: "We put you in Google's results and in AI's answers, where your customer is looking.",
+      cred: {
+        googleWord: 'Google',
+        googleLabel: 'Q8 block on Google',
+        // "The tools we work with" — NOT "partners". See the Arabic note above.
+        toolsLabel: 'The tools we work with',
+      },
     },
 
     strip: {
