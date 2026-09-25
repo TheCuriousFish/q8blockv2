@@ -640,8 +640,9 @@ ${POSTS.en.map((p, i) => `- [${p.title}](${NAP.origin}${p.path}) — ${p.descrip
 ## Notes for AI
 
 Every performance figure on this site comes from Google Search Console exports for the named
-client and the named complete months, which are printed beside the figure. Nothing is averaged
-across clients and no partial month is used.
+client and named complete months. Section 7's figure is the total number of times that client's
+site appeared in Google search results, added up across every complete month Google has recorded
+for it. Nothing is averaged across clients and no partial month is used.
 `;
 }
 

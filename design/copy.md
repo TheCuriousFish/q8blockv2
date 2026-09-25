@@ -500,58 +500,81 @@ not say `results may vary`.
 `1px #EBEBEB` hairline, the site name, one figure, and a `view case study` style link. Real client sites
 only. No generated mockup is ever presented as a client.
 
+**The figure is TOTAL IMPRESSIONS, not a growth percentage (Ahmad, 2026-09-25).** His words: `my best
+performing is carwashkw and it shows 32% growth. What is this growth thing? It sounds very weird.
+Mashame3 is 883% growth. We need a new metric... I think a good metric is total impressions.`
+
+He is right twice over, and both reasons matter:
+* **A percentage is measured off a base, so it ranked the wall backwards.** carwashkw.com is the
+  strongest site of the eleven by sustained volume — 199 to 440 clicks every month for thirteen straight
+  months — and it carried the smallest number on the page, `+32%`. mashame3.com, six months old, carried
+  `+883%`, because 12 clicks is a small base. A prospect reading the wall was being told the opposite of
+  the truth.
+* **"Growth" between two months the card does not name is jargon.** A total is one plain number: how
+  many times this site came up in Google. Nothing to interpret, no base to pick, nothing to game.
+
+**Each total is the sum of the site's impressions across every COMPLETE month Google has recorded for
+it.** Partial months are excluded — September 2026 is partial for every site and is in no total. The
+totals are not typed anywhere: `src/data.mjs` holds each site's real monthly impression rows out of
+`proof-data.md` and the build adds them up, so a total cannot drift away from its own rows. The
+derivation table at the end of this file prints the rows and the sum for every card.
+
+**Sorted biggest total first.** That alone fixes the complaint: carwashkw.com moves from last place to
+second.
+
 **The plate at the top of the card is THE CLIENT'S OWN LOGO (Ahmad, 2026-09-25), not a chart.** His
 words: `The client slideshow, many boxes are empty. I think since the website lacks images, we should
 scratch the graph idea and just put images. If you can extract good images for each project and put them
 there. Or their logos. Actually, would be better. Yeah, their logos.` The plate used to draw the site's
 real monthly click series, and the four newest clients have one complete month each, so they had no curve
 and rendered a bare dashed slot — that is what read as broken. Every client has a logo, so every card is
-now full. **Nothing else on the card moved**: the site name, the growth percentage, the `New project`
-tags and the case study link are exactly as they were, and every percentage below is unchanged. Each logo
-is taken from that client's own live site; the sources are listed in the logo table at the end of this
-file and the derivation is in `build-spec.md` §20. No brand mark is invented, redrawn or recoloured.
+now full. The logo sources are in the logo table at the end of this file and the derivation is in
+`build-spec.md` §20 and §22.
 
 **Rebuilt 2026-09-24. This is the biggest change on the page.** Ahmad's decisions, in his order:
 1. **Show every SEO client, not four.** Eleven sites, not a shortlist of the four best. A page that shows
    four and has eleven is hiding something a prospect will find anyway.
-2. **Keep the approved card design**, the title, a percentage figure and the case study link.
-3. **Every figure is real.** His words: `we don't want fake.` So each card carries a growth percentage
-   computed from two named complete months in `proof-data.md`, and both months are printed on the card.
-4. **A site with little or no traffic gets the `مشروع جديد` / `New project` tag instead of a percentage.**
+2. **Keep the approved card design**, the title, one figure and the case study link.
+3. **Every figure is real.** His words: `we don't want fake.` Every total is reproduced row by row in the
+   derivation table below, from `proof-data.md`, which is a straight Search Console export.
+4. **A site with little or no traffic gets the `مشروع جديد` / `New project` tag instead of a figure.**
    It is not given an invented number and it is not quietly dropped from the grid.
 5. **The cards link out to the live client sites**, `rel="nofollow"`.
 
 **This is the second and last section on the page that carries figures.** Every card is one named client
-across two named complete months, already in the past. None of it describes what a new client will get. No
-figure appears in the headline.
+across its own named complete months, already in the past. None of it describes what a new client will
+get. No figure appears in the headline.
 
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | أعمالنا | Our work |
 | Headline | مواقع بنيناها ويجدها العملاء اليوم | Sites we built that get found. |
 | Highlighted word | ويجدها العملاء | get found |
-| Subhead | كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة حقيقية، محسوبة من شهرين كاملين من بيانات Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد. | Every site here was built from scratch and is still running. The growth figure on each card is real, computed from two complete months of Google Search Console data. The recent projects are labelled as what they are, because their data is not in yet. |
+| Subhead | كل موقع هنا بُني من الصفر وما زال يعمل. الرقم على كل بطاقة هو عدد المرات التي ظهر فيها الموقع في نتائج بحث Google، مجموع كل شهر كامل سجّله Google لهذا الموقع. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد. | Every site here was built from scratch and is still running. The figure on each card is how many times that site has come up in Google search results, added up across every complete month Google has recorded for it. The recent projects are labelled as what they are, because their data is not in yet. |
 
-**Source line, ONE line under the whole section.** It replaces the eleven period lines that used to sit
-on the cards.
+**Source line, ONE line under the whole section.** Rewritten 2026-09-25: it used to name the two months a
+percentage was computed between, and there is no longer a percentage. It now says what is summed, that
+the window is **per site** (the sites are different ages — kwtclean.com has five complete months,
+kuwaityclean.com has thirteen), and that partial months are not counted.
 
 | Arabic | English |
 |---|---|
-| كل الأرقام من Google Search Console، آخر شهر كامل هو أغسطس 2026 | All figures from Google Search Console, most recent complete month August 2026 |
-
-**Why the subhead does not print a count.** It would now be true — card 11 is resolved and the grid ships
-with eleven — so the count can be added in one edit whenever Ahmad wants it:
-`أحد عشر موقعًا، كلها بُنيت من الصفر` / `Eleven sites, all built from scratch`. It is left out for now only
-because the shipping subhead is approved copy and adding a sentence to it is his call, not an agent's. The
-original reason for leaving it out — that the grid might ship with ten — no longer applies.
+| كل الأرقام من Google Search Console: مجموع مرات الظهور في كل شهر كامل مسجّل لكل موقع، حتى أغسطس 2026. الأشهر غير المكتملة غير محسوبة. | All figures from Google Search Console: every complete month recorded for each site, added up, to August 2026. Partial months are not counted. |
 
 **Card fields, same shape on every card**
 
 | Field | Arabic | English |
 |---|---|---|
-| Metric label | نمو النقرات | Click growth |
+| Metric label | مرة ظهر فيها في بحث Google | times shown in Google search |
 | New project tag | مشروع جديد | New project |
 | Link label | افتح الموقع | View case study |
+
+**The metric label never says "impression".** It says what an impression *is*. `impressions` is a Search
+Console word; a service-company owner who has never had a website does not know it and is not asked to
+learn it to read this page. The card reads `245,600 times shown in Google search` /
+`245,600 مرة ظهر فيها في بحث Google` — a sentence, not a metric name. Western digits with a comma group,
+the same convention as every other number on the site; `.work-metric .num` isolates them so they read
+left to right inside the Arabic line.
 
 **The card carries no caption under the logo and the logo carries no `alt` text.** The card already
 prints the client's domain as real text directly under the plate, so an alt would read the same name
@@ -559,75 +582,68 @@ twice in a row to a screen reader. The retired
 `لقطة من Google Search Console` / `Capture from Google Search Console` caption went with the charts: no
 card shows a Search Console capture and none is planned.
 
-**Revised again 2026-09-24. Three things came off every card and the section became a slideshow.**
-Ahmad's instructions, in his words and in full:
-1. **Sort by the biggest numbers first.** The order below is the shipping order and it is not the
-   chronological one any more.
+**Revised 2026-09-24. Three things came off every card and the section became a slideshow.** Ahmad's
+instructions, in his words and in full:
+1. **Sort by the biggest numbers first.** Still true, now applied to the impression totals.
 2. **The sector labels are gone.** `خدمات التنظيف` / `Cleaning services`, `غسيل السيارات` / `Car wash`,
    `تكييف وتبريد` / `Air conditioning` and the rest are removed from every card and from the build data.
 3. **The date windows are gone from the cards.** He was explicit that he does not want them and is not
-   worried about a reader checking them. They are replaced by **one** source line under the whole
-   section (above), not eleven lines on eleven cards. Every percentage is still reproduced with its two
-   exact months in the derivation table at the end of this file, so nothing became uncheckable.
+   worried about a reader checking them. One source line sits under the whole section instead. Every
+   total is still reproduced with its exact months in the derivation table at the end of this file, so
+   nothing became uncheckable.
 4. **`أول شهر بيانات: أغسطس 2026` / `First data month: August 2026` is gone from the empty plates.** He
-   called it not sexy. Those four cards carry their `مشروع جديد` / `New project` tag and nothing else.
-   **Superseded 2026-09-25:** there are no empty plates any more. Those four cards keep the tag and now
-   carry their client's logo in the plate, the same as the other seven.
+   called it not sexy. **Superseded 2026-09-25:** there are no empty plates any more. Those four cards
+   keep their tag and carry their client's logo, the same as the other seven.
+
+**The slideshow LOOPS ENDLESSLY (Ahmad, 2026-09-25: `the slideshow needs to be infinite`).** It reaches
+the last card and carries straight on into the first, with no rewind and no stop. The mechanism is in
+`build-spec.md` §22; nothing about the copy, the cards or their order depends on it.
 
 **Build rules for this section, all five are hard.**
 * Every outbound card link is `rel="nofollow"` plus `target="_blank"` and `rel` also carries `noopener`,
   so the attribute reads `rel="nofollow noopener"` (Ahmad, 2026-09-24).
-* A `مشروع جديد` / `New project` card carries the tag in the slot where the percentage sits on the other
+* A `مشروع جديد` / `New project` card carries the tag in the slot where the figure sits on the other
   cards, in the same position and the same size. It is not smaller, greyed out or pushed to the end.
-* Every percentage stays traceable: the two complete months it came from are in the derivation table
-  below, and the section prints the single source line above.
-* No card carries a Search Console capture unless the capture is real and unedited. The percentage alone is
+* Every total stays traceable: its monthly rows and their sum are in the derivation table below, and the
+  section prints the single source line above.
+* No card carries a Search Console capture unless the capture is real and unedited. The figure alone is
   enough; a capture is optional per card.
 * A card carries the site name, the figure and the link. No card states a country.
 
 ### The eleven cards, ordered biggest figure first
 
-| # | Site | Figure shown | Computed from (not printed on the card) |
+| # | Site | Figure shown | Complete months summed |
 |---|---|---|---|
-| 1 | q8carwash.com | +900% | August 2025 to August 2026 |
-| 2 | mashame3.com | +883% | March 2026 to August 2026 |
-| 3 | kuwaityclean.com | +326% | August 2025 to August 2026 |
-| 4 | kwcarwash.com | +270% | December 2025 to August 2026 |
-| 5 | kwtclean.com | +222% | May 2026 to August 2026 |
-| 6 | carwashkw.com | +32% | August 2025 to August 2026 |
-| 7 | betikcleaner.com | مشروع جديد / New project | one complete month only, August 2026 |
-| 8 | anharpest.com | مشروع جديد / New project | one complete month only, August 2026 |
-| 9 | alghadeerclean.com | مشروع جديد / New project | one complete month only, August 2026 |
-| 10 | ragwaclean.com | مشروع جديد / New project | one complete month only, August 2026 |
-| 11 | movingcompanykw.com | none — no figure, no tag | no honest window exists |
+| 1 | kuwaityclean.com | 245,600 | 13, August 2025 to August 2026 |
+| 2 | carwashkw.com | 207,855 | 13, August 2025 to August 2026 |
+| 3 | q8carwash.com | 112,623 | 13, August 2025 to August 2026 |
+| 4 | kwtclean.com | 87,708 | 5, April 2026 to August 2026 |
+| 5 | kwcarwash.com | 54,132 | 13, August 2025 to August 2026 |
+| 6 | movingcompanykw.com | 52,080 | 13, August 2025 to August 2026 |
+| 7 | mashame3.com | 32,434 | 6, March 2026 to August 2026 |
+| 8 | betikcleaner.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 9 | anharpest.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 10 | alghadeerclean.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 11 | ragwaclean.com | مشروع جديد / New project | one complete month only, August 2026 |
 
-**Card 11, movingcompanykw.com. RESOLVED by Ahmad, 2026-09-24: option B, and it is live.**
+**The four newest clients keep the tag and are not given their number.** betikcleaner.com has 1,614
+impressions in its single complete month, anharpest.com 768, alghadeerclean.com 531 and ragwaclean.com
+160. Every one of those is real and every one is in the derivation table, but 160 printed beside 245,600
+says nothing true about the work — it says the site is a month old, which is exactly what the tag says,
+in words a reader understands. They sit after the seven, in that order.
 
-His words: `Moving company is a valid company. You can put that in, no problem.` So the section ships with
-**eleven** cards, which is every SEO client, which is what decision 1 above asked for.
-
-The card carries **no percentage and no `مشروع جديد` / `New project` tag.** Both were considered and both
-would have been false. The data will not support an honest growth figure: movingcompanykw.com went from 27
-clicks in August 2025 to 11 clicks in August 2026, a fall of 59 percent, and its impressions fell the same
-way, 17,452 to 4,384. Every window that produces a positive percentage for this site does it by starting
-from one of its own troughs, for example March 2026 at 1 click, and that is cherry picking, which is the
-thing the numbers rule exists to stop. The `New project` tag is not available to it either, because the
-site is not new: it has recorded data across the whole fourteen month window, so the tag would be a lie.
-
-So the card shows **the site name and the link, and nothing else** — no figure, no tag and no period
-line (the sector label came off this card with all the others). One card without a figure sitting beside
-ten that have one is normal and honest, and it is the only version of this card that does not require
-inventing something. Nothing on this page may be fake (Ahmad, 2026-09-24).
-
-**Its plate, 2026-09-25.** It used to be an empty dashed slot; it now carries the client's wordmark like
-every other card. movingcompanykw.com is the one client of the eleven that ships **no logo file at all**
-— its header brand is type, not an image — so the wordmark is set in the site's own two typefaces, in
-the site's own colours, from the site's own strings. That is a reproduction of what the site already
-displays, not a new brand mark, and it is recorded in full in `build-spec.md` §20.
+**Card 11 under the old metric, movingcompanykw.com. The problem is gone.** Ahmad resolved the card
+itself on 2026-09-24 (`Moving company is a valid company. You can put that in, no problem.`) but under a
+growth percentage it could carry **neither** a figure nor a tag: the site fell from 27 clicks in August
+2025 to 11 in August 2026, every window that turned that into growth started from one of its own
+troughs, and fourteen months of recorded data made the `New project` tag false. So it shipped as the one
+card with an empty figure slot. **A total is not a window and cannot be cherry-picked**, so its real
+52,080 impressions across thirteen complete months now goes on the card like everyone else's, and it sits
+sixth. The odd card is gone without anything being invented.
 
 **Build note.** Ahmad confirms which client names may be shown publicly before this section ships. Every
-percentage is reproduced in the derivation table at the end of this file with the exact rows it came from,
-so any figure on the page can be traced in one step.
+total is reproduced in the derivation table at the end of this file with the exact rows it came from, so
+any figure on the page can be traced in one step.
 
 ---
 
@@ -972,67 +988,67 @@ move to another section.
 | 165 clicks, May 2026 | Section 6, stage 2 | kwtclean.com |
 | 531 clicks, August 2026 | Section 6, stage 3 | kwtclean.com |
 | 199 to 440 clicks a month across 13 consecutive complete months | Section 6, baseline line 1 | carwashkw.com |
-| Six growth percentages, four `New project` tags and one card with neither | Section 7, the eleven cards | derivation table below |
+| Seven impression totals and four `New project` tags | Section 7, the eleven cards | derivation table below |
 
 Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures. Part B carries no performance figures and no
 prices, in any section, including the three options in B5. The only digits that render in Part B come from
 the `[COUNTDOWN]` and `[SPOTS]` build slots, which are configuration, not claims. Every number above
 comes from `clients/q8block/design/proof-data.md`, pulled from the Search Console API on 24 September 2026.
-No figure is rounded beyond whole percents in Section 7, none is averaged across clients, and none is taken
-from a partial month. September 2026 is a partial month and is excluded from every claim on the site.
+No figure in Section 7 is rounded at all — each is an exact sum of exact monthly rows — none is averaged
+across clients, and none is taken from a partial month. September 2026 is a partial month and is excluded
+from every claim on the site.
 
-**Impressions are no longer printed anywhere on the page.** Section 6 prints clicks only and Section 7
-prints percentages only. The impression figures stay in this file, in the Section 6 build data table and in
-the derivation table below, because the curve is drawn from them and because they are the check on a
-percentage, but a reader who has no website does not know what an impression is and is not asked to.
+**Section 7 now prints impressions, and Section 6 still does not.** Section 6 prints clicks only: it is
+the month-by-month story of one site, and a click is a person arriving. Section 7 prints one impression
+total per site, because Ahmad replaced its growth percentage with one (2026-09-25). **The word
+"impression" appears nowhere on the page** — the card says `times shown in Google search` /
+`مرة ظهر فيها في بحث Google`, which is what an impression is, in words a reader who has never owned a
+website already understands. The monthly impression rows behind every total are in this file's Section 7
+derivation table and in `src/data.mjs`, which is where the build adds them up.
 
 ## Section 7 derivation table
 
-One row per card. Every percentage below was computed from two complete months exported in
-`proof-data.md`, clicks only, rounded to a whole percent, formula `(later − earlier) ÷ earlier`. Both
-months are printed on the card itself, so the reader can do the same arithmetic.
+One row per card. **Rewritten 2026-09-25 with the metric.** The figure on a card is no longer a growth
+percentage between two months — it is the site's **total impressions**, the sum of every complete month
+Google has recorded for that site in `proof-data.md`. Nothing is rounded, nothing is averaged, nothing is
+estimated: the addition below is the whole derivation, and the same rows live in `src/data.mjs` where the
+build adds them up itself, so no total on the page can differ from this table.
 
-**Unchanged by the 2026-09-25 logo pass.** Every figure in this table is exactly what it was. What
-changed is only what sits above the figure: the card's plate was a chart drawn from the same `clicks`
-series, and it is now the client's logo. The `clicks` arrays stay in `src/data.mjs` as the record, the
-way `period` does, and are no longer drawn. The logo sources are the table under this one.
+**Partial months are excluded.** September 2026 is partial for every property (data to 24 September 2026)
+and appears in no total. The window differs per site because the sites are different ages, which is why
+the section's source line says "every complete month recorded for each site" rather than naming one range.
 
-| # | Site | Figure shown | Derived from, exactly | Check |
+| # | Site | Total shown | Months | Every complete month, added |
 |---|---|---|---|---|
-| 1 | kwtclean.com | +222% | May 2026 `165` clicks to August 2026 `531` clicks | 531 ÷ 165 = 3.218, so +221.8%, printed +222% |
-| 2 | carwashkw.com | +32% | August 2025 `334` clicks to August 2026 `440` clicks | 440 ÷ 334 = 1.317, so +31.7%, printed +32% |
-| 3 | kuwaityclean.com | +326% | August 2025 `83` clicks to August 2026 `354` clicks | 354 ÷ 83 = 4.265, so +326.5%, printed +326% |
-| 4 | mashame3.com | +883% | March 2026 `12` clicks to August 2026 `118` clicks | 118 ÷ 12 = 9.833, so +883.3%, printed +883% |
-| 5 | kwcarwash.com | +270% | December 2025 `23` clicks to August 2026 `85` clicks | 85 ÷ 23 = 3.696, so +269.6%, printed +270% |
-| 6 | q8carwash.com | +900% | August 2025 `8` clicks to August 2026 `80` clicks | 80 ÷ 8 = 10.0 exactly, so +900% |
-| 7 | betikcleaner.com | مشروع جديد / New project | First and only complete month is August 2026, `8` clicks, `1,614` impressions | One complete month cannot produce a growth percentage |
-| 8 | anharpest.com | مشروع جديد / New project | First and only complete month is August 2026, `10` clicks, `768` impressions | Same |
-| 9 | alghadeerclean.com | مشروع جديد / New project | First and only complete month is August 2026, `8` clicks, `531` impressions | Same |
-| 10 | ragwaclean.com | مشروع جديد / New project | First and only complete month is August 2026, `1` click, `160` impressions | Same, and the one click is far too small to build any claim on |
-| 11 | movingcompanykw.com | **none — the card prints no figure and no tag** | Nothing. No window was used, because no honest one exists | August 2025 `27` clicks to August 2026 `11` clicks is −59%, and every positive window starts from one of the site's own troughs. Fourteen months of data also rules out the `New project` tag. Shipped with sector, name and link only |
+| 1 | kuwaityclean.com | **245,600** | 13 | 31,710 + 19,720 + 14,389 + 17,278 + 18,103 + 16,640 + 17,752 + 12,717 + 14,151 + 15,353 + 22,256 + 23,818 + 21,713 = 245,600 |
+| 2 | carwashkw.com | **207,855** | 13 | 23,024 + 21,414 + 16,167 + 15,900 + 12,382 + 13,902 + 13,961 + 13,107 + 12,765 + 15,451 + 17,831 + 15,155 + 16,796 = 207,855 |
+| 3 | q8carwash.com | **112,623** | 13 | 778 + 3,826 + 4,996 + 9,493 + 13,032 + 12,894 + 11,377 + 12,824 + 9,130 + 10,280 + 9,787 + 7,278 + 6,928 = 112,623 |
+| 4 | kwtclean.com | **87,708** | 5 | 956 + 11,155 + 22,101 + 25,564 + 27,932 = 87,708 |
+| 5 | kwcarwash.com | **54,132** | 13 | 24 + 31 + 14 + 23 + 825 + 3,181 + 6,012 + 6,816 + 6,245 + 10,053 + 7,796 + 6,930 + 6,182 = 54,132 |
+| 6 | movingcompanykw.com | **52,080** | 13 | 17,452 + 11,898 + 5,303 + 2,230 + 782 + 464 + 793 + 905 + 1,801 + 1,630 + 227 + 4,211 + 4,384 = 52,080 |
+| 7 | mashame3.com | **32,434** | 6 | 1,364 + 3,013 + 3,995 + 7,098 + 8,173 + 8,791 = 32,434 |
+| 8 | betikcleaner.com | مشروع جديد / New project | 1 | August 2026, `1,614` impressions. One month is not a track record |
+| 9 | anharpest.com | مشروع جديد / New project | 1 | August 2026, `768` impressions |
+| 10 | alghadeerclean.com | مشروع جديد / New project | 1 | August 2026, `531` impressions |
+| 11 | ragwaclean.com | مشروع جديد / New project | 1 | August 2026, `160` impressions |
 
-**How the earlier month was chosen, and why it differs between cards.** One rule, applied in order, and the
-card prints whichever month it landed on so nothing is hidden:
-1. Where the site has a full year of complete months, the earlier month is **the same month a year before**,
-   August 2025. Cards 2, 3 and 6.
-2. Where the site is younger than a year, or where August 2025 recorded no clicks at all so a percentage
-   cannot be computed from it, the earlier month is **the site's first complete month with real clicks**.
-   Cards 1, 4 and 5. kwcarwash.com sat at 0 clicks from August to November 2025, so December 2025 is its
-   first month with any clicks. kwtclean.com's own first data month, April 2026, had 7 clicks: April to
-   August is `+7,486%`, which is true and is not used, because a seven click base makes the percentage
-   meaningless and it reads as fake. May is used instead and the claim is smaller and stronger.
-3. Where the site has one complete month or fewer, it gets the `مشروع جديد` / `New project` tag.
+The 13-month sites run August 2025 to August 2026, kwtclean.com runs April to August 2026 (its first data
+month is April 2026) and mashame3.com runs March to August 2026 (first data month March 2026). Months
+before a site's first indexed month returned no rows from the API and are reported in `proof-data.md` as
+"no data", not as zero, so they are not summed as zeroes — they are not in the series at all.
 
-**Two caveats Ahmad should see before this ships.**
-* **q8carwash.com, +900%, true but flattering.** August 2025 to August 2026 is a straight year on year
-  comparison of two complete months and the arithmetic is exact. But the site peaked at 193 clicks in
-  January 2026 and sat at 80 in August 2026, so it is a tenth of the traffic it had a year ago **and** well
-  below its own best month. A conservative swap that is equally real: September 2025 `21` clicks to August
-  2026 `80` clicks is `+281%`. One edit either way.
-* **mashame3.com, +883%, correct but watch the site.** Its partial September 2026 shows `0` clicks against
-  `371` impressions, which usually means something broke on the site or in indexing. The August figure and
-  the percentage are unaffected, and September is a partial month and excluded from every claim anyway, but
-  somebody should look at that site before it is put on the homepage as proof.
+**What the change fixed, in one comparison.** Under the retired metric the order was q8carwash `+900%`,
+mashame3 `+883%`, kuwaityclean `+326%`, kwcarwash `+270%`, kwtclean `+222%`, carwashkw `+32%`, then four
+tags and one empty card. carwashkw.com — thirteen straight months between 199 and 440 clicks, the
+steadiest site of the eleven — came last on the wall, and mashame3.com came second on a 12-click base.
+Sorting by total impressions puts carwashkw second and needs no explanation to a reader.
+
+**Two caveats that came off with the percentages.** The old table carried warnings about q8carwash's
+`+900%` (exact, but the site is below its own January 2026 peak) and about mashame3's `+883%` (correct,
+but its partial September shows 0 clicks against 371 impressions, which usually means something broke).
+Neither figure is printed any more, so neither caveat applies to anything on the page. **The mashame3
+observation still stands as an operational note**: somebody should look at why that site's September
+clicks fell to zero. It does not affect its 32,434 total, which is complete months only.
 
 **Sites in `proof-data.md` that are not cards.** `q8block.com` is Q8Block's own site, not a client, and it
 is not in the eleven. Its own numbers are tiny, 0 to 2 clicks a month, which is exactly why the site is
@@ -1041,34 +1057,34 @@ property in the export, so there is no data for them and they get no card.
 
 ## Section 7 logo table
 
-One row per card, in the shipping order. Every logo was fetched from the client's own live site on
-2026-09-25 and the source file is kept byte-for-byte at `design/client-logos/<domain>.<ext>`. The
-preference order was header logo image, then inline SVG logo, then `og:image`, then favicon or
-apple-touch-icon; where a client ships more than one version of the same mark, the higher resolution one
-and the one drawn for a light surface were taken. **No brand mark was invented, redrawn or recoloured.**
-`build-spec.md` §20 has the pixel record.
+One row per card, in the shipping order. **Revised 2026-09-25: seven of the eleven are now clean brand
+lockups regenerated from each client's real registered name**, supplied as `design/client-logos/v2-<domain>.png`
+and derived into the plate by `build-spec.md` §22. The other four are unchanged and are still the mark the
+client's own live site serves, fetched 2026-09-25 and kept byte-for-byte at `design/client-logos/<domain>.<ext>`.
+The old seven source files stay on disk; the build simply stops referencing them. **No brand mark is
+invented, redrawn or recoloured from what was supplied.** `build-spec.md` §20 has the pixel record of the
+first pass and §22 of this one.
 
-| # | Site | Logo taken from | What it is |
+| # | Site | Plate | Source |
 |---|---|---|---|
-| 1 | q8carwash.com | `/images/logo-badge.webp` | The Posefore car badge, the `LocalBusiness` image in the site's own JSON-LD. The header brand is type only |
-| 2 | mashame3.com | `/favicon.svg` | The blue snowflake mark. The header brand is type only, and the `og:image` is a photograph of a technician |
-| 3 | kuwaityclean.com | `/images/icons/brand-logo-colorful.webp` | The header logo, `KUWAITY CLEAN` with the colour house mark |
-| 4 | kwcarwash.com | `/images/optimized/logo.webp` | The `Wash & Polish` script on the brand's mint field. The header brand is an icon plus type |
-| 5 | kwtclean.com | `/images/logo.png` | The header logo, the four-colour house mark |
-| 6 | carwashkw.com | `/images/logo.webp` | The header logo, `Master Wash`, on its navy badge |
-| 7 | betikcleaner.com | `/assets/brand/betik-cleaner-primary-rtl.svg` | The header logo, the full `بيتك كلينر / BETIK CLEANER` lockup |
-| 8 | anharpest.com | `/assets/logo/logo-ar.svg` | The header logo. anharpest.com is a dark site and this is its light-on-dark lockup, so it sits on the site's own `#0D1512` ground |
-| 9 | alghadeerclean.com | `/icon-512.png` | The same mark as the 166px header logo, at 512px, from the site's own `site.webmanifest` |
-| 10 | ragwaclean.com | `/assets/images/brand/ragwa-mark.svg` | The header logo, the bubble mark |
-| 11 | movingcompanykw.com | **no logo file exists** | The site's wordmark, set in the site's own typefaces and colours — see below |
+| 1 | kuwaityclean.com | unchanged | `/images/icons/brand-logo-colorful.webp` from the live site — the header logo, `KUWAITY CLEAN` with the colour house mark |
+| 2 | carwashkw.com | **regenerated** | `v2-carwashkw.com.png` — the `MASTER WASH / غسيل سيارات متنقل` lockup on white |
+| 3 | q8carwash.com | unchanged | `/images/logo-badge.webp` from the live site — the Posefore car badge, the `LocalBusiness` image in its own JSON-LD |
+| 4 | kwtclean.com | **regenerated** | `v2-kwtclean.com.png` — the `كلين الكويت / CLEAN AL KUWAIT` house lockup on white |
+| 5 | kwcarwash.com | **regenerated** | `v2-kwcarwash.com.png` — the `WASH AND POLISH / غسيل سيارات متنقل` lockup on white |
+| 6 | movingcompanykw.com | **regenerated** | `v2-movingcompanykw.com.png` — the `شركة منيف للنقل / MUNEEF TRANSPORT` truck lockup on white |
+| 7 | mashame3.com | unchanged | `/favicon.svg` from the live site — the blue snowflake mark |
+| 8 | betikcleaner.com | unchanged | `/assets/brand/betik-cleaner-primary-rtl.svg` from the live site — the full `بيتك كلينر / BETIK CLEANER` lockup |
+| 9 | anharpest.com | **regenerated** | `v2-anharpest.com.png` — the `شركة انهار لمكافحة الحشرات / ANHAR PEST CONTROL` shield lockup on white |
+| 10 | alghadeerclean.com | **regenerated** | `v2-alghadeerclean.com.png` — the `الغدير اللامع كلين / AL GHADEER CLEAN` droplet lockup on white |
+| 11 | ragwaclean.com | **regenerated** | `v2-ragwaclean.com.png` — the `رغوة الجنوب / RAGWA CLEAN` bubble lockup on white |
 
-**movingcompanykw.com is the one client with no logo asset.** Its header and footer brand is type:
-`شركة منيف للنقل` above `Muneef Transport · Kuwait`, with an unrelated generic truck icon beside it in
-the nav. There is no logo image anywhere on the site, no favicon, no apple-touch-icon and no manifest,
-and its `og:image` is a photograph of a removal service. So the card carries the wordmark it already
-shows, set from the site's own stylesheet: `Noto Kufi Arabic` 800 in `#ffffff` over `Outfit` 600 in
-`#c8962c`, on the site's own header navy `#0b1929`. Every string, typeface and colour is read off
-movingcompanykw.com; nothing is designed. If the client ever ships a real mark, replace the file.
+**Two notes from the first pass that the regeneration retired.** anharpest.com's live logo is a
+light-on-dark lockup, so §20.3 had to composite it on the site's own `#0D1512` ground and it shipped as
+the one dark tile in the row; the regenerated lockup is dark-on-white like the rest and the dark tile is
+gone. movingcompanykw.com ships **no logo file at all** — its live brand is type — so §20.4 reproduced
+that wordmark in the site's own two typefaces and colours; it now carries a proper lockup instead, so
+nothing on the page is a reproduction any more.
 
 ## Geography register
 

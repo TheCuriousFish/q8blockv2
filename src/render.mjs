@@ -277,7 +277,9 @@ function workPlate(c) {
 }
 
 // Rebuilt as a slideshow 2026-09-24, to Ahmad's list:
-//   * biggest number first (the order is fixed in data.mjs, not here);
+//   * biggest number first (the order is fixed in data.mjs, not here) — since
+//     2026-09-25 that number is the site's total impressions, not a growth
+//     percentage;
 //   * no sector labels and no date windows on the cards — one source line
 //     under the whole section instead of eleven on the cards;
 //   * roughly three noticeably bigger cards visible, auto-advancing.
@@ -286,13 +288,33 @@ function workPlate(c) {
 // the eleven and the browser scrolls each into view, and the two buttons carry
 // aria-labels over aria-hidden glyphs. app.js pauses the auto-advance on
 // hover, on focus, on touch and off-screen, and never starts it at all under
-// prefers-reduced-motion.
+// prefers-reduced-motion. It also LOOPS ENDLESSLY (Ahmad, 2026-09-25: "the
+// slideshow needs to be infinite"): app.js clones the card set once at runtime
+// and normalises scrollLeft by one set length at the seam, so the wrap is a
+// jump between two pixel-identical views. The clones are aria-hidden and
+// tabindex="-1", so the eleven real cards are still the only eleven tab stops
+// and the only eleven the accessibility tree sees.
+/* The card's figure: the site's TOTAL IMPRESSIONS, summed HERE from the real
+   monthly series in data.mjs, never typed as a total. Ahmad, 2026-09-25: "my
+   best performing is carwashkw and it shows 32% growth. What is this growth
+   thing? It sounds very weird ... I think a good metric is total impressions."
+   A percentage is measured off a base, so it ranked the strongest site last;
+   a total does not have a base and cannot be moved by choosing one.
+
+   Western digits with a comma group, the same convention as every other number
+   on the site (§6 prints 7 / 165 / 531). `.work-metric .num` already carries
+   `direction: ltr; unicode-bidi: isolate`, so 245,600 reads left to right
+   inside the Arabic sentence without a wrapper here. */
+const totalImpressions = (c) => (c.impressions || []).reduce((a, b) => a + b, 0);
+const groupNum = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
 export function work(t) {
   const cards = WORK.map((c) => {
+    const total = totalImpressions(c);
     const metric = c.isNew
       ? `<p class="work-metric work-tag">${esc(t.work.newTag)}</p>`
-      : c.figure
-        ? `<p class="work-metric"><span class="num">${esc(c.figure)}</span> ${esc(t.work.metricLabel)}</p>`
+      : total
+        ? `<p class="work-metric"><span class="num">${groupNum(total)}</span> ${esc(t.work.metricLabel)}</p>`
         : '';
     return `<a class="card-light work-card" href="${c.url}" rel="nofollow noopener" target="_blank">
       ${workPlate(c)}

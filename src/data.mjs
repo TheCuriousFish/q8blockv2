@@ -58,70 +58,90 @@ export const JOURNEY_ROWS = [
   { month: 'August 2026', clicks: 531 },
 ];
 
-/* ── Section 7: eleven cards, every SEO client. Every percentage is reproduced
-      in copy.md's derivation table. `clicks` is the site's real monthly click
-      series from design/proof-data.md. It is NO LONGER DRAWN — see the
-      2026-09-25 note at the end of this block — and is kept only as the
-      record, exactly like `period`. Do not put a chart back on these cards.
+/* ── Section 7: eleven cards, every SEO client. The figure on a card is the
+      site's TOTAL IMPRESSIONS — the number of times it came up in Google
+      search results — summed at build time from `impressions`, the site's real
+      monthly series out of design/proof-data.md. No total is typed anywhere, so
+      no total can drift away from its own rows. `clicks` is the site's real
+      monthly click series and stays as the record.
+
+      REVISED 2026-09-25 (Ahmad: "my best performing is carwashkw and it shows
+      32% growth. What is this growth thing? It sounds very weird. Mashame3 is
+      883% growth. We need a new metric... I think a good metric is total
+      impressions."). THE GROWTH PERCENTAGE IS GONE from every card.
+
+      He is right twice over. A percentage is measured off a base, so it
+      punishes the mature site and flatters the small one: carwashkw.com, the
+      strongest site of the eleven by sustained volume, carried the SMALLEST
+      number on the wall (+32%) while mashame3.com, six months old, carried
+      +883%. And "growth" between two months the card does not name is jargon a
+      business owner cannot check. A total impression count is one plain number
+      per site, it cannot be moved by choosing a base month, and sorting by it
+      puts the sites in the order a reader would call correct.
+
+      `months` is how many complete months are summed and `window` names them.
+      Windows differ per site because the sites are different ages —
+      kwtclean.com has five complete months, kuwaityclean.com has thirteen — so
+      the section's ONE source line says the window is per site and that partial
+      months are excluded. September 2026 is partial everywhere and is in no
+      total.
+
+      ORDER: biggest total first. Ahmad's 2026-09-24 instruction, unchanged,
+      now applied to impressions instead of a percentage.
+
+      The four newest clients have ONE complete month each, between 160 and
+      1,614 impressions. They keep the `مشروع جديد` / `New project` tag rather
+      than a number: 160 beside 245,600 undercuts the whole wall, and the tag is
+      the honest description of a site whose data is not in yet.
+
+      movingcompanykw.com is no longer the odd card with neither figure nor tag.
+      Under a growth percentage it could have neither — 27 clicks in August 2025
+      fell to 11 in August 2026, and every positive window started from one of
+      its own troughs — but a total is not a window, so its real 52,080
+      impressions across thirteen complete months goes on the card like
+      everyone else's.
 
       `logo` names the client's own logo, derived into
       src/img/logo-<logo>.webp from the source kept in
-      design/client-logos/<domain>.<ext>. Every client has one, so every card
-      is full; build-spec §20 records which asset each one came from.
-
-      Card 11, movingcompanykw.com, resolved by Ahmad 2026-09-24: "Moving
-      company is a valid company. You can put that in, no problem." It carries
-      NO percentage — August 2025's 27 clicks fell to 11 in August 2026 and
-      every window that turns that into growth starts from one of its own
-      troughs — and NO "New project" tag, because fourteen months of recorded
-      data makes that tag false. Name and link, and nothing else. One card
-      without a figure beside ten that have one is honest; an invented window
-      would not be.
-
-      REVISED 2026-09-24 (Ahmad's homepage pass). Three changes:
-      * ORDER — biggest number first, his explicit instruction. The six sites
-        with a percentage lead, highest to lowest; then the four New project
-        sites in their natural order; then movingcompanykw.com last.
-      * SECTOR LABELS ARE GONE. "Cleaning services", "Car wash" and the rest
-        are removed from every card, so the field is removed from the data too
-        rather than left behind to drift.
-      * `period` IS NO LONGER PRINTED on the card. Ahmad does not want the date
-        windows and is not worried about checkability; §7 now carries ONE line
-        under the whole section instead of eleven on the cards. The field stays
-        here as the record of which two complete months each percentage was
-        computed from — copy.md's derivation table is the public version.
-
-      REVISED 2026-09-25 (Ahmad: "many boxes are empty ... scratch the graph
-      idea and just put images. Or their logos. Actually, would be better.
-      Yeah, their logos."). THE PLATE IS THE CLIENT'S LOGO, not a chart. The
-      four New project sites have one complete month each, so they had no
-      curve to draw and rendered as an empty dashed plate — that is what read
-      as broken. Every client has a logo, so every card is now full. The
-      percentages and the New project tags are untouched. ── */
+      design/client-logos/<domain>.<ext>. Every client has one, so every card is
+      full; build-spec §20 records which asset each one came from. The plate is
+      a logo and is never a chart again (Ahmad, 2026-09-25). ── */
 export const WORK = [
-  { site: 'q8carwash.com', url: 'https://q8carwash.com/', logo: 'q8carwash',
-    figure: '+900%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
-    clicks: [8, 21, 43, 105, 171, 193, 158, 148, 97, 118, 104, 72, 80] },
-  { site: 'mashame3.com', url: 'https://mashame3.com/', logo: 'mashame3',
-    figure: '+883%', period: { ar: 'مارس 2026 إلى أغسطس 2026', en: 'March 2026 to August 2026' },
-    clicks: [12, 31, 83, 86, 122, 118] },
   { site: 'kuwaityclean.com', url: 'https://kuwaityclean.com/', logo: 'kuwaityclean',
-    figure: '+326%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    months: 13, window: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    impressions: [31710, 19720, 14389, 17278, 18103, 16640, 17752, 12717, 14151, 15353, 22256, 23818, 21713],
     clicks: [83, 65, 79, 89, 125, 127, 188, 107, 83, 154, 330, 372, 354] },
-  { site: 'kwcarwash.com', url: 'https://kwcarwash.com/', logo: 'kwcarwash',
-    figure: '+270%', period: { ar: 'ديسمبر 2025 إلى أغسطس 2026', en: 'December 2025 to August 2026' },
-    clicks: [23, 46, 72, 82, 97, 106, 108, 105, 85] },
-  { site: 'kwtclean.com', url: 'https://kwtclean.com/', logo: 'kwtclean',
-    figure: '+222%', period: { ar: 'مايو 2026 إلى أغسطس 2026', en: 'May 2026 to August 2026' },
-    clicks: [7, 165, 354, 452, 531] },
   { site: 'carwashkw.com', url: 'https://carwashkw.com/', logo: 'carwashkw',
-    figure: '+32%', period: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    months: 13, window: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    impressions: [23024, 21414, 16167, 15900, 12382, 13902, 13961, 13107, 12765, 15451, 17831, 15155, 16796],
     clicks: [334, 389, 321, 287, 240, 211, 227, 199, 225, 287, 437, 386, 440] },
+  { site: 'q8carwash.com', url: 'https://q8carwash.com/', logo: 'q8carwash',
+    months: 13, window: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    impressions: [778, 3826, 4996, 9493, 13032, 12894, 11377, 12824, 9130, 10280, 9787, 7278, 6928],
+    clicks: [8, 21, 43, 105, 171, 193, 158, 148, 97, 118, 104, 72, 80] },
+  { site: 'kwtclean.com', url: 'https://kwtclean.com/', logo: 'kwtclean',
+    months: 5, window: { ar: 'أبريل 2026 إلى أغسطس 2026', en: 'April 2026 to August 2026' },
+    impressions: [956, 11155, 22101, 25564, 27932],
+    clicks: [7, 165, 354, 452, 531] },
+  { site: 'kwcarwash.com', url: 'https://kwcarwash.com/', logo: 'kwcarwash',
+    months: 13, window: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    impressions: [24, 31, 14, 23, 825, 3181, 6012, 6816, 6245, 10053, 7796, 6930, 6182],
+    clicks: [0, 0, 0, 0, 23, 46, 72, 82, 97, 106, 108, 105, 85] },
+  { site: 'movingcompanykw.com', url: 'https://movingcompanykw.com/', logo: 'movingcompanykw',
+    months: 13, window: { ar: 'أغسطس 2025 إلى أغسطس 2026', en: 'August 2025 to August 2026' },
+    impressions: [17452, 11898, 5303, 2230, 782, 464, 793, 905, 1801, 1630, 227, 4211, 4384],
+    clicks: [27, 15, 10, 6, 4, 0, 0, 1, 15, 13, 4, 11, 11] },
+  { site: 'mashame3.com', url: 'https://mashame3.com/', logo: 'mashame3',
+    months: 6, window: { ar: 'مارس 2026 إلى أغسطس 2026', en: 'March 2026 to August 2026' },
+    impressions: [1364, 3013, 3995, 7098, 8173, 8791],
+    clicks: [12, 31, 83, 86, 122, 118] },
+  /* One complete month each, August 2026: betikcleaner 1,614 impressions,
+     anharpest 768, alghadeerclean 531, ragwaclean 160. Recorded in copy.md's
+     derivation table, deliberately not printed on the card. */
   { site: 'betikcleaner.com', url: 'https://betikcleaner.com/', logo: 'betikcleaner', isNew: true },
   { site: 'anharpest.com', url: 'https://anharpest.com/', logo: 'anharpest', isNew: true },
   { site: 'alghadeerclean.com', url: 'https://alghadeerclean.com/', logo: 'alghadeerclean', isNew: true },
   { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', logo: 'ragwaclean', isNew: true },
-  { site: 'movingcompanykw.com', url: 'https://movingcompanykw.com/', logo: 'movingcompanykw' },
 ];
 
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
@@ -305,14 +325,20 @@ export const COPY = {
          months are no longer printed on the cards, so the sentence would have
          been describing something the reader cannot see. One source line now
          sits under the whole section instead. */
-      lead: 'كل موقع هنا بُني من الصفر وما زال يعمل. نسبة النمو على كل بطاقة حقيقية، محسوبة من شهرين كاملين من بيانات Google Search Console. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.',
-      metricLabel: 'نمو النقرات',
+      /* The lead used to describe a growth percentage computed from two
+         complete months. The figure is now a total, so the sentence says what a
+         total is, in the words a business owner uses: how many times the site
+         came up in Google. (Ahmad, 2026-09-25.) */
+      lead: 'كل موقع هنا بُني من الصفر وما زال يعمل. الرقم على كل بطاقة هو عدد المرات التي ظهر فيها الموقع في نتائج بحث Google، مجموع كل شهر كامل سجّله Google لهذا الموقع. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.',
+      /* The metric label never says "impression": it says what an impression
+         IS. A reader who has no website does not know the word and is not
+         asked to. Reads on the card as "245,600 مرة ظهر فيها في بحث Google". */
+      metricLabel: 'مرة ظهر فيها في بحث Google',
       newTag: 'مشروع جديد',
       linkLabel: 'افتح الموقع',
-      plateCaption: 'النقرات الشهرية، Google Search Console',
       /* ONE source line under the whole section, replacing the eleven date
          windows that used to sit on the cards (Ahmad, 2026-09-24). */
-      source: 'كل الأرقام من Google Search Console، آخر شهر كامل هو أغسطس 2026',
+      source: 'كل الأرقام من Google Search Console: مجموع مرات الظهور في كل شهر كامل مسجّل لكل موقع، حتى أغسطس 2026. الأشهر غير المكتملة غير محسوبة.',
       carouselLabel: 'مواقع بنيناها',
       prev: 'السابق',
       next: 'التالي',
@@ -685,12 +711,11 @@ export const COPY = {
     work: {
       eyebrow: 'Our work',
       h2: 'Sites we built that <span class="hl">get found.</span>',
-      lead: 'Every site here was built from scratch and is still running. The growth figure on each card is real, computed from two complete months of Google Search Console data. The recent projects are labelled as what they are, because their data is not in yet.',
-      metricLabel: 'Click growth',
+      lead: 'Every site here was built from scratch and is still running. The figure on each card is how many times that site has come up in Google search results, added up across every complete month Google has recorded for it. The recent projects are labelled as what they are, because their data is not in yet.',
+      metricLabel: 'times shown in Google search',
       newTag: 'New project',
       linkLabel: 'View case study',
-      plateCaption: 'Monthly clicks, Google Search Console',
-      source: 'All figures from Google Search Console, most recent complete month August 2026',
+      source: 'All figures from Google Search Console: every complete month recorded for each site, added up, to August 2026. Partial months are not counted.',
       carouselLabel: 'Sites we built',
       prev: 'Previous',
       next: 'Next',

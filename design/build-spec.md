@@ -2587,3 +2587,203 @@ touches §3, §6 or the offer page.)
 performance **99** mobile / **100** desktop on all 4 pages, CLS **0.000** on all 8.
 
 **Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+## 22. §7 gets a new metric and an endless loop, 2026-09-25. Plus seven regenerated logos
+
+Two changes Ahmad asked for in one pass, both inside §7, plus a logo swap folded in while the section was
+open. Nothing outside §7 was touched.
+
+### 22.1 The growth percentage is replaced by total impressions
+
+Ahmad: `my best performing is carwashkw and it shows 32% growth. What is this growth thing? It sounds very
+weird. Mashame3 is 883% growth. We need a new metric... I think a good metric is total impressions.`
+
+**This is a defect report, not a preference.** A growth percentage is measured off a base, so the base
+decides the number:
+
+| Site | Old figure | What the site actually is |
+|---|---|---|
+| carwashkw.com | `+32%`, **last on the wall** | 199 to 440 clicks a month for thirteen straight months. The steadiest, highest-volume site of the eleven |
+| mashame3.com | `+883%`, second on the wall | Six months old, and the base was 12 clicks |
+| q8carwash.com | `+900%`, first on the wall | 80 clicks in August 2026 against a peak of 193 in January 2026 — below its own best month |
+
+The wall was ranked close to backwards, and "growth between two months" is a phrase a service-company
+owner cannot check or act on. A total impression count has no base, cannot be moved by choosing one, and
+is one plain number per site.
+
+**The figure is the sum of every COMPLETE month in `design/proof-data.md`.** No total is typed: `WORK` in
+`src/data.mjs` carries each site's real monthly impression rows and `render.mjs` adds them at build time
+(`totalImpressions`), so a printed total cannot drift from its rows. Verified against `proof-data.md` row
+by row before use:
+
+| # | Site | Total | Months summed | Window |
+|---|---|---|---|---|
+| 1 | kuwaityclean.com | **245,600** | 13 | Aug 2025 – Aug 2026 |
+| 2 | carwashkw.com | **207,855** | 13 | Aug 2025 – Aug 2026 |
+| 3 | q8carwash.com | **112,623** | 13 | Aug 2025 – Aug 2026 |
+| 4 | kwtclean.com | **87,708** | 5 | Apr 2026 – Aug 2026 |
+| 5 | kwcarwash.com | **54,132** | 13 | Aug 2025 – Aug 2026 |
+| 6 | movingcompanykw.com | **52,080** | 13 | Aug 2025 – Aug 2026 |
+| 7 | mashame3.com | **32,434** | 6 | Mar 2026 – Aug 2026 |
+| 8 | betikcleaner.com | `مشروع جديد` / `New project` | 1 | Aug 2026, 1,614 impressions |
+| 9 | anharpest.com | `مشروع جديد` / `New project` | 1 | Aug 2026, 768 |
+| 10 | alghadeerclean.com | `مشروع جديد` / `New project` | 1 | Aug 2026, 531 |
+| 11 | ragwaclean.com | `مشروع جديد` / `New project` | 1 | Aug 2026, 160 |
+
+**Sorted descending, which is the fix on its own**: carwashkw.com moves from eleventh to second.
+September 2026 is partial for every property and is in no total. The four one-month sites keep the tag
+rather than a number — 160 printed beside 245,600 undercuts the wall and says nothing true about the work.
+**movingcompanykw.com stops being the odd card**: under a percentage it could carry neither figure nor tag
+(its clicks fell 27 → 11 year on year and fourteen months of data ruled out `New project`), but a total is
+not a window, so its real 52,080 goes on the card like everyone else's.
+
+**The label says what an impression is, not what it is called.**
+
+| | Arabic | English |
+|---|---|---|
+| Metric label | `مرة ظهر فيها في بحث Google` | `times shown in Google search` |
+| On the card | `245,600 مرة ظهر فيها في بحث Google` | `245,600 times shown in Google search` |
+
+The word "impression" renders nowhere on the site. Western digits with a comma group, matching §6's
+`7 / 165 / 531`; `.work-metric .num` already carries `direction: ltr; unicode-bidi: isolate`, so the
+number reads left to right inside the Arabic sentence with no extra wrapper. Measured at 1440: the metric
+is **2 lines, 52px**, both locales.
+
+The §7 subhead and the one source line under the section were rewritten with it — both described a
+percentage computed between two months. The new source line states that the window is **per site**
+(the sites are different ages) and that partial months are not counted. `copy.md` §7, its derivation table
+(now one addition per card) and the "Numbers on the page" register are all updated; `llms.txt`'s note for
+AI too.
+
+### 22.2 The slideshow loops endlessly
+
+Ahmad: `the slideshow needs to be infinite.`
+
+**What it did before.** It did wrap, but by smooth-scrolling the whole track back. Measured at 1440,
+cursor parked away from the section, sampling `scrollLeft` once a second:
+
+```
+/en/  0 0 0 0 448 448 448 448 ... 3136 3136 3136 3136 3584 3584 3584 3584 1516 0 0 0 291 448 ...
+```
+
+`3584 → 1516 → 0` is an eight-card rewind the reader watches go past. That is why it read as reaching the
+end and stopping: the last card was the end of the line and everything after it was a retreat.
+
+**What it does now — a treadmill, no library.** `src/app.js` clones the card set **once at runtime** and
+appends it, so the track holds 22 cards for 11 clients. Advancing is always one step forward; at the seam
+`scrollLeft` is reduced by exactly one set length with the CSS `scroll-behavior: smooth` suppressed for
+that single assignment.
+
+* **Why the jump is invisible.** At `pos = loopLen` the viewport shows clone 1, 2, 3, which are the same
+  three cards as 1, 2, 3 at `pos = 0`. Subtracting one set length changes nothing on screen. Proved, not
+  assumed — see 22.4.
+* **Clones are `aria-hidden="true"` + `tabindex="-1"`**, so the eleven real cards stay the only eleven tab
+  stops and the only eleven in the accessibility tree. Focusable nodes in `#work`: **14**, unchanged from
+  §20.7.
+* **Cloned in JS, not in the HTML.** The markup, the SEO audit's image count and the no-JS fallback all
+  still see eleven cards. Same eleven image URLs, so the clones cost no extra bytes.
+* **The `go()` fallback for an un-cloned track is kept** (one card, or a future layout with nothing to
+  clone), which is the old `scrollTo` wrap.
+
+**The one real bug this introduced, and it was caught by measuring.** A programmatic jump fires its own
+`scrollend`, and that event is *not* a settled track: it arrived while the smooth scroll started on the
+next line was still in flight, so the settle handler normalised a mid-animation position and cancelled the
+move. Stepping **backwards** off the first card died exactly there — measured `0 → prev → 0` instead of
+`0 → 4480`. A jump now marks its own `scrollend` to be ignored, with a 400ms timer dropping the mark in
+case the assignment was a no-op and no event ever came. Re-measured after the fix: `0 → 4480`, both
+locales. **Read the code and you would have shipped it.**
+
+### 22.3 Seven regenerated client logos
+
+Seven clean brand lockups, built from each client's real registered name, supplied at
+`design/client-logos/v2-<domain>.png` (1024x1024, opaque, near-white ground). Swapped in for
+**kwcarwash.com, carwashkw.com, alghadeerclean.com, ragwaclean.com, movingcompanykw.com, kwtclean.com and
+anharpest.com**. The other four — q8carwash, mashame3, kuwaityclean, betikcleaner — are untouched and are
+still the mark the client's own live site serves. The old seven sources and every `-sq` derivative stay on
+disk; the build stops referencing them.
+
+**Derived by §20.2's rules exactly**, so eleven logos still read as one set: trim the dead ground against
+the source's own corner colour (tolerance 12), re-pad up to 7% in that colour but never more than was
+trimmed off that side, scale by **equal optical area** `k = sqrt(0.44 x 640 x 334 / inkArea)` clamped to
+614x307, centre on the shared **640x334** transparent canvas, WebP `quality 86, alphaQuality 100,
+effort 6`. Same one canvas for all eleven, so the same explicit `width="640" height="334"` covers every
+card and no logo can move the layout.
+
+| Site | Ink box after trim | Ratio | Placed in 640x334 | kB |
+|---|---|---|---|---|
+| carwashkw.com | 1024x847 | 1.21 | 337x279 | 13.5 |
+| kwtclean.com | 1024x889 | 1.15 | 329x286 | 9.4 |
+| kwcarwash.com | 1024x913 | 1.12 | 325x290 | 12.6 |
+| movingcompanykw.com | 1014x673 | 1.51 | 376x250 | 11.0 |
+| anharpest.com | 1024x912 | 1.12 | 325x289 | 12.1 |
+| alghadeerclean.com | 1024x879 | 1.16 | 331x284 | 9.6 |
+| ragwaclean.com | 970x754 | 1.29 | 348x270 | 10.4 |
+
+**Two of §20's special cases are retired by this.** §20.3 had to composite anharpest.com's light-on-dark
+lockup on its site's own `#0D1512` ground, so it shipped as the one dark tile in the row; the regenerated
+lockup is dark-on-white like the rest and the dark tile is gone. §20.4 reproduced movingcompanykw.com's
+wordmark in the site's own typefaces because that client ships no logo file at all; it now carries a real
+lockup, so nothing on the page is a reproduction any more. `copy.md`'s §7 logo table records which of the
+eleven is which.
+
+Everything else from §20 stands: white plate, `object-fit: contain`, `alt=""` (the card prints the domain
+as text right underneath), and **not** `loading="lazy"` for the reason measured in §20.6.
+
+### 22.4 Verification
+
+**Scope cut deliberately.** This pass is a metric swap, a carousel loop and a logo swap, all inside §7.
+The full `shots.mjs` route sweep, `compare.mjs` (§7 diverges from its board by design — §20.5) and
+`seo-audit.mjs` (no link, metadata, structure or sitemap touched) were dropped as disproportionate. What
+was kept is the two things that can actually be wrong: the numbers, and whether the loop loops.
+
+**1. The numbers.** Every total recomputed from `proof-data.md`'s rows and matched against the table in
+22.1. Order descending confirmed on the built page. The four one-month cards carry their tag and no
+number. All eleven cards render with a logo, no plate empty, both locales, checked at 1440 with the track
+unwrapped so all eleven are on screen at once.
+
+**2. The loop.** Cursor parked at 20,20 — far from §7 and never moved — §7 scrolled into view, then left
+alone for 105 seconds. `scrollLeft` once a second, 1440x900:
+
+```
+/en/   0 0 0 0 448 448 448 448 896 896 896 896 1344 ... 3584 3584 3584 3584 4032 4032 4032 4032
+       4480 4480 4480 4480  0 0 0 0  448 448 448 448 ... 4480 4480 4480 4480  0 0 0  448 448 ...
+
+/      0 0 0 0 -448 -448 -448 -448 -896 ... -4032 -4032 -4032 -4032 -4480 -4480 -4480 -4480
+(RTL)   0 0 0 0 -448 ... -4480 -4480 -4480 -4480  0 0 0 -327 -448 ...
+```
+
+**Two complete laps in 105 seconds in both locales**, `0 → 4480 → 0 → 4480 → 0 → …`, with no rewind values
+between `4480` and `0` — against the old `3584 → 1516 → 0`. RTL still advances negative, Chrome's
+convention, which is what `sign` is for. Track geometry: 22 cards, step 448, `scrollWidth` 9832,
+`clientWidth` 1320, `loopLen` 4928.
+
+**Is the seam visible?** Two ways, both at 1440, both locales:
+* The track screenshotted at `pos = 0` and at `pos = loopLen`, diffed: **0 differing subpixels of
+  1,702,800** (`/en/`) and **0 of 1,718,640** (`/`).
+* The live wrap caught in the act by polling at 40ms — `4924 → 4928 → 0` — and the frame taken immediately
+  after the wrap diffed against `pos = 0`: **0 differing subpixels**, both locales.
+
+The two frames either side of the jump are the same pixels, so there is nothing to see.
+
+**3. Everything §18 and §20.7 already paid for, re-measured because `go()` changed.** Both locales:
+
+| Behaviour | Result |
+|---|---|
+| `prefers-reduced-motion: reduce`, 11s untouched | `scrollLeft 0` — never auto-advances |
+| Real `mousemove` over the cards, 10s | held at `0` for the full 10s |
+| Pointer leaves | resumes, `448` / `-448` |
+| Keyboard + buttons from 0 | `0 → 448 → 896 → 448 → 0 → 4480` (and the RTL mirror) — including the backward wrap off the first card |
+| Focusable nodes in `#work` | **14** (track, 11 card links, 2 buttons) |
+| Clones | 11, every one `aria-hidden="true"` and `tabindex="-1"` |
+| Console / page errors | none, both locales |
+
+**4. Lighthouse**, `/en/` desktop, one run on the final build:
+
+| Perf | A11y | LCP | TBT | CLS |
+|---|---|---|---|---|
+| **100** | **100** | 404ms | 0ms | **0** |
+
+Zero accessibility audit failures. CLS stays 0 with 11 runtime-appended cards because every plate has a
+fixed `aspect-ratio` and every logo the same explicit `width`/`height`.
+
+**Nothing in this pass was committed, pushed or deployed.**

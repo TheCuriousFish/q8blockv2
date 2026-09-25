@@ -119,6 +119,9 @@
      link in DOM order, and the two buttons are real buttons. It never
      auto-advances under prefers-reduced-motion, and it pauses on hover, on
      focus, on touch, when off screen and when the tab is hidden.
+     It LOOPS ENDLESSLY: the card set is cloned once and the position is
+     reduced by one set length at the seam, so there is no last card to stop on
+     (Ahmad, 2026-09-25 — see the block comment below).
      RTL: Chrome reports scrollLeft as 0 at the start and negative toward the
      end, so `sign` flips and "advance" is always go(1) in both locales. ───── */
   var slider = document.querySelector('[data-slider]');
@@ -147,11 +150,112 @@
     };
     var maxScroll = function () { return track.scrollWidth - track.clientWidth; };
     var pos = function () { return Math.abs(track.scrollLeft); };
+
+    /* ── The loop is INFINITE (Ahmad, 2026-09-25: "the slideshow needs to be
+       infinite") ────────────────────────────────────────────────────────────
+       It did wrap before, but by smooth-scrolling the whole track back to the
+       start. Measured at 1440, cursor parked away from the section: scrollLeft
+       ran 0 448 896 ... 3584, sat at 3584 for a tick, then 1516, then 0 — an
+       eight-card rewind the reader watches go past. That is what read as
+       "it advances to the end and stops": the last card is the end of the line
+       and everything after it is a retreat.
+
+       The fix is a treadmill, not a library. The card set is cloned ONCE and
+       appended, so the track holds 22 cards for 11 clients. Advancing is always
+       one step forward; at the seam, scrollLeft is reduced by exactly one set
+       length with the CSS smooth behaviour suppressed for that single
+       assignment. At pos = loopLen the viewport shows clone 1, 2, 3, which are
+       pixel-identical to cards 1, 2, 3 at pos 0, so the subtraction changes
+       nothing on screen and the next step continues forward. There is no end to
+       reach and no rewind to watch.
+
+       The clones are `aria-hidden="true"` + `tabindex="-1"`, so the eleven real
+       cards remain the only eleven tab stops and the only eleven the
+       accessibility tree sees (the focusable count in §7 stays 14). They are
+       cloned in JS, not written into the HTML, so the markup, the SEO audit's
+       image count and the no-JS fallback all see eleven cards. Same eleven
+       URLs, so the clones cost no extra bytes. */
+    var real = Array.prototype.slice.call(track.children);
+    var looping = false;
+    if (real.length > 1) {
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < real.length; i++) {
+        var clone = real[i].cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('tabindex', '-1');
+        clone.setAttribute('data-clone', '');
+        frag.appendChild(clone);
+      }
+      track.appendChild(frag);
+      looping = true;
+    }
+    var loopLen = function () { return real.length * stepPx(); };
+
+    // One scroll assignment with `scroll-behavior: smooth` suppressed, so the
+    // seam is a jump and not an animation the reader can see. The read of
+    // scrollLeft afterwards flushes it before the inline style comes off.
+    //
+    // A jump fires its own `scrollend`, and that event is NOT a settled track:
+    // measured, it arrived while the smooth scroll started on the next line was
+    // still in flight, so the settle handler normalised a position that was
+    // mid-animation and cancelled the move. Stepping backwards off the first
+    // card died exactly there — 0 -> prev -> 0 instead of 0 -> 4480. So a jump
+    // marks its own scrollend to be ignored, and the mark is dropped on a timer
+    // in case the assignment was a no-op and no event ever came.
+    var ignoreSettle = false, ignoreTimer = null;
+    var jumpTo = function (p) {
+      var target = sign * Math.max(p, 0);
+      if (Math.round(track.scrollLeft) === Math.round(target)) return;
+      ignoreSettle = true;
+      clearTimeout(ignoreTimer);
+      ignoreTimer = setTimeout(function () { ignoreSettle = false; }, 400);
+      var prev = track.style.scrollBehavior;
+      track.style.scrollBehavior = 'auto';
+      track.scrollLeft = target;
+      void track.scrollLeft;
+      track.style.scrollBehavior = prev;
+    };
+    // Called only when the track is at rest. The `while` covers a viewport
+    // resize having shrunk a set length under the current position.
+    var normalise = function () {
+      if (!looping) return false;
+      var L = loopLen();
+      if (L <= 0) return false;
+      var p = pos(), moved = false;
+      while (p >= L - 2) { p -= L; moved = true; }
+      if (moved) jumpTo(p);
+      return moved;
+    };
     var go = function (dir) {
+      var step = stepPx();
+      if (looping) {
+        if (dir > 0) normalise();                    // step off the seam, not off the end
+        else if (pos() <= 2) jumpTo(loopLen());      // step back off the start
+        track.scrollBy({ left: sign * dir * step, behavior: behavior() });
+        return;
+      }
       if (dir > 0 && pos() >= maxScroll() - 2) track.scrollTo({ left: 0, behavior: behavior() });
       else if (dir < 0 && pos() <= 2) track.scrollTo({ left: sign * maxScroll(), behavior: behavior() });
-      else track.scrollBy({ left: sign * dir * stepPx(), behavior: behavior() });
+      else track.scrollBy({ left: sign * dir * step, behavior: behavior() });
     };
+    // A swipe, or the browser's own arrow-key scrolling of the focused track,
+    // moves the position without go() being involved and can leave it inside
+    // the clones. Normalise once the scroll comes to rest as well: `scrollend`
+    // where Chrome has it, a short debounce where it does not. Normalising is
+    // idempotent, so the scroll event our own jump fires is a no-op.
+    var settleTimer = null;
+    var onSettle = function () {
+      if (ignoreSettle) { ignoreSettle = false; clearTimeout(ignoreTimer); return; }
+      normalise();
+    };
+    if ('onscrollend' in window) {
+      track.addEventListener('scrollend', onSettle);
+    } else {
+      track.addEventListener('scroll', function () {
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(onSettle, 180);
+      }, { passive: true });
+    }
 
     var stop = function () { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } };
     var update = function () {
