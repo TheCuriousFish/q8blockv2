@@ -332,8 +332,8 @@ export const COPY = {
       lead: 'كل موقع هنا بُني من الصفر وما زال يعمل. الرقم على كل بطاقة هو عدد المرات التي ظهر فيها الموقع في نتائج بحث Google، مجموع كل شهر كامل سجّله Google لهذا الموقع. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.',
       /* The metric label never says "impression": it says what an impression
          IS. A reader who has no website does not know the word and is not
-         asked to. Reads on the card as "245,600 مرة ظهر فيها في بحث Google". */
-      metricLabel: 'مرة ظهر فيها في بحث Google',
+         asked to. Reads on the card as "246K ظهور". One number, one word. */
+      metricLabel: 'ظهور',
       newTag: 'مشروع جديد',
       linkLabel: 'افتح الموقع',
       /* ONE source line under the whole section, replacing the eleven date
@@ -712,7 +712,7 @@ export const COPY = {
       eyebrow: 'Our work',
       h2: 'Sites we built that <span class="hl">get found.</span>',
       lead: 'Every site here was built from scratch and is still running. The figure on each card is how many times that site has come up in Google search results, added up across every complete month Google has recorded for it. The recent projects are labelled as what they are, because their data is not in yet.',
-      metricLabel: 'times shown in Google search',
+      metricLabel: 'impressions',
       newTag: 'New project',
       linkLabel: 'View case study',
       source: 'All figures from Google Search Console: every complete month recorded for each site, added up, to August 2026. Partial months are not counted.',

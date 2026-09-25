@@ -305,6 +305,10 @@ function workPlate(c) {
    on the site (§6 prints 7 / 165 / 531). `.work-metric .num` already carries
    `direction: ltr; unicode-bidi: isolate`, so 245,600 reads left to right
    inside the Arabic sentence without a wrapper here. */
+
+// Compact thousands: 245,600 -> 246K. Ahmad, 2026-09-25: the full grouped number
+// plus a six word label was "so much text" on the card. One number, one word.
+const compactNum = (n) => (n >= 1000 ? Math.round(n / 1000) + "K" : String(n));
 const totalImpressions = (c) => (c.impressions || []).reduce((a, b) => a + b, 0);
 const groupNum = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -314,7 +318,7 @@ export function work(t) {
     const metric = c.isNew
       ? `<p class="work-metric work-tag">${esc(t.work.newTag)}</p>`
       : total
-        ? `<p class="work-metric"><span class="num">${groupNum(total)}</span> ${esc(t.work.metricLabel)}</p>`
+        ? `<p class="work-metric"><span class="num">${compactNum(total)}</span> ${esc(t.work.metricLabel)}</p>`
         : '';
     return `<a class="card-light work-card" href="${c.url}" rel="nofollow noopener" target="_blank">
       ${workPlate(c)}
