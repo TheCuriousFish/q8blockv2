@@ -13,6 +13,15 @@
 # gets it too, from this same file). build.mjs writes site/404.html on every
 # build (design/build-spec.md §17).
 
+# MUST sit above the /ar/* wildcard: Netlify takes the FIRST matching rule, so
+# the wildcard was swallowing this and sending it to the homepage instead.
+# The Arabic checklist never exists in the new build; the one canonical copy does.
+[[redirects]]
+  from = "/ar/google-business-profile-checklist.html"
+  to = "/google-business-profile-checklist.html"
+  status = 301
+  force = true
+
 # --- Language flip -----------------------------------------------------------
 # The old site served English at / and Arabic at /ar/. The new site is Arabic
 # first at / with the English mirror at /en/. 478 links from client sites point
@@ -61,10 +70,3 @@
   from = "/landscaping/onboarding.html"
   to = "/"
   status = 301
-
-# The Arabic checklist never exists in the new build; the one canonical copy does.
-[[redirects]]
-  from = "/ar/google-business-profile-checklist.html"
-  to = "/google-business-profile-checklist.html"
-  status = 301
-  force = true
