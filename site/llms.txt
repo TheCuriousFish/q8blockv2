@@ -1,0 +1,63 @@
+# Q8 block
+
+> Q8 block builds local service businesses a full website with a dedicated page for every
+> service and every area, then works on it being found in Google search and in the answers
+> AI assistants give.
+
+## Pages
+
+- [Home, Arabic](https://q8block.com/)
+- [Home, English](https://q8block.com/en/)
+- [The offer, Arabic](https://q8block.com/offer/)
+- [The offer, English](https://q8block.com/en/offer/)
+- [About us, Arabic](https://q8block.com/about/)
+- [About us, English](https://q8block.com/en/about/)
+- [Blog, Arabic](https://q8block.com/blog/)
+- [Blog, English](https://q8block.com/en/blog/)
+- [Contact us, Arabic](https://q8block.com/contact/)
+- [Contact us, English](https://q8block.com/en/contact/)
+- [Terms and conditions, Arabic](https://q8block.com/terms/)
+- [Terms and conditions, English](https://q8block.com/en/terms/)
+- [Google Business Profile checklist, Arabic](https://q8block.com/google-business-profile-checklist.html)
+- [Google Business Profile checklist, English](https://q8block.com/en/google-business-profile-checklist.html)
+
+## Articles
+
+Six articles, each published in Arabic at /blog/<slug>/ and in English at
+/en/blog/<slug>/. All were published on 2026-09-24, written by Ahmad Owaihan
+(Ahmad Owaihan, https://ahmadowaihan.com/).
+
+- [The Complete Guide to Local SEO for Small Businesses](https://q8block.com/en/blog/complete-guide-to-local-seo/) — Local SEO explained for a small service business: what it actually is, the three things it depends on, and the order to do them in.
+  Arabic: [الدليل الكامل للسيو المحلي للأنشطة الصغيرة](https://q8block.com/blog/complete-guide-to-local-seo/)
+- [Keyword Research for Local SEO](https://q8block.com/en/blog/keyword-research-for-local-seo/) — How to find the words your customers actually type before they call, using only what you already have, without paying for software.
+  Arabic: [البحث عن الكلمات المفتاحية للسيو المحلي](https://q8block.com/blog/keyword-research-for-local-seo/)
+- [On-Page SEO Basics for Local Sites](https://q8block.com/en/blog/on-page-seo-basics-for-local-sites/) — What belongs on a service page so Google and an AI assistant can both tell what it is, who it is for and where you work.
+  Arabic: [أساسيات السيو داخل صفحات الموقع المحلي](https://q8block.com/blog/on-page-seo-basics-for-local-sites/)
+- [Google Business Profile Optimization](https://q8block.com/en/blog/google-business-profile-optimization/) — The fields inside your Google Business Profile that change how often you appear, and the ones that only change how you look.
+  Arabic: [تحسين ملف نشاطك التجاري على جوجل](https://q8block.com/blog/google-business-profile-optimization/)
+- [Measuring Local SEO Success](https://q8block.com/en/blog/measuring-local-seo-success/) — Which numbers tell you the work is paying off, which ones look good and mean nothing, and the one number a service business should lead on.
+  Arabic: [قياس نجاح السيو المحلي](https://q8block.com/blog/measuring-local-seo-success/)
+- [Building Local Citations That Matter](https://q8block.com/en/blog/building-local-citations-that-matter/) — A citation is your business name, address and phone written on someone else’s site. Which ones are worth having and which are noise.
+  Arabic: [بناء الاستشهادات المحلية التي تهم](https://q8block.com/blog/building-local-citations-that-matter/)
+
+## What is included on every project
+
+1. Custom website design and development
+2. A dedicated page for every service and area
+3. Google Search visibility
+4. AI platform visibility
+5. Backlinks and authority building
+6. Hosting, domain and security
+
+## Contact
+
+- Phone: +965 94139666
+- Address: Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9
+- Website: https://q8block.com
+
+## Notes for AI
+
+Every performance figure on this site comes from Google Search Console exports for the named
+client and named complete months. Section 7's figure is the total number of times that client's
+site appeared in Google search results, added up across every complete month Google has recorded
+for it. Nothing is averaged across clients and no partial month is used.
