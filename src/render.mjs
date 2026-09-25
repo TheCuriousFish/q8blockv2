@@ -133,31 +133,35 @@ export function offerStrip(t) {
 
 /* ── §1 Hero ─────────────────────────────────────────────────────────────── */
 
-/* The credentials row, §23. It replaced the four trust points, one of which
-   ("hosting, domain and security included") was an OFFER deliverable that had
-   drifted into the brand hero. Ahmad: "this is great real estate to put
-   authority and trustability."
+/* The hero's Google rating mark, §23 then §24. It replaced the four trust
+   points, one of which ("hosting, domain and security included") was an OFFER
+   deliverable that had drifted into the brand hero. Ahmad: "this is great real
+   estate to put authority and trustability."
 
-   Two elements share the row. The Google mark is five filled stars and the
-   word Google, linked to Q8Block's own Business Profile — NO review count
-   (he has few reviews and does not want the number shown) and NO review text.
-   The tools are the four subscriptions the work is actually done with, under a
-   label that says exactly that.
+   §24, 2026-09-25: the row that briefly also carried a strip of SEO tool logos
+   under the label "the tools we work with" is cut back to this mark alone.
+   Ahmad: "I told you we do not want to mention the tools that we are using...
+   that's not trust." Nothing about tools, partners or software appears anywhere
+   on the page any more, so the mark is now the whole row: CENTRED and a size
+   step larger, because it no longer shares the space.
+
+   The mark is five filled stars and Google's own wordmark, linked to Q8Block's
+   own Business Profile — NO review count (he has few reviews and does not want
+   the number shown) and NO review text.
+
+   THE WORDMARK IS AN IMAGE, NOT COLOURED TEXT, AND THAT IS DELIBERATE. Ahmad
+   asked for Google's own per-letter colours. As live text the yellow `o` is
+   ~1.8:1 on the hero's #F5F6F7 and fails WCAG even at the large-text threshold,
+   which would cost the 100 accessibility score; WCAG does not apply to an image
+   of a logotype, so the image keeps the colours AND the score. The file is
+   Google's official SVG, fetched byte-for-byte — see design/brand-marks/.
 
    THE STARS ARE VISUAL ONLY. Nothing here emits `aggregateRating` or `Review`
    structured data and nothing ever should: showing stars is fine, marking them
    up as a rating on a handful of reviews is what earns a manual action. There
-   is no rating value, no count and no review body anywhere in this markup. */
-
-// Intrinsic pixel sizes, written by design/tool-logos/derive.mjs at 3x the CSS
-// box. Both dimensions are on every <img>, so four logos of four different
-// shapes cannot move the first screen — CLS stays 0.
-const TOOLS = [
-  { slug: 'semrush', name: 'Semrush', w: 273, h: 66 },
-  { slug: 'ahrefs', name: 'Ahrefs', w: 182, h: 51 },
-  { slug: 'ubersuggest', name: 'Ubersuggest', w: 281, h: 45 },
-  { slug: 'gsc', name: 'Google Search Console', w: 410, h: 48 },
-];
+   is no rating value, no count and no review body anywhere in this markup.
+   The link carries its own `aria-label`, so a screen reader hears that this is
+   a five star rating on Google even though neither word is drawn on screen. */
 
 const STAR = 'M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z';
 
@@ -171,17 +175,19 @@ function stars(n = 5) {
 function credentials(t) {
   const c = t.hero.cred;
   // Rendered only when Ahmad's own profile URL is configured. With GBP_URL
-  // null the mark disappears rather than linking somewhere wrong.
-  const google = CONFIG.GBP_URL
-    ? `<a class="cred-google" href="${CONFIG.GBP_URL}" target="_blank" rel="noopener" aria-label="${esc(c.googleLabel)}">
-        ${stars()}<span class="cred-word">${esc(c.googleWord)}</span>
-      </a>`
-    : '';
-  const tools = `<div class="cred-tools">
-      <p class="cred-label">${esc(c.toolsLabel)}</p>
-      <ul class="tool-row">${TOOLS.map((x) => `<li><img class="t-${x.slug}" src="/assets/img/tool-${x.slug}.webp" width="${x.w}" height="${x.h}" alt="${esc(x.name)}" decoding="async"></li>`).join('')}</ul>
+  // null the whole row disappears rather than linking somewhere wrong — there
+  // is nothing else left in it to carry.
+  if (!CONFIG.GBP_URL) return '';
+  // alt="" on the wordmark: the link's aria-label is the accessible name and it
+  // already contains "Google", so alt text here would only be announced twice.
+  // With no visible text inside the link, axe's label-content-name-mismatch
+  // cannot fire. The intrinsic 74x24 is the SVG's own viewBox — both dimensions
+  // are present, so the first screen cannot shift as the image decodes.
+  return `<div class="cred">
+      <a class="cred-google" href="${CONFIG.GBP_URL}" target="_blank" rel="noopener" aria-label="${esc(c.googleLabel)}">
+        ${stars()}<img class="cred-word" src="/assets/img/google-wordmark.svg" width="74" height="24" alt="" decoding="async">
+      </a>
     </div>`;
-  return `<div class="cred${google ? '' : ' cred-solo'}">${google}${tools}</div>`;
 }
 
 export function hero(t) {

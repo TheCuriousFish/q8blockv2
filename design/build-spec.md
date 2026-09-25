@@ -2990,3 +2990,229 @@ its product name as `alt`. `--fs-cred-label` at `#686F79` on `#F2F3F5` is 4.57:1
 without a weight floor.
 
 **Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+---
+
+## 24. The tools strip is deleted and the Google mark becomes the whole row, 2026-09-25
+
+Ahmad's fifth revision pass, same day as §23 and against §23's own output. Hero only, so the verification
+is sized to the change exactly as §23's was: the first-screen budget, screenshots looked at by eye, a
+structured-data grep and one Lighthouse run. `compare.mjs`, `seo-audit.mjs` and the full `shots.mjs` sweep
+were deliberately skipped again. Nothing here is committed, pushed or deployed — the site is live at
+q8block.com, so Ahmad reviews this on `localhost:8823` first.
+
+### 24.1 The tools are out, and the reason is worth keeping
+
+§23 filled the row under the CTAs with two things: a Google rating mark, and a strip of four SEO tool
+logos (Semrush, Ahrefs, Ubersuggest, Google Search Console) under the label `الأدوات التي نعمل بها` /
+`THE TOOLS WE WORK WITH`. Ahmad, hours later:
+
+> `I told you we do not want to mention the tools that we are using... that's not trust.`
+
+He is right, and §23.2 half-argued itself into it: the strip had to be defended in three sentences
+against being read as partnership, endorsement or a badge, which is the tell that it was never a
+credential in the first place. A subscription the reader can buy himself is not authority.
+
+**What was removed.** `.cred-tools`, `.cred-label`, `.tool-row` and the four per-logo height rules out of
+`src/styles.css`; the `TOOLS` array and the whole tools branch of `credentials()` out of `src/render.mjs`;
+`toolsLabel` out of both locales in `src/data.mjs`; the `--fs-cred-label` token, which existed only for
+that label; `.cred-solo`, which existed only for the case where the Google mark was absent and the tools
+held the row alone; the `<990px` stacking rules and the `<768px` phone rules that existed only to pack two
+halves into a phone row; and `src/img/tool-{semrush,ahrefs,ubersuggest,gsc}.webp`, the four build inputs.
+
+**What was kept on disk.** `design/tool-logos/` — the four fetched sources and `derive.mjs` — is left
+exactly where §23.4 put it. Nothing references it, nothing builds from it, and it is not served
+(`netlify.toml` publishes `site/` only). It is the record of where those assets came from, in case a
+different surface ever legitimately needs them.
+
+**Verified by grep over the BUILT output**, not the templates, `site/` entire, case-insensitive:
+`semrush`, `ahrefs`, `ubersuggest`, `tool-row`, `cred-tools`, `cred-label` → **0 files each**. On the two
+homepages, `tool`, `partner` and `software` → **0 occurrences**.
+
+**`Google Search Console` is still on the page three times and that is deliberate.** Twice in §6/§7 and
+once in an FAQ answer, always as the **source of a figure** (`All figures from Google Search Console:
+every complete month...`). That is provenance, not a tool being advertised; it predates §23 by a day
+(§15.5) and `copy.md` rule 2 — every figure is checkable — leans on it. Removing it is a separate
+decision for Ahmad and it costs the checkability argument.
+
+### 24.2 The CSS-comment leak happened again, in this pass, and the same grep caught it
+
+§23.3 records that a comment in `src/styles.css` naming schema properties leaked into all 82 built pages,
+because `build.mjs` inlines the stylesheet. The first draft of this pass wrote the full reasoning —
+including the words "tool logos" and Ahmad's quote about tools — into the `.cred` comment block, and the
+built-output grep came back with **4 occurrences of `tool` and 25 files containing `fs-cred-label`** on a
+change whose entire point was that the word should be gone.
+
+The fix is not "be careful with comments". `src/styles.css` now carries a standing instruction at the top
+of the `.cred` block: this file is shipped text, the reasoning lives in `src/render.mjs` and in this file,
+and **no vendor, product or property name is written in the stylesheet at all**. `render.mjs` and
+`data.mjs` are build-time modules and are never served, so that is where the long comments belong.
+
+### 24.3 The mark: centred, bigger, and the wordmark is an image on purpose
+
+Ahmad: `Google Rating, centre and bigger`, and `add the colours for each letter of the Google so it
+matches the Google company, since black is just boring.`
+
+`.cred` is now a single centred flex row holding one `<a class="cred-google">`: five filled stars and the
+wordmark, nothing else. No count, no `5.0`, no review text, no box, no border, no plate.
+
+| | §23 | §24 | at 1440 |
+|---|---|---|---|
+| Stars box height | `clamp(14, 18/14.4vw, 20)` | **`clamp(20, 26/14.4vw, 29)`** | 18 → **26px** |
+| `Google` | live text, `--fs-trust` 600, `--ink` | **Google's own SVG as `<img>`**, `clamp(23, 30/14.4vw, 33)` | cap 13.4 → **22.3px** |
+| Gap | 12px fixed | `clamp(12, 16/14.4vw, 18)` | 12 → **16px** |
+| The row | mark + hairline + label + 4 logos, **48px** tall | **the mark alone, 36px tall** | 255.8px wide |
+| `margin-block-start` | 76px | **78px** | |
+
+That is 1.44x on the stars and 1.66x on the wordmark's cap height, and the whole mark is 255.8px wide
+against roughly 184px before. It is still far below the CTA row's weight: two buttons of 262px minimum
+each, one an orange fill and one a 2px outline, against 255.8px of 26px stars. It does not compete.
+
+**Why the wordmark is an image and must stay one.** Per-letter colours as live text would put Google's
+yellow `#FBBC05` on the hero's `#F5F6F7`: **1.79:1**, which fails WCAG AA at any size, including the
+large-text threshold, and would take accessibility off 100 the moment it shipped. WCAG 1.4.3 exempts
+images, and specifically exempts logotypes, so an image is the only construction that gets Ahmad the
+brand colours **and** keeps the score. There is no CSS trick that recovers this: darkening the yellow
+until it passes stops it being Google's yellow, which was the whole request.
+
+**Where the asset came from.**
+`https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg` — Google's own
+branding directory on `gstatic.com`, the SVG counterpart of the `googlelogo_color_*dp.png` rasters listed
+on Google's brand resource centre. Fetched 2026-09-25, 1660 bytes, `viewBox="0 0 74 24"`, sha256
+`99bf4aa4…67a03e52`. Kept byte-for-byte at `design/brand-marks/google-wordmark.svg` with `SOURCES.md`
+beside it. **Nothing is redrawn**: a hand-traced approximation of a trademark is both less accurate and
+worse practice, and §23.4's rule — fetch the owner's own asset or do not ship it — applies to Google
+exactly as it applied to the four tools.
+
+`design/brand-marks/derive.mjs` copies it into `src/img/`. A vector needs no rasterising, so the
+derivation is a **guarded** copy: it re-checks the sha256, the viewBox and the presence of all four brand
+colours before writing, and prepends a provenance comment into the shipped SVG. If Google changes the
+asset under that URL the script fails loudly instead of silently shipping something else. No `sharp`, no
+dependencies — it runs with plain `node`.
+
+The `<img>` carries `width="74" height="24"`, its own viewBox, so the mark cannot shift the first screen
+as it decodes. It is **not** lazy: §20.6 already records why a first-viewport image must not be. 1881
+bytes on the wire, against the 36 kB of WebP the four tool logos cost — the row got bigger and ~34 kB
+lighter.
+
+### 24.4 The stars are Google's gold, not the brand orange. Both were built and looked at
+
+§23 argued for `--orange` on the grounds that a mark in the site's own accent cannot be mistaken for a
+scraped Google widget. That argument was made when the word beside the stars was **black text**. With the
+wordmark now in Google's four colours it no longer holds, so both were rendered at `deviceScaleFactor 3`
+and compared side by side (`stars-gold.png`, `stars-orange.png`):
+
+* **Orange `#FF5F29`** puts a fifth hue directly between the wordmark's own red `#EA4335` and yellow
+  `#FBBC05`. Orange sits between those two on the wheel without matching either, so the five stars and
+  the first three letters read as a colour mistake rather than as a set. It also spends the page's
+  **action** colour — the CTA fill and the headline highlight bar are the only other orange on the first
+  screen — on a decorative mark sitting directly beneath the CTAs, which is the one thing this row must
+  not do.
+* **Google's star gold `#FBBC04`** ties the stars to the `o` two glyphs away. The mark resolves into one
+  object instead of two, and the orange above it stays the only orange, so the CTAs keep their monopoly
+  on the page's action colour.
+
+Gold shipped. Contrast is not a question for either: the stars are `aria-hidden` decoration, not text,
+and the meaning is carried by the link's accessible name (24.5).
+
+**The optical nudge on the wordmark is measured, not eyeballed.** Google's SVG is tight-cropped, so the
+descender of `g` is inside the box: rasterised at 20x in Chrome and scanned row by row, the cap top is at
+**0.0** units, the baseline (bottom of the final `e`) at **17.85** and the descender bottom at **23.0**,
+in a 24-unit box. The cap band's centre is therefore 8.93 units — **3.84px above the box's geometric
+centre** at a 30px render — so `align-items: center` alone leaves the word riding high against the stars.
+`.cred-word { margin-block-start: 6px }` drops it back: star ink centre lands 17.46px from the row top,
+cap-band centre 17.16px. **0.3px apart.** The stars' own ink runs y 2 → 21 of their 24-unit viewBox,
+which is where the other half of that arithmetic comes from.
+
+RTL mirrors the composition, so Arabic reads `Google ★★★★★` right to left. That is correct for a
+composition in an RTL container, not a bug, and the wordmark itself is never mirrored.
+
+### 24.5 Accessibility: the row draws no words, so the link carries them
+
+Nothing on the row is text any more — five `aria-hidden` stars and an image. The `<img>` takes `alt=""`
+(the link already names itself, and alt text here would only be announced twice), and the link takes:
+
+| | Accessible name |
+|---|---|
+| `/` | `تقييم خمس نجوم على Google` |
+| `/en/` | `Five star rating on Google` |
+
+It says what the mark means — a five star rating on Google — which neither the stars nor the wordmark say
+out loud, and it names **no count**, matching the visual. With `alt=""` the link has no visible text at
+all, so `label-content-name-mismatch` cannot fire; the name keeps the word `Google` in it anyway, so it
+stays clean even if the image is ever given alt text again. Focus uses the global `:focus-visible` ring.
+
+**Still no rating structured data.** Grepped over the whole of `site/` after the final build,
+case-insensitively, for `aggregaterating`, `ratingvalue`, `reviewcount`, `"review"`, `schema.org/Review`
+and `bestrating`: **0 matches each**. Run against the built output, never the template — 24.2 is why that
+is not paranoia.
+
+### 24.6 The first-screen budget, rebalanced, and one Arabic media query retired
+
+Deleting a 48px two-part row and putting back a 36px one-part row frees 12px, and §15.1's budget is a
+**hard** constraint, so the freed space went where Ahmad asked for it — air. `margin-block-start` 76 → 78
+on desktop, 52 → **56** on tablet, and on the phone 40 → **48**, where §23 needed the row squeezed to 40
+to fit two stacked bands about 90px tall and §24's single 29px row does not.
+
+**The Arabic short-window override moved, and this is the real whitespace win.** §15.1's
+`@media (min-width: 990px) and (max-height: 950px)` gave Arabic tightened hero gaps — `btn-row 40 → 30`,
+`cred 70 → 50` — and **1440x900, the spec viewport, is inside that query**, so the Arabic mark sat 50px
+under the CTAs against English's 78. With the shorter row Arabic now clears 900 with room: measured hero
+content **483.3px inside a 550px box**, 66.7px spare. The threshold is now `max-height: 870px`.
+
+The arithmetic that picks 870, so the next agent does not have to re-derive it: hero box = viewport − 78
+(the strip); content area = that − 272 (96 above the content plus the 112 header, and 64 below). So the
+untightened Arabic hero needs a viewport of **833.3px** and the tightened one **795.3px**. 870 is a round
+number comfortably between them: 900 gets the full air, genuinely short windows keep the tightened gaps
+they have always had, and the 795.3px floor below which the Arabic hero grows and the page scrolls
+normally is unchanged.
+
+### 24.7 Verification
+
+**1. The first-screen budget, §15.1's hard constraint, all six combinations.** Real Chrome,
+`deviceScaleFactor 1`, after `document.fonts.ready`:
+
+| Viewport | Locale | Header | Hero | Strip | First screen | `#problem` top | Hero internal scroll | Overflow-x | Subhead lines |
+|---|---|---|---|---|---|---|---|---|---|
+| 1440x900 | en | 112 | 822 | 78 | **900** | **900** | 0 | false | 1 |
+| 1440x900 | ar | 112 | 822 | 78 | **900** | **900** | 0 | false | 1 |
+| 1920x1200 | en | 112 | 1121 | 79 | **1200** | **1200** | 0 | false | 1 |
+| 1920x1200 | ar | 112 | 1121 | 79 | **1200** | **1200** | 0 | false | 1 |
+| 390x844 | en | 72 | 726.8 | 117.2 | **844** | **844** | 0 | false | 3 |
+| 390x844 | ar | 72 | 726.8 | 117.2 | **844** | **844** | 0 | false | 2 |
+
+Identical to §23.6 and §21.4 to the pixel in all six rows: header + hero + strip is exactly one viewport,
+the next section starts precisely at the fold, and the hero never scrolls inside itself.
+
+The mark itself, measured:
+
+| Viewport | Row height | Mark | Stars | Wordmark | Row top (en / ar) |
+|---|---|---|---|---|---|
+| 1440x900 | 36 | 255.8 x 36 | 147.3 x 26 | 92.5 x 30 | 674.9 / 688.7 |
+| 1920x1200 | 39 | 284.1 x 39 | 164.3 x 29 | 101.8 x 33 | 836.3 / 852.1 |
+| 390x844 | 29 | 196.2 x 29 | 113.3 x 20 | 70.9 x 23 | 589.4 / 587.4 |
+
+At 390 the mark is 196.2px inside a 350px inner box — one row, both locales, no wrap, and no clamp floor
+being fought for the way §23's four logos fought for theirs.
+
+**2. Screenshots, looked at.** `fold-1440-{en,ar}.png` and `fold-390-{en,ar}.png` at
+`deviceScaleFactor 2`, plus tight crops of the mark and the gold/orange pair at 3x. The mark reads as a
+deliberate trust mark: centred, no box, no border, no plate, no number, no "5.0", nothing that frames it
+as an embedded widget or an ad unit. It is visibly the lightest element in the hero and sits clearly
+below the CTAs in weight. The hero has more air than §23's at every size and the mark does not float: at
+1440 it is ~88px below the CTA row and ~142px above the strip, so it still reads as part of the hero
+block rather than as something stranded between the two.
+
+**3. Structured data.** 24.5. Zero matches on all six property names, over the whole of `site/`.
+
+**4. Lighthouse**, `/en/`, one run each on the final build:
+
+| | Perf | A11y | Best practices | SEO | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|
+| Desktop | **100** | **100** | 100 | 100 | 0.4s | 0ms | **0** |
+| Mobile | **100** | **100** | 100 | 100 | 1.7s | 0ms | **0** |
+
+Zero accessibility audit failures on either. Mobile performance is **100**, up from §23.6's 99: the four
+tool WebPs were 36 kB of first-viewport image and the SVG that replaced them is 1.9 kB.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.

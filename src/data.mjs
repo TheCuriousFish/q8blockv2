@@ -25,10 +25,11 @@ export const CONFIG = {
   // city. It says just nine seats left. That's it."
   SPOTS: 9,
 
-  // Q8Block's OWN Google Business Profile. The hero credentials row (§23)
-  // renders five stars plus the word Google and links out to it; with this set
-  // to null the whole mark disappears and the tools strip takes the row alone,
-  // so the page never links to a profile that is not his.
+  // Q8Block's OWN Google Business Profile. The hero's trust row (§23, reworked
+  // in §24) is five stars plus Google's own wordmark, linked out to it; with
+  // this set to null the mark — and with it the whole row, since the tools
+  // strip that used to share it is gone — disappears, so the page can never
+  // link to a profile that is not his.
   //
   // This is the share link Google generated for the profile (Knowledge Graph
   // /g/11n3dddmb8, شركة كويت بلوك — the registered Arabic name in company.md).
@@ -258,16 +259,19 @@ export const COPY = {
       lead: 'نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك',
       /* The four trust points are gone (§23). One of them, "الاستضافة والنطاق
          والحماية علينا", was an OFFER deliverable sitting in the brand hero —
-         it only got there when "بدون عقد" had to be pulled. The row now carries
-         credentials instead: the Google mark and the tools we pay for. */
+         it only got there when "بدون عقد" had to be pulled.
+
+         §24: the tools strip that shared this row is gone too. Ahmad: "I told
+         you we do not want to mention the tools that we are using... that's not
+         trust." There is NO toolsLabel any more and no wording about tools,
+         partners, subscriptions or software goes back into this row.
+
+         One string is left: the accessible name of the Google mark. It has to
+         say what the mark means, because the page draws five stars and the
+         Google wordmark and no words at all — so a screen reader would
+         otherwise hear only "Google". It names the rating, never a count. */
       cred: {
-        googleWord: 'Google',
-        googleLabel: 'Q8 block على Google',
-        /* NOT "partners" and never anything like it. Ahmad floated the word and
-           agreed it out: these are subscriptions, not partnerships, and a false
-           claim on a page whose whole argument is that its numbers are checkable
-           is not worth the word. No endorsement, no certification, no badge. */
-        toolsLabel: 'الأدوات التي نعمل بها',
+        googleLabel: 'تقييم خمس نجوم على Google',
       },
     },
 
@@ -664,11 +668,10 @@ export const COPY = {
       h1: 'Customers <span class="hl">find you</span><br class="brk"> on Google and in AI.',
       // Ahmad's own line, 2026-09-25, verbatim. One line, not a paragraph.
       lead: "We put you in Google's results and in AI's answers, where your customer is looking.",
+      // §24: the tools strip is gone; only the Google mark's accessible name
+      // remains. See the Arabic note above.
       cred: {
-        googleWord: 'Google',
-        googleLabel: 'Q8 block on Google',
-        // "The tools we work with" — NOT "partners". See the Arabic note above.
-        toolsLabel: 'The tools we work with',
+        googleLabel: 'Five star rating on Google',
       },
     },
 

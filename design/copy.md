@@ -112,9 +112,15 @@ headline was replaced later the same day by Ahmad himself, see the note under th
 3. Trust point 4 is resolved, and the reasoning is written out under the trust row below.
 
 **The subhead and the trust row were both replaced on 2026-09-25 (build-spec §23).** The subhead is now
-Ahmad's own one-line sentence; the four trust points are gone and the row carries a credentials strip
+Ahmad's own one-line sentence; the four trust points are gone and the row carries a Google rating mark
 instead. Everything from `The trust row` down is kept below as the record of what stood there, marked
 **superseded** — the old subhead is in the table row directly beneath it.
+
+**And the row was cut back again the same day (build-spec §24).** §23 put a strip of SEO tool logos on
+that row beside the Google mark. Ahmad: `I told you we do not want to mention the tools that we are
+using... that's not trust.` The strip, its label and its logos are **deleted**, and the Google mark is now
+the whole row. **No string naming a tool, a vendor, a subscription, a partner or a piece of software goes
+into the hero again**, under any label. The removed wording is kept below, marked superseded.
 
 **The Arabic headline changed on 2026-09-24, and it is Ahmad's own line.** It now reads
 `تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟` — **deliberately Gulf colloquial** (`تبي`, not the
@@ -141,39 +147,66 @@ Superseded: `نبني لك موقعًا كاملًا، ثم نجعله يظهر 
 تستشهد به مساعدات الذكاء الاصطناعي.` / `We build your whole website, then we get it found in local search
 and prepare it to be a source AI assistants cite.`
 
-### The credentials row, 2026-09-25. It replaced the four trust points
+### The Google rating mark, 2026-09-25. It replaced the four trust points, and it is now the whole row
 
 Ahmad: `this is great real estate to put authority and trustability.` The four trust points and their
 orange rules are **deleted**, because one of them had no business being in the brand hero: point 4,
 `الاستضافة والنطاق والحماية علينا` / `Hosting, domain and security included`, is Section 5 deliverable 6 —
 an **offer deliverable** — and it only ended up here because `بدون عقد` / `No contract` had to be pulled
-(the reasoning is kept below, marked superseded). Two elements share the row instead.
+(the reasoning is kept below, marked superseded).
 
-**(a) The Google mark.** Five filled stars and the word `Google`, linking out to Q8Block's own Google
-Business Profile in a new tab (`rel="noopener"`). The URL is `CONFIG.GBP_URL` in `src/data.mjs`; with it
-set to `null` the mark does not render at all, so the page can never link to somebody else's profile.
+**The row draws no words at all.** Five filled stars and Google's own wordmark, centred under the CTAs,
+the whole thing one link out to Q8Block's own Google Business Profile in a new tab (`rel="noopener"`).
+The URL is `CONFIG.GBP_URL` in `src/data.mjs`; with it set to `null` the mark does not render at all, so
+the page can never link to somebody else's profile.
 
 * **No review count.** Ahmad has few reviews and does not want the number on the page.
 * **No review text.** Nothing is quoted, paraphrased or scraped.
 * **No rating structured data, ever.** The stars are a visual mark and nothing more. Marking up a rating
   on a handful of reviews is the thing that earns a manual action, and this site's whole argument is that
   its numbers are checkable. Showing stars is fine; claiming a rating in schema is not. This is a standing
-  rule, not a preference — see build-spec §23.
-* The stars are drawn in the site's own `--orange`, not a Google yellow, so the mark reads as a brand
-  credential rather than as a copy of a Google widget.
+  rule, not a preference — see build-spec §23 and §24.
+* **The word `Google` is an image, not text.** Ahmad, 2026-09-25: `add the colours for each letter of the
+  Google so it matches the Google company, since black is just boring.` It is Google's own SVG wordmark,
+  fetched byte-for-byte (`design/brand-marks/`) and never redrawn. As live text the yellow `o` is ~1.8:1
+  on the hero background and fails WCAG even as large text; an image of a logotype is exempt, so this is
+  the only way to have both the brand colours and a 100 accessibility score. Do not convert it to text.
+* The stars are Google's own star gold `#FBBC04`, chosen over the site orange §23 shipped once the
+  wordmark was in full colour — see build-spec §24.
 
-**(b) The tools strip.** Four logos under one small label.
+**The one string this row still needs is not drawn on the page.** Because nothing on the row is text, a
+screen reader would otherwise hear only "Google". The link carries an accessible name instead:
 
 | Element | Arabic | English |
 |---|---|---|
-| Label | الأدوات التي نعمل بها | The tools we work with |
-| Logos | Semrush · Ahrefs · Ubersuggest · Google Search Console | same |
+| Link accessible name (`aria-label`) | تقييم خمس نجوم على Google | Five star rating on Google |
 
-**The label is not, and never becomes, `partners`.** Ahmad floated the word and agreed it out the same
-breath: these are **subscriptions**, not partnerships. Nothing on this row may imply endorsement,
-partnership, certification or a badge — no "official", no "certified", no "trusted by". The four marks are
-rendered in one muted ink so they read as a texture, not as four features competing with the page's
-orange.
+It names the rating and never a count, it is not visible copy, and it must keep containing the word
+`Google` so the visible-label rule cannot fire against it.
+
+**Nothing on this row may imply endorsement, partnership, certification or a badge** — no "official", no
+"certified", no "trusted by", no partner or vendor lockup of any kind.
+
+---
+
+### Superseded 2026-09-25 (same day): the tools strip that briefly shared this row
+
+§23 put four SEO tool logos under a small label beside the Google mark. Ahmad killed it hours later:
+`I told you we do not want to mention the tools that we are using... that's not trust.`
+
+**The label strings are deleted from this file rather than quoted here**, in both languages, so they
+cannot be copied back out of a "superseded" block by the next agent. What stood there was one small
+label naming the software the work is done with, over four vendor wordmarks. It is gone from the copy,
+from `src/data.mjs` and from the build. Do not write another one.
+
+The label was never `partners` and the question is now moot: Ahmad floated that word and agreed it out in
+the same breath, because those were **subscriptions**, not partnerships — and then removed the row itself.
+The logo source files stay on disk under `design/tool-logos/` for the record; **nothing references them.**
+
+`Google Search Console` does still appear on the page, twice in Section 6/7 and once in an FAQ answer,
+as the **source of the figures** (`All figures from Google Search Console...`). That is a provenance
+citation that copy.md rule 2 depends on, it predates the strip, and it is not a claim about tools we buy.
+If Ahmad wants it gone too, that is a separate decision and it takes the checkability argument with it.
 
 ---
 
