@@ -41,7 +41,14 @@ export const CONFIG = {
   // Review structured data anywhere in this build and there must never be:
   // marking up a rating on a handful of reviews is what earns a manual action.
   // No review count is shown either — Ahmad's decision, he has few reviews.
-  GBP_URL: 'https://share.google/JMWP620SaaXf2GqNL',
+  // Google rating mark in the hero. OFF at Ahmad's instruction, 2026-09-25:
+  // "the Google five star just looks basic and desperate". The space is meant
+  // to stay empty, which also gives the hero the breathing room he asked for.
+  // This is a deliberate removal, NOT a missing value. Do not restore it
+  // without him asking. His real profile URL, verified against the registered
+  // Arabic name شركة كويت بلوك, is kept here so it is not hunted for again:
+  //   https://share.google/JMWP620SaaXf2GqNL
+  GBP_URL: null,
 };
 
 /* IndexNow key. Generated once, 2026-09-24 (32-char hex, `crypto.randomBytes(16)`),
