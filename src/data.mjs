@@ -24,6 +24,31 @@ export const CONFIG = {
   // "per city" came off the line on 2026-09-25: Ahmad — "don't mention each
   // city. It says just nine seats left. That's it."
   SPOTS: 9,
+
+  // Q8Block's OWN Google Business Profile. The hero's trust row (§23, reworked
+  // in §24) is five stars plus Google's own wordmark, linked out to it; with
+  // this set to null the mark — and with it the whole row, since the tools
+  // strip that used to share it is gone — disappears, so the page can never
+  // link to a profile that is not his.
+  //
+  // This is the share link Google generated for the profile (Knowledge Graph
+  // /g/11n3dddmb8, شركة كويت بلوك — the registered Arabic name in company.md).
+  // Do NOT "improve" it into a maps.google.com/?cid= or place_id URL: nobody
+  // has his CID, and a constructed link that resolves to the wrong business is
+  // far worse than a redirect.
+  //
+  // The stars are a VISUAL mark only. There is no aggregateRating and no
+  // Review structured data anywhere in this build and there must never be:
+  // marking up a rating on a handful of reviews is what earns a manual action.
+  // No review count is shown either — Ahmad's decision, he has few reviews.
+  // Google rating mark in the hero. OFF at Ahmad's instruction, 2026-09-25:
+  // "the Google five star just looks basic and desperate". The space is meant
+  // to stay empty, which also gives the hero the breathing room he asked for.
+  // This is a deliberate removal, NOT a missing value. Do not restore it
+  // without him asking. His real profile URL, verified against the registered
+  // Arabic name شركة كويت بلوك, is kept here so it is not hunted for again:
+  //   https://share.google/JMWP620SaaXf2GqNL
+  GBP_URL: null,
 };
 
 /* IndexNow key. Generated once, 2026-09-24 (32-char hex, `crypto.randomBytes(16)`),
@@ -235,13 +260,26 @@ export const COPY = {
          colloquial line on the site; every other Arabic string stays MSA.
          Do not "correct" this to MSA. The highlight stays on `يجدونك`. */
       h1: 'تبي عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
-      lead: 'نبني لك موقعًا كاملًا، ثم نجعله يظهر لعملائك في نتائج البحث المحلية، ونهيئه ليكون مصدرًا تستشهد به مساعدات الذكاء الاصطناعي.',
-      trust: [
-        'نبني الموقع ثم نُظهره في نتائج البحث',
-        'صفحة لكل خدمة ولكل منطقة',
-        'نتائج موثقة من Google Search Console',
-        'الاستضافة والنطاق والحماية علينا',
-      ],
+      /* Ahmad's own line, 2026-09-25, verbatim. It replaces the three-clause
+         paragraph that stood here: NP Digital's hero runs ONE line and this one
+         was a paragraph. Do not lengthen it back. */
+      lead: 'نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك',
+      /* The four trust points are gone (§23). One of them, "الاستضافة والنطاق
+         والحماية علينا", was an OFFER deliverable sitting in the brand hero —
+         it only got there when "بدون عقد" had to be pulled.
+
+         §24: the tools strip that shared this row is gone too. Ahmad: "I told
+         you we do not want to mention the tools that we are using... that's not
+         trust." There is NO toolsLabel any more and no wording about tools,
+         partners, subscriptions or software goes back into this row.
+
+         One string is left: the accessible name of the Google mark. It has to
+         say what the mark means, because the page draws five stars and the
+         Google wordmark and no words at all — so a screen reader would
+         otherwise hear only "Google". It names the rating, never a count. */
+      cred: {
+        googleLabel: 'تقييم خمس نجوم على Google',
+      },
     },
 
     /* ── 2. Offer strip ──
@@ -635,13 +673,13 @@ export const COPY = {
 
     hero: {
       h1: 'Customers <span class="hl">find you</span><br class="brk"> on Google and in AI.',
-      lead: 'We build your whole website, then we get it found in local search and prepare it to be a source AI assistants cite.',
-      trust: [
-        'We build it then we get it found',
-        'A page for every service and area',
-        'Results documented in Google Search Console',
-        'Hosting, domain and security included',
-      ],
+      // Ahmad's own line, 2026-09-25, verbatim. One line, not a paragraph.
+      lead: "We put you in Google's results and in AI's answers, where your customer is looking.",
+      // §24: the tools strip is gone; only the Google mark's accessible name
+      // remains. See the Arabic note above.
+      cred: {
+        googleLabel: 'Five star rating on Google',
+      },
     },
 
     strip: {

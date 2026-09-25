@@ -123,6 +123,8 @@
   --fs-eyebrow:   clamp(19px, calc(22/14.4 * 1vw), 24px);
   --fs-hero-lead: clamp(18px, calc(27/14.4 * 1vw), 30px);
   --fs-trust:     clamp(15px, calc(20/14.4 * 1vw), 22px);
+  /* §23 added one more label size below this one. §24 deleted it with the row
+     it belonged to; see src/render.mjs. Nothing uses it, so it is gone. */
   /* floor raised 17 → 19: bold white on #FF5F29 is 3.03:1, which only satisfies
      AA as "large text" at 18.66px or more. 23px at 1440 is the board value and
      does not move; the floor is a phone number the boards do not specify. */
@@ -399,20 +401,61 @@ html[lang="ar"] .nav a { font-weight: 400; }
 #hero > .wrap-wide { width: 100%; }
 .hero-h1 { font-size: var(--fs-h1); }
 #hero .lead {
-  max-width: 790px; margin-inline: auto; font-size: var(--fs-hero-lead);
+  /* 790px while the subhead was a three-clause paragraph. §23 replaced it with
+     Ahmad's one-line subhead, chosen because NP Digital's hero runs a single
+     line and ours ran a paragraph — so the measure has to be wide enough for
+     that line to actually BE one line. 1210 is the narrowest value that sets
+     both locales on one line at 1440 and at 1920; it wraps to two below about
+     1330 and to three on a phone, which is as far as one line can be carried. */
+  max-width: 1210px; margin-inline: auto; font-size: var(--fs-hero-lead);
   margin-block-start: 28px;                           /* §5.3 hero H1 → subhead = 28 */
   text-wrap: pretty;                                  /* never a one-word last line */
 }
 #hero .btn-row { margin-block-start: 40px; }          /* §5.3 subhead → CTA row = 40 */
-.trust {
+
+/* §23 the hero CTAs, one modest step bigger. Ahmad: "a little bit bigger".
+   HERO ONLY — §9's final call band and the offer page keep their board sizes,
+   and `Call now` stays the orange fill with `WhatsApp` outlined, as approved. */
+#hero .btn-row .btn { font-size: clamp(20px, calc(25/14.4 * 1vw), 27px); }
+#hero .btn-row .btn-primary { padding: 16px 56px; }
+#hero .btn-row .btn-outline { padding: 14px 54px; }
+@media (min-width: 768px) { #hero .btn-row .btn { min-width: 262px; } }
+
+/* ══ §23 → §24 the hero's Google rating mark, now the whole row: centred and
+      one clear size step larger than §23 drew it, because it no longer shares
+      the space with anything. It sits below the CTAs and is deliberately kept
+      well under their weight.
+
+      THIS FILE IS INLINED INTO EVERY BUILT PAGE, so a comment here is shipped
+      text. The reasoning — why the wordmark is an <img> and not coloured live
+      text, why the stars carry no number, count or markup, and what §24
+      removed — lives in src/render.mjs and build-spec §24, which are not.
+      Do not restate it here and do not name a vendor, a product or a property
+      in this file: §23 lost a whole verification round to exactly that. ══ */
+.cred {
   display: flex; align-items: center; justify-content: center;
-  max-width: 1260px; margin-inline: auto;             /* board insets the row (measured 1105.2 css); 1260 is the
-                                                         narrowest inset that keeps every item to 2 lines */
-  margin-block-start: 70px;                           /* §5.3 CTA row → trust row = 70 */
-  font-size: var(--fs-trust); font-weight: 600; line-height: 1.25; color: var(--ink);
+  margin-block-start: 78px;                           /* 70 to the four trust points, 76 to §23's two-part row */
 }
-.trust li { padding-inline: clamp(14px, 2.4vw, 34px); flex: 1 1 0; }
-.trust li + li { border-inline-start: 2px solid var(--orange); }  /* §3.3 --rule-accent */
+.cred-google {
+  display: inline-flex; align-items: center;
+  gap: clamp(12px, calc(16/14.4 * 1vw), 18px);
+  text-decoration: none;
+  transition: opacity 0.4s ease-in-out;
+}
+.cred-google:hover { opacity: 0.75; }
+/* Google's own star gold, #FBBC04, and not the brand orange §23 shipped. With
+   the wordmark now drawn in Google's four colours, orange was a fifth hue
+   landing right between the logo's own red and yellow and the two fought; the
+   gold ties the stars to the `o` two glyphs away and the mark resolves into one
+   object. Contrast is not a question here — the stars are aria-hidden
+   decoration, and the meaning is carried by the link's accessible name. */
+.cred-stars { display: block; height: clamp(20px, calc(26/14.4 * 1vw), 29px); width: auto; color: #FBBC04; }
+/* The `margin-block-start` is an OPTICAL correction, not spacing. Google's SVG
+   is tight-cropped, so the descender of `g` is inside the box and the cap band
+   sits above the box's geometric centre; centred against the stars the word
+   rides high. The nudge drops the cap band onto the stars' centre line.
+   Measured in Chrome with getBBox, not guessed — build-spec §24. */
+.cred-word { display: block; height: clamp(23px, calc(30/14.4 * 1vw), 33px); width: auto; margin-block-start: 6px; }
 
 /* ══ §6 row 2 — Offer strip. 78px tall, ONE centred row, and the whole band is
       the link to /offer/. Rebuilt 2026-09-24 to Ahmad's instruction: the
@@ -1182,9 +1225,19 @@ html[lang="ar"] .prose { line-height: var(--lh-body); }
    English, so no board pair moves. The English hero keeps every board-measured
    gap at every size. */
 html[lang="ar"] #hero .lead { line-height: 1.55; }
-@media (min-width: 990px) and (max-height: 950px) {
+/* The threshold was `max-height: 950px` until §24, which meant a 1440x900
+   window — the spec viewport — took the tightened Arabic gaps and the mark sat
+   50px under the CTAs against English's 78. §24's row is 36px tall where §23's
+   was 48 and the four trust points were more, so Arabic now clears 900 with
+   room: measured content 483.3px inside a 550px box at 1440x900, 66.7px spare.
+   The arithmetic that sets the threshold: hero box = viewport − 78 (strip),
+   content area = that − 272 (96 + header above, 64 below), so the untightened
+   Arabic hero needs a viewport of 833.3px and the tightened one 795.3px. 870 is
+   a round number comfortably between them, so 900 gets the full air and genuinely
+   short windows still get the tightened gaps they have always had. */
+@media (min-width: 990px) and (max-height: 870px) {
   html[lang="ar"] #hero .btn-row { margin-block-start: 30px; }
-  html[lang="ar"] #hero .trust { margin-block-start: 46px; }
+  html[lang="ar"] #hero .cred { margin-block-start: 50px; }
 }
 
 @media (max-width: 1099px) {
@@ -1221,9 +1274,10 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .post-rows > :last-child { border-block-end: 0; }
   .fact { grid-template-columns: 1fr; }
   .journey-card img { width: 100%; height: auto; aspect-ratio: 343 / 296; }
-  .trust { flex-wrap: wrap; row-gap: 18px; }
-  .trust li { flex: 1 1 44%; }
-  .trust li:nth-child(3) { border-inline-start: 0; }
+  /* §23 stacked this row below 990 because it had two halves and a hairline
+     between them. §24 leaves one centred mark, so there is nothing to stack —
+     only the air above it comes down to fit the first screen on a tablet. */
+  .cred { margin-block-start: 56px; }
   .footer-top { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1259,8 +1313,16 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .work-card { flex-basis: 84%; padding: 24px; }
   .slide-btn { width: 48px; height: 48px; }
   .btn-row .btn { flex: 1 1 100%; }
-  .trust li { flex: 1 1 100%; border-inline-start: 0 !important; padding-inline: 0; }
-  .trust { flex-direction: column; row-gap: 14px; margin-block-start: 44px; }
+  /* The phone hero is the tightest box on the site: header + hero + strip have
+     to be exactly 844 at 390. §23 needed two stacked bands here (stars +
+     Google, then a label and four logos, ~90px tall); §24's mark is one 29px
+     row, so the air above it goes UP rather than down and the hero still fits
+     with room to spare. The mark takes its clamp floors, 20px stars and a 23px
+     wordmark, which measure 125px wide inside a 350px box. */
+  .cred { margin-block-start: 48px; }
+  #hero .btn-row .btn { font-size: var(--fs-btn); }
+  #hero .btn-row .btn-primary { padding: 15px 40px; }
+  #hero .btn-row .btn-outline { padding: 13px 38px; }
   .problem-card, .icon-card, .journey-card { padding: 24px; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
