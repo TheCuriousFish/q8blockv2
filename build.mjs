@@ -39,7 +39,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { COPY, NAP, CONFIG, INDEXNOW_KEY } from './src/data.mjs';
 import {
-  header, footer, firstScreen, problem, whatWeDo, included, journey, work,
+  header, footer, firstScreen, problem, whatWeDo, included, journey, work, pricing,
   faq, finalCall, offerHero, offerIncluded, offerProof, offerEligibility, offerNoContract,
   offerAfter, offerFaq, esc,
   pageHead, aboutPrinciple, aboutDeliver, aboutNotDo, aboutCompany,
@@ -380,7 +380,7 @@ function crumbLd(t, p) {
 function homePage(t) {
   const body = [
     firstScreen(t), problem(t), whatWeDo(t), included(t),
-    journey(t), work(t), faq(t), finalCall(t),
+    journey(t), work(t), pricing(t), faq(t), finalCall(t),
   ].join('\n');
   return shell({ t, page: 'home', meta: t.meta.home, body, jsonLd: [orgLd(t), faqLd(t.faq.items)] });
 }

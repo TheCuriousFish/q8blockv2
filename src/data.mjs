@@ -231,9 +231,9 @@ export const COPY = {
         ogAlt: 'موقع إلكتروني يظهر في نتائج البحث المحلية وفي إجابات الذكاء الاصطناعي',
       },
       offer: {
-        title: 'العرض: ستة أشهر بدفعة واحدة 500 دولار | Q8 block',
-        description: 'دفعة واحدة 500 دولار تغطي ستة أشهر من العمل الكامل على الموقع وتحسين محركات البحث، لشركات الخدمات في السعودية. السعر المعتاد يبدأ من 500 دولار شهريًا.',
-        ogAlt: 'عرض Q8 block: ستة أشهر بدفعة واحدة قدرها 500 دولار',
+        title: 'عملاء جدد من محركات البحث والذكاء الاصطناعي | Q8 block',
+        description: 'عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من 500 دولار شهريًا.',
+        ogAlt: 'عرض Q8 block: عملاء جدد من محركات البحث والذكاء الاصطناعي',
       },
       about: {
         title: 'نبني المواقع التي نتحمل مسؤوليتها | Q8 block',
@@ -357,23 +357,38 @@ export const COPY = {
       ],
     },
 
-    /* ── 6. The journey ── */
+    /* ── 6. The journey. REBUILT 2026-09-30 (build-spec §26.1): the Search
+          Console graph is the section, and the three illustrations that used to
+          head three large cards are small icons under it carrying the three
+          story beats. THE FORENSIC DETAIL IS DELIBERATELY GONE — no client
+          name, no date range, no "fifth full data month" note, no carwashkw
+          baseline, no source caption. Ahmad has now said twice that a prospect
+          does not verify and that the detail costs more than it earns. Do NOT
+          restore it: this is a reversal of the earlier checkability framing,
+          not a regression. The figures printed INSIDE the image are the
+          image's own axis and stay exactly as exported. ── */
     journey: {
       eyebrow: 'كيف نعمل',
       h2: 'هكذا يبدأ موقع جديد <span class="hl">في الظهور</span>',
-      lead: 'هذه قصة موقع واحد بنيناه، شهرًا بعد شهر، كما صدّرها Google Search Console. لم نجمع بين عملاء مختلفين ولم نختر أفضل شهر من كل موقع.',
-      siteLabel: 'kwtclean.com',
+      lead: 'هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console.',
+      /* The same unedited export the offer page's B2b carries, reused here —
+         never re-derived or re-cropped. It pans instead of shrinking below
+         1000px and its wrapper forces direction:ltr, because the four headline
+         figures sit at the panel's LEFT edge and an RTL scroller would open on
+         the tail of the chart. See build-spec §25.6 and §26.1. The alt names no
+         client and no date range; it describes the panel, which is why
+         "متوسط الموضع" may appear in it where the rank register bans position
+         as a selling word. */
+      graph: {
+        alt: 'لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى.',
+        panLabel: 'لوحة أداء في Google Search Console لموقع بنيناه',
+        hint: 'اسحب الصورة أفقيًا لقراءتها كاملة',
+      },
       stages: [
-        { label: 'الشهر الأول، أبريل 2026', title: 'البناء', figure: '<span dir="ltr">7</span> نقرات في الشهر', body: 'يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة.' },
-        { label: 'الشهر الثاني، مايو 2026', title: 'الظهور', figure: '<span dir="ltr">165</span> نقرة في الشهر', body: 'تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه.' },
-        { label: 'بعد نحو ستة أشهر، أغسطس 2026', title: 'النمو', figure: '<span dir="ltr">531</span> نقرة في الشهر', body: 'يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها.' },
+        { title: 'البناء', body: 'يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة.' },
+        { title: 'الظهور', body: 'تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه.' },
+        { title: 'النمو', body: 'يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها.' },
       ],
-      precision: 'أبريل 2026 هو أول شهر سُجّلت فيه بيانات لهذا الموقع، وأغسطس 2026 هو خامس شهر كامل من البيانات، أي ما يقارب ستة أشهر من عمر الموقع إذا احتسبنا فترة الفهرسة التي تسبق أول نقرة.',
-      baseline: [
-        'وموقع مثل carwashkw.com حافظ على <span dir="ltr">199</span> إلى <span dir="ltr">440</span> نقرة في الشهر عبر ثلاثة عشر شهرًا كاملًا متتاليًا، من الموقع وحده.',
-        'إن أردت أن تكون في أعلى النطاق، فالشرط أن تنفذ قائمة تعليمات ملف جوجل التي نسلمك إياها.',
-      ],
-      source: 'المصدر: Google Search Console، بيانات حتى <span dir="ltr">24</span> سبتمبر <span dir="ltr">2026</span>',
     },
 
     /* ── 7. Our work ── */
@@ -401,6 +416,39 @@ export const COPY = {
       carouselLabel: 'مواقع بنيناها',
       prev: 'السابق',
       next: 'التالي',
+    },
+
+    /* ── 7b. The price. NEW 2026-09-30 (build-spec §26.2). The homepage used to
+          carry a price in exactly one place, the §2 strip teaser; it now carries
+          the offer itself, after the proof in §7 and before the objections in §8.
+          EVERY FIGURE AND EVERY WORD HERE IS ALREADY DECIDED ON THE OFFER PAGE
+          (copy.md Part B) and is repeated verbatim — nothing is invented and
+          nothing new is said. In particular:
+            * the three tiers carry PRICES ONLY. Ahmad has not defined what
+              differs between them and nothing here may fill them out;
+            * there is NO savings figure and there never will be. The two numbers
+              sitting together do the work and the reader does the arithmetic;
+            * NO COUNTRY. The offer page names Saudi Arabia because eligibility is
+              a condition of the promotion; the homepage names no geography
+              anywhere and this section does not break that. ── */
+    pricing: {
+      eyebrow: 'السعر',
+      h2: '<span class="hl">دفعة واحدة</span> تغطي ستة أشهر',
+      lead: `السعر المعتاد لهذه الخدمة يبدأ من ${P.month} شهريًا. وفي هذا العرض تدفع ${P.six} مرة واحدة، وتغطي أول ستة أشهر كاملة.`,
+      /* The same two rows as offer B1b, word for word. */
+      price: {
+        anchorLabel: 'السعر المعتاد',
+        anchorValue: `يبدأ من ${P.month} شهريًا`,
+        offerLabel: 'هذا العرض',
+        offerValue: `${P.six} دفعة واحدة، تغطي ستة أشهر`,
+        note: 'دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.',
+      },
+      afterTitle: 'بعد الأشهر الستة',
+      afterIntro: 'تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك.',
+      tiers: [P.month, P.t2, P.t3],
+      tierUnit: 'شهريًا',
+      note: 'ما تشمله كل خطة يُتفق عليه معك في المكالمة.',
+      cta: 'اطلع على العرض',
     },
 
     /* ── 8. FAQ ── */
@@ -585,7 +633,17 @@ export const COPY = {
        `price.note` says it in the shortest words there are. */
     offerPage: {
       pill: 'عرض محدود',
-      h1: `ستة أشهر بـ${P.six}،<br class="brk"> تُدفع <span class="hl">مرة واحدة</span>`,
+      /* H1 REPLACED 2026-09-30, second pass (build-spec §26.4). The old line
+         `ستة أشهر بـ$500، تُدفع مرة واحدة` sold the PRICE; every replacement that
+         led with the website sold the WEBSITE. Ahmad: "you're selling the
+         website, not the dream outcome, which is related to search and AI,
+         getting clients." So it opens on the outcome and names the two channels
+         without explaining either. `محركات البحث` is deliberate and is NOT to be
+         narrowed back to "جوجل" — he asked for search engines. The highlight
+         moved with it, onto the outcome phrase `عملاء جدد`, because the price is
+         no longer in the headline to carry it. The price now lives entirely in
+         the anchor block directly beneath, which was strengthened to compensate. */
+      h1: `<span class="hl">عملاء جدد</span> من محركات البحث<br class="brk"> والذكاء الاصطناعي`,
       lead: `هذا العرض مخصص لشركات الخدمات في السعودية. دفعة واحدة ${P.six} تغطي أول ستة أشهر من العمل الكامل. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك.`,
 
       /* The anchor. Two rows, same number, different unit, nothing between them.
@@ -623,7 +681,14 @@ export const COPY = {
          the image is an unedited Search Console export (design/proof-shots/). */
       proof: {
         title: 'مثال واحد على ستة أشهر',
-        intro: 'هذه لوحة أداء موقع kwtclean.com في Google Search Console، من 1 أبريل 2026 إلى 19 سبتمبر 2026. موقع لعميل بنيناه نحن، والأرقام أرقامه وحده.',
+        /* SHORTENED 2026-09-30, second pass (build-spec §26.3). The lead used to
+           open on the client name and the exact date range. Ahmad: "you put too
+           much details for the search console graph, you are very logical and
+           direct in your messaging." Six words now. The client name and the
+           range are NOT deleted — they moved to `meta`, small fine print under
+           the image, where provenance belongs. Do not lead with them again. */
+        intro: 'موقع بنيناه. هذه أرقامه.',
+        meta: 'kwtclean.com، من 1 أبريل 2026 إلى 19 سبتمبر 2026.',
         alt: 'لوحة الأداء في Google Search Console لموقع kwtclean.com من 1 أبريل 2026 إلى 19 سبتمبر 2026: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر في أبريل ثم يرتفع ويستقر في نطاق أعلى حتى سبتمبر.',
         panLabel: 'لوحة أداء kwtclean.com في Google Search Console',
         hint: 'اسحب الصورة أفقيًا لقراءتها كاملة',
@@ -699,9 +764,9 @@ export const COPY = {
         ogAlt: 'A website found in local search and in AI answers',
       },
       offer: {
-        title: 'The offer: six months for $500, paid once | Q8 block',
-        description: 'One payment of $500 covers six months of full website and search work for service companies in Saudi Arabia. The normal price starts at $500 a month.',
-        ogAlt: 'The Q8 block offer: six months for one payment of $500',
+        title: 'New customers from search engines and AI | Q8 block',
+        description: 'New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from $500 a month.',
+        ogAlt: 'The Q8 block offer: new customers from search engines and AI',
       },
       about: {
         title: 'We build the websites we take responsibility for | Q8 block',
@@ -795,22 +860,23 @@ export const COPY = {
       ],
     },
 
+    /* The English mirror of the rebuilt §6. See the Arabic block above for why
+       the client name, the date range, the precision note, the carwashkw
+       baseline and the source caption are gone, and why they stay gone. */
     journey: {
       eyebrow: 'How it works',
       h2: 'How a new site <span class="hl">gets found.</span>',
-      lead: 'This is the story of one site we built, month by month, exactly as Google Search Console exported it. We did not mix clients together and we did not pick the best month from each site.',
-      siteLabel: 'kwtclean.com',
+      lead: 'These are the numbers of one site we built, exactly as Google Search Console exported them.',
+      graph: {
+        alt: 'A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band.',
+        panLabel: 'A Google Search Console performance panel for a site we built',
+        hint: 'Swipe the panel sideways to read all of it',
+      },
       stages: [
-        { label: 'Month one, April 2026', title: 'Build', figure: '<span dir="ltr">7</span> clicks in the month', body: 'The site is designed, built and published, and sent to Google.' },
-        { label: 'Month two, May 2026', title: 'Get discovered', figure: '<span dir="ltr">165</span> clicks in the month', body: 'Service and area pages enter the index. Customers find them.' },
-        { label: 'About six months in, August 2026', title: 'Get traction', figure: '<span dir="ltr">531</span> clicks in the month', body: 'A customer finds the page for his area, and calls you from it.' },
+        { title: 'Build', body: 'The site is designed, built and published, and sent to Google.' },
+        { title: 'Get discovered', body: 'Service and area pages enter the index. Customers find them.' },
+        { title: 'Get traction', body: 'A customer finds the page for his area, and calls you from it.' },
       ],
-      precision: 'April 2026 is the first month with recorded data for this site, and August 2026 is its fifth full data month, which is close to six months of site age once the indexing period before the first click is counted.',
-      baseline: [
-        'And a site like carwashkw.com has held between <span dir="ltr">199</span> and <span dir="ltr">440</span> clicks a month across thirteen consecutive complete months, from the website alone.',
-        'If you want to sit at the top of the range, the condition is that you work through the Google Business Profile checklist we hand you.',
-      ],
-      source: 'Source: Google Search Console, data to <span dir="ltr">24 September 2026</span>',
     },
 
     work: {
@@ -824,6 +890,27 @@ export const COPY = {
       carouselLabel: 'Sites we built',
       prev: 'Previous',
       next: 'Next',
+    },
+
+    /* The English mirror of §7b. Prices only in the tiers, no savings figure,
+       no country. See the Arabic block above. */
+    pricing: {
+      eyebrow: 'The price',
+      h2: '<span class="hl">One payment</span> covers six months.',
+      lead: 'The normal price for this service starts at $500 per month. In this offer you pay $500 one time, and it covers your first six months in full.',
+      price: {
+        anchorLabel: 'Normal price',
+        anchorValue: 'from $500 per month',
+        offerLabel: 'This offer',
+        offerValue: '$500 one time, covers six months',
+        note: 'One payment, not monthly. No monthly bill during the six months.',
+      },
+      afterTitle: 'After the six months',
+      afterIntro: 'You pick one of three monthly plans, or you stop. You decide.',
+      tiers: ['$500', '$1,000', '$1,500'],
+      tierUnit: 'per month',
+      note: 'What each plan covers is agreed with you on the call.',
+      cta: 'See the offer',
     },
 
     faq: {
@@ -987,7 +1074,8 @@ export const COPY = {
        time the number appears. Do not shorten it away. */
     offerPage: {
       pill: 'Limited offer',
-      h1: 'Six months for $500,<br class="brk"> paid <span class="hl">one time</span>.',
+      /* See the Arabic H1 note. "search engines", never "Google". */
+      h1: '<span class="hl">New customers</span><br class="brk"> from search engines and AI.',
       lead: 'This offer is for service companies in Saudi Arabia. One payment of $500 covers your first six months of the full work. We get your business found on Google and in AI, turning those visits into calls and customers.',
 
       price: {
@@ -1015,7 +1103,9 @@ export const COPY = {
 
       proof: {
         title: 'One example of six months',
-        intro: 'This is the performance panel for kwtclean.com in Google Search Console, from 1 April 2026 to 19 September 2026. It is a client website we built, and the figures are its own.',
+        /* See the Arabic note: the provenance moved to `meta`, it was not cut. */
+        intro: 'A site we built. These are its numbers.',
+        meta: 'kwtclean.com, 1 April 2026 to 19 September 2026.',
         alt: 'Google Search Console performance panel for kwtclean.com from 1 April 2026 to 19 September 2026: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that sits at zero through April, lifts through May and settles into a higher band to September.',
         panLabel: 'The kwtclean.com performance panel in Google Search Console',
         hint: 'Swipe the panel sideways to read all of it',

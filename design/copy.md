@@ -477,121 +477,96 @@ words `موقع الصفحات في نتائج البحث` and `الترتيب` 
 
 **Background** dark `#141415`, full bleed band.
 
-**The layout of this section is not settled.** Three new design directions are being generated separately
-and Ahmad picks one. Nothing below prescribes a layout. What is settled is the copy: a three stage story of
-one real site, month one, month two, month six, with one figure per stage.
+**REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).** The Search Console graph is the section's
+centrepiece and the three illustrations that used to head three large cards are now small icons under it
+carrying the story. The shape is: eyebrow, headline, one short subhead, the graph, a row of three compact
+beats, the WhatsApp CTA. Nothing else.
 
-**This is one of exactly two sections on the page that carry figures.** All figures are real Google Search
-Console exports from `clients/q8block/design/proof-data.md`, from one site, kwtclean.com. Nothing is
-rounded, estimated or stitched together from different clients. Every digit run is wrapped `dir="ltr"` and
-uses Western numerals. No figure appears in the headline.
+**THE FORENSIC DETAIL IS GONE ON PURPOSE AND MAY NOT BE RESTORED.** Ahmad, in his own words:
+*"don't use details like kwtclean or from what month to what month."* Removed from this section's copy:
 
-**Rewritten 2026-09-24 to the narrative Ahmad described, and cut down.** His instruction was to
-`avoid using stupid data`, so the story leads and the figures support it. Three changes against the old
-version:
-* **One number per stage, clicks only.** The impressions were dropped from the stage lines. A reader who
-  has no website does not know what an impression is, and printing two numbers per stage turned three
-  sentences into a spreadsheet.
-* **The printed five month table is gone.** The five rows stay in this file as build data for the curve,
-  below, but the page does not print a table of them.
-* **The mashame3.com start note is gone from this section.** That site now carries its own card with its
-  own real figure in Section 7, so the number is still on the page and it is no longer a third data point
-  crowding this one.
+* the client name (`kwtclean.com`, the old site label),
+* the date range and the three month labels,
+* the three click figures (`7` / `165` / `531`),
+* the precision note about April being the first data month and August the fifth full one,
+* the carwashkw.com baseline paragraph,
+* the Search Console source caption.
 
-**Stage titles and bodies corrected back to the approved board, 2026-09-24 (second pass).** The build had
-drifted to `شهر البناء` / `The build month`, `أول ظهور` / `First found`, `النتيجة` / `The result`. The
-approved board `design/boards/journey-D.png` draws **Build / Get discovered / Get traction** and Ahmad
-restated it in his own words: `I like the messaging that was used, use the same exact messaging. So get
-discovered, get traction, get more customers.` The English titles are now the board's exactly. The Arabic
-is the natural MSA equivalent triad in this file's register, three parallel nouns:
-`البناء` / `الظهور` / `النمو`. `الظهور` is the same register word the section headline already uses
-(`هكذا يبدأ موقع جديد في الظهور`), so nothing here reaches for the banned `ترتيب`.
-The **month labels above the titles keep their real months** (`الشهر الأول، أبريل 2026` /
-`Month one, April 2026`, and so on). They are deliberately more precise than the board's plain `MONTH 1`,
-because the credibility of the whole section rests on dates a reader can check.
-The three **bodies were cut to two lines each**, because the board draws two lines per card
-and the build was rendering six to nine, which tripled the card height and cost the section the punch it
-was chosen for. The meaning is unchanged and the three figures stay exactly where they were.
+**This is a deliberate reversal of the earlier checkability framing and he has now made it twice**, on the
+grounds that prospects do not verify and the detail costs more than it earns. The long argument for the
+opposite that used to live in this section is not an instruction to a later agent; build-spec §26.1 records
+the decision. **Nothing became unverifiable**: the offer page's B2b still names the client and both dates,
+and the derivation tables at the end of this file are untouched.
+
+**The numbers printed inside the graph image stay exactly as they are.** `1.99K`, `114K`, `1.7%`, `10.9`
+and the dated x axis are the image's own axis, not our copy, and no number in it is ever altered.
+
+**The graph is the same asset as offer B2b**, `src/img/proof-kwtclean-gsc.webp`, reused and never
+re-derived or re-cropped. It keeps B2b's behaviour: below 1000px it **pans instead of shrinking** and its
+wrapper forces `direction: ltr`, so both locales open on the four headline figures at the panel's left
+edge. Build-spec §25.6 and §26.1 have the measurements.
 
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | كيف نعمل | How it works |
 | Headline | هكذا يبدأ موقع جديد في الظهور | How a new site gets found. |
 | Highlighted word | في الظهور | gets found |
-| Subhead | هذه قصة موقع واحد بنيناه، شهرًا بعد شهر، كما صدّرها Google Search Console. لم نجمع بين عملاء مختلفين ولم نختر أفضل شهر من كل موقع. | This is the story of one site we built, month by month, exactly as Google Search Console exported it. We did not mix clients together and we did not pick the best month from each site. |
-| Site label | kwtclean.com | kwtclean.com |
+| Subhead | هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console. | These are the numbers of one site we built, exactly as Google Search Console exported them. |
 
-**Stage 1**
-
-| | Arabic | English |
-|---|---|---|
-| Stage label | الشهر الأول، أبريل 2026 | Month one, April 2026 |
-| Title | البناء | Build |
-| Body | يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة. | The site is designed, built and published, and sent to Google. |
-| Figure | 7 نقرات في الشهر | 7 clicks in the month |
-
-**Stage 2**
-
-| | Arabic | English |
-|---|---|---|
-| Stage label | الشهر الثاني، مايو 2026 | Month two, May 2026 |
-| Title | الظهور | Get discovered |
-| Body | تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه. | Service and area pages enter the index. Customers find them. |
-| Figure | 165 نقرة في الشهر | 165 clicks in the month |
-
-**Stage 3**
-
-| | Arabic | English |
-|---|---|---|
-| Stage label | بعد نحو ستة أشهر، أغسطس 2026 | About six months in, August 2026 |
-| Title | النمو | Get traction |
-| Body | يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها. | A customer finds the page for his area, and calls you from it. |
-| Figure | 531 نقرة في الشهر | 531 clicks in the month |
-
-**Precision note, printed on the page under the stages. This is not optional wording.**
-
-| Arabic | English |
-|---|---|
-| أبريل 2026 هو أول شهر سُجّلت فيه بيانات لهذا الموقع، وأغسطس 2026 هو خامس شهر كامل من البيانات، أي ما يقارب ستة أشهر من عمر الموقع إذا احتسبنا فترة الفهرسة التي تسبق أول نقرة. | April 2026 is the first month with recorded data for this site, and August 2026 is its fifth full data month, which is close to six months of site age once the indexing period before the first click is counted. |
-
-**Build data for the curve. Not printed as a table on the page.**
-
-The chart, however the chosen direction draws it, is drawn in HTML and CSS from these five real rows and
-from nothing else. June and July exist so the line between month two and month six is continuous and
-honest, not a jump between two cherry picked months. The page prints the three stage figures only.
-
-| Month | Clicks | Impressions |
-|---|---|---|
-| أبريل 2026 / April 2026 | 7 | 956 |
-| مايو 2026 / May 2026 | 165 | 11,155 |
-| يونيو 2026 / June 2026 | 354 | 22,101 |
-| يوليو 2026 / July 2026 | 452 | 25,564 |
-| أغسطس 2026 / August 2026 | 531 | 27,932 |
-
-### The baseline line, kept short
-
-kwtclean.com is the top of the range partly because that client also worked through the Google Business
-Profile checklist and built up his reviews. Most clients will not, so the section still states the level a
-site of ours holds without that. **Two lines, not a second band of figures.** Ahmad required this framing
-on 2026-09-24 and it is written as a condition the client controls, never as a disclaimer. The page does
-not say `results may vary`.
+**The graph's accessible text.** It names no client and no date range. It describes the panel, which is a
+description of an image and not a claim — the same reasoning that lets `متوسط الموضع` / `average position`
+appear in it where the `rank` register forbids position as a selling word anywhere else.
 
 | Element | Arabic | English |
 |---|---|---|
-| Line 1 | وموقع مثل carwashkw.com حافظ على 199 إلى 440 نقرة في الشهر عبر ثلاثة عشر شهرًا كاملًا متتاليًا، من الموقع وحده. | And a site like carwashkw.com has held between 199 and 440 clicks a month across thirteen consecutive complete months, from the website alone. |
-| Line 2 | إن أردت أن تكون في أعلى النطاق، فالشرط أن تنفذ قائمة تعليمات ملف جوجل التي نسلمك إياها. | If you want to sit at the top of the range, the condition is that you work through the Google Business Profile checklist we hand you. |
+| Alt | لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى. | A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band. |
+| Pan region accessible name | لوحة أداء في Google Search Console لموقع بنيناه | A Google Search Console performance panel for a site we built |
+| Pan hint, phone only | اسحب الصورة أفقيًا لقراءتها كاملة | Swipe the panel sideways to read all of it |
 
-**Source caption, sits under the whole section**
+**The three beats, under the graph.** Same three story beats as before, and the titles are still the
+approved board's — `Build / Get discovered / Get traction`, and the MSA triad `البناء / الظهور / النمو`
+(Ahmad, 2026-09-24: *"I like the messaging that was used, use the same exact messaging. So get discovered,
+get traction, get more customers."*). `الظهور` is the same register word the headline uses, so nothing here
+reaches for the banned `ترتيب`. **The bodies are the ones the cards already carried, kept because they
+contain no invented claim, duration or figure** — which is now the only thing holding this section, since
+the figures that used to support them are gone. Each beat carries its icon, its title and its body. No
+month label, no figure.
 
-| Arabic | English |
-|---|---|
-| المصدر: Google Search Console، بيانات حتى 24 سبتمبر 2026 | Source: Google Search Console, data to 24 September 2026 |
+| # | Icon | Arabic title | Arabic body | English title | English body |
+|---|---|---|---|---|---|
+| 1 | Build (`journey-1.webp`) | البناء | يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة. | Build | The site is designed, built and published, and sent to Google. |
+| 2 | Get discovered (`journey-2.webp`) | الظهور | تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه. | Get discovered | Service and area pages enter the index. Customers find them. |
+| 3 | Get traction (`journey-3.webp`) | النمو | يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها. | Get traction | A customer finds the page for his area, and calls you from it. |
 
-**CTA strip closing the section**
+**CTA strip closing the section**, now centred on its own row because the source line it used to share
+that row with is gone.
 
 | Arabic | English |
 |---|---|
 | واتساب | WhatsApp |
+
+**Build data kept on file, printed nowhere.** The five real Google Search Console rows for kwtclean.com
+stay in `src/data.mjs` as `JOURNEY_ROWS` and in `design/proof-data.md`. Nothing on the page prints them
+any more and no chart is drawn from them — the graph is the export image.
+
+| Month | Clicks | Impressions |
+|---|---|---|
+| April 2026 | 7 | 956 |
+| May 2026 | 165 | 11,155 |
+| June 2026 | 354 | 22,101 |
+| July 2026 | 452 | 25,564 |
+| August 2026 | 531 | 27,932 |
+
+**Retired from this section, 2026-09-30.** Kept here so nobody hunts for them or puts them back:
+
+| What it said | Where it went |
+|---|---|
+| `الشهر الأول، أبريل 2026` / `Month one, April 2026` and the two other month labels | deleted |
+| `7 نقرات في الشهر` / `165` / `531` | deleted from the page; the rows are in the table above |
+| The precision note about April and the fifth full data month | deleted |
+| The carwashkw.com baseline pair (199 to 440 clicks over thirteen months, plus the Google profile checklist condition) | deleted |
+| `المصدر: Google Search Console، بيانات حتى 24 سبتمبر 2026` | deleted; the subhead still names the source |
+| `kwtclean.com` site label | deleted |
 
 ---
 
@@ -745,6 +720,89 @@ sixth. The odd card is gone without anything being invented.
 **Build note.** Ahmad confirms which client names may be shown publicly before this section ships. Every
 total is reproduced in the derivation table at the end of this file with the exact rows it came from, so
 any figure on the page can be traced in one step.
+
+---
+
+## 7b. The price
+
+**NEW 2026-09-30 (build-spec §26.2).** A price section on the homepage, placed **after Section 7 Our work
+and before Section 8 FAQ**, so the page runs problem, solution, what you get, proof, **price**, objections,
+close.
+
+**Background** dark `#141415`, full bleed band, centred. **No new visual language.** Every part of this
+section is a component already approved elsewhere on the site: the standard eyebrow, headline and subhead
+head; the price anchor from offer **B1b**; the three tier tiles from offer **B5**; and the Section 2 strip's
+own CTA label on the link out. Nothing was designed for this section.
+
+**EVERY FIGURE AND EVERY PHRASE IS PART B, VERBATIM.** Nothing here is invented and nothing new is said.
+The three facts are the ones in the Part B preamble: the service normally starts at **$500 per month**, the
+offer is **$500 one time covering the first six months**, and after six months the client picks one of
+three monthly tiers, **$500 / $1,000 / $1,500**.
+
+**The one thing this section must achieve in under two seconds is that the $500 is paid ONCE**, so the
+value phrase is the headline's highlight and the anchor's offer row and its bold note sit directly under
+it with nothing between them.
+
+| Element | Arabic | English |
+|---|---|---|
+| Eyebrow | السعر | The price |
+| Headline | دفعة واحدة تغطي ستة أشهر | One payment covers six months. |
+| Highlighted phrase | دفعة واحدة | One payment |
+| Subhead | السعر المعتاد لهذه الخدمة يبدأ من $500 شهريًا. وفي هذا العرض تدفع $500 مرة واحدة، وتغطي أول ستة أشهر كاملة. | The normal price for this service starts at $500 per month. In this offer you pay $500 one time, and it covers your first six months in full. |
+
+**The anchor, identical to B1b.** Two rows, the same number, different units, one short bold note under
+them.
+
+| Row | Label, ar / en | Value, ar / en |
+|---|---|---|
+| Anchor | السعر المعتاد / Normal price | يبدأ من $500 شهريًا / from $500 per month |
+| Offer | هذا العرض / This offer | $500 دفعة واحدة، تغطي ستة أشهر / $500 one time, covers six months |
+
+| Note under the pair | Arabic | English |
+|---|---|---|
+| | دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة. | One payment, not monthly. No monthly bill during the six months. |
+
+**The three tiers, identical to B5. PRICES ONLY.**
+
+| Element | Arabic | English |
+|---|---|---|
+| Block title | بعد الأشهر الستة | After the six months |
+| Intro | تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك. | You pick one of three monthly plans, or you stop. You decide. |
+
+| Tier | Price | Unit, ar / en |
+|---|---|---|
+| 1 | $500 | شهريًا / per month |
+| 2 | $1,000 | شهريًا / per month |
+| 3 | $1,500 | شهريًا / per month |
+
+| Note | Arabic | English |
+|---|---|---|
+| | ما تشمله كل خطة يُتفق عليه معك في المكالمة. | What each plan covers is agreed with you on the call. |
+
+**CTA into the offer page.** The label is the Section 2 strip's own, so this section introduces no new CTA
+label.
+
+| Arabic | English |
+|---|---|
+| اطلع على العرض → `/offer/` | See the offer → `/en/offer/` |
+
+**Three hard rules on this section.**
+
+1. **THE TIERS HAVE NO CONTENTS AND NOTHING MAY BE INVENTED FOR THEM.** Ahmad gave the three figures and
+   not what differs between them. No service level, no page count, no hours figure, no feature list, no
+   "most popular" marker. The note says what is true instead, which is exactly what B5 and `copy-pages.md`
+   T6 already say. Fill them in only when Ahmad supplies them, and fill B5 in the same edit.
+2. **NO SAVINGS FIGURE, EVER.** No `you save $2,500`, no struck-through price, no percentage. The two
+   numbers sitting together do the work and the reader does the arithmetic in about a second. A savings
+   claim reads as a discount gimmick and makes the reader argue with the arithmetic instead of with the
+   competitor's quote. Same reasoning as the Part B preamble.
+3. **NO GEOGRAPHY.** Part B names Saudi Arabia because being there is a condition of the promotion. **The
+   homepage names no country anywhere**, and this section does not break that even though the copy it is
+   lifted from does. The geography register at the end of this file is unchanged.
+
+**The one-payment wording is mandatory beside the number here too**, in every line: `دفعة واحدة` /
+`one payment`, `مرة واحدة` / `one time`. And every Arabic price goes through `ltr()`, the Unicode LTR
+isolate — never a bare `$` inside an Arabic string.
 
 ---
 
@@ -903,8 +961,8 @@ half of the market.
 
 | Field | Arabic (`/offer`) | English (`/en/offer`) |
 |---|---|---|
-| Title | العرض: ستة أشهر بدفعة واحدة 500 دولار \| Q8 block | The offer: six months for $500, paid once \| Q8 block |
-| Description | دفعة واحدة 500 دولار تغطي ستة أشهر من العمل الكامل على الموقع وتحسين محركات البحث، لشركات الخدمات في السعودية. السعر المعتاد يبدأ من 500 دولار شهريًا. | One payment of $500 covers six months of full website and search work for service companies in Saudi Arabia. The normal price starts at $500 a month. |
+| Title | عملاء جدد من محركات البحث والذكاء الاصطناعي \| Q8 block | New customers from search engines and AI \| Q8 block |
+| Description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من 500 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from $500 a month. |
 
 **The Arabic meta writes `500 دولار`, not `$500`, and that is deliberate.** Inside page copy the price is
 `$500` wrapped in a Unicode LTR isolate (see the price register at the end of this file); a title and a
@@ -919,12 +977,22 @@ the risk, and `500 دولار` is unambiguous without one.
 new block, the price anchor, sits between the subhead and the countdown. Everything else in this section —
 the pill, the countdown, the spots slot, both CTAs and the static state — is untouched.
 
+**THE HEADLINE WAS REPLACED AGAIN LATER ON 2026-09-30 (build-spec §26.4). It sells the outcome, not the
+price.** It was `ستة أشهر بـ$500، تُدفع مرة واحدة` / `Six months for $500, paid one time.` Ahmad:
+*"you're selling the website, not the dream outcome, which is related to search and AI, getting clients."*
+The line now opens on the outcome, new customers, and names the two channels without explaining either.
+**`محركات البحث` / `search engines` is deliberate and must NOT be narrowed back to `جوجل` / `Google`**:
+he asked for search engines specifically. Six Arabic words, seven English.
+
 **Where the highlight went.** Ahmad's rule from 2026-09-24 was that the highlight belongs on the offer's
-value word, not on `بدون عقد` / `no contract` (`the highlighter is on no contract, it should be highlighted
-on free`). The value word used to be `مجانية` / `free`. It is now `مرة واحدة` / `one time`, because $500 on
-its own is a price and $500 **once** for six months is the offer. It is also the word that stops the
-confusion, so the loudest thing in the hero is the thing that must not be misread. `بدون عقد` is still
-never highlighted here: it owns its own full width band in B4.
+value word, not on `بدون عقد` / `no contract`. The value word was `مجانية` / `free`, then `مرة واحدة` /
+`one time` while the headline still carried the price. **The headline no longer carries the price**, so the
+highlight moved to `عملاء جدد` / `New customers` — the outcome, which is what the reader is being sold.
+`بدون عقد` is still never highlighted here: it owns its own full width band in B4.
+
+**Because the price left the headline, B1b now carries the whole price message alone and was strengthened
+to compensate**: a bigger offer row with an orange edge, and the anti-confusion note in a box. The single
+biggest risk on this page is still confusion. Build-spec §26.4 has the sizes and the measured line counts.
 
 **Three fixes against the rendered board, 2026-09-24, that still stand.**
 1. One highlighted phrase only, and it is the value word (above).
@@ -954,8 +1022,8 @@ complaint and both carry required information (§18.3's eligibility condition, a
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Headline | ستة أشهر بـ$500، تُدفع مرة واحدة | Six months for $500, paid one time. |
-| Highlighted phrase | مرة واحدة | one time |
+| Headline | عملاء جدد من محركات البحث والذكاء الاصطناعي | New customers from search engines and AI. |
+| Highlighted phrase | عملاء جدد | New customers |
 | Subhead | هذا العرض مخصص لشركات الخدمات في السعودية. دفعة واحدة $500 تغطي أول ستة أشهر من العمل الكامل. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | This offer is for service companies in Saudi Arabia. One payment of $500 covers your first six months of the full work. We get your business found on Google and in AI, turning those visits into calls and customers. |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
@@ -1021,7 +1089,8 @@ immediately shown one real case of it.
 | Element | Arabic | English |
 |---|---|---|
 | Block title | مثال واحد على ستة أشهر | One example of six months |
-| Intro | هذه لوحة أداء موقع kwtclean.com في Google Search Console، من 1 أبريل 2026 إلى 19 سبتمبر 2026. موقع لعميل بنيناه نحن، والأرقام أرقامه وحده. | This is the performance panel for kwtclean.com in Google Search Console, from 1 April 2026 to 19 September 2026. It is a client website we built, and the figures are its own. |
+| Intro | موقع بنيناه. هذه أرقامه. | A site we built. These are its numbers. |
+| Fine print, directly under the image | kwtclean.com، من 1 أبريل 2026 إلى 19 سبتمبر 2026. | kwtclean.com, 1 April 2026 to 19 September 2026. |
 | Caption, under the image | ستة أشهر من هذا العمل هي ما تشتريه الدفعة الواحدة $500. | Six months of that work is what the one payment of $500 buys. |
 | Pan hint, phone only | اسحب الصورة أفقيًا لقراءتها كاملة | Swipe the panel sideways to read all of it |
 | Pan region accessible name | لوحة أداء kwtclean.com في Google Search Console | The kwtclean.com performance panel in Google Search Console |
@@ -1046,6 +1115,13 @@ range and the shape of the daily curve. That is a description of an image, not a
 **Ahmad's framing when he supplied it:** *"a good example of what happens in six months."* The page prints
 the two dates off the image and never rounds them into a month count or a claim. April 2026 is this
 property's first month with any data, so the chart is the site's whole life to date.
+
+**THE LEAD WAS SHORTENED LATER ON 2026-09-30 (build-spec §26.3) AND THE PROVENANCE MOVED UNDER THE IMAGE.**
+Ahmad: *"you put too much details for the search console graph, you are very logical and direct in your
+messaging."* The lead used to open on the client name and both exact dates before the reader had looked at
+the panel. It is now six words, and `kwtclean.com` and the range are small fine print directly beneath the
+image, where provenance belongs. **They were not deleted** — B2b still names one client and one named
+period already in the past, so every guard rail above still holds. Do not lead with them again.
 
 **What this block never says.** It does not average the figures, project them, promise them to the reader,
 call them typical, or compare them with anything. One client, one named period, already in the past.
@@ -1228,20 +1304,23 @@ the homepage strip, B1 and B3 — and the number still comes from `CONFIG.SPOTS`
 Every figure printed anywhere on the site, with its source. Nothing else may be added, and nothing here may
 move to another section.
 
+**Rewritten 2026-09-30.** Section 6 stopped printing figures of its own when it was rebuilt around the
+graph (build-spec §26.1). The three click figures, the carwashkw.com baseline range, the month labels and
+the source caption all came off the page. The only figures §6 now shows are the ones drawn **inside the
+Search Console export image** — its own axis, not our copy, and never altered.
+
 | Figure | Where | Source |
 |---|---|---|
-| 7 clicks, April 2026 | Section 6, stage 1 | kwtclean.com |
-| 165 clicks, May 2026 | Section 6, stage 2 | kwtclean.com |
-| 531 clicks, August 2026 | Section 6, stage 3 | kwtclean.com |
-| 199 to 440 clicks a month across 13 consecutive complete months | Section 6, baseline line 1 | carwashkw.com |
+| `1.99K` clicks, `114K` impressions, `1.7%` CTR, `10.9` average position, and the dated x axis | Section 6 and offer B2b, printed **inside the image** | the unedited Search Console export, `design/proof-shots/` |
 | Seven impression totals and four `New project` tags | Section 7, the eleven cards | derivation table below |
 
-Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures, and **the homepage carries no price anywhere
-except the Section 2 strip line**, which is the teaser for the offer page. Part B carries prices (the price
-register below) and exactly one performance figure block, B2b. Every other number that renders in Part B
-comes from the `[COUNTDOWN]` and `[SPOTS]` build slots, which are configuration, not claims. Every number
-above comes from `clients/q8block/design/proof-data.md`, pulled from the Search Console API on 24 September
-2026.
+Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures. **The homepage carries a price in exactly two
+places: the Section 2 strip line and Section 7b.** The strip is the teaser and 7b is the offer itself; both
+repeat Part B verbatim and neither invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
+carries prices (the price register below) and exactly one performance figure block, B2b. Every other number
+that renders in Part B comes from the `[COUNTDOWN]` and `[SPOTS]` build slots, which are configuration,
+not claims. Every figure behind Section 7 comes from `clients/q8block/design/proof-data.md`, pulled from
+the Search Console API on 24 September 2026.
 
 ## Price register, 2026-09-30
 
@@ -1250,9 +1329,14 @@ added and no figure here may be changed without Ahmad.
 
 | Figure | What it is | Where it appears |
 |---|---|---|
-| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | Offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
-| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line, offer meta, B1 headline and subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
-| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | B5, offer FAQ Q1 and Q6 |
+| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | **Homepage §7b subhead, anchor row and tier 1**, offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
+| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line, **homepage §7b headline, subhead, offer row and note**, offer meta, B1 subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
+| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | **Homepage §7b tiers 2 and 3**, B5, offer FAQ Q1 and Q6 |
+
+**The offer B1 headline is no longer in this register.** It carried `$500` until 2026-09-30, when it was
+replaced with `عملاء جدد من محركات البحث والذكاء الاصطناعي` / `New customers from search engines and AI.`
+(build-spec §26.4). The price it dropped is carried by B1b directly beneath it, which was strengthened for
+exactly that reason.
 
 **The one-payment wording is mandatory beside the number, every time.** `دفعة واحدة` / `one payment`,
 `مرة واحدة` / `one time`, `تُدفع مرة واحدة` / `paid once`. A price on this site never appears next to
@@ -1272,13 +1356,12 @@ No figure in Section 7 is rounded at all — each is an exact sum of exact month
 across clients, and none is taken from a partial month. September 2026 is a partial month and is excluded
 from every claim on the site.
 
-**Section 7 now prints impressions, and Section 6 still does not.** Section 6 prints clicks only: it is
-the month-by-month story of one site, and a click is a person arriving. Section 7 prints one impression
-total per site, because Ahmad replaced its growth percentage with one (2026-09-25). **The word
-"impression" appears nowhere on the page** — the card says `times shown in Google search` /
-`مرة ظهر فيها في بحث Google`, which is what an impression is, in words a reader who has never owned a
-website already understands. The monthly impression rows behind every total are in this file's Section 7
-derivation table and in `src/data.mjs`, which is where the build adds them up.
+**Section 7 prints impressions. Section 6 prints no figure of its own at all any more** (2026-09-30, build-spec
+§26.1): it is one Search Console export image and three short beats, and the only numbers in it are the
+image's own. **The word "impression" still appears nowhere on the page** — Section 7's card says
+`times shown in Google search` / `مرة ظهر فيها في بحث Google`, which is what an impression is, in words a
+reader who has never owned a website already understands. The monthly impression rows behind every total
+are in this file's Section 7 derivation table and in `src/data.mjs`, which is where the build adds them up.
 
 ## Section 7 derivation table
 

@@ -272,35 +272,61 @@ export function included(t) {
   </section>`;
 }
 
-/* ── §6 The journey.
-      No sparkline under the cards any more — removed at Ahmad's instruction,
-      2026-09-25 (build-spec §21): "there is this orange graph under the
-      three images... it looks ugly." Deliberate divergence from
-      journey-D.png, which draws one; do not restore it. ─────────────────── */
+/* ── §6 The journey. REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).
+      Ahmad: the Search Console graph is the centrepiece and the three
+      illustrations become small icons underneath it that tell the story. What
+      was three large charcoal cards — illustration, month label, title, body
+      and a click figure each, then a precision note, a baseline paragraph and a
+      source caption — is now headline, graph, three compact beats.
+
+      THE FORENSIC DETAIL IS GONE ON PURPOSE AND MUST NOT BE RESTORED. Ahmad,
+      twice: "don't use details like kwtclean or from what month to what month."
+      The client name, the date range, the "fifth full data month" note, the
+      carwashkw baseline and the source caption are all out of THIS section's
+      copy. It is a deliberate reversal of the earlier checkability framing, on
+      the grounds that prospects do not verify and the detail costs more than it
+      earns. The figures printed inside the image stay exactly as exported:
+      that is the image's own axis, not our copy. The offer page's B2b still
+      carries the full provenance, which is where a reader who wants it looks.
+
+      THE GRAPH IS THE SAME ASSET AS B2b — one unedited export, never
+      re-derived or re-cropped — and it keeps B2b's behaviour exactly: below
+      1000px it pans inside `.proof-pan` instead of shrinking (scaled into a
+      350px box its headline figures render about 5px tall), and the wrapper is
+      `direction: ltr` so an RTL scroller cannot open on the tail of the chart
+      instead of on the four figures at its left edge. See §25.6.
+
+      The section still diverges from journey-D.png, which draws three cards and
+      a sparkline. That divergence is Ahmad-instructed, the same status as
+      §21.2's sparkline removal. ─────────────────────────────────────────── */
 const JOURNEY_ART = ['/assets/img/journey-1.webp', '/assets/img/journey-2.webp', '/assets/img/journey-3.webp'];
 
 export function journey(t) {
-  const cards = t.journey.stages.map((s, i) => `<article class="journey-card">
+  const g = t.journey.graph;
+  const beats = t.journey.stages.map((s, i) => `<li class="journey-beat">
       <img src="${JOURNEY_ART[i]}" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <p class="month">${esc(s.label)}</p>
-      <h3 class="h3">${esc(s.title)}</h3>
-      <p class="journey-figure">${s.figure}</p>
-      <p class="body">${esc(s.body)}</p>
-    </article>`).join('');
+      <div class="journey-beat-text">
+        <h3 class="h3">${esc(s.title)}</h3>
+        <p class="body">${esc(s.body)}</p>
+      </div>
+    </li>`).join('');
   return `<section id="journey" class="sec on-dark">
     <div class="wrap">
       <p class="eyebrow">${esc(t.journey.eyebrow)}</p>
       <h2 class="h2">${t.journey.h2}</h2>
       <p class="lead">${esc(t.journey.lead)}</p>
-      <p class="site-label">${esc(t.journey.siteLabel)}</p>
-      <div class="journey-grid">${cards}</div>
-      <div class="journey-notes">
-        <p>${esc(t.journey.precision)}</p>
-        <p>${t.journey.baseline[0]}</p>
-        <p>${t.journey.baseline[1]}</p>
-      </div>
-      <div class="journey-foot">
-        <p class="journey-source">${t.journey.source}</p>
+      <figure class="proof-shot journey-graph">
+        <div class="proof-pan" tabindex="0" role="group" aria-label="${esc(g.panLabel)}">
+          <img src="/assets/img/proof-kwtclean-gsc.webp" width="${PROOF_W}" height="${PROOF_H}"
+               alt="${esc(g.alt)}" loading="lazy" decoding="async">
+        </div>
+        <p class="proof-hint" aria-hidden="true">${esc(g.hint)}</p>
+      </figure>
+      <ul class="journey-beats">${beats}</ul>
+        <!-- Call and WhatsApp always ship as a pair. This block had WhatsApp alone,
+             which read as an unfinished row beside every other CTA on the site. -->
+      <div class="journey-foot btn-row">
+        <a class="btn btn-primary" href="${telHref}">${esc(t.cta.call)}</a>
         <a class="btn btn-outline" href="${waHref}" rel="noopener" target="_blank">${esc(t.cta.whatsapp)}</a>
       </div>
     </div>
@@ -406,6 +432,53 @@ export function work(t) {
 /* ── §8 FAQ ──────────────────────────────────────────────────────────────── */
 // The approved board (s8, offer-3) draws the first row open, so the build ships
 // the first row open too.
+/* ── §7b The price. NEW 2026-09-30 (build-spec §26.2), between §7 Our work and
+      §8 FAQ: problem, solution, what you get, proof, PRICE, objections, close.
+
+      NO NEW VISUAL LANGUAGE. Every part of this section is a component already
+      approved elsewhere on the site: the `.eyebrow → h2 → .lead` head from every
+      homepage section, `priceAnchor()` from offer B1b, `.tier-row`/`.tier` from
+      offer B5, and the §2 strip's own `اطلع على العرض` / `See the offer` label
+      on the link out. The band is `--bg-dark`, like §6, so the approved dark
+      components render on the ground they were designed for and the page still
+      alternates white §7 → dark §7b → light §8.
+
+      Every figure and every phrase is copy.md Part B, verbatim. NOTHING IS
+      INVENTED. The three tiers carry PRICES ONLY — Ahmad has not defined what
+      differs between them and nothing here may fill them out. There is NO
+      savings figure and there never will be: the two numbers sitting together
+      do the work. And there is NO COUNTRY — the offer page names Saudi Arabia
+      because eligibility is a condition of that promotion; the homepage names
+      no geography anywhere, and this section does not break that.
+
+      The one thing this section has to achieve in under two seconds is that the
+      $500 is paid ONCE, so the anchor's "now" row and its bold note sit directly
+      under the headline with nothing between them. */
+export function pricing(t) {
+  const p = t.pricing;
+  const tiers = p.tiers.map((price) => `<li class="tier">
+      <span class="tier-price">${esc(price)}</span>
+      <span class="tier-unit">${esc(p.tierUnit)}</span>
+    </li>`).join('');
+  return `<section id="pricing" class="sec on-dark">
+    <div class="wrap">
+      <p class="eyebrow">${esc(p.eyebrow)}</p>
+      <h2 class="h2">${p.h2}</h2>
+      <p class="lead">${esc(p.lead)}</p>
+      ${priceAnchor(p.price)}
+      <div class="pricing-after">
+        <h3 class="h3">${esc(p.afterTitle)}</h3>
+        <p class="body">${esc(p.afterIntro)}</p>
+        <ul class="tier-row">${tiers}</ul>
+        <div class="tier-notes"><p>${esc(p.note)}</p></div>
+      </div>
+      <div class="btn-row centred">
+        <a class="btn btn-primary" href="${t.offer.path}">${esc(p.cta)}<span class="chev" aria-hidden="true">&rsaquo;</span></a>
+      </div>
+    </div>
+  </section>`;
+}
+
 export function accordion(items, idPrefix) {
   return `<div class="faq-list">${items.map((q, i) => `<div class="faq-item${i === 0 ? ' open' : ''}">
       <button class="faq-q" type="button" aria-expanded="${i === 0 ? 'true' : 'false'}" aria-controls="${idPrefix}-a${i}">
@@ -555,6 +628,7 @@ export function offerProof(t) {
                alt="${esc(b.alt)}" loading="lazy" decoding="async">
         </div>
         <p class="proof-hint" aria-hidden="true">${esc(b.hint)}</p>
+        <p class="proof-meta">${esc(b.meta)}</p>
         <figcaption>${esc(b.caption)}</figcaption>
       </figure>
       <p class="proof-source">${esc(b.source)}</p>
