@@ -40,7 +40,7 @@ import { fileURLToPath } from 'node:url';
 import { COPY, NAP, CONFIG, INDEXNOW_KEY } from './src/data.mjs';
 import {
   header, footer, firstScreen, problem, whatWeDo, included, journey, work,
-  faq, finalCall, offerHero, offerIncluded, offerEligibility, offerNoContract,
+  faq, finalCall, offerHero, offerIncluded, offerProof, offerEligibility, offerNoContract,
   offerAfter, offerFaq, esc,
   pageHead, aboutPrinciple, aboutDeliver, aboutNotDo, aboutCompany,
   contactBlocks, contactOffice, termsBody, blogList, postArticle,
@@ -51,7 +51,40 @@ const SRC = path.join(ROOT, 'src');
 const OUT = path.join(ROOT, 'site');
 const CONTENT = path.join(ROOT, 'content', 'blog');
 
-const CSS = fs.readFileSync(path.join(SRC, 'styles.css'), 'utf8');
+/* The stylesheet is inlined into every page, so ANY comment inside it ships to
+   the public site. It has leaked three times: a vendor name, a quote from Ahmad
+   about tools, and a price example that rendered straight through the side of a
+   phone column on all 27 pages. Asking each agent to be careful inside comments
+   did not hold, so comments are stripped here instead. Author CSS with as many
+   comments as you like; none of them reach a browser.
+
+   Written as a scanner rather than a regular expression on purpose: it has to
+   skip quoted values, so a comment marker sitting inside content: "..." is left
+   alone, and a regex for that is both harder to read and easier to get wrong. */
+function stripCssComments(css) {
+  let out = "";
+  let quote = null;
+  for (let i = 0; i < css.length; i++) {
+    const c = css[i];
+    if (quote) {
+      out += c;
+      if (c === BACKSLASH) { out += css[++i] ?? ""; continue; }
+      if (c === quote) quote = null;
+      continue;
+    }
+    if (c === '"' || c === "'") { quote = c; out += c; continue; }
+    if (c === "/" && css[i + 1] === "*") {
+      const close = css.indexOf("*/", i + 2);
+      i = close === -1 ? css.length : close + 1;
+      continue;
+    }
+    out += c;
+  }
+  const NL = String.fromCharCode(10);
+  return out.split(NL).filter((l, n, a) => l.trim() !== "" || (a[n - 1] ?? "").trim() !== "").join(NL);
+}
+const BACKSLASH = String.fromCharCode(92);
+const CSS = stripCssComments(fs.readFileSync(path.join(SRC, 'styles.css'), 'utf8'));
 
 /* ══════════════════════════════════════════════════════════════════════════
    The blog content layer: a frontmatter parser and a markdown renderer,
@@ -354,7 +387,7 @@ function homePage(t) {
 
 function offerPage(t) {
   const body = [
-    offerHero(t), offerIncluded(t), offerEligibility(t), offerNoContract(t),
+    offerHero(t), offerIncluded(t), offerProof(t), offerEligibility(t), offerNoContract(t),
     offerAfter(t), offerFaq(t),
     finalCall(t, { id: 'offer-final', h2: t.offerPage.b7.h2, lead: t.offerPage.b7.lead }),
   ].join('\n');

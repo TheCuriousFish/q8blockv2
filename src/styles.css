@@ -403,11 +403,14 @@ html[lang="ar"] .nav a { font-weight: 400; }
       well under their weight.
 
       THIS FILE IS INLINED INTO EVERY BUILT PAGE, so a comment here is shipped
-      text. The reasoning — why the wordmark is an <img> and not coloured live
-      text, why the stars carry no number, count or markup, and what §24
-      removed — lives in src/render.mjs and build-spec §24, which are not.
-      Do not restate it here and do not name a vendor, a product or a property
-      in this file: §23 lost a whole verification round to exactly that. ══ */
+      text. The reasoning — why the wordmark is an image element and not
+      coloured live text, why the stars carry no number, count or markup, and
+      what §24 removed — lives in src/render.mjs and build-spec §24, which are
+      not. Do not restate it here, do not name a vendor, a product or a property
+      in this file, and do not write an HTML tag in it: §23 lost a whole
+      verification round to a leaked comment, and a bare "img" tag written in a
+      comment is counted by seo-audit.mjs as an image with no alt, on every
+      page at once. ══ */
 .cred {
   display: flex; align-items: center; justify-content: center;
   margin-block-start: 78px;                           /* 70 to the four trust points, 76 to §23's two-part row */
@@ -742,6 +745,32 @@ body.theme-dark { background: var(--bg-dark); }
 #offer-hero .strip-pill { display: inline-block; margin-block-end: 28px; }
 #offer-hero h1 { font-size: var(--fs-h1); }
 #offer-hero .lead { max-width: 860px; margin-inline: auto; font-size: var(--fs-hero-lead); margin-block-start: 28px; }
+
+/* The price anchor, 2026-09-30. Two rows, the SAME number, DIFFERENT units.
+   No third element competes with them and there is no savings line: the reader
+   does the arithmetic himself, which is the whole point.
+   The "now" row is the only thing on this page that uses --orange at this size
+   above the CTAs, and it earns it. The note under it is the anti-confusion line
+   and it is bold on purpose. */
+.price-anchor { margin-block-start: 40px; margin-inline: auto; max-width: 760px; text-align: start; }
+.pa-pair { display: grid; border: 1px solid rgba(255, 255, 255, 0.16); }
+.pa-row {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; column-gap: 24px; row-gap: 4px;
+  padding: 18px clamp(18px, calc(28/14.4 * 1vw), 30px);
+}
+.pa-row + .pa-row { border-block-start: 1px solid rgba(255, 255, 255, 0.16); }
+.pa-row dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
+.pa-row dd { margin: 0; font-weight: 700; line-height: 1.25; }
+.pa-was dd { font-size: var(--fs-count); color: var(--muted-on-dark); }
+.pa-now { background: rgba(255, 95, 41, 0.10); }
+.pa-now dt { color: var(--ink-invert); }
+.pa-now dd { font-size: clamp(19px, calc(30/14.4 * 1vw), 34px); color: var(--orange); }
+.pa-note {
+  margin-block-start: 14px; text-align: center;
+  font-size: var(--fs-strip); font-weight: 700; color: var(--ink-invert);
+}
+
 .count-label { margin-block-start: 44px; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
 .count-boxes { display: flex; justify-content: center; gap: 16px; margin-block-start: 16px; direction: ltr; }
 .count-box {
@@ -773,6 +802,60 @@ body.theme-dark { background: var(--bg-dark); }
 .offer-row .n {
   flex: none; min-width: 64px; font-size: var(--fs-numeral); font-weight: 600; line-height: 1;
   color: transparent; -webkit-text-stroke: 2.5px var(--orange); direction: ltr;
+}
+
+/* B2b, the proof block. The image is an unedited Google Search Console export
+   (design/proof-shots/SOURCES.md) and it is a screenshot of a light, LTR
+   interface: it keeps its own white ground on this dark section and it is never
+   mirrored under an RTL direction. Explicit width and height attributes on the
+   image element, plus width:100% and height:auto here, mean the browser reserves
+   the box from the attribute ratio before the file decodes, so CLS stays 0. */
+.proof-shot { margin: 40px 0 0; }
+/* direction:ltr is not cosmetic. The panel is a screenshot of an LTR interface
+   whose four headline figures sit at its LEFT edge. Left in an RTL container a
+   horizontal scroller opens at the content's RIGHT, so an Arabic reader would
+   land on the tail of the chart and never see the numbers. This opens both
+   locales on the figures. The image itself is never mirrored. */
+.proof-pan { background: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.12); direction: ltr; }
+.proof-pan:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.proof-shot img { display: block; width: 100%; height: auto; }
+/* The hint only means anything while the panel actually pans. */
+.proof-hint { display: none; }
+@media (max-width: 999px) {
+  /* The export is 2243px of wide chart. Scaled into a 350px phone box its
+     headline figures render about 5px tall, so the panel keeps a 1000px floor
+     and the reader swipes it instead. It is never cropped to fit. */
+  .proof-pan { overflow-x: auto; overscroll-behavior-inline: contain; }
+  .proof-shot img { width: 1000px; max-width: none; }
+  .proof-hint {
+    display: block; margin-block-start: 10px;
+    font-size: var(--fs-caption); color: var(--muted-on-dark);
+  }
+}
+.proof-shot figcaption {
+  margin-block-start: 24px; font-size: var(--fs-lead); font-weight: 600;
+  line-height: var(--lh-h3); color: var(--ink-invert); max-width: 900px;
+}
+.proof-source { margin-block-start: 16px; font-size: var(--fs-caption); color: var(--muted-on-dark); }
+
+/* B5's three monthly tiers. PRICES ONLY — see render.mjs: nobody has decided
+   what differs between them and nothing here invents a feature list to fill the
+   tiles. Its own size clamp rather than --fs-numeral, whose 44px floor puts
+   "$1,000" straight through the side of a 390px column. */
+.tier-row { margin-block-start: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tier {
+  border: 1px solid rgba(255, 255, 255, 0.16); padding: 30px 16px;
+  text-align: center; display: grid; align-content: center; gap: 12px;
+}
+.tier-price {
+  font-size: clamp(30px, calc(58/14.4 * 1vw), 64px); font-weight: 600; line-height: 1;
+  color: var(--orange); direction: ltr; unicode-bidi: isolate;
+}
+.tier-unit { font-size: var(--fs-strip); font-weight: 400; color: var(--muted-on-dark); }
+.tier-notes { margin-block-start: 30px; display: grid; gap: 12px; max-width: 900px; }
+.tier-notes p {
+  font-size: var(--fs-body); font-weight: var(--w-body);
+  line-height: var(--lh-body); color: var(--muted-on-dark);
 }
 
 #offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
@@ -1258,16 +1341,20 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 
 @media (max-width: 767px) {
-  /* One row is impossible at 390; the band packs into four and is kept as
-     tight as it can be, because hero + strip still have to be the whole first
-     screen. Mobile is not board-measured (build-spec §11). It packed into
-     THREE until 2026-09-25, when Ahmad's longer strip line ("Six months free
-     for service companies") stopped the line sharing row 1 with the pill:
-     at 390 the inner box is 350px and pill + line now measure 410 (en) and
-     358 (ar). Every way back to three drops an element or splits the countdown
-     label from its own clock, so the fourth row stands — build-spec §18. The
-     first screen still measures exactly 844 (72 + 702 + 142) in both locales
-     with zero hero scroll. */
+  /* NOTHING IN THIS FILE MAY QUOTE PAGE COPY. build.mjs inlines this stylesheet
+     into every built page, so a comment that merely repeats a line of copy puts
+     that line into all 82 HTML files — build-spec §23.3 and §24.2 are both this
+     same bug, caught by grepping the BUILT output. The reasoning lives in
+     src/render.mjs and in design/build-spec.md, which are never served.
+
+     One row is impossible at 390; the band packs into four and is kept as tight
+     as it can be, because hero + strip still have to be the whole first screen.
+     Mobile is not board-measured (build-spec §11). It packed into THREE until
+     2026-09-25, when a longer strip line stopped the line sharing row 1 with the
+     pill: at 390 the inner box is 350px and pill + line overran it. Every way
+     back to three drops an element or splits the countdown label from its own
+     clock, so the fourth row stands — build-spec §18 and §25. The first screen
+     still measures exactly 844 in both locales with zero hero scroll. */
   #offer-strip { padding-block: 12px; }
   .strip-row { gap: 8px 16px; }
   #offer-strip .strip-pill { padding: 7px 14px; }
@@ -1303,6 +1390,14 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
   .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
+  /* Three tier tiles do not fit a 390px row: each column is ~106px and "$1,000"
+     is wider than that at any size worth reading. They stack, and each tile
+     becomes one row with the price and its unit side by side. */
+  .tier-row { grid-template-columns: 1fr; gap: 12px; }
+  .tier {
+    grid-auto-flow: column; justify-content: space-between; align-items: baseline;
+    text-align: start; padding: 18px 20px; gap: 16px;
+  }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  /* 44.2px tap target, DESIGN.md §8 */

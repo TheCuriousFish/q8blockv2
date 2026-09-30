@@ -3216,3 +3216,308 @@ Zero accessibility audit failures on either. Mobile performance is **100**, up f
 tool WebPs were 36 kB of first-viewport image and the SVG that replaced them is 1.9 kB.
 
 **Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+---
+
+## 25. The offer is not free any more. $500 once for six months, 2026-09-30
+
+Ahmad's sixth revision pass, and the first one that changes what the business sells rather than how a
+section looks. It touches the homepage offer strip line, the whole of `/offer` and `/en/offer`, the Terms
+page's offer block, and it adds one new section and one new image. Nothing here is committed, pushed or
+deployed — the site is live at q8block.com, so Ahmad reviews this on `localhost:8823` first.
+
+### 25.1 The offer, in Ahmad's own words
+
+> `It's actually $500 for six months. And we anchor the actual price starts from $500 a month. But for the`
+> `first six months, they don't actually need to pay monthly. They just pay one time $500. And then after`
+> `that, they can choose a three-tier price, $500, $1,000, or $1,500.`
+
+| | |
+|---|---|
+| The anchor | The service normally starts at **$500 per month** |
+| The offer | **$500 ONE TIME**, covering the first six months. Not $500 a month. Not $500 a month for six months |
+| After six months | One of three monthly tiers: **$500, $1,000 or $1,500 a month** |
+
+Everything else stands: service companies in Saudi Arabia, the four eligibility conditions unchanged, the
+six deliverables unchanged, no contract.
+
+**The anchor is the weapon, and that is why the page is built around two rows.** Ahmad has a competitor
+actively pitching his prospects at $500 a month. A prospect on this page has to find that quote unthinkable
+by comparison, and what does it is the same number printed twice with two different units, next to each
+other, with nothing in between. **There is no "you save $2,500" line and none may be added** — a savings
+claim reads as a discount gimmick and makes the reader argue with the arithmetic instead of with the
+competitor's quote. Two numbers. The reader does the sum himself in about a second.
+
+**The single biggest risk is confusion, and it outranks everything else on this page.** If a reader leaves
+thinking it is $500 per month for six months, the offer is dead and so is the trust. So `دفعة واحدة` /
+`one payment`, `مرة واحدة` / `one time`, `تُدفع مرة واحدة` / `paid once` sits beside the number **every
+single time the number appears**, in both languages, in the shortest words there are. `copy.md`'s new price
+register lists every place. Do not economise on those words anywhere.
+
+### 25.2 What changed, file by file
+
+| Where | Was | Now |
+|---|---|---|
+| Homepage §2 strip line, ar | `ستة أشهر مجانًا لشركات خدمية` | `ستة أشهر بـ$500 مرة واحدة` |
+| Homepage §2 strip line, en | `6 months free, service firms` | `6 months for $500, paid once` |
+| `/offer` title, ar | `العرض: ستة أشهر مجانية بدون عقد` | `العرض: ستة أشهر بدفعة واحدة 500 دولار` |
+| `/offer` title, en | `The offer: six months free, no contract` | `The offer: six months for $500, paid once` |
+| B1 headline, ar | `ستة أشهر مجانية، بدون عقد` | `ستة أشهر بـ$500، تُدفع مرة واحدة` |
+| B1 headline, en | `Six months free, no contract.` | `Six months for $500, paid one time.` |
+| B1 highlight | `مجانية` / `free` | `مرة واحدة` / `one time` |
+| B1b | — | **new**, the price anchor |
+| B2 intro | `The six months cover the full work` | `One payment of $500 covers all six months, and the six months cover the full work` |
+| B2b | — | **new**, the proof block and its image |
+| B4 body | `stop at any time … with no fee` | one payment, no monthly bill, nothing renews, nothing further due |
+| B5 | three numbered options, no figures | **three monthly tiers**, $500 / $1,000 / $1,500, prices only |
+| B6 | 6 questions, Q1 `Why is this offer free?` | **7 questions**, Q1 `Is the $500 per month?` |
+| Terms T5 | `who can register, what the six months cover, and the options afterwards` | `… what it costs and how it is paid, and the options afterwards` |
+
+The homepage FAQ never carried an offer question — every one of them moved to `/offer` on 2026-09-24 — so
+nothing in homepage §8 needed rewording beyond its own preamble in `copy.md`.
+
+### 25.3 The strip line lost "service firms", and that was a pixel decision
+
+`copy.md` §2 has the full note. In short: the line has to carry the price **and** the fact that it is paid
+once, and there is no room left for the qualifier. At 390 the pill and the line share row 1 inside a 350px
+inner box, and putting `لشركات خدمية` / `service firms` back overruns it — the same budget that forced the
+line to be shortened once already on 2026-09-25 (§21). The qualifier is not lost: the offer page names
+service companies in the B1 subhead, in the B3 intro and as eligibility condition **1**, which is where a
+reader actually self-qualifies. **This is the one thing in this pass Ahmad may want back**, and getting it
+back costs a fourth row on the phone strip.
+
+### 25.4 The price anchor, B1b
+
+Two rows, one description list, the same number, different units, and one short bold note under them. It
+sits between the subhead and the countdown, and nothing competes with it.
+
+| | ar | en |
+|---|---|---|
+| Anchor row | `السعر المعتاد` · `يبدأ من $500 شهريًا` | `Normal price` · `from $500 per month` |
+| Offer row | `هذا العرض` · `$500 دفعة واحدة، تغطي ستة أشهر` | `This offer` · `$500 one time, covers six months` |
+| Note | `دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.` | `One payment, not monthly. No monthly bill during the six months.` |
+
+`.price-anchor` in `src/styles.css`, `priceAnchor()` in `src/render.mjs`. Max-width 760px, centred; a 1px
+`rgba(255,255,255,0.16)` box with a hairline between the two rows; the offer row takes
+`rgba(255,95,41,0.10)` and its value takes `--orange` at `clamp(19px, 30/14.4vw, 34px)` against the anchor
+row's `--fs-count` in `--muted-on-dark`. The rows are `flex-wrap: wrap` with `space-between`, so at 1440 the
+value sits at the end of the row and at 390 it wraps below its own label, with no media query for it.
+
+**No strike-through on the anchor row, and this is not a style preference.** It is not a "was" price being
+crossed out; it is the service's real ongoing price, and it reappears three sections later as tier 1 in B5.
+Striking it through would turn a true statement into a sales device and would contradict B5 on the same page.
+
+**A description list may only contain `dt`, `dd` and `div`**, so the note is a paragraph outside it. The
+first draft had it inside and that is invalid HTML.
+
+### 25.5 The tiers, B5. Prices only, and this is the one thing still blocked on Ahmad
+
+Ahmad gave the three PRICES and **not what differs between them**. B5 therefore prints three tiles carrying
+a price and `شهريًا` / `per month` and nothing else, with two notes under the row: what each plan covers is
+agreed on the call (which is what `copy-pages.md` T6 already says of everything project specific), and
+stopping is still free and needs no notice.
+
+**Nothing in this pass invented a service level, a page count, an hours figure, a feature list or a "most
+popular" marker for the tiers**, and nothing should. An invented tier spec on a page whose entire argument
+is that its figures are checkable is the worst possible place to make something up. The comment above
+`offerAfter()` in `src/render.mjs` says so at the point of edit.
+
+`.tier-row` is a 3-column grid at desktop; below 768px it stacks to three single rows with the price and its
+unit side by side, because three columns of `$1,000` do not fit a 390px width at any size worth reading
+(`--fs-numeral`'s 44px floor puts it straight through the side of the column, which is why the tier price
+has its own `clamp(30px, 58/14.4vw, 64px)`).
+
+### 25.6 The proof block, B2b, and the rule it overrides
+
+`copy.md` Part B used to forbid performance figures on `/offer` outright: *a figure lifted onto an offer page
+turns into a promise*. **Ahmad overrode that on 2026-09-30**, on the grounds that a reader who is being asked
+for money wants to see what the six months do before he pays. The override is scoped to this one block.
+
+The image is a Google Search Console export for `kwtclean.com`, a real client site — card 4 in homepage §7,
+and the site homepage §6 already follows month by month — covering `4/1/26` to `9/19/26`. Ahmad's framing:
+*"a good example of what happens in six months."* It shows `Total clicks 1.99K` and `Total impressions 114K`
+selected, `Average CTR 1.7%` and `Average position 10.9` unselected, and a daily chart flat along zero
+through April that lifts through May and settles into a climbing band to September.
+
+**The page prints the two dates and never rounds them into a month count or a claim.** April 2026 is that
+property's first month with any data (`design/proof-data.md`), so the chart is the site's whole life to date.
+
+| | |
+|---|---|
+| Source, kept byte-for-byte | `design/proof-shots/kwtclean-gsc-2026-04-01-to-2026-09-19.png`, 2243 x 582, 121,385 bytes |
+| sha256 | `b762c37640d5e1fd213fd287032561dadffb3e93d47fc77a1f12cf2b1ff8d4f1` |
+| Derivation | `design/proof-shots/derive.mjs`, run as `SHARP_FROM=<scratch>/node_modules node design/proof-shots/derive.mjs` |
+| Ships as | `src/img/proof-kwtclean-gsc.webp`, 2243 x 582, **74.7 kB**, WebP q92 |
+| Provenance | `design/proof-shots/SOURCES.md` |
+
+**The derivation is a format conversion and nothing else.** No further crop, no retouch, no sharpening, no
+recolour, no upscale, and **no number in the image is altered**. It follows §23.4's rule exactly: the derive
+script re-checks the source's sha256 and its pixel dimensions before it will write, so swapping the file
+fails the run loudly instead of silently shipping a different screenshot. `sharp` stays out of the repo.
+
+The image element carries `width="2243" height="582"` with `width:100%; height:auto`, so the browser reserves
+the box from the attribute ratio before the file decodes — **CLS measured 0.000** on both Lighthouse runs. It
+is `loading="lazy"`: it sits well below the fold, which is the opposite of §20.6's first-viewport rule and
+correct here.
+
+The alt text describes the panel as a panel: both selected tiles, both unselected ones, the date range and
+the shape of the curve. That is a description of an image, not a claim, which is why `Average position` may
+appear in it where the `rank` register forbids position as a selling word anywhere else.
+
+**It pans on a phone instead of shrinking, and that is the whole point of it.** The export is 2243px of a
+wide chart. Scaled to fit a 350px phone box it renders `1.99K` about 5px tall, which makes the one piece of
+evidence on the page unreadable on the device 99% of the traffic uses — a proof nobody can read is not
+proof. So **below 1000px** the image keeps a 1000px floor inside `.proof-pan`, a horizontally scrollable
+wrapper, and the reader swipes it. At 390 the panel is 350px over 1000px of content and `1.99K` renders
+13.4px tall; at 1440 the image is 1318px inside the 1320px column, the wrapper does not scroll at all and
+the hint line is `display: none`. **It is never cropped to fit**: this is a real export and the crop it has
+is the one Ahmad supplied.
+
+**`.proof-pan` is `direction: ltr` and that is not cosmetic.** The panel is a screenshot of an LTR interface
+whose four headline figures sit at its **left** edge. Left in an RTL container, a horizontal scroller opens
+at the content's **right**, so an Arabic phone reader landed on the tail of the chart and never saw the
+numbers at all — caught by looking at `proof2-390-ar.png`, not by any measurement. `direction: ltr` opens
+both locales on the figures. The image itself is never mirrored either way.
+
+The wrapper is `tabindex="0"` with `role="group"` and an `aria-label`, because axe requires a scrollable
+region to be keyboard reachable (`scrollable-region-focusable`) and that also gives arrow-key panning for
+free. The hint line (`اسحب الصورة أفقيًا لقراءتها كاملة` / `Swipe the panel sideways to read all of it`) is
+`aria-hidden`: it tells a sighted phone reader that the panel scrolls, and a screen reader already has the
+whole panel described in the image's alt.
+
+### 25.7 `$500` renders backwards in Arabic unless it is isolated
+
+Written plainly inside an Arabic sentence, `$500` comes out with the currency sign on the wrong side of the
+digits. UAX#9 W2 resolves European digits whose nearest preceding strong type is an Arabic letter to
+Arabic-Number; the `$` is then no longer adjacent to a European number, falls through to a neutral, and
+resolves into the right-to-left run.
+
+`src/data.mjs` exports `ltr()`, which wraps a price in **U+2066 (LRI) / U+2069 (PDI)**, and every Arabic
+price string goes through it. Invisible characters were chosen over an inline `dir="ltr"` element
+deliberately: they survive `esc()`, so the price strings stay ordinary escaped copy and no renderer has to
+start emitting raw markup for a price. **Never write a bare `$` price into an Arabic string.**
+
+The two exceptions are the Arabic page title and meta description, which write `500 دولار` instead. A search
+result snippet is not a place to put a control character, and `500 دولار` is unambiguous without one.
+
+Verified by eye at 3x: the H1, the subhead, both anchor rows, the strip line and all three tier tiles render
+`$500` / `$1,000` / `$1,500` correctly under `dir="rtl"`.
+
+### 25.8 The CSS comment leak happened twice more, and the second one had been shipping for days
+
+§23.3 and §24.2 both record that `build.mjs` inlines `src/styles.css` into every built page, so a comment in
+it is **shipped text**. It happened twice in this pass, and the grep over the built output caught both:
+
+1. **A quoted copy line.** The phone strip's comment quoted the old strip string verbatim, so `Six months
+   free` was still in all 82 built pages after every trace of it had been removed from the copy. Reworded.
+2. **A bare HTML tag, and this one predates this pass.** The `.cred` comment written in §24 contained the
+   words `an img element and not coloured live text` — written then as an actual tag. `scripts/seo-audit.mjs`
+   counts image tags without an `alt=` over the built HTML, so that one comment was being reported as **an
+   image with no alt on every page at once**: a HIGH finding across 25 pages, sitting in the audit since
+   2026-09-25. The `.proof-shot` comment added in this pass wrote a second one and doubled it to "2 of 2".
+
+Both are reworded, and `src/styles.css` now carries the standing rule in the phone-strip block: **no page
+copy, no vendor or product name, and no HTML tag may be written in this file at all.** The reasoning lives in
+`src/render.mjs` and in this document, neither of which is ever served.
+
+Fixing them took the audit from **25 high / 43 medium** to **0 high / 18 medium**: the same phantom tag was
+also being counted by the "images without width and height" check, which is where 25 of the mediums went.
+
+### 25.9 Verification
+
+Scope sized to the change, as §23.6 and §24.7 were. `compare.mjs` was skipped: the offer boards
+(`design/boards/offer-1..3.png`) show a free offer and every divergence here is Ahmad-instructed, the same
+status as §21.2's sparkline. The full `shots.mjs` sweep was skipped too. What was run:
+
+**1. The first-screen budget, §15.1's hard constraint, all six combinations.** Real Chrome,
+`deviceScaleFactor 1`, after `document.fonts.ready`:
+
+| Viewport | Locale | Header | Hero | Strip | First screen | `#problem` top | Hero internal scroll | Overflow-x |
+|---|---|---|---|---|---|---|---|---|
+| 1440x900 | en | 112 | 822 | 78 | **900** | **900** | 0 | false |
+| 1440x900 | ar | 112 | 822 | 78 | **900** | **900** | 0 | false |
+| 1920x1200 | en | 112 | 1121 | 79 | **1200** | **1200** | 0 | false |
+| 1920x1200 | ar | 112 | 1121 | 79 | **1200** | **1200** | 0 | false |
+| 390x844 | en | 72 | 726.8 | 117.2 | **844** | **844** | 0 | false |
+| 390x844 | ar | 72 | 726.8 | 117.2 | **844** | **844** | 0 | false |
+
+Identical to §24.7, §23.6 and §21.4 to the pixel in all six rows. The new strip line is shorter than the one
+it replaced, so the budget did not move at all.
+
+**2. The offer strip, one row, measured by clustering every visible child by its vertical centre:**
+
+| Viewport | Locale | Band | Visual rows | Row width | Inner box | Line width |
+|---|---|---|---|---|---|---|
+| 1440x900 | en | 78 | **1** | 1037 | 1320 | 299.2 |
+| 1440x900 | ar | 78 | **1** | 1025 | 1320 | 262.0 |
+| 1920x1200 | en | 79 | **1** | 1141 | 1500 | 299.2 |
+| 1920x1200 | ar | 79 | **1** | 1127 | 1500 | 262.0 |
+| 390x844 | en | 117.2 | 3 | row 1 = 333 | 350 | 209.4 |
+| 390x844 | ar | 117.2 | 3 | row 1 = 300 | 350 | 183.4 |
+
+One row at both desktop widths in both locales, and the phone band is still the three rows §21 got it back
+to, at exactly the 117.2px it has measured since. At 390 the pill and the line share row 1 with 17px of
+slack in English, which is the margin the "service firms" qualifier cannot fit into (25.3).
+
+**3. Screenshots, looked at.** `offerhero-{1440,390}-{en,ar}.png`, `proof2-{1440,390}-{en,ar}.png`,
+`tiers-{1440,390}-{en,ar}.png` and `strip-{1440,390}-{en,ar}.png`, `deviceScaleFactor 2`, plus a 3x crop of
+the Arabic H1 and the anchor rows.
+
+**The two second test — can a reader tell that $500 is a single payment?** Yes, three times before he
+scrolls. The headline ends on `مرة واحدة` / `one time` inside the orange highlight block, which is the
+loudest object in the hero. The anchor block puts `from $500 per month` directly above `$500 one time,
+covers six months`, with the offer row tinted and its value in orange at nearly twice the anchor row's size,
+so the unit is the only thing that differs and the eye lands on it. The bold note under the pair says
+`One payment, not monthly` in four words. At 390 the anchor rows wrap label over value and read in the same
+order, and the note holds two lines. Nothing on the page says "free" and nothing implies a monthly bill
+during the six months.
+
+**The proof panel, measured and looked at in both locales:**
+
+| Viewport | Locale | Panel width | Image width | Scrolls | Hint |
+|---|---|---|---|---|---|
+| 1440x900 | en | 1320 | 1318 | false | hidden |
+| 1440x900 | ar | 1320 | 1318 | false | hidden |
+| 390x844 | en | 350 | 1000 | true | shown |
+| 390x844 | ar | 350 | 1000 | true | shown |
+
+At 390 both locales open on the four metric tiles, `1.99K` and `114K` plainly legible, with the flat April
+start of the curve visible beside them. That took the `direction: ltr` fix in 25.6; before it the Arabic
+phone view opened on the far end of the chart with no numbers on screen at all.
+
+**4. No trace of the free offer in the built output.** Grepped over the whole of `site/`, case-insensitively:
+`Six months free` → **0 files**. The word `free` (excluding `freelance`) and `مجان` → **0 occurrences on
+`/`, `/en/`, `/offer/`, `/en/offer/`, `/terms/` and `/en/terms/`**. What is left is six blog pages and the
+old checklist page, all of it unrelated copy about a Google profile being free and about free keyword tools.
+`no fee` survives twice per offer page and is correct: it is the stopping option in B5 and in FAQ Q6, not a
+claim about the offer's price.
+
+**5. `node scripts/seo-audit.mjs` — 27 pages, `0 high`, 18 medium, 9 low.** Down from 25 high / 43 medium
+(25.8). The new image carries a real alt and both intrinsic dimensions, and no link, canonical, sitemap or
+page count moved.
+
+**6. Lighthouse**, `/en/offer/`, one run each on the final build:
+
+| | Perf | A11y | Best practices | SEO | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|
+| Desktop | **100** | **100** | 100 | 100 | 0.4s | 0ms | **0** |
+| Mobile | **100** | **100** | 100 | 100 | 1.7s | 40ms | **0** |
+
+`/offer/` (Arabic) was run once as well: **100 / 100 / 100 / 100**, zero accessibility audit failures. Zero
+accessibility failures on all three, including the new focusable scroll region. CLS is 0 with the new
+74.7 kB image on the page, which is what the explicit width and height buy.
+
+### 25.10 What is still open
+
+1. **The tier contents.** B5 prints three prices and no contents, because Ahmad gave the prices and not what
+   differs between the plans. Nothing was invented to fill them. This is the only thing on the page waiting
+   on him, and it drops into `b5` in both locales in one edit.
+2. **`service firms` on the strip line**, removed for pixels (25.3). Getting it back costs a fourth row on
+   the phone strip.
+3. **A refund position.** Money now changes hands at the start. B4 and FAQ Q3 say what is true — one payment,
+   no monthly bill, nothing renews, nothing further due — and deliberately state **no refund rule in either
+   direction**, because nobody has decided one. `copy-pages.md` T6 already says the money terms are agreed
+   directly. If Ahmad wants a refund line, it is his decision and it goes in B4.
+4. **`CONFIG.COUNTDOWN_END`** is still the `2026-10-04` placeholder from §15.4. Ahmad sets the real date.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.

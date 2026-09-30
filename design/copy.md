@@ -271,25 +271,36 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر مجانًا لشركات خدمية | 6 months free, service firms |
+| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
 | Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA, same row | اطلع على العرض | See the offer |
 
-**Line shortened 2026-09-25 (build-spec §21).** `ستة أشهر مجانية لشركات الخدمات` /
+**Rewritten 2026-09-30 (build-spec §25): the line now carries the PRICE, and the "service firms"
+qualifier came off it.** The offer is no longer free, and the one thing the strip must not do is leave a
+reader thinking the price is monthly, so `مرة واحدة` / `paid once` is on the line beside the number. There
+is no room for both that and the qualifier: at 390 the pill and the line share row 1 inside a 350px inner
+box, and adding `لشركات خدمية` / `service firms` back overruns it. The qualifier is not lost — the offer
+page names service companies in its subhead, in the B3 intro and as eligibility condition 1, which is
+where a reader actually self-qualifies. Measured after the change: **one row at 1440 and 1920** in both
+locales (band 78 / 79px, row 1037 / 1141px inside 1320 / 1500), and **three rows at 390** with the line
+sharing row 1 with the pill at 333px (en) and 300px (ar) inside 350. The band is 117.2px at 390, to the
+pixel what §23.6 and §24.7 measured.
+
+**The line it replaced, and why the history matters.** `ستة أشهر مجانية لشركات الخدمات` /
 `Six months free for service companies` was the string §18.3 added to carry the "service companies"
-qualifier, but it pushed the phone strip to four rows (§18.6) because the English could no longer share
-a row with the pill at 390px. Shortened to keep the same qualifier in fewer pixels — `شركات خدمية` /
-`service firms` reads the same and the band is back to three rows on a phone, in both locales.
+qualifier; it pushed the phone strip to four rows (§18.6) and was shortened on 2026-09-25 to
+`شركات خدمية` / `service firms` to get back to three. The pixel budget on this line has been tight twice
+now. Anything added to it has to be measured at 390 in both locales before it ships.
 
 ### Static state, countdown removed and spots empty
 
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر مجانًا لشركات خدمية | 6 months free, service firms |
+| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
 | CTA, same row | اطلع على العرض | See the offer |
 
@@ -741,9 +752,9 @@ any figure on the page can be traced in one step.
 
 **Background** light `#F5F6F7`, accordion panels on white with a `1px #EBEBEB` hairline.
 
-These are brand objections. Every offer question, `why is this free`, `is there a contract`, `what happens
-after six months`, `do I need a commercial registration`, has moved to `/offer`. **No figures in this
-section.** No durations are invented anywhere in it.
+These are brand objections. Every offer question, `is the $500 per month`, `why is it $500 for six months`,
+`is there a contract`, `what happens after six months`, `do I need a commercial registration`, lives on
+`/offer`. **No figures and no prices in this section.** No durations are invented anywhere in it.
 
 | Element | Arabic | English |
 |---|---|---|
@@ -847,10 +858,43 @@ Arabic at `/offer`, English at `/en/offer`. Reached from the Section 2 strip, th
 **This is the only part of the site where a country is named**, because being in Saudi Arabia is a
 condition of this specific promotion, not a description of who Q8Block sells to.
 
-**No prices anywhere on this page.** Tier pricing is not decided and inventing one is a launch blocker.
-**No performance figures on this page either.** The proof lives on the homepage, in sections 6 and 7,
-where it can be read with its month labels and its source caption. A figure lifted onto an offer page
-turns into a promise, which is exactly what the numbers rule forbids.
+## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE.
+
+Ahmad, in his own words: *"It's actually $500 for six months. And we anchor the actual price starts from
+$500 a month. But for the first six months, they don't actually need to pay monthly. They just pay one
+time $500. And then after that, they can choose a three-tier price, $500, $1,000, or $1,500."*
+
+So, and every line in Part B is written off these three facts:
+
+1. **The anchor.** The service normally starts at **$500 per month**.
+2. **The offer.** **$500 ONE TIME**, and that single payment covers the first six months. Not $500 a
+   month. Not $500 a month for six months. One payment of $500 buys six months.
+3. **After six months** the client picks one of three monthly tiers: **$500, $1,000 or $1,500 a month.**
+
+**THE SINGLE BIGGEST RISK ON THIS PAGE IS CONFUSION**, and it is worth more than any other consideration
+here. If a reader leaves thinking it is $500 per month for six months, the offer is dead and so is the
+trust. Every place the price appears says in the shortest words available that it is one payment, in both
+languages: `دفعة واحدة` / `one payment`, `مرة واحدة` / `one time`. Do not economise on those words anywhere.
+
+**Why the anchor is the weapon.** Ahmad has a competitor actively pitching his prospects at $500 a month.
+A prospect who reads this page has to find that offer unthinkable by comparison, and the way that happens
+is the same number printed twice with two different units, sitting next to each other in the hero, with
+nothing between them. **There is no "you save $2,500" line and there never will be** — a savings claim
+reads as a discount gimmick and it makes the reader argue with the arithmetic instead of with the
+competitor's quote. Two numbers. The reader does the sum.
+
+**The three tiers carry PRICES ONLY.** Ahmad gave the three figures and not what differs between them.
+Nothing on this page invents a service level, a page count, an hours figure or a feature list to fill them
+out. What each plan covers is agreed on the call, which is what `copy-pages.md` T6 already says of
+everything project specific. **Fill the tiers in only when Ahmad supplies their contents.**
+
+**One performance figure block is now allowed here, B2b, and only that one.** Part B used to forbid
+performance figures outright, on the grounds that a figure lifted onto an offer page turns into a promise.
+Ahmad overrode that on 2026-09-30, when the offer stopped being free: a reader who is being asked for money
+wants to see what the six months do before he pays. B2b keeps every guard rail the homepage figures carry —
+one named client, one named period, already in the past, the source named on the page — and its image is an
+unedited Search Console export. Nothing else on this page carries a performance figure, and no figure
+anywhere on it is phrased as a forecast.
 
 `وثيقة عمل حر` appears everywhere `سجل تجاري` appears. Leaving it out silently disqualifies the larger
 half of the market.
@@ -859,17 +903,31 @@ half of the market.
 
 | Field | Arabic (`/offer`) | English (`/en/offer`) |
 |---|---|---|
-| Title | العرض: ستة أشهر مجانية بدون عقد \| Q8 block | The offer: six months free, no contract \| Q8 block |
-| Description | ستة أشهر من العمل الكامل على الموقع وتحسين محركات البحث، لشركات الخدمات في السعودية، دون رسوم ودون عقد. الشروط والتفاصيل كاملة. | Six months of full website and search work for service companies in Saudi Arabia, with no fee and no contract. Full conditions and details. |
+| Title | العرض: ستة أشهر بدفعة واحدة 500 دولار \| Q8 block | The offer: six months for $500, paid once \| Q8 block |
+| Description | دفعة واحدة 500 دولار تغطي ستة أشهر من العمل الكامل على الموقع وتحسين محركات البحث، لشركات الخدمات في السعودية. السعر المعتاد يبدأ من 500 دولار شهريًا. | One payment of $500 covers six months of full website and search work for service companies in Saudi Arabia. The normal price starts at $500 a month. |
+
+**The Arabic meta writes `500 دولار`, not `$500`, and that is deliberate.** Inside page copy the price is
+`$500` wrapped in a Unicode LTR isolate (see the price register at the end of this file); a title and a
+description are shown as plain text in a search result, where an invisible control character is not worth
+the risk, and `500 دولار` is unambiguous without one.
 
 ## B1. Offer hero
 
 **Background** dark `#141415`. Countdown directly under the headline.
 
-**Three fixes against the rendered board, 2026-09-24, and nothing else in this section moved.**
-1. **The highlight sits on `مجانية` / `free`, not on `بدون عقد` / `no contract`** (Ahmad: `the highlighter is
-   on no contract, it should be highlighted on free`). One word only. `بدون عقد` is never highlighted here:
-   it already owns its own full width band in B4.
+**Rewritten 2026-09-30 for the paid offer.** The headline, the subhead and the highlight all moved, and a
+new block, the price anchor, sits between the subhead and the countdown. Everything else in this section —
+the pill, the countdown, the spots slot, both CTAs and the static state — is untouched.
+
+**Where the highlight went.** Ahmad's rule from 2026-09-24 was that the highlight belongs on the offer's
+value word, not on `بدون عقد` / `no contract` (`the highlighter is on no contract, it should be highlighted
+on free`). The value word used to be `مجانية` / `free`. It is now `مرة واحدة` / `one time`, because $500 on
+its own is a price and $500 **once** for six months is the offer. It is also the word that stops the
+confusion, so the loudest thing in the hero is the thing that must not be misread. `بدون عقد` is still
+never highlighted here: it owns its own full width band in B4.
+
+**Three fixes against the rendered board, 2026-09-24, that still stand.**
+1. One highlighted phrase only, and it is the value word (above).
 2. **The subhead no longer sells a position in search.** It is written in what the owner counts, being
    discovered on Google and in AI, the call that follows, and the clients and revenue those calls become.
    Ahmad has now said three times that a promise about position in search results, in either language, means
@@ -896,9 +954,9 @@ complaint and both carry required information (§18.3's eligibility condition, a
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Headline | ستة أشهر مجانية، بدون عقد | Six months free, no contract. |
-| Highlighted word | مجانية | free |
-| Subhead | هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. دون التزام. | This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We get your business found on Google and in AI, turning those visits into calls and customers. No commitment. |
+| Headline | ستة أشهر بـ$500، تُدفع مرة واحدة | Six months for $500, paid one time. |
+| Highlighted phrase | مرة واحدة | one time |
+| Subhead | هذا العرض مخصص لشركات الخدمات في السعودية. دفعة واحدة $500 تغطي أول ستة أشهر من العمل الكامل. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | This offer is for service companies in Saudi Arabia. One payment of $500 covers your first six months of the full work. We get your business found on Google and in AI, turning those visits into calls and customers. |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
@@ -909,14 +967,41 @@ complaint and both carry required information (§18.3's eligibility condition, a
 **Static state.** With `[COUNTDOWN]` removed and `[SPOTS]` empty the hero still has to read correctly.
 Replacement line: `التسجيل مفتوح الآن` / `Registration is open now`.
 
+### B1b. The price anchor
+
+The block that carries the whole argument. It sits directly under the subhead, above the countdown, and
+nothing competes with it: two rows, the **same number**, **different units**, and one short line under them.
+
+| Row | Label, ar / en | Value, ar / en |
+|---|---|---|
+| Anchor | السعر المعتاد / Normal price | يبدأ من $500 شهريًا / from $500 per month |
+| Offer | هذا العرض / This offer | $500 دفعة واحدة، تغطي ستة أشهر / $500 one time, covers six months |
+
+| Note under the pair | Arabic | English |
+|---|---|---|
+| | دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة. | One payment, not monthly. No monthly bill during the six months. |
+
+**The note is not decoration.** It is the anti-confusion line and it is the reason the block exists: a
+reader who takes one thing away from this page has to take away that the $500 is paid once. It is the only
+bold line in the hero after the headline.
+
+**No savings figure, no struck-through price, no percentage.** The anchor row is not a "was" price being
+crossed out — it is the service's real ongoing price, stated plainly, because it is also tier 1 in B5. A
+strike-through would turn a true statement into a sales device and would contradict B5 three sections later.
+
+**It is a description list, not a table**, because two label/value pairs are exactly that, and it gives a
+screen reader the pairing with no ARIA. The note sits outside the `dl`, which may only contain `dt`, `dd`
+and `div`.
+
 ## B2. What the offer includes
 
-Same six deliverables as homepage Section 5, same icons, listed here as the contents of the free period.
+Same six deliverables as homepage Section 5, same icons, listed here as the contents of the six months the
+one payment buys.
 
 | Element | Arabic | English |
 |---|---|---|
 | Block title | ما يشمله العرض | What is included |
-| Intro | الأشهر الستة تشمل العمل كاملًا، لا جزءًا منه. | The six months cover the full work, not a part of it. |
+| Intro | دفعة واحدة $500 تغطي الأشهر الستة كاملة، والأشهر الستة تشمل العمل كاملًا لا جزءًا منه. | One payment of $500 covers all six months, and the six months cover the full work, not a part of it. |
 
 | # | Arabic | English |
 |---|---|---|
@@ -927,10 +1012,48 @@ Same six deliverables as homepage Section 5, same icons, listed here as the cont
 | 5 | بناء الروابط والسلطة | Backlinks and authority building |
 | 6 | الاستضافة والنطاق والحماية | Hosting, domain and security |
 
+## B2b. The proof
+
+**New 2026-09-30, and it is the only performance figure in Part B.** It answers the question the price
+creates: what do six months actually do. Placed after B2, so the reader has just read what he gets and is
+immediately shown one real case of it.
+
+| Element | Arabic | English |
+|---|---|---|
+| Block title | مثال واحد على ستة أشهر | One example of six months |
+| Intro | هذه لوحة أداء موقع kwtclean.com في Google Search Console، من 1 أبريل 2026 إلى 19 سبتمبر 2026. موقع لعميل بنيناه نحن، والأرقام أرقامه وحده. | This is the performance panel for kwtclean.com in Google Search Console, from 1 April 2026 to 19 September 2026. It is a client website we built, and the figures are its own. |
+| Caption, under the image | ستة أشهر من هذا العمل هي ما تشتريه الدفعة الواحدة $500. | Six months of that work is what the one payment of $500 buys. |
+| Pan hint, phone only | اسحب الصورة أفقيًا لقراءتها كاملة | Swipe the panel sideways to read all of it |
+| Pan region accessible name | لوحة أداء kwtclean.com في Google Search Console | The kwtclean.com performance panel in Google Search Console |
+| Source line | الصورة تصدير مباشر من Google Search Console، دون أي تعديل على الأرقام. | The image is an unedited export from Google Search Console. No figure in it has been changed. |
+
+**On a phone the panel pans, it does not shrink.** Scaled into a 350px box the export's headline figures
+render about 5px tall, so below 1000px the image keeps a 1000px floor inside a horizontally scrollable
+wrapper and the reader swipes it. **It is never cropped to fit.** build-spec §25.6 has the measurements and
+the RTL trap that cost one round.
+
+**The image.** `src/img/proof-kwtclean-gsc.webp`, 2243 x 582, derived from the PNG kept byte-for-byte at
+`design/proof-shots/kwtclean-gsc-2026-04-01-to-2026-09-19.png`. The derivation is a format conversion and
+nothing else: never cropped further, never retouched, never recoloured, and **no number in it is altered**.
+The full provenance, including the sha256 the derive script checks before it will write, is in
+`design/proof-shots/SOURCES.md`.
+
+The alt text describes the panel as a panel — the two selected tiles (`Total clicks 1.99K`,
+`Total impressions 114K`), the two unselected ones (`Average CTR 1.7%`, `Average position 10.9`), the date
+range and the shape of the daily curve. That is a description of an image, not a claim, which is why
+`Average position` may appear in it where the `rank` register forbids position as a selling word.
+
+**Ahmad's framing when he supplied it:** *"a good example of what happens in six months."* The page prints
+the two dates off the image and never rounds them into a month count or a claim. April 2026 is this
+property's first month with any data, so the chart is the site's whole life to date.
+
+**What this block never says.** It does not average the figures, project them, promise them to the reader,
+call them typical, or compare them with anything. One client, one named period, already in the past.
+
 ## B3. Eligibility
 
-**Four** conditions, given equal visual weight to the inclusion list. The conditions are what make a free
-thing read as selective rather than desperate, so they are not tucked into small print.
+**Four** conditions, given equal visual weight to the inclusion list. The conditions are what make a
+selective offer read as selective rather than desperate, so they are not tucked into small print.
 
 **Condition 1 added 2026-09-25, and it is deliberately first.** Ahmad: `We're not mentioning service
 companies. That should be clear because we don't work with anyone, only service companies. Even in the
@@ -963,32 +1086,54 @@ Its own block, not a bullet. This is the strongest line on the page and it gets 
 
 | Element | Arabic | English |
 |---|---|---|
+**Rewritten 2026-09-30, because the old body was written for a free offer.** It said `تستطيع التوقف في أي
+وقت خلال الأشهر الستة أو بعدها، دون رسوم` / `You can stop at any time during the six months or after them,
+with no fee`, which was plainly true when nothing had been paid and reads as a **refund promise** now that
+it has. The new body states what is actually true and stops there: one payment, no monthly bill, no
+automatic renewal, nothing further due. **It states no refund policy in either direction.** Nobody has
+decided one, `copy-pages.md` T6 already says the money terms are agreed directly, and inventing one here
+would be inventing a fact about money.
+
+| Element | Arabic | English |
+|---|---|---|
 | Block title | بدون عقد | No contract |
-| Body | لا يوجد عقد ولا التزام ولا فترة إشعار. تستطيع التوقف في أي وقت خلال الأشهر الستة أو بعدها، دون رسوم. | There is no contract, no commitment and no notice period. You can stop at any time during the six months or after them, with no fee. |
+| Body | لا يوجد عقد ولا التزام ولا فترة إشعار. الدفعة $500 مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، القرار لك وحدك، ولا يُطلب منك شيء إن قررت التوقف. | There is no contract, no commitment and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends the decision is yours alone, and nothing further is due if you stop. |
 
 ## B5. After six months
 
-**Rewritten 2026-09-24.** The old body described continuing, pricing and keeping the site as one paragraph
-and Ahmad called it confusing: `choose a plan, default back to the maintenance monthly, or cancel.` It is now
-three explicit numbered choices, so the reader sees every option he has at a glance. Same block, same layout
-as B2 and B3: a title, an intro, then a numbered list given equal weight per row.
+**Rebuilt 2026-09-30. This block now carries the three tiers.** Until 2026-09-30 tier pricing was undecided
+and this block said in as many words that no price figure could appear in it. Ahmad has now given the three
+figures, so they are printed, and the old three options (continue on a plan / keep the site on a small
+monthly fee / stop) are replaced by the three tiers plus stopping.
 
-**One hard rule on this block.** No price figure appears in any of the three options, in either language.
-Tier pricing is not decided and inventing a figure here is a launch blocker.
+**PRICES ONLY. THE TIERS HAVE NO CONTENTS AND NOTHING MAY BE INVENTED FOR THEM.** Ahmad gave the three
+figures and not what differs between them. No service level, no page count, no hours figure, no feature
+list, no "most popular" marker. The note under the row says what is true instead: the contents are agreed
+on the call. This is the one section of Part B that is knowingly incomplete, and it is the only thing on
+this page waiting on Ahmad.
 
 **Heading check.** One rendered board came back with `What happens after six months and three`, a truncated
-sentence from the image model. The heading is the two cells below and nothing else, in both languages.
+sentence from the image model. The heading is the cell below and nothing else, in both languages.
 
 | Element | Arabic | English |
 |---|---|---|
 | Block title | ماذا يحدث بعد ستة أشهر | What happens after six months |
-| Intro | القرار لك. أمامك ثلاثة خيارات، تختار منها ما يناسبك. | You decide. You have three options and you pick the one that suits you. |
+| Intro | حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك. | When the six months end you pick one of three monthly plans, or you stop. You decide. |
 
-| # | Arabic | English |
+| Tier | Price | Unit, ar / en |
 |---|---|---|
-| 1 | الاستمرار في العمل الكامل عبر خطة، يُحدد سعرها حسب قطاعك وحسب النتائج التي تحققت. | Continue the full work on a plan, priced according to your industry and the results achieved. |
-| 2 | إيقاف العمل على محركات البحث والاحتفاظ بالموقع مباشرًا مقابل رسم شهري بسيط. | Stop the search work and keep the website live for a small monthly fee. |
-| 3 | التوقف نهائيًا، دون رسوم ودون إشعار. | Stop completely, with no fee and no notice. |
+| 1 | $500 | شهريًا / per month |
+| 2 | $1,000 | شهريًا / per month |
+| 3 | $1,500 | شهريًا / per month |
+
+| Note | Arabic | English |
+|---|---|---|
+| 1 | ما تشمله كل خطة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة. | What each plan covers is agreed with you on the call, against your industry and what the six months produced. |
+| 2 | وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار. | If you choose to stop, you stop completely, with no fee and no notice. |
+
+**Tier 1 is the same $500 as the anchor in B1b, on purpose.** The anchor is not a struck-through "was"
+price; it is the real ongoing price, and it reappears here as the entry tier. The two blocks have to agree,
+and they do.
 
 ## B6. Offer FAQ
 
@@ -998,38 +1143,49 @@ The offer questions live here and only here.
 
 | | Arabic | English |
 |---|---|---|
-| Question | لماذا هذا العرض مجاني؟ | Why is this offer free? |
-| Answer | نختار عددًا محدودًا من الشركات في كل مدينة ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. النتيجة نفسها هي ما يجعل العميل يقرر الاستمرار، وهي أيضًا ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول: العرض لا ينجح إلا مع نشاط قائم وموثق فعلًا. | We take a limited number of companies in each city and work on them for a full six months until the result shows. That result is what makes a client decide to continue, and it is also what we show the next client. That is why the eligibility conditions exist. The offer only works with a business that is already running and already documented. |
+| Question | هل الـ$500 شهريًا؟ | Is the $500 per month? |
+| Answer | لا. الـ$500 دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من $500 شهريًا، وبعد انتهاء الأشهر الستة تختار خطة شهرية من ثلاث: $500 أو $1,000 أو $1,500. | No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at $500 a month, and after the six months end you pick one of three monthly plans: $500, $1,000 or $1,500. |
+
+**Q1 is the confusion question and it is deliberately first.** It is the single most likely reason a
+qualified prospect walks away from this page, so it is answered before anything else is, in the plainest
+possible words, and the anchor is restated inside the answer.
 
 **Q2**
 
 | | Arabic | English |
 |---|---|---|
-| Question | هل هناك عقد أو التزام؟ | Is there a contract or a commitment? |
-| Answer | لا. لا يوجد عقد. تستطيع التوقف في أي وقت خلال الأشهر الستة أو بعدها، دون رسوم ودون إشعار مسبق. | No. There is no contract. You can stop at any time during the six months or after them, with no fee and no notice period. |
+| Question | لماذا السعر $500 لستة أشهر؟ | Why is it $500 for six months? |
+| Answer | نختار عددًا محدودًا من الشركات في كل مدينة ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. النتيجة نفسها هي ما يجعل العميل يقرر الاستمرار، وهي أيضًا ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول: العرض لا ينجح إلا مع نشاط قائم وموثق فعلًا. | We take a limited number of companies in each city and work on them for a full six months until the result shows. That result is what makes a client decide to continue, and it is also what we show the next client. That is why the eligibility conditions exist. The offer only works with a business that is already running and already documented. |
 
 **Q3**
+
+| | Arabic | English |
+|---|---|---|
+| Question | هل هناك عقد أو التزام؟ | Is there a contract or a commitment? |
+| Answer | لا. لا يوجد عقد ولا فترة إشعار. الدفعة $500 مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، إن قررت التوقف فلا يُطلب منك شيء. | No. There is no contract and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends, nothing further is due if you stop. |
+
+**Q4**
 
 | | Arabic | English |
 |---|---|---|
 | Question | هل يشترط وجود سجل تجاري؟ | Do I need a commercial registration? |
 | Answer | سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل. | A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile. |
 
-**Q4**
+**Q5**
 
 | | Arabic | English |
 |---|---|---|
 | Question | لدي موقع قائم، هل أنا مؤهل؟ | I already have a website. Do I qualify? |
 | Answer | العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك. | The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you. |
 
-**Q5**
+**Q6**
 
 | | Arabic | English |
 |---|---|---|
-| Question | ماذا يحدث لموقعي بعد ستة أشهر؟ | What happens to my website after six months? |
-| Answer | القرار لك، وأمامك ثلاثة خيارات. الأول، الاستمرار في العمل الكامل عبر خطة يُحدد سعرها حسب قطاعك وحسب النتائج التي تحققت. الثاني، إيقاف العمل على محركات البحث والاحتفاظ بالموقع مباشرًا مقابل رسم شهري بسيط. الثالث، التوقف نهائيًا، دون رسوم ودون إشعار. | You decide, and you have three options. One, continue the full work on a plan, priced according to your industry and the results achieved. Two, stop the search work and keep the website live for a small monthly fee. Three, stop completely, with no fee and no notice. |
+| Question | ماذا يحدث بعد ستة أشهر؟ | What happens after six months? |
+| Answer | القرار لك. حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، $500 أو $1,000 أو $1,500، وما تشمله كل خطة يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار. | You decide. When the six months end you pick one of three monthly plans, $500, $1,000 or $1,500, and what each plan covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice. |
 
-**Q6**
+**Q7**
 
 | | Arabic | English |
 |---|---|---|
@@ -1080,10 +1236,38 @@ move to another section.
 | 199 to 440 clicks a month across 13 consecutive complete months | Section 6, baseline line 1 | carwashkw.com |
 | Seven impression totals and four `New project` tags | Section 7, the eleven cards | derivation table below |
 
-Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures. Part B carries no performance figures and no
-prices, in any section, including the three options in B5. The only digits that render in Part B come from
-the `[COUNTDOWN]` and `[SPOTS]` build slots, which are configuration, not claims. Every number above
-comes from `clients/q8block/design/proof-data.md`, pulled from the Search Console API on 24 September 2026.
+Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures, and **the homepage carries no price anywhere
+except the Section 2 strip line**, which is the teaser for the offer page. Part B carries prices (the price
+register below) and exactly one performance figure block, B2b. Every other number that renders in Part B
+comes from the `[COUNTDOWN]` and `[SPOTS]` build slots, which are configuration, not claims. Every number
+above comes from `clients/q8block/design/proof-data.md`, pulled from the Search Console API on 24 September
+2026.
+
+## Price register, 2026-09-30
+
+Every price printed anywhere on the site, and there are only three distinct figures. Nothing else may be
+added and no figure here may be changed without Ahmad.
+
+| Figure | What it is | Where it appears |
+|---|---|---|
+| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | Offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
+| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line, offer meta, B1 headline and subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
+| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | B5, offer FAQ Q1 and Q6 |
+
+**The one-payment wording is mandatory beside the number, every time.** `دفعة واحدة` / `one payment`,
+`مرة واحدة` / `one time`, `تُدفع مرة واحدة` / `paid once`. A price on this site never appears next to
+"six months" without one of them.
+
+**`$500` in Arabic needs a Unicode LTR isolate and this is not optional.** Written plainly inside an Arabic
+sentence it renders as `500$`: the bidi algorithm resolves European digits following an Arabic letter to
+Arabic-Number, which leaves the `$` as a neutral and pushes it to the wrong side of the run. `src/data.mjs`
+exports `ltr()`, which wraps the price in U+2066 / U+2069, and every Arabic price string goes through it.
+Invisible characters were chosen over `<span dir="ltr">` because they survive `esc()`, so the strings stay
+ordinary escaped copy. **Never write a bare `$` price into an Arabic string.** The two exceptions are the
+Arabic `<title>` and meta description, which write `500 دولار` instead — a control character in a search
+result snippet is not worth the risk.
+
+**No savings figure is derived from these anywhere**, and none may be. See the Part B preamble.
 No figure in Section 7 is rounded at all — each is an exact sum of exact monthly rows — none is averaged
 across clients, and none is taken from a partial month. September 2026 is a partial month and is excluded
 from every claim on the site.

@@ -439,6 +439,42 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
 /* ══ Offer page sections — built from design/boards/offer-1..3.png with the
      homepage's tokens, type scale and components. ══════════════════════════ */
 
+/* The anchor, added 2026-09-30 when the offer stopped being free.
+
+   Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
+   and no third element competing: "Normal price / from $500 per month" over
+   "This offer / $500 one time, covers six months". Ahmad has a competitor
+   pitching his prospects at $500 a month, so the arithmetic is the argument and
+   the reader does it himself in about a second.
+
+   THERE IS NO "you save $2,500" LINE AND THERE NEVER WILL BE. A savings claim
+   reads as a discount gimmick and it makes the reader argue with the figure
+   instead of with the competitor's quote. Two numbers, side by side, nothing else.
+
+   `price.note` is the anti-confusion line and it is the reason this block exists
+   at all: if a reader leaves thinking it is $500 a MONTH for six months, the offer
+   and the trust both die. It is written in the shortest words there are and it is
+   repeated wherever the number appears (hero, B2 intro, B4, two FAQ answers).
+
+   The two pairs are a <dl>, not a table: they are label/value pairs, and that is
+   also what gives a screen reader the pairing without any ARIA. The note sits
+   OUTSIDE the <dl> on purpose — a <dl> may only contain dt, dd and div, so a <p>
+   inside it is invalid HTML. */
+function priceAnchor(p) {
+  if (!p) return '';
+  return `<div class="price-anchor">
+      <dl class="pa-pair">
+        <div class="pa-row pa-was">
+          <dt>${esc(p.anchorLabel)}</dt><dd>${esc(p.anchorValue)}</dd>
+        </div>
+        <div class="pa-row pa-now">
+          <dt>${esc(p.offerLabel)}</dt><dd>${esc(p.offerValue)}</dd>
+        </div>
+      </dl>
+      <p class="pa-note">${esc(p.note)}</p>
+    </div>`;
+}
+
 export function offerHero(t) {
   const o = t.offerPage;
   const live = hasCountdown();
@@ -450,6 +486,7 @@ export function offerHero(t) {
       <span class="strip-pill">${esc(o.pill)}</span>
       <h1>${o.h1}</h1>
       <p class="lead">${esc(o.lead)}</p>
+      ${priceAnchor(o.price)}
       ${live ? `<p class="count-label" data-countdown-part>${esc(o.countdownLabel)}</p>
       <div class="count-boxes" data-countdown-part>${boxes}</div>` : ''}
       <p class="offer-spots" data-countdown-fallback${live ? ' hidden' : ''}>${esc(o.statusLine)}</p>
@@ -470,6 +507,57 @@ export function offerIncluded(t) {
       <h2>${esc(b.title)}</h2>
       <p class="lead">${esc(b.intro)}</p>
       <ul class="offer-rows">${rows}</ul>
+    </div>
+  </section>`;
+}
+
+/* B2b, the proof block. Added 2026-09-30, and it is the one place on this page
+   where a performance figure appears — copy.md Part B used to forbid them here
+   outright. Ahmad overrode that when the offer stopped being free: a reader who
+   is being asked for money wants to see what the six months do before he pays.
+
+   The image is an UNEDITED Google Search Console export for kwtclean.com, a real
+   client site, kept byte-for-byte at design/proof-shots/ and converted to WebP at
+   its own pixel size by that folder's derive.mjs. It is never cropped further,
+   retouched or recoloured, and no number in it is altered — see SOURCES.md there.
+
+   Explicit width and height on the image element, so the box is reserved before
+   the file decodes and CLS stays 0. It is `loading="lazy"`: it sits well below
+   the fold, which is the opposite of §20.6's first-viewport rule and right here.
+
+   IT PANS ON A PHONE INSTEAD OF SHRINKING, AND THAT IS THE WHOLE POINT OF IT.
+   The export is 2243px of a wide chart. Scaled to fit a 350px phone box it
+   renders "1.99K" about 5px tall, which makes the one piece of evidence on the
+   page unreadable on the device 99% of the traffic uses — a proof nobody can
+   read is not proof. So below 1000px the image keeps a 1000px floor inside a
+   horizontally scrollable wrapper and the reader swipes it. It is NEVER cropped
+   to fit: this is a real export and the crop it has is the one Ahmad supplied.
+
+   The wrapper is `tabindex="0"` with a role and a label, because axe requires a
+   scrollable region to be keyboard reachable (`scrollable-region-focusable`);
+   that also gives arrow-key panning for free. The hint line is `aria-hidden`:
+   it tells a sighted phone reader the panel scrolls, and a screen reader
+   already has the whole panel described in the image's alt.
+
+   The section names the client and both dates, because the page's credibility
+   rests on a reader being able to go and check. Nothing beside it averages the
+   figures, projects them, promises them to the reader or calls them typical. */
+const PROOF_W = 2243, PROOF_H = 582;
+export function offerProof(t) {
+  const b = t.offerPage.proof;
+  return `<section id="offer-proof" class="sec offer-sec plain on-dark">
+    <div class="wrap">
+      <h2>${esc(b.title)}</h2>
+      <p class="lead">${esc(b.intro)}</p>
+      <figure class="proof-shot">
+        <div class="proof-pan" tabindex="0" role="group" aria-label="${esc(b.panLabel)}">
+          <img src="/assets/img/proof-kwtclean-gsc.webp" width="${PROOF_W}" height="${PROOF_H}"
+               alt="${esc(b.alt)}" loading="lazy" decoding="async">
+        </div>
+        <p class="proof-hint" aria-hidden="true">${esc(b.hint)}</p>
+        <figcaption>${esc(b.caption)}</figcaption>
+      </figure>
+      <p class="proof-source">${esc(b.source)}</p>
     </div>
   </section>`;
 }
@@ -499,16 +587,30 @@ export function offerNoContract(t) {
   </section>`;
 }
 
+/* B5, rebuilt 2026-09-30. It used to be three numbered options (continue on a
+   plan / keep the site on a small fee / stop). It is now the three monthly tiers
+   Ahmad named, $500, $1,000 and $1,500, plus stopping.
+
+   PRICES ONLY, AND THAT IS DELIBERATE. Ahmad gave the three figures and NOT what
+   differs between them. Nothing here invents a service level, a page count, an
+   hours figure or a feature list to fill the tiles out, because an invented tier
+   spec on a page whose whole argument is that its figures are checkable is the
+   worst possible place to make something up. `notes[0]` says what is true instead:
+   the contents are agreed on the call, which is also what copy-pages.md T6 says of
+   everything project specific. Fill these in only when Ahmad supplies them. */
 export function offerAfter(t) {
   const b = t.offerPage.b5;
-  const rows = b.items.map((label, i) => `<li class="offer-row">
-      <span class="n" aria-hidden="true">${i + 1}</span><span class="t">${esc(label)}</span>
+  const tiers = b.tiers.map((price) => `<li class="tier">
+      <span class="tier-price">${esc(price)}</span>
+      <span class="tier-unit">${esc(b.tierUnit)}</span>
     </li>`).join('');
+  const notes = b.notes.map((n) => `<p>${esc(n)}</p>`).join('');
   return `<section id="offer-after" class="sec offer-sec tint on-dark">
     <div class="wrap">
       <h2>${esc(b.title)}</h2>
       <p class="lead">${esc(b.intro)}</p>
-      <ul class="offer-rows">${rows}</ul>
+      <ul class="tier-row">${tiers}</ul>
+      <div class="tier-notes">${notes}</div>
     </div>
   </section>`;
 }

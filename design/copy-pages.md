@@ -48,6 +48,13 @@ Recorded so the next agent does not try to fill these gaps with something invent
 * **`بدون عقد` / `No contract` on Terms.** It is an offer term from `copy.md` B4 and nobody has confirmed it
   is true of Q8Block outside the promotion. The same question was already resolved the safe way in the
   homepage trust row. Terms therefore points at `/offer` for it and states nothing itself.
+* **Any price, on Terms or anywhere else on these four pages.** The offer's price changed on 2026-09-30
+  ($500 once for six months, then a monthly tier) and `copy.md` Part B is its only reference. T5 names
+  `what it costs and how it is paid` as something the offer page covers, and prints no figure. Nothing on
+  About, Contact or the blog states a price either.
+* **A refund policy.** Money now changes hands at the start of the offer, and nobody has decided what
+  happens to it if either side stops. T6 already says the money terms are agreed directly, and neither
+  Terms nor `/offer` states a refund rule in either direction. Do not add one.
 * **Anything about what happens if either side stops, beyond the offer page.** No notice period, no refund
   policy, no liability wording, no jurisdiction. Terms says plainly that those are agreed directly.
 
@@ -497,10 +504,16 @@ so instead of inventing it.
 
 ## T5. The six month offer
 
+**Updated 2026-09-30.** The offer is no longer free: one payment of $500 covers the first six months, and
+after them the client picks a monthly tier. The body gained `وسعره وكيف يُدفع` / `what it costs and how it
+is paid` to the list of things the offer page owns. **This page still prints no price itself** — Terms
+describes the service, `/offer` is the single reference for the promotion's own terms, and duplicating a
+price across two pages is how the two drift apart.
+
 | Element | Arabic | English |
 |---|---|---|
 | Block title | العرض المحدود | The limited offer |
-| Body | العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض. | The limited offer has its own conditions: who can register, what the six months cover, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion. |
+| Body | العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة، وسعره وكيف يُدفع، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض. | The limited offer has its own conditions: who can register, what the six months cover, what it costs and how it is paid, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion. |
 | Link, a text link | اقرأ شروط العرض | Read the offer terms |
 
 ## T6. What we agree directly
@@ -545,5 +558,7 @@ market is named as an audience on any of them. Saudi Arabia appears on `/offer` 
 | Terms | The last updated date only. |
 
 No performance figure, percentage, duration, price or count appears on any of these four pages, and none
-appears in any of the six blog posts. Every figure on this site is printed in homepage Sections 6 and 7,
-with its month labels and its Search Console source caption, and it stays there.
+appears in any of the six blog posts. **The price rule survived the 2026-09-30 offer change unchanged:**
+the three price figures live on `/offer` and in the homepage's Section 2 strip line, and nowhere else.
+Every performance figure on this site is printed in homepage Sections 6 and 7 with its month labels and
+its Search Console source caption, plus the one proof block at `/offer` B2b, and it stays there.
