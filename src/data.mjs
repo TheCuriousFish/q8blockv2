@@ -418,37 +418,66 @@ export const COPY = {
       next: 'التالي',
     },
 
-    /* ── 7b. The price. NEW 2026-09-30 (build-spec §26.2). The homepage used to
-          carry a price in exactly one place, the §2 strip teaser; it now carries
-          the offer itself, after the proof in §7 and before the objections in §8.
-          EVERY FIGURE AND EVERY WORD HERE IS ALREADY DECIDED ON THE OFFER PAGE
-          (copy.md Part B) and is repeated verbatim — nothing is invented and
-          nothing new is said. In particular:
-            * the three tiers carry PRICES ONLY. Ahmad has not defined what
-              differs between them and nothing here may fill them out;
-            * there is NO savings figure and there never will be. The two numbers
-              sitting together do the work and the reader does the arithmetic;
-            * NO COUNTRY. The offer page names Saudi Arabia because eligibility is
-              a condition of the promotion; the homepage names no geography
-              anywhere and this section does not break that. ── */
+    /* ── 7b. The price. REBUILT 2026-10-01, twice (build-spec §27).
+
+          PASS 1 TOOK THE OFFER OUT. It used to lead with the offer: an anchor
+          row (normal price versus this offer), a bold "one payment, not
+          monthly" note, and only then the tiers. Ahmad: "I told you not to
+          mention the offer in the pricing section. The pricing section should be
+          three cards, the traditional beautiful way of showing tiers, and don't
+          mention the offer in the pricing section."
+
+          THE OFFER IS NOT IN THIS SECTION AT ALL, and it never comes back. No
+          anchor, no "$500 one time", no دفعة واحدة, no ستة أشهر, no countdown,
+          no spots, no promotion wording. It has exactly two homes: the §2 dark
+          strip under the hero, and /offer/.
+
+          PASS 2 ANSWERED THE TIER QUESTION. Ahmad, 2026-10-01, verbatim: "We're
+          selling phone calls. We're obviously not going to mention number of
+          phone calls because in SEO that's unpredictable. My suggestion is
+          mention the size of the company. So a 500 is for small companies, 1,000
+          is small to medium, $1,500 is medium to large."
+
+          SO THE PLANS DIFFER BY COMPANY SIZE AND BY NOTHING ELSE. Each card
+          carries a price, a period and who the plan is for. That is a COMPLETE
+          card, not a card waiting for a feature list, and the old stand-in line
+          ("what each plan covers is agreed on the call") is gone along with the
+          gap it was covering.
+
+          STILL NEVER INVENTED, and Ahmad rejected this whole axis on purpose,
+          because it is exactly what SEO agencies conventionally print: hours,
+          page counts, numbers of services or areas, blog volume, link
+          quantities, reporting frequency, support levels, and above all any
+          promise about how many calls a plan produces. Company size is the only
+          differentiator that exists.
+
+          THE MESSAGE IS THE BUSINESS OUTCOME, NOT SEO. Ahmad: "we're selling
+          SEO, so the messaging is not really SEO... we're selling phone calls."
+          The head sits on customers calling and on picking by the size of the
+          business. No feature language, no packages framing, no jargon, and the
+          standing ban on ترتيب / يتصدر holds.
+
+          >>> IF A FEATURE LIST IS EVER ADDED: put `features: ['…', '…']` on each
+          entry of `plans` below, mirror it in the English block, and fill offer
+          B5 in the same edit. render.mjs renders `plan.features` between the price
+          block and the size line, and the card grid already allows for it, so no
+          redesign is needed. It is NOT needed today: the card is finished as it
+          stands. <<<
+
+          NO SAVINGS FIGURE, NO GEOGRAPHY, here or anywhere. ── */
     pricing: {
-      eyebrow: 'السعر',
-      h2: '<span class="hl">دفعة واحدة</span> تغطي ستة أشهر',
-      lead: `السعر المعتاد لهذه الخدمة يبدأ من ${P.month} شهريًا. وفي هذا العرض تدفع ${P.six} مرة واحدة، وتغطي أول ستة أشهر كاملة.`,
-      /* The same two rows as offer B1b, word for word. */
-      price: {
-        anchorLabel: 'السعر المعتاد',
-        anchorValue: `يبدأ من ${P.month} شهريًا`,
-        offerLabel: 'هذا العرض',
-        offerValue: `${P.six} دفعة واحدة، تغطي ستة أشهر`,
-        note: 'دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.',
-      },
-      afterTitle: 'بعد الأشهر الستة',
-      afterIntro: 'تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك.',
-      tiers: [P.month, P.t2, P.t3],
+      eyebrow: 'الأسعار',
+      h2: '<span class="hl">اختر خطتك</span> حسب حجم شركتك',
+      lead: 'كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك.',
+      /* Low to high. This order never changes; direction handles the mirror. */
+      plans: [
+        { price: P.month, size: 'للشركات الصغيرة' },
+        { price: P.t2, size: 'للشركات الصغيرة والمتوسطة' },
+        { price: P.t3, size: 'للشركات المتوسطة والكبيرة' },
+      ],
+      /* The board writes the period as one lowercase word under the price, and
+         Ahmad says the prices the same way: "$500 monthly". */
       tierUnit: 'شهريًا',
-      note: 'ما تشمله كل خطة يُتفق عليه معك في المكالمة.',
-      cta: 'اطلع على العرض',
     },
 
     /* ── 8. FAQ ── */
@@ -892,25 +921,25 @@ export const COPY = {
       next: 'Next',
     },
 
-    /* The English mirror of §7b. Prices only in the tiers, no savings figure,
-       no country. See the Arabic block above. */
+    /* The English mirror of §7b. Three monthly plans that differ by COMPANY
+       SIZE and by nothing else: NO offer, NO anchor, NO one-payment note, NO six
+       months, NO savings figure, NO feature list, NO hours, NO page counts, and
+       NO promise about how many calls a plan produces. The head sits on the
+       business outcome, not on SEO. See the long comment on the Arabic block. */
     pricing: {
-      eyebrow: 'The price',
-      h2: '<span class="hl">One payment</span> covers six months.',
-      lead: 'The normal price for this service starts at $500 per month. In this offer you pay $500 one time, and it covers your first six months in full.',
-      price: {
-        anchorLabel: 'Normal price',
-        anchorValue: 'from $500 per month',
-        offerLabel: 'This offer',
-        offerValue: '$500 one time, covers six months',
-        note: 'One payment, not monthly. No monthly bill during the six months.',
-      },
-      afterTitle: 'After the six months',
-      afterIntro: 'You pick one of three monthly plans, or you stop. You decide.',
-      tiers: ['$500', '$1,000', '$1,500'],
-      tierUnit: 'per month',
-      note: 'What each plan covers is agreed with you on the call.',
-      cta: 'See the offer',
+      eyebrow: 'Pricing',
+      /* Explicit break plus nowrap, the site's standard treatment for a display
+         line with a planned break (the board draws its headline on one line and
+         this one will not fit on one). Without it, 1440 broke it as
+         "by your / company size." Both release under 768px. */
+      h2: '<span class="hl">Pick your plan</span><br class="brk"> <span class="nb">by your company size.</span>',
+      lead: 'Every plan has one goal: customers calling you. What changes is the size of your company.',
+      plans: [
+        { price: '$500', size: 'For small companies' },
+        { price: '$1,000', size: 'For small to medium companies' },
+        { price: '$1,500', size: 'For medium to large companies' },
+      ],
+      tierUnit: 'monthly',
     },
 
     faq: {

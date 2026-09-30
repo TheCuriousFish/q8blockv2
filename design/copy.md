@@ -725,84 +725,91 @@ any figure on the page can be traced in one step.
 
 ## 7b. The price
 
-**NEW 2026-09-30 (build-spec §26.2).** A price section on the homepage, placed **after Section 7 Our work
-and before Section 8 FAQ**, so the page runs problem, solution, what you get, proof, **price**, objections,
-close.
+**REWRITTEN 2026-10-01, twice (build-spec §27). THE OFFER IS NOT MENTIONED IN THIS SECTION.**
+Placed **after Section 7 Our work and before Section 8 FAQ**, keeping its `#pricing` id, so the page
+runs problem, solution, what you get, proof, **price**, objections, close.
 
-**Background** dark `#141415`, full bleed band, centred. **No new visual language.** Every part of this
-section is a component already approved elsewhere on the site: the standard eyebrow, headline and subhead
-head; the price anchor from offer **B1b**; the three tier tiles from offer **B5**; and the Section 2 strip's
-own CTA label on the link out. Nothing was designed for this section.
+**What this section used to be.** From 2026-09-30 it led with the offer: the B1b price anchor (normal
+price versus this offer), a bold `one payment, not monthly` note, and only then the three tiers.
+Ahmad, 2026-10-01:
 
-**EVERY FIGURE AND EVERY PHRASE IS PART B, VERBATIM.** Nothing here is invented and nothing new is said.
-The three facts are the ones in the Part B preamble: the service normally starts at **$500 per month**, the
-offer is **$500 one time covering the first six months**, and after six months the client picks one of
-three monthly tiers, **$500 / $1,000 / $1,500**.
+> "I told you not to mention the offer in the pricing section. The pricing section should be three
+> cards, the traditional beautiful way of showing tiers, and don't mention the offer in the pricing
+> section."
 
-**The one thing this section must achieve in under two seconds is that the $500 is paid ONCE**, so the
-value phrase is the headline's highlight and the anchor's offer row and its bold note sit directly under
-it with nothing between them.
+**THE OFFER HAS EXACTLY TWO HOMES AND THIS IS NOT ONE OF THEM: the Section 2 strip, and `/offer/`.**
+Nothing in this section may say `$500 one time`, `دفعة واحدة`, `مرة واحدة`, `one payment`, six months,
+`ستة أشهر`, a countdown, spots left, a limited anything, or any other promotion wording. No anchor
+row, no normal-price-versus-offer pair, no link to the offer page.
+
+### What separates the three plans: COMPANY SIZE, and nothing else
+
+Ahmad, 2026-10-01, verbatim:
+
+> "We're selling phone calls. We're obviously not going to mention number of phone calls because in
+> SEO that's unpredictable. My suggestion is mention the size of the company. So a 500 is for small
+> companies, 1,000 is small to medium, $1,500 is medium to large."
+
+So a card is a **price, a period and who the plan is for**, and that is a **complete card**. The
+earlier stand-in line, `what each plan covers is agreed with you on the call`, is gone along with the
+gap it was covering.
+
+**Never invented, and this axis is rejected on purpose**, because it is exactly what SEO agencies
+conventionally print on tiers: hours, page counts, numbers of services or areas, blog post volume,
+link quantities, reporting frequency, support levels, and above all **any promise about how many
+calls a plan produces**. None of that goes on a card. Neither does a `most popular` badge.
+
+### The message is the business outcome, not SEO
+
+Ahmad: *"we're selling SEO, so the messaging is not really SEO... we're selling phone calls."* The
+head sits on customers calling and on picking by the size of the business. No feature language, no
+packages framing, no jargon, and the standing ban on `rank` / `ترتيب` / `يتصدر` holds.
+
+### The copy
 
 | Element | Arabic | English |
 |---|---|---|
-| Eyebrow | السعر | The price |
-| Headline | دفعة واحدة تغطي ستة أشهر | One payment covers six months. |
-| Highlighted phrase | دفعة واحدة | One payment |
-| Subhead | السعر المعتاد لهذه الخدمة يبدأ من $500 شهريًا. وفي هذا العرض تدفع $500 مرة واحدة، وتغطي أول ستة أشهر كاملة. | The normal price for this service starts at $500 per month. In this offer you pay $500 one time, and it covers your first six months in full. |
+| Eyebrow | الأسعار | Pricing |
+| Headline | اختر خطتك حسب حجم شركتك | Pick your plan by your company size. |
+| Highlighted phrase | اختر خطتك | Pick your plan |
+| Subhead | كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك. | Every plan has one goal: customers calling you. What changes is the size of your company. |
 
-**The anchor, identical to B1b.** Two rows, the same number, different units, one short bold note under
-them.
+**Three cards, `$500` / `$1,000` / `$1,500` per month, low to high in reading order**, which is left
+to right on `/en/` and **right to left on `/`**. Same order in the source, both languages; the page
+direction does the mirroring.
 
-| Row | Label, ar / en | Value, ar / en |
-|---|---|---|
-| Anchor | السعر المعتاد / Normal price | يبدأ من $500 شهريًا / from $500 per month |
-| Offer | هذا العرض / This offer | $500 دفعة واحدة، تغطي ستة أشهر / $500 one time, covers six months |
+| Card | Price | Period, ar / en | Who it is for, ar / en |
+|---|---|---|---|
+| 1 | $500 | شهريًا / monthly | للشركات الصغيرة / For small companies |
+| 2 | $1,000 | شهريًا / monthly | للشركات الصغيرة والمتوسطة / For small to medium companies |
+| 3 | $1,500 | شهريًا / monthly | للشركات المتوسطة والكبيرة / For medium to large companies |
 
-| Note under the pair | Arabic | English |
-|---|---|---|
-| | دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة. | One payment, not monthly. No monthly bill during the six months. |
-
-**The three tiers, identical to B5. PRICES ONLY.**
-
-| Element | Arabic | English |
-|---|---|---|
-| Block title | بعد الأشهر الستة | After the six months |
-| Intro | تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك. | You pick one of three monthly plans, or you stop. You decide. |
-
-| Tier | Price | Unit, ar / en |
-|---|---|---|
-| 1 | $500 | شهريًا / per month |
-| 2 | $1,000 | شهريًا / per month |
-| 3 | $1,500 | شهريًا / per month |
-
-| Note | Arabic | English |
-|---|---|---|
-| | ما تشمله كل خطة يُتفق عليه معك في المكالمة. | What each plan covers is agreed with you on the call. |
-
-**CTA into the offer page.** The label is the Section 2 strip's own, so this section introduces no new CTA
-label.
+**The CTA on each card is the site's existing call CTA, and no third label is introduced.**
 
 | Arabic | English |
 |---|---|
-| اطلع على العرض → `/offer/` | See the offer → `/en/offer/` |
+| اتصل الآن → `tel:` | Call now → `tel:` |
 
-**Three hard rules on this section.**
+**Four hard rules on this section.**
 
-1. **THE TIERS HAVE NO CONTENTS AND NOTHING MAY BE INVENTED FOR THEM.** Ahmad gave the three figures and
-   not what differs between them. No service level, no page count, no hours figure, no feature list, no
-   "most popular" marker. The note says what is true instead, which is exactly what B5 and `copy-pages.md`
-   T6 already say. Fill them in only when Ahmad supplies them, and fill B5 in the same edit.
-2. **NO SAVINGS FIGURE, EVER.** No `you save $2,500`, no struck-through price, no percentage. The two
-   numbers sitting together do the work and the reader does the arithmetic in about a second. A savings
-   claim reads as a discount gimmick and makes the reader argue with the arithmetic instead of with the
-   competitor's quote. Same reasoning as the Part B preamble.
-3. **NO GEOGRAPHY.** Part B names Saudi Arabia because being there is a condition of the promotion. **The
-   homepage names no country anywhere**, and this section does not break that even though the copy it is
-   lifted from does. The geography register at the end of this file is unchanged.
+1. **NO OFFER.** See above. This is the rule the section exists to obey and it is the one a future
+   agent will break first, because the copy for the offer is sitting right there in Part B.
+2. **COMPANY SIZE IS THE ONLY DIFFERENTIATOR.** No hours, no page counts, no service or area counts,
+   no blog volume, no link quantities, no reporting frequency, no support levels, no `most popular`
+   marker, and no promise about how many calls a plan produces.
+3. **NO SAVINGS FIGURE, NO STRUCK-THROUGH PRICE, NO PERCENTAGE.** Three prices are three prices.
+4. **NO GEOGRAPHY.** The homepage names no country anywhere. The geography register at the end of
+   this file is unchanged.
 
-**The one-payment wording is mandatory beside the number here too**, in every line: `دفعة واحدة` /
-`one payment`, `مرة واحدة` / `one time`. And every Arabic price goes through `ltr()`, the Unicode LTR
-isolate — never a bare `$` inside an Arabic string.
+**Every Arabic price still goes through `ltr()`, the Unicode LTR isolate** — never a bare `$` inside an
+Arabic string.
+
+**The section is built to `design/boards/pricing-light.png`.** Ahmad picked `pricing-dark.png` first
+and then replaced it: *"you are right make it light because dark follows."* **`pricing-dark.png` is
+the dead board.** Either way the board's own words are placeholders and are **not** used: it draws
+`$2,000`, `Get Started` and `More features for growing teams`, and all three are wrong here — the
+last is exactly the invented feature language rule 2 bans. The board is the layout and the type,
+never the copy. See build-spec §27.5 and §27.6.
 
 ---
 
@@ -1315,8 +1322,9 @@ Search Console export image** — its own axis, not our copy, and never altered.
 | Seven impression totals and four `New project` tags | Section 7, the eleven cards | derivation table below |
 
 Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures. **The homepage carries a price in exactly two
-places: the Section 2 strip line and Section 7b.** The strip is the teaser and 7b is the offer itself; both
-repeat Part B verbatim and neither invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
+places: the Section 2 strip line and Section 7b.** The strip is the offer teaser. **Since 2026-10-01,
+§7b carries only the three monthly prices and never the offer** — it was the offer a second time until
+Ahmad ruled it out. Neither place invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
 carries prices (the price register below) and exactly one performance figure block, B2b. Every other number
 that renders in Part B comes from the `[COUNTDOWN]` and `[SPOTS]` build slots, which are configuration,
 not claims. Every figure behind Section 7 comes from `clients/q8block/design/proof-data.md`, pulled from
@@ -1329,9 +1337,9 @@ added and no figure here may be changed without Ahmad.
 
 | Figure | What it is | Where it appears |
 |---|---|---|
-| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | **Homepage §7b subhead, anchor row and tier 1**, offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
-| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line, **homepage §7b headline, subhead, offer row and note**, offer meta, B1 subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
-| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | **Homepage §7b tiers 2 and 3**, B5, offer FAQ Q1 and Q6 |
+| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | **Homepage §7b card 1**, offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
+| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line ONLY on the homepage (§7b no longer mentions the offer), offer meta, B1 subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
+| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | **Homepage §7b cards 2 and 3**, B5, offer FAQ Q1 and Q6 |
 
 **The offer B1 headline is no longer in this register.** It carried `$500` until 2026-09-30, when it was
 replaced with `عملاء جدد من محركات البحث والذكاء الاصطناعي` / `New customers from search engines and AI.`

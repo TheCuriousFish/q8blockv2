@@ -3809,3 +3809,288 @@ the boxed note, one under the other.
 
 Everything in §25.10 still stands unchanged — the tier contents, `service firms` on the strip line, a
 refund position and the `CONFIG.COUNTDOWN_END` placeholder. This pass adds nothing to that list.
+
+---
+
+## 27. The pricing section drops the offer, becomes three cards, and is built to a board, 2026-10-01
+
+Three passes on the same day. Pass 1 took the offer out and rebuilt the section as three cards. Pass 2
+answered the tier question and built to `pricing-dark.png`. Pass 3 moved it to `pricing-light.png`,
+which is where it stands.
+
+### 27.1 What Ahmad said
+
+> "I told you not to mention the offer in the pricing section. The pricing section should be three
+> cards, the traditional beautiful way of showing tiers, and don't mention the offer in the pricing
+> section."
+
+§26.2 built `#pricing` to **lead with the offer**: offer B1b's `.price-anchor` (normal price versus
+this offer), its bold `One payment, not monthly` note, and only then the three tiers. That was the
+whole shape of the section and it is the thing he rejected.
+
+**The offer now has exactly two homes and this is not one of them:** the §2 dark strip under the hero,
+and `/offer/`. Both are untouched — the strip still reads
+`عرض محدود · ستة أشهر بـ$500 مرة واحدة` / `Limited offer · 6 months for $500, paid once`, and the offer
+page still renders `.price-anchor` (B1b) and `.tier-row` (B5).
+
+### 27.2 What is gone from `#pricing`
+
+| Removed | Was |
+|---|---|
+| `priceAnchor(p.price)` call | the two-row anchor lifted from B1b |
+| `.pa-note` | `دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.` |
+| `.pricing-after` block | `بعد الأشهر الستة` + `تختار خطة شهرية من ثلاث، أو تتوقف.` |
+| `.tier-row` / `.tier` | offer B5's three tiles |
+| the `/offer/` CTA | `اطلع على العرض` / `See the offer` |
+| `pricing.price`, `afterTitle`, `afterIntro`, `tiers`, `note`, `cta` | all six deleted from `data.mjs`, both locales |
+
+`.price-anchor`, `.pa-*` and `.tier-*` are **not** deleted from `styles.css`. The offer page still uses
+them. Only the `#pricing`-scoped overrides were replaced.
+
+### 27.3 The tier question is answered: COMPANY SIZE
+
+This had been open since §25.5 and flagged three times. Ahmad, 2026-10-01, verbatim:
+
+> "We're selling phone calls. We're obviously not going to mention number of phone calls because in
+> SEO that's unpredictable. My suggestion is mention the size of the company. So a 500 is for small
+> companies, 1,000 is small to medium, $1,500 is medium to large."
+
+So a card is a **price, a period and who the plan is for**, and that is a **complete card**. The
+interim stand-in line from pass 1, `what each plan covers is agreed with you on the call`, is gone
+along with the gap it was covering — it would now read as an apology on a card that is finished.
+
+**The conventional SEO-tier axis stays banned, deliberately.** Hours, page counts, numbers of services
+or areas, blog post volume, link quantities, reporting frequency, support levels, and above all any
+promise about how many calls a plan produces. That is precisely what agencies print on tiers and Ahmad
+rejected all of it on purpose. Company size is the only differentiator that exists.
+
+### 27.4 The copy
+
+Ahmad: *"we're selling SEO, so the messaging is not really SEO... we're selling phone calls."* The head
+sits on the business outcome and on picking by the size of the business. No feature language, no
+packages framing, no jargon, no `rank` / `ترتيب` / `يتصدر`, no geography, no dashes, no emojis, and
+both headlines are under eight words.
+
+| Line | Arabic | English |
+|---|---|---|
+| Eyebrow | `الأسعار` | `Pricing` |
+| Headline | `<span class="hl">اختر خطتك</span> حسب حجم شركتك` | `<span class="hl">Pick your plan</span><br class="brk"> <span class="nb">by your company size.</span>` |
+| Lead | `كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك.` | `Every plan has one goal: customers calling you. What changes is the size of your company.` |
+| Period | `شهريًا` | `monthly` |
+| Card 1 | `للشركات الصغيرة` | `For small companies` |
+| Card 2 | `للشركات الصغيرة والمتوسطة` | `For small to medium companies` |
+| Card 3 | `للشركات المتوسطة والكبيرة` | `For medium to large companies` |
+| CTA, every card | `اتصل الآن` → `tel:` | `Call now` → `tel:` |
+
+The English headline carries an explicit `.brk` + `.nb` because the board draws its headline on one
+line and this one will not fit; without it 1440 broke it as `by your / company size.` Both release
+under 768px so the phone wraps naturally.
+
+**No third CTA label was invented.** It is `cta.call`, on the same `tel:` href as every other CTA on
+the site. The section does not link to `/offer/` at all.
+
+**Reading order is low to high in both locales from one DOM order.** Measured on the built pages:
+`/en/` card lefts `60, 507, 954` for 500/1000/1500; `/` card lefts `954, 507, 60` for the same three,
+so `$500` is the rightmost card on the Arabic page.
+
+### 27.5 The board: `pricing-light.png`. `pricing-dark.png` IS DEAD
+
+Ahmad first picked `pricing-dark.png` and the section was built to it. He then replaced it:
+
+> "you are right make it light because dark follows."
+
+**`design/boards/pricing-light.png` is the board. `design/boards/pricing-dark.png` is the dead board —
+do not rebuild against it.** No new Higgsfield spend: both boards already existed.
+
+What the light board draws: a `#FEFEFE` band, white cards defined by a hairline border alone,
+**near-black prices**, a quiet lowercase period, a hairline, the descriptive line, and a **solid orange
+button on all three cards**. The middle card is weighted by an **orange top rule** and a marginally
+darker border.
+
+Three consequences worth stating, because they answer the questions the dark board raised:
+
+1. **The contrast risk is gone, not managed.** The dark board put an 85px `--orange` numeral on
+   charcoal; on white that same numeral would have had to lean on the large-text threshold. The light
+   board's price is near-black — sampled `#0B0C0E`, which is `--ink` — so it measures **19.61:1**
+   against the card and leans on nothing. Full ratios in §27.10.
+2. **The middle card is still weighted, and still without a badge.** The dark board did it with one
+   solid button among two outlines; the light board does it with the orange top rule, and all three
+   buttons go solid. Either way there is **no badge, no ribbon, no "most popular" label, no scale
+   change and no heavier shadow**, and none may be added — those would be a recommendation nobody has
+   made. The rule is painted as `box-shadow: inset 0 5px 0 var(--orange)` rather than a 5px border, so
+   the middle card is exactly as tall as the other two (measured: 441/441/441 on `/en/`).
+3. **The board's own words are still placeholders and are still not used.** It draws `$2,000`,
+   `Get Started` and `More features for growing teams` — the last of those is exactly the invented
+   feature language this section bans. **The board is the layout and the type, never the copy.**
+
+### 27.6 The measurement table, `pricing-light.png`
+
+Board canvas is **2688px wide for a 1440px viewport, so board px × 0.5357 = CSS px.** Every value was
+measured off the PNG, not chosen by eye, and written as `calc(N/14.4 * 1vw)` so it is exact at 1440.
+This table **replaces** the `pricing-dark` table that stood here in pass 2.
+
+| Element | Board px | CSS at 1440 | Built as |
+|---|---|---|---|
+| band | `#FEFEFE` | — | `--bg-white` |
+| card row span | 118 → 2570 | 1313 | the site's own 1320px `.wrap` |
+| card width | 790 | 423.2 | `repeat(3, 1fr)` |
+| card gap | 40 | 21.4 | `clamp(14px, calc(21/14.4 * 1vw), 23px)` |
+| card height | 551 → 1345 | 423.7 | content-derived: **417** (`/`), **441** (`/en/`) |
+| card fill | `#FEFEFE` | — | `--bg-white` |
+| card border | 2, `#DADEE3` | 1 | `1px solid var(--hairline-light)` (`#D2D7DD`) |
+| card padding, inline | 67 | 35.9 | `clamp(18px, calc(36/14.4 * 1vw), 39px)` |
+| card padding, top | — | ~44 | `clamp(26px, calc(44/14.4 * 1vw), 48px)` |
+| card padding, bottom | — | 31.1 | `clamp(24px, calc(31/14.4 * 1vw), 34px)` |
+| **middle card rule** | 542 → 552, `#FD5926` | **5.4** | `box-shadow: inset 0 5px 0 var(--orange)` |
+| **price glyph** | 149 × 404 (`$500`) | **79.8 × 216.4** | `clamp(44px, calc(81/14.4 * 1vw), 88px)`, weight 600 |
+| price colour | `#0B0C0E` | — | `var(--ink)` (`#0A0A0C`) |
+| price → period | — | 20.4 | `clamp(11px, calc(20/14.4 * 1vw), 22px)` |
+| period glyph | 38 (`monthly`) | 20.4 | `clamp(15px, calc(21/14.4 * 1vw), 23px)`, weight 400 |
+| period → rule | — | 26.8 | `clamp(18px, calc(27/14.4 * 1vw), 29px)` |
+| rule → size line | — | 31 | `clamp(20px, calc(31/14.4 * 1vw), 34px)` |
+| size line | 2 lines, 96 | 51.4 → ~22/line | `--fs-body` |
+| size line → button | — | 53.6 | `clamp(26px, calc(53/14.4 * 1vw), 58px)` |
+| button | 118 × 667 | 63.2 × 357.3 | full card inner width, **63px built**, `.btn-primary` ×3 |
+| head → cards | 241.1 → 295.2 | 54.1 | `clamp(32px, calc(54/14.4 * 1vw), 58px)` |
+
+**How the price size was fixed, since a glyph box is not a font size.** The build renders `$500` at a
+known **62px** and measures **61 tall × 163 wide**. This board's `$500` measures **79.8 × 216.4**.
+`79.8 / 61 = 1.308`, so the board is `62 × 1.308 = 81px`. The independent width check agrees:
+`163 × 1.308 = 213.2` against the board's `216.4`, inside 1.5%. That agreement also confirms the
+**weight as 600** — a heavier cut would have come out wider at the same height.
+
+**Four deliberate deviations from the board**, all site tokens winning over a generated mock that is
+not accessibility checked:
+
+1. **the period and the size line take `--muted-on-light` (`#686F79`)**, not the board's `#A1A9B6` and
+   `#9EA6B0`. Those measure about 2.3:1 on `#FEFEFE` and **fail AA outright**. This is the same
+   correction §3.2 already recorded against the board grey, for the same reason;
+2. the eyebrow stays `--fs-eyebrow` (22px at 1440) against the board's ~26px, because that token
+   carries the 19px/700 floor that keeps `#E85319` qualified as large text (§17);
+3. the h2 stays `--fs-h2` (80px) against ~76px and the lead stays `--fs-lead` (29px) against ~27px.
+   Every other section head on this page is those two tokens and one section a few px off would read
+   as a mistake, not a design;
+4. the buttons are the site's `.btn-primary` in sentence case, not the board's `Get Started`.
+
+Everything else on the board is matched.
+
+### 27.7 `.plan` is a flex column, and the grid version was a real bug
+
+It was first written `display: grid; grid-template-rows: auto auto 1fr auto`, meaning to pin the three
+buttons to one baseline. With no feature list a card has **three** children, so the `1fr` landed on
+`.plan-cta` instead of the row above it: card 1 on `/en/`, whose size line is one line rather than two,
+put its button **31px above** the other two. Measured, not noticed by eye — `ctaTops [870, 901, 901]`.
+
+A flex column with `margin-block-start: auto` on `.plan-cta` holds the baseline whatever the card
+contains, including a feature list added later. Re-measured on the light build: `ctaTops
+[913, 913, 913]` on `/en/` and `[842, 842, 842]` on `/`, card heights identical across all three cards
+in both locales.
+
+### 27.8 Where a feature list would go, if one is ever wanted
+
+Marked in `data.mjs`, `render.mjs` `pricing()` and `styles.css` at `.plan-row`:
+
+> Add `features: ['…', '…']` to each entry of `pricing.plans`, **both locales**, and fill offer B5 in
+> the same edit.
+
+`render.mjs` renders `plan.features` as `<ul class="plan-features">` between the price block and the
+size line, `.plan-features` is styled, and `.plan` is a flex column with the CTA pinned to the foot, so
+a list of any length drops in **without a redesign**. **It is not needed today.** Neither board draws a
+feature list and the card is finished as it stands.
+
+### 27.9 The band rhythm: two dark bands on the whole page
+
+When §7b was dark (pass 2) the lower half ran journey **DARK** · work white · pricing **DARK** · faq
+light · final **DARK** — four alternating breaks, which `lessons.md` rules out (*"Light pattern breaker
+sections: 1 or 2 per page, not alternating"*). Pass 2 fixed that by moving §8 FAQ onto the dark ground.
+
+**A light §7b dissolves that problem, so the FAQ move was reverted in full.** §8 is back exactly as it
+was: `--bg-light-faq` ground, `--bg-panel` rows on `--hairline-light`, `--ink` questions,
+`--muted-on-light` answers, the 785px measure, the 17px gap, the open-first row and the icon, all at
+their pre-change values. The four `#faq` CSS lines and the `on-dark` class came out. Verified as a
+clean revert rather than a half state: `git diff` of `src/render.mjs` and `src/styles.css` matches
+**zero** `faq` lines, i.e. both files are byte-identical to the last commit everywhere the FAQ is
+concerned.
+
+Backgrounds read off the built page, top to bottom:
+
+| Section | Computed background | |
+|---|---|---|
+| hero | `rgb(242,243,245)` | light |
+| problem | `rgb(254,254,254)` | light |
+| what-we-do | `rgb(242,243,245)` | light |
+| included | `rgb(254,254,254)` | light |
+| **journey** | `rgb(16,16,18)` | **DARK — break 1** |
+| work | `rgb(254,254,254)` | light |
+| **pricing** | `rgb(254,254,254)` | light |
+| faq | `rgb(244,245,246)` | light |
+| **final** | `rgb(16,16,18)` | **DARK — break 2** |
+| footer | `rgb(3,3,3)` | the close |
+
+**Exactly two dark bands on the whole page: the journey and the close.** That is what `lessons.md`
+asks for and what the page was approved with.
+
+`#pricing` and `#work` are both `#FEFEFE` and adjacent. That is the board's own band value and it was
+checked rather than assumed: a full §7→footer crop at 1440 in both locales shows the boundary carried
+by the work wall's source line, the whitespace, then the orange eyebrow and the 80px headline, with the
+three bordered cards forming their own block underneath. It reads as two sections, not one.
+
+### 27.10 Contrast, measured on the built page
+
+The dark board's colour choices were made against charcoal, so every one was re-checked against white.
+Computed values from `/en/` at 1440:
+
+| Element | Colour | Size / weight | On | Ratio | Verdict |
+|---|---|---|---|---|---|
+| price | `#0A0A0C` `--ink` | 81px / 600 | `#FEFEFE` | **19.61** | passes everything |
+| period | `#686F79` `--muted-on-light` | 21px | `#FEFEFE` | **5.03** | AA normal text |
+| size line | `#686F79` | 23px | `#FEFEFE` | **5.03** | AA normal text |
+| lead | `#686F79` | 29px | `#FEFEFE` | **5.03** | AA normal text |
+| card CTA label | `#FFFFFF` | 23px / **700** | `#FF5F29` | 3.03 | AA **large text** |
+| eyebrow | `#E85319` `--orange-ink-light` | 22px / **700** | `#FEFEFE` | 3.66 | AA **large text** |
+
+The last two rows are the §17 / §17.7b reasoning unchanged, not a new exception: white on the locked
+`--orange` is 3.03:1 and `#E85319` is 3.66:1, both of which satisfy AA at the 3:1 large-text threshold,
+which is why `--fs-btn` and `--fs-eyebrow` carry 19px/700 floors. **No new token was invented and no
+existing one was altered.** Lighthouse accessibility is 100 on both locales, with no audit failures.
+
+### 27.11 Verification
+
+**The offer is genuinely absent from the section.** The built `#pricing` was sliced out of
+`site/index.html` and `site/en/index.html` and grepped for `one time`, `one payment`, `not monthly`,
+`six months`, `monthly bill`, `offer`, `save`, `Normal price`, `discount`, `limited`, `spots`,
+`countdown`, `%`, `price-anchor`, `pa-now`, `pa-note`, `tier-row`, `pricing-after`, `دفعة واحدة`,
+`مرة واحدة`, `ستة أشهر`, `الأشهر الستة`, `العرض`, `السعر المعتاد`, `فاتورة`. **Zero hits in both
+locales.** The strip above and `/offer/` still carry all of it, as they must.
+
+Section order unchanged in both locales:
+`hero > problem > what-we-do > included > journey > work > pricing > faq > final`. The `#pricing` id is
+unchanged.
+
+| Check | Result |
+|---|---|
+| `node scripts/seo-audit.mjs` | **0 high**, 18 medium, 9 low — all pre-existing, none in `#pricing` |
+| Lighthouse `/en/`, desktop | perf **100**, **accessibility 100**, best practices 100, SEO 100 |
+| | LCP 0.4s · TBT 0ms · **CLS 0** · FCP 0.3s · SI 0.3s · a11y failures none |
+| Lighthouse `/`, desktop | perf **100**, **accessibility 100**, best practices 100, SEO 100, **CLS 0** |
+| Page errors, 1440 and 390, both locales | none |
+| Horizontal overflow | false everywhere; no card overflows its own box |
+| CTA baselines | identical across all three cards, all four viewport/locale combinations |
+| Card heights | 417/417/417 (`/`), 441/441/441 (`/en/`) — the middle card is not taller |
+| FAQ revert | byte-identical to the last commit in both `render.mjs` and `styles.css` |
+| Section crops | `pricing-{ar,en}-{1440,390}.png`, looked at, all four |
+| Band run crops | `lower-{ar,en}.png`, §7 → footer, looked at |
+
+`compare.mjs` and the full `shots.mjs` sweep were skipped: one section, and the first-screen budget is
+untouched by a section this far down the page.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+### 27.12 What is still open
+
+**The tier contents are no longer a blocker** — §27.3 closed the longest-standing item on the §25.10
+list. Still open from §25.10: `service firms` on the strip line, a refund position, and the
+`CONFIG.COUNTDOWN_END` placeholder. Nothing was added to that list by this pass.
+
+`design/boards/pricing-dark.png` is now a dead board kept on disk for the record. If it is ever deleted,
+this section is unaffected — `pricing-light.png` is the one that matters.
