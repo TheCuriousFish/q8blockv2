@@ -169,6 +169,27 @@ export const WORK = [
   { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', logo: 'ragwaclean', isNew: true },
 ];
 
+/* ── PRICES. The offer changed on 2026-09-30: it is no longer free.
+      $500 ONE TIME buys the first six months. The service's normal price starts
+      at $500 PER MONTH, and that anchor is the point — a prospect comparing this
+      against a competitor charging $500 a month has to see the two numbers side
+      by side. After the six months the client picks $500, $1,000 or $1,500 a month.
+
+      WHY EVERY PRICE GOES THROUGH `ltr()`. `$500` written plainly inside an Arabic
+      sentence renders as `500$`: the Unicode bidi algorithm resolves European digits
+      after an Arabic letter to Arabic-Number, which leaves the `$` as a neutral and
+      pushes it to the wrong side of the run. U+2066 / U+2069 (LRI / PDI) isolate the
+      run so it renders `$500` — and, unlike a `<span dir="ltr">`, invisible characters
+      survive `esc()`, so these strings can still be escaped like any other copy.
+      Never write a bare `$` price into an Arabic string. ── */
+export const ltr = (s) => `⁦${s}⁩`;
+const P = {
+  six: ltr('$500'),          // the one-time price of the six months
+  month: ltr('$500'),        // the anchor, and tier 1
+  t2: ltr('$1,000'),
+  t3: ltr('$1,500'),
+};
+
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
       files are design/icons/v2/<name>-sq.png (512x512, transparent, trimmed to
       a 476px ink box), converted to WebP at 240x240 in src/img/icon-<name>.webp
@@ -210,9 +231,9 @@ export const COPY = {
         ogAlt: 'موقع إلكتروني يظهر في نتائج البحث المحلية وفي إجابات الذكاء الاصطناعي',
       },
       offer: {
-        title: 'العرض: ستة أشهر مجانية بدون عقد | Q8 block',
-        description: 'ستة أشهر من العمل الكامل على الموقع وتحسين محركات البحث، لشركات الخدمات في السعودية، دون رسوم ودون عقد. الشروط والتفاصيل كاملة.',
-        ogAlt: 'عرض ستة أشهر مجانية من Q8 block',
+        title: 'عملاء جدد من محركات البحث والذكاء الاصطناعي | Q8 block',
+        description: 'عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من 500 دولار شهريًا.',
+        ogAlt: 'عرض Q8 block: عملاء جدد من محركات البحث والذكاء الاصطناعي',
       },
       about: {
         title: 'نبني المواقع التي نتحمل مسؤوليتها | Q8 block',
@@ -289,7 +310,7 @@ export const COPY = {
        contact CTA — the only two contact labels are still اتصل الآن / واتساب. */
     strip: {
       pill: 'عرض محدود',
-      line: 'ستة أشهر مجانًا لشركات خدمية',
+      line: `ستة أشهر بـ${P.six} مرة واحدة`,
       countdownLabel: 'يغلق التسجيل خلال',
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
       spots: (n) => `<span dir="ltr">${n}</span> مقاعد متبقية`,
@@ -336,23 +357,38 @@ export const COPY = {
       ],
     },
 
-    /* ── 6. The journey ── */
+    /* ── 6. The journey. REBUILT 2026-09-30 (build-spec §26.1): the Search
+          Console graph is the section, and the three illustrations that used to
+          head three large cards are small icons under it carrying the three
+          story beats. THE FORENSIC DETAIL IS DELIBERATELY GONE — no client
+          name, no date range, no "fifth full data month" note, no carwashkw
+          baseline, no source caption. Ahmad has now said twice that a prospect
+          does not verify and that the detail costs more than it earns. Do NOT
+          restore it: this is a reversal of the earlier checkability framing,
+          not a regression. The figures printed INSIDE the image are the
+          image's own axis and stay exactly as exported. ── */
     journey: {
       eyebrow: 'كيف نعمل',
       h2: 'هكذا يبدأ موقع جديد <span class="hl">في الظهور</span>',
-      lead: 'هذه قصة موقع واحد بنيناه، شهرًا بعد شهر، كما صدّرها Google Search Console. لم نجمع بين عملاء مختلفين ولم نختر أفضل شهر من كل موقع.',
-      siteLabel: 'kwtclean.com',
+      lead: 'هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console.',
+      /* The same unedited export the offer page's B2b carries, reused here —
+         never re-derived or re-cropped. It pans instead of shrinking below
+         1000px and its wrapper forces direction:ltr, because the four headline
+         figures sit at the panel's LEFT edge and an RTL scroller would open on
+         the tail of the chart. See build-spec §25.6 and §26.1. The alt names no
+         client and no date range; it describes the panel, which is why
+         "متوسط الموضع" may appear in it where the rank register bans position
+         as a selling word. */
+      graph: {
+        alt: 'لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى.',
+        panLabel: 'لوحة أداء في Google Search Console لموقع بنيناه',
+        hint: 'اسحب الصورة أفقيًا لقراءتها كاملة',
+      },
       stages: [
-        { label: 'الشهر الأول، أبريل 2026', title: 'البناء', figure: '<span dir="ltr">7</span> نقرات في الشهر', body: 'يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة.' },
-        { label: 'الشهر الثاني، مايو 2026', title: 'الظهور', figure: '<span dir="ltr">165</span> نقرة في الشهر', body: 'تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه.' },
-        { label: 'بعد نحو ستة أشهر، أغسطس 2026', title: 'النمو', figure: '<span dir="ltr">531</span> نقرة في الشهر', body: 'يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها.' },
+        { title: 'البناء', body: 'يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة.' },
+        { title: 'الظهور', body: 'تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه.' },
+        { title: 'النمو', body: 'يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها.' },
       ],
-      precision: 'أبريل 2026 هو أول شهر سُجّلت فيه بيانات لهذا الموقع، وأغسطس 2026 هو خامس شهر كامل من البيانات، أي ما يقارب ستة أشهر من عمر الموقع إذا احتسبنا فترة الفهرسة التي تسبق أول نقرة.',
-      baseline: [
-        'وموقع مثل carwashkw.com حافظ على <span dir="ltr">199</span> إلى <span dir="ltr">440</span> نقرة في الشهر عبر ثلاثة عشر شهرًا كاملًا متتاليًا، من الموقع وحده.',
-        'إن أردت أن تكون في أعلى النطاق، فالشرط أن تنفذ قائمة تعليمات ملف جوجل التي نسلمك إياها.',
-      ],
-      source: 'المصدر: Google Search Console، بيانات حتى <span dir="ltr">24</span> سبتمبر <span dir="ltr">2026</span>',
     },
 
     /* ── 7. Our work ── */
@@ -380,6 +416,39 @@ export const COPY = {
       carouselLabel: 'مواقع بنيناها',
       prev: 'السابق',
       next: 'التالي',
+    },
+
+    /* ── 7b. The price. NEW 2026-09-30 (build-spec §26.2). The homepage used to
+          carry a price in exactly one place, the §2 strip teaser; it now carries
+          the offer itself, after the proof in §7 and before the objections in §8.
+          EVERY FIGURE AND EVERY WORD HERE IS ALREADY DECIDED ON THE OFFER PAGE
+          (copy.md Part B) and is repeated verbatim — nothing is invented and
+          nothing new is said. In particular:
+            * the three tiers carry PRICES ONLY. Ahmad has not defined what
+              differs between them and nothing here may fill them out;
+            * there is NO savings figure and there never will be. The two numbers
+              sitting together do the work and the reader does the arithmetic;
+            * NO COUNTRY. The offer page names Saudi Arabia because eligibility is
+              a condition of the promotion; the homepage names no geography
+              anywhere and this section does not break that. ── */
+    pricing: {
+      eyebrow: 'السعر',
+      h2: '<span class="hl">دفعة واحدة</span> تغطي ستة أشهر',
+      lead: `السعر المعتاد لهذه الخدمة يبدأ من ${P.month} شهريًا. وفي هذا العرض تدفع ${P.six} مرة واحدة، وتغطي أول ستة أشهر كاملة.`,
+      /* The same two rows as offer B1b, word for word. */
+      price: {
+        anchorLabel: 'السعر المعتاد',
+        anchorValue: `يبدأ من ${P.month} شهريًا`,
+        offerLabel: 'هذا العرض',
+        offerValue: `${P.six} دفعة واحدة، تغطي ستة أشهر`,
+        note: 'دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.',
+      },
+      afterTitle: 'بعد الأشهر الستة',
+      afterIntro: 'تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك.',
+      tiers: [P.month, P.t2, P.t3],
+      tierUnit: 'شهريًا',
+      note: 'ما تشمله كل خطة يُتفق عليه معك في المكالمة.',
+      cta: 'اطلع على العرض',
     },
 
     /* ── 8. FAQ ── */
@@ -550,23 +619,50 @@ export const COPY = {
         { title: 'نعمل على ما نبنيه', body: 'لا نتسلم موقعًا بناه غيرنا ونعمل عليه. الأساس التقني والبنية الداخلية هما ما يحددان إن كان العميل سيجد الموقع أصلًا، ولا نستطيع أن نتحمل مسؤولية نتيجة مبنية على أساس لم نضعه. إن كان لديك موقع قائم وتريد استبداله بالكامل بموقع نبنيه من الصفر، فهذا عمل نقوم به ضمن عملنا المعتاد.' },
         { title: 'الاستضافة والنطاق والحماية', body: 'الاستضافة والنطاق وحماية الموقع وتحديثاته التقنية كلها جزء من الخدمة ونتولاها نحن، فلا تحتاج إلى إدارتها ولا إلى التعامل مع مزود منفصل. والموقع يُبنى لنشاطك التجاري وحده ولا يُستخدم لغيرك.' },
         { title: 'ملفك على جوجل يبقى لك', body: 'إدارة ملف نشاطك التجاري على جوجل ليست ضمن الخدمة. لا نطلب صلاحية الدخول إلى الملف ولا نملكه ولا ندير محتواه. ما نقدمه هو قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثر ذلك في نتائج البحث. الملف وحسابه يبقيان تحت سيطرتك بالكامل، خلال العمل معنا وبعده.' },
-        { title: 'العرض المحدود', body: 'العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض.', link: { label: 'اقرأ شروط العرض', href: '/offer/' } },
+        { title: 'العرض المحدود', body: 'العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة، وسعره وكيف يُدفع، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض.', link: { label: 'اقرأ شروط العرض', href: '/offer/' } },
         { title: 'ما يُتفق عليه مباشرة', body: 'كل ما يخص مشروعك تحديدًا، من نطاق العمل والخدمات والمناطق التي تُبنى لها الصفحات إلى شروط الدفع وما يحدث إن أراد أي من الطرفين التوقف، يُتفق عليه معك مباشرة قبل بدء العمل ويُكتب لك. لن تجد هنا بندًا عامًا يقرر شيئًا لم تسمعه منا. إن لم يكن الأمر مكتوبًا في اتفاقك أو منشورًا على هذا الموقع، فهو غير قائم.' },
         { title: 'تحديث هذه الصفحة', body: 'إن تغيّر شيء مما سبق، نحدّث هذه الصفحة ونغيّر تاريخ آخر تحديث أعلاها. وإن كان لديك سؤال عن أي بند هنا، اتصل بنا وسنجيبك مباشرة.', link: { label: 'تواصل معنا', href: '/contact/' } },
       ],
     },
 
-    /* ═══ PART B. The offer page ═══ */
+    /* ═══ PART B. The offer page ═══
+       Rewritten 2026-09-30: the offer is NOT free any more. One payment of $500
+       buys the first six months; the normal price starts at $500 a month. The
+       single biggest risk on this page is a reader thinking it is $500 monthly,
+       so "دفعة واحدة" sits beside the number everywhere the number appears and
+       `price.note` says it in the shortest words there are. */
     offerPage: {
       pill: 'عرض محدود',
-      h1: 'ستة أشهر <span class="hl">مجانية</span>،<br class="brk"> بدون عقد',
-      lead: 'هذا العرض مخصص لشركات الخدمات في السعودية. ستة أشهر من العمل الكامل، دون رسوم. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. دون التزام.',
+      /* H1 REPLACED 2026-09-30, second pass (build-spec §26.4). The old line
+         `ستة أشهر بـ$500، تُدفع مرة واحدة` sold the PRICE; every replacement that
+         led with the website sold the WEBSITE. Ahmad: "you're selling the
+         website, not the dream outcome, which is related to search and AI,
+         getting clients." So it opens on the outcome and names the two channels
+         without explaining either. `محركات البحث` is deliberate and is NOT to be
+         narrowed back to "جوجل" — he asked for search engines. The highlight
+         moved with it, onto the outcome phrase `عملاء جدد`, because the price is
+         no longer in the headline to carry it. The price now lives entirely in
+         the anchor block directly beneath, which was strengthened to compensate. */
+      h1: `<span class="hl">عملاء جدد</span> من محركات البحث<br class="brk"> والذكاء الاصطناعي`,
+      lead: `هذا العرض مخصص لشركات الخدمات في السعودية. دفعة واحدة ${P.six} تغطي أول ستة أشهر من العمل الكامل. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك.`,
+
+      /* The anchor. Two rows, same number, different unit, nothing between them.
+         No "you save X" line anywhere: the arithmetic is the reader's to do and
+         a savings claim reads as a discount gimmick. */
+      price: {
+        anchorLabel: 'السعر المعتاد',
+        anchorValue: `يبدأ من ${P.month} شهريًا`,
+        offerLabel: 'هذا العرض',
+        offerValue: `${P.six} دفعة واحدة، تغطي ستة أشهر`,
+        note: 'دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.',
+      },
+
       countdownLabel: 'يغلق التسجيل خلال',
       units: ['يوم', 'ساعة', 'دقيقة', 'ثانية'],
       spots: (n) => `<span dir="ltr">${n}</span> مقاعد متبقية`,
       statusLine: 'التسجيل مفتوح الآن',
 
-      b2: { title: 'ما يشمله العرض', intro: 'الأشهر الستة تشمل العمل كاملًا، لا جزءًا منه.',
+      b2: { title: 'ما يشمله العرض', intro: `دفعة واحدة ${P.six} تغطي الأشهر الستة كاملة، والأشهر الستة تشمل العمل كاملًا لا جزءًا منه.`,
         items: [
           'تصميم وتطوير موقع مخصص',
           'صفحة مستقلة لكل خدمة ولكل منطقة',
@@ -576,6 +672,30 @@ export const COPY = {
           'الاستضافة والنطاق والحماية',
         ] },
 
+      /* B2b, the proof block, added 2026-09-30. Part B used to carry NO performance
+         figure at all, on the grounds that a figure on an offer page turns into a
+         promise. Ahmad overrode that when the offer stopped being free: a reader
+         being asked for money wants to see what six months do before he pays.
+         It keeps every guard rail the homepage figures carry — one named client,
+         one named period, already in the past, the source named on the page — and
+         the image is an unedited Search Console export (design/proof-shots/). */
+      proof: {
+        title: 'مثال واحد على ستة أشهر',
+        /* SHORTENED 2026-09-30, second pass (build-spec §26.3). The lead used to
+           open on the client name and the exact date range. Ahmad: "you put too
+           much details for the search console graph, you are very logical and
+           direct in your messaging." Six words now. The client name and the
+           range are NOT deleted — they moved to `meta`, small fine print under
+           the image, where provenance belongs. Do not lead with them again. */
+        intro: 'موقع بنيناه. هذه أرقامه.',
+        meta: 'kwtclean.com، من 1 أبريل 2026 إلى 19 سبتمبر 2026.',
+        alt: 'لوحة الأداء في Google Search Console لموقع kwtclean.com من 1 أبريل 2026 إلى 19 سبتمبر 2026: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر في أبريل ثم يرتفع ويستقر في نطاق أعلى حتى سبتمبر.',
+        panLabel: 'لوحة أداء kwtclean.com في Google Search Console',
+        hint: 'اسحب الصورة أفقيًا لقراءتها كاملة',
+        caption: `ستة أشهر من هذا العمل هي ما تشتريه الدفعة الواحدة ${P.six}.`,
+        source: 'الصورة تصدير مباشر من Google Search Console، دون أي تعديل على الأرقام.',
+      },
+
       b3: { title: 'شروط القبول', intro: 'العرض مخصص لشركات الخدمات في السعودية. أربعة شروط، وإن تحققت جميعها فنشاطك مؤهل.',
         items: [
           'نشاط خدمي. نعمل مع شركات الخدمات فقط.',
@@ -584,22 +704,34 @@ export const COPY = {
           'لا يوجد موقع إلكتروني قائم.',
         ] },
 
-      b4: { title: 'بدون عقد', body: 'لا يوجد عقد ولا التزام ولا فترة إشعار. تستطيع التوقف في أي وقت خلال الأشهر الستة أو بعدها، دون رسوم.' },
+      /* Rewritten 2026-09-30. The old body said "stop at any time, with no fee",
+         which was written for a free offer and reads as a refund promise once money
+         has changed hands. It now says what is actually true and nothing more: one
+         payment, no monthly bill, no automatic renewal, nothing further due. It does
+         NOT state a refund policy in either direction — nobody has decided one, and
+         copy-pages.md T6 already says the money terms are agreed directly. */
+      b4: { title: 'بدون عقد', body: `لا يوجد عقد ولا التزام ولا فترة إشعار. الدفعة ${P.six} مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، القرار لك وحدك، ولا يُطلب منك شيء إن قررت التوقف.` },
 
-      b5: { title: 'ماذا يحدث بعد ستة أشهر', intro: 'القرار لك. أمامك ثلاثة خيارات، تختار منها ما يناسبك.',
-        items: [
-          'الاستمرار في العمل الكامل عبر خطة، يُحدد سعرها حسب قطاعك وحسب النتائج التي تحققت.',
-          'إيقاف العمل على محركات البحث والاحتفاظ بالموقع مباشرًا مقابل رسم شهري بسيط.',
-          'التوقف نهائيًا، دون رسوم ودون إشعار.',
+      /* The three tiers. Ahmad gave the PRICES and not what differs between them,
+         so this block prints prices only. Do NOT invent service levels, page counts,
+         hours or feature lists for them: what each plan covers is agreed on the call,
+         exactly as copy-pages.md T6 already says of everything project specific. */
+      b5: { title: 'ماذا يحدث بعد ستة أشهر', intro: 'حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك.',
+        tiers: [P.month, P.t2, P.t3],
+        tierUnit: 'شهريًا',
+        notes: [
+          'ما تشمله كل خطة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة.',
+          'وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.',
         ] },
 
       b6: { title: 'أسئلة شائعة',
         items: [
-          { q: 'لماذا هذا العرض مجاني؟', a: 'نختار عددًا محدودًا من الشركات في كل مدينة ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. النتيجة نفسها هي ما يجعل العميل يقرر الاستمرار، وهي أيضًا ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول: العرض لا ينجح إلا مع نشاط قائم وموثق فعلًا.' },
-          { q: 'هل هناك عقد أو التزام؟', a: 'لا. لا يوجد عقد. تستطيع التوقف في أي وقت خلال الأشهر الستة أو بعدها، دون رسوم ودون إشعار مسبق.' },
+          { q: `هل الـ${P.six} شهريًا؟`, a: `لا. الـ${P.six} دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من ${P.month} شهريًا، وبعد انتهاء الأشهر الستة تختار خطة شهرية من ثلاث: ${P.month} أو ${P.t2} أو ${P.t3}.` },
+          { q: `لماذا السعر ${P.six} لستة أشهر؟`, a: 'نختار عددًا محدودًا من الشركات في كل مدينة ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. النتيجة نفسها هي ما يجعل العميل يقرر الاستمرار، وهي أيضًا ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول: العرض لا ينجح إلا مع نشاط قائم وموثق فعلًا.' },
+          { q: 'هل هناك عقد أو التزام؟', a: `لا. لا يوجد عقد ولا فترة إشعار. الدفعة ${P.six} مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، إن قررت التوقف فلا يُطلب منك شيء.` },
           { q: 'هل يشترط وجود سجل تجاري؟', a: 'سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل.' },
           { q: 'لدي موقع قائم، هل أنا مؤهل؟', a: 'العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك.' },
-          { q: 'ماذا يحدث لموقعي بعد ستة أشهر؟', a: 'القرار لك، وأمامك ثلاثة خيارات. الأول، الاستمرار في العمل الكامل عبر خطة يُحدد سعرها حسب قطاعك وحسب النتائج التي تحققت. الثاني، إيقاف العمل على محركات البحث والاحتفاظ بالموقع مباشرًا مقابل رسم شهري بسيط. الثالث، التوقف نهائيًا، دون رسوم ودون إشعار.' },
+          { q: 'ماذا يحدث بعد ستة أشهر؟', a: `القرار لك. حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، ${P.month} أو ${P.t2} أو ${P.t3}، وما تشمله كل خطة يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.` },
           { q: 'هل تديرون ملف نشاطي على جوجل خلال العرض؟', a: 'لا، لا في العرض ولا خارجه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث.' },
         ] },
 
@@ -632,9 +764,9 @@ export const COPY = {
         ogAlt: 'A website found in local search and in AI answers',
       },
       offer: {
-        title: 'The offer: six months free, no contract | Q8 block',
-        description: 'Six months of full website and search work for service companies in Saudi Arabia, with no fee and no contract. Full conditions and details.',
-        ogAlt: 'The Q8 block six months free offer',
+        title: 'New customers from search engines and AI | Q8 block',
+        description: 'New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from $500 a month.',
+        ogAlt: 'The Q8 block offer: new customers from search engines and AI',
       },
       about: {
         title: 'We build the websites we take responsibility for | Q8 block',
@@ -684,7 +816,7 @@ export const COPY = {
 
     strip: {
       pill: 'Limited offer',
-      line: '6 months free, service firms',
+      line: '6 months for $500, paid once',
       countdownLabel: 'Registration closes in',
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
       spots: (n) => `<span dir="ltr">${n}</span> seats left`,
@@ -728,22 +860,23 @@ export const COPY = {
       ],
     },
 
+    /* The English mirror of the rebuilt §6. See the Arabic block above for why
+       the client name, the date range, the precision note, the carwashkw
+       baseline and the source caption are gone, and why they stay gone. */
     journey: {
       eyebrow: 'How it works',
       h2: 'How a new site <span class="hl">gets found.</span>',
-      lead: 'This is the story of one site we built, month by month, exactly as Google Search Console exported it. We did not mix clients together and we did not pick the best month from each site.',
-      siteLabel: 'kwtclean.com',
+      lead: 'These are the numbers of one site we built, exactly as Google Search Console exported them.',
+      graph: {
+        alt: 'A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band.',
+        panLabel: 'A Google Search Console performance panel for a site we built',
+        hint: 'Swipe the panel sideways to read all of it',
+      },
       stages: [
-        { label: 'Month one, April 2026', title: 'Build', figure: '<span dir="ltr">7</span> clicks in the month', body: 'The site is designed, built and published, and sent to Google.' },
-        { label: 'Month two, May 2026', title: 'Get discovered', figure: '<span dir="ltr">165</span> clicks in the month', body: 'Service and area pages enter the index. Customers find them.' },
-        { label: 'About six months in, August 2026', title: 'Get traction', figure: '<span dir="ltr">531</span> clicks in the month', body: 'A customer finds the page for his area, and calls you from it.' },
+        { title: 'Build', body: 'The site is designed, built and published, and sent to Google.' },
+        { title: 'Get discovered', body: 'Service and area pages enter the index. Customers find them.' },
+        { title: 'Get traction', body: 'A customer finds the page for his area, and calls you from it.' },
       ],
-      precision: 'April 2026 is the first month with recorded data for this site, and August 2026 is its fifth full data month, which is close to six months of site age once the indexing period before the first click is counted.',
-      baseline: [
-        'And a site like carwashkw.com has held between <span dir="ltr">199</span> and <span dir="ltr">440</span> clicks a month across thirteen consecutive complete months, from the website alone.',
-        'If you want to sit at the top of the range, the condition is that you work through the Google Business Profile checklist we hand you.',
-      ],
-      source: 'Source: Google Search Console, data to <span dir="ltr">24 September 2026</span>',
     },
 
     work: {
@@ -757,6 +890,27 @@ export const COPY = {
       carouselLabel: 'Sites we built',
       prev: 'Previous',
       next: 'Next',
+    },
+
+    /* The English mirror of §7b. Prices only in the tiers, no savings figure,
+       no country. See the Arabic block above. */
+    pricing: {
+      eyebrow: 'The price',
+      h2: '<span class="hl">One payment</span> covers six months.',
+      lead: 'The normal price for this service starts at $500 per month. In this offer you pay $500 one time, and it covers your first six months in full.',
+      price: {
+        anchorLabel: 'Normal price',
+        anchorValue: 'from $500 per month',
+        offerLabel: 'This offer',
+        offerValue: '$500 one time, covers six months',
+        note: 'One payment, not monthly. No monthly bill during the six months.',
+      },
+      afterTitle: 'After the six months',
+      afterIntro: 'You pick one of three monthly plans, or you stop. You decide.',
+      tiers: ['$500', '$1,000', '$1,500'],
+      tierUnit: 'per month',
+      note: 'What each plan covers is agreed with you on the call.',
+      cta: 'See the offer',
     },
 
     faq: {
@@ -907,22 +1061,37 @@ export const COPY = {
         { title: 'We work on what we build', body: 'We do not take over a website somebody else built and work on it. The technical foundation and the internal structure are what decide whether a customer ever finds the site, and we cannot take responsibility for a result built on a foundation we did not lay. If you have an existing website and you want it replaced entirely by one we build from scratch, that is part of our normal work.' },
         { title: 'Hosting, domain and security', body: 'Hosting, the domain, site security and the technical updates are all part of the service and we run them, so you do not have to manage any of it or deal with a separate provider. The website is built for your business alone and is not used for anybody else.' },
         { title: 'Your Google profile stays yours', body: 'Managing your Google Business Profile is not part of the service. We do not ask for access to it, we do not own it and we do not run its content. What we provide is a clear checklist for whoever manages the profile on your side, and then we track the effect in the search results. The profile and the account behind it stay entirely under your control, during the work and after it.' },
-        { title: 'The limited offer', body: 'The limited offer has its own conditions: who can register, what the six months cover, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion.', link: { label: 'Read the offer terms', href: '/en/offer/' } },
+        { title: 'The limited offer', body: 'The limited offer has its own conditions: who can register, what the six months cover, what it costs and how it is paid, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion.', link: { label: 'Read the offer terms', href: '/en/offer/' } },
         { title: 'What we agree directly', body: 'Everything specific to your project, from the scope of the work and which services and areas get pages to the payment arrangements and what happens if either side wants to stop, is agreed with you directly before the work starts and put in writing for you. You will not find a general clause here deciding something you have not heard from us. If it is not in your agreement or published on this site, it does not apply.' },
         { title: 'Updates to this page', body: 'If anything above changes, we update this page and change the last updated date at the top of it. If you have a question about anything here, call us and we will answer you directly.', link: { label: 'Contact us', href: '/en/contact/' } },
       ],
     },
 
+    /* The English mirror of Part B. Rewritten 2026-09-30 with the Arabic: ONE
+       payment of $500 buys the first six months, the normal price starts at $500
+       PER MONTH, and after the six months the client picks $500, $1,000 or $1,500
+       a month. "paid once" / "one payment" sits beside the number every single
+       time the number appears. Do not shorten it away. */
     offerPage: {
       pill: 'Limited offer',
-      h1: 'Six months <span class="hl">free</span>,<br class="brk"> no contract.',
-      lead: 'This offer is for service companies in Saudi Arabia. Six months of the full work, with no fee. We get your business found on Google and in AI, turning those visits into calls and customers. No commitment.',
+      /* See the Arabic H1 note. "search engines", never "Google". */
+      h1: '<span class="hl">New customers</span><br class="brk"> from search engines and AI.',
+      lead: 'This offer is for service companies in Saudi Arabia. One payment of $500 covers your first six months of the full work. We get your business found on Google and in AI, turning those visits into calls and customers.',
+
+      price: {
+        anchorLabel: 'Normal price',
+        anchorValue: 'from $500 per month',
+        offerLabel: 'This offer',
+        offerValue: '$500 one time, covers six months',
+        note: 'One payment, not monthly. No monthly bill during the six months.',
+      },
+
       countdownLabel: 'Registration closes in',
       units: ['Days', 'Hours', 'Minutes', 'Seconds'],
       spots: (n) => `<span dir="ltr">${n}</span> seats left`,
       statusLine: 'Registration is open now',
 
-      b2: { title: 'What is included', intro: 'The six months cover the full work, not a part of it.',
+      b2: { title: 'What is included', intro: 'One payment of $500 covers all six months, and the six months cover the full work, not a part of it.',
         items: [
           'Custom website design and development',
           'A dedicated page for every service and area',
@@ -932,6 +1101,18 @@ export const COPY = {
           'Hosting, domain and security',
         ] },
 
+      proof: {
+        title: 'One example of six months',
+        /* See the Arabic note: the provenance moved to `meta`, it was not cut. */
+        intro: 'A site we built. These are its numbers.',
+        meta: 'kwtclean.com, 1 April 2026 to 19 September 2026.',
+        alt: 'Google Search Console performance panel for kwtclean.com from 1 April 2026 to 19 September 2026: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that sits at zero through April, lifts through May and settles into a higher band to September.',
+        panLabel: 'The kwtclean.com performance panel in Google Search Console',
+        hint: 'Swipe the panel sideways to read all of it',
+        caption: 'Six months of that work is what the one payment of $500 buys.',
+        source: 'The image is an unedited export from Google Search Console. No figure in it has been changed.',
+      },
+
       b3: { title: 'Eligibility', intro: 'The offer is for service companies in Saudi Arabia. Four conditions, and if all four are met your business qualifies.',
         items: [
           'A service business. We work with service companies only.',
@@ -940,22 +1121,24 @@ export const COPY = {
           'No existing website.',
         ] },
 
-      b4: { title: 'No contract', body: 'There is no contract, no commitment and no notice period. You can stop at any time during the six months or after them, with no fee.' },
+      b4: { title: 'No contract', body: 'There is no contract, no commitment and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends the decision is yours alone, and nothing further is due if you stop.' },
 
-      b5: { title: 'What happens after six months', intro: 'You decide. You have three options and you pick the one that suits you.',
-        items: [
-          'Continue the full work on a plan, priced according to your industry and the results achieved.',
-          'Stop the search work and keep the website live for a small monthly fee.',
-          'Stop completely, with no fee and no notice.',
+      b5: { title: 'What happens after six months', intro: 'When the six months end you pick one of three monthly plans, or you stop. You decide.',
+        tiers: ['$500', '$1,000', '$1,500'],
+        tierUnit: 'per month',
+        notes: [
+          'What each plan covers is agreed with you on the call, against your industry and what the six months produced.',
+          'If you choose to stop, you stop completely, with no fee and no notice.',
         ] },
 
       b6: { title: 'Common questions',
         items: [
-          { q: 'Why is this offer free?', a: 'We take a limited number of companies in each city and work on them for a full six months until the result shows. That result is what makes a client decide to continue, and it is also what we show the next client. That is why the eligibility conditions exist. The offer only works with a business that is already running and already documented.' },
-          { q: 'Is there a contract or a commitment?', a: 'No. There is no contract. You can stop at any time during the six months or after them, with no fee and no notice period.' },
+          { q: 'Is the $500 per month?', a: 'No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at $500 a month, and after the six months end you pick one of three monthly plans: $500, $1,000 or $1,500.' },
+          { q: 'Why is it $500 for six months?', a: 'We take a limited number of companies in each city and work on them for a full six months until the result shows. That result is what makes a client decide to continue, and it is also what we show the next client. That is why the eligibility conditions exist. The offer only works with a business that is already running and already documented.' },
+          { q: 'Is there a contract or a commitment?', a: 'No. There is no contract and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends, nothing further is due if you stop.' },
           { q: 'Do I need a commercial registration?', a: 'A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile.' },
           { q: 'I already have a website. Do I qualify?', a: 'The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you.' },
-          { q: 'What happens to my website after six months?', a: 'You decide, and you have three options. One, continue the full work on a plan, priced according to your industry and the results achieved. Two, stop the search work and keep the website live for a small monthly fee. Three, stop completely, with no fee and no notice.' },
+          { q: 'What happens after six months?', a: 'You decide. When the six months end you pick one of three monthly plans, $500, $1,000 or $1,500, and what each plan covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice.' },
           { q: 'Do you manage my Google Business Profile during the offer?', a: 'No, neither during the offer nor outside it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results.' },
         ] },
 

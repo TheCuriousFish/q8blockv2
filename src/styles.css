@@ -403,11 +403,14 @@ html[lang="ar"] .nav a { font-weight: 400; }
       well under their weight.
 
       THIS FILE IS INLINED INTO EVERY BUILT PAGE, so a comment here is shipped
-      text. The reasoning — why the wordmark is an <img> and not coloured live
-      text, why the stars carry no number, count or markup, and what §24
-      removed — lives in src/render.mjs and build-spec §24, which are not.
-      Do not restate it here and do not name a vendor, a product or a property
-      in this file: §23 lost a whole verification round to exactly that. ══ */
+      text. The reasoning — why the wordmark is an image element and not
+      coloured live text, why the stars carry no number, count or markup, and
+      what §24 removed — lives in src/render.mjs and build-spec §24, which are
+      not. Do not restate it here, do not name a vendor, a product or a property
+      in this file, and do not write an HTML tag in it: §23 lost a whole
+      verification round to a leaked comment, and a bare "img" tag written in a
+      comment is counted by seo-audit.mjs as an image with no alt, on every
+      page at once. ══ */
 .cred {
   display: flex; align-items: center; justify-content: center;
   margin-block-start: 78px;                           /* 70 to the four trust points, 76 to §23's two-part row */
@@ -569,34 +572,26 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
       against the approved board rather than reading as a hole where the
       graphic used to be; see build-spec §21. ══ */
 #journey { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
-#journey .site-label {
-  font-size: var(--fs-caption); font-weight: 600; color: var(--orange);
-  margin-block-start: 14px; direction: ltr; unicode-bidi: isolate;
+/* The graph is the section. It reuses the offer page's .proof-shot/.proof-pan
+   pair wholesale, so the pan behaviour and the direction:ltr wrapper come with
+   it and cannot drift apart between the two pages. Only the spacing and the
+   ceiling are set here. */
+.journey-graph { margin-block-start: 40px; }
+.journey-graph .proof-pan { max-width: 1320px; margin-inline: auto; }
+/* Three compact beats under the graph: an icon and two or three lines each.
+   They are not cards any more, so no plate, no padding block, no min-height. */
+.journey-beats {
+  margin-block-start: 48px; list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;
 }
-html[dir="rtl"] #journey .site-label { text-align: right; }
-.journey-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-block-start: 40px; }
-.journey-card {
-  background: var(--bg-card-dark); border: 0; border-radius: 0;
-  padding: 32px; min-height: 494px; display: flex; flex-direction: column;
+.journey-beat { display: flex; align-items: flex-start; gap: 18px; }
+.journey-beat img {
+  flex: none; width: 104px; height: auto; aspect-ratio: 343 / 296; object-fit: contain;
+  margin-block-start: -6px;
 }
-.journey-card img { width: 343px; height: 296px; max-width: 100%; object-fit: contain; }
-.month {
-  font-size: var(--fs-month); font-weight: 600; line-height: 1.1; color: var(--orange);
-  margin-block-start: 24px;
-}
-html[lang="en"] .month { text-transform: uppercase; letter-spacing: 0.06em; }
-.journey-card .h3 { font-size: var(--fs-h3-s6); margin-block-start: 13px; }
-.journey-figure {
-  font-size: var(--fs-body); font-weight: 600; line-height: var(--lh-body);
-  color: var(--orange); margin-block-start: 16px;
-}
-.journey-card .body { margin-block-start: 14px; }
-.journey-notes { margin-block-start: 56px; display: grid; gap: 12px; max-width: 780px; }
-.journey-notes p { font-size: var(--fs-foot-l); font-weight: var(--w-body); line-height: 1.6; color: var(--muted-on-dark); }
-/* source line and the WhatsApp button share one row, so the section stops
-   ending a second time on a button hanging off the bottom-left corner. */
-.journey-foot { margin-block-start: 28px; display: flex; align-items: center; justify-content: space-between; gap: 18px 32px; flex-wrap: wrap; }
-.journey-source { font-size: var(--fs-foot-l); line-height: 1.6; color: var(--muted-on-dark); }
+.journey-beat .h3 { font-size: var(--fs-h3-s6); }
+.journey-beat .body { margin-block-start: 10px; }
+.journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
 
 /* ══ §6 row 7 — Our work. A SLIDESHOW since 2026-09-24, not a 4-up grid.
       Ahmad's list: sorted biggest number first (the order lives in data.mjs),
@@ -742,6 +737,39 @@ body.theme-dark { background: var(--bg-dark); }
 #offer-hero .strip-pill { display: inline-block; margin-block-end: 28px; }
 #offer-hero h1 { font-size: var(--fs-h1); }
 #offer-hero .lead { max-width: 860px; margin-inline: auto; font-size: var(--fs-hero-lead); margin-block-start: 28px; }
+
+/* The price anchor, 2026-09-30. Two rows, the SAME number, DIFFERENT units.
+   No third element competes with them and there is no savings line: the reader
+   does the arithmetic himself, which is the whole point.
+   The "now" row is the only thing on this page that uses --orange at this size
+   above the CTAs, and it earns it. The note under it is the anti-confusion line
+   and it is bold on purpose. */
+.price-anchor { margin-block-start: 40px; margin-inline: auto; max-width: 760px; text-align: start; }
+.pa-pair { display: grid; border: 1px solid rgba(255, 255, 255, 0.16); }
+.pa-row {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; column-gap: 24px; row-gap: 4px;
+  padding: 18px clamp(18px, calc(28/14.4 * 1vw), 30px);
+}
+.pa-row + .pa-row { border-block-start: 1px solid rgba(255, 255, 255, 0.16); }
+.pa-row dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
+.pa-row dd { margin: 0; font-weight: 700; line-height: 1.25; }
+.pa-was dd { font-size: var(--fs-count); color: var(--muted-on-dark); }
+/* STRENGTHENED 2026-09-30, second pass. The offer H1 used to print the price
+   and no longer does — it sells the outcome now — so this block carries the
+   whole price message alone. The "now" row gets a size step and a left orange
+   edge, and the note gets a boxed treatment, because a reader who takes one
+   thing off this page has to take away that the $500 is paid ONCE. */
+.pa-now { background: rgba(255, 95, 41, 0.12); box-shadow: inset 3px 0 0 var(--orange); }
+html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
+.pa-now dt { color: var(--ink-invert); }
+.pa-now dd { font-size: clamp(22px, calc(36/14.4 * 1vw), 40px); color: var(--orange); }
+.pa-note {
+  margin-block-start: 16px; text-align: center;
+  border: 1px solid rgba(255, 95, 41, 0.45); padding: 12px 18px;
+  font-size: var(--fs-count); font-weight: 700; line-height: 1.45; color: var(--ink-invert);
+}
+
 .count-label { margin-block-start: 44px; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
 .count-boxes { display: flex; justify-content: center; gap: 16px; margin-block-start: 16px; direction: ltr; }
 .count-box {
@@ -774,6 +802,90 @@ body.theme-dark { background: var(--bg-dark); }
   flex: none; min-width: 64px; font-size: var(--fs-numeral); font-weight: 600; line-height: 1;
   color: transparent; -webkit-text-stroke: 2.5px var(--orange); direction: ltr;
 }
+
+/* B2b, the proof block. The image is an unedited Google Search Console export
+   (design/proof-shots/SOURCES.md) and it is a screenshot of a light, LTR
+   interface: it keeps its own white ground on this dark section and it is never
+   mirrored under an RTL direction. Explicit width and height attributes on the
+   image element, plus width:100% and height:auto here, mean the browser reserves
+   the box from the attribute ratio before the file decodes, so CLS stays 0. */
+.proof-shot { margin: 40px 0 0; }
+/* direction:ltr is not cosmetic. The panel is a screenshot of an LTR interface
+   whose four headline figures sit at its LEFT edge. Left in an RTL container a
+   horizontal scroller opens at the content's RIGHT, so an Arabic reader would
+   land on the tail of the chart and never see the numbers. This opens both
+   locales on the figures. The image itself is never mirrored. */
+.proof-pan { background: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.12); direction: ltr; }
+.proof-pan:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.proof-shot img { display: block; width: 100%; height: auto; }
+/* The hint only means anything while the panel actually pans. */
+.proof-hint { display: none; }
+@media (max-width: 999px) {
+  /* The export is 2243px of wide chart. Scaled into a 350px phone box its
+     headline figures render about 5px tall, so the panel keeps a 1000px floor
+     and the reader swipes it instead. It is never cropped to fit. */
+  .proof-pan { overflow-x: auto; overscroll-behavior-inline: contain; }
+  .proof-shot img { width: 1000px; max-width: none; }
+  .proof-hint {
+    display: block; margin-block-start: 10px;
+    font-size: var(--fs-caption); color: var(--muted-on-dark);
+  }
+}
+/* Provenance, moved here 2026-09-30 from the block's lead. Ahmad: the lead over
+   explained the graph. The client name and the date range are not gone — they
+   are fine print under the image, which is where provenance belongs. */
+.proof-meta {
+  margin-block-start: 14px; font-size: var(--fs-caption);
+  line-height: 1.5; color: var(--muted-on-dark);
+}
+.proof-shot figcaption {
+  margin-block-start: 24px; font-size: var(--fs-lead); font-weight: 600;
+  line-height: var(--lh-h3); color: var(--ink-invert); max-width: 900px;
+}
+.proof-source { margin-block-start: 16px; font-size: var(--fs-caption); color: var(--muted-on-dark); }
+
+/* B5's three monthly tiers. PRICES ONLY — see render.mjs: nobody has decided
+   what differs between them and nothing here invents a feature list to fill the
+   tiles. Its own size clamp rather than --fs-numeral, whose 44px floor puts
+   "$1,000" straight through the side of a 390px column. */
+.tier-row { margin-block-start: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tier {
+  border: 1px solid rgba(255, 255, 255, 0.16); padding: 30px 16px;
+  text-align: center; display: grid; align-content: center; gap: 12px;
+}
+.tier-price {
+  font-size: clamp(30px, calc(58/14.4 * 1vw), 64px); font-weight: 600; line-height: 1;
+  color: var(--orange); direction: ltr; unicode-bidi: isolate;
+}
+.tier-unit { font-size: var(--fs-strip); font-weight: 400; color: var(--muted-on-dark); }
+.tier-notes { margin-block-start: 30px; display: grid; gap: 12px; max-width: 900px; }
+.tier-notes p {
+  font-size: var(--fs-body); font-weight: var(--w-body);
+  line-height: var(--lh-body); color: var(--muted-on-dark);
+}
+
+/* ══ §7b The price, homepage, 2026-09-30. NO NEW VISUAL LANGUAGE: the head is
+      every section's eyebrow/h2/lead, the anchor is offer B1b's .price-anchor
+      and the tiles are offer B5's .tier-row, on the same dark ground those two
+      were designed for. Only the section's own rhythm is set here. ══ */
+/* Centred like the §9 final-call band, because the anchor and the three tiles
+   are centred components and a start-aligned head above them reads as two
+   different sections stacked. */
+#pricing { background: var(--bg-dark); text-align: center; }
+#pricing .lead { margin-inline: auto; }
+#pricing .price-anchor .pa-row { text-align: start; }
+#pricing .tier-notes { margin-inline: auto; }
+#pricing .btn .chev { display: inline-block; margin-inline-start: 8px; }
+html[dir="rtl"] #pricing .btn .chev { transform: scaleX(-1); }
+/* The anchor is centred under the headline and is the loudest thing in the
+   section, because the one job here is that "paid once" lands in two seconds. */
+#pricing .price-anchor { margin-block-start: 44px; }
+#pricing .pricing-after { margin-block-start: 64px; }
+#pricing .pricing-after .h3 { font-size: var(--fs-h3); }
+#pricing .pricing-after .body { margin-block-start: 12px; color: var(--muted-on-dark); }
+#pricing .tier-row { margin-block-start: 28px; }
+#pricing .tier-notes { margin-block-start: 20px; }
+#pricing .btn-row { margin-block-start: 56px; }
 
 #offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
 #offer-nocontract h2 { font-size: var(--fs-h2-final); color: var(--ink); }
@@ -1234,11 +1346,13 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .nav .lang, .site-header.over-dark:not(.solid) .nav .lang { color: var(--muted-on-dark); }
   .nav .nav-close { display: block; position: absolute; inset-block-start: 18px; inset-inline-end: 18px; width: 44px; height: 44px; color: #fff; font-size: 30px; line-height: 1; }
   .header-cta { display: none; }
-  .problem-grid, .journey-grid { grid-template-columns: 1fr; }
+  .problem-grid { grid-template-columns: 1fr; }
+  /* Two beats across on a tablet, the third full width under them. */
+  .journey-beats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
   .wwd-grid { grid-template-columns: 1fr; row-gap: 44px; }
   .wwd-block + .wwd-block::before { display: none; }
   .icons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .problem-card, .icon-card, .journey-card { min-height: 0; }
+  .problem-card, .icon-card { min-height: 0; }
   /* Secondary pages: every two-up and the blog's two-column list go single.
      `minmax(0, 1fr)` and not `1fr`: a bare 1fr track floors at the item's
      min-content width, and `.map-shell` carries an aspect-ratio with a
@@ -1249,7 +1363,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .post-rows > :nth-last-child(-n+2) { border-block-end: 1px solid var(--hairline-light); }
   .post-rows > :last-child { border-block-end: 0; }
   .fact { grid-template-columns: 1fr; }
-  .journey-card img { width: 100%; height: auto; aspect-ratio: 343 / 296; }
+
   /* §23 stacked this row below 990 because it had two halves and a hairline
      between them. §24 leaves one centred mark, so there is nothing to stack —
      only the air above it comes down to fit the first screen on a tablet. */
@@ -1258,16 +1372,20 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 
 @media (max-width: 767px) {
-  /* One row is impossible at 390; the band packs into four and is kept as
-     tight as it can be, because hero + strip still have to be the whole first
-     screen. Mobile is not board-measured (build-spec §11). It packed into
-     THREE until 2026-09-25, when Ahmad's longer strip line ("Six months free
-     for service companies") stopped the line sharing row 1 with the pill:
-     at 390 the inner box is 350px and pill + line now measure 410 (en) and
-     358 (ar). Every way back to three drops an element or splits the countdown
-     label from its own clock, so the fourth row stands — build-spec §18. The
-     first screen still measures exactly 844 (72 + 702 + 142) in both locales
-     with zero hero scroll. */
+  /* NOTHING IN THIS FILE MAY QUOTE PAGE COPY. build.mjs inlines this stylesheet
+     into every built page, so a comment that merely repeats a line of copy puts
+     that line into all 82 HTML files — build-spec §23.3 and §24.2 are both this
+     same bug, caught by grepping the BUILT output. The reasoning lives in
+     src/render.mjs and in design/build-spec.md, which are never served.
+
+     One row is impossible at 390; the band packs into four and is kept as tight
+     as it can be, because hero + strip still have to be the whole first screen.
+     Mobile is not board-measured (build-spec §11). It packed into THREE until
+     2026-09-25, when a longer strip line stopped the line sharing row 1 with the
+     pill: at 390 the inner box is 350px and pill + line overran it. Every way
+     back to three drops an element or splits the countdown label from its own
+     clock, so the fourth row stands — build-spec §18 and §25. The first screen
+     still measures exactly 844 in both locales with zero hero scroll. */
   #offer-strip { padding-block: 12px; }
   .strip-row { gap: 8px 16px; }
   #offer-strip .strip-pill { padding: 7px 14px; }
@@ -1299,10 +1417,23 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   #hero .btn-row .btn { font-size: var(--fs-btn); }
   #hero .btn-row .btn-primary { padding: 15px 40px; }
   #hero .btn-row .btn-outline { padding: 13px 38px; }
-  .problem-card, .icon-card, .journey-card { padding: 24px; }
+  .problem-card, .icon-card { padding: 24px; }
+  /* One beat per row on a phone, the icon a size down so the two or three
+     lines beside it still set on a sensible measure inside 350px. */
+  .journey-beats { grid-template-columns: 1fr; gap: 24px; margin-block-start: 36px; }
+  .journey-beat { gap: 14px; }
+  .journey-beat img { width: 76px; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
   .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
+  /* Three tier tiles do not fit a 390px row: each column is ~106px and "$1,000"
+     is wider than that at any size worth reading. They stack, and each tile
+     becomes one row with the price and its unit side by side. */
+  .tier-row { grid-template-columns: 1fr; gap: 12px; }
+  .tier {
+    grid-auto-flow: column; justify-content: space-between; align-items: baseline;
+    text-align: start; padding: 18px 20px; gap: 16px;
+  }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  /* 44.2px tap target, DESIGN.md §8 */

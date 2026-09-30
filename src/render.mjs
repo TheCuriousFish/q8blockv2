@@ -272,35 +272,61 @@ export function included(t) {
   </section>`;
 }
 
-/* ── §6 The journey.
-      No sparkline under the cards any more — removed at Ahmad's instruction,
-      2026-09-25 (build-spec §21): "there is this orange graph under the
-      three images... it looks ugly." Deliberate divergence from
-      journey-D.png, which draws one; do not restore it. ─────────────────── */
+/* ── §6 The journey. REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).
+      Ahmad: the Search Console graph is the centrepiece and the three
+      illustrations become small icons underneath it that tell the story. What
+      was three large charcoal cards — illustration, month label, title, body
+      and a click figure each, then a precision note, a baseline paragraph and a
+      source caption — is now headline, graph, three compact beats.
+
+      THE FORENSIC DETAIL IS GONE ON PURPOSE AND MUST NOT BE RESTORED. Ahmad,
+      twice: "don't use details like kwtclean or from what month to what month."
+      The client name, the date range, the "fifth full data month" note, the
+      carwashkw baseline and the source caption are all out of THIS section's
+      copy. It is a deliberate reversal of the earlier checkability framing, on
+      the grounds that prospects do not verify and the detail costs more than it
+      earns. The figures printed inside the image stay exactly as exported:
+      that is the image's own axis, not our copy. The offer page's B2b still
+      carries the full provenance, which is where a reader who wants it looks.
+
+      THE GRAPH IS THE SAME ASSET AS B2b — one unedited export, never
+      re-derived or re-cropped — and it keeps B2b's behaviour exactly: below
+      1000px it pans inside `.proof-pan` instead of shrinking (scaled into a
+      350px box its headline figures render about 5px tall), and the wrapper is
+      `direction: ltr` so an RTL scroller cannot open on the tail of the chart
+      instead of on the four figures at its left edge. See §25.6.
+
+      The section still diverges from journey-D.png, which draws three cards and
+      a sparkline. That divergence is Ahmad-instructed, the same status as
+      §21.2's sparkline removal. ─────────────────────────────────────────── */
 const JOURNEY_ART = ['/assets/img/journey-1.webp', '/assets/img/journey-2.webp', '/assets/img/journey-3.webp'];
 
 export function journey(t) {
-  const cards = t.journey.stages.map((s, i) => `<article class="journey-card">
+  const g = t.journey.graph;
+  const beats = t.journey.stages.map((s, i) => `<li class="journey-beat">
       <img src="${JOURNEY_ART[i]}" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <p class="month">${esc(s.label)}</p>
-      <h3 class="h3">${esc(s.title)}</h3>
-      <p class="journey-figure">${s.figure}</p>
-      <p class="body">${esc(s.body)}</p>
-    </article>`).join('');
+      <div class="journey-beat-text">
+        <h3 class="h3">${esc(s.title)}</h3>
+        <p class="body">${esc(s.body)}</p>
+      </div>
+    </li>`).join('');
   return `<section id="journey" class="sec on-dark">
     <div class="wrap">
       <p class="eyebrow">${esc(t.journey.eyebrow)}</p>
       <h2 class="h2">${t.journey.h2}</h2>
       <p class="lead">${esc(t.journey.lead)}</p>
-      <p class="site-label">${esc(t.journey.siteLabel)}</p>
-      <div class="journey-grid">${cards}</div>
-      <div class="journey-notes">
-        <p>${esc(t.journey.precision)}</p>
-        <p>${t.journey.baseline[0]}</p>
-        <p>${t.journey.baseline[1]}</p>
-      </div>
-      <div class="journey-foot">
-        <p class="journey-source">${t.journey.source}</p>
+      <figure class="proof-shot journey-graph">
+        <div class="proof-pan" tabindex="0" role="group" aria-label="${esc(g.panLabel)}">
+          <img src="/assets/img/proof-kwtclean-gsc.webp" width="${PROOF_W}" height="${PROOF_H}"
+               alt="${esc(g.alt)}" loading="lazy" decoding="async">
+        </div>
+        <p class="proof-hint" aria-hidden="true">${esc(g.hint)}</p>
+      </figure>
+      <ul class="journey-beats">${beats}</ul>
+        <!-- Call and WhatsApp always ship as a pair. This block had WhatsApp alone,
+             which read as an unfinished row beside every other CTA on the site. -->
+      <div class="journey-foot btn-row">
+        <a class="btn btn-primary" href="${telHref}">${esc(t.cta.call)}</a>
         <a class="btn btn-outline" href="${waHref}" rel="noopener" target="_blank">${esc(t.cta.whatsapp)}</a>
       </div>
     </div>
@@ -406,6 +432,53 @@ export function work(t) {
 /* ── §8 FAQ ──────────────────────────────────────────────────────────────── */
 // The approved board (s8, offer-3) draws the first row open, so the build ships
 // the first row open too.
+/* ── §7b The price. NEW 2026-09-30 (build-spec §26.2), between §7 Our work and
+      §8 FAQ: problem, solution, what you get, proof, PRICE, objections, close.
+
+      NO NEW VISUAL LANGUAGE. Every part of this section is a component already
+      approved elsewhere on the site: the `.eyebrow → h2 → .lead` head from every
+      homepage section, `priceAnchor()` from offer B1b, `.tier-row`/`.tier` from
+      offer B5, and the §2 strip's own `اطلع على العرض` / `See the offer` label
+      on the link out. The band is `--bg-dark`, like §6, so the approved dark
+      components render on the ground they were designed for and the page still
+      alternates white §7 → dark §7b → light §8.
+
+      Every figure and every phrase is copy.md Part B, verbatim. NOTHING IS
+      INVENTED. The three tiers carry PRICES ONLY — Ahmad has not defined what
+      differs between them and nothing here may fill them out. There is NO
+      savings figure and there never will be: the two numbers sitting together
+      do the work. And there is NO COUNTRY — the offer page names Saudi Arabia
+      because eligibility is a condition of that promotion; the homepage names
+      no geography anywhere, and this section does not break that.
+
+      The one thing this section has to achieve in under two seconds is that the
+      $500 is paid ONCE, so the anchor's "now" row and its bold note sit directly
+      under the headline with nothing between them. */
+export function pricing(t) {
+  const p = t.pricing;
+  const tiers = p.tiers.map((price) => `<li class="tier">
+      <span class="tier-price">${esc(price)}</span>
+      <span class="tier-unit">${esc(p.tierUnit)}</span>
+    </li>`).join('');
+  return `<section id="pricing" class="sec on-dark">
+    <div class="wrap">
+      <p class="eyebrow">${esc(p.eyebrow)}</p>
+      <h2 class="h2">${p.h2}</h2>
+      <p class="lead">${esc(p.lead)}</p>
+      ${priceAnchor(p.price)}
+      <div class="pricing-after">
+        <h3 class="h3">${esc(p.afterTitle)}</h3>
+        <p class="body">${esc(p.afterIntro)}</p>
+        <ul class="tier-row">${tiers}</ul>
+        <div class="tier-notes"><p>${esc(p.note)}</p></div>
+      </div>
+      <div class="btn-row centred">
+        <a class="btn btn-primary" href="${t.offer.path}">${esc(p.cta)}<span class="chev" aria-hidden="true">&rsaquo;</span></a>
+      </div>
+    </div>
+  </section>`;
+}
+
 export function accordion(items, idPrefix) {
   return `<div class="faq-list">${items.map((q, i) => `<div class="faq-item${i === 0 ? ' open' : ''}">
       <button class="faq-q" type="button" aria-expanded="${i === 0 ? 'true' : 'false'}" aria-controls="${idPrefix}-a${i}">
@@ -439,6 +512,42 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
 /* ══ Offer page sections — built from design/boards/offer-1..3.png with the
      homepage's tokens, type scale and components. ══════════════════════════ */
 
+/* The anchor, added 2026-09-30 when the offer stopped being free.
+
+   Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
+   and no third element competing: "Normal price / from $500 per month" over
+   "This offer / $500 one time, covers six months". Ahmad has a competitor
+   pitching his prospects at $500 a month, so the arithmetic is the argument and
+   the reader does it himself in about a second.
+
+   THERE IS NO "you save $2,500" LINE AND THERE NEVER WILL BE. A savings claim
+   reads as a discount gimmick and it makes the reader argue with the figure
+   instead of with the competitor's quote. Two numbers, side by side, nothing else.
+
+   `price.note` is the anti-confusion line and it is the reason this block exists
+   at all: if a reader leaves thinking it is $500 a MONTH for six months, the offer
+   and the trust both die. It is written in the shortest words there are and it is
+   repeated wherever the number appears (hero, B2 intro, B4, two FAQ answers).
+
+   The two pairs are a <dl>, not a table: they are label/value pairs, and that is
+   also what gives a screen reader the pairing without any ARIA. The note sits
+   OUTSIDE the <dl> on purpose — a <dl> may only contain dt, dd and div, so a <p>
+   inside it is invalid HTML. */
+function priceAnchor(p) {
+  if (!p) return '';
+  return `<div class="price-anchor">
+      <dl class="pa-pair">
+        <div class="pa-row pa-was">
+          <dt>${esc(p.anchorLabel)}</dt><dd>${esc(p.anchorValue)}</dd>
+        </div>
+        <div class="pa-row pa-now">
+          <dt>${esc(p.offerLabel)}</dt><dd>${esc(p.offerValue)}</dd>
+        </div>
+      </dl>
+      <p class="pa-note">${esc(p.note)}</p>
+    </div>`;
+}
+
 export function offerHero(t) {
   const o = t.offerPage;
   const live = hasCountdown();
@@ -450,6 +559,7 @@ export function offerHero(t) {
       <span class="strip-pill">${esc(o.pill)}</span>
       <h1>${o.h1}</h1>
       <p class="lead">${esc(o.lead)}</p>
+      ${priceAnchor(o.price)}
       ${live ? `<p class="count-label" data-countdown-part>${esc(o.countdownLabel)}</p>
       <div class="count-boxes" data-countdown-part>${boxes}</div>` : ''}
       <p class="offer-spots" data-countdown-fallback${live ? ' hidden' : ''}>${esc(o.statusLine)}</p>
@@ -470,6 +580,58 @@ export function offerIncluded(t) {
       <h2>${esc(b.title)}</h2>
       <p class="lead">${esc(b.intro)}</p>
       <ul class="offer-rows">${rows}</ul>
+    </div>
+  </section>`;
+}
+
+/* B2b, the proof block. Added 2026-09-30, and it is the one place on this page
+   where a performance figure appears — copy.md Part B used to forbid them here
+   outright. Ahmad overrode that when the offer stopped being free: a reader who
+   is being asked for money wants to see what the six months do before he pays.
+
+   The image is an UNEDITED Google Search Console export for kwtclean.com, a real
+   client site, kept byte-for-byte at design/proof-shots/ and converted to WebP at
+   its own pixel size by that folder's derive.mjs. It is never cropped further,
+   retouched or recoloured, and no number in it is altered — see SOURCES.md there.
+
+   Explicit width and height on the image element, so the box is reserved before
+   the file decodes and CLS stays 0. It is `loading="lazy"`: it sits well below
+   the fold, which is the opposite of §20.6's first-viewport rule and right here.
+
+   IT PANS ON A PHONE INSTEAD OF SHRINKING, AND THAT IS THE WHOLE POINT OF IT.
+   The export is 2243px of a wide chart. Scaled to fit a 350px phone box it
+   renders "1.99K" about 5px tall, which makes the one piece of evidence on the
+   page unreadable on the device 99% of the traffic uses — a proof nobody can
+   read is not proof. So below 1000px the image keeps a 1000px floor inside a
+   horizontally scrollable wrapper and the reader swipes it. It is NEVER cropped
+   to fit: this is a real export and the crop it has is the one Ahmad supplied.
+
+   The wrapper is `tabindex="0"` with a role and a label, because axe requires a
+   scrollable region to be keyboard reachable (`scrollable-region-focusable`);
+   that also gives arrow-key panning for free. The hint line is `aria-hidden`:
+   it tells a sighted phone reader the panel scrolls, and a screen reader
+   already has the whole panel described in the image's alt.
+
+   The section names the client and both dates, because the page's credibility
+   rests on a reader being able to go and check. Nothing beside it averages the
+   figures, projects them, promises them to the reader or calls them typical. */
+const PROOF_W = 2243, PROOF_H = 582;
+export function offerProof(t) {
+  const b = t.offerPage.proof;
+  return `<section id="offer-proof" class="sec offer-sec plain on-dark">
+    <div class="wrap">
+      <h2>${esc(b.title)}</h2>
+      <p class="lead">${esc(b.intro)}</p>
+      <figure class="proof-shot">
+        <div class="proof-pan" tabindex="0" role="group" aria-label="${esc(b.panLabel)}">
+          <img src="/assets/img/proof-kwtclean-gsc.webp" width="${PROOF_W}" height="${PROOF_H}"
+               alt="${esc(b.alt)}" loading="lazy" decoding="async">
+        </div>
+        <p class="proof-hint" aria-hidden="true">${esc(b.hint)}</p>
+        <p class="proof-meta">${esc(b.meta)}</p>
+        <figcaption>${esc(b.caption)}</figcaption>
+      </figure>
+      <p class="proof-source">${esc(b.source)}</p>
     </div>
   </section>`;
 }
@@ -499,16 +661,30 @@ export function offerNoContract(t) {
   </section>`;
 }
 
+/* B5, rebuilt 2026-09-30. It used to be three numbered options (continue on a
+   plan / keep the site on a small fee / stop). It is now the three monthly tiers
+   Ahmad named, $500, $1,000 and $1,500, plus stopping.
+
+   PRICES ONLY, AND THAT IS DELIBERATE. Ahmad gave the three figures and NOT what
+   differs between them. Nothing here invents a service level, a page count, an
+   hours figure or a feature list to fill the tiles out, because an invented tier
+   spec on a page whose whole argument is that its figures are checkable is the
+   worst possible place to make something up. `notes[0]` says what is true instead:
+   the contents are agreed on the call, which is also what copy-pages.md T6 says of
+   everything project specific. Fill these in only when Ahmad supplies them. */
 export function offerAfter(t) {
   const b = t.offerPage.b5;
-  const rows = b.items.map((label, i) => `<li class="offer-row">
-      <span class="n" aria-hidden="true">${i + 1}</span><span class="t">${esc(label)}</span>
+  const tiers = b.tiers.map((price) => `<li class="tier">
+      <span class="tier-price">${esc(price)}</span>
+      <span class="tier-unit">${esc(b.tierUnit)}</span>
     </li>`).join('');
+  const notes = b.notes.map((n) => `<p>${esc(n)}</p>`).join('');
   return `<section id="offer-after" class="sec offer-sec tint on-dark">
     <div class="wrap">
       <h2>${esc(b.title)}</h2>
       <p class="lead">${esc(b.intro)}</p>
-      <ul class="offer-rows">${rows}</ul>
+      <ul class="tier-row">${tiers}</ul>
+      <div class="tier-notes">${notes}</div>
     </div>
   </section>`;
 }
