@@ -429,56 +429,93 @@ export function work(t) {
   </section>`;
 }
 
-/* ── §8 FAQ ──────────────────────────────────────────────────────────────── */
-// The approved board (s8, offer-3) draws the first row open, so the build ships
-// the first row open too.
-/* ── §7b The price. NEW 2026-09-30 (build-spec §26.2), between §7 Our work and
-      §8 FAQ: problem, solution, what you get, proof, PRICE, objections, close.
+/* ── §7b The price. Between §7 Our work and §8 FAQ: problem, solution, what
+      you get, proof, PRICE, objections, close. Keeps its `#pricing` id and its
+      position; both are linked to and neither moves.
 
-      NO NEW VISUAL LANGUAGE. Every part of this section is a component already
-      approved elsewhere on the site: the `.eyebrow → h2 → .lead` head from every
-      homepage section, `priceAnchor()` from offer B1b, `.tier-row`/`.tier` from
-      offer B5, and the §2 strip's own `اطلع على العرض` / `See the offer` label
-      on the link out. The band is `--bg-dark`, like §6, so the approved dark
-      components render on the ground they were designed for and the page still
-      alternates white §7 → dark §7b → light §8.
+      BUILT TO design/boards/pricing-dark.png (build-spec §27.6). Ahmad picked
+      that board over pricing-light.png. Board canvas is 2688px for a 1440px
+      viewport, so every number in styles.css came off it at board px x 0.5357.
+      The board's own placeholder copy is NOT used: it draws $2,000, GET STARTED
+      and "More features for growing teams", and all three are wrong here. The
+      board is the LAYOUT and the TYPE, never the words.
 
-      Every figure and every phrase is copy.md Part B, verbatim. NOTHING IS
-      INVENTED. The three tiers carry PRICES ONLY — Ahmad has not defined what
-      differs between them and nothing here may fill them out. There is NO
-      savings figure and there never will be: the two numbers sitting together
-      do the work. And there is NO COUNTRY — the offer page names Saudi Arabia
-      because eligibility is a condition of that promotion; the homepage names
-      no geography anywhere, and this section does not break that.
+      THE OFFER IS NOT IN THIS SECTION. No priceAnchor() call, no "$500 one
+      time", no دفعة واحدة, no six months, no countdown, no spots, no promotion
+      wording. It has exactly two homes and this is not one of them: the §2 dark
+      strip under the hero, and /offer/. priceAnchor() below still exists and is
+      still called by the offer page. It is simply not called from here.
 
-      The one thing this section has to achieve in under two seconds is that the
-      $500 is paid ONCE, so the anchor's "now" row and its bold note sit directly
-      under the headline with nothing between them. */
+      THREE CARDS, DIFFERING BY COMPANY SIZE AND BY NOTHING ELSE. Ahmad,
+      2026-10-01: "We're selling phone calls. We're obviously not going to
+      mention number of phone calls because in SEO that's unpredictable. My
+      suggestion is mention the size of the company." So each card is a price, a
+      period and who it is for. That is a FINISHED card. Nothing else may be
+      added to it: no hours, no page counts, no numbers of services or areas, no
+      blog volume, no link quantities, no reporting frequency, no support levels,
+      and no promise about how many calls a plan produces. That is the exact axis
+      every other SEO agency prints on its tiers and Ahmad rejected it on purpose.
+
+      DOM ORDER IS ALWAYS LOW TO HIGH, and the grid follows the document
+      direction, so the same markup reads low to high in reading order in both
+      locales: left to right on /en/, right to left on /.
+
+      THE MIDDLE CARD'S SOLID CTA IS THE BOARD, NOT A CLAIM. pricing-dark draws
+      cards 1 and 3 with an outline button and card 2 with a solid orange one.
+      There is no badge, no ribbon, no "most popular" label, no scale change and
+      no heavier border, and none may be added: those would be a recommendation
+      nobody has made. The cards are otherwise identical in size and weight.
+
+      >>> IF A FEATURE LIST IS EVER ADDED: put `features: ['…', '…']` on each entry
+      of data.mjs `pricing.plans`, both locales, and fill offer B5 in the same
+      edit. The branch below renders it between the price block and the size
+      line, .plan-features is already styled, and .plan is a grid with the CTA
+      pinned to the foot, so a list of any length drops in without a redesign.
+      The board deliberately draws no feature list and the card does not need
+      one. <<<
+
+      NO SAVINGS FIGURE, NO GEOGRAPHY. The CTA is the site's existing call label
+      on the site's existing tel: href; no third CTA label was invented and this
+      section does not link to /offer/. */
 export function pricing(t) {
   const p = t.pricing;
-  const tiers = p.tiers.map((price) => `<li class="tier">
-      <span class="tier-price">${esc(price)}</span>
-      <span class="tier-unit">${esc(p.tierUnit)}</span>
-    </li>`).join('');
-  return `<section id="pricing" class="sec on-dark">
+  const cards = p.plans.map((plan, i) => {
+    /* Inert until somebody supplies lists — see the note above. */
+    const features = Array.isArray(plan.features) && plan.features.length
+      ? `<ul class="plan-features">${plan.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`
+      : '';
+    /* pricing-light weights the middle card with an ORANGE TOP RULE and gives
+       all three cards the same solid orange button. (pricing-dark, the board
+       Ahmad first picked and then replaced, did the opposite: one solid button
+       in the middle, outlines either side. That board is dead — see
+       build-spec §27.5.) There is still NO badge, NO ribbon, NO "most popular"
+       label, NO scale change: the rule is the board's own weighting and it
+       makes no claim in words. Do not add one. */
+    return `<li class="plan${i === 1 ? ' plan-featured' : ''}">
+      <div class="plan-head">
+        <p class="plan-price"><span class="plan-amount">${esc(plan.price)}</span></p>
+        <p class="plan-unit">${esc(p.tierUnit)}</p>
+      </div>
+      ${features}
+      <p class="plan-size">${esc(plan.size)}</p>
+      <div class="plan-cta">
+        <a class="btn btn-primary" href="${telHref}">${esc(t.cta.call)}</a>
+      </div>
+    </li>`;
+  }).join('');
+  return `<section id="pricing" class="sec">
     <div class="wrap">
       <p class="eyebrow">${esc(p.eyebrow)}</p>
       <h2 class="h2">${p.h2}</h2>
       <p class="lead">${esc(p.lead)}</p>
-      ${priceAnchor(p.price)}
-      <div class="pricing-after">
-        <h3 class="h3">${esc(p.afterTitle)}</h3>
-        <p class="body">${esc(p.afterIntro)}</p>
-        <ul class="tier-row">${tiers}</ul>
-        <div class="tier-notes"><p>${esc(p.note)}</p></div>
-      </div>
-      <div class="btn-row centred">
-        <a class="btn btn-primary" href="${t.offer.path}">${esc(p.cta)}<span class="chev" aria-hidden="true">&rsaquo;</span></a>
-      </div>
+      <ul class="plan-row">${cards}</ul>
     </div>
   </section>`;
 }
 
+/* ── §8 FAQ ──────────────────────────────────────────────────────────────── */
+// The approved board (s8, offer-3) draws the first row open, so the build ships
+// the first row open too.
 export function accordion(items, idPrefix) {
   return `<div class="faq-list">${items.map((q, i) => `<div class="faq-item${i === 0 ? ' open' : ''}">
       <button class="faq-q" type="button" aria-expanded="${i === 0 ? 'true' : 'false'}" aria-controls="${idPrefix}-a${i}">
