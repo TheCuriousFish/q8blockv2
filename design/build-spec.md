@@ -4094,3 +4094,230 @@ list. Still open from §25.10: `service firms` on the strip line, a refund posit
 
 `design/boards/pricing-dark.png` is now a dead board kept on disk for the record. If it is ever deleted,
 this section is unaffected — `pricing-light.png` is the one that matters.
+
+## 28. Ahmad's fourth revision pass, 2026-10-01. Two headlines cut, two leads deleted, §5 removed and the client wall goes to fourteen
+
+Five items in one pass, all on the homepage. **The voice note governs every one of them:** Ahmad on the
+copy that was there — *"you wrote a description of what we're doing, which is horrible... we're selling
+them the service, we're not selling them the data."* The failure is consistent and it is the same one
+each time: a sentence that explains the mechanism instead of stating the thing. **Where a line explained
+how a figure was derived, what a section contains, or why something is true, it was DELETED rather than
+rewritten.** A shorter explanation is still an explanation. Nothing on this page got longer.
+
+### 28.1 §7b's headline drops the qualifier, and its lead drops a sentence
+
+> "just leave it, choose your plan, remove company size."
+
+| | Was | Is |
+|---|---|---|
+| Headline, ar | `<span class="hl">اختر خطتك</span> حسب حجم شركتك` | `<span class="hl">اختر خطتك</span>` |
+| Headline, en | `<span class="hl">Pick your plan</span><br class="brk"> <span class="nb">by your company size.</span>` | `<span class="hl">Choose your plan.</span>` |
+| Lead, ar | كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك. | كل خطة هدفها واحد: عملاء يتصلون بك. |
+| Lead, en | Every plan has one goal: customers calling you. What changes is the size of your company. | Every plan has one goal: customers calling you. |
+
+**The highlight was not invented and was not removed.** §27.4's highlighted phrase was already exactly
+`اختر خطتك` / `Pick your plan`, so cutting the qualifier leaves the headline **equal to** its own
+highlight. It renders as one solid `--orange` block with `--ink` text, §4's rule unchanged, at
+`--fs-h2`. Nothing was added around it to make it look less loud; that would have been writing copy to
+decorate a layout.
+
+**The `.brk` / `.nb` treatment went with the qualifier.** §27.4 added an explicit break because the
+English headline would not fit on one line at 1440. Three words fit at every width, so the planned break
+is gone rather than left in as a no-op.
+
+**The lead's second sentence was the headline's qualifier said twice**, and each of the three cards
+already prints who it is for (`For small companies` and the other two, §27.3). Cutting it leaves the one
+thing the section sells: customers calling. The first sentence is **not** a mechanism explanation, which
+is why it stayed.
+
+### 28.2 §7's headline becomes two words, and BOTH its explanatory lines are deleted
+
+> Ahmad on `مواقع بنيناها ويجدها العملاء اليوم` / `Sites we built that get found.`: horrible. He asked
+> for "something very simple like our clients". And on the paragraph under it: "don't write what the
+> number is or any of that."
+
+| | Was | Is |
+|---|---|---|
+| Headline, ar | مواقع بنيناها <span class="hl">ويجدها العملاء</span> اليوم | `عملاؤنا` |
+| Headline, en | Sites we built that <span class="hl">get found.</span> | `Our clients.` |
+| Lead | a 44-word paragraph (ar) explaining that every site was built from scratch, what the figure on each card is, that it is summed across complete months, and that recent projects are tagged | **deleted** |
+| Source line | `كل الأرقام من Google Search Console: مجموع مرات الظهور في كل شهر كامل مسجّل لكل موقع...` | **deleted** |
+
+**No highlighted word.** Two words leave nothing to pick out, and §8's `أسئلة شائعة` /
+`Common questions` is the existing precedent for a plain head on this page, so this is not a new
+treatment.
+
+**Deleted, not rewritten, and the build enforces it.** `t.work.lead` and `t.work.source` no longer
+exist in `data.mjs`, and `render.mjs` no longer emits the two `<p>` elements. Re-adding either markup
+line throws rather than quietly printing `undefined`. `.work-source` came out of `styles.css`; no other
+selector used it. The derivation did not disappear — it is still reproduced row by row in `copy.md`'s
+Section 7 derivation table, which is the record. It is not copy and it does not go on the page.
+
+**The one spacing change, and it is spacing, not replacement copy.** `.work-slider` carried
+`margin-block-start: 40px`, which is §5.3's measured **subhead → cards** gap. With no subhead the
+headline would have sat 40px off the cards while every other section keeps a subhead's worth of air under
+its head. It is now the two measured rhythm gaps the subhead used to sit between, **28 + 40 = 68**,
+written `clamp(40px, calc(68/14.4 * 1vw), 72px)` so the old 40 is kept as the phone floor and the 390
+layout does not move. Measured on the built page: **68px at 1440 and 40px at 390, both locales.**
+
+### 28.3 §5 "What is included" is deleted entirely
+
+> "the what's included section is not needed because the one above it is what we present, which is the
+> same thing. So remove that. What we present, immediately what follows is the how we work."
+
+The overlap is real: §4's three blocks already say build it, get it found, keep it growing, and the six
+items under §5 were the same promise itemised.
+
+| Removed | From |
+|---|---|
+| `included()` renderer, the whole `<section id="included">` | `src/render.mjs` |
+| `included(t)` from the home page body, and from the import list | `build.mjs` |
+| the `included` copy block, **both locales** | `src/data.mjs` |
+| `#included` and `#included .lead` | `src/styles.css` |
+
+**Nothing else came out, and that is deliberate.** `.icons-grid`, `.icon-card`, `.icon-card.compact`
+and the two responsive rules that collapse the grid to 2 then 1 column all **stay**: offer B2's rows and
+the About page's `#deliver` grid use them. **The six icon files stay referenced too** — `ICONS` is still
+imported by `render.mjs` and still read by `offerIncluded()` and `aboutDeliver()`, so not one of
+`icon-website-build`, `icon-service-area-pages`, `icon-google-visibility`, `icon-ai-visibility`,
+`icon-backlinks-authority` or `icon-hosting-security` became unreferenced. Nothing was deleted from
+disk. **Checked, not assumed:** `#included` appears **zero** times in the built `site/`, and there is
+no `href="#included"` anywhere in the output or in the source — there never was one, so no navigation,
+anchor or sitemap entry had to be repaired.
+
+**The band rhythm, read off the built page.** This is the thing a section removal breaks, so it was
+measured rather than reasoned about, both locales:
+
+| Section | Computed background | |
+|---|---|---|
+| hero | `rgb(242, 243, 245)` | light |
+| problem | `rgb(254, 254, 254)` | light |
+| what-we-do | `rgb(242, 243, 245)` | light |
+| **journey** | `rgb(16, 16, 18)` | **DARK — break 1** |
+| work | `rgb(254, 254, 254)` | light |
+| pricing | `rgb(254, 254, 254)` | light |
+| faq | `rgb(244, 245, 246)` | light |
+| **final** | `rgb(16, 16, 18)` | **DARK — break 2** |
+| footer | `rgb(3, 3, 3)` | the close |
+
+**light · light · light · DARK · light · light · light · DARK**, which is exactly the rhythm §27.9
+locked and what `lessons.md` asks for: one or two dark breakers, never an alternating stripe. §5 was a
+light `#FEFEFE` band between two other light bands, so removing it took nothing out of the rhythm — the
+page lost a light band from a run of four and kept a run of three.
+
+### 28.4 The client wall: three new clients and one replaced logo. Fourteen cards
+
+**The three new cards carry the tag, and that is a measured fact, not a judgement.**
+`alamana-kw.com`, `tasleekq8.com` and `skyscraperkw.com` are live (all three return 200). A
+`sites.list` call through the same service account `.claude/skills/report/scripts/lib.js` uses, made
+2026-10-01, returned **thirteen** accessible properties: the twelve already in `proof-data.md` plus
+`israelsupportindex.com`. **None of the three is among them.** With no accessible property there is no
+complete month to sum, so each takes `مشروع جديد` / `New project`. Nothing was estimated, inferred from
+a sibling client or carried across. When a property is shared with the service account, its rows go into
+`proof-data.md` first and the figure follows from `WORK[].impressions` like everyone else's.
+
+`mashame3.com`'s plate was **replaced**, not added. Ahmad: the old one "is just a big icon without the
+company name, so it doesn't align with the rest" — §20.1 had taken it from the live site's
+`/favicon.svg`, a bare blue snowflake with no wordmark, and it was the one plate in the set that did not
+name its client.
+
+**Order on the wall is unchanged in rule and in result:** figure cards descending, tagged cards after.
+Read off the built page, both locales: kuwaityclean, carwashkw, q8carwash, kwtclean, kwcarwash,
+movingcompanykw, mashame3, then betikcleaner, anharpest, alghadeerclean, ragwaclean, alamana-kw,
+tasleekq8, skyscraperkw. **Seven figures, seven tags.**
+
+#### The four plates were derived by §20.2's rules, and the script was proved before it was trusted
+
+§20.2 and §22.3 describe the derivation but no script survived, so one was written and is now
+kept in the repo at `clients/q8block/scripts/logo-plate.mjs` — the first two passes left nothing behind
+and this one should not. It was rewritten — and then **run
+against three already-shipped v2 sources to see whether it reproduced §22.3's table before it was
+allowed near a new logo.** The first version did not: it came out 817 where the table says 847, 867
+against 889, 722 against 754. Widths matched exactly, heights did not, which located the fault in the
+re-pad rather than the trim.
+
+**The rule §22.3 does not spell out: the 7% re-pad is ONE value for all four sides, computed from the
+LARGER ink dimension, each side still capped by what was actually trimmed off it.** Not 7% of each axis
+separately, which is the obvious reading and is wrong. Reverse engineered from the shipped plates and
+confirmed on three independent sources. With it, the script reproduces §22.3 **exactly, to the kilobyte**:
+
+| Check source | §22.3 says | Script returns |
+|---|---|---|
+| `v2-carwashkw.com.png` | ink 1024x847, placed 337x279, 13.5 kB | ink 1024x847, placed 337x279, 13.5 kB |
+| `v2-kwtclean.com.png` | ink 1024x889, placed 329x286, 9.4 kB | ink 1024x889, placed 329x286, 9.4 kB |
+| `v2-ragwaclean.com.png` | ink 970x754, placed 348x270, 10.4 kB | ink 970x754, placed 348x270, 10.4 kB |
+
+Only then were the four derived, by the same path: trim against the source's own corner colour
+(tolerance 12), re-pad as above, scale by **equal optical area** `k = sqrt(0.44 x 640 x 334 / inkArea)`
+clamped to 614x307, centre on the shared **640x334** transparent canvas, WebP `quality 86,
+alphaQuality 100, effort 6`.
+
+| Site | Source | Ink box after trim | Ratio | Placed in 640x334 | kB |
+|---|---|---|---|---|---|
+| alamana-kw.com | `v2-alamana-kw.com.png` | 1024x907 | 1.13 | 326x289 | 13.2 |
+| tasleekq8.com | `v2-tasleekq8.com.png` | 1024x891 | 1.15 | 329x286 | 12.9 |
+| skyscraperkw.com | `v2-skyscraperkw.com.png` | 1024x908 | 1.13 | 326x289 | 7.2 |
+| mashame3.com | `v2-mashame3.com.png` | 1024x967 | 1.06 | 316x298 | 13.1 |
+
+All four sources are 1024x1024 opaque dark-on-near-white lockups, the same build as the v2 set, so none
+needed §20.3's dark-ground composite. **Every one of the fourteen `<img>` still carries the same
+explicit `width="640" height="334"`**, which is why fourteen logos still cannot move the layout.
+
+#### Everything else about the section is untouched, and was re-measured because the card count changed
+
+| Behaviour | Result, both locales at 1440 |
+|---|---|
+| Cards in the track | 28 = **14 real + 14 clones** |
+| Clones | all 14 `aria-hidden="true"` and `tabindex="-1"` |
+| Outbound links | 14/14 `rel="nofollow noopener"` `target="_blank"` |
+| Plates loaded | 14/14, every `naturalWidth` 640, none empty |
+| Track geometry | step 448, `scrollWidth` 12520, `clientWidth` 1320, `loopLen` 6272 |
+| Auto-advance, 60s untouched, cursor parked at 20,20 | `/en/` `0 → 448 → … → 5824 → 0`; `/` the RTL mirror, negative. **No rewind value between 5824 and 0** |
+| Page errors | none |
+
+### 28.5 Verification
+
+**Screenshots were looked at, not just taken.** `#work` and `#pricing` at 1440 and 390 in both locales,
+eight crops. The carousel shows three cards at a time, so a ninth and tenth capture were made with the
+clones removed and the track forced to a 4-wide grid, putting **all fourteen real cards on one image per
+locale**. Every card shows a legible logo that names its client; **none is empty**, which was the defect
+§20 existed to remove and the thing three new plates could have reintroduced.
+
+| Check | Result |
+|---|---|
+| `#included` in built output | **0 occurrences**, both locales. No `href="#included"` anywhere |
+| `#work` `.lead` / `.work-source` in the DOM | **false / false**, both locales |
+| Section order | `hero > problem > what-we-do > journey > work > pricing > faq > final`, both locales |
+| Band order | light · light · light · **DARK** · light · light · light · **DARK** (§28.3) |
+| Headline → cards gap, §7 | 68px at 1440, 40px at 390, both locales |
+| `node scripts/seo-audit.mjs` | **0 high**, 18 medium, 9 low — identical to §27.11's baseline, nothing new |
+| **First-screen budget (§15.1), re-verified** | 1440x900 → first screen **900**, `#problem` top **900** · 1920x1200 → **1200 / 1200** · 390x844 → **844 / 844**. Both locales at all three. Exactly one viewport, unchanged |
+| Horizontal overflow | false at 1440 and 390, both locales |
+| Page errors | none, any viewport, either locale |
+
+**Lighthouse, real Chrome against `http://localhost:8823`:**
+
+| Page | Preset | Perf | A11y | BP | SEO | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|---|---|
+| `/` | desktop | **100** | **100** | 100 | 100 | 0.4s | 0ms | **0** |
+| `/en/` | desktop | **100** | **100** | 100 | 100 | 0.5s | 0ms | **0** |
+| `/` | mobile, 3 runs | 100 / 97 / 96 | **100** | 100 | 100 | 1.7–1.8s | 0–230ms | **0** |
+| `/en/` | mobile, 3 runs | 98 / 99 / 99 | **100** | 100 | 100 | 1.7–1.8s | 80–120ms | **0** |
+
+Zero accessibility audit failures on every run. **CLS is 0 everywhere**, with fourteen runtime-appended
+clones, because every plate has a fixed `aspect-ratio` and every logo the same explicit width and height.
+The mobile performance spread is TBT noise on a loaded machine — LCP and CLS are stable across all six
+runs, and the three added cards are `fetchpriority="low"` images, which cost bytes, not main-thread time.
+
+### 28.6 What was deliberately not done
+
+* **The six deliverable icons were not deleted and not unreferenced.** They are still used twice (§28.3).
+* **No figure was invented for the three new clients.** §28.4.
+* **No new copy was written anywhere.** Four lines were cut and two were shortened; nothing was added to
+  fill the space either left behind. The only replacement for deleted text is one spacing value (§28.2).
+* **`compare.mjs` and the full `shots.mjs` sweep were skipped.** §7 diverges from its board by design
+  (§20.5) and §7b is built to `pricing-light.png`, whose layout did not move — only two headlines, two
+  leads and a card count changed, and §5's removal touches no board at all. The first-screen budget, the
+  one thing a section removal could not break but is cheap to prove, was re-measured anyway.
+
+**Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.

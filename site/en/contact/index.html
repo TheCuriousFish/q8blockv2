@@ -400,8 +400,6 @@ html[dir="rtl"] .strip-cta .chev { transform: scaleX(-1); }
 .wwd-block .h3 { font-size: var(--fs-h3-s4); }
 .wwd-block .body { margin-block-start: 18px; }
 
-#included { background: var(--bg-white); padding-block: var(--pad-sec); text-align: center; }
-#included .lead { margin-inline: auto; }
 .icons-grid {
   max-width: 1248px; margin-inline: auto; margin-block-start: 40px;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: start;
@@ -431,7 +429,8 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
 
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
-.work-slider { margin-block-start: 40px; }
+
+.work-slider { margin-block-start: clamp(40px, calc(68/14.4 * 1vw), 72px); }
 .work-track {
   display: flex; gap: 24px;
   overflow-x: auto; overflow-y: hidden;
@@ -476,11 +475,6 @@ html[dir="rtl"] .work-site { text-align: right; }
 .slide-btn:hover { background: var(--bg-light); border-color: var(--ink); }
 .slide-btn span { display: block; margin-block-end: 4px; }
 html[dir="rtl"] .slide-btn span { transform: scaleX(-1); }
-
-.work-source {
-  margin-block-start: 22px; font-size: var(--fs-foot-l); font-weight: var(--w-body);
-  line-height: 1.5; color: var(--muted-on-light);
-}
 
 .work-link {
   margin-block-start: auto; padding-block-start: 18px;

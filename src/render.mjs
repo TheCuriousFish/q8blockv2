@@ -255,22 +255,18 @@ export function whatWeDo(t) {
   </section>`;
 }
 
-/* ── §5 What is included ─────────────────────────────────────────────────── */
-export function included(t) {
-  const cards = t.included.items.map((it, i) => `<article class="card-light icon-card">
-      <img src="/assets/img/icon-${ICONS[i]}.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">${esc(it.title)}</h3>
-      <p class="body">${esc(it.body)}</p>
-    </article>`).join('');
-  return `<section id="included" class="sec">
-    <div class="wrap">
-      <p class="eyebrow">${esc(t.included.eyebrow)}</p>
-      <h2 class="h2">${t.included.h2}</h2>
-      <p class="lead">${esc(t.included.lead)}</p>
-      <div class="icons-grid">${cards}</div>
-    </div>
-  </section>`;
-}
+/* ── §5 WHAT IS INCLUDED IS DELETED, 2026-10-01 (build-spec §28.3).
+      Ahmad: "the what's included section is not needed because the one above it
+      is what we present, which is the same thing. So remove that. What we
+      present, immediately what follows is the how we work." There is no
+      `included()` renderer, no `#included` section and no `included` copy block
+      any more; §4 `whatWeDo()` is followed directly by §6 `journey()`.
+
+      `ICONS` is still imported and still used TWICE below — offer B2
+      (`offerIncluded`) and About A3 (`aboutDeliver`) — so none of the six icon
+      files became unreferenced and none was deleted. `.icons-grid`,
+      `.icon-card` and `.icon-card.compact` stay in styles.css for the same
+      reason; only the `#included`-scoped rules came out. ── */
 
 /* ── §6 The journey. REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).
       Ahmad: the Search Console graph is the centrepiece and the three
@@ -396,6 +392,16 @@ const compactNum = (n) => (n >= 1000 ? Math.round(n / 1000) + "K" : String(n));
 const totalImpressions = (c) => (c.impressions || []).reduce((a, b) => a + b, 0);
 const groupNum = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+/* THE LEAD AND THE SOURCE LINE ARE DELETED, 2026-10-01 (build-spec §28.2).
+   Ahmad: "don't write what the number is or any of that." The lead explained
+   that each site was built from scratch, what the figure on the card is, that
+   it is summed across complete months and that recent projects are tagged; the
+   source line explained where the figures came from. Both were DELETED, not
+   shortened — a trimmed sentence that still explains the mechanism is the same
+   mistake. `t.work.lead` and `t.work.source` no longer exist in data.mjs, so
+   re-adding either markup line throws rather than printing "undefined".
+   The section is eyebrow, headline, carousel, and nothing else. The derivation
+   lives in copy.md's tables, which is the record, not the page. */
 export function work(t) {
   const cards = WORK.map((c) => {
     const total = totalImpressions(c);
@@ -415,7 +421,6 @@ export function work(t) {
     <div class="wrap">
       <p class="eyebrow">${esc(t.work.eyebrow)}</p>
       <h2 class="h2">${t.work.h2}</h2>
-      <p class="lead">${esc(t.work.lead)}</p>
       <div class="work-slider" data-slider>
         <div class="work-track" id="work-track" data-track tabindex="0" role="group"
              aria-roledescription="carousel" aria-label="${esc(t.work.carouselLabel)}">${cards}</div>
@@ -424,7 +429,6 @@ export function work(t) {
           <button class="slide-btn" type="button" data-slide="next" aria-controls="work-track" aria-label="${esc(t.work.next)}"><span aria-hidden="true">&rsaquo;</span></button>
         </div>
       </div>
-      <p class="work-source">${esc(t.work.source)}</p>
     </div>
   </section>`;
 }
