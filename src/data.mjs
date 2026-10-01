@@ -167,6 +167,17 @@ export const WORK = [
   { site: 'anharpest.com', url: 'https://anharpest.com/', logo: 'anharpest', isNew: true },
   { site: 'alghadeerclean.com', url: 'https://alghadeerclean.com/', logo: 'alghadeerclean', isNew: true },
   { site: 'ragwaclean.com', url: 'https://ragwaclean.com/', logo: 'ragwaclean', isNew: true },
+  /* ADDED 2026-10-01 (build-spec §28.4). Three live sites Ahmad built. They
+     carry the tag and NO figure, and the reason is not a judgement call: the
+     Search Console service account cannot see any of the three. Checked on
+     2026-10-01 against `sites.list` — 13 properties are accessible and
+     alamana-kw.com, tasleekq8.com and skyscraperkw.com are not among them, so
+     there is no complete month to sum and nothing to print. Do NOT put a number
+     on these cards until the property is shared with the service account and
+     the rows go into design/proof-data.md like everyone else's. */
+  { site: 'alamana-kw.com', url: 'https://alamana-kw.com/', logo: 'alamana-kw', isNew: true },
+  { site: 'tasleekq8.com', url: 'https://tasleekq8.com/', logo: 'tasleekq8', isNew: true },
+  { site: 'skyscraperkw.com', url: 'https://skyscraperkw.com/', logo: 'skyscraperkw', isNew: true },
 ];
 
 /* ── PRICES. The offer changed on 2026-09-30: it is no longer free.
@@ -342,20 +353,17 @@ export const COPY = {
       ],
     },
 
-    /* ── 5. What is included ── */
-    included: {
-      eyebrow: 'ما يشمله العمل',
-      h2: 'ما نقدمه في <span class="hl">كل مشروع</span>',
-      lead: 'هذه ليست قائمة عرض مؤقت. هذا هو العمل نفسه، في كل مشروع نبدأه.',
-      items: [
-        { title: 'تصميم وتطوير موقع مخصص', body: 'موقع يُصمَّم ويُبرمَج من الصفر لنشاطك، لا قالب جاهز يُعاد تركيبه.' },
-        { title: 'صفحة مستقلة لكل خدمة ولكل منطقة', body: 'كل خدمة تقدمها وكل منطقة تخدمها تحصل على صفحتها الخاصة بمحتوى مكتوب لها وحدها.' },
-        { title: 'الظهور في نتائج بحث جوجل', body: 'تهيئة داخلية وتقنية، ومحتوى محلي لكل صفحة، ومتابعة شهرية لظهور الصفحات في نتائج البحث.' },
-        { title: 'الظهور في منصات الذكاء الاصطناعي', body: 'بنية محتوى واضحة ومفهرسة تجعل صفحاتك قابلة للاقتباس في إجابات مساعدات الذكاء الاصطناعي.' },
-        { title: 'بناء الروابط والسلطة', body: 'عمل مستمر على الروابط الخارجية وعلى سلطة النطاق، لأن الظهور لا يأتي من الصفحة وحدها.' },
-        { title: 'الاستضافة والنطاق والحماية', body: 'الاستضافة والنطاق وحماية الموقع وتحديثاته التقنية، كلها ضمن العمل ولا تُدار من طرفك.' },
-      ],
-    },
+    /* ── 5. WHAT IS INCLUDED IS DELETED, 2026-10-01 (build-spec §28.3).
+          Ahmad: "the what's included section is not needed because the one
+          above it is what we present, which is the same thing. So remove that.
+          What we present, immediately what follows is the how we work."
+          §4 what-we-do now runs straight into §6 the journey.
+
+          The six deliverables are NOT lost and no icon file became
+          unreferenced: offer B2 (`offerPage.b2.items`) and the About page
+          (`about.deliver.items`) both still carry the same six titles and both
+          still render the same six ICONS. Do not reinstate a third copy of
+          them on the homepage. ── */
 
     /* ── 6. The journey. REBUILT 2026-09-30 (build-spec §26.1): the Search
           Console graph is the section, and the three illustrations that used to
@@ -394,25 +402,27 @@ export const COPY = {
     /* ── 7. Our work ── */
     work: {
       eyebrow: 'أعمالنا',
-      h2: 'مواقع بنيناها <span class="hl">ويجدها العملاء</span> اليوم',
-      /* `مكتوبين عليها` / `printed on it` was dropped 2026-09-24: the two
-         months are no longer printed on the cards, so the sentence would have
-         been describing something the reader cannot see. One source line now
-         sits under the whole section instead. */
-      /* The lead used to describe a growth percentage computed from two
-         complete months. The figure is now a total, so the sentence says what a
-         total is, in the words a business owner uses: how many times the site
-         came up in Google. (Ahmad, 2026-09-25.) */
-      lead: 'كل موقع هنا بُني من الصفر وما زال يعمل. الرقم على كل بطاقة هو عدد المرات التي ظهر فيها الموقع في نتائج بحث Google، مجموع كل شهر كامل سجّله Google لهذا الموقع. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.',
+      /* HEADLINE CUT 2026-10-01 (build-spec §28.2). Ahmad called
+         `مواقع بنيناها ويجدها العملاء اليوم` horrible and asked for
+         "something very simple like our clients". Two words, no highlight —
+         §8's `أسئلة شائعة` is the precedent for a plain head on this page.
+
+         THERE IS NO `lead` AND NO `source` ANY MORE, AND NEITHER MAY COME
+         BACK. The lead explained that each site was built from scratch, what
+         the figure on the card is, that it is summed across complete months
+         and that recent projects are tagged; the source line explained where
+         the figures came from. Ahmad: "don't write what the number is or any of
+         that." Both were DELETED, not rewritten — a shorter version of a
+         sentence that explains the mechanism is still a sentence that explains
+         the mechanism. The section is eyebrow, headline, cards. The derivation
+         is still in copy.md's tables, which is where it belongs. */
+      h2: 'عملاؤنا',
       /* The metric label never says "impression": it says what an impression
          IS. A reader who has no website does not know the word and is not
          asked to. Reads on the card as "246K ظهور". One number, one word. */
       metricLabel: 'ظهور',
       newTag: 'مشروع جديد',
       linkLabel: 'افتح الموقع',
-      /* ONE source line under the whole section, replacing the eleven date
-         windows that used to sit on the cards (Ahmad, 2026-09-24). */
-      source: 'كل الأرقام من Google Search Console: مجموع مرات الظهور في كل شهر كامل مسجّل لكل موقع، حتى أغسطس 2026. الأشهر غير المكتملة غير محسوبة.',
       carouselLabel: 'مواقع بنيناها',
       prev: 'السابق',
       next: 'التالي',
@@ -467,8 +477,18 @@ export const COPY = {
           NO SAVINGS FIGURE, NO GEOGRAPHY, here or anywhere. ── */
     pricing: {
       eyebrow: 'الأسعار',
-      h2: '<span class="hl">اختر خطتك</span> حسب حجم شركتك',
-      lead: 'كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك.',
+      /* CUT 2026-10-01 (build-spec §28.1). Ahmad: "just leave it, choose your
+         plan, remove company size." The qualifier is gone, so the headline IS
+         the highlighted phrase — nothing is added back around it. The lead's
+         second sentence, "والفرق بينها هو حجم شركتك", went with it: the three
+         cards each print who they are for, so the sentence was reading the
+         cards out loud. What is left is the one thing the section sells. */
+      // Plain, no highlight. At two words the orange block became the whole
+      // headline and read as a label or a button rather than a heading; every
+      // other highlight on the site marks a phrase inside a longer line. §7
+      // 'عملاؤنا' is the precedent.
+      h2: 'اختر خطتك',
+      lead: 'كل خطة هدفها واحد: عملاء يتصلون بك.',
       /* Low to high. This order never changes; direction handles the mirror. */
       plans: [
         { price: P.month, size: 'للشركات الصغيرة' },
@@ -875,20 +895,6 @@ export const COPY = {
       ],
     },
 
-    included: {
-      eyebrow: 'What is included',
-      h2: 'What <span class="hl">every project</span> includes.',
-      lead: 'This is not a promotion list. This is the work itself, on every project we start.',
-      items: [
-        { title: 'Custom website design and development', body: 'A website designed and coded from scratch for your business, not a template reassembled.' },
-        { title: 'A dedicated page for every service and area', body: 'Every service you offer and every area you cover gets its own page, with content written for it alone.' },
-        { title: 'Google Search visibility', body: 'On page and technical optimisation, local content for every page, and monthly tracking of how the pages are found in search.' },
-        { title: 'AI platform visibility', body: 'A clear, indexed content structure that makes your pages quotable in the answers AI assistants give.' },
-        { title: 'Backlinks and authority building', body: 'Continuous work on external links and domain authority, because visibility does not come from the page alone.' },
-        { title: 'Hosting, domain and security', body: 'Hosting, the domain, site security and the technical updates. All part of the work, none of it on your desk.' },
-      ],
-    },
-
     /* The English mirror of the rebuilt §6. See the Arabic block above for why
        the client name, the date range, the precision note, the carwashkw
        baseline and the source caption are gone, and why they stay gone. */
@@ -910,12 +916,12 @@ export const COPY = {
 
     work: {
       eyebrow: 'Our work',
-      h2: 'Sites we built that <span class="hl">get found.</span>',
-      lead: 'Every site here was built from scratch and is still running. The figure on each card is how many times that site has come up in Google search results, added up across every complete month Google has recorded for it. The recent projects are labelled as what they are, because their data is not in yet.',
+      /* See the Arabic block: the headline is two plain words and there is NO
+         `lead` and NO `source`. Both were deleted 2026-10-01, not rewritten. */
+      h2: 'Our clients.',
       metricLabel: 'impressions',
       newTag: 'New project',
       linkLabel: 'View case study',
-      source: 'All figures from Google Search Console: every complete month recorded for each site, added up, to August 2026. Partial months are not counted.',
       carouselLabel: 'Sites we built',
       prev: 'Previous',
       next: 'Next',
@@ -928,12 +934,11 @@ export const COPY = {
        business outcome, not on SEO. See the long comment on the Arabic block. */
     pricing: {
       eyebrow: 'Pricing',
-      /* Explicit break plus nowrap, the site's standard treatment for a display
-         line with a planned break (the board draws its headline on one line and
-         this one will not fit on one). Without it, 1440 broke it as
-         "by your / company size." Both release under 768px. */
-      h2: '<span class="hl">Pick your plan</span><br class="brk"> <span class="nb">by your company size.</span>',
-      lead: 'Every plan has one goal: customers calling you. What changes is the size of your company.',
+      /* CUT 2026-10-01 (build-spec §28.1). The qualifier and the `.brk`/`.nb`
+         break treatment with it: three words fit on one line at every width, so
+         there is nothing left to plan a break for. See the Arabic block. */
+      h2: 'Choose your plan.',
+      lead: 'Every plan has one goal: customers calling you.',
       plans: [
         { price: '$500', size: 'For small companies' },
         { price: '$1,000', size: 'For small to medium companies' },

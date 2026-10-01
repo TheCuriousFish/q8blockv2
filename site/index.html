@@ -401,8 +401,6 @@ html[dir="rtl"] .strip-cta .chev { transform: scaleX(-1); }
 .wwd-block .h3 { font-size: var(--fs-h3-s4); }
 .wwd-block .body { margin-block-start: 18px; }
 
-#included { background: var(--bg-white); padding-block: var(--pad-sec); text-align: center; }
-#included .lead { margin-inline: auto; }
 .icons-grid {
   max-width: 1248px; margin-inline: auto; margin-block-start: 40px;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: start;
@@ -432,7 +430,8 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
 
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
-.work-slider { margin-block-start: 40px; }
+
+.work-slider { margin-block-start: clamp(40px, calc(68/14.4 * 1vw), 72px); }
 .work-track {
   display: flex; gap: 24px;
   overflow-x: auto; overflow-y: hidden;
@@ -477,11 +476,6 @@ html[dir="rtl"] .work-site { text-align: right; }
 .slide-btn:hover { background: var(--bg-light); border-color: var(--ink); }
 .slide-btn span { display: block; margin-block-end: 4px; }
 html[dir="rtl"] .slide-btn span { transform: scaleX(-1); }
-
-.work-source {
-  margin-block-start: 22px; font-size: var(--fs-foot-l); font-weight: var(--w-body);
-  line-height: 1.5; color: var(--muted-on-light);
-}
 
 .work-link {
   margin-block-start: auto; padding-block-start: 18px;
@@ -1121,38 +1115,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     </article></div>
     </div>
   </section>
-<section id="included" class="sec">
-    <div class="wrap">
-      <p class="eyebrow">ما يشمله العمل</p>
-      <h2 class="h2">ما نقدمه في <span class="hl">كل مشروع</span></h2>
-      <p class="lead">هذه ليست قائمة عرض مؤقت. هذا هو العمل نفسه، في كل مشروع نبدأه.</p>
-      <div class="icons-grid"><article class="card-light icon-card">
-      <img src="/assets/img/icon-website-build.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">تصميم وتطوير موقع مخصص</h3>
-      <p class="body">موقع يُصمَّم ويُبرمَج من الصفر لنشاطك، لا قالب جاهز يُعاد تركيبه.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-service-area-pages.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">صفحة مستقلة لكل خدمة ولكل منطقة</h3>
-      <p class="body">كل خدمة تقدمها وكل منطقة تخدمها تحصل على صفحتها الخاصة بمحتوى مكتوب لها وحدها.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-google-visibility.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">الظهور في نتائج بحث جوجل</h3>
-      <p class="body">تهيئة داخلية وتقنية، ومحتوى محلي لكل صفحة، ومتابعة شهرية لظهور الصفحات في نتائج البحث.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-ai-visibility.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">الظهور في منصات الذكاء الاصطناعي</h3>
-      <p class="body">بنية محتوى واضحة ومفهرسة تجعل صفحاتك قابلة للاقتباس في إجابات مساعدات الذكاء الاصطناعي.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-backlinks-authority.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">بناء الروابط والسلطة</h3>
-      <p class="body">عمل مستمر على الروابط الخارجية وعلى سلطة النطاق، لأن الظهور لا يأتي من الصفحة وحدها.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-hosting-security.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">الاستضافة والنطاق والحماية</h3>
-      <p class="body">الاستضافة والنطاق وحماية الموقع وتحديثاته التقنية، كلها ضمن العمل ولا تُدار من طرفك.</p>
-    </article></div>
-    </div>
-  </section>
 <section id="journey" class="sec on-dark">
     <div class="wrap">
       <p class="eyebrow">كيف نعمل</p>
@@ -1195,8 +1157,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <section id="work" class="sec">
     <div class="wrap">
       <p class="eyebrow">أعمالنا</p>
-      <h2 class="h2">مواقع بنيناها <span class="hl">ويجدها العملاء</span> اليوم</h2>
-      <p class="lead">كل موقع هنا بُني من الصفر وما زال يعمل. الرقم على كل بطاقة هو عدد المرات التي ظهر فيها الموقع في نتائج بحث Google، مجموع كل شهر كامل سجّله Google لهذا الموقع. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد.</p>
+      <h2 class="h2">عملاؤنا</h2>
       <div class="work-slider" data-slider>
         <div class="work-track" id="work-track" data-track tabindex="0" role="group"
              aria-roledescription="carousel" aria-label="مواقع بنيناها"><a class="card-light work-card" href="https://kuwaityclean.com/" rel="nofollow noopener" target="_blank">
@@ -1254,20 +1215,34 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       <p class="work-site">ragwaclean<wbr>.com</p>
       <p class="work-metric work-tag">مشروع جديد</p>
       <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://alamana-kw.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><img src="/assets/img/logo-alamana-kw.webp" width="640" height="334" alt="" decoding="async" fetchpriority="low"></div>
+      <p class="work-site">alamana-kw<wbr>.com</p>
+      <p class="work-metric work-tag">مشروع جديد</p>
+      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://tasleekq8.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><img src="/assets/img/logo-tasleekq8.webp" width="640" height="334" alt="" decoding="async" fetchpriority="low"></div>
+      <p class="work-site">tasleekq8<wbr>.com</p>
+      <p class="work-metric work-tag">مشروع جديد</p>
+      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://skyscraperkw.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><img src="/assets/img/logo-skyscraperkw.webp" width="640" height="334" alt="" decoding="async" fetchpriority="low"></div>
+      <p class="work-site">skyscraperkw<wbr>.com</p>
+      <p class="work-metric work-tag">مشروع جديد</p>
+      <span class="work-link">افتح الموقع<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a></div>
         <div class="work-nav">
           <button class="slide-btn" type="button" data-slide="prev" aria-controls="work-track" aria-label="السابق"><span aria-hidden="true">&lsaquo;</span></button>
           <button class="slide-btn" type="button" data-slide="next" aria-controls="work-track" aria-label="التالي"><span aria-hidden="true">&rsaquo;</span></button>
         </div>
       </div>
-      <p class="work-source">كل الأرقام من Google Search Console: مجموع مرات الظهور في كل شهر كامل مسجّل لكل موقع، حتى أغسطس 2026. الأشهر غير المكتملة غير محسوبة.</p>
     </div>
   </section>
 <section id="pricing" class="sec">
     <div class="wrap">
       <p class="eyebrow">الأسعار</p>
-      <h2 class="h2"><span class="hl">اختر خطتك</span> حسب حجم شركتك</h2>
-      <p class="lead">كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك.</p>
+      <h2 class="h2">اختر خطتك</h2>
+      <p class="lead">كل خطة هدفها واحد: عملاء يتصلون بك.</p>
       <ul class="plan-row"><li class="plan">
       <div class="plan-head">
         <p class="plan-price"><span class="plan-amount">⁦$500⁩</span></p>

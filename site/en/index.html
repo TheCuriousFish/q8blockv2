@@ -400,8 +400,6 @@ html[dir="rtl"] .strip-cta .chev { transform: scaleX(-1); }
 .wwd-block .h3 { font-size: var(--fs-h3-s4); }
 .wwd-block .body { margin-block-start: 18px; }
 
-#included { background: var(--bg-white); padding-block: var(--pad-sec); text-align: center; }
-#included .lead { margin-inline: auto; }
 .icons-grid {
   max-width: 1248px; margin-inline: auto; margin-block-start: 40px;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: start;
@@ -431,7 +429,8 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
 
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
-.work-slider { margin-block-start: 40px; }
+
+.work-slider { margin-block-start: clamp(40px, calc(68/14.4 * 1vw), 72px); }
 .work-track {
   display: flex; gap: 24px;
   overflow-x: auto; overflow-y: hidden;
@@ -476,11 +475,6 @@ html[dir="rtl"] .work-site { text-align: right; }
 .slide-btn:hover { background: var(--bg-light); border-color: var(--ink); }
 .slide-btn span { display: block; margin-block-end: 4px; }
 html[dir="rtl"] .slide-btn span { transform: scaleX(-1); }
-
-.work-source {
-  margin-block-start: 22px; font-size: var(--fs-foot-l); font-weight: var(--w-body);
-  line-height: 1.5; color: var(--muted-on-light);
-}
 
 .work-link {
   margin-block-start: auto; padding-block-start: 18px;
@@ -1120,38 +1114,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     </article></div>
     </div>
   </section>
-<section id="included" class="sec">
-    <div class="wrap">
-      <p class="eyebrow">What is included</p>
-      <h2 class="h2">What <span class="hl">every project</span> includes.</h2>
-      <p class="lead">This is not a promotion list. This is the work itself, on every project we start.</p>
-      <div class="icons-grid"><article class="card-light icon-card">
-      <img src="/assets/img/icon-website-build.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">Custom website design and development</h3>
-      <p class="body">A website designed and coded from scratch for your business, not a template reassembled.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-service-area-pages.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">A dedicated page for every service and area</h3>
-      <p class="body">Every service you offer and every area you cover gets its own page, with content written for it alone.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-google-visibility.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">Google Search visibility</h3>
-      <p class="body">On page and technical optimisation, local content for every page, and monthly tracking of how the pages are found in search.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-ai-visibility.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">AI platform visibility</h3>
-      <p class="body">A clear, indexed content structure that makes your pages quotable in the answers AI assistants give.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-backlinks-authority.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">Backlinks and authority building</h3>
-      <p class="body">Continuous work on external links and domain authority, because visibility does not come from the page alone.</p>
-    </article><article class="card-light icon-card">
-      <img src="/assets/img/icon-hosting-security.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <h3 class="h3">Hosting, domain and security</h3>
-      <p class="body">Hosting, the domain, site security and the technical updates. All part of the work, none of it on your desk.</p>
-    </article></div>
-    </div>
-  </section>
 <section id="journey" class="sec on-dark">
     <div class="wrap">
       <p class="eyebrow">How it works</p>
@@ -1194,8 +1156,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <section id="work" class="sec">
     <div class="wrap">
       <p class="eyebrow">Our work</p>
-      <h2 class="h2">Sites we built that <span class="hl">get found.</span></h2>
-      <p class="lead">Every site here was built from scratch and is still running. The figure on each card is how many times that site has come up in Google search results, added up across every complete month Google has recorded for it. The recent projects are labelled as what they are, because their data is not in yet.</p>
+      <h2 class="h2">Our clients.</h2>
       <div class="work-slider" data-slider>
         <div class="work-track" id="work-track" data-track tabindex="0" role="group"
              aria-roledescription="carousel" aria-label="Sites we built"><a class="card-light work-card" href="https://kuwaityclean.com/" rel="nofollow noopener" target="_blank">
@@ -1253,20 +1214,34 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       <p class="work-site">ragwaclean<wbr>.com</p>
       <p class="work-metric work-tag">New project</p>
       <span class="work-link">View case study<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://alamana-kw.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><img src="/assets/img/logo-alamana-kw.webp" width="640" height="334" alt="" decoding="async" fetchpriority="low"></div>
+      <p class="work-site">alamana-kw<wbr>.com</p>
+      <p class="work-metric work-tag">New project</p>
+      <span class="work-link">View case study<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://tasleekq8.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><img src="/assets/img/logo-tasleekq8.webp" width="640" height="334" alt="" decoding="async" fetchpriority="low"></div>
+      <p class="work-site">tasleekq8<wbr>.com</p>
+      <p class="work-metric work-tag">New project</p>
+      <span class="work-link">View case study<span class="arrow" aria-hidden="true">&rarr;</span></span>
+    </a><a class="card-light work-card" href="https://skyscraperkw.com/" rel="nofollow noopener" target="_blank">
+      <div class="work-plate"><img src="/assets/img/logo-skyscraperkw.webp" width="640" height="334" alt="" decoding="async" fetchpriority="low"></div>
+      <p class="work-site">skyscraperkw<wbr>.com</p>
+      <p class="work-metric work-tag">New project</p>
+      <span class="work-link">View case study<span class="arrow" aria-hidden="true">&rarr;</span></span>
     </a></div>
         <div class="work-nav">
           <button class="slide-btn" type="button" data-slide="prev" aria-controls="work-track" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></button>
           <button class="slide-btn" type="button" data-slide="next" aria-controls="work-track" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></button>
         </div>
       </div>
-      <p class="work-source">All figures from Google Search Console: every complete month recorded for each site, added up, to August 2026. Partial months are not counted.</p>
     </div>
   </section>
 <section id="pricing" class="sec">
     <div class="wrap">
       <p class="eyebrow">Pricing</p>
-      <h2 class="h2"><span class="hl">Pick your plan</span><br class="brk"> <span class="nb">by your company size.</span></h2>
-      <p class="lead">Every plan has one goal: customers calling you. What changes is the size of your company.</p>
+      <h2 class="h2">Choose your plan.</h2>
+      <p class="lead">Every plan has one goal: customers calling you.</p>
       <ul class="plan-row"><li class="plan">
       <div class="plan-head">
         <p class="plan-price"><span class="plan-amount">$500</span></p>

@@ -432,44 +432,22 @@ Section 5, items 5 and 6.
 
 ---
 
-## 5. What is included
+## 5. DELETED 2026-10-01. There is no "what is included" section
 
-**Background** white. Six items, one flat 2D icon each, three across on desktop and two on tablet.
+Ahmad, 2026-10-01:
 
-This is the service, not the promotion. It is written as a permanent capability and it survives the
-promotion being switched off. No figures, no prices, no durations, no country.
+> "the what's included section is not needed because the one above it is what we present, which is
+> the same thing. So remove that. What we present, immediately what follows is the how we work."
 
-**The design of this section is approved and unchanged. Only wording moved, 2026-09-24.** Two notes, both
-from Ahmad the same day:
+He is right about the overlap: Section 4's three blocks already say build it, get it found, keep it
+growing, and the six items underneath were the same promise itemised. **Section 4 now runs straight
+into Section 6.** The section's markup, its `#included` id, its copy block in `src/data.mjs` and its
+two `#included`-scoped CSS rules are all gone. Nothing links to `#included` and nothing ever did.
 
-1. **The six items below are the real six deliverables and the list does not change.** One of the generated
-   section boards came back drawing a different list, `keyword research, content creation, link building,
-   on page SEO, performance tracking, ongoing support`. That was the image model inventing a stock SEO
-   list, not copy from this file. It is not the offer, it never was, and no part of it may be built. The
-   six rows in the table below are the list.
-2. **Website design and development has to be visible in this list, not buried.** It is item 1, first in
-   reading order, and its title now says both words explicitly: `تصميم وتطوير موقع مخصص` /
-   `Custom website design and development`. The same title is used on the offer page in B2 so the two
-   lists cannot drift apart.
-
-The headline and subhead were already free of the rank promise and are unchanged. Items 3 and 5 had the
-words `موقع الصفحات في نتائج البحث` and `الترتيب` inside their bodies; both now read as visibility.
-
-| Element | Arabic | English |
-|---|---|---|
-| Eyebrow | ما يشمله العمل | What is included |
-| Headline | ما نقدمه في كل مشروع | What every project includes. |
-| Highlighted word | كل مشروع | every project |
-| Subhead | هذه ليست قائمة عرض مؤقت. هذا هو العمل نفسه، في كل مشروع نبدأه. | This is not a promotion list. This is the work itself, on every project we start. |
-
-| # | Icon | Arabic title | Arabic body | English title | English body |
-|---|---|---|---|---|---|
-| 1 | Website build | تصميم وتطوير موقع مخصص | موقع يُصمَّم ويُبرمَج من الصفر لنشاطك، لا قالب جاهز يُعاد تركيبه. | Custom website design and development | A website designed and coded from scratch for your business, not a template reassembled. |
-| 2 | Page per service and area | صفحة مستقلة لكل خدمة ولكل منطقة | كل خدمة تقدمها وكل منطقة تخدمها تحصل على صفحتها الخاصة بمحتوى مكتوب لها وحدها. | A dedicated page for every service and area | Every service you offer and every area you cover gets its own page, with content written for it alone. |
-| 3 | Google Search | الظهور في نتائج بحث جوجل | تهيئة داخلية وتقنية، ومحتوى محلي لكل صفحة، ومتابعة شهرية لظهور الصفحات في نتائج البحث. | Google Search visibility | On page and technical optimisation, local content for every page, and monthly tracking of how the pages are found in search. |
-| 4 | AI answers | الظهور في منصات الذكاء الاصطناعي | بنية محتوى واضحة ومفهرسة تجعل صفحاتك قابلة للاقتباس في إجابات مساعدات الذكاء الاصطناعي. | AI platform visibility | A clear, indexed content structure that makes your pages quotable in the answers AI assistants give. |
-| 5 | Authority | بناء الروابط والسلطة | عمل مستمر على الروابط الخارجية وعلى سلطة النطاق، لأن الظهور لا يأتي من الصفحة وحدها. | Backlinks and authority building | Continuous work on external links and domain authority, because visibility does not come from the page alone. |
-| 6 | Hosting and security | الاستضافة والنطاق والحماية | الاستضافة والنطاق وحماية الموقع وتحديثاته التقنية، كلها ضمن العمل ولا تُدار من طرفك. | Hosting, domain and security | Hosting, the domain, site security and the technical updates. All part of the work, none of it on your desk. |
+**The six deliverables are not lost, and no icon became unreferenced.** They are still written out in
+full on the offer page (B2) and on the About page (A3), both of which render the same six icon files.
+The icon files stay on disk and stay referenced. **Do not reinstate a third copy of the list on the
+homepage.** Build-spec §28.3 has the record.
 
 ---
 
@@ -624,18 +602,23 @@ get. No figure appears in the headline.
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | أعمالنا | Our work |
-| Headline | مواقع بنيناها ويجدها العملاء اليوم | Sites we built that get found. |
-| Highlighted word | ويجدها العملاء | get found |
-| Subhead | كل موقع هنا بُني من الصفر وما زال يعمل. الرقم على كل بطاقة هو عدد المرات التي ظهر فيها الموقع في نتائج بحث Google، مجموع كل شهر كامل سجّله Google لهذا الموقع. والمشاريع الحديثة موسومة كما هي، لأن بياناتها لم تكتمل بعد. | Every site here was built from scratch and is still running. The figure on each card is how many times that site has come up in Google search results, added up across every complete month Google has recorded for it. The recent projects are labelled as what they are, because their data is not in yet. |
+| Headline | عملاؤنا | Our clients. |
+| Highlighted word | none. The headline is two words and sets plain, like Section 8's | |
+| Subhead | **THERE IS NONE. DELETED 2026-10-01.** | |
 
-**Source line, ONE line under the whole section.** Rewritten 2026-09-25: it used to name the two months a
-percentage was computed between, and there is no longer a percentage. It now says what is summed, that
-the window is **per site** (the sites are different ages — kwtclean.com has five complete months,
-kuwaityclean.com has thirteen), and that partial months are not counted.
+**THE HEADLINE, 2026-10-01.** It read `مواقع بنيناها ويجدها العملاء اليوم` /
+`Sites we built that get found.` Ahmad called it horrible and asked for "something very simple like
+our clients". It is now `عملاؤنا` / `Our clients.` and it carries **no highlighted word** — there is
+nothing in two words to pick out, and Section 8's `أسئلة شائعة` / `Common questions` is the precedent
+for a plain head on this page.
 
-| Arabic | English |
-|---|---|
-| كل الأرقام من Google Search Console: مجموع مرات الظهور في كل شهر كامل مسجّل لكل موقع، حتى أغسطس 2026. الأشهر غير المكتملة غير محسوبة. | All figures from Google Search Console: every complete month recorded for each site, added up, to August 2026. Partial months are not counted. |
+**THE SUBHEAD AND THE SOURCE LINE ARE DELETED, NOT REWRITTEN, 2026-10-01.** Ahmad: `don't write what
+the number is or any of that.` The subhead explained that every site was built from scratch, what the
+figure on the card is, that it is summed across complete months, and that recent projects are tagged;
+the source line explained where the figures came from. Both were describing the mechanism instead of
+saying the thing, and a shortened version of either would have been the same mistake in fewer words.
+**The section is eyebrow, headline, cards.** The derivation stays in this file's tables, which is the
+record; it is not copy and it does not go on the page. Build-spec §28.2.
 
 **Card fields, same shape on every card**
 
@@ -686,7 +669,14 @@ the last card and carries straight on into the first, with no rewind and no stop
   enough; a capture is optional per card.
 * A card carries the site name, the figure and the link. No card states a country.
 
-### The eleven cards, ordered biggest figure first
+### The fourteen cards, ordered biggest figure first
+
+**Three clients added 2026-10-01**, all three live sites Ahmad built: `alamana-kw.com`,
+`tasleekq8.com` and `skyscraperkw.com`. **All three carry the `مشروع جديد` / `New project` tag and no
+figure**, and that is not a judgement call — the Search Console service account **cannot see any of the
+three properties**. Checked 2026-10-01 against `sites.list`: thirteen properties are accessible and
+none of these three is among them, so there is no complete month to sum and nothing to print. No figure
+goes on these cards until the property is shared and its rows are added to `proof-data.md`.
 
 | # | Site | Figure shown | Complete months summed |
 |---|---|---|---|
@@ -701,6 +691,12 @@ the last card and carries straight on into the first, with no rewind and no stop
 | 9 | anharpest.com | مشروع جديد / New project | one complete month only, August 2026 |
 | 10 | alghadeerclean.com | مشروع جديد / New project | one complete month only, August 2026 |
 | 11 | ragwaclean.com | مشروع جديد / New project | one complete month only, August 2026 |
+| 12 | alamana-kw.com | مشروع جديد / New project | no Search Console access, no data |
+| 13 | tasleekq8.com | مشروع جديد / New project | no Search Console access, no data |
+| 14 | skyscraperkw.com | مشروع جديد / New project | no Search Console access, no data |
+
+**The seven tagged cards sit after the seven that carry a figure**, in the order above: the four
+one-month clients first, then the three with no Search Console property at all.
 
 **The four newest clients keep the tag and are not given their number.** betikcleaner.com has 1,614
 impressions in its single complete month, anharpest.com 768, alghadeerclean.com 531 and ragwaclean.com
@@ -770,9 +766,21 @@ packages framing, no jargon, and the standing ban on `rank` / `ترتيب` / `ي
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | الأسعار | Pricing |
-| Headline | اختر خطتك حسب حجم شركتك | Pick your plan by your company size. |
-| Highlighted phrase | اختر خطتك | Pick your plan |
-| Subhead | كل خطة هدفها واحد: عملاء يتصلون بك. والفرق بينها هو حجم شركتك. | Every plan has one goal: customers calling you. What changes is the size of your company. |
+| Headline | اختر خطتك | Choose your plan. |
+| Highlighted phrase | اختر خطتك — the whole headline | Choose your plan. — the whole headline |
+| Subhead | كل خطة هدفها واحد: عملاء يتصلون بك. | Every plan has one goal: customers calling you. |
+
+**THE QUALIFIER IS CUT, 2026-10-01.** The headline read `اختر خطتك حسب حجم شركتك` /
+`Pick your plan by your company size.` Ahmad: `just leave it, choose your plan, remove company size.`
+The highlighted phrase was already exactly `اختر خطتك` / `Pick your plan`, so what is left **is** the
+highlight, unchanged — nothing was added around it and the highlight was not invented. The English
+`<br class="brk">` / `<span class="nb">` break treatment went with the qualifier: three words need no
+planned break.
+
+**THE SUBHEAD LOST ITS SECOND SENTENCE WITH IT.** `والفرق بينها هو حجم شركتك` /
+`What changes is the size of your company.` was the headline's qualifier said twice, and each of the
+three cards already prints who it is for. What is left is the one thing the section sells: customers
+calling. Build-spec §28.1.
 
 **Three cards, `$500` / `$1,000` / `$1,500` per month, low to high in reading order**, which is left
 to right on `/en/` and **right to left on `/`**. Same order in the source, both languages; the page
@@ -1319,9 +1327,9 @@ Search Console export image** — its own axis, not our copy, and never altered.
 | Figure | Where | Source |
 |---|---|---|
 | `1.99K` clicks, `114K` impressions, `1.7%` CTR, `10.9` average position, and the dated x axis | Section 6 and offer B2b, printed **inside the image** | the unedited Search Console export, `design/proof-shots/` |
-| Seven impression totals and four `New project` tags | Section 7, the eleven cards | derivation table below |
+| Seven impression totals and **seven** `New project` tags | Section 7, the **fourteen** cards | derivation table below |
 
-Sections 0, 1, 2, 3, 4, 5, 8, 9 and 10 carry no figures. **The homepage carries a price in exactly two
+Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **The homepage carries a price in exactly two
 places: the Section 2 strip line and Section 7b.** The strip is the offer teaser. **Since 2026-10-01,
 §7b carries only the three monthly prices and never the offer** — it was the offer a second time until
 Ahmad ruled it out. Neither place invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
@@ -1396,6 +1404,9 @@ the section's source line says "every complete month recorded for each site" rat
 | 9 | anharpest.com | مشروع جديد / New project | 1 | August 2026, `768` impressions |
 | 10 | alghadeerclean.com | مشروع جديد / New project | 1 | August 2026, `531` impressions |
 | 11 | ragwaclean.com | مشروع جديد / New project | 1 | August 2026, `160` impressions |
+| 12 | alamana-kw.com | مشروع جديد / New project | — | **No Search Console property accessible to the service account** (checked 2026-10-01). No rows exist, so nothing is summed and nothing is printed |
+| 13 | tasleekq8.com | مشروع جديد / New project | — | As above, no accessible property |
+| 14 | skyscraperkw.com | مشروع جديد / New project | — | As above, no accessible property |
 
 The 13-month sites run August 2025 to August 2026, kwtclean.com runs April to August 2026 (its first data
 month is April 2026) and mashame3.com runs March to August 2026 (first data month March 2026). Months
@@ -1415,14 +1426,23 @@ Neither figure is printed any more, so neither caveat applies to anything on the
 observation still stands as an operational note**: somebody should look at why that site's September
 clicks fell to zero. It does not affect its 32,434 total, which is complete months only.
 
+**The three cards added 2026-10-01 are not in `proof-data.md` and must not be guessed into it.** A
+`sites.list` call on 2026-10-01 through the same service account `.claude/skills/report/scripts/lib.js`
+uses returned thirteen properties — the twelve already in `proof-data.md` plus `israelsupportindex.com`.
+`alamana-kw.com`, `tasleekq8.com` and `skyscraperkw.com` are **not** among them. All three sites are
+live and return 200; Search Console simply has not been shared with the service account. Until it is,
+they carry the tag. **Do not estimate, infer from another client, or copy a figure across.**
+
 **Sites in `proof-data.md` that are not cards.** `q8block.com` is Q8Block's own site, not a client, and it
-is not in the eleven. Its own numbers are tiny, 0 to 2 clicks a month, which is exactly why the site is
+is not in the fourteen. Its own numbers are tiny, 0 to 2 clicks a month, which is exactly why the site is
 being rebuilt. `skyscraper`, `fightclub` and `alamana` are not SEO clients and have no Search Console
 property in the export, so there is no data for them and they get no card.
 
 ## Section 7 logo table
 
-One row per card, in the shipping order. **Revised 2026-09-25: seven of the eleven are now clean brand
+One row per card, in the shipping order. **Revised 2026-10-01: fourteen cards. Three new lockups were
+added and mashame3.com's plate was replaced**, all four derived by build-spec §20.2's rules exactly —
+see §28.4. **Revised 2026-09-25: seven of the eleven are now clean brand
 lockups regenerated from each client's real registered name**, supplied as `design/client-logos/v2-<domain>.png`
 and derived into the plate by `build-spec.md` §22. The other four are unchanged and are still the mark the
 client's own live site serves, fetched 2026-09-25 and kept byte-for-byte at `design/client-logos/<domain>.<ext>`.
@@ -1438,11 +1458,14 @@ first pass and §22 of this one.
 | 4 | kwtclean.com | **regenerated** | `v2-kwtclean.com.png` — the `كلين الكويت / CLEAN AL KUWAIT` house lockup on white |
 | 5 | kwcarwash.com | **regenerated** | `v2-kwcarwash.com.png` — the `WASH AND POLISH / غسيل سيارات متنقل` lockup on white |
 | 6 | movingcompanykw.com | **regenerated** | `v2-movingcompanykw.com.png` — the `شركة منيف للنقل / MUNEEF TRANSPORT` truck lockup on white |
-| 7 | mashame3.com | unchanged | `/favicon.svg` from the live site — the blue snowflake mark |
+| 7 | mashame3.com | **regenerated 2026-10-01** | `v2-mashame3.com.png` — the `مؤسسة المشامع للتكييف والتبريد / AL MASHAME` lockup on white. It replaced the live site's `/favicon.svg`, a bare blue snowflake. Ahmad: the old one "is just a big icon without the company name, so it doesn't align with the rest" |
 | 8 | betikcleaner.com | unchanged | `/assets/brand/betik-cleaner-primary-rtl.svg` from the live site — the full `بيتك كلينر / BETIK CLEANER` lockup |
 | 9 | anharpest.com | **regenerated** | `v2-anharpest.com.png` — the `شركة انهار لمكافحة الحشرات / ANHAR PEST CONTROL` shield lockup on white |
 | 10 | alghadeerclean.com | **regenerated** | `v2-alghadeerclean.com.png` — the `الغدير اللامع كلين / AL GHADEER CLEAN` droplet lockup on white |
 | 11 | ragwaclean.com | **regenerated** | `v2-ragwaclean.com.png` — the `رغوة الجنوب / RAGWA CLEAN` bubble lockup on white |
+| 12 | alamana-kw.com | **new 2026-10-01** | `v2-alamana-kw.com.png` — the `شركة الأمانة لتسليك المجاري / AL AMANA` pipe lockup on white |
+| 13 | tasleekq8.com | **new 2026-10-01** | `v2-tasleekq8.com.png` — the `رمضان لتسليك المجاري / RAMADAN DRAIN` gully lockup on white |
+| 14 | skyscraperkw.com | **new 2026-10-01** | `v2-skyscraperkw.com.png` — the `ناطحات السحاب / SKYSCRAPER` towers lockup on white |
 
 **Two notes from the first pass that the regeneration retired.** anharpest.com's live logo is a
 light-on-dark lockup, so §20.3 had to composite it on the site's own `#0D1512` ground and it shipped as

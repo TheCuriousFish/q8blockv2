@@ -549,9 +549,15 @@ html[dir="rtl"] .strip-cta .chev { transform: scaleX(-1); }
 .wwd-block .h3 { font-size: var(--fs-h3-s4); }
 .wwd-block .body { margin-block-start: 18px; }
 
-/* ══ §6 row 5 — What is included. Centred head, 1248px grid, 3×2. ══ */
-#included { background: var(--bg-white); padding-block: var(--pad-sec); text-align: center; }
-#included .lead { margin-inline: auto; }
+/* ══ §5 WHAT IS INCLUDED IS DELETED, 2026-10-01 (build-spec §28.3). The two
+      `#included`-scoped rules (the white ground, `--pad-sec`, the centred head
+      and the auto-margined lead) came out with the section.
+
+      `.icons-grid`, `.icon-card` and `.icon-card.compact` STAY, and are not
+      dead code: offer B2's rows and About A3's `#deliver` grid both still use
+      them, and `#deliver .icons-grid` below overrides the text alignment for
+      that page. The two responsive rules further down that collapse
+      `.icons-grid` to 2 then 1 column stay for the same reason. ══ */
 .icons-grid {
   max-width: 1248px; margin-inline: auto; margin-block-start: 40px;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: start;
@@ -601,7 +607,14 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
       Plain CSS scroll-snap plus ~60 lines of vanilla JS in the existing
       deferred app.js — no carousel library. ══ */
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
-.work-slider { margin-block-start: 40px; }
+/* 40px was the measured subhead → cards gap (§5.3). §7 has no subhead since
+   2026-10-01, so the headline would have sat 40px off the cards while every
+   other section keeps a subhead's worth of air under its head. The gap is now
+   the TWO measured rhythm gaps the subhead used to sit between, 28 + 40 = 68,
+   with the old 40 kept as the phone floor so the 390 layout does not move. It
+   is a spacing value, not a replacement sentence: nothing was written back in
+   to fill the hole (build-spec §28.2). */
+.work-slider { margin-block-start: clamp(40px, calc(68/14.4 * 1vw), 72px); }
 .work-track {
   display: flex; gap: 24px;
   overflow-x: auto; overflow-y: hidden;
@@ -662,11 +675,9 @@ html[dir="rtl"] .work-site { text-align: right; }
 .slide-btn span { display: block; margin-block-end: 4px; }
 html[dir="rtl"] .slide-btn span { transform: scaleX(-1); }
 
-/* The one line that replaced eleven date windows. */
-.work-source {
-  margin-block-start: 22px; font-size: var(--fs-foot-l); font-weight: var(--w-body);
-  line-height: 1.5; color: var(--muted-on-light);
-}
+/* `.work-source` IS DELETED, 2026-10-01 (build-spec §28.2). It was the one line
+   under the section that said where the figures came from, and Ahmad: "don't
+   write what the number is or any of that." No other selector used it. */
 
 .work-link {
   margin-block-start: auto; padding-block-start: 18px;
