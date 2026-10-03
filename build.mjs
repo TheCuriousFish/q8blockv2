@@ -724,6 +724,7 @@ write('sitemap.xml', sitemap());
 write('llms.txt', llms());
 write('404.html', notFoundPage());
 write(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
+write('_headers', '/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 
 const c = CONFIG;
 const live = c.COUNTDOWN_END && Date.parse(c.COUNTDOWN_END) > Date.now();
