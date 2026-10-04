@@ -22,6 +22,7 @@
 <meta name="twitter:description" content="Call us or message us on WhatsApp. Phone, office address, and a map that opens when you ask for it. There is no form on this page.">
 <meta name="theme-color" content="#FF5F29">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<script>document.documentElement.classList.add('js')</script>
 <style>@font-face {
   font-family: 'Alexandria';
   font-style: normal;
@@ -1033,12 +1034,33 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .post-step.next { text-align: start; }
   .reach-card .btn, .map-closed .btn { width: 100%; }
 }
-</style>
+.fl{display:none}
+.js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .45s ease}
+.js:not(.open) body>:not(.fl){visibility:hidden}
+.open .fl{opacity:0;pointer-events:none}
+.done .fl{display:none}
+.fl-light{background:#F2F3F5}.fl-white{background:#FEFEFE}.fl-dark{background:#101012}.fl-deep{background:linear-gradient(180deg,#0d161c,#080e13)}
+.fl svg{width:124px;height:98px;overflow:visible;transition:transform .45s ease}
+.open .fl svg{transform:scale(1.06)}
+.fl .fl-a,.fl .fl-b{fill:#D7DBE0}.fl .fl-q rect{fill:#FF5F29}.fl .fl-q .fl-l1{fill:#0A0A0C}.fl .fl-q .fl-l2{fill:#8A919B}
+.fl-dark .fl-a,.fl-dark .fl-b,.fl-deep .fl-a,.fl-deep .fl-b{fill:rgba(255,255,255,.12)}
+.fl-dark .fl-q .fl-l1,.fl-deep .fl-q .fl-l1{fill:#FFFFFF}.fl-dark .fl-q .fl-l2,.fl-deep .fl-q .fl-l2{fill:#949BA6}
+.fl-g{animation:fl-g 3.2s linear -.26s infinite}
+.fl-q,.fl-a,.fl-b{animation:3.2s cubic-bezier(.45,0,.25,1) -.26s infinite}
+.fl-q{animation-name:fl-q}.fl-a{animation-name:fl-a}.fl-b{animation-name:fl-b}
+@keyframes fl-g{0%{opacity:0}8%,86%{opacity:1}96%,100%{opacity:0}}
+@keyframes fl-q{0%,22%{transform:translateY(76px)}34%,50%{transform:translateY(38px)}62%,100%{transform:translateY(0)}}
+@keyframes fl-a{0%,50%{transform:translateY(0)}62%,100%{transform:translateY(38px)}}
+@keyframes fl-b{0%,22%{transform:translateY(38px)}34%,100%{transform:translateY(76px)}}
+@media (min-width:1024px){.fl svg{width:160px;height:126px}}
+@media (prefers-reduced-motion:reduce){.fl *{animation:none!important;transition:none!important}.js .fl{transition-duration:.2s}}</style>
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Q8 block","alternateName":"Kuwait Block","url":"https://q8block.com/","telephone":"+965 94139666","address":{"@type":"PostalAddress","streetAddress":"Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9","addressCountry":"KW"}}</script>
 </head>
 <body>
+<div class="fl fl-light" aria-hidden="true"><svg viewBox="0 0 124 98" focusable="false"><g class="fl-g"><g class="fl-a" transform="translate(0 38)"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g><g class="fl-b" transform="translate(0 76)"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g><g class="fl-q"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g></g></svg></div>
+<script>window.flT=setTimeout(function(){window.flO&&flO()},8000)</script>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
     <div class="sec-wide"><div class="wrap-wide header-row">
@@ -1149,5 +1171,17 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       </div>
     </div></div>
   </footer>
+<script>(function(){var d=document,r=d.documentElement,p=d.querySelector('.fl'),on=0;
+if(!p)return;if(!window.Promise){r.classList.add('open','done');return}
+var open=window.flO=function(){if(on)return;on=1;clearTimeout(window.flT);requestAnimationFrame(function(){if(window.performance&&performance.mark)performance.mark('hero-ready');
+p.addEventListener('transitionend',function(e){if(e.target===p)r.classList.add('done')});r.classList.add('open')})};
+if(!window.flT)window.flT=setTimeout(open,8000);
+var H=innerHeight,w=[],t='',f=["400 1em Alexandria"];
+[].forEach.call(d.querySelectorAll('body>:not(.fl):not(script)'),function(e){if(e.getBoundingClientRect().top<H)t+=e.textContent});
+t=t.replace(/\s+/g,' ');
+[].forEach.call(d.querySelectorAll('body img'),function(i){var b=i.getBoundingClientRect();if(b.width&&b.top<H&&b.bottom>0&&i.decode)w.push(i.decode())});
+if(p.dataset.bg){var b=new Image();b.src=p.dataset.bg;if(b.decode)w.push(b.decode())}
+if(d.fonts&&d.fonts.load)f.forEach(function(s){w.push(d.fonts.load(s,t||'a'))});
+Promise.all(w).then(open,open)})()</script>
 </body>
 </html>

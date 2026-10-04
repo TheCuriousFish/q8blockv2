@@ -1015,4 +1015,60 @@ export function postArticle(t, post, { prev, next }) {
   </article>`;
 }
 
+/* ── first load: every page opens on a full-screen loading panel ─────────────
+   Until the first screen is ready the whole screen (header included) is one
+   panel in that first screen's own colour, with a small loader in the middle:
+   three search results, and the orange Q8 one climbs from third to first, over
+   and over. All inline (first thing in <body>), so it is the first paint.
+   Ready = the faces of the header and first-screen words loaded + every image
+   on the first screen decoded; event-driven, with one 8 s safety cap. Then
+   performance.mark('hero-ready') and html.open: the panel fades off the
+   finished screen. Until then everything under it is laid out but not painted,
+   so the webfont settling there is never seen and never counted as a shift.
+   No JS: html never gets .js, the panel never shows, the page is as before.
+   Reduced motion: the loader stands still (orange result on top), short fade.
+   The CSS lives here and not in styles.css because the two legacy checklist
+   pages carry their own stylesheet and get the same panel at copy time.
+   Comments stay out of the strings below: they ship. ── */
+const FL_ROW = '<rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/>';
+export const FL_CSS = `.fl{display:none}
+.js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .45s ease}
+.js:not(.open) body>:not(.fl){visibility:hidden}
+.open .fl{opacity:0;pointer-events:none}
+.done .fl{display:none}
+.fl-light{background:#F2F3F5}.fl-white{background:#FEFEFE}.fl-dark{background:#101012}.fl-deep{background:linear-gradient(180deg,#0d161c,#080e13)}
+.fl svg{width:124px;height:98px;overflow:visible;transition:transform .45s ease}
+.open .fl svg{transform:scale(1.06)}
+.fl .fl-a,.fl .fl-b{fill:#D7DBE0}.fl .fl-q rect{fill:#FF5F29}.fl .fl-q .fl-l1{fill:#0A0A0C}.fl .fl-q .fl-l2{fill:#8A919B}
+.fl-dark .fl-a,.fl-dark .fl-b,.fl-deep .fl-a,.fl-deep .fl-b{fill:rgba(255,255,255,.12)}
+.fl-dark .fl-q .fl-l1,.fl-deep .fl-q .fl-l1{fill:#FFFFFF}.fl-dark .fl-q .fl-l2,.fl-deep .fl-q .fl-l2{fill:#949BA6}
+.fl-g{animation:fl-g 3.2s linear -.26s infinite}
+.fl-q,.fl-a,.fl-b{animation:3.2s cubic-bezier(.45,0,.25,1) -.26s infinite}
+.fl-q{animation-name:fl-q}.fl-a{animation-name:fl-a}.fl-b{animation-name:fl-b}
+@keyframes fl-g{0%{opacity:0}8%,86%{opacity:1}96%,100%{opacity:0}}
+@keyframes fl-q{0%,22%{transform:translateY(76px)}34%,50%{transform:translateY(38px)}62%,100%{transform:translateY(0)}}
+@keyframes fl-a{0%,50%{transform:translateY(0)}62%,100%{transform:translateY(38px)}}
+@keyframes fl-b{0%,22%{transform:translateY(38px)}34%,100%{transform:translateY(76px)}}
+@media (min-width:1024px){.fl svg{width:160px;height:126px}}
+@media (prefers-reduced-motion:reduce){.fl *{animation:none!important;transition:none!important}.js .fl{transition-duration:.2s}}`;
+// at rest (reduced motion) the transform attributes give the finished order: Q8 first
+export const flPanel = (tone, bg = '') => `<div class="fl fl-${tone}" aria-hidden="true"${bg ? ` data-bg="${bg}"` : ''}><svg viewBox="0 0 124 98" focusable="false"><g class="fl-g"><g class="fl-a" transform="translate(0 38)">${FL_ROW}</g><g class="fl-b" transform="translate(0 76)">${FL_ROW}</g><g class="fl-q">${FL_ROW}</g></g></svg></div>`;
+// in <head>: the class that lets the panel show at all
+export const FL_HEAD = `<script>document.documentElement.classList.add('js')</script>`;
+// right after the panel: the safety cap starts with the page
+export const FL_START = `<script>window.flT=setTimeout(function(){window.flO&&flO()},8000)</script>`;
+// end of <body>: the first screen exists; wait for its faces and images, then open
+export const flBoot = (faces) => `<script>(function(){var d=document,r=d.documentElement,p=d.querySelector('.fl'),on=0;
+if(!p)return;if(!window.Promise){r.classList.add('open','done');return}
+var open=window.flO=function(){if(on)return;on=1;clearTimeout(window.flT);requestAnimationFrame(function(){if(window.performance&&performance.mark)performance.mark('hero-ready');
+p.addEventListener('transitionend',function(e){if(e.target===p)r.classList.add('done')});r.classList.add('open')})};
+if(!window.flT)window.flT=setTimeout(open,8000);
+var H=innerHeight,w=[],t='',f=${JSON.stringify(faces)};
+[].forEach.call(d.querySelectorAll('body>:not(.fl):not(script)'),function(e){if(e.getBoundingClientRect().top<H)t+=e.textContent});
+t=t.replace(/\\s+/g,' ');
+[].forEach.call(d.querySelectorAll('body img'),function(i){var b=i.getBoundingClientRect();if(b.width&&b.top<H&&b.bottom>0&&i.decode)w.push(i.decode())});
+if(p.dataset.bg){var b=new Image();b.src=p.dataset.bg;if(b.decode)w.push(b.decode())}
+if(d.fonts&&d.fonts.load)f.forEach(function(s){w.push(d.fonts.load(s,t||'a'))});
+Promise.all(w).then(open,open)})()</script>`;
+
 export { esc, telHref, waHref, hasCountdown, hasSpots };
