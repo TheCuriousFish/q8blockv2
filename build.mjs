@@ -44,6 +44,7 @@ import {
   offerAfter, offerFaq, esc,
   pageHead, aboutPrinciple, aboutDeliver, aboutNotDo, aboutCompany,
   contactBlocks, contactOffice, termsBody, blogList, postArticle,
+  FL_CSS, FL_HEAD, FL_START, flPanel, flBoot,
 } from './src/render.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -255,6 +256,10 @@ function shell({ t, page, meta, body, bodyClass = '', jsonLd = [], self }) {
   const enPath = t.lang === 'en' ? self.path : self.otherPath;
 
   // /en/ never needs the Arabic subset; / carries Latin brand names and digits.
+  // the first-load panel takes the first screen's own colour: the offer hero is
+  // dark, the blog list and posts open on white, every other page on the grey band
+  const tone = page === 'offer' ? 'dark' : (page === 'blog' || page === 'post') ? 'white' : 'light';
+
   const preload = t.lang === 'ar'
     ? ['alexandria-arabic.woff2', 'alexandria-latin.woff2']
     : ['alexandria-latin.woff2'];
@@ -283,18 +288,22 @@ ${meta.ogImage ? `<meta property="og:image" content="${abs(meta.ogImage)}">\n` :
 <meta name="twitter:description" content="${esc(meta.description)}">
 ${meta.ogImage ? `<meta name="twitter:image" content="${abs(meta.ogImage)}">\n` : ''}<meta name="theme-color" content="#FF5F29">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<style>${CSS}</style>
+${FL_HEAD}
+<style>${CSS}${FL_CSS}</style>
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 ${jsonLd.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
+${flPanel(tone)}
+${FL_START}
 <a class="skip" href="#main">${esc(t.skip)}</a>
 ${header(t, page, self)}
 <main id="main">
 ${body}
 </main>
 ${footer(t, self)}
+${flBoot(FL_FACES)}
 </body>
 </html>
 `;
@@ -486,18 +495,22 @@ function notFoundPage() {
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="theme-color" content="#FF5F29">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<style>${CSS}</style>
+${FL_HEAD}
+<style>${CSS}${FL_CSS}</style>
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">${JSON.stringify(orgLd(t))}</script>
 </head>
 <body>
+${flPanel('light')}
+${FL_START}
 <a class="skip" href="#main">${esc(t.skip)}</a>
 ${header(t, 'notfound', self)}
 <main id="main">
 ${body}
 </main>
 ${footer(t, self)}
+${flBoot(FL_FACES)}
 </body>
 </html>
 `;
@@ -687,6 +700,23 @@ for it. Nothing is averaged across clients and no partial month is used.
 
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 56"><rect width="67" height="56" fill="#FF5F29"/><text x="33.5" y="39" font-family="Alexandria,Arial,sans-serif" font-size="30" font-weight="800" fill="#fff" text-anchor="middle">Q8</text></svg>`;
 
+/* The faces the first screen waits for: Alexandria is one variable file per
+   script, so one weight per call pulls in the whole face for the text given. */
+const FL_FACES = ['400 1em Alexandria'];
+
+/* The two legacy checklist pages keep their own markup and stylesheet; they get
+   the same first-load panel on copy, in their hero's own near-black blue, and
+   also wait for their Cairo weights and the hero's background photo. */
+function withLoader(file) {
+  const html = fs.readFileSync(file, 'utf8');
+  const out = html
+    .replace('</head>', `${FL_HEAD}\n<style>${FL_CSS}</style>\n</head>`)
+    .replace('<body>', `<body>\n${flPanel('deep', '/assets/img/checklist/gbp-blueprint.webp')}\n${FL_START}`)
+    .replace('</body>', `${flBoot(['400 1em Cairo', '600 1em Cairo', '700 1em Cairo', '800 1em Cairo'])}\n</body>`);
+  if (out.split('class="fl ').length !== 2 || !out.includes('flO=')) throw new Error(`first-load panel not placed in ${file}`);
+  return out;
+}
+
 /* ── run ────────────────────────────────────────────────────────────────── */
 fs.rmSync(OUT, { recursive: true, force: true });
 
@@ -702,9 +732,9 @@ write('assets/img/favicon.svg', favicon);
 // Arabic-first, same convention as the four main pages: ar at the root, en at /en/.
 const CHECKLIST_AR = path.join(SRC, 'static', 'google-business-profile-checklist.ar.html');
 const CHECKLIST_EN = path.join(SRC, 'static', 'google-business-profile-checklist.en.html');
-if (fs.existsSync(CHECKLIST_AR)) copy(CHECKLIST_AR, 'google-business-profile-checklist.html');
+if (fs.existsSync(CHECKLIST_AR)) write('google-business-profile-checklist.html', withLoader(CHECKLIST_AR));
 else console.warn('!! google-business-profile-checklist.ar.html not found in src/static/ — not copied');
-if (fs.existsSync(CHECKLIST_EN)) copy(CHECKLIST_EN, 'en/google-business-profile-checklist.html');
+if (fs.existsSync(CHECKLIST_EN)) write('en/google-business-profile-checklist.html', withLoader(CHECKLIST_EN));
 else console.warn('!! google-business-profile-checklist.en.html not found in src/static/ — not copied');
 
 // The checklist pages' own illustrations. They shipped with broken relative
