@@ -1036,24 +1036,15 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .reach-card .btn, .map-closed .btn { width: 100%; }
 }
 .fl{display:none}
-.js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .45s ease}
+.js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .35s ease}
 .js:not(.open) body>:not(.fl){visibility:hidden}
 .open .fl{opacity:0;pointer-events:none}
 .done .fl{display:none}
 .fl-light{background:#F2F3F5}.fl-white{background:#FEFEFE}.fl-dark{background:#101012}.fl-deep{background:linear-gradient(180deg,#0d161c,#080e13)}
-.fl svg{width:124px;height:98px;overflow:visible;transition:transform .45s ease}
-.open .fl svg{transform:scale(1.06)}
-.fl .fl-a,.fl .fl-b{fill:#D7DBE0}.fl .fl-q rect{fill:#FF5F29}.fl .fl-q .fl-l1{fill:#0A0A0C}.fl .fl-q .fl-l2{fill:#8A919B}
-.fl-dark .fl-a,.fl-dark .fl-b,.fl-deep .fl-a,.fl-deep .fl-b{fill:rgba(255,255,255,.12)}
-.fl-dark .fl-q .fl-l1,.fl-deep .fl-q .fl-l1{fill:#FFFFFF}.fl-dark .fl-q .fl-l2,.fl-deep .fl-q .fl-l2{fill:#949BA6}
-.fl-g{animation:fl-g 3.2s linear -.26s infinite}
-.fl-q,.fl-a,.fl-b{animation:3.2s cubic-bezier(.45,0,.25,1) -.26s infinite}
-.fl-q{animation-name:fl-q}.fl-a{animation-name:fl-a}.fl-b{animation-name:fl-b}
-@keyframes fl-g{0%{opacity:0}8%,86%{opacity:1}96%,100%{opacity:0}}
-@keyframes fl-q{0%,22%{transform:translateY(76px)}34%,50%{transform:translateY(38px)}62%,100%{transform:translateY(0)}}
-@keyframes fl-a{0%,50%{transform:translateY(0)}62%,100%{transform:translateY(38px)}}
-@keyframes fl-b{0%,22%{transform:translateY(38px)}34%,100%{transform:translateY(76px)}}
-@media (min-width:1024px){.fl svg{width:160px;height:126px}}
+.fl svg{width:48px;height:40px;overflow:visible}
+.fl .fl-m{transform-origin:33.5px 28px;animation:fl-p 1.5s ease-in-out infinite}
+@keyframes fl-p{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1)}}
+@media (min-width:1024px){.fl svg{width:56px;height:47px}}
 @media (prefers-reduced-motion:reduce){.fl *{animation:none!important;transition:none!important}.js .fl{transition-duration:.2s}}</style>
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
@@ -1061,7 +1052,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل الـ⁦$500⁩ شهريًا؟","acceptedAnswer":{"@type":"Answer","text":"لا. الـ⁦$500⁩ دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من ⁦$500⁩ شهريًا، وبعد انتهاء الأشهر الستة تختار خطة شهرية من ثلاث: ⁦$500⁩ أو ⁦$1,000⁩ أو ⁦$1,500⁩."}},{"@type":"Question","name":"لماذا السعر ⁦$500⁩ لستة أشهر؟","acceptedAnswer":{"@type":"Answer","text":"نختار عددًا محدودًا من الشركات في كل مدينة ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. النتيجة نفسها هي ما يجعل العميل يقرر الاستمرار، وهي أيضًا ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول: العرض لا ينجح إلا مع نشاط قائم وموثق فعلًا."}},{"@type":"Question","name":"هل هناك عقد أو التزام؟","acceptedAnswer":{"@type":"Answer","text":"لا. لا يوجد عقد ولا فترة إشعار. الدفعة ⁦$500⁩ مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، إن قررت التوقف فلا يُطلب منك شيء."}},{"@type":"Question","name":"هل يشترط وجود سجل تجاري؟","acceptedAnswer":{"@type":"Answer","text":"سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل."}},{"@type":"Question","name":"لدي موقع قائم، هل أنا مؤهل؟","acceptedAnswer":{"@type":"Answer","text":"العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك."}},{"@type":"Question","name":"ماذا يحدث بعد ستة أشهر؟","acceptedAnswer":{"@type":"Answer","text":"القرار لك. حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، ⁦$500⁩ أو ⁦$1,000⁩ أو ⁦$1,500⁩، وما تشمله كل خطة يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار."}},{"@type":"Question","name":"هل تديرون ملف نشاطي على جوجل خلال العرض؟","acceptedAnswer":{"@type":"Answer","text":"لا، لا في العرض ولا خارجه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث."}}]}</script>
 </head>
 <body class="theme-dark">
-<div class="fl fl-dark" aria-hidden="true"><svg viewBox="0 0 124 98" focusable="false"><g class="fl-g"><g class="fl-a" transform="translate(0 38)"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g><g class="fl-b" transform="translate(0 76)"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g><g class="fl-q"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g></g></svg></div>
+<div class="fl fl-dark" aria-hidden="true"><svg viewBox="0 0 67 56" focusable="false"><g class="fl-m"><rect width="67" height="56" fill="#FF5F29"/><g fill="none" stroke="#fff" stroke-width="5.4"><ellipse cx="20.5" cy="27" rx="7.6" ry="9.2"/><path d="M24 32.5 30.5 40"/><circle cx="46" cy="21.4" r="5"/><circle cx="46" cy="33.6" r="6.6"/></g></g></svg></div>
 <script>window.flT=setTimeout(function(){window.flO&&flO()},8000)</script>
 <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header over-dark">
@@ -1079,7 +1070,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     </div></div>
   </header>
 <main id="main">
-<section id="offer-hero" class="sec-wide on-dark" data-countdown-end="2026-10-04T23:59:59+03:00">
+<section id="offer-hero" class="sec-wide on-dark">
     <div class="wrap-wide">
       <span class="strip-pill">عرض محدود</span>
       <h1><span class="hl">عملاء جدد</span> من محركات البحث<br class="brk"> والذكاء الاصطناعي</h1>
@@ -1095,17 +1086,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       </dl>
       <p class="pa-note">دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.</p>
     </div>
-      <p class="count-label" data-countdown-part>يغلق التسجيل خلال</p>
-      <div class="count-boxes" data-countdown-part><div class="count-box">
-      <b data-count="d">&nbsp;</b><span>يوم</span>
-    </div><div class="count-box">
-      <b data-count="h">&nbsp;</b><span>ساعة</span>
-    </div><div class="count-box">
-      <b data-count="m">&nbsp;</b><span>دقيقة</span>
-    </div><div class="count-box">
-      <b data-count="s">&nbsp;</b><span>ثانية</span>
-    </div></div>
-      <p class="offer-spots" data-countdown-fallback hidden>التسجيل مفتوح الآن</p>
+      
+      <p class="offer-spots" data-countdown-fallback>التسجيل مفتوح الآن</p>
       <p class="offer-spots"><span dir="ltr">9</span> مقاعد متبقية</p>
       <div class="btn-row centred">
       <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
