@@ -727,6 +727,8 @@ copy(path.join(SRC, 'app.js'), 'assets/app.js');
 for (const f of fs.readdirSync(path.join(SRC, 'fonts'))) copy(path.join(SRC, 'fonts', f), `assets/fonts/${f}`);
 for (const f of fs.readdirSync(path.join(SRC, 'img'))) copy(path.join(SRC, 'img', f), `assets/img/${f}`);
 write('assets/img/favicon.svg', favicon);
+// browsers and crawlers ask for /favicon.ico by habit; the Q8 box, drawn from the logo (see ops/firstload/_q8block-ico.mjs in the hub)
+copy(path.join(SRC, 'static', 'favicon.ico'), 'favicon.ico');
 
 // preserved from the old site: the checklist page is referenced in the offer.
 // Arabic-first, same convention as the four main pages: ar at the root, en at /en/.

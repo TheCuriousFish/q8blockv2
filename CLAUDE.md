@@ -29,3 +29,11 @@ Credentials are stored in `.env` (gitignored). Always read from there — never 
 source .env
 curl -H "Authorization: token $GITHUB_TOKEN" ...
 ```
+
+## First-load panel (2026-10)
+
+Every page opens on a full-screen loading panel with one small icon loader (the orange Q8 box of the logo, 48 px phone / 56 px desktop,
+a soft pulse), then a plain 0.35 s fade onto the finished page. It is generated, not pasted: `FL_CSS`, `flPanel`, `flBoot` live in
+`src/render.mjs`; `build.mjs` places them on every page (`shell`, `notFoundPage`) and on the two legacy checklist pages (`withLoader`).
+A rebuild therefore always keeps it. `src/static/favicon.ico` is copied to `/favicon.ico` by the build. No footer credit here: this is Q8Block.
+Check after any change: `node ops/firstload/site-audit.mjs clients/q8block/site https://q8block.com` (hub) must report 0 failing pages.

@@ -1035,24 +1035,15 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .reach-card .btn, .map-closed .btn { width: 100%; }
 }
 .fl{display:none}
-.js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .45s ease}
+.js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .35s ease}
 .js:not(.open) body>:not(.fl){visibility:hidden}
 .open .fl{opacity:0;pointer-events:none}
 .done .fl{display:none}
 .fl-light{background:#F2F3F5}.fl-white{background:#FEFEFE}.fl-dark{background:#101012}.fl-deep{background:linear-gradient(180deg,#0d161c,#080e13)}
-.fl svg{width:124px;height:98px;overflow:visible;transition:transform .45s ease}
-.open .fl svg{transform:scale(1.06)}
-.fl .fl-a,.fl .fl-b{fill:#D7DBE0}.fl .fl-q rect{fill:#FF5F29}.fl .fl-q .fl-l1{fill:#0A0A0C}.fl .fl-q .fl-l2{fill:#8A919B}
-.fl-dark .fl-a,.fl-dark .fl-b,.fl-deep .fl-a,.fl-deep .fl-b{fill:rgba(255,255,255,.12)}
-.fl-dark .fl-q .fl-l1,.fl-deep .fl-q .fl-l1{fill:#FFFFFF}.fl-dark .fl-q .fl-l2,.fl-deep .fl-q .fl-l2{fill:#949BA6}
-.fl-g{animation:fl-g 3.2s linear -.26s infinite}
-.fl-q,.fl-a,.fl-b{animation:3.2s cubic-bezier(.45,0,.25,1) -.26s infinite}
-.fl-q{animation-name:fl-q}.fl-a{animation-name:fl-a}.fl-b{animation-name:fl-b}
-@keyframes fl-g{0%{opacity:0}8%,86%{opacity:1}96%,100%{opacity:0}}
-@keyframes fl-q{0%,22%{transform:translateY(76px)}34%,50%{transform:translateY(38px)}62%,100%{transform:translateY(0)}}
-@keyframes fl-a{0%,50%{transform:translateY(0)}62%,100%{transform:translateY(38px)}}
-@keyframes fl-b{0%,22%{transform:translateY(38px)}34%,100%{transform:translateY(76px)}}
-@media (min-width:1024px){.fl svg{width:160px;height:126px}}
+.fl svg{width:48px;height:40px;overflow:visible}
+.fl .fl-m{transform-origin:33.5px 28px;animation:fl-p 1.5s ease-in-out infinite}
+@keyframes fl-p{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1)}}
+@media (min-width:1024px){.fl svg{width:56px;height:47px}}
 @media (prefers-reduced-motion:reduce){.fl *{animation:none!important;transition:none!important}.js .fl{transition-duration:.2s}}</style>
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
@@ -1060,7 +1051,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the $500 per month?","acceptedAnswer":{"@type":"Answer","text":"No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at $500 a month, and after the six months end you pick one of three monthly plans: $500, $1,000 or $1,500."}},{"@type":"Question","name":"Why is it $500 for six months?","acceptedAnswer":{"@type":"Answer","text":"We take a limited number of companies in each city and work on them for a full six months until the result shows. That result is what makes a client decide to continue, and it is also what we show the next client. That is why the eligibility conditions exist. The offer only works with a business that is already running and already documented."}},{"@type":"Question","name":"Is there a contract or a commitment?","acceptedAnswer":{"@type":"Answer","text":"No. There is no contract and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends, nothing further is due if you stop."}},{"@type":"Question","name":"Do I need a commercial registration?","acceptedAnswer":{"@type":"Answer","text":"A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile."}},{"@type":"Question","name":"I already have a website. Do I qualify?","acceptedAnswer":{"@type":"Answer","text":"The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you."}},{"@type":"Question","name":"What happens after six months?","acceptedAnswer":{"@type":"Answer","text":"You decide. When the six months end you pick one of three monthly plans, $500, $1,000 or $1,500, and what each plan covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice."}},{"@type":"Question","name":"Do you manage my Google Business Profile during the offer?","acceptedAnswer":{"@type":"Answer","text":"No, neither during the offer nor outside it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results."}}]}</script>
 </head>
 <body class="theme-dark">
-<div class="fl fl-dark" aria-hidden="true"><svg viewBox="0 0 124 98" focusable="false"><g class="fl-g"><g class="fl-a" transform="translate(0 38)"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g><g class="fl-b" transform="translate(0 76)"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g><g class="fl-q"><rect width="22" height="22"/><rect class="fl-l1" x="32" y="2" width="92" height="7" rx="3.5"/><rect class="fl-l2" x="32" y="15" width="60" height="5" rx="2.5"/></g></g></svg></div>
+<div class="fl fl-dark" aria-hidden="true"><svg viewBox="0 0 67 56" focusable="false"><g class="fl-m"><rect width="67" height="56" fill="#FF5F29"/><g fill="none" stroke="#fff" stroke-width="5.4"><ellipse cx="20.5" cy="27" rx="7.6" ry="9.2"/><path d="M24 32.5 30.5 40"/><circle cx="46" cy="21.4" r="5"/><circle cx="46" cy="33.6" r="6.6"/></g></g></svg></div>
 <script>window.flT=setTimeout(function(){window.flO&&flO()},8000)</script>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header over-dark">
@@ -1078,7 +1069,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     </div></div>
   </header>
 <main id="main">
-<section id="offer-hero" class="sec-wide on-dark" data-countdown-end="2026-10-04T23:59:59+03:00">
+<section id="offer-hero" class="sec-wide on-dark">
     <div class="wrap-wide">
       <span class="strip-pill">Limited offer</span>
       <h1><span class="hl">New customers</span><br class="brk"> from search engines and AI.</h1>
@@ -1094,17 +1085,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       </dl>
       <p class="pa-note">One payment, not monthly. No monthly bill during the six months.</p>
     </div>
-      <p class="count-label" data-countdown-part>Registration closes in</p>
-      <div class="count-boxes" data-countdown-part><div class="count-box">
-      <b data-count="d">&nbsp;</b><span>Days</span>
-    </div><div class="count-box">
-      <b data-count="h">&nbsp;</b><span>Hours</span>
-    </div><div class="count-box">
-      <b data-count="m">&nbsp;</b><span>Minutes</span>
-    </div><div class="count-box">
-      <b data-count="s">&nbsp;</b><span>Seconds</span>
-    </div></div>
-      <p class="offer-spots" data-countdown-fallback hidden>Registration is open now</p>
+      
+      <p class="offer-spots" data-countdown-fallback>Registration is open now</p>
       <p class="offer-spots"><span dir="ltr">9</span> seats left</p>
       <div class="btn-row centred">
       <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
