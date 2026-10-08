@@ -67,7 +67,7 @@ for (const s of SIZES) {
       const overflow = document.documentElement.scrollWidth > window.innerWidth + 1;
       // the ten sections the build-spec locks, plus the header and footer
       const want = ['#hero', '#offer-strip', '#problem', '#what-we-do', '#included',
-                    '#journey', '#work', '#faq', '#final'];
+                    '#report', '#work', '#faq', '#final'];
       const missing = want.filter((sel) => !document.querySelector(sel));
       if (!document.querySelector('header.site-header')) missing.push('header.site-header');
       if (!document.querySelector('footer.site-footer')) missing.push('footer.site-footer');

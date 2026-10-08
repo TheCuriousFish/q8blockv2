@@ -461,100 +461,90 @@ homepage.** Build-spec §28.3 has the record.
 
 ---
 
-## 6. The journey
+## 6. Your monthly report
 
-**Background** dark `#141415`, full bleed band.
+**Background** dark `#101012`, full bleed band. Section id `report` (was `journey`).
 
-**REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).** The Search Console graph is the section's
-centrepiece and the three illustrations that used to head three large cards are now small icons under it
-carrying the story. The shape is: eyebrow, headline, one short subhead, the graph, a row of three compact
-beats, the WhatsApp CTA. Nothing else.
-
-**THE FORENSIC DETAIL IS GONE ON PURPOSE AND MAY NOT BE RESTORED.** Ahmad, in his own words:
-*"don't use details like kwtclean or from what month to what month."* Removed from this section's copy:
-
-* the client name (`kwtclean.com`, the old site label),
-* the date range and the three month labels,
-* the three click figures (`7` / `165` / `531`),
-* the precision note about April being the first data month and August the fifth full one,
-* the carwashkw.com baseline paragraph,
-* the Search Console source caption.
-
-**This is a deliberate reversal of the earlier checkability framing and he has now made it twice**, on the
-grounds that prospects do not verify and the detail costs more than it earns. The long argument for the
-opposite that used to live in this section is not an instruction to a later agent; build-spec §26.1 records
-the decision. **Nothing became unverifiable**: the offer page's B2b still names the client and both dates,
-and the derivation tables at the end of this file are untouched.
-
-**The numbers printed inside the graph image stay exactly as they are.** `1.99K`, `114K`, `1.7%`, `10.9`
-and the dated x axis are the image's own axis, not our copy, and no number in it is ever altered.
-
-**The graph is the same asset as offer B2b**, `src/img/proof-kwtclean-gsc.webp`, reused and never
-re-derived or re-cropped. It keeps B2b's behaviour: below 1000px it **pans instead of shrinking** and its
-wrapper forces `direction: ltr`, so both locales open on the four headline figures at the panel's left
-edge. Build-spec §25.6 and §26.1 have the measurements.
+**REBUILT 2026-10-08 (build-spec §31).** Ahmad: "lets redo the how we work section completely, remove
+everything. instead, i want to show a report". Board `design/boards/report-A.png` (B and C are dead), then
+"lets add 4 pages, the 2 extra are the keyword page and traffic page." Everything the old section carried is
+deleted: the old eyebrow and headline, the subhead, the Search Console graph, the three icon beats and the
+Call/WhatsApp pair. The shape is now eyebrow, headline, four report pages. No lead, no CTA.
 
 | Element | Arabic | English |
 |---|---|---|
-| Eyebrow | كيف نعمل | How it works |
-| Headline | هكذا يبدأ موقع جديد في الظهور | How a new site gets found. |
-| Highlighted word | في الظهور | gets found |
-| Subhead | هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console. | These are the numbers of one site we built, exactly as Google Search Console exported them. |
+| Eyebrow | تقريرك الشهري | Your monthly report |
+| Headline | ما تحصل عليه كل شهر | What you get every month. |
+| Highlighted words | كل شهر | every month. |
+| Grid accessible name | أربع صفحات من تقرير شهري حقيقي لأحد عملائنا | Four pages from a real monthly report for one of our clients |
+| Caption under each page | الصفحة 1 / 2 / 4 / 5 | Page 1 / 2 / 4 / 5 |
 
-**The graph's accessible text.** It names no client and no date range. It describes the panel, which is a
-description of an image and not a claim — the same reasoning that lets `متوسط الموضع` / `average position`
-appear in it where the `rank` register forbids position as a selling word anywhere else.
+The captions carry the report's own page numbers (1, 2, 4, 5), not 1 to 4: the pages are real and pages 3 and 6
+were left out. Header strip on every page: the Q8 box, `block`, and the report's own tag `kwtclean.com · Sep 2026`
+(uppercase by CSS; the report's em dash became a middle dot, no dashes in copy).
+
+**Every figure comes from the report, never from this file.** `scripts/derive-report.mjs` reads
+`ops/reports/kwtclean/2026-09.html` and writes `src/report.json`; the renderer prints only that. Re-run the
+script for a new month; do not type numbers.
+
+### Page 1, conversions
 
 | Element | Arabic | English |
 |---|---|---|
-| Alt | لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى. | A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band. |
-| Pan region accessible name | لوحة أداء في Google Search Console لموقع بنيناه | A Google Search Console performance panel for a site we built |
-| Pan hint, phone only | اسحب الصورة أفقيًا لقراءتها كاملة | Swipe the panel sideways to read all of it |
+| Label | تواصل العملاء | Client conversions |
+| Figure + unit | 88 تحويل | 88 conversions |
+| Split bar | 64% orange (WhatsApp) / 36% white (calls) | same |
+| Left figure | 56 محادثة واتساب 64% | 56 WhatsApp chats 64% |
+| Right figure | 32 اتصال هاتفي 36% | 32 Phone calls 36% |
 
-**The three beats, under the graph.** Same three story beats as before, and the titles are still the
-approved board's — `Build / Get discovered / Get traction`, and the MSA triad `البناء / الظهور / النمو`
-(Ahmad, 2026-09-24: *"I like the messaging that was used, use the same exact messaging. So get discovered,
-get traction, get more customers."*). `الظهور` is the same register word the headline uses, so nothing here
-reaches for the banned `ترتيب`. **The bodies are the ones the cards already carried, kept because they
-contain no invented claim, duration or figure** — which is now the only thing holding this section, since
-the figures that used to support them are gone. Each beat carries its icon, its title and its body. No
-month label, no figure.
+Dropped: the report's date range sentence under the number, and its "من إجمالي التواصل" suffix (the board has none).
 
-| # | Icon | Arabic title | Arabic body | English title | English body |
+### Page 2, conversions by service (top 8, the report's order)
+
+| # | Arabic | English | Calls | WhatsApp | Total |
 |---|---|---|---|---|---|
-| 1 | Build (`journey-1.webp`) | البناء | يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة. | Build | The site is designed, built and published, and sent to Google. |
-| 2 | Get discovered (`journey-2.webp`) | الظهور | تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه. | Get discovered | Service and area pages enter the index. Customers find them. |
-| 3 | Get traction (`journey-3.webp`) | النمو | يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها. | Get traction | A customer finds the page for his area, and calls you from it. |
+| 01 | عاملات بالساعة | Hourly maids | 11 | 21 | 32 |
+| 02 | غسيل سجاد | Carpet washing | 7 | 8 | 15 |
+| 03 | تنظيف منازل | House cleaning | 1 | 6 | 7 |
+| 04 | الصفحة الرئيسية | Home page | 0 | 6 | 6 |
+| 05 | مكافحة حشرات | Pest control | 2 | 2 | 4 |
+| 06 | تنظيف مسابح | Pool cleaning | 1 | 2 | 3 |
+| 07 | غسيل كنب | Sofa washing | 1 | 2 | 3 |
+| 08 | تنظيف مكاتب | Office cleaning | 1 | 1 | 2 |
 
-**CTA strip closing the section**, now centred on its own row because the source line it used to share
-that row with is gone.
+Label `التواصل حسب الخدمة` / `Conversions by service`. Muted line `11 اتصال · 21 واتساب` / `11 calls · 21 WhatsApp`
+(`1 call` singular; a zero part is omitted). Dropped: rows 09 to 15 and the "and 3 more services" line. No ترتيب.
 
-| Arabic | English |
-|---|---|
-| واتساب | WhatsApp |
+### Page 3, search keywords (report page 4)
 
-**Build data kept on file, printed nowhere.** The five real Google Search Console rows for kwtclean.com
-stay in `src/data.mjs` as `JOURNEY_ROWS` and in `design/proof-data.md`. Nothing on the page prints them
-any more and no chart is drawn from them — the graph is the export image.
+Label `كلمات البحث` / `Search keywords`, line `ما يبحث عنه عملاؤكم في جوجل` / `What your customers search for on Google`.
+The first 12 phrases in the report's order, exactly as written, the report's `( إنجليزي )` marker stripped. Arabic
+phrases stay Arabic on `/en/` (marked `lang="ar" dir="rtl"`); English ones carry `lang="en"`. The first is the
+report's highlighted one (orange outline):
+مكافحة حشرات الفحيحيل · مكافحة حشرات صباح السالم · خدم بالساعات الفحيحيل · carpet cleaning kuwait · خادمات بالساعة ·
+عاملات بالساعة · hourly cleaning service kuwait · خدم بالساعات المهبولة · خدم بالساعات صباح الاحمد · تنظيف كنب ·
+sofa cleaning kuwait · ac duct cleaning kuwait.
 
-| Month | Clicks | Impressions |
+### Page 4, visits from search (report page 5)
+
+| Label | Value | Line under it |
 |---|---|---|
-| April 2026 | 7 | 956 |
-| May 2026 | 165 | 11,155 |
-| June 2026 | 354 | 22,101 |
-| July 2026 | 452 | 25,564 |
-| August 2026 | 531 | 27,932 |
+| النقرات من نتائج البحث / Clicks from search results | 525 (orange) | نقرة وصلت للموقع من نتائج جوجل / clicks that reached the site from Google results |
+| ظهور الموقع في النتائج / Appearances in results | 29,797 | مرة ظهور في صفحات نتائج جوجل / times the site showed on Google results pages |
+| أعلى يوم / Best day | 14 سبتمبر / 14 September | 27 زيارة في يوم واحد / 27 visits in one day |
+| القيمة التقديرية / Estimated value | 500 إلى 600 د.ك / 500 to 600 KWD | لو جاءت هذه الزيارات من إعلانات جوجل / if these visits had come from Google Ads |
 
-**Retired from this section, 2026-09-30.** Kept here so nobody hunts for them or puts them back:
+Page label `الزيارات من نتائج البحث` / `Visits from search results`. The report's first panel label
+`الزيارات / النقرات من نتائج البحث` was shortened to `النقرات من نتائج البحث`. The range dash became `إلى` / `to`.
+Under the figures, the daily visits chart (30 days, recovered from the report's own chart, sums to 525), axis
+`1 سبتمبر` to `30 سبتمبر` / `1 Sep` to `30 Sep`, accessible name
+`الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 27 زيارة يوم 14 سبتمبر` /
+`Daily visits from Google search, 1 to 30 September, peaking at 27 visits on 14 September`.
+Dropped: the report's h2 `حجم الزيارات / النقرات من جوجل` and the long methodology note (`تقدير: جوجل يذكر...`).
 
-| What it said | Where it went |
-|---|---|
-| `الشهر الأول، أبريل 2026` / `Month one, April 2026` and the two other month labels | deleted |
-| `7 نقرات في الشهر` / `165` / `531` | deleted from the page; the rows are in the table above |
-| The precision note about April and the fifth full data month | deleted |
-| The carwashkw.com baseline pair (199 to 440 clicks over thirteen months, plus the Google profile checklist condition) | deleted |
-| `المصدر: Google Search Console، بيانات حتى 24 سبتمبر 2026` | deleted; the subhead still names the source |
-| `kwtclean.com` site label | deleted |
+**Retired 2026-10-08.** `كيف نعمل` / `How it works`, `هكذا يبدأ موقع جديد في الظهور` / `How a new site gets found.`,
+the Search Console subhead, the graph (still on the offer page B2b), the beats `البناء / الظهور / النمو` and the
+closing Call/WhatsApp pair. `JOURNEY_ROWS` stays in `src/data.mjs`, printed nowhere.
 
 ---
 
@@ -829,7 +819,7 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | متى تظهر النتائج؟ | How long before results show? |
-| Answer | لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما حدث فعلًا: قسم كيف نعمل في هذه الصفحة يعرض أشهرًا متتالية لموقع واحد بنيناه، كما صدّرها Google Search Console. | We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what actually happened. The How it works section on this page shows consecutive months from one single site we built, exactly as Google Search Console exported them. |
+| Answer | لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة. | We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page. |
 
 **Q5**
 

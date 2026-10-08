@@ -42,7 +42,7 @@ const PAGES = [
       ['problem',   's3.png',        '#problem'],                             // section 3
       ['whatwedo',  's4.png',        '#what-we-do'],                          // section 4
       ['included',  's5.png',        '#included'],                            // section 5
-      ['journey',   'journey-D.png', '#journey'],                             // section 6 (approved board)
+      ['report',    'report-A.png',  '#report'],                              // section 6 (approved board, pages 1 and 2 only)
       ['work',      's7.png',        '#work'],                                // section 7
       ['faq',       's8.png',        '#faq'],                                 // section 8
       ['final',     's9.png',        ['#final', 'footer.site-footer']],       // sections 9 + 10

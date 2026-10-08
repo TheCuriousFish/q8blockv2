@@ -388,38 +388,32 @@ export const COPY = {
           still render the same six ICONS. Do not reinstate a third copy of
           them on the homepage. ── */
 
-    /* ── 6. The journey. REBUILT 2026-09-30 (build-spec §26.1): the Search
-          Console graph is the section, and the three illustrations that used to
-          head three large cards are small icons under it carrying the three
-          story beats. THE FORENSIC DETAIL IS DELIBERATELY GONE — no client
-          name, no date range, no "fifth full data month" note, no carwashkw
-          baseline, no source caption. Ahmad has now said twice that a prospect
-          does not verify and that the detail costs more than it earns. Do NOT
-          restore it: this is a reversal of the earlier checkability framing,
-          not a regression. The figures printed INSIDE the image are the
-          image's own axis and stay exactly as exported. ── */
-    journey: {
-      eyebrow: 'كيف نعمل',
-      h2: 'هكذا يبدأ موقع جديد <span class="hl">في الظهور</span>',
-      lead: 'هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console.',
-      /* The same unedited export the offer page's B2b carries, reused here —
-         never re-derived or re-cropped. It pans instead of shrinking below
-         1000px and its wrapper forces direction:ltr, because the four headline
-         figures sit at the panel's LEFT edge and an RTL scroller would open on
-         the tail of the chart. See build-spec §25.6 and §26.1. The alt names no
-         client and no date range; it describes the panel, which is why
-         "متوسط الموضع" may appear in it where the rank register bans position
-         as a selling word. */
-      graph: {
-        alt: 'لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى.',
-        panLabel: 'لوحة أداء في Google Search Console لموقع بنيناه',
-        hint: 'اسحب الصورة أفقيًا لقراءتها كاملة',
+    /* ── 6. Your monthly report. REBUILT 2026-10-08 (build-spec §31). The old
+          graph, the three icon beats and the CTA pair are gone. Four pages of a
+          real client report, built as live HTML. Every figure comes from
+          src/report.json, which scripts/derive-report.mjs pulls out of the
+          report HTML; only labels live here. No dashes: the report's value
+          range is written with إلى. ── */
+    report: {
+      eyebrow: 'تقريرك الشهري',
+      h2: 'ما تحصل عليه <span class="hl">كل شهر</span>',
+      gridLabel: 'أربع صفحات من تقرير شهري حقيقي لأحد عملائنا',
+      page: 'الصفحة',
+      conv: { label: 'تواصل العملاء', unit: 'تحويل', wa: 'محادثة واتساب', call: 'اتصال هاتفي', barLabel: 'نسبة الواتساب والاتصال' },
+      svc: {
+        label: 'التواصل حسب الخدمة', calls: 'اتصال', wa: 'واتساب',
+        names: {},
       },
-      stages: [
-        { title: 'البناء', body: 'يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة.' },
-        { title: 'الظهور', body: 'تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه.' },
-        { title: 'النمو', body: 'يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها.' },
-      ],
+      kw: { label: 'كلمات البحث', sub: 'ما يبحث عنه عملاؤكم في جوجل' },
+      traffic: {
+        label: 'الزيارات من نتائج البحث',
+        clicksK: 'النقرات من نتائج البحث', clicksS: 'نقرة وصلت للموقع من نتائج جوجل',
+        imprK: 'ظهور الموقع في النتائج', imprS: 'مرة ظهور في صفحات نتائج جوجل',
+        peakK: 'أعلى يوم', peakV: '{d} سبتمبر', peakS: '{n} زيارة في يوم واحد',
+        valueK: 'القيمة التقديرية', valueV: '{lo} إلى {hi} د.ك', valueS: 'لو جاءت هذه الزيارات من إعلانات جوجل',
+        chartLabel: 'الزيارات اليومية من بحث جوجل، من 1 إلى {last} سبتمبر، وأعلاها {n} زيارة يوم {d} سبتمبر',
+        start: '1 سبتمبر', end: '{last} سبتمبر',
+      },
     },
 
     /* ── 7. Our work ── */
@@ -506,7 +500,7 @@ export const COPY = {
         { q: 'هل تعملون على موقعي الحالي؟', a: 'لا. نعمل فقط على المواقع التي نبنيها بأنفسنا. الأساس التقني والبنية الداخلية هما ما يحدد الترتيب، ولا يمكننا أن نتحمل مسؤولية نتيجة مبنية على أساس وضعه غيرنا.' },
         { q: 'لمن يعود الموقع؟', a: 'الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. وشروط ما بعد انتهاء فترة العرض مكتوبة كاملة في صفحة العرض.' },
         { q: 'هل تديرون ملف نشاطي على جوجل؟', a: 'لا. لا نطلب صلاحية الدخول إلى ملفك. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث. الملف يبقى بالكامل تحت سيطرتك.' },
-        { q: 'متى تظهر النتائج؟', a: 'لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما حدث فعلًا: قسم كيف نعمل في هذه الصفحة يعرض أشهرًا متتالية لموقع واحد بنيناه، كما صدّرها Google Search Console.' },
+        { q: 'متى تظهر النتائج؟', a: 'لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة.' },
         { q: 'لدي موقع بالفعل، فماذا يحدث؟', a: 'نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. أما شروط العرض المحدود فتختلف عن ذلك، وهي مكتوبة في صفحة العرض.' },
       ],
     },
@@ -899,23 +893,37 @@ export const COPY = {
       ],
     },
 
-    /* The English mirror of the rebuilt §6. See the Arabic block above for why
-       the client name, the date range, the precision note, the carwashkw
-       baseline and the source caption are gone, and why they stay gone. */
-    journey: {
-      eyebrow: 'How it works',
-      h2: 'How a new site <span class="hl">gets found.</span>',
-      lead: 'These are the numbers of one site we built, exactly as Google Search Console exported them.',
-      graph: {
-        alt: 'A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band.',
-        panLabel: 'A Google Search Console performance panel for a site we built',
-        hint: 'Swipe the panel sideways to read all of it',
+    /* The English mirror of §6, the monthly report (build-spec §31). The
+       keyword phrases are NOT translated: they are what customers typed. */
+    report: {
+      eyebrow: 'Your monthly report',
+      h2: 'What you get <span class="hl">every month.</span>',
+      gridLabel: 'Four pages from a real monthly report for one of our clients',
+      page: 'Page',
+      conv: { label: 'Client conversions', unit: 'conversions', wa: 'WhatsApp chats', call: 'Phone calls', barLabel: 'WhatsApp and call share' },
+      svc: {
+        label: 'Conversions by service', calls: ['call', 'calls'], wa: 'WhatsApp',
+        names: {
+          'عاملات بالساعة': 'Hourly maids',
+          'غسيل سجاد': 'Carpet washing',
+          'تنظيف منازل': 'House cleaning',
+          'الصفحة الرئيسية': 'Home page',
+          'مكافحة حشرات': 'Pest control',
+          'تنظيف مسابح': 'Pool cleaning',
+          'غسيل كنب': 'Sofa washing',
+          'تنظيف مكاتب': 'Office cleaning',
+        },
       },
-      stages: [
-        { title: 'Build', body: 'The site is designed, built and published, and sent to Google.' },
-        { title: 'Get discovered', body: 'Service and area pages enter the index. Customers find them.' },
-        { title: 'Get traction', body: 'A customer finds the page for his area, and calls you from it.' },
-      ],
+      kw: { label: 'Search keywords', sub: 'What your customers search for on Google' },
+      traffic: {
+        label: 'Visits from search results',
+        clicksK: 'Clicks from search results', clicksS: 'clicks that reached the site from Google results',
+        imprK: 'Appearances in results', imprS: 'times the site showed on Google results pages',
+        peakK: 'Best day', peakV: '{d} September', peakS: '{n} visits in one day',
+        valueK: 'Estimated value', valueV: '{lo} to {hi} KWD', valueS: 'if these visits had come from Google Ads',
+        chartLabel: 'Daily visits from Google search, 1 to {last} September, peaking at {n} visits on {d} September',
+        start: '1 Sep', end: '{last} Sep',
+      },
     },
 
     work: {
@@ -962,7 +970,7 @@ export const COPY = {
         { q: 'Do you work on my current website?', a: 'No. We only work on websites we build ourselves. The technical foundation and the internal structure are what decide the ranking, and we cannot take responsibility for a result built on somebody else’s foundation.' },
         { q: 'Who owns the website?', a: 'The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. The terms for what happens when the offer period ends are written in full on the offer page.' },
         { q: 'Do you manage my Google Business Profile?', a: 'No. We do not ask for access to your profile. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results. The profile stays entirely under your control.' },
-        { q: 'How long before results show?', a: 'We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what actually happened. The How it works section on this page shows consecutive months from one single site we built, exactly as Google Search Console exported them.' },
+        { q: 'How long before results show?', a: 'We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page.' },
         { q: 'What if I already have a website?', a: 'We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. The conditions of the limited offer are different, and they are written on the offer page.' },
       ],
     },

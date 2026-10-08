@@ -411,23 +411,134 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .icon-card .h3 { margin-block-start: 20px; min-height: calc(2em * var(--lh-h3)); }
 .icon-card .body { margin-block-start: 16px; }
 
-#journey { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
-
-.journey-graph { margin-block-start: 40px; }
-.journey-graph .proof-pan { max-width: 1320px; margin-inline: auto; }
-
-.journey-beats {
-  margin-block-start: 48px; list-style: none; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;
+#report { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
+.rp-grid {
+  list-style: none; margin: 40px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px;
 }
-.journey-beat { display: flex; align-items: flex-start; gap: 18px; }
-.journey-beat img {
-  flex: none; width: 104px; height: auto; aspect-ratio: 343 / 296; object-fit: contain;
-  margin-block-start: -6px;
+.rp-item { display: flex; flex-direction: column; min-width: 0; }
+.rp-card {
+  flex: 1; display: flex; flex-direction: column; container-type: inline-size;
+  background: #17181B; border: 1px solid #3B3E45; border-radius: 0; color: #fff;
 }
-.journey-beat .h3 { font-size: var(--fs-h3-s6); }
-.journey-beat .body { margin-block-start: 10px; }
-.journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
+.rp-cap { margin: 12px 0 0; font-size: 15px; line-height: 1.3; color: var(--muted-on-dark); }
+
+.rp-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: clamp(52px, 10.4cqi, 67px); padding-inline: clamp(16px, 3.9cqi, 25px);
+  background: #000; border-block-end: 1px solid #3B3E45;
+}
+.rp-logo { display: inline-flex; align-items: center; gap: clamp(8px, 1.9cqi, 12px); direction: ltr; line-height: 1; }
+.rp-logo-box {
+  width: clamp(32px, 6.5cqi, 42px); height: clamp(29px, 5.9cqi, 38px); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: #fff; font-weight: 800; letter-spacing: -0.02em;
+  font-size: clamp(16px, 3.3cqi, 21px);
+}
+.rp-logo-word { font-weight: 800; color: #fff; font-size: clamp(19px, 3.9cqi, 25px); }
+.rp-tag {
+  font-size: clamp(11px, 1.85cqi, 12px); font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #A3A9B2; white-space: nowrap;
+}
+
+.rp-body {
+  flex: 1; display: flex; flex-direction: column;
+  padding: clamp(22px, 5.3cqi, 34px) clamp(20px, 5.1cqi, 33px) clamp(24px, 5cqi, 32px);
+}
+.rp-card .rp-label {
+  margin: 0; font-size: clamp(17px, 3.1cqi, 20px); font-weight: 600; line-height: 1.3;
+  color: var(--orange);
+}
+
+.rp-hero {
+  margin: clamp(10px, 2.5cqi, 16px) 0 0; display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: 0 clamp(12px, 3.4cqi, 22px); line-height: 1;
+}
+.rp-big { font-size: min(23.6cqi, 152px); font-weight: 800; line-height: 0.92; letter-spacing: -0.02em; }
+.rp-unit { font-size: clamp(28px, 8.1cqi, 52px); font-weight: 700; }
+.rp-bar { display: flex; height: clamp(8px, 1.6cqi, 10px); margin-block-start: clamp(22px, 5.7cqi, 37px); background: #26282D; }
+.rp-seg { display: block; height: 100%; transform-origin: left center; }
+html[dir="rtl"] .rp-seg { transform-origin: right center; }
+.rp-seg-wa { background: var(--orange); }
+.rp-seg-call { background: #fff; }
+.rp-barnums {
+  display: flex; justify-content: space-between; margin-block-start: 10px;
+  font-size: clamp(15px, 3.1cqi, 20px); font-weight: 500;
+}
+.rp-split {
+  margin-block-start: auto; padding-block-start: clamp(24px, 6cqi, 40px);
+  display: grid; grid-template-columns: 56fr 44fr; gap: 16px;
+}
+.rp-sp { margin: 0; display: flex; flex-direction: column; }
+.rp-n { font-size: clamp(44px, 10.1cqi, 65px); font-weight: 800; line-height: 1; }
+.rp-sp-wa .rp-n { color: var(--orange); }
+.rp-k { margin-block-start: 8px; font-size: clamp(17px, 3.4cqi, 22px); font-weight: 500; line-height: 1.3; }
+.rp-pc { margin-block-start: 4px; font-size: clamp(16px, 3.1cqi, 20px); color: var(--muted-on-dark); }
+
+.rp-rows { list-style: none; margin: clamp(8px, 2cqi, 14px) 0 0; padding: 0; }
+.rp-row {
+  display: grid; grid-template-columns: clamp(38px, 10.5cqi, 68px) minmax(0, 1fr) auto;
+  align-items: center; gap: 0 12px; min-height: clamp(44px, 7.1cqi, 46px);
+  padding-block: 6px; border-block-end: 1px solid #34373E;
+}
+.rp-rk { font-size: clamp(15px, 3cqi, 19px); font-weight: 600; color: var(--orange); }
+.rp-name {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px;
+  font-size: clamp(16px, 3.3cqi, 21px); font-weight: 500; line-height: 1.3;
+}
+.rp-mix { font-size: clamp(14px, 2.2cqi, 15px); font-weight: 400; color: var(--muted-on-dark); white-space: nowrap; }
+.rp-tot { min-width: 2ch; text-align: end; font-size: clamp(22px, 4.7cqi, 30px); font-weight: 800; line-height: 1; padding-inline-start: 6px; }
+
+.rp-sub { margin: 6px 0 0; font-size: clamp(15px, 2.65cqi, 17px); color: var(--muted-on-dark); line-height: 1.4; }
+.rp-tags {
+  list-style: none; margin: clamp(16px, 3.7cqi, 24px) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: clamp(8px, 1.6cqi, 10px);
+}
+.rp-tagk {
+  border: 1px solid #4A4E57; border-radius: 0; padding: 7px 13px;
+  font-size: clamp(15px, 2.65cqi, 17px); font-weight: 500; line-height: 1.35;
+}
+.rp-tagk.hot { border-color: var(--orange); }
+
+.rp-stats {
+  margin-block-start: clamp(10px, 2.5cqi, 16px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(16px, 4cqi, 26px);
+}
+.rp-stat { padding-block: 12px; border-block-start: 1px solid #34373E; min-width: 0; }
+.rp-stat.key { border-block-start-color: var(--orange); }
+.rp-stat p { margin: 0; }
+.rp-sk { font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
+.rp-sv { margin-block-start: 6px !important; font-size: clamp(28px, 6.2cqi, 40px); font-weight: 800; line-height: 1.1; }
+.rp-stat.key .rp-sv { color: var(--orange); }
+.rp-stat.small .rp-sv { font-size: clamp(22px, 4.7cqi, 30px); line-height: 1.25; }
+.rp-ss { margin-block-start: 4px !important; font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
+.rp-chart { margin: auto 0 0; padding-block-start: 14px; }
+.rp-plot { position: relative; width: 100%; aspect-ratio: 600 / 120; }
+.rp-chart-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.rp-area { fill: rgba(255, 95, 41, 0.16); stroke: none; }
+.rp-line { fill: none; stroke: var(--orange); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.rp-axis { stroke: rgba(255, 255, 255, 0.16); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rp-peak {
+  position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--orange); box-sizing: border-box;
+}
+html[dir="rtl"] .rp-peak { margin: -5px; }
+.rp-axisl { display: flex; justify-content: space-between; margin-block-start: 6px; font-size: 13px; color: var(--muted-on-dark); }
+
+.rp-anim .rp-seg { transform: scaleX(0); }
+.rp-anim.rp-in .rp-seg { transform: none; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.rp-anim.rp-in .rp-seg-call { transition-delay: 0.35s; }
+@media (prefers-reduced-motion: reduce) {
+  .rp-anim .rp-seg, .rp-anim.rp-in .rp-seg { transform: none; transition: none; }
+}
+@media (max-width: 767px) {
+  .rp-grid { grid-template-columns: 1fr; gap: 32px; margin-block-start: 32px; }
+}
+
+@container (max-width: 480px) {
+  .rp-name { flex-direction: column; align-items: flex-start; }
+  .rp-stats { grid-template-columns: 1fr; }
+}
 
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
 
@@ -998,8 +1109,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .nav .nav-close { display: block; position: absolute; inset-block-start: 18px; inset-inline-end: 18px; width: 44px; height: 44px; color: #fff; font-size: 30px; line-height: 1; }
   .header-cta { display: none; }
   .problem-grid { grid-template-columns: 1fr; }
-  
-  .journey-beats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
   .wwd-grid { grid-template-columns: 1fr; row-gap: 44px; }
   .wwd-block + .wwd-block::before { display: none; }
   .icons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1042,10 +1151,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   #hero .btn-row .btn-primary { padding: 15px 40px; }
   #hero .btn-row .btn-outline { padding: 13px 38px; }
   .problem-card, .icon-card { padding: 24px; }
-  
-  .journey-beats { grid-template-columns: 1fr; gap: 24px; margin-block-start: 36px; }
-  .journey-beat { gap: 14px; }
-  .journey-beat img { width: 76px; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
   .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
@@ -1115,7 +1220,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Q8 block","alternateName":"Kuwait Block","url":"https://q8block.com/","telephone":"+965 94139666","address":{"@type":"PostalAddress","streetAddress":"Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9","addressCountry":"KW"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you work on my current website?","acceptedAnswer":{"@type":"Answer","text":"No. We only work on websites we build ourselves. The technical foundation and the internal structure are what decide the ranking, and we cannot take responsibility for a result built on somebody else’s foundation."}},{"@type":"Question","name":"Who owns the website?","acceptedAnswer":{"@type":"Answer","text":"The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. The terms for what happens when the offer period ends are written in full on the offer page."}},{"@type":"Question","name":"Do you manage my Google Business Profile?","acceptedAnswer":{"@type":"Answer","text":"No. We do not ask for access to your profile. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results. The profile stays entirely under your control."}},{"@type":"Question","name":"How long before results show?","acceptedAnswer":{"@type":"Answer","text":"We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what actually happened. The How it works section on this page shows consecutive months from one single site we built, exactly as Google Search Console exported them."}},{"@type":"Question","name":"What if I already have a website?","acceptedAnswer":{"@type":"Answer","text":"We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. The conditions of the limited offer are different, and they are written on the offer page."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you work on my current website?","acceptedAnswer":{"@type":"Answer","text":"No. We only work on websites we build ourselves. The technical foundation and the internal structure are what decide the ranking, and we cannot take responsibility for a result built on somebody else’s foundation."}},{"@type":"Question","name":"Who owns the website?","acceptedAnswer":{"@type":"Answer","text":"The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. The terms for what happens when the offer period ends are written in full on the offer page."}},{"@type":"Question","name":"Do you manage my Google Business Profile?","acceptedAnswer":{"@type":"Answer","text":"No. We do not ask for access to your profile. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results. The profile stays entirely under your control."}},{"@type":"Question","name":"How long before results show?","acceptedAnswer":{"@type":"Answer","text":"We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page."}},{"@type":"Question","name":"What if I already have a website?","acceptedAnswer":{"@type":"Answer","text":"We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. The conditions of the limited offer are different, and they are written on the offer page."}}]}</script>
 </head>
 <body>
 <div class="fl fl-light" aria-hidden="true"><svg viewBox="0 0 67 56" focusable="false"><g class="fl-m"><rect width="67" height="56" fill="#FF5F29"/><g fill="none" stroke="#fff" stroke-width="5.4"><ellipse cx="20.5" cy="27" rx="7.6" ry="9.2"/><path d="M24 32.5 30.5 40"/><circle cx="46" cy="21.4" r="5"/><circle cx="46" cy="33.6" r="6.6"/></g></g></svg></div>
@@ -1195,43 +1300,119 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
     </article></div>
     </div>
   </section>
-<section id="journey" class="sec on-dark">
+<section id="report" class="sec on-dark">
     <div class="wrap">
-      <p class="eyebrow">How it works</p>
-      <h2 class="h2">How a new site <span class="hl">gets found.</span></h2>
-      <p class="lead">These are the numbers of one site we built, exactly as Google Search Console exported them.</p>
-      <figure class="proof-shot journey-graph">
-        <div class="proof-pan" tabindex="0" role="group" aria-label="A Google Search Console performance panel for a site we built">
-          <img src="/assets/img/proof-kwtclean-gsc.webp" width="2243" height="582"
-               alt="A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band." loading="lazy" decoding="async">
+      <p class="eyebrow">Your monthly report</p>
+      <h2 class="h2">What you get <span class="hl">every month.</span></h2>
+      <ul class="rp-grid" aria-label="Four pages from a real monthly report for one of our clients">
+        <li class="rp-item">
+      <article class="rp-card rp-conv" aria-labelledby="rp-h0">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
+      </div>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h0">Client conversions</h3>
+          <p class="rp-hero"><span class="rp-big"><bdi dir="ltr">88</bdi></span> <span class="rp-unit">conversions</span></p>
+          <div class="rp-bar" role="img" aria-label="WhatsApp and call share: 64% / 36%">
+            <i class="rp-seg rp-seg-wa" style="width:64%"></i><i class="rp-seg rp-seg-call" style="width:36%"></i>
+          </div>
+          <div class="rp-barnums" aria-hidden="true"><span><bdi dir="ltr">64%</bdi></span><span><bdi dir="ltr">36%</bdi></span></div>
+          <div class="rp-split">
+            <p class="rp-sp rp-sp-wa"><span class="rp-n"><bdi dir="ltr">56</bdi></span><span class="rp-k">WhatsApp chats</span><span class="rp-pc"><bdi dir="ltr">64%</bdi></span></p>
+            <p class="rp-sp rp-sp-call"><span class="rp-n"><bdi dir="ltr">32</bdi></span><span class="rp-k">Phone calls</span><span class="rp-pc"><bdi dir="ltr">36%</bdi></span></p>
+          </div>
         </div>
-        <p class="proof-hint" aria-hidden="true">Swipe the panel sideways to read all of it</p>
-      </figure>
-      <ul class="journey-beats"><li class="journey-beat">
-      <img src="/assets/img/journey-1.webp" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">Build</h3>
-        <p class="body">The site is designed, built and published, and sent to Google.</p>
+      </article>
+      <p class="rp-cap">Page 1</p>
+    </li>
+        <li class="rp-item">
+      <article class="rp-card rp-svc" aria-labelledby="rp-h1">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
       </div>
-    </li><li class="journey-beat">
-      <img src="/assets/img/journey-2.webp" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">Get discovered</h3>
-        <p class="body">Service and area pages enter the index. Customers find them.</p>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h1">Conversions by service</h3>
+          <ol class="rp-rows"><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">01</bdi></span>
+            <span class="rp-name">Hourly maids<span class="rp-mix"><bdi dir="ltr">11</bdi> calls · <bdi dir="ltr">21</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">32</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">02</bdi></span>
+            <span class="rp-name">Carpet washing<span class="rp-mix"><bdi dir="ltr">7</bdi> calls · <bdi dir="ltr">8</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">15</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">03</bdi></span>
+            <span class="rp-name">House cleaning<span class="rp-mix"><bdi dir="ltr">1</bdi> call · <bdi dir="ltr">6</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">7</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">04</bdi></span>
+            <span class="rp-name">Home page<span class="rp-mix"><bdi dir="ltr">6</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">6</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">05</bdi></span>
+            <span class="rp-name">Pest control<span class="rp-mix"><bdi dir="ltr">2</bdi> calls · <bdi dir="ltr">2</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">4</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">06</bdi></span>
+            <span class="rp-name">Pool cleaning<span class="rp-mix"><bdi dir="ltr">1</bdi> call · <bdi dir="ltr">2</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">3</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">07</bdi></span>
+            <span class="rp-name">Sofa washing<span class="rp-mix"><bdi dir="ltr">1</bdi> call · <bdi dir="ltr">2</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">3</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">08</bdi></span>
+            <span class="rp-name">Office cleaning<span class="rp-mix"><bdi dir="ltr">1</bdi> call · <bdi dir="ltr">1</bdi> WhatsApp</span></span>
+            <span class="rp-tot"><bdi dir="ltr">2</bdi></span>
+          </li></ol>
+        </div>
+      </article>
+      <p class="rp-cap">Page 2</p>
+    </li>
+        <li class="rp-item">
+      <article class="rp-card rp-kw" aria-labelledby="rp-h2">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
       </div>
-    </li><li class="journey-beat">
-      <img src="/assets/img/journey-3.webp" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">Get traction</h3>
-        <p class="body">A customer finds the page for his area, and calls you from it.</p>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h2">Search keywords</h3>
+          <p class="rp-sub">What your customers search for on Google</p>
+          <ul class="rp-tags"><li class="rp-tagk hot" lang="ar" dir="rtl">مكافحة حشرات الفحيحيل</li><li class="rp-tagk" lang="ar" dir="rtl">مكافحة حشرات صباح السالم</li><li class="rp-tagk" lang="ar" dir="rtl">خدم بالساعات الفحيحيل</li><li class="rp-tagk" lang="en" dir="ltr">carpet cleaning kuwait</li><li class="rp-tagk" lang="ar" dir="rtl">خادمات بالساعة</li><li class="rp-tagk" lang="ar" dir="rtl">عاملات بالساعة</li><li class="rp-tagk" lang="en" dir="ltr">hourly cleaning service kuwait</li><li class="rp-tagk" lang="ar" dir="rtl">خدم بالساعات المهبولة</li><li class="rp-tagk" lang="ar" dir="rtl">خدم بالساعات صباح الاحمد</li><li class="rp-tagk" lang="ar" dir="rtl">تنظيف كنب</li><li class="rp-tagk" lang="en" dir="ltr">sofa cleaning kuwait</li><li class="rp-tagk" lang="en" dir="ltr">ac duct cleaning kuwait</li></ul>
+        </div>
+      </article>
+      <p class="rp-cap">Page 3</p>
+    </li>
+        <li class="rp-item">
+      <article class="rp-card rp-traffic" aria-labelledby="rp-h3">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
       </div>
-    </li></ul>
-        <!-- Call and WhatsApp always ship as a pair. This block had WhatsApp alone,
-             which read as an unfinished row beside every other CTA on the site. -->
-      <div class="journey-foot btn-row">
-        <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
-        <a class="btn btn-outline" href="https://wa.me/96594139666" rel="noopener" target="_blank">WhatsApp</a>
-      </div>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h3">Visits from search results</h3>
+          <div class="rp-stats">
+            <div class="rp-stat key"><p class="rp-sk">Clicks from search results</p><p class="rp-sv"><bdi dir="ltr">525</bdi></p><p class="rp-ss">clicks that reached the site from Google results</p></div>
+            <div class="rp-stat "><p class="rp-sk">Appearances in results</p><p class="rp-sv"><bdi dir="ltr">29,797</bdi></p><p class="rp-ss">times the site showed on Google results pages</p></div>
+            <div class="rp-stat small"><p class="rp-sk">Best day</p><p class="rp-sv"><bdi dir="ltr">14</bdi> September</p><p class="rp-ss"><bdi dir="ltr">27</bdi> visits in one day</p></div>
+            <div class="rp-stat small"><p class="rp-sk">Estimated value</p><p class="rp-sv"><bdi dir="ltr">500</bdi> to <bdi dir="ltr">600</bdi> KWD</p><p class="rp-ss">if these visits had come from Google Ads</p></div>
+          </div>
+          <figure class="rp-chart" role="img" aria-label="Daily visits from Google search, 1 to 30 September, peaking at 27 visits on 14 September">
+            <div class="rp-plot"><svg class="rp-chart-svg" viewBox="0 0 600 120" width="600" height="120" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+          <path d="M0,70.4 L20.7,32.7 L41.4,28.9 L62.1,36.4 L82.8,47.8 L103.4,28.9 L124.1,13.8 L144.8,44 L165.5,25.1 L186.2,62.9 L206.9,25.1 L227.6,17.6 L248.3,51.6 L269,10 L289.7,62.9 L310.3,47.8 L331,70.4 L351.7,70.4 L372.4,28.9 L393.1,62.9 L413.8,40.2 L434.5,51.6 L455.2,47.8 L475.9,66.7 L496.6,59.1 L517.2,40.2 L537.9,51.6 L558.6,55.3 L579.3,55.3 L600,70.4 L600,112 L0,112 Z" class="rp-area"/>
+          <path d="M0,70.4 L20.7,32.7 L41.4,28.9 L62.1,36.4 L82.8,47.8 L103.4,28.9 L124.1,13.8 L144.8,44 L165.5,25.1 L186.2,62.9 L206.9,25.1 L227.6,17.6 L248.3,51.6 L269,10 L289.7,62.9 L310.3,47.8 L331,70.4 L351.7,70.4 L372.4,28.9 L393.1,62.9 L413.8,40.2 L434.5,51.6 L455.2,47.8 L475.9,66.7 L496.6,59.1 L517.2,40.2 L537.9,51.6 L558.6,55.3 L579.3,55.3 L600,70.4" class="rp-line"/>
+          <line x1="0" y1="112" x2="600" y2="112" class="rp-axis"/>
+        </svg>
+        <span class="rp-peak" style="inset-inline-start:44.83333333333333%;top:8.333333333333332%" aria-hidden="true"></span></div>
+            <figcaption class="rp-axisl" aria-hidden="true"><span><bdi dir="ltr">1</bdi> Sep</span><span><bdi dir="ltr">30</bdi> Sep</span></figcaption>
+          </figure>
+        </div>
+      </article>
+      <p class="rp-cap">Page 4</p>
+    </li>
+      </ul>
     </div>
   </section>
 <section id="work" class="sec">
@@ -1373,7 +1554,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a3">
         <span>How long before results show?</span><span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a" id="faq-a3">We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what actually happened. The How it works section on this page shows consecutive months from one single site we built, exactly as Google Search Console exported them.</div>
+      <div class="faq-a" id="faq-a3">We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page.</div>
     </div><div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a4">
         <span>What if I already have a website?</span><span class="faq-icon" aria-hidden="true"></span>

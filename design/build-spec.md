@@ -4442,3 +4442,79 @@ B2 intro, B2b caption, B4, B5 tiers (`$500 / $1,000 / $1,500`), offer FAQ Q1, Q2
 | Lighthouse `/en/` and `/` | perf 100, accessibility 100, best practices 100, SEO 100, CLS 0 |
 
 Nothing committed, pushed or deployed.
+
+## 31. §6 becomes the monthly report: four live pages to `report-A.png`, 2026-10-08
+
+Ahmad: "lets redo the how we work section completely, remove everything. instead, i want to show a report",
+picked **A** of three boards (`report-B.png`, `report-C.png`, `report-options.png` are DEAD), then "lets add 4
+pages, the 2 extra are the keyword page and traffic page." This supersedes §26.1 and §21.2 for §6.
+
+### 31.1 What the section is now
+
+`<section id="report" class="sec on-dark">` (renamed from `journey`; `scripts/compare.mjs` and `scripts/shots.mjs`
+updated). Eyebrow, h2 with the `.hl` block on the last words, then `ul.rp-grid` of four `article.rp-card`, each
+with an `h3` label and a caption carrying the report's page number (1, 2, 4, 5). Deleted: subhead, graph,
+`.journey-*` rules, the three beat icons (files stay on disk, unreferenced by the homepage; `proof-kwtclean-gsc.webp`
+is still used by `/offer/`), the Call/WhatsApp pair.
+
+### 31.2 Data path, no hand-typed numbers
+
+`scripts/derive-report.mjs` parses `ops/reports/kwtclean/2026-09.html` (pages 1, 2, 4, 5) into `src/report.json`.
+It asserts the split adds up to the total, each service row's calls + WhatsApp = total, and the traffic panels
+count is four. **The daily series is not stored in the report as numbers**, only as the chart's SVG path; the
+script recovers it from the path (baseline y=196, peak marker = 27 visits, day 1 at the right) and refuses any
+point that is not a whole visit count. The 30 recovered values sum to **525**, the report's click total, so the
+chart is real. `render.mjs` `report()` reads the JSON; labels live in `data.mjs` `report` (ar/en).
+
+### 31.3 Frame and layout
+
+| Element | Board px | CSS at 1440 | Built |
+|---|---|---|---|
+| page width / gutter | 880 / 43 (2000 view) | 634 / 31 | 644 / 32 (1320 wrap) |
+| page height | 730 | 526 | 564 (rows equal per grid row) |
+| header strip | 93 | 67 | min-height `clamp(52px, 10.4cqi, 67px)`, `#000` |
+| Q8 box | 58 x 53 | 42 x 38 | `clamp` to 42 x 38 |
+| page border | lighter hairline | 1px | `1px solid #3B3E45` on `#17181B`, band `#101012` |
+| label | ~20px orange 600 | | `clamp(17px, 3.1cqi, 20px)` |
+| 88 | 152 cap px | ~152px | `min(23.6cqi, 152px)` / 800 (82px at 390) |
+| "conversions" | | ~52px | `clamp(28px, 8.1cqi, 52px)` / 700 |
+| split bar | 17 | ~10 | 10px, 64/36 widths from the JSON |
+| 56 / 32 | 65 cap | ~65px | `clamp(44px, 10.1cqi, 65px)`, columns 56fr / 44fr |
+| service row pitch | 64 | 46 | min-height 46, hairline `#34373E` |
+| row count | | ~30px / 800 | `clamp(22px, 4.7cqi, 30px)` |
+
+Every page is `container-type: inline-size`, so type scales with the page, not the viewport. 2 x 2 at 768 and up
+(DOM order 1, 2, 4, 5, so page 1 sits at the right in Arabic); one column below 768. Under a 480px page
+(`@container`) the call/WhatsApp line drops under the service name and the four traffic figures stack.
+Keywords are hard-cornered tags (1px `#4A4E57`, first one orange). Traffic chart: inline SVG, `viewBox 0 0 600 120`,
+`preserveAspectRatio="none"` with `vector-effect: non-scaling-stroke`, flat 16% orange fill, the peak dot an HTML
+span so it stays round; mirrored for Arabic (day 1 at the right, as in the report). `role="img"` with a label.
+
+### 31.4 Motion
+
+`app.js` (report bars): if IntersectionObserver exists and reduced motion is off, adds `rp-anim` (segments
+`scaleX(0)`), then `rp-in` once on first intersection (`threshold: 0`), 0.9 s, the call segment 0.35 s later.
+Transform only. Without JS or under reduced motion the bar is drawn full.
+
+### 31.5 What differs from `report-A.png`
+
+1. A muted call/WhatsApp line in each service row, where the board draws a decorative leader line (Ahmad's spec).
+2. Pages are 38px taller than the board (564 vs 526): real Alexandria line heights.
+3. Header tag uses a middle dot, not the board's dash (no dashes in copy).
+4. Pages 3 and 4 have no board; they reuse the frame and type scale. Page 3 has spare space at its foot at 1440
+   because grid rows are equal height.
+
+### 31.6 Verification
+
+| Check | Result |
+|---|---|
+| Data, both locales, headless Chrome against the report HTML parsed independently | 45/45 pass: 88, 56, 32, 64/36, 8 rows with call/WhatsApp splits, 12 keywords in order, 525, 29,797, 14 / 27, 500 to 600, 30 chart points; no dashes, no (إنجليزي), no ترتيب/rank in the section |
+| Board compare at 1440 | 2 passes (second moved the 56/32 columns to 56/44) |
+| Overflow 1440 and 390, both locales | none; no element outside its page |
+| Band order | hero, problem, what-we-do, report DARK, work, pricing, faq, final DARK |
+| First screen 1440x900, 1920x1200, 390x844, both locales | unchanged (900, 1200, 844) |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/en/` and `/` | perf 100, accessibility 100, best practices 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.

@@ -401,6 +401,27 @@
     });
   });
 
+  /* ── report bars ──────────────────────────────────────────────────────────
+     The split bar on the first report page grows in once, the first time the
+     section enters the viewport. Without JS, without IntersectionObserver or
+     under prefers-reduced-motion the bar is simply drawn full. Transform only,
+     so nothing shifts layout. ─────────────────────────────────────────────── */
+  (function () {
+    var sec = document.getElementById('report');
+    if (!sec || !('IntersectionObserver' in window)) return;
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (still) return;
+    sec.classList.add('rp-anim');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        sec.classList.add('rp-in');
+        io.disconnect();
+      });
+    }, { threshold: 0 });
+    io.observe(sec);
+  })();
+
   /* ── countdown ────────────────────────────────────────────────────────────
      Renders "DD : HH : MM : SS" in the strip and fills the four boxes on the
      offer page. When the end date is absent or already past, every element
