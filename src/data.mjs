@@ -14,11 +14,11 @@ export const CONFIG = {
   // Registration close date. ISO 8601 with the Kuwait/Riyadh offset (+03:00).
   // Set to null (or a date in the past) to ship the page with no countdown.
   //
-  // AHMAD SETS THE REAL DATE. The value below is a placeholder: ten days out
-  // from 2026-09-24, because a 98-day countdown reads as no deadline at all
-  // ("should be less than 10. Ten days", 2026-09-24). Change this one line and
-  // the homepage strip and offer hero both follow.
-  COUNTDOWN_END: '2026-10-04T23:59:59+03:00',
+  // Set by Ahmad, 2026-10-08: "push offer to 12th oct". Registration closes at the end of
+  // 12 October 2026, Kuwait / Riyadh time. Keep it short: a 98-day countdown reads as no
+  // deadline at all ("should be less than 10. Ten days", 2026-09-24). Change this one line
+  // and the homepage strip and offer hero both follow.
+  COUNTDOWN_END: '2026-10-12T23:59:59+03:00',
 
   // Seats left. Ahmad's working number is around 9. Set to null to hide the line.
   // "per city" came off the line on 2026-09-25: Ahmad — "don't mention each
