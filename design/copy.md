@@ -132,7 +132,7 @@ The highlight stays on `يجدونك`. The English headline is unchanged.
 |---|---|---|
 | Headline | تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟ | Customers find you on Google and in AI. |
 | Highlighted word | يجدونك | find you |
-| Subhead | نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put you in Google's results and in AI's answers, where your customer is looking. |
+| Subhead | نضع خدماتك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put you in Google's results and in AI's answers, where your customer is looking. |
 | CTA primary | اتصل الآن | Call now |
 | CTA secondary | واتساب | WhatsApp |
 

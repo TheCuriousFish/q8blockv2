@@ -295,7 +295,7 @@ export const COPY = {
       /* Ahmad's own line, 2026-09-25, verbatim. It replaces the three-clause
          paragraph that stood here: NP Digital's hero runs ONE line and this one
          was a paragraph. Do not lengthen it back. */
-      lead: 'نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك',
+      lead: 'نضع خدماتك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك',
       /* The four trust points are gone (§23). One of them, "الاستضافة والنطاق
          والحماية علينا", was an OFFER deliverable sitting in the brand hero —
          it only got there when "بدون عقد" had to be pulled.
