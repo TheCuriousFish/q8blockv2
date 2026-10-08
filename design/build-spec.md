@@ -4669,3 +4669,15 @@ stays the orange top edge. `dir="ltr"`. Card padding from §27 and §30 untouche
 | Lighthouse `/`, `/offer/` (desktop) | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
 
 Nothing committed, pushed or deployed.
+
+## 35. Contract discount line under the pricing cards, 2026-10-08
+
+Ahmad (owner, approved client-facing claim): "mention 10% discount for 6 month contracts and 20% discounts for 12 month contracts".
+
+- **What:** one quiet centred line under the three cards in `#pricing` (`p.plan-contract`): AR `خصم 10% على عقد 6 أشهر · خصم 20% على عقد 12 شهرًا`, EN `10% off 6 month contracts · 20% off 12 month contracts`. Data in `pricing.contract` (`src/data.mjs`), markup in `pricing()` (`src/render.mjs`), style `.plan-contract` (`src/styles.css`, before `.pa-m`).
+- **Style:** 14px, `--muted-on-light`; the two percentages bold in `--ink`, `dir="ltr"` isolated so Arabic never shows `%20`. Not a block, tag, button or badge. At 480px and below the two items stack on two centred lines and the `·` hides.
+- **Digits 6 and 12 on purpose.** "ستة أشهر" / "six months" stays banner-only (the free offer); a contract discount must not read as part of it. No discounted prices computed, no other terms.
+- **Untouched:** the nine prices, SAR block, card padding and heights, board A layout, banner, offer page, hero, report.
+- **Verified:** sweep of `free|مجان|six months|ستة أشهر|limited offer|/offer|seats|مقاعد` outside `#offer-strip` on `/` and `/en/` at 1440 and 390: nothing. Prices after clicking Small/Medium/Large: 997/2,497/4,997; 1,997/4,997/9,997; 2,997/6,997/15,997 (both locales). `#problem` top at the fold unchanged (900 / 844), no horizontal scroll. seo-audit 0 high; site-audit 0 failing; Lighthouse `/` perf 100, a11y 100, CLS 0.
+
+Nothing committed, pushed or deployed.

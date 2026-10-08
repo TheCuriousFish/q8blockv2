@@ -493,6 +493,8 @@ export const COPY = {
       h2: 'اختر خطتك',
       /* The switch. Small is the default and the no-JS state. */
       sizesLabel: 'حجم شركتك',
+      /* Contract discounts, Ahmad 2026-10-08. Digits 6 and 12 on purpose: the words for six months belong to the banner offer only. */
+      contract: [{ a: 'خصم ', pct: '10%', b: ' على عقد 6 أشهر' }, { a: 'خصم ', pct: '20%', b: ' على عقد 12 شهرًا' }],
       sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
       plans: [
@@ -972,6 +974,7 @@ export const COPY = {
       h2: 'Choose your plan.',
       // No lead: the board draws none (build-spec §30).
       sizesLabel: 'Your company size',
+      contract: [{ a: '', pct: '10%', b: ' off 6 month contracts' }, { a: '', pct: '20%', b: ' off 12 month contracts' }],
       sizes: ['Small', 'Medium', 'Large'],
       plans: [
         { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'),
