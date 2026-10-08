@@ -1122,6 +1122,14 @@ html[lang="ar"] #pricing {
   font-size: min(var(--pl-price), 20.5cqi); font-weight: 800; line-height: 1;
   color: var(--ink); direction: ltr; unicode-bidi: isolate;
 }
+.plan-contract {
+  margin: clamp(18px, 2vw, 28px) 0 0; padding-block-end: clamp(14px, 2vw, 24px); font-size: 14px; line-height: 1.6; color: var(--muted-on-light);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 0;
+}
+.plan-contract b { font-weight: 700; color: var(--ink); unicode-bidi: isolate; }
+.pc-item { white-space: nowrap; }
+.pc-sep { white-space: pre; padding-inline: 2px; }
+@media (max-width: 480px) { .pc-sep { display: none; } .plan-contract { flex-direction: column; align-items: center; } }
 .pa-m, .pa-l { display: none; }
 #pricing:has(#psize-m:checked) .pa-s, #pricing:has(#psize-l:checked) .pa-s { display: none; }
 #pricing:has(#psize-m:checked) .pa-m, #pricing:has(#psize-l:checked) .pa-l { display: inline; }

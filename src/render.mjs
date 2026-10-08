@@ -557,6 +557,7 @@ export function pricing(t) {
       <h2 class="h2">${p.h2}</h2>
       <fieldset class="psw"><legend class="vh">${esc(p.sizesLabel)}</legend>${sw}</fieldset>
       <ul class="plan-row">${cards}</ul>
+      <p class="plan-contract">${p.contract.map((c) => `<span class="pc-item">${esc(c.a)}<b dir="ltr">${c.pct}</b>${esc(c.b)}</span>`).join('<span class="pc-sep" aria-hidden="true"> &middot; </span>')}</p>
     </div>
   </section>`;
 }

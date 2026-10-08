@@ -777,6 +777,7 @@ less explanatory text, and the board draws no lead).
 | Switch pills | شركة صغيرة · شركة متوسطة · شركة كبيرة | Small · Medium · Large |
 | Period (unit line beside the bare numeral) | ر.س شهريًا | SAR / month |
 | CTA, every card | اتصل الآن → `tel:` | Call now → `tel:` |
+| Contract discounts, one muted line under the cards (2026-10-08, Ahmad; build-spec §35) | خصم 10% على عقد 6 أشهر · خصم 20% على عقد 12 شهرًا | 10% off 6 month contracts · 20% off 12 month contracts |
 
 | Card | Tag | Arabic name | English name | Check lines, Arabic (Ahmad's own, verbatim) | Check lines, English |
 |---|---|---|---|---|---|
