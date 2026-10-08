@@ -277,14 +277,26 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
+| Line | ستة أشهر مجانية | Six months free |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
 | Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA, same row | اطلع على العرض | See the offer |
 
-**Rewritten 2026-09-30 (build-spec §25): the line now carries the PRICE, and the "service firms"
+**Rewritten 2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN.** Ahmad: the offer "was absolutely
+free. So make sure our offer reflects that." The line is `ستة أشهر مجانية` / `Six months free`. The long
+form `ستة أشهر مجانية لشركات الخدمات` / `Six months free for service companies` was built and measured
+first: one row at 1440 and 1920 in both locales, but at 390 the English strip went to **four rows** (band
+139.6px) and the Arabic line dropped off the pill row. Shortened as the brief allowed. Measured after: one
+row at 1440 and 1920 (band 78 / 79px), **3 rows at 390 in Arabic (114.8px) and 2 in English (90px)**, line
+on the pill row in every case, `#problem` exactly at the fold at 1440x900, 1920x1200 and 390x844. Service
+companies are still named on the offer page (subhead, B3 intro, condition 1). **This strip is the ONLY
+offer mention on the homepage** and its link is the sole route into `/offer/` from there: the footer's
+"The offer" column and the two FAQ references were removed the same day. Everything below about the $500
+line is history.
+
+**Rewritten 2026-09-30 (build-spec §25, superseded 2026-10-08): the line now carries the PRICE, and the "service firms"
 qualifier came off it.** The offer is no longer free, and the one thing the strip must not do is leave a
 reader thinking the price is monthly, so `مرة واحدة` / `paid once` is on the line beside the number. There
 is no room for both that and the qualifier: at 390 the pill and the line share row 1 inside a 350px inner
@@ -306,7 +318,7 @@ now. Anything added to it has to be measured at 390 in both locales before it sh
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
+| Line | ستة أشهر مجانية | Six months free |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
 | CTA, same row | اطلع على العرض | See the offer |
 
@@ -811,7 +823,10 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | لمن يعود الموقع؟ | Who owns the website? |
-| Answer | الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. وشروط ما بعد انتهاء فترة العرض مكتوبة كاملة في صفحة العرض. | The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. The terms for what happens when the offer period ends are written in full on the offer page. |
+| Answer | الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. | The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. |
+
+The offer-page sentence was cut from this answer on 2026-10-08 (build-spec §33): the homepage mentions the
+offer in the strip only.
 
 **Q3**
 
@@ -832,7 +847,9 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | لدي موقع بالفعل، فماذا يحدث؟ | What if I already have a website? |
-| Answer | نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. أما شروط العرض المحدود فتختلف عن ذلك، وهي مكتوبة في صفحة العرض. | We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. The conditions of the limited offer are different, and they are written on the offer page. |
+| Answer | نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. | We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. |
+
+The limited-offer sentence was cut from this answer on 2026-10-08 (build-spec §33), same reason as Q2.
 
 ---
 
@@ -866,18 +883,20 @@ The address is the only place on the homepage where a location appears, and it i
 | Brand strapline | نبني المواقع ونجعل العملاء يجدونها | We build websites and get them found |
 | Column 1 title | الشركة | Company |
 | Column 2 title | الموارد | Resources |
-| Column 3 title | العرض | The offer |
-| Column 4 title | تواصل | Contact |
+| Column 3 title | تواصل | Contact |
+
+**2026-10-08 (build-spec §33): the "العرض / The offer" column is removed.** The offer is temporary and the
+homepage mentions it in the strip only; the footer is shared, so it is gone from every page. Terms moved
+into column 1. The desktop grid is brand + three columns.
 
 **Footer links, rebuilt 2026-09-24 under the same no-scrollies rule as the header.** Every `#section`
 link is gone; every link below is a page.
 
 | Column | Arabic | English | Href (ar / en) |
 |---|---|---|---|
-| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا | Home · About us · Contact us | `/` · `/about/` · `/contact/` |
+| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا · الشروط والأحكام | Home · About us · Contact us · Terms and conditions | `/` · `/about/` · `/contact/` · `/terms/` |
 | 2 الموارد / Resources | المدونة · قائمة ملف جوجل | Blog · Google profile checklist | `/blog/` · `/google-business-profile-checklist.html` |
-| 3 العرض / The offer | العرض · الشروط والأحكام | The offer · Terms and conditions | `/offer/` · `/terms/` |
-| 4 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
+| 3 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
 | Address label | العنوان | Address |
 | Address value | محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9 | Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9 |
 | Phone label | الهاتف | Phone |
@@ -890,13 +909,49 @@ link is gone; every link below is a page.
 
 # PART B. The offer page
 
-Arabic at `/offer`, English at `/en/offer`. Reached from the Section 2 strip, the header nav item
-`العرض` / `The offer`, and footer column 3.
+Arabic at `/offer`, English at `/en/offer`. Since 2026-10-08 reached from the Section 2 strip ONLY (the
+header nav item left on 2026-09-24 and the footer column on 2026-10-08, build-spec §33).
 
 **This is the only part of the site where a country is named**, because being in Saudi Arabia is a
 condition of this specific promotion, not a description of who Q8Block sells to.
 
-## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE.
+## 2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. THIS BLOCK OVERRIDES EVERY $500 LINE BELOW.
+
+Ahmad: *"we had an offer for $500 for six months. We're going to change that. It was absolutely free."*
+So the offer is **six months, free**. The prices AFTER the six months are unchanged (the nine packages,
+anchor "from $997 per month"). Every "$500", "one payment", "paid once", "no monthly bill" statement is off
+the site; `P.six` is deleted from `src/data.mjs`. Kept as decided: the H1 and its highlight, the countdown and
+fallback, the seats line, the four eligibility items, the six included items, the proof graph, the final call,
+the anchor block as the sales device (no savings claim). The current strings, which replace the cells of the
+same name in the sections below:
+
+| Element | Arabic | English |
+|---|---|---|
+| Meta description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من 997 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. The first six months are free. Normal price from $997 a month. |
+| B1 subhead | هذا العرض مخصص لشركات الخدمات في السعودية. أول ستة أشهر من العمل الكامل مجانًا. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | This offer is for service companies in Saudi Arabia. Your first six months of the full work are free. We get your business found on Google and in AI, turning those visits into calls and customers. |
+| B1b anchor row (unchanged) | السعر المعتاد / يبدأ من $997 شهريًا | Normal price / from $997 per month |
+| B1b offer row | هذا العرض / ستة أشهر مجانًا | This offer / free for six months |
+| B1b note | DELETED | DELETED |
+| B2 intro | الأشهر الستة مجانية، وتشمل العمل كاملًا لا جزءًا منه. | The six months are free, and they cover the full work, not a part of it. |
+| B2b caption | ستة أشهر من هذا العمل هي ما يشمله هذا العرض. | Six months of that work is what this offer covers. |
+| B4 body | لا يوجد عقد ولا التزام ولا رسوم. تستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | There is no contract, no commitment and no fee. You can stop at any time, during the six months or after them. |
+| B5 intro | حين تنتهي الأشهر الستة لديك ثلاثة خيارات: تستمر على إحدى الباقات أدناه، ويتحدد سعرها بالباقة وبحجم شركتك. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة. | When the six months end you have three choices. Continue on one of the packages below, priced by the package and the size of your company. Stop the search work and keep your website live for a small monthly fee. Or stop. You decide. The prices below are monthly and only start once the six months are over. |
+| B5 boxes and notes | unchanged | unchanged |
+
+**B6 FAQ, in order** (Q4 commercial registration, Q5 existing website, Q7 Google profile unchanged):
+
+| # | Arabic | English |
+|---|---|---|
+| Q1 | لماذا العرض مجاني؟ / نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول. | Why is this free? / We take a limited number of companies and work on them for the full six months, until the result shows. That result is what makes a client decide to continue, and it is what we show the next client. That is why there are eligibility conditions. |
+| Q2 | هل أدفع شيئًا خلال الأشهر الستة؟ / لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من $997 شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار. | Do I pay anything during the six months? / No. The six months are entirely free. The normal price for this service starts at $997 a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue. |
+| Q3 | هل هناك عقد أو التزام؟ / لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | Is there a contract or a commitment? / No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them. |
+| Q6 | ماذا يحدث بعد ستة أشهر؟ / القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار. | What happens after six months? / You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice. |
+
+Removed: "Is the $500 per month?", "Why is it $500 for six months?". There is no payment, so there is no
+refund question. "per city" stays out (Ahmad dropped it). The "small monthly fee" option is not priced:
+no figure was given, so none is printed.
+
+## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE. (SUPERSEDED 2026-10-08, SEE ABOVE)
 
 Ahmad, in his own words: *"It's actually $500 for six months. And we anchor the actual price starts from
 $500 a month. But for the first six months, they don't actually need to pay monthly. They just pay one
@@ -1308,8 +1363,9 @@ Search Console export image** — its own axis, not our copy, and never altered.
 | `1.99K` clicks, `114K` impressions, `1.7%` CTR, `10.9` average position, and the dated x axis | Section 6 and offer B2b, printed **inside the image** | the unedited Search Console export, `design/proof-shots/` |
 | Seven impression totals and **seven** `New project` tags | Section 7, the **fourteen** cards | derivation table below |
 
-Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **The homepage carries a price in exactly two
-places: the Section 2 strip line and Section 7b.** The strip is the offer teaser. **Since 2026-10-01,
+Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **Since 2026-10-08 (§33) the homepage carries
+prices in Section 7b only; the strip says `ستة أشهر مجانية` / `Six months free` and has no figure.** Before
+that it carried a price in exactly two places: the Section 2 strip line and Section 7b. The strip is the offer teaser. **Since 2026-10-01,
 §7b carries only the three monthly prices and never the offer** — it was the offer a second time until
 Ahmad ruled it out. Neither place invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
 carries prices (the price register below) and exactly one performance figure block, B2b. Every other number
@@ -1336,8 +1392,8 @@ offer anchor prints **from $997 per month**, computed as the minimum of the nine
 
 | Figure | What it is | Where it appears |
 |---|---|---|
-| **$500 one time** | The offer. One payment covering the first six months. Unchanged | Homepage §2 strip line, offer meta, B1 lead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1 (question and answer), Q2 and Q3 |
-| **from $997 per month** | The anchor, lowest package price | Offer B1b anchor row, offer meta description (ar `997 دولار`), offer FAQ Q1 |
+| ~~$500 one time~~ | REMOVED 2026-10-08 (build-spec §33): the offer is six months FREE. No `$500` anywhere on the site | nowhere |
+| **from $997 per month** | The anchor, lowest package price | Offer B1b anchor row, offer meta description (ar `997 دولار`), offer FAQ Q2 |
 | **the nine package prices** | Ongoing monthly price after the six months | Homepage §7b, offer B5 |
 
 Swept programmatically on 2026-10-08 over `/`, `/en/`, `/offer/`, `/en/offer/`, `/terms/`, `/en/terms/`
@@ -1620,14 +1676,26 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
+| Line | ستة أشهر مجانية | Six months free |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
 | Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA, same row | اطلع على العرض | See the offer |
 
-**Rewritten 2026-09-30 (build-spec §25): the line now carries the PRICE, and the "service firms"
+**Rewritten 2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN.** Ahmad: the offer "was absolutely
+free. So make sure our offer reflects that." The line is `ستة أشهر مجانية` / `Six months free`. The long
+form `ستة أشهر مجانية لشركات الخدمات` / `Six months free for service companies` was built and measured
+first: one row at 1440 and 1920 in both locales, but at 390 the English strip went to **four rows** (band
+139.6px) and the Arabic line dropped off the pill row. Shortened as the brief allowed. Measured after: one
+row at 1440 and 1920 (band 78 / 79px), **3 rows at 390 in Arabic (114.8px) and 2 in English (90px)**, line
+on the pill row in every case, `#problem` exactly at the fold at 1440x900, 1920x1200 and 390x844. Service
+companies are still named on the offer page (subhead, B3 intro, condition 1). **This strip is the ONLY
+offer mention on the homepage** and its link is the sole route into `/offer/` from there: the footer's
+"The offer" column and the two FAQ references were removed the same day. Everything below about the $500
+line is history.
+
+**Rewritten 2026-09-30 (build-spec §25, superseded 2026-10-08): the line now carries the PRICE, and the "service firms"
 qualifier came off it.** The offer is no longer free, and the one thing the strip must not do is leave a
 reader thinking the price is monthly, so `مرة واحدة` / `paid once` is on the line beside the number. There
 is no room for both that and the qualifier: at 390 the pill and the line share row 1 inside a 350px inner
@@ -1649,7 +1717,7 @@ now. Anything added to it has to be measured at 390 in both locales before it sh
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
+| Line | ستة أشهر مجانية | Six months free |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
 | CTA, same row | اطلع على العرض | See the offer |
 
@@ -2154,7 +2222,10 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | لمن يعود الموقع؟ | Who owns the website? |
-| Answer | الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. وشروط ما بعد انتهاء فترة العرض مكتوبة كاملة في صفحة العرض. | The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. The terms for what happens when the offer period ends are written in full on the offer page. |
+| Answer | الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. | The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. |
+
+The offer-page sentence was cut from this answer on 2026-10-08 (build-spec §33): the homepage mentions the
+offer in the strip only.
 
 **Q3**
 
@@ -2175,7 +2246,9 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | لدي موقع بالفعل، فماذا يحدث؟ | What if I already have a website? |
-| Answer | نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. أما شروط العرض المحدود فتختلف عن ذلك، وهي مكتوبة في صفحة العرض. | We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. The conditions of the limited offer are different, and they are written on the offer page. |
+| Answer | نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. | We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. |
+
+The limited-offer sentence was cut from this answer on 2026-10-08 (build-spec §33), same reason as Q2.
 
 ---
 
@@ -2209,18 +2282,20 @@ The address is the only place on the homepage where a location appears, and it i
 | Brand strapline | نبني المواقع ونجعل العملاء يجدونها | We build websites and get them found |
 | Column 1 title | الشركة | Company |
 | Column 2 title | الموارد | Resources |
-| Column 3 title | العرض | The offer |
-| Column 4 title | تواصل | Contact |
+| Column 3 title | تواصل | Contact |
+
+**2026-10-08 (build-spec §33): the "العرض / The offer" column is removed.** The offer is temporary and the
+homepage mentions it in the strip only; the footer is shared, so it is gone from every page. Terms moved
+into column 1. The desktop grid is brand + three columns.
 
 **Footer links, rebuilt 2026-09-24 under the same no-scrollies rule as the header.** Every `#section`
 link is gone; every link below is a page.
 
 | Column | Arabic | English | Href (ar / en) |
 |---|---|---|---|
-| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا | Home · About us · Contact us | `/` · `/about/` · `/contact/` |
+| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا · الشروط والأحكام | Home · About us · Contact us · Terms and conditions | `/` · `/about/` · `/contact/` · `/terms/` |
 | 2 الموارد / Resources | المدونة · قائمة ملف جوجل | Blog · Google profile checklist | `/blog/` · `/google-business-profile-checklist.html` |
-| 3 العرض / The offer | العرض · الشروط والأحكام | The offer · Terms and conditions | `/offer/` · `/terms/` |
-| 4 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
+| 3 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
 | Address label | العنوان | Address |
 | Address value | محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9 | Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9 |
 | Phone label | الهاتف | Phone |
@@ -2233,13 +2308,49 @@ link is gone; every link below is a page.
 
 # PART B. The offer page
 
-Arabic at `/offer`, English at `/en/offer`. Reached from the Section 2 strip, the header nav item
-`العرض` / `The offer`, and footer column 3.
+Arabic at `/offer`, English at `/en/offer`. Since 2026-10-08 reached from the Section 2 strip ONLY (the
+header nav item left on 2026-09-24 and the footer column on 2026-10-08, build-spec §33).
 
 **This is the only part of the site where a country is named**, because being in Saudi Arabia is a
 condition of this specific promotion, not a description of who Q8Block sells to.
 
-## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE.
+## 2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. THIS BLOCK OVERRIDES EVERY $500 LINE BELOW.
+
+Ahmad: *"we had an offer for $500 for six months. We're going to change that. It was absolutely free."*
+So the offer is **six months, free**. The prices AFTER the six months are unchanged (the nine packages,
+anchor "from $997 per month"). Every "$500", "one payment", "paid once", "no monthly bill" statement is off
+the site; `P.six` is deleted from `src/data.mjs`. Kept as decided: the H1 and its highlight, the countdown and
+fallback, the seats line, the four eligibility items, the six included items, the proof graph, the final call,
+the anchor block as the sales device (no savings claim). The current strings, which replace the cells of the
+same name in the sections below:
+
+| Element | Arabic | English |
+|---|---|---|
+| Meta description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من 997 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. The first six months are free. Normal price from $997 a month. |
+| B1 subhead | هذا العرض مخصص لشركات الخدمات في السعودية. أول ستة أشهر من العمل الكامل مجانًا. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | This offer is for service companies in Saudi Arabia. Your first six months of the full work are free. We get your business found on Google and in AI, turning those visits into calls and customers. |
+| B1b anchor row (unchanged) | السعر المعتاد / يبدأ من $997 شهريًا | Normal price / from $997 per month |
+| B1b offer row | هذا العرض / ستة أشهر مجانًا | This offer / free for six months |
+| B1b note | DELETED | DELETED |
+| B2 intro | الأشهر الستة مجانية، وتشمل العمل كاملًا لا جزءًا منه. | The six months are free, and they cover the full work, not a part of it. |
+| B2b caption | ستة أشهر من هذا العمل هي ما يشمله هذا العرض. | Six months of that work is what this offer covers. |
+| B4 body | لا يوجد عقد ولا التزام ولا رسوم. تستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | There is no contract, no commitment and no fee. You can stop at any time, during the six months or after them. |
+| B5 intro | حين تنتهي الأشهر الستة لديك ثلاثة خيارات: تستمر على إحدى الباقات أدناه، ويتحدد سعرها بالباقة وبحجم شركتك. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة. | When the six months end you have three choices. Continue on one of the packages below, priced by the package and the size of your company. Stop the search work and keep your website live for a small monthly fee. Or stop. You decide. The prices below are monthly and only start once the six months are over. |
+| B5 boxes and notes | unchanged | unchanged |
+
+**B6 FAQ, in order** (Q4 commercial registration, Q5 existing website, Q7 Google profile unchanged):
+
+| # | Arabic | English |
+|---|---|---|
+| Q1 | لماذا العرض مجاني؟ / نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول. | Why is this free? / We take a limited number of companies and work on them for the full six months, until the result shows. That result is what makes a client decide to continue, and it is what we show the next client. That is why there are eligibility conditions. |
+| Q2 | هل أدفع شيئًا خلال الأشهر الستة؟ / لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من $997 شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار. | Do I pay anything during the six months? / No. The six months are entirely free. The normal price for this service starts at $997 a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue. |
+| Q3 | هل هناك عقد أو التزام؟ / لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | Is there a contract or a commitment? / No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them. |
+| Q6 | ماذا يحدث بعد ستة أشهر؟ / القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار. | What happens after six months? / You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice. |
+
+Removed: "Is the $500 per month?", "Why is it $500 for six months?". There is no payment, so there is no
+refund question. "per city" stays out (Ahmad dropped it). The "small monthly fee" option is not priced:
+no figure was given, so none is printed.
+
+## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE. (SUPERSEDED 2026-10-08, SEE ABOVE)
 
 Ahmad, in his own words: *"It's actually $500 for six months. And we anchor the actual price starts from
 $500 a month. But for the first six months, they don't actually need to pay monthly. They just pay one
@@ -2651,8 +2762,9 @@ Search Console export image** — its own axis, not our copy, and never altered.
 | `1.99K` clicks, `114K` impressions, `1.7%` CTR, `10.9` average position, and the dated x axis | Section 6 and offer B2b, printed **inside the image** | the unedited Search Console export, `design/proof-shots/` |
 | Seven impression totals and **seven** `New project` tags | Section 7, the **fourteen** cards | derivation table below |
 
-Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **The homepage carries a price in exactly two
-places: the Section 2 strip line and Section 7b.** The strip is the offer teaser. **Since 2026-10-01,
+Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **Since 2026-10-08 (§33) the homepage carries
+prices in Section 7b only; the strip says `ستة أشهر مجانية` / `Six months free` and has no figure.** Before
+that it carried a price in exactly two places: the Section 2 strip line and Section 7b. The strip is the offer teaser. **Since 2026-10-01,
 §7b carries only the three monthly prices and never the offer** — it was the offer a second time until
 Ahmad ruled it out. Neither place invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
 carries prices (the price register below) and exactly one performance figure block, B2b. Every other number

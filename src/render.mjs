@@ -57,7 +57,7 @@ export function footer(t, self) {
   const cols = t.footer.cols.map((c) => `<div class="footer-col">
       <h3>${esc(c.title)}</h3>
       ${c.links.map((l) => `<a href="${resolveHref(l.href)}">${esc(l.label)}</a>`).join('')}
-      ${c.title === t.footer.cols[3].title
+      ${c === t.footer.cols[t.footer.cols.length - 1]
         ? `<div class="footer-nap">
              <p>${esc(t.footer.phoneLabel)}: <span dir="ltr">${esc(NAP.phoneDisplay)}</span></p>
              <p>${esc(t.footer.addressLabel)}: ${esc(t.footer.address)}</p>
@@ -590,6 +590,12 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
 
 /* The anchor, added 2026-09-30 when the offer stopped being free.
 
+   2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. The second row now reads
+   "This offer / free for six months" and there is NO note: the "one payment, not
+   monthly" line only existed to stop $500 reading as monthly, and there is no
+   $500 any more. `p.note` is optional; leave it unset. The history below is the
+   paid version's reasoning, kept for the record.
+
    Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
    and no third element competing: "Normal price / from $997 per month" (since
    2026-10-08 the lowest package price, computed in data.mjs, build-spec §32) over
@@ -619,7 +625,7 @@ function priceAnchor(p) {
           <dt>${esc(p.offerLabel)}</dt><dd>${esc(p.offerValue)}</dd>
         </div>
       </dl>
-      <p class="pa-note">${esc(p.note)}</p>
+      ${p.note ? `<p class="pa-note">${esc(p.note)}</p>` : ''}
     </div>`;
 }
 

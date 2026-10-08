@@ -4570,3 +4570,46 @@ block (dots about flush with the bottom edge, inside the measured 0.57em descent
 | Lighthouse `/offer/`, `/en/offer/` | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
 
 Nothing committed, pushed or deployed.
+
+## 33. The offer is free again, and the homepage mentions it in the strip only, 2026-10-08
+
+Ahmad: "we had an offer for $500 for six months. We're going to change that. It was absolutely free... The
+only place it should mention is just the banners because it's temporary." Prices after the six months are
+unchanged (the nine packages, anchor from $997). Copy is in `copy.md` Part B (the 2026-10-08 block at the top),
+§2, §8, §10 and the price register; Terms in `copy-pages.md` T5.
+
+### 33.1 What changed
+
+| Where | Was | Now |
+|---|---|---|
+| §2 strip line | ستة أشهر بـ$500 مرة واحدة / 6 months for $500, paid once | **ستة أشهر مجانية / Six months free**. The long form "...لشركات الخدمات / ...for service companies" was built and measured first: 4 rows at 390 en (139.6px), so shortened per the brief |
+| Offer meta, B1 subhead, B2 intro, B2b caption | "one payment of $500..." | "first six months free" wording, no figure |
+| B1b offer row | $500 one time, covers six months | ستة أشهر مجانًا / free for six months. Anchor row unchanged (computed from $997) |
+| B1b note | "One payment, not monthly..." | deleted; `priceAnchor()` now prints the note only if `price.note` is set (it is not) |
+| B4 | one payment, nothing further due | no contract, no commitment, no fee, stop at any time |
+| B5 intro | packages or stop | three choices: a package (priced by package and size), keep the site live for a small monthly fee, or stop. Boxes unchanged |
+| B6 FAQ | Q1 "Is the $500 per month?", Q2 "Why is it $500?", Q3 paid | Q1 "Why is this free?" (no "per city"), Q2 "Do I pay anything during the six months?", Q3 no contract/no fee; Q6 the three choices; Q4, Q5, Q7 unchanged |
+| `src/data.mjs` | `P.six = ltr('$500')` | deleted, so `$500` cannot come back through `P` |
+| Homepage FAQ Q2, Q5 | pointed at the offer page / limited offer | sentence cut; answers otherwise unchanged |
+| Footer (all pages) | 4 columns, "العرض / The offer" = offer + terms | 3 columns: terms moved into Company. `footer()` puts the NAP in the LAST column (was `cols[3]`); `.footer-top` desktop grid `minmax(240px,1.4fr) repeat(3,1fr)` |
+| Terms T5 (both) | "what it costs and how it is paid" | "what the six free months cover"; last updated 8 October 2026 |
+
+Not touched: hero, §7b pricing, report, slideshow, clients carousel, the offer H1, countdown, seats, eligibility,
+included items, proof graph, final call. `llms.txt` still lists the offer page among the site's pages (an index,
+not offer copy) and the 404 keeps its existing offer link; neither is the homepage.
+
+### 33.2 Verification
+
+| Check | Result |
+|---|---|
+| Sweep `/`, `/en/` (text, meta, JSON-LD, footer) for $500, free/مجان, six months/ستة أشهر, limited offer, عرض, offer, /offer, countdown, seats | **0 hits outside `#offer-strip`**; the strip's link is the only route to `/offer/` from the homepage |
+| `$500` / `500 دولار` / paid once / one payment across the whole built site | 0 (remaining دفعة واحدة / مرة واحدة hits are "at once" in blog prose and the about page, unrelated) |
+| `$` figures left | `$997` anchor and the nine package prices only (offer ar meta `997 دولار`) |
+| Strip rows | 1 at 1440 and 1920 both locales (band 78 / 79px); 390: ar 3 rows (114.8px), en 2 rows (90px); line on the pill row everywhere |
+| First screen, `#problem` top | 900 / 1200 / 844 at 1440x900, 1920x1200, 390x844, both locales; no horizontal scroll |
+| Offer top + footer, 1440 and 390, both locales | looked at: anchor reads "from $997 per month" over "free for six months", no note; footer three columns, no offer link |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/`, `/offer/` (desktop config) | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.

@@ -39,7 +39,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { COPY, NAP, CONFIG, INDEXNOW_KEY } from './src/data.mjs';
 import {
-  header, footer, firstScreen, problem, whatWeDo, journey, work, pricing,
+  header, footer, firstScreen, problem, whatWeDo, report, work, pricing,
   faq, finalCall, offerHero, offerIncluded, offerProof, offerEligibility, offerNoContract,
   offerAfter, offerFaq, esc,
   pageHead, aboutPrinciple, aboutDeliver, aboutNotDo, aboutCompany,
@@ -390,10 +390,10 @@ function homePage(t) {
   const body = [
     // §5 #included was DELETED 2026-10-01 (build-spec §28.3). Ahmad: what we
     // present is §4, and "what we present, immediately what follows is the how
-    // we work." §4 what-we-do runs straight into §6 the journey. Do not add it
+    // we work." §4 what-we-do runs straight into §6 the report. Do not add it
     // back: there is no `included()` renderer and no `included` copy block.
     firstScreen(t), problem(t), whatWeDo(t),
-    journey(t), work(t), pricing(t), faq(t), finalCall(t),
+    report(t), work(t), pricing(t), faq(t), finalCall(t),
   ].join('\n');
   return shell({ t, page: 'home', meta: t.meta.home, body, jsonLd: [orgLd(t), faqLd(t.faq.items)] });
 }

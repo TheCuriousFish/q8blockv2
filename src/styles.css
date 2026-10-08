@@ -828,7 +828,7 @@ html[dir="rtl"] .work-link .arrow { transform: scaleX(-1); }
 /* ══ §6 row 10 — Footer. #030303, on the same 1320px column as every section
       above it: the board's 1294 is its divider, not a content edge. ══ */
 .site-footer { background: var(--bg-footer); color: var(--ink-invert); padding-block: 48px 40px; }
-.footer-top { display: grid; grid-template-columns: minmax(240px, 1.2fr) repeat(4, 1fr); gap: 32px 40px; }
+.footer-top { display: grid; grid-template-columns: minmax(240px, 1.4fr) repeat(3, 1fr); gap: 32px 40px; }  /* 3 link columns since 2026-10-08: "The offer" column removed (build-spec §33) */
 .footer-tag { font-size: var(--fs-foot-tag); font-weight: 400; line-height: 1.5; color: var(--muted-on-dark); margin-block-start: 18px; max-width: 280px; }
 .footer-col h3 { font-size: var(--fs-foot-h); font-weight: 600; line-height: 1.2; color: var(--ink-invert); margin-block-end: 10px; }
 .footer-col a, .footer-col p { font-size: var(--fs-foot-l); font-weight: 400; line-height: 1.9; color: var(--muted-on-dark); text-decoration: none; display: block; }
