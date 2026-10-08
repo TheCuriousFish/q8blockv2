@@ -747,7 +747,8 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 .tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
 .tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
-.tier-tag { font-size: var(--fs-strip); font-weight: 500; color: var(--muted-on-dark); unicode-bidi: isolate; }
+.tier-tag.xtag { font-size: var(--fs-strip); flex: none; }
+.tier-head { align-items: center; }
 .tier-sizes { margin: 0; display: grid; }
 .tier-sizes > div {
   display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
@@ -815,9 +816,13 @@ html[lang="ar"] #pricing {
   text-align: start;
 }
 .plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
-.plan-tag {
-  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
-  color: var(--muted-on-light);
+.plan-tag { margin: 0 0 clamp(10px, calc(14/14.4 * 1vw), 16px); line-height: 1; }
+
+.xtag {
+  display: inline-block; direction: ltr; unicode-bidi: isolate;
+  background: var(--orange); color: #141415; border-radius: 100px;
+  padding: 0.32em 0.8em 0.36em; font-size: var(--pl-tag); font-weight: 800; line-height: 1;
+  letter-spacing: 0.01em;
 }
 .plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
 .plan-name {
@@ -1413,7 +1418,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
             <div class="rp-stat key"><p class="rp-sk">النقرات من نتائج البحث</p><p class="rp-sv"><bdi dir="ltr">525</bdi></p><p class="rp-ss">نقرة وصلت للموقع من نتائج جوجل</p></div>
             <div class="rp-stat "><p class="rp-sk">ظهور الموقع في النتائج</p><p class="rp-sv"><bdi dir="ltr">29,797</bdi></p><p class="rp-ss">مرة ظهور في صفحات نتائج جوجل</p></div>
             <div class="rp-stat small"><p class="rp-sk">أعلى يوم</p><p class="rp-sv"><bdi dir="ltr">14</bdi> سبتمبر</p><p class="rp-ss"><bdi dir="ltr">27</bdi> زيارة في يوم واحد</p></div>
-            <div class="rp-stat small"><p class="rp-sk">القيمة التقديرية</p><p class="rp-sv"><bdi dir="ltr">500</bdi> إلى <bdi dir="ltr">600</bdi> د.ك</p><p class="rp-ss">لو جاءت هذه الزيارات من إعلانات جوجل</p></div>
+            <div class="rp-stat small"><p class="rp-sk">القيمة التقديرية</p><p class="rp-sv"><bdi dir="ltr">6,100</bdi> إلى <bdi dir="ltr">7,300</bdi> ر.س</p><p class="rp-ss">لو جاءت هذه الزيارات من إعلانات جوجل</p></div>
           </div>
           <figure class="rp-chart" role="img" aria-label="الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 27 زيارة يوم 14 سبتمبر">
             <div class="rp-plot"><svg class="rp-chart-svg" viewBox="0 0 600 120" width="600" height="120" aria-hidden="true" focusable="false" preserveAspectRatio="none">
@@ -1521,25 +1526,25 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <h2 class="h2">اختر خطتك</h2>
       <fieldset class="psw"><legend class="vh">حجم شركتك</legend><input class="psw-in" type="radio" name="psize" id="psize-s" value="s" checked><label class="psw-pill" for="psize-s">شركة صغيرة</label><input class="psw-in" type="radio" name="psize" id="psize-m" value="m"><label class="psw-pill" for="psize-m">شركة متوسطة</label><input class="psw-in" type="radio" name="psize" id="psize-l" value="l"><label class="psw-pill" for="psize-l">شركة كبيرة</label></fieldset>
       <ul class="plan-row"><li class="plan">
-      <p class="plan-tag">⁦x1⁩</p>
+      <p class="plan-tag"><span class="xtag" dir="ltr">⁦x1⁩</span></p>
       <h3 class="plan-name">باقة الحفاظ</h3>
-      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">⁦$997⁩</span><span class="pa pa-m">⁦$1,997⁩</span><span class="pa pa-l">⁦$2,997⁩</span></span> <span class="plan-unit">شهريًا</span></p>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">997</span><span class="pa pa-m">1,997</span><span class="pa pa-l">2,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
       <ul class="plan-features"><li>تثبيت نتائجك والاتصالات الحالية</li><li>حماية موقعك من المنافسين</li><li>الحفاظ على قوة ظهورك</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
     </li><li class="plan plan-featured">
-      <p class="plan-tag">⁦x3⁩</p>
+      <p class="plan-tag"><span class="xtag" dir="ltr">⁦x3⁩</span></p>
       <h3 class="plan-name">باقة التوسع</h3>
-      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">⁦$2,497⁩</span><span class="pa pa-m">⁦$4,997⁩</span><span class="pa pa-l">⁦$6,997⁩</span></span> <span class="plan-unit">شهريًا</span></p>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">2,497</span><span class="pa pa-m">4,997</span><span class="pa pa-l">6,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
       <ul class="plan-features"><li>استهداف كلمات وخدمات أكثر</li><li>تكثيف الشغل والجهد شهريًا</li><li>تحسين فرص طلبات الواتساب</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
     </li><li class="plan">
-      <p class="plan-tag">⁦x10⁩</p>
+      <p class="plan-tag"><span class="xtag" dir="ltr">⁦x10⁩</span></p>
       <h3 class="plan-name">باقة السيطرة</h3>
-      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">⁦$4,997⁩</span><span class="pa pa-m">⁦$9,997⁩</span><span class="pa pa-l">⁦$15,997⁩</span></span> <span class="plan-unit">شهريًا</span></p>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">4,997</span><span class="pa pa-m">9,997</span><span class="pa pa-l">15,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
       <ul class="plan-features"><li>أقصى جهد وطاقة تشغيلية</li><li>منافسة أقوى الشركات بالسوق</li><li>أولوية قصوى ودعم مباشر</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>

@@ -550,7 +550,9 @@ sofa cleaning kuwait · ac duct cleaning kuwait.
 | النقرات من نتائج البحث / Clicks from search results | 525 (orange) | نقرة وصلت للموقع من نتائج جوجل / clicks that reached the site from Google results |
 | ظهور الموقع في النتائج / Appearances in results | 29,797 | مرة ظهور في صفحات نتائج جوجل / times the site showed on Google results pages |
 | أعلى يوم / Best day | 14 سبتمبر / 14 September | 27 زيارة في يوم واحد / 27 visits in one day |
-| القيمة التقديرية / Estimated value | 500 إلى 600 د.ك / 500 to 600 KWD | لو جاءت هذه الزيارات من إعلانات جوجل / if these visits had come from Google Ads |
+| القيمة التقديرية / Estimated value | 6,100 إلى 7,300 ر.س / 6,100 to 7,300 SAR | لو جاءت هذه الزيارات من إعلانات جوجل / if these visits had come from Google Ads |
+
+**Estimated value in Saudi riyals since 2026-10-08 (build-spec §34).** Ahmad: "swap KD with its saudi reyals value". The report itself gives 500 to 600 KWD; `src/report.json` keeps that dinar range as derived. `render.mjs` converts at `KWD_TO_SAR = 12.2` (1 KWD about 3.26 US, riyal pegged at 3.75) and rounds to the nearest 100: 6,100 and 7,320 print 6,100 and 7,300. Label and line under it unchanged. Superseded value: 500 إلى 600 د.ك / 500 to 600 KWD.
 
 Page label `الزيارات من نتائج البحث` / `Visits from search results`. The report's first panel label
 `الزيارات / النقرات من نتائج البحث` was shortened to `النقرات من نتائج البحث`. The range dash became `إلى` / `to`.
@@ -773,7 +775,7 @@ less explanatory text, and the board draws no lead).
 | Lead | DELETED | DELETED |
 | Switch, accessible name only | حجم شركتك | Your company size |
 | Switch pills | شركة صغيرة · شركة متوسطة · شركة كبيرة | Small · Medium · Large |
-| Period | شهريًا | /month |
+| Period (unit line beside the bare numeral) | ر.س شهريًا | SAR / month |
 | CTA, every card | اتصل الآن → `tel:` | Call now → `tel:` |
 
 | Card | Tag | Arabic name | English name | Check lines, Arabic (Ahmad's own, verbatim) | Check lines, English |
@@ -794,7 +796,7 @@ left on `/`.
 3. **No `most popular` marker.** The middle card's orange top edge is the board's only weighting.
 4. **NO SAVINGS FIGURE, NO STRUCK-THROUGH PRICE, NO PERCENTAGE, NO GEOGRAPHY.**
 
-**Every Arabic price and tag still goes through `ltr()`.**
+**Prices are Saudi riyals since 2026-10-08 (build-spec §34).** The big numeral is bare (`997`); the currency sits in the small unit line beside it (`ر.س شهريًا` / `SAR / month`). No currency sign in front of the number, and never the new riyal glyph U+20C1 (Alexandria has none). The `x1` / `x3` / `x10` tags are a solid orange pill with ink text, identical on all three cards, `dir="ltr"`.
 
 ---
 
@@ -927,23 +929,23 @@ same name in the sections below:
 
 | Element | Arabic | English |
 |---|---|---|
-| Meta description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من 997 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. The first six months are free. Normal price from $997 a month. |
+| Meta description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من 997 ريال سعودي شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. The first six months are free. Normal price from 997 SAR a month. |
 | B1 subhead | هذا العرض مخصص لشركات الخدمات في السعودية. أول ستة أشهر من العمل الكامل مجانًا. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | This offer is for service companies in Saudi Arabia. Your first six months of the full work are free. We get your business found on Google and in AI, turning those visits into calls and customers. |
-| B1b anchor row (unchanged) | السعر المعتاد / يبدأ من $997 شهريًا | Normal price / from $997 per month |
+| B1b anchor row (SAR since §34) | السعر المعتاد / يبدأ من 997 ر.س شهريًا | Normal price / from 997 SAR per month |
 | B1b offer row | هذا العرض / ستة أشهر مجانًا | This offer / free for six months |
 | B1b note | DELETED | DELETED |
 | B2 intro | الأشهر الستة مجانية، وتشمل العمل كاملًا لا جزءًا منه. | The six months are free, and they cover the full work, not a part of it. |
 | B2b caption | ستة أشهر من هذا العمل هي ما يشمله هذا العرض. | Six months of that work is what this offer covers. |
 | B4 body | لا يوجد عقد ولا التزام ولا رسوم. تستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | There is no contract, no commitment and no fee. You can stop at any time, during the six months or after them. |
 | B5 intro | حين تنتهي الأشهر الستة لديك ثلاثة خيارات: تستمر على إحدى الباقات أدناه، ويتحدد سعرها بالباقة وبحجم شركتك. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة. | When the six months end you have three choices. Continue on one of the packages below, priced by the package and the size of your company. Stop the search work and keep your website live for a small monthly fee. Or stop. You decide. The prices below are monthly and only start once the six months are over. |
-| B5 boxes and notes | unchanged | unchanged |
+| B5 boxes and notes | unchanged figures; unit line `ر.س شهريًا` (§34) | unchanged figures; unit line `SAR per month` (§34) |
 
 **B6 FAQ, in order** (Q4 commercial registration, Q5 existing website, Q7 Google profile unchanged):
 
 | # | Arabic | English |
 |---|---|---|
 | Q1 | لماذا العرض مجاني؟ / نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول. | Why is this free? / We take a limited number of companies and work on them for the full six months, until the result shows. That result is what makes a client decide to continue, and it is what we show the next client. That is why there are eligibility conditions. |
-| Q2 | هل أدفع شيئًا خلال الأشهر الستة؟ / لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من $997 شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار. | Do I pay anything during the six months? / No. The six months are entirely free. The normal price for this service starts at $997 a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue. |
+| Q2 | هل أدفع شيئًا خلال الأشهر الستة؟ / لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من 997 ر.س شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار. | Do I pay anything during the six months? / No. The six months are entirely free. The normal price for this service starts at 997 SAR a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue. |
 | Q3 | هل هناك عقد أو التزام؟ / لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | Is there a contract or a commitment? / No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them. |
 | Q6 | ماذا يحدث بعد ستة أشهر؟ / القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار. | What happens after six months? / You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice. |
 
@@ -1377,26 +1379,33 @@ the Search Console API on 24 September 2026.
 
 Every price printed anywhere on the site. Nothing may be added and no figure changed without Ahmad.
 
-**Homepage §7b packages, locked by Ahmad 2026-10-08, USD per month** (currency assumed, kept in ONE place:
-`money()` in `src/data.mjs`):
+**Homepage §7b packages, locked by Ahmad 2026-10-08, SAUDI RIYALS per month** (Ahmad, 2026-10-08: "my
+pricing is Reyal Saudi not usd"; build-spec §34). The currency is kept in ONE place: the `CUR` block and
+`money()` in `src/data.mjs`. The earlier "USD assumed" line is SUPERSEDED.
 
 | Package | Small | Medium | Large |
 |---|---|---|---|
-| باقة الحفاظ / Maintain (x1) | $997 | $1,997 | $2,997 |
-| باقة التوسع / Expand (x3) | $2,497 | $4,997 | $6,997 |
-| باقة السيطرة / Dominate (x10) | $4,997 | $9,997 | $15,997 |
+| باقة الحفاظ / Maintain (x1) | 997 | 1,997 | 2,997 |
+| باقة التوسع / Expand (x3) | 2,497 | 4,997 | 6,997 |
+| باقة السيطرة / Dominate (x10) | 4,997 | 9,997 | 15,997 |
+
+How they print: on the cards and in B5 the numeral is bare and the unit line carries the currency
+(`ر.س شهريًا` / `SAR / month`, B5 `SAR per month`). In a sentence: `997 ر.س` / `997 SAR`. In the
+Arabic meta description: `997 ريال سعودي`.
 
 **Since 2026-10-08 (build-spec §32) these nine are ALSO the offer page's prices** (Ahmad: "the ones you used
 were the real things"). They appear in homepage §7b and offer B5, both rendered from the same data. The
-offer anchor prints **from $997 per month**, computed as the minimum of the nine.
+offer anchor prints **from 997 SAR per month** / `يبدأ من 997 ر.س شهريًا`, computed as the minimum of the nine.
 
 | Figure | What it is | Where it appears |
 |---|---|---|
 | ~~$500 one time~~ | REMOVED 2026-10-08 (build-spec §33): the offer is six months FREE. No `$500` anywhere on the site | nowhere |
-| **from $997 per month** | The anchor, lowest package price | Offer B1b anchor row, offer meta description (ar `997 دولار`), offer FAQ Q2 |
+| **from 997 SAR per month** | The anchor, lowest package price | Offer B1b anchor row, offer meta description (ar `997 ريال سعودي`), offer FAQ Q2 |
 | **the nine package prices** | Ongoing monthly price after the six months | Homepage §7b, offer B5 |
 
-Swept programmatically on 2026-10-08 over `/`, `/en/`, `/offer/`, `/en/offer/`, `/terms/`, `/en/terms/`
+Swept again on 2026-10-08 after the riyal switch (§34): no `$`, `دولار`, `USD`, `KWD` or `د.ك` on
+`/`, `/en/`, `/offer/`, `/en/offer/`, terms, about, blog or `llms.txt`. The paragraph below is the
+dollar-era sweep, SUPERSEDED. Swept programmatically on 2026-10-08 over `/`, `/en/`, `/offer/`, `/en/offer/`, `/terms/`, `/en/terms/`
 and `llms.txt`, visible text, JSON-LD and meta: every `$` figure is one of the three rows above. No
 `$1,000`, no `$1,500`, no "from $500 per month" remains. Terms and llms.txt carry no price.
 
@@ -1419,7 +1428,7 @@ site sits beside "six months" now. The only prices left are the nine monthly pac
 "from $997 per month" anchor, and the offer page says in one sentence that they only start once the six
 months are over.
 
-**A price in Arabic needs a Unicode LTR isolate and this is not optional.** Written plainly inside an Arabic
+**SUPERSEDED 2026-10-08 (§34): with the currency AFTER the number (`997 ر.س`) nothing flips, so sentence prices carry no isolate; `ltr()` remains only for the Latin x1 / x3 / x10 labels. The old dollar-era rule, for the record:** A price in Arabic needed a Unicode LTR isolate. Written plainly inside an Arabic
 sentence it renders as `500$`: the bidi algorithm resolves European digits following an Arabic letter to
 Arabic-Number, which leaves the `$` as a neutral and pushes it to the wrong side of the run. `src/data.mjs`
 exports `ltr()`, which wraps the price in U+2066 / U+2069, and every Arabic price string goes through it.

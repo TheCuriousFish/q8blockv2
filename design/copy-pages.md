@@ -50,7 +50,7 @@ Recorded so the next agent does not try to fill these gaps with something invent
   homepage trust row. Terms therefore points at `/offer` for it and states nothing itself.
 * **Any price, on Terms or anywhere else on these four pages.** The offer is six months free again since
   2026-10-08 (build-spec §33; the $500-once version of 2026-09-30 is gone) and `copy.md` Part B is its only
-  reference. T5 prints no figure. Nothing on
+  reference. Package prices are Saudi riyals since 2026-10-08 (build-spec §34). T5 prints no figure. Nothing on
   About, Contact or the blog states a price either.
 * **A refund policy.** Money now changes hands at the start of the offer, and nobody has decided what
   happens to it if either side stops. T6 already says the money terms are agreed directly, and neither
