@@ -731,7 +731,7 @@ any figure on the page can be traced in one step.
 
 ## 7b. The price
 
-**REWRITTEN 2026-10-01, twice (build-spec §27). THE OFFER IS NOT MENTIONED IN THIS SECTION.**
+**REWRITTEN 2026-10-01 (build-spec §27) and REBUILT 2026-10-08 (build-spec §30). THE OFFER IS NOT MENTIONED IN THIS SECTION.**
 Placed **after Section 7 Our work and before Section 8 FAQ**, keeping its `#pricing` id, so the page
 runs problem, solution, what you get, proof, **price**, objections, close.
 
@@ -748,86 +748,45 @@ Nothing in this section may say `$500 one time`, `دفعة واحدة`, `مرة 
 `ستة أشهر`, a countdown, spots left, a limited anything, or any other promotion wording. No anchor
 row, no normal-price-versus-offer pair, no link to the offer page.
 
-### What separates the three plans: COMPANY SIZE, and nothing else
+### REBUILT 2026-10-08: a company-size switch and three packages (build-spec §30)
 
-Ahmad, 2026-10-01, verbatim:
-
-> "We're selling phone calls. We're obviously not going to mention number of phone calls because in
-> SEO that's unpredictable. My suggestion is mention the size of the company. So a 500 is for small
-> companies, 1,000 is small to medium, $1,500 is medium to large."
-
-So a card is a **price, a period and who the plan is for**, and that is a **complete card**. The
-earlier stand-in line, `what each plan covers is agreed with you on the call`, is gone along with the
-gap it was covering.
-
-**Never invented, and this axis is rejected on purpose**, because it is exactly what SEO agencies
-conventionally print on tiers: hours, page counts, numbers of services or areas, blog post volume,
-link quantities, reporting frequency, support levels, and above all **any promise about how many
-calls a plan produces**. None of that goes on a card. Neither does a `most popular` badge.
-
-### The message is the business outcome, not SEO
-
-Ahmad: *"we're selling SEO, so the messaging is not really SEO... we're selling phone calls."* The
-head sits on customers calling and on picking by the size of the business. No feature language, no
-packages framing, no jargon, and the standing ban on `rank` / `ترتيب` / `يتصدر` holds.
+Built to `design/boards/pricing-v2-A.png`. **pricing-v2-B, pricing-v2-C, pricing-light and pricing-dark
+are dead boards.** The "company size is the only differentiator" rule of 2026-10-01 is superseded: company
+size now lives in the switch, and the three cards are Ahmad's named packages with his own check lines.
+The old per-card "who it is for" line and the lead under the headline are deleted (Ahmad keeps asking for
+less explanatory text, and the board draws no lead).
 
 ### The copy
 
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | الأسعار | Pricing |
-| Headline | اختر خطتك | Choose your plan. |
-| Highlighted phrase | اختر خطتك — the whole headline | Choose your plan. — the whole headline |
-| Subhead | كل خطة هدفها واحد: عملاء يتصلون بك. | Every plan has one goal: customers calling you. |
+| Headline | اختر خطتك (plain, no highlight) | Choose your plan. (plain, no highlight) |
+| Lead | DELETED | DELETED |
+| Switch, accessible name only | حجم شركتك | Your company size |
+| Switch pills | شركة صغيرة · شركة متوسطة · شركة كبيرة | Small · Medium · Large |
+| Period | شهريًا | /month |
+| CTA, every card | اتصل الآن → `tel:` | Call now → `tel:` |
 
-**THE QUALIFIER IS CUT, 2026-10-01.** The headline read `اختر خطتك حسب حجم شركتك` /
-`Pick your plan by your company size.` Ahmad: `just leave it, choose your plan, remove company size.`
-The highlighted phrase was already exactly `اختر خطتك` / `Pick your plan`, so what is left **is** the
-highlight, unchanged — nothing was added around it and the highlight was not invented. The English
-`<br class="brk">` / `<span class="nb">` break treatment went with the qualifier: three words need no
-planned break.
+| Card | Tag | Arabic name | English name | Check lines, Arabic (Ahmad's own, verbatim) | Check lines, English |
+|---|---|---|---|---|---|
+| 1 | x1 | باقة الحفاظ | Maintain | تثبيت نتائجك والاتصالات الحالية / حماية موقعك من المنافسين / الحفاظ على قوة ظهورك | Lock in your current results and calls / Protect your site from competitors / Keep your visibility strong |
+| 2 | x3 | باقة التوسع | Expand | استهداف كلمات وخدمات أكثر / تكثيف الشغل والجهد شهريًا / تحسين فرص طلبات الواتساب | Target more keywords and services / More work and effort every month / Better chances of WhatsApp requests |
+| 3 | x10 | باقة السيطرة | Dominate | أقصى جهد وطاقة تشغيلية / منافسة أقوى الشركات بالسوق / أولوية قصوى ودعم مباشر | Maximum effort and operating power / Compete with the strongest companies in the market / Top priority and direct support |
 
-**THE SUBHEAD LOST ITS SECOND SENTENCE WITH IT.** `والفرق بينها هو حجم شركتك` /
-`What changes is the size of your company.` was the headline's qualifier said twice, and each of the
-three cards already prints who it is for. What is left is the one thing the section sells: customers
-calling. Build-spec §28.1.
+The only change to Ahmad's lines: `شهرياً` is written `شهريًا`, the site's spelling. Prices are in the price
+register below. **Small is selected by default.** Cards read low to high: left to right on `/en/`, right to
+left on `/`.
 
-**Three cards, `$500` / `$1,000` / `$1,500` per month, low to high in reading order**, which is left
-to right on `/en/` and **right to left on `/`**. Same order in the source, both languages; the page
-direction does the mirroring.
+**Hard rules on this section.**
 
-| Card | Price | Period, ar / en | Who it is for, ar / en |
-|---|---|---|---|
-| 1 | $500 | شهريًا / monthly | للشركات الصغيرة / For small companies |
-| 2 | $1,000 | شهريًا / monthly | للشركات الصغيرة والمتوسطة / For small to medium companies |
-| 3 | $1,500 | شهريًا / monthly | للشركات المتوسطة والكبيرة / For medium to large companies |
+1. **NO OFFER.** No `$500 one time`, `دفعة واحدة`, six months, countdown, spots or link to `/offer/`.
+2. **NEVER ADD, SOFTEN OR INVENT A LINE.** No hours, page counts, call counts, guarantees or extra
+   features. `x1` / `x3` / `x10` are Ahmad's labels and are not explained.
+3. **No `most popular` marker.** The middle card's orange top edge is the board's only weighting.
+4. **NO SAVINGS FIGURE, NO STRUCK-THROUGH PRICE, NO PERCENTAGE, NO GEOGRAPHY.**
 
-**The CTA on each card is the site's existing call CTA, and no third label is introduced.**
-
-| Arabic | English |
-|---|---|
-| اتصل الآن → `tel:` | Call now → `tel:` |
-
-**Four hard rules on this section.**
-
-1. **NO OFFER.** See above. This is the rule the section exists to obey and it is the one a future
-   agent will break first, because the copy for the offer is sitting right there in Part B.
-2. **COMPANY SIZE IS THE ONLY DIFFERENTIATOR.** No hours, no page counts, no service or area counts,
-   no blog volume, no link quantities, no reporting frequency, no support levels, no `most popular`
-   marker, and no promise about how many calls a plan produces.
-3. **NO SAVINGS FIGURE, NO STRUCK-THROUGH PRICE, NO PERCENTAGE.** Three prices are three prices.
-4. **NO GEOGRAPHY.** The homepage names no country anywhere. The geography register at the end of
-   this file is unchanged.
-
-**Every Arabic price still goes through `ltr()`, the Unicode LTR isolate** — never a bare `$` inside an
-Arabic string.
-
-**The section is built to `design/boards/pricing-light.png`.** Ahmad picked `pricing-dark.png` first
-and then replaced it: *"you are right make it light because dark follows."* **`pricing-dark.png` is
-the dead board.** Either way the board's own words are placeholders and are **not** used: it draws
-`$2,000`, `Get Started` and `More features for growing teams`, and all three are wrong here — the
-last is exactly the invented feature language rule 2 bans. The board is the layout and the type,
-never the copy. See build-spec §27.5 and §27.6.
+**Every Arabic price and tag still goes through `ltr()`.**
 
 ---
 
@@ -1348,16 +1307,27 @@ that renders in Part B comes from the `[COUNTDOWN]` and `[SPOTS]` build slots, w
 not claims. Every figure behind Section 7 comes from `clients/q8block/design/proof-data.md`, pulled from
 the Search Console API on 24 September 2026.
 
-## Price register, 2026-09-30
+## Price register, updated 2026-10-08
 
-Every price printed anywhere on the site, and there are only three distinct figures. Nothing else may be
-added and no figure here may be changed without Ahmad.
+Every price printed anywhere on the site. Nothing may be added and no figure changed without Ahmad.
+
+**Homepage §7b packages, locked by Ahmad 2026-10-08, USD per month** (currency assumed, kept in ONE place:
+`money()` in `src/data.mjs`):
+
+| Package | Small | Medium | Large |
+|---|---|---|---|
+| باقة الحفاظ / Maintain (x1) | $997 | $1,997 | $2,997 |
+| باقة التوسع / Expand (x3) | $2,497 | $4,997 | $6,997 |
+| باقة السيطرة / Dominate (x10) | $4,997 | $9,997 | $15,997 |
+
+These appear in §7b ONLY. **The offer still carries the OLD figures below**, deliberately, until Ahmad says
+what the offer becomes under the new prices:
 
 | Figure | What it is | Where it appears |
 |---|---|---|
-| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | **Homepage §7b card 1**, offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
-| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line ONLY on the homepage (§7b no longer mentions the offer), offer meta, B1 subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
-| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | **Homepage §7b cards 2 and 3**, B5, offer FAQ Q1 and Q6 |
+| **$500 per month** | The old anchor and old tier 1 | Offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 (no longer on the homepage) |
+| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line, offer meta, B1 lead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
+| **$1,000 and $1,500 per month** | Old tiers 2 and 3 | Offer B5, offer FAQ Q1 and Q6 (no longer on the homepage) |
 
 **The offer B1 headline is no longer in this register.** It carried `$500` until 2026-09-30, when it was
 replaced with `عملاء جدد من محركات البحث والذكاء الاصطناعي` / `New customers from search engines and AI.`

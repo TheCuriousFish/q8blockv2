@@ -875,170 +875,142 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
   line-height: var(--lh-body); color: var(--muted-on-dark);
 }
 
-/* ══ §7b The price, homepage. Build-spec §27 ═══════════════════════════════
+/* ══ §7b The price, homepage. Build-spec §30 ═══════════════════════════════
 
-   THE OFFER IS NOT IN THIS SECTION and never comes back. .price-anchor,
-   .pa-note, .pricing-after and .tier-row are gone FROM HERE. They are NOT
-   deleted from the stylesheet — the offer page still renders .price-anchor
-   (B1b) and .tier-row (B5). Nothing here may ever say $500 one time,
-   دفعة واحدة, six months, or any promotion wording.
+   BUILT TO design/boards/pricing-v2-A.png (Ahmad picked A of three on
+   2026-10-08). pricing-v2-B, pricing-v2-C, pricing-light and pricing-dark are
+   DEAD boards. Board canvas 2688px for a 1440px viewport: board px x 0.5357 =
+   css px, written as calc(N/14.4 * 1vw) so it is exact at 1440. Full table in
+   build-spec §30.
 
-   BUILT TO design/boards/pricing-light.png. Ahmad, 2026-10-01: "you are right
-   make it light because dark follows." pricing-dark.png is the DEAD BOARD —
-   this section was built to it for one pass and is not any more; do not rebuild
-   against it. The canvas is 2688px wide for a 1440px viewport, so every value
-   below is a board measurement at board px × 0.5357, written as
-   calc(N/14.4 * 1vw) so it is exact at 1440. Do not adjust any of it by eye.
-   The full table is in build-spec §27.6.
+   Measured (board px → css at 1440):
+     pills          ~123/134/123 x 47, gap 13 → 7, label 17px/600
+     pills → cards  74 → 40
+     card span      118 → 2571 = 1314 (the site's 1320 wrap), gap 37 → 20
+     card height    541 → 1405 = 463
+     middle edge    533 → 545 = 6.4 → 6px orange at the card top
+     tag (x1)       ~22px / 500, muted
+     name           ~44px / 800
+     price          ~70px / 800, ink; period ~18px / 400 muted, gap 7.5
+     price → rule   27; rule → checks 31
+     check lines    17px, pitch 43 (line-height 1.35, gap 20), icon 20 wide,
+                    text starts 40 from the content edge
+     checks → button 39; button 58 tall, full inner width
 
-   Measured off pricing-light (board px → css px at 1440):
-     card row span   118 → 2570      = 1313 css   (the site's own 1320px wrap)
-     card width      790             = 423.2
-     card gap        40              = 21.4  → 21
-     card height     551 → 1345      = 423.7
-     card padding    inline 67       = 35.9  → 36
-     card border     2, #DADEE3      = 1px, --hairline-light
-     price glyph     149 × 404       = 79.8 × 216.4 → font-size 81 (calibrated)
-     price → period  —               = 20.4
-     period glyph    38 (=monthly)   = 20.4  → font-size 21
-     period → rule   —               = 26.8
-     rule → size     —               = 31
-     size line       2 lines, 96     = 51.4  → --fs-body
-     size → button   —               = 53.6
-     button          118 × 667       = 63.2 × 357.3, full card inner width
-     middle rule     542 → 552       = 5.4   → 5px, --orange, at the card top
-     head → cards    241.1 → 295.2   = 54.1
+   APPROVED OVERRIDES OF THE BOARD:
+     1. card padding stays 66/40/42 at 1440 (the board draws ~28/32/26). Ahmad,
+        2026-10-01: content "just stuck to the upper section border".
+     2. tag, period and check lines take --muted-on-light (#686F79, 5.0:1), not
+        the board's grey (~2.3:1 on white, fails AA).
+     3. eyebrow and h2 keep the site tokens (--fs-eyebrow, --fs-h2).
+     4. buttons are the site's .btn-primary (white on --orange passes only at
+        this large bold size, §17).
 
-   THE PRICE IS NEAR-BLACK ON THIS BOARD, not orange: sampled #0B0C0E, which is
-   --ink. That is what removes the contrast problem the dark board created — an
-   85px orange numeral had to lean on the large-text threshold, and this one
-   does not lean on anything (#0A0A0C on #FEFEFE is 19.6:1).
+   THE MIDDLE CARD IS WEIGHTED BY THE ORANGE TOP EDGE AND NOTHING ELSE. No
+   badge, no ribbon, no scale, no heavier shadow. Same height as the others.
 
-   The price font-size was not guessed off the glyph box: the build renders $500
-   at a known 62px and measures 61 tall × 163 wide, so this board's 79.8 × 216.4
-   solves to 81px. The independent width check agrees (163 × 1.308 = 213.2
-   against 216.4, inside 1.5%), and that agreement is also what confirms the
-   weight as 600 rather than a heavier cut.
-
-   FOUR DELIBERATE DEVIATIONS FROM THE BOARD, all of them site tokens winning
-   over a generated mock that is not accessibility checked:
-     1. the period and the size line take --muted-on-light (#686F79), not the
-        board's #A1A9B6 / #9EA6B0. Those measure about 2.3:1 on #FEFEFE and fail
-        AA outright. This is the same correction §3.2 already recorded for the
-        board grey, for the same reason.
-     2. the eyebrow stays --fs-eyebrow (22px at 1440) against the board's ~26px,
-        because that token carries the 19px/700 floor that keeps #E85319
-        qualified as large text (§17).
-     3. the h2 stays --fs-h2 (80px) against the board's ~76px, and the lead
-        stays --fs-lead (29px) against ~27px. Every other section head on this
-        page is those two tokens and one section a few px off would read as a
-        mistake, not a design.
-     4. the buttons are the site's .btn-primary in sentence case, not the
-        board's "Get Started". The CTA labels are the site's existing two and no
-        third label was invented. White on --orange is 3.03:1, which is AA as
-        large text at 700 weight and 18.66px+, which --fs-btn's 19px floor
-        guarantees — the same reasoning already recorded in §17.
-   Everything else on the board is matched.
-
-   THE MIDDLE CARD IS WEIGHTED BY AN ORANGE TOP RULE AND NOTHING ELSE. That is
-   the board's own device. There is NO badge, NO ribbon, NO "most popular"
-   label, NO scale change and NO heavier shadow, and none may be added: those
-   would be a recommendation nobody has made. All three cards carry the same
-   solid orange button, the same border, the same padding and the same height.
-   The rule is painted as an inset box-shadow, not a thicker border, so the
-   middle card stays exactly as tall as the other two.
-
-   THE CARD IS FINISHED AS IT STANDS. The plans differ by COMPANY SIZE and by
-   nothing else (Ahmad, 2026-10-01): a price, a period, who it is for. No hours,
-   no page counts, no service or area counts, no blog volume, no link
-   quantities, no reporting frequency, no support levels, and no promise about
-   how many calls a plan produces.
-
-   FEATURE LISTS: .plan-features is styled below and render.mjs renders it when
-   data.mjs supplies `features`. .plan is a flex column with the size line and
-   the CTA pinned to the foot, so a list of any length drops in between the
-   price block and the size line without touching this file. Neither board draws
-   a feature list and the card does not need one. ═══════════════════════════ */
+   THE SWITCH. Native radios (render.mjs §7b), visually hidden; the labels are
+   the pills. The checked size's prices show via :has(). With no :has() support
+   or no script the Small prices (checked in the HTML) are what shows. All three
+   amounts share one line box, so a card never changes height. ═══════════ */
 #pricing { background: var(--bg-white); text-align: center; }
-#pricing .lead { margin-inline: auto; }
+
+#pricing {
+  --pl-tag: clamp(16px, calc(24/14.4 * 1vw), 26px);
+  --pl-name: clamp(28px, calc(44/14.4 * 1vw), 48px);
+  --pl-price: clamp(44px, calc(68/14.4 * 1vw), 74px);
+  --pl-unit: clamp(14px, calc(18/14.4 * 1vw), 20px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+  --pl-pill: clamp(15px, calc(17/14.4 * 1vw), 19px);
+}
+html[lang="ar"] #pricing {
+  --pl-name: clamp(24px, calc(34/14.4 * 1vw), 37px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+}
+
+.psw {
+  position: relative; border: 0; padding: 0; min-inline-size: 0;
+  margin: clamp(18px, calc(20/14.4 * 1vw), 22px) 0 0;
+  display: flex; justify-content: center; gap: 7px;
+}
+.psw-in {
+  position: absolute; inset-block-start: 0; inset-inline-start: 0;
+  width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none;
+}
+.psw-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 47px; padding: 0 clamp(18px, calc(36/14.4 * 1vw), 38px);
+  border: 1px solid var(--hairline-light); border-radius: 999px;
+  background: var(--bg-white); color: var(--ink);
+  font-size: var(--pl-pill); font-weight: 600; line-height: 1.1; white-space: nowrap;
+  cursor: pointer; transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.psw-pill:hover { border-color: var(--ink); }
+.psw-in:checked + .psw-pill { background: var(--ink); border-color: var(--ink); color: #fff; }
+.psw-in:focus-visible + .psw-pill { outline: 3px solid var(--orange); outline-offset: 3px; }
 
 /* Equal columns, equal heights. DOM order is low to high and the grid follows
-   the document direction, so /en/ reads $500 → $1,500 left to right and / reads
-   it right to left. NEVER reorder the cards in CSS. */
+   the document direction. NEVER reorder the cards in CSS. */
 .plan-row {
-  margin: clamp(32px, calc(54/14.4 * 1vw), 58px) 0 0; padding: 0; list-style: none;
+  margin: clamp(28px, calc(40/14.4 * 1vw), 44px) 0 0; padding: 0; list-style: none;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, calc(21/14.4 * 1vw), 23px);
+  gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
   align-items: stretch;
 }
-/* FLEX COLUMN, NOT A GRID WITH FIXED ROWS. It was `grid-template-rows: auto
-   auto 1fr auto` and that silently broke the moment the size lines wrapped to
-   different heights: with no feature list the card has three children, so the
-   1fr landed on .plan-cta instead of the line above it and card 1 on /en/ sat
-   31px above the other two. A flex column with `margin-block-start: auto` on
-   the CTA holds the baseline whatever the card contains, including a feature
-   list added later. */
+/* Flex column with the CTA pinned by margin-block-start: auto, so all three
+   buttons share a baseline whatever wraps. container-type lets the price cap
+   itself to the card width, so the widest amount never wraps the period. */
 .plan {
   display: flex; flex-direction: column;
+  container-type: inline-size;
   border: 1px solid var(--hairline-light);
   background: var(--bg-white);
-  /* Deliberately more generous than the board measured (44/36/31 at 1440).
-     Ahmad, 2026-10-01: the price was "just stuck to the upper section border".
-     He is right, and the price is the cause: 81px at line-height 1 puts the cap
-     almost on the padding edge, so a value that looks fine on a drawn mock reads
-     cramped once real type renders. Top is now about 0.8x the price size, with
-     the sides and foot brought up so the card stays balanced, not top heavy.
-     An approved override of the board. */
   padding: clamp(36px, calc(66/14.4 * 1vw), 72px) clamp(22px, calc(40/14.4 * 1vw), 44px)
            clamp(28px, calc(42/14.4 * 1vw), 46px);
   text-align: start;
 }
-/* The board's weighting, and the whole of it. Inset rather than a 5px border so
-   the middle card is exactly as tall as the other two. */
-.plan-featured { box-shadow: inset 0 5px 0 var(--orange); }
-.plan-head { margin: 0; }
-.plan-price { margin: 0; }
-/* 81px at 1440, measured. Near-black on this board, not orange. The 44px floor
-   is a phone number the board does not specify: at 390 the fluid value would be
-   22px, and "$1,000" has to stay the loudest thing in a stacked card. */
-.plan-amount {
-  font-size: clamp(44px, calc(81/14.4 * 1vw), 88px); font-weight: 600; line-height: 1;
-  color: var(--ink); direction: ltr; unicode-bidi: isolate;
-  font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;
-}
-/* The board writes the period as one quiet lowercase word directly under the
-   price: 21px at 1440, no uppercase and no letter spacing. The board's own grey
-   fails AA on white, so this takes --muted-on-light. */
-.plan-unit {
-  margin: clamp(11px, calc(20/14.4 * 1vw), 22px) 0 0;
-  font-size: clamp(15px, calc(21/14.4 * 1vw), 23px); font-weight: 400; line-height: 1.2;
+.plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
+.plan-tag {
+  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
   color: var(--muted-on-light);
 }
-/* Inert until somebody supplies lists — see render.mjs §7b. */
+.plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
+.plan-name {
+  margin: 2px 0 0; font-size: var(--pl-name); font-weight: 800; line-height: 1.1;
+  color: var(--ink); letter-spacing: 0;
+}
+.plan-price {
+  margin: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: nowrap; white-space: nowrap;
+}
+.plan-amount {
+  font-size: min(var(--pl-price), 20.5cqi); font-weight: 800; line-height: 1;
+  color: var(--ink); direction: ltr; unicode-bidi: isolate;
+}
+.pa-m, .pa-l { display: none; }
+#pricing:has(#psize-m:checked) .pa-s, #pricing:has(#psize-l:checked) .pa-s { display: none; }
+#pricing:has(#psize-m:checked) .pa-m, #pricing:has(#psize-l:checked) .pa-l { display: inline; }
+.plan-unit {
+  font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
+  color: var(--muted-on-light);
+}
 .plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: 0; list-style: none;
-  display: grid; gap: 10px;
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--ink);
-}
-/* Who the plan is for. This is the card's content, not a caption and not a
-   stand-in: the plans differ by company size and by nothing else. The rule over
-   it is the card's only internal division and it is on the board. */
-.plan-size {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
-  padding-block-start: clamp(20px, calc(31/14.4 * 1vw), 34px);
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--muted-on-light);
+  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
+  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
+  color: var(--muted-on-light);
 }
-/* Board: the button is the full card inner width and 63px tall at 1440, solid
-   orange on all three cards. `margin-block-start: auto` pushes it to the foot
-   of every card, so all three share a baseline however the size lines wrap; the
-   padding is the board's 53.6px gap, kept as a floor for the tallest card. */
-.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(53/14.4 * 1vw), 58px); }
+.plan-features li { position: relative; padding-inline-start: 40px; }
+.plan-features li::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
+  width: 20px; height: 15px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
-  padding-block: clamp(13px, calc(19/14.4 * 1vw), 21px);
+  padding-block: clamp(13px, calc(16/14.4 * 1vw), 18px);
 }
 
 #offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
@@ -1595,8 +1567,11 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
      the same collapsing strategy every other section uses, with the board's
      own proportions kept: price loudest, quiet period, hairline, size line,
      full-width button. */
-  .plan-row { margin-block-start: 32px; grid-template-columns: 1fr; gap: 14px; }
+  .plan-row { margin-block-start: 28px; grid-template-columns: 1fr; gap: 14px; }
   .plan { padding: 40px 24px 32px; }
+  .psw { gap: 6px; }
+  .psw-pill { min-height: 46px; padding: 0 20px; }
+  html[lang="ar"] .psw-pill { font-size: 14px; padding: 0 12px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  /* 44.2px tap target, DESIGN.md §8 */

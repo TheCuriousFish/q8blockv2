@@ -201,6 +201,23 @@ const P = {
   t3: ltr('$1,500'),
 };
 
+/* ── Homepage §7b package prices, locked by Ahmad 2026-10-08 (build-spec §30).
+      Nine numbers: three packages × three company sizes, per month. These are
+      NOT the offer's figures above (P stays on the offer page and the strip
+      until Ahmad says what the offer becomes).
+
+      CURRENCY LIVES HERE AND ONLY HERE. It was never stated; US dollars are
+      assumed because the old pricing was in dollars and the board prints "$".
+      To change it, edit `money` below and nothing else. ── */
+const money = (n) => `$${n.toLocaleString('en-US')}`;
+//                         [ Small, Medium, Large ]
+const PKG = {
+  maintain: [997, 1997, 2997],
+  expand:   [2497, 4997, 6997],
+  dominate: [4997, 9997, 15997],
+};
+const pkgPrices = (key, wrap = (s) => s) => PKG[key].map((n) => wrap(money(n)));
+
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
       files are design/icons/v2/<name>-sq.png (512x512, transparent, trimmed to
       a 476px ink box), converted to WebP at 240x240 in src/img/icon-<name>.webp
@@ -448,61 +465,36 @@ export const COPY = {
           no spots, no promotion wording. It has exactly two homes: the §2 dark
           strip under the hero, and /offer/.
 
-          PASS 2 ANSWERED THE TIER QUESTION. Ahmad, 2026-10-01, verbatim: "We're
-          selling phone calls. We're obviously not going to mention number of
-          phone calls because in SEO that's unpredictable. My suggestion is
-          mention the size of the company. So a 500 is for small companies, 1,000
-          is small to medium, $1,500 is medium to large."
+          PASS 2 (2026-10-01) made company size the only differentiator. PASS 3,
+          2026-10-08 (build-spec §30), REPLACED that with Ahmad's three packages:
+          a company size switch (صغيرة / متوسطة / كبيرة) above three named
+          packages, each with a label (x1 / x3 / x10), nine locked prices and
+          three check lines in Ahmad's own Arabic. The old "who it is for" line is
+          gone: the switch carries company size now.
 
-          SO THE PLANS DIFFER BY COMPANY SIZE AND BY NOTHING ELSE. Each card
-          carries a price, a period and who the plan is for. That is a COMPLETE
-          card, not a card waiting for a feature list, and the old stand-in line
-          ("what each plan covers is agreed on the call") is gone along with the
-          gap it was covering.
-
-          STILL NEVER INVENTED, and Ahmad rejected this whole axis on purpose,
-          because it is exactly what SEO agencies conventionally print: hours,
-          page counts, numbers of services or areas, blog volume, link
-          quantities, reporting frequency, support levels, and above all any
-          promise about how many calls a plan produces. Company size is the only
-          differentiator that exists.
-
-          THE MESSAGE IS THE BUSINESS OUTCOME, NOT SEO. Ahmad: "we're selling
-          SEO, so the messaging is not really SEO... we're selling phone calls."
-          The head sits on customers calling and on picking by the size of the
-          business. No feature language, no packages framing, no jargon, and the
-          standing ban on ترتيب / يتصدر holds.
-
-          >>> IF A FEATURE LIST IS EVER ADDED: put `features: ['…', '…']` on each
-          entry of `plans` below, mirror it in the English block, and fill offer
-          B5 in the same edit. render.mjs renders `plan.features` between the price
-          block and the size line, and the card grid already allows for it, so no
-          redesign is needed. It is NOT needed today: the card is finished as it
-          stands. <<<
+          THE CHECK LINES ARE AHMAD'S, VERBATIM (only شهرياً normalised to the
+          site's شهريًا). Never add, soften or invent a line, and never add
+          hours, page counts, call counts or guarantees. x1 / x3 / x10 are his
+          labels and are not explained anywhere.
 
           NO SAVINGS FIGURE, NO GEOGRAPHY, here or anywhere. ── */
     pricing: {
       eyebrow: 'الأسعار',
-      /* CUT 2026-10-01 (build-spec §28.1). Ahmad: "just leave it, choose your
-         plan, remove company size." The qualifier is gone, so the headline IS
-         the highlighted phrase — nothing is added back around it. The lead's
-         second sentence, "والفرق بينها هو حجم شركتك", went with it: the three
-         cards each print who they are for, so the sentence was reading the
-         cards out loud. What is left is the one thing the section sells. */
-      // Plain, no highlight. At two words the orange block became the whole
-      // headline and read as a label or a button rather than a heading; every
-      // other highlight on the site marks a phrase inside a longer line. §7
-      // 'عملاؤنا' is the precedent.
+      // Plain, no highlight: two words in a highlight block read as a button.
+      // The board draws no lead under it, so the lead was deleted (§30).
       h2: 'اختر خطتك',
-      lead: 'كل خطة هدفها واحد: عملاء يتصلون بك.',
+      /* The switch. Small is the default and the no-JS state. */
+      sizesLabel: 'حجم شركتك',
+      sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
       plans: [
-        { price: P.month, size: 'للشركات الصغيرة' },
-        { price: P.t2, size: 'للشركات الصغيرة والمتوسطة' },
-        { price: P.t3, size: 'للشركات المتوسطة والكبيرة' },
+        { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain', ltr),
+          features: ['تثبيت نتائجك والاتصالات الحالية', 'حماية موقعك من المنافسين', 'الحفاظ على قوة ظهورك'] },
+        { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand', ltr),
+          features: ['استهداف كلمات وخدمات أكثر', 'تكثيف الشغل والجهد شهريًا', 'تحسين فرص طلبات الواتساب'] },
+        { tag: ltr('x10'), name: 'باقة السيطرة', prices: pkgPrices('dominate', ltr),
+          features: ['أقصى جهد وطاقة تشغيلية', 'منافسة أقوى الشركات بالسوق', 'أولوية قصوى ودعم مباشر'] },
       ],
-      /* The board writes the period as one lowercase word under the price, and
-         Ahmad says the prices the same way: "$500 monthly". */
       tierUnit: 'شهريًا',
     },
 
@@ -939,24 +931,28 @@ export const COPY = {
       next: 'Next',
     },
 
-    /* The English mirror of §7b. Three monthly plans that differ by COMPANY
-       SIZE and by nothing else: NO offer, NO anchor, NO one-payment note, NO six
-       months, NO savings figure, NO feature list, NO hours, NO page counts, and
-       NO promise about how many calls a plan produces. The head sits on the
-       business outcome, not on SEO. See the long comment on the Arabic block. */
+    /* The English mirror of §7b (build-spec §30): a size switch and three
+       packages, the check lines as on the approved board. NO offer, NO anchor,
+       NO savings figure, NO hours, NO page counts, NO call counts. See the
+       comment on the Arabic block. */
     pricing: {
       eyebrow: 'Pricing',
       /* CUT 2026-10-01 (build-spec §28.1). The qualifier and the `.brk`/`.nb`
          break treatment with it: three words fit on one line at every width, so
          there is nothing left to plan a break for. See the Arabic block. */
       h2: 'Choose your plan.',
-      lead: 'Every plan has one goal: customers calling you.',
+      // No lead: the board draws none (build-spec §30).
+      sizesLabel: 'Your company size',
+      sizes: ['Small', 'Medium', 'Large'],
       plans: [
-        { price: '$500', size: 'For small companies' },
-        { price: '$1,000', size: 'For small to medium companies' },
-        { price: '$1,500', size: 'For medium to large companies' },
+        { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'),
+          features: ['Lock in your current results and calls', 'Protect your site from competitors', 'Keep your visibility strong'] },
+        { tag: 'x3', name: 'Expand', prices: pkgPrices('expand'),
+          features: ['Target more keywords and services', 'More work and effort every month', 'Better chances of WhatsApp requests'] },
+        { tag: 'x10', name: 'Dominate', prices: pkgPrices('dominate'),
+          features: ['Maximum effort and operating power', 'Compete with the strongest companies in the market', 'Top priority and direct support'] },
       ],
-      tierUnit: 'monthly',
+      tierUnit: '/month',
     },
 
     faq: {

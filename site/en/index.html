@@ -638,60 +638,99 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 }
 
 #pricing { background: var(--bg-white); text-align: center; }
-#pricing .lead { margin-inline: auto; }
+
+#pricing {
+  --pl-tag: clamp(16px, calc(24/14.4 * 1vw), 26px);
+  --pl-name: clamp(28px, calc(44/14.4 * 1vw), 48px);
+  --pl-price: clamp(44px, calc(68/14.4 * 1vw), 74px);
+  --pl-unit: clamp(14px, calc(18/14.4 * 1vw), 20px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+  --pl-pill: clamp(15px, calc(17/14.4 * 1vw), 19px);
+}
+html[lang="ar"] #pricing {
+  --pl-name: clamp(24px, calc(34/14.4 * 1vw), 37px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+}
+
+.psw {
+  position: relative; border: 0; padding: 0; min-inline-size: 0;
+  margin: clamp(18px, calc(20/14.4 * 1vw), 22px) 0 0;
+  display: flex; justify-content: center; gap: 7px;
+}
+.psw-in {
+  position: absolute; inset-block-start: 0; inset-inline-start: 0;
+  width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none;
+}
+.psw-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 47px; padding: 0 clamp(18px, calc(36/14.4 * 1vw), 38px);
+  border: 1px solid var(--hairline-light); border-radius: 999px;
+  background: var(--bg-white); color: var(--ink);
+  font-size: var(--pl-pill); font-weight: 600; line-height: 1.1; white-space: nowrap;
+  cursor: pointer; transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.psw-pill:hover { border-color: var(--ink); }
+.psw-in:checked + .psw-pill { background: var(--ink); border-color: var(--ink); color: #fff; }
+.psw-in:focus-visible + .psw-pill { outline: 3px solid var(--orange); outline-offset: 3px; }
 
 .plan-row {
-  margin: clamp(32px, calc(54/14.4 * 1vw), 58px) 0 0; padding: 0; list-style: none;
+  margin: clamp(28px, calc(40/14.4 * 1vw), 44px) 0 0; padding: 0; list-style: none;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, calc(21/14.4 * 1vw), 23px);
+  gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
   align-items: stretch;
 }
 
 .plan {
   display: flex; flex-direction: column;
+  container-type: inline-size;
   border: 1px solid var(--hairline-light);
   background: var(--bg-white);
-  
   padding: clamp(36px, calc(66/14.4 * 1vw), 72px) clamp(22px, calc(40/14.4 * 1vw), 44px)
            clamp(28px, calc(42/14.4 * 1vw), 46px);
   text-align: start;
 }
-
-.plan-featured { box-shadow: inset 0 5px 0 var(--orange); }
-.plan-head { margin: 0; }
-.plan-price { margin: 0; }
-
-.plan-amount {
-  font-size: clamp(44px, calc(81/14.4 * 1vw), 88px); font-weight: 600; line-height: 1;
-  color: var(--ink); direction: ltr; unicode-bidi: isolate;
-  font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;
-}
-
-.plan-unit {
-  margin: clamp(11px, calc(20/14.4 * 1vw), 22px) 0 0;
-  font-size: clamp(15px, calc(21/14.4 * 1vw), 23px); font-weight: 400; line-height: 1.2;
+.plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
+.plan-tag {
+  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
   color: var(--muted-on-light);
 }
-
+.plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
+.plan-name {
+  margin: 2px 0 0; font-size: var(--pl-name); font-weight: 800; line-height: 1.1;
+  color: var(--ink); letter-spacing: 0;
+}
+.plan-price {
+  margin: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: nowrap; white-space: nowrap;
+}
+.plan-amount {
+  font-size: min(var(--pl-price), 20.5cqi); font-weight: 800; line-height: 1;
+  color: var(--ink); direction: ltr; unicode-bidi: isolate;
+}
+.pa-m, .pa-l { display: none; }
+#pricing:has(#psize-m:checked) .pa-s, #pricing:has(#psize-l:checked) .pa-s { display: none; }
+#pricing:has(#psize-m:checked) .pa-m, #pricing:has(#psize-l:checked) .pa-l { display: inline; }
+.plan-unit {
+  font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
+  color: var(--muted-on-light);
+}
 .plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: 0; list-style: none;
-  display: grid; gap: 10px;
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--ink);
-}
-
-.plan-size {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
-  padding-block-start: clamp(20px, calc(31/14.4 * 1vw), 34px);
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--muted-on-light);
+  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
+  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
+  color: var(--muted-on-light);
 }
-
-.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(53/14.4 * 1vw), 58px); }
+.plan-features li { position: relative; padding-inline-start: 40px; }
+.plan-features li::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
+  width: 20px; height: 15px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
-  padding-block: clamp(13px, calc(19/14.4 * 1vw), 21px);
+  padding-block: clamp(13px, calc(16/14.4 * 1vw), 18px);
 }
 
 #offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
@@ -1017,8 +1056,11 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     text-align: start; padding: 18px 20px; gap: 16px;
   }
   
-  .plan-row { margin-block-start: 32px; grid-template-columns: 1fr; gap: 14px; }
+  .plan-row { margin-block-start: 28px; grid-template-columns: 1fr; gap: 14px; }
   .plan { padding: 40px 24px 32px; }
+  .psw { gap: 6px; }
+  .psw-pill { min-height: 46px; padding: 0 20px; }
+  html[lang="ar"] .psw-pill { font-size: 14px; padding: 0 12px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  
@@ -1280,34 +1322,28 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
     <div class="wrap">
       <p class="eyebrow">Pricing</p>
       <h2 class="h2">Choose your plan.</h2>
-      <p class="lead">Every plan has one goal: customers calling you.</p>
+      <fieldset class="psw"><legend class="vh">Your company size</legend><input class="psw-in" type="radio" name="psize" id="psize-s" value="s" checked><label class="psw-pill" for="psize-s">Small</label><input class="psw-in" type="radio" name="psize" id="psize-m" value="m"><label class="psw-pill" for="psize-m">Medium</label><input class="psw-in" type="radio" name="psize" id="psize-l" value="l"><label class="psw-pill" for="psize-l">Large</label></fieldset>
       <ul class="plan-row"><li class="plan">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">$500</span></p>
-        <p class="plan-unit">monthly</p>
-      </div>
-      
-      <p class="plan-size">For small companies</p>
+      <p class="plan-tag">x1</p>
+      <h3 class="plan-name">Maintain</h3>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">$997</span><span class="pa pa-m">$1,997</span><span class="pa pa-l">$2,997</span></span> <span class="plan-unit">/month</span></p>
+      <ul class="plan-features"><li>Lock in your current results and calls</li><li>Protect your site from competitors</li><li>Keep your visibility strong</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
       </div>
     </li><li class="plan plan-featured">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">$1,000</span></p>
-        <p class="plan-unit">monthly</p>
-      </div>
-      
-      <p class="plan-size">For small to medium companies</p>
+      <p class="plan-tag">x3</p>
+      <h3 class="plan-name">Expand</h3>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">$2,497</span><span class="pa pa-m">$4,997</span><span class="pa pa-l">$6,997</span></span> <span class="plan-unit">/month</span></p>
+      <ul class="plan-features"><li>Target more keywords and services</li><li>More work and effort every month</li><li>Better chances of WhatsApp requests</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
       </div>
     </li><li class="plan">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">$1,500</span></p>
-        <p class="plan-unit">monthly</p>
-      </div>
-      
-      <p class="plan-size">For medium to large companies</p>
+      <p class="plan-tag">x10</p>
+      <h3 class="plan-name">Dominate</h3>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">$4,997</span><span class="pa pa-m">$9,997</span><span class="pa pa-l">$15,997</span></span> <span class="plan-unit">/month</span></p>
+      <ul class="plan-features"><li>Maximum effort and operating power</li><li>Compete with the strongest companies in the market</li><li>Top priority and direct support</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
       </div>

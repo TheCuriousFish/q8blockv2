@@ -4334,3 +4334,111 @@ Ahmad: a slideshow in the "what we do" section, under the lead, above the three 
 * **Measured** (headless Chrome, cursor parked, 250 ms samples, 1440): en `0 -20 -564 -672 ... -1344 ... -2016 ... -2688 ... -3360 ... -4025 0 -20 -564 -672`; ar the same with positive signs. One step per 2 s, one direction, wrap 4032 to 0 with no backwards step. Frame screenshot just before and just after the wrap is byte identical in both locales. Reduced motion: nothing moves over 6 s.
 * **Gates** first screen 900/900, 1200/1200, 844/844 both locales; seo-audit 0 high; site-audit 0 failing; Lighthouse `/` and `/en/` performance 100, accessibility 100, CLS 0.
 * **Flag** `new1.png` has a hover tooltip ("Friday, Sep 4 ... add an annotation") across the chart; shipped as exported.
+
+## 30. §7b rebuilt to `pricing-v2-A.png`: a size switch and three packages, 2026-10-08
+
+Ahmad picked **A** of three boards. **`design/boards/pricing-v2-A.png` is the board.** `pricing-v2-B.png`,
+`pricing-v2-C.png` and `pricing-v2-options.png` are **DEAD boards**, as are `pricing-light.png` and
+`pricing-dark.png` (§27). The board's lettering is a generated render (one malformed letter in
+"Dominate"); real type is set in Alexandria. This section supersedes §27.3 to §27.8: the plans no longer
+differ by company size alone, the `.plan-size` line is gone, and `.plan-features` is live.
+
+### 30.1 What the section is now
+
+Eyebrow `الأسعار` / `PRICING`, headline `اختر خطتك` / `Choose your plan.` (plain, no highlight), **no lead**
+(the board draws none; the old lead was deleted), a centred three-pill switch, three cards. Each card:
+muted tag (`x1` / `x3` / `x10`), bold name, very large price with a muted period, hairline, three check
+lines, the site's call button (`اتصل الآن` / `Call now`, `tel:`). The middle card is weighted by a 6px
+orange top edge and nothing else. No offer, no link to `/offer/`, no badge.
+
+### 30.2 The nine prices (locked by Ahmad), USD per month
+
+| Package | Tag | Small | Medium | Large |
+|---|---|---|---|---|
+| باقة الحفاظ / Maintain | x1 | $997 | $1,997 | $2,997 |
+| باقة التوسع / Expand | x3 | $2,497 | $4,997 | $6,997 |
+| باقة السيطرة / Dominate | x10 | $4,997 | $9,997 | $15,997 |
+
+Currency was never stated; dollars are assumed. It lives in ONE place: `money()` in `src/data.mjs`, next
+to the `PKG` table. The offer's `P` figures ($500 / $1,000 / $1,500) are untouched (§30.6).
+
+### 30.3 The switch
+
+Native radios, no script. `render.mjs` emits a `<fieldset class="psw">` (visually hidden legend `حجم شركتك` /
+`Your company size`) holding three `name="psize"` radios, each followed by its `<label class="psw-pill">`.
+The inputs are visually hidden; the labels are the pills. Radio-group semantics, arrow-key movement and
+the checked state come from the browser. Every card carries all three amounts (`.pa-s/.pa-m/.pa-l`);
+`styles.css` shows the checked one with `#pricing:has(#psize-m:checked)`. `Small` is `checked` in the HTML,
+so with JS off (or without `:has()`) the Small prices show and are correct. All three amounts share one
+line box, so a card's height never changes with the size. The price caps itself at `20.5cqi` of the card
+(`container-type: inline-size`), so `$15,997` and the period never wrap. Focus ring: 3px `--orange` outline,
+3px offset, on the pill.
+
+### 30.4 Measurement table, `pricing-v2-A.png` (board px × 0.5357 = CSS px at 1440)
+
+| Element | Board px | CSS at 1440 | Built as |
+|---|---|---|---|
+| pills | 231 / 250 / 230 × 89 | 123 / 134 / 123 × 47 | intrinsic, padding 36, `min-height: 47px`; built 123 / 146 / 122 × 47 |
+| pill gap | 13 | 7 | `gap: 7px` |
+| pill label | 82 × 24 (`Small`) | ~17px / 600 | `clamp(15px, 17/14.4vw, 19px)`, 600 |
+| selected pill | near-black fill, white | | `--ink` fill, `#fff` |
+| other pills | 2px `#D5DAE1` outline | 1px | `1px solid var(--hairline-light)` |
+| headline ink → pills | 345 → 380 | 19 | `.psw` margin `clamp(18px, 20/14.4vw, 22px)` |
+| pills → cards | 467 → 541 | 40 | `.plan-row` margin `clamp(28px, 40/14.4vw, 44px)` |
+| card span / gap | 118 → 2571 / 37 | 1314 / 20 | 1320 `.wrap` / `clamp(14px, 20/14.4vw, 22px)` |
+| card height | 541 → 1405 | 463 | content-derived: **544** `/en/`, **512** `/` (see 30.5) |
+| middle edge | 533 → 545, `#F6A386`… `#FD5926` | 6.4 | `border-top-color: --orange` + `inset 0 5px 0` = 6px, no height change |
+| tag `x1` | 37 × 32 | ~24px | `clamp(16px, 24/14.4vw, 26px)` / 500, `--muted-on-light` |
+| name `Maintain` | 351 × 68 | 36 cap → ~44px | `clamp(28px, 44/14.4vw, 48px)` / 800 (Arabic 34px) |
+| price `$997` | 329 × 123 | 176 × 66 → ~68px | `min(clamp(44px, 68/14.4vw, 74px), 20.5cqi)` / 800, `--ink` |
+| price → `/month` | 14 | 7.5 | `gap: 8px`, baseline aligned |
+| `/month` | 128 × 31 | ~18px | `clamp(14px, 18/14.4vw, 20px)` / 400, muted |
+| price → hairline | 871 → 923 | 28 | margin 27 |
+| hairline → check 1 | 923 → 981 | 31 | padding 27 (ink measured 30) |
+| check lines | 33 tall, pitch 80 | 16 to 17px, pitch 43 | `clamp(15px, 16/14.4vw, 18px)`, lh 1.35, gap 20 |
+| check icon | 37 × 25, orange | 20 × 14 | inline SVG background, 20 × 15, text at 40 |
+| button | 679 × 108 | 364 × 58 | full width, built 56 tall |
+| button → card foot | 1355 → 1405 | 27 | padding 42 (override) |
+
+Built ink offsets inside card 1 at 1440 `/en/`, minus the 38px extra top padding, against the board: tag
+28 (28), name 55 (52.5), price 113 to 182 (111 to 177), hairline 209 (205), check 1 239 (236), button 56
+tall (57). Type was sized by rendering Alexandria on a canvas and solving each board glyph box for height
+and width; the board lettering is wider than Alexandria, so sizes sit between the two solutions.
+
+### 30.5 Approved overrides and what still differs
+
+1. **Card padding stays 66/40/42 at 1440 (40/24/32 on a phone)**, against the board's ~28/32/26. Ahmad,
+   2026-10-01: the content was "just stuck to the upper section border". Approved override.
+2. **Grey text uses `--muted-on-light` (#686F79, 5.03:1)**, not the board grey (~#8B909F / #95949A,
+   about 2.3 to 3:1 on white). Tag, period and check lines.
+3. **Eyebrow and h2 keep `--fs-eyebrow` and `--fs-h2`**, as in §27.6.
+4. **Cards are ~80px taller than the board at 1440** (544 vs 463): 54 of it is override 1, the rest is
+   real Alexandria wrapping "Compete with the strongest companies in the market" to two lines in a column
+   the side padding override narrowed. Buttons still share one baseline.
+5. **The Medium pill is 12px wider** (Alexandria is wider than the board's lettering).
+6. **The period follows the price horizontally** when the size changes (`$997` to `$2,997` pushes
+   `/month` right). Nothing moves vertically; card heights are identical across sizes.
+
+### 30.6 The old figures, deliberately left
+
+Ahmad has not said what the offer becomes under the new prices, so these still carry the OLD figures and
+were not touched: the homepage §2 offer strip (`$500` paid once), and `/offer/` and `/en/offer/`: meta
+title and description (`500 دولار` in Arabic), B1 lead, B1b anchor (`from $500 per month`) and offer row,
+B2 intro, B2b caption, B4, B5 tiers (`$500 / $1,000 / $1,500`), offer FAQ Q1, Q2, Q3 and Q6.
+
+### 30.7 Verification
+
+| Check | Result |
+|---|---|
+| Nine prices, by clicking each pill in headless Chrome, both locales, 1440 and 390 | all nine match 30.2 |
+| No JS | Small prices shown, both locales |
+| Keyboard | arrows move the checked radio and the prices follow; focus ring 3px solid |
+| Card heights across sizes | 544/544/544 `/en/`, 511.5 ×3 `/` at 1440; unchanged by size at 390 |
+| Overflow, 1440 and 390 | none; switch one row at 390 (EN 85/105/84, AR 109/126/98, all 46 tall) |
+| Band order | hero, problem, what-we-do, journey DARK, work, pricing, faq, final DARK |
+| First screen 1440x900, 1920x1200, 390x844, both locales | unchanged (900, 1200, 844) |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/en/` and `/` | perf 100, accessibility 100, best practices 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.
