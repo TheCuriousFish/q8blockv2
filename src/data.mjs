@@ -182,40 +182,53 @@ export const WORK = [
 
 /* ── PRICES.
       THE OFFER (2026-10-08, build-spec §33): the first six months are FREE again.
-      The $500-once version (2026-09-30) is gone from the site; `P.six` was removed
-      with it, so no "$500" can creep back through this object.
+      The 500-once version (2026-09-30) is gone from the site; `P.six` was removed
+      with it, so no "500" can creep back through this object.
       THE ONGOING PRICE (locked by Ahmad 2026-10-08, build-spec §30 and §32): three
       packages x three company sizes, nine monthly prices in PKG below. Ahmad
       confirmed on 2026-10-08 that these nine are also the offer page's prices,
       so the offer anchor is "from" the lowest of them, computed, never typed,
       and B5 prints the same nine through `pricing.plans`.
 
-      WHY EVERY PRICE GOES THROUGH `ltr()`. `$500` written plainly inside an Arabic
-      sentence renders as `500$`: the Unicode bidi algorithm resolves European digits
-      after an Arabic letter to Arabic-Number, which leaves the `$` as a neutral and
-      pushes it to the wrong side of the run. U+2066 / U+2069 (LRI / PDI) isolate the
-      run so it renders `$500` — and, unlike a `<span dir="ltr">`, invisible characters
-      survive `esc()`, so these strings can still be escaped like any other copy.
-      Never write a bare `$` price into an Arabic string.
+      CURRENCY LIVES IN `CUR` AND ONLY THERE (build-spec §34, 2026-10-08). The
+      prices are Saudi riyals (Ahmad, 2026-10-08: "my pricing is Reyal Saudi").
+      Until then a US currency sign was assumed from the old site; superseded.
+      The abbreviation is used, never the new riyal sign (U+20C1): Alexandria and
+      most fonts have no glyph for it yet.
+        - `money(n, lang)` is the price inside a sentence: "997 SAR", "997 ر.س".
+        - `CUR.unit` is the small line beside a big numeral (the #pricing cards and
+          the offer B5 boxes): the numeral stays bare, the currency sits in the unit.
+        - `CUR.arWord` is for meta descriptions, where a reader sees plain text.
 
-      CURRENCY LIVES IN `money` AND ONLY THERE. It was never stated; US dollars are
-      assumed because the old pricing was in dollars and the board prints "$". ── */
+      BIDI. The old isolate existed only because a symbol BEFORE the digits
+      (a symbol written before the digits) was a neutral and flipped to the wrong side inside Arabic.
+      With the currency AFTER the number there is nothing to flip: the digits
+      resolve to Arabic-Number, keep their own left-to-right order (1,997 stays
+      1,997, the comma is a common separator between digits), and `ر.س` follows
+      them in reading order. Checked in Chrome on 2026-10-08, so sentence prices
+      carry no isolate. `ltr()` stays for the Latin x1 / x3 / x10 labels only. ── */
 export const ltr = (s) => `⁦${s}⁩`;
-const money = (n) => `$${n.toLocaleString('en-US')}`;
+export const CUR = {
+  code: 'SAR',            // English, after the number: "997 SAR"
+  ar: 'ر.س',              // Arabic abbreviation, after the number: "997 ر.س"
+  arWord: 'ريال سعودي',   // meta text: "997 ريال سعودي"
+  unit: { ar: 'ر.س شهريًا', en: 'SAR / month', enLong: 'SAR per month' },
+};
+const num = (n) => n.toLocaleString('en-US');
+export const money = (n, lang = 'en') => `${num(n)} ${lang === 'ar' ? CUR.ar : CUR.code}`;
 //                         [ Small, Medium, Large ]
 const PKG = {
   maintain: [997, 1997, 2997],
   expand:   [2497, 4997, 6997],
   dominate: [4997, 9997, 15997],
 };
-const pkgPrices = (key, wrap = (s) => s) => PKG[key].map((n) => wrap(money(n)));
+// The bare numerals for the big price slots; the currency is in CUR.unit beside them.
+const pkgPrices = (key) => PKG[key].map(num);
 // The offer anchor: the lowest of the nine. Computed so it can never drift.
 const FROM = Math.min(...Object.values(PKG).flat());
-const P = {
-  from: ltr(money(FROM)),    // the anchor, "from" the lowest monthly package price
-};
-const FROM_EN = money(FROM);
-const FROM_NUM = FROM.toLocaleString('en-US'); // for the meta text, "997 دولار"
+const FROM_AR = money(FROM, 'ar');                // "997 ر.س"
+const FROM_EN = money(FROM, 'en');                // "997 SAR"
+const FROM_META_AR = `${num(FROM)} ${CUR.arWord}`; // "997 ريال سعودي"
 
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
       files are design/icons/v2/<name>-sq.png (512x512, transparent, trimmed to
@@ -259,7 +272,7 @@ export const COPY = {
       },
       offer: {
         title: 'عملاء جدد من محركات البحث والذكاء الاصطناعي | Q8 block',
-        description: `عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من ${FROM_NUM} دولار شهريًا.`,
+        description: `عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من ${FROM_META_AR} شهريًا.`,
         ogAlt: 'عرض Q8 block: عملاء جدد من محركات البحث والذكاء الاصطناعي',
       },
       about: {
@@ -411,7 +424,7 @@ export const COPY = {
         clicksK: 'النقرات من نتائج البحث', clicksS: 'نقرة وصلت للموقع من نتائج جوجل',
         imprK: 'ظهور الموقع في النتائج', imprS: 'مرة ظهور في صفحات نتائج جوجل',
         peakK: 'أعلى يوم', peakV: '{d} سبتمبر', peakS: '{n} زيارة في يوم واحد',
-        valueK: 'القيمة التقديرية', valueV: '{lo} إلى {hi} د.ك', valueS: 'لو جاءت هذه الزيارات من إعلانات جوجل',
+        valueK: 'القيمة التقديرية', valueV: `{lo} إلى {hi} ${CUR.ar}`, valueS: 'لو جاءت هذه الزيارات من إعلانات جوجل',
         chartLabel: 'الزيارات اليومية من بحث جوجل، من 1 إلى {last} سبتمبر، وأعلاها {n} زيارة يوم {d} سبتمبر',
         start: '1 سبتمبر', end: '{last} سبتمبر',
       },
@@ -456,7 +469,7 @@ export const COPY = {
           mention the offer in the pricing section."
 
           THE OFFER IS NOT IN THIS SECTION AT ALL, and it never comes back. No
-          anchor, no "$500 one time", no دفعة واحدة, no ستة أشهر, no countdown,
+          anchor, no "500 one time", no دفعة واحدة, no ستة أشهر, no countdown,
           no spots, no promotion wording. It has exactly two homes: the §2 dark
           strip under the hero, and /offer/.
 
@@ -483,14 +496,14 @@ export const COPY = {
       sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
       plans: [
-        { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain', ltr),
+        { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain'),
           features: ['تثبيت نتائجك والاتصالات الحالية', 'حماية موقعك من المنافسين', 'الحفاظ على قوة ظهورك'] },
-        { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand', ltr),
+        { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand'),
           features: ['استهداف كلمات وخدمات أكثر', 'تكثيف الشغل والجهد شهريًا', 'تحسين فرص طلبات الواتساب'] },
-        { tag: ltr('x10'), name: 'باقة السيطرة', prices: pkgPrices('dominate', ltr),
+        { tag: ltr('x10'), name: 'باقة السيطرة', prices: pkgPrices('dominate'),
           features: ['أقصى جهد وطاقة تشغيلية', 'منافسة أقوى الشركات بالسوق', 'أولوية قصوى ودعم مباشر'] },
       ],
-      tierUnit: 'شهريًا',
+      tierUnit: CUR.unit.ar,
     },
 
     /* ── 8. FAQ ── */
@@ -669,18 +682,18 @@ export const COPY = {
 
     /* ═══ PART B. The offer page ═══
        2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN, six months, no
-       payment. Every $500 / one-payment string is gone; the history below is
+       payment. Every 500 / one-payment string is gone; the history below is
        the paid version's and no longer describes the copy.
-       Rewritten 2026-09-30: the offer is NOT free any more. One payment of $500
+       Rewritten 2026-09-30: the offer is NOT free any more. One payment of 500
        buys the first six months; the normal price starts at the lowest package
        price (build-spec §32, computed from PKG). The
-       single biggest risk on this page is a reader thinking it is $500 monthly,
+       single biggest risk on this page is a reader thinking it is 500 monthly,
        so "دفعة واحدة" sits beside the number everywhere the number appears and
        `price.note` says it in the shortest words there are. */
     offerPage: {
       pill: 'عرض محدود',
       /* H1 REPLACED 2026-09-30, second pass (build-spec §26.4). The old line
-         `ستة أشهر بـ$500، تُدفع مرة واحدة` sold the PRICE; every replacement that
+         `ستة أشهر بـ500، تُدفع مرة واحدة` sold the PRICE; every replacement that
          led with the website sold the WEBSITE. Ahmad: "you're selling the
          website, not the dream outcome, which is related to search and AI,
          getting clients." So it opens on the outcome and names the two channels
@@ -697,10 +710,10 @@ export const COPY = {
          a savings claim reads as a discount gimmick. */
       price: {
         anchorLabel: 'السعر المعتاد',
-        anchorValue: `يبدأ من ${P.from} شهريًا`,
+        anchorValue: `يبدأ من ${FROM_AR} شهريًا`,
         offerLabel: 'هذا العرض',
         offerValue: 'ستة أشهر مجانًا',
-        // no `note` since 2026-10-08 (§33): the one-payment line went with the $500
+        // no `note` since 2026-10-08 (§33): the one-payment line went with the 500
       },
 
       countdownLabel: 'يغلق التسجيل خلال',
@@ -764,10 +777,10 @@ export const COPY = {
          nine prices by company size. The boxes are rendered from `pricing.plans`
          and `pricing.sizes` above (the homepage §7b data), so no price is typed
          here. Prices and names only: NO check lines / feature lists on this page,
-         no "most popular". The intro's last sentence keeps the $500 from ever
+         no "most popular". The intro's last sentence keeps the 500 from ever
          reading as one of these monthly prices. */
       b5: { title: 'ماذا يحدث بعد ستة أشهر', intro: 'حين تنتهي الأشهر الستة لديك ثلاثة خيارات: تستمر على إحدى الباقات أدناه، ويتحدد سعرها بالباقة وبحجم شركتك. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة.',
-        tierUnit: 'شهريًا',
+        tierUnit: CUR.unit.ar,
         notes: [
           'ما تشمله كل باقة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة.',
           'وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.',
@@ -776,7 +789,7 @@ export const COPY = {
       b6: { title: 'أسئلة شائعة',
         items: [
           { q: 'لماذا العرض مجاني؟', a: 'نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول.' },
-          { q: 'هل أدفع شيئًا خلال الأشهر الستة؟', a: `لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من ${P.from} شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار.` },
+          { q: 'هل أدفع شيئًا خلال الأشهر الستة؟', a: `لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من ${FROM_AR} شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار.` },
           { q: 'هل هناك عقد أو التزام؟', a: 'لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها.' },
           { q: 'هل يشترط وجود سجل تجاري؟', a: 'سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل.' },
           { q: 'لدي موقع قائم، هل أنا مؤهل؟', a: 'العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك.' },
@@ -928,7 +941,7 @@ export const COPY = {
         clicksK: 'Clicks from search results', clicksS: 'clicks that reached the site from Google results',
         imprK: 'Appearances in results', imprS: 'times the site showed on Google results pages',
         peakK: 'Best day', peakV: '{d} September', peakS: '{n} visits in one day',
-        valueK: 'Estimated value', valueV: '{lo} to {hi} KWD', valueS: 'if these visits had come from Google Ads',
+        valueK: 'Estimated value', valueV: `{lo} to {hi} ${CUR.code}`, valueS: 'if these visits had come from Google Ads',
         chartLabel: 'Daily visits from Google search, 1 to {last} September, peaking at {n} visits on {d} September',
         start: '1 Sep', end: '{last} Sep',
       },
@@ -968,7 +981,7 @@ export const COPY = {
         { tag: 'x10', name: 'Dominate', prices: pkgPrices('dominate'),
           features: ['Maximum effort and operating power', 'Compete with the strongest companies in the market', 'Top priority and direct support'] },
       ],
-      tierUnit: '/month',
+      tierUnit: CUR.unit.en,
     },
 
     faq: {
@@ -1124,7 +1137,7 @@ export const COPY = {
     },
 
     /* The English mirror of Part B. Rewritten 2026-09-30 with the Arabic: ONE
-       payment of $500 buys the first six months. Since 2026-10-08 (build-spec §32)
+       payment of 500 buys the first six months. Since 2026-10-08 (build-spec §32)
        the normal price is "from" the lowest of the nine package prices (computed)
        and B5 prints the three packages by company size from `pricing.plans`. "paid once" / "one payment" sits beside the number every single
        time the number appears. Do not shorten it away. */
@@ -1179,7 +1192,7 @@ export const COPY = {
       b4: { title: 'No contract', body: 'There is no contract, no commitment and no fee. You can stop at any time, during the six months or after them.' },
 
       b5: { title: 'What happens after six months', intro: 'When the six months end you have three choices. Continue on one of the packages below, priced by the package and the size of your company. Stop the search work and keep your website live for a small monthly fee. Or stop. You decide. The prices below are monthly and only start once the six months are over.',
-        tierUnit: 'per month',
+        tierUnit: CUR.unit.enLong,
         notes: [
           'What each package covers is agreed with you on the call, against your industry and what the six months produced.',
           'If you choose to stop, you stop completely, with no fee and no notice.',

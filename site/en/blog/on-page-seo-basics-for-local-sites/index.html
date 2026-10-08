@@ -748,7 +748,8 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 .tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
 .tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
-.tier-tag { font-size: var(--fs-strip); font-weight: 500; color: var(--muted-on-dark); unicode-bidi: isolate; }
+.tier-tag.xtag { font-size: var(--fs-strip); flex: none; }
+.tier-head { align-items: center; }
 .tier-sizes { margin: 0; display: grid; }
 .tier-sizes > div {
   display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
@@ -816,9 +817,13 @@ html[lang="ar"] #pricing {
   text-align: start;
 }
 .plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
-.plan-tag {
-  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
-  color: var(--muted-on-light);
+.plan-tag { margin: 0 0 clamp(10px, calc(14/14.4 * 1vw), 16px); line-height: 1; }
+
+.xtag {
+  display: inline-block; direction: ltr; unicode-bidi: isolate;
+  background: var(--orange); color: #141415; border-radius: 100px;
+  padding: 0.32em 0.8em 0.36em; font-size: var(--pl-tag); font-weight: 800; line-height: 1;
+  letter-spacing: 0.01em;
 }
 .plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
 .plan-name {

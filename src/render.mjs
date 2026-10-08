@@ -293,6 +293,15 @@ const KW_COUNT = 12;
 const fmt = (n) => n.toLocaleString('en-US');
 const fill = (str, map) => str.replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : m));
 const ltr = (v) => `<bdi dir="ltr">${v}</bdi>`;
+/* The report's estimated click value is in Kuwaiti dinars (the source report is a
+   Kuwait site). The homepage prints it in Saudi riyals (Ahmad, 2026-10-08).
+   KWD_TO_SAR, set 2026-10-08: 1 KWD is about 3.26 USD and the riyal is pegged at
+   3.75 to the dollar, so 3.26 x 3.75 = about 12.2. One-line change when the rate
+   moves. Applied HERE, not in report.json, so re-running derive-report.mjs keeps
+   the dinar range it reads from the report and can never undo the conversion.
+   Rounded to the nearest 100: 500 to 600 KWD prints 6,100 to 7,300. */
+const KWD_TO_SAR = 12.2;
+const toSar = (kwd) => Math.round((kwd * KWD_TO_SAR) / 100) * 100;
 
 function reportChart(daily, rtl) {
   const W = 600, H = 120, top = 10, base = 112;
@@ -368,7 +377,7 @@ export function report(t) {
             `<li class="rp-tagk${k.hot ? ' hot' : ''}"${k.lang === 'en' ? ' lang="en" dir="ltr"' : (rtl ? '' : ' lang="ar" dir="rtl"')}>${esc(k.text)}</li>`).join('')}</ul>`;
 
   const last = T.daily.length;
-  const m = { d: T.peakDay, n: T.peakVisits, lo: fmt(T.valueLo), hi: fmt(T.valueHi), last };
+  const m = { d: T.peakDay, n: T.peakVisits, lo: fmt(toSar(T.valueLo)), hi: fmt(toSar(T.valueHi)), last };
   const stat = (k, v, sub, cls = '') => `<div class="rp-stat ${cls}"><p class="rp-sk">${esc(k)}</p><p class="rp-sv">${v}</p><p class="rp-ss">${sub}</p></div>`;
   const withNums = (str) => esc(fill(str, m)).replace(/(\d[\d,]*)/g, (d) => ltr(d));
   const traffic = `<div class="rp-stats">
@@ -519,7 +528,7 @@ export function work(t) {
       correct. Every size's price occupies the same line box, so switching
       never changes a card's height.
 
-      THE OFFER IS NOT IN THIS SECTION. No $500 one time, no six months, no
+      THE OFFER IS NOT IN THIS SECTION. No 500 one time, no six months, no
       countdown, no link to /offer/. The CTA is the site's existing call label
       on the site's tel: href.
 
@@ -533,7 +542,7 @@ export function pricing(t) {
     const amounts = plan.prices.map((v, k) => `<span class="pa pa-${PSIZE[k]}">${esc(v)}</span>`).join('');
     const features = `<ul class="plan-features">${plan.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`;
     return `<li class="plan${i === 1 ? ' plan-featured' : ''}">
-      <p class="plan-tag">${esc(plan.tag)}</p>
+      <p class="plan-tag"><span class="xtag" dir="ltr">${esc(plan.tag)}</span></p>
       <h3 class="plan-name">${esc(plan.name)}</h3>
       <p class="plan-price"><span class="plan-amount">${amounts}</span> <span class="plan-unit">${esc(p.tierUnit)}</span></p>
       ${features}
@@ -592,21 +601,21 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
 
    2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. The second row now reads
    "This offer / free for six months" and there is NO note: the "one payment, not
-   monthly" line only existed to stop $500 reading as monthly, and there is no
-   $500 any more. `p.note` is optional; leave it unset. The history below is the
+   monthly" line only existed to stop 500 reading as monthly, and there is no
+   500 any more. `p.note` is optional; leave it unset. The history below is the
    paid version's reasoning, kept for the record.
 
    Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
-   and no third element competing: "Normal price / from $997 per month" (since
+   and no third element competing: "Normal price / from 997 per month" (since
    2026-10-08 the lowest package price, computed in data.mjs, build-spec §32) over
-   "This offer / $500 one time, covers six months".
+   "This offer / 500 one time, covers six months".
 
-   THERE IS NO "you save $2,500" LINE AND THERE NEVER WILL BE. A savings claim
+   THERE IS NO "you save 2,500" LINE AND THERE NEVER WILL BE. A savings claim
    reads as a discount gimmick and it makes the reader argue with the figure
    instead of with the competitor's quote. Two numbers, side by side, nothing else.
 
    `price.note` is the anti-confusion line and it is the reason this block exists
-   at all: if a reader leaves thinking it is $500 a MONTH for six months, the offer
+   at all: if a reader leaves thinking it is 500 a MONTH for six months, the offer
    and the trust both die. It is written in the shortest words there are and it is
    repeated wherever the number appears (hero, B2 intro, B4, two FAQ answers).
 
@@ -744,7 +753,7 @@ export function offerNoContract(t) {
 
 /* B5, rebuilt 2026-09-30. It used to be three numbered options (continue on a
    plan / keep the site on a small fee / stop). It is now the three monthly tiers
-   Ahmad named, $500, $1,000 and $1,500, plus stopping.
+   Ahmad named, 500, 1,000 and 1,500, plus stopping.
 
    PRICES ONLY, AND THAT IS DELIBERATE. Ahmad gave the three figures and NOT what
    differs between them. Nothing here invents a service level, a page count, an
@@ -762,7 +771,7 @@ export function offerAfter(t) {
   const b = t.offerPage.b5;
   const sizes = t.pricing.sizes;
   const tiers = t.pricing.plans.map((p) => `<li class="tier tier-pkg">
-      <p class="tier-head"><span class="tier-name">${esc(p.name)}</span> <span class="tier-tag" dir="ltr">${esc(p.tag)}</span></p>
+      <p class="tier-head"><span class="tier-name">${esc(p.name)}</span> <span class="tier-tag xtag" dir="ltr">${esc(p.tag)}</span></p>
       <dl class="tier-sizes">${p.prices.map((price, i) => `<div><dt>${esc(sizes[i])}</dt><dd><span class="tier-price">${esc(price)}</span></dd></div>`).join('')}</dl>
       <span class="tier-unit">${esc(b.tierUnit)}</span>
     </li>`).join('');

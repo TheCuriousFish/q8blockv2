@@ -4351,7 +4351,7 @@ muted tag (`x1` / `x3` / `x10`), bold name, very large price with a muted period
 lines, the site's call button (`اتصل الآن` / `Call now`, `tel:`). The middle card is weighted by a 6px
 orange top edge and nothing else. No offer, no link to `/offer/`, no badge.
 
-### 30.2 The nine prices (locked by Ahmad), USD per month
+### 30.2 The nine prices (locked by Ahmad), per month (currency: SAR since §34; the USD below is SUPERSEDED)
 
 | Package | Tag | Small | Medium | Large |
 |---|---|---|---|---|
@@ -4359,7 +4359,7 @@ orange top edge and nothing else. No offer, no link to `/offer/`, no badge.
 | باقة التوسع / Expand | x3 | $2,497 | $4,997 | $6,997 |
 | باقة السيطرة / Dominate | x10 | $4,997 | $9,997 | $15,997 |
 
-Currency was never stated; dollars are assumed. It lives in ONE place: `money()` in `src/data.mjs`, next
+SUPERSEDED by §34 (the prices are Saudi riyals): currency was never stated; dollars were assumed. It lives in ONE place: `money()` in `src/data.mjs`, next
 to the `PKG` table. The offer's `P` figures ($500 / $1,000 / $1,500) are untouched (§30.6).
 
 ### 30.3 The switch
@@ -4611,5 +4611,61 @@ not offer copy) and the 404 keeps its existing offer link; neither is the homepa
 | `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
 | `ops/firstload/site-audit.mjs` | 0 failing pages |
 | Lighthouse `/`, `/offer/` (desktop config) | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.
+
+## 34. Prices in Saudi riyals, the report value in riyals, and the x1 / x3 / x10 pills, 2026-10-08
+
+Ahmad: "1 thing to change in report is swap KD with its saudi reyals value. also my pricing is Reyal Saudi
+not usd for the pricing." Then: "also the x1 x3 x10 make them pop". The nine figures and the "from the
+lowest of the nine" anchor are unchanged; only the currency changed.
+
+### 34.1 Currency in one place
+
+`src/data.mjs` now holds a `CUR` block (`code: 'SAR'`, `ar: 'ر.س'`, `arWord: 'ريال سعودي'`, and the unit
+lines `ر.س شهريًا` / `SAR / month` / `SAR per month`) and `money(n, lang)` (`997 SAR` / `997 ر.س`).
+`pkgPrices()` returns bare numerals; the anchor (`FROM_AR`, `FROM_EN`, `FROM_META_AR`) is still
+`Math.min` of `PKG`. Abbreviations only: the new riyal sign U+20C1 has no glyph in Alexandria.
+
+| Where | Before | Now |
+|---|---|---|
+| §7b cards | `$997` big, `/month` / `شهريًا` small | `997` big and bare, unit `SAR / month` / `ر.س شهريًا` |
+| Offer B1b anchor | from $997 per month | from 997 SAR per month / يبدأ من 997 ر.س شهريًا |
+| Offer B5 boxes | `$997` ... per month / شهريًا | `997` ..., unit `SAR per month` / `ر.س شهريًا` |
+| Offer FAQ Q2 (and its FAQPage JSON-LD) | $997 | 997 SAR / 997 ر.س |
+| Offer meta description | 997 دولار / $997 | 997 ريال سعودي / 997 SAR |
+
+**Bidi.** The isolate was only needed because a sign BEFORE the digits was a neutral and flipped in Arabic.
+With the currency after the number the digits resolve to Arabic-Number, keep their order (`1,997` intact)
+and `ر.س` follows them. Checked in headless Chrome: the anchor reads `يبدأ من 997 ر.س شهريًا` correctly
+at 1440 and 390. Sentence prices carry no isolate now; `ltr()` stays for the x labels only.
+
+### 34.2 Report estimated value
+
+`render.mjs`: `KWD_TO_SAR = 12.2` (set 2026-10-08: 1 KWD about 3.26 US, riyal pegged at 3.75, 3.26 x 3.75
+about 12.2) and `toSar()` rounds to the nearest 100. `report.json` keeps 500 / 600 KWD as derived, so
+re-running `derive-report.mjs` cannot undo it. Prints `6,100 إلى 7,300 ر.س` / `6,100 to 7,300 SAR`.
+Label and line under it unchanged; no other report figure touched.
+
+### 34.3 x1 / x3 / x10 pills
+
+`.xtag`: the site's pill (100px radius, as `.strip-pill`), weight 800, ink `#141415` on `#FF5F29`
+(6.07:1), `--pl-tag` size on the cards (64 / 69 / 81 x 40px at 1440, 43 / 46 / 54 x 27 at 390) and
+`--fs-strip` in B5, beside the package name. Identical on all three; the middle card's only weighting
+stays the orange top edge. `dir="ltr"`. Card padding from §27 and §30 untouched.
+
+### 34.4 Verification
+
+| Check | Result |
+|---|---|
+| Click Small / Medium / Large, both locales, 1440 and 390 | 997 / 2,497 / 4,997; 1,997 / 4,997 / 9,997; 2,997 / 6,997 / 15,997, unit on every card; 8px numeral-to-unit gap, unit inside the card |
+| Card heights, 1440 | ar 542 / 542 / 542, en 574 / 574 / 574 for all three sizes (at 390 the cards stack) |
+| Offer anchor + B5, both locales, 1440 and 390 | anchor "from 997 SAR per month" / "يبدأ من 997 ر.س شهريًا"; B5 nine prices match, no box overflow |
+| Report value | "6,100 إلى 7,300 ر.س" / "6,100 to 7,300 SAR", no overflow at 1440 or 390 |
+| Sweep `/`, `/en/`, `/offer/`, `/en/offer/`, terms, about, blog, `llms.txt`, `sitemap.xml` | 0 `$`, دولار, USD, KWD, د.ك. Left: `399 KWD` / `399 د.ك` in the legacy GBP checklist pages (an example of a Kuwaiti shop's product price, not our pricing) |
+| First screen 1440x900, 1920x1200, 390x844, both locales | unchanged (no CSS outside the pricing / B5 selectors), no horizontal scroll |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/`, `/offer/` (desktop) | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
 
 Nothing committed, pushed or deployed.

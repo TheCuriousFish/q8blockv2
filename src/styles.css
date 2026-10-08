@@ -881,7 +881,7 @@ body.theme-dark { background: var(--bg-dark); }
    and no longer does — it sells the outcome now — so this block carries the
    whole price message alone. The "now" row gets a size step and a left orange
    edge, and the note gets a boxed treatment, because a reader who takes one
-   thing off this page has to take away that the $500 is paid ONCE. */
+   thing off this page has to take away that the 500 is paid ONCE. */
 .pa-now { background: rgba(255, 95, 41, 0.12); box-shadow: inset 3px 0 0 var(--orange); }
 html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 .pa-now dt { color: var(--ink-invert); }
@@ -969,7 +969,7 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 /* B5's three monthly tiers. PRICES ONLY — see render.mjs: nobody has decided
    what differs between them and nothing here invents a feature list to fill the
    tiles. Its own size clamp rather than --fs-numeral, whose 44px floor puts
-   "$1,000" straight through the side of a 390px column. */
+   "1,000" straight through the side of a 390px column. */
 .tier-row { margin-block-start: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .tier {
   border: 1px solid rgba(255, 255, 255, 0.16); padding: 30px 16px;
@@ -986,7 +986,8 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 .tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
 .tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
-.tier-tag { font-size: var(--fs-strip); font-weight: 500; color: var(--muted-on-dark); unicode-bidi: isolate; }
+.tier-tag.xtag { font-size: var(--fs-strip); flex: none; }
+.tier-head { align-items: center; }
 .tier-sizes { margin: 0; display: grid; }
 .tier-sizes > div {
   display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
@@ -1096,9 +1097,17 @@ html[lang="ar"] #pricing {
   text-align: start;
 }
 .plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
-.plan-tag {
-  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
-  color: var(--muted-on-light);
+.plan-tag { margin: 0 0 clamp(10px, calc(14/14.4 * 1vw), 16px); line-height: 1; }
+/* x1 / x3 / x10 (build-spec §34, Ahmad 2026-10-08 "make them pop"). The site's
+   pill: 100px radius, weight 800, ink #141415 on #FF5F29 (6.07:1; white on that
+   orange is 3.03:1 and not allowed). IDENTICAL on all three cards and on the
+   offer B5 boxes: no card is louder, the middle card's only weighting stays the
+   orange top edge. dir="ltr" in the markup keeps x10 from turning into 10x. */
+.xtag {
+  display: inline-block; direction: ltr; unicode-bidi: isolate;
+  background: var(--orange); color: #141415; border-radius: 100px;
+  padding: 0.32em 0.8em 0.36em; font-size: var(--pl-tag); font-weight: 800; line-height: 1;
+  letter-spacing: 0.01em;
 }
 .plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
 .plan-name {
@@ -1671,7 +1680,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
   .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
-  /* Three tier tiles do not fit a 390px row: each column is ~106px and "$1,000"
+  /* Three tier tiles do not fit a 390px row: each column is ~106px and "1,000"
      is wider than that at any size worth reading. They stack, and each tile
      becomes one row with the price and its unit side by side. */
   .tier-row { grid-template-columns: 1fr; gap: 12px; }
@@ -1683,7 +1692,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .tier.tier-pkg { grid-auto-flow: row; justify-content: stretch; align-items: start; padding: 22px 20px; gap: 12px; }
   /* §7b's own cards stack full width rather than collapsing into rows the way
      B5's tiles above do: each one keeps a real CTA, so it needs the whole
-     column. Three ~106px columns cannot hold "$1,000" and a button. The board
+     column. Three ~106px columns cannot hold "1,000" and a button. The board
      is a 1440 board and does not draw the phone (build-spec §11), so these are
      the same collapsing strategy every other section uses, with the board's
      own proportions kept: price loudest, quiet period, hairline, size line,
