@@ -239,7 +239,13 @@ export function problem(t) {
 }
 
 /* ── §4 What we do ───────────────────────────────────────────────────────── */
+const SLIDE_ORDER = ['ss1', 'new1', 'ss2', 'ss3', 'new2', 'ss4'];
 export function whatWeDo(t) {
+  const sl = t.wwd.slides;
+  const slides = SLIDE_ORDER.map((n) => {
+    const isNew = n.startsWith('new');
+    return `<div class="ss-slide"><img src="/assets/img/slide-${n}.webp" width="960" height="417" alt="${esc(isNew ? sl.altNew : sl.alt)}" decoding="async" fetchpriority="low">${isNew ? `<span class="ss-stamp">${esc(sl.stamp)}</span>` : ''}</div>`;
+  }).join('');
   const blocks = t.wwd.blocks.map((b, i) => `<article class="wwd-block">
       <div class="wwd-num" aria-hidden="true">0${i + 1}</div>
       <h3 class="h3">${esc(b.title)}</h3>
@@ -250,6 +256,7 @@ export function whatWeDo(t) {
       <p class="eyebrow">${esc(t.wwd.eyebrow)}</p>
       <h2 class="h2">${t.wwd.h2}</h2>
       <p class="lead">${esc(t.wwd.lead)}</p>
+      <div class="ss" role="group" aria-roledescription="carousel" aria-label="${esc(sl.label)}" data-ss><div class="ss-track" data-ss-track>${slides}</div></div>
       <div class="wwd-grid">${blocks}</div>
     </div>
   </section>`;

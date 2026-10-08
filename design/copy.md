@@ -409,6 +409,16 @@ Section 5, items 5 and 6.
 | Highlighted word | يجدونه | get it found |
 | Subhead | لا نعمل على مواقع بناها غيرنا. الأساس التقني هو ما يحدد النتيجة، ولذلك نصمم الموقع ونبنيه بأنفسنا، ثم نتحمل مسؤولية ظهوره في نتائج البحث وفي إجابات الذكاء الاصطناعي. | We do not work on websites other people built. The technical foundation decides the result, so we design and build the site ourselves, then we take responsibility for it being found in search and in AI answers. |
 
+
+**Slide strip (added 2026-10-08), between the subhead and the three blocks.** Only new copy in the section.
+
+| Element | Arabic | English |
+|---|---|---|
+| Frame label (accessible name) | أمثلة من Search Console | Search Console examples |
+| Stamp, on the two new projects only | مشروع جديد | New project (rendered uppercase) |
+| Alt, established slides | مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن | Search Console chart of clicks and impressions over time |
+| Alt, new projects | مخطط من Search Console يعرض نقرات مشروع جديد ومرات ظهوره عبر الزمن | Search Console chart of clicks and impressions for a new project |
+
 **Block A**
 
 | | Arabic | English |

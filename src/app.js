@@ -1,6 +1,6 @@
-/* Q8Block — one deferred script, seven jobs and no more:
+/* Q8Block — one deferred script, eight jobs and no more:
    the countdown, the FAQ accordion, the scroll-solidified header, the mobile
-   nav, the offer strip pinning under the header, the §7 slideshow, and the
+   nav, the offer strip pinning under the header, the §7 slideshow, the §4 slide strip, and the
    contact page's tap-to-load map.
    No library, no framework.
 
@@ -324,6 +324,73 @@
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', update);
     update();
   }
+
+  /* ── §4 slide strip ───────────────────────────────────────────────────────
+     Forward only and endless. A transform-driven track inside an overflow
+     hidden frame: no native scroll, no buttons, so there is nothing to swipe
+     back. The six slides are cloned once and appended; after the step that
+     lands on the first clone the track jumps, with no transition, back to the
+     real first slide, which looks identical. One step every 2s. Everything
+     lives in its own function so no name can collide with another block.
+     Reduced motion: no clones, no timer, a static row that scrolls sideways. */
+  (function strip() {
+    var frame = document.querySelector('[data-ss]');
+    var rail = frame && frame.querySelector('[data-ss-track]');
+    if (!frame || !rail) return;
+    var motion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    if (motion && motion.matches) { frame.setAttribute('tabindex', '0'); return; }
+    var base = Array.prototype.slice.call(rail.children);
+    var count = base.length;
+    if (count < 2) return;
+    var frag = document.createDocumentFragment();
+    base.forEach(function (el) {
+      var c = el.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.setAttribute('data-clone', '');
+      var im = c.querySelector('img');
+      if (im) im.setAttribute('alt', '');
+      frag.appendChild(c);
+    });
+    rail.appendChild(frag);
+    var flow = getComputedStyle(frame).direction === 'rtl' ? 1 : -1;
+    var at = 0, ticker = null, jumpTimer = null, visible = true, hover = false, within = false;
+    var stepPx = function () {
+      var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+      return base[0].offsetWidth + gap;
+    };
+    var place = function (animate) {
+      if (!animate) rail.classList.add('nojump');
+      rail.style.transform = 'translate3d(' + (flow * at * stepPx()) + 'px,0,0)';
+      if (!animate) { void rail.offsetWidth; rail.classList.remove('nojump'); }
+    };
+    var advance = function () {
+      at += 1;
+      place(true);
+      if (at >= count) {
+        clearTimeout(jumpTimer);
+        jumpTimer = setTimeout(function () { at = 0; place(false); }, 620);
+      }
+    };
+    var halt = function () { if (ticker) { clearInterval(ticker); ticker = null; } };
+    var refresh = function () {
+      var go = visible && !hover && !within && !document.hidden;
+      if (go && !ticker) ticker = setInterval(advance, 2000);
+      else if (!go) halt();
+    };
+    // pause on a real pointer move, never on a bare mouseenter (build-spec §18)
+    frame.addEventListener('mousemove', function () { if (!hover) { hover = true; refresh(); } });
+    frame.addEventListener('mouseleave', function () { hover = false; refresh(); });
+    frame.addEventListener('focusin', function () { within = true; refresh(); });
+    frame.addEventListener('focusout', function () { within = false; refresh(); });
+    document.addEventListener('visibilitychange', refresh);
+    window.addEventListener('resize', function () { place(false); }, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting; refresh();
+      }, { threshold: 0 }).observe(frame);
+    }
+    refresh();
+  })();
 
   /* ── FAQ accordion ────────────────────────────────────────────────────── */
   Array.prototype.forEach.call(document.querySelectorAll('.faq-q'), function (btn) {

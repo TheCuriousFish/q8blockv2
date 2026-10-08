@@ -346,6 +346,12 @@ export const COPY = {
       eyebrow: 'ما نقدمه',
       h2: 'نبني الموقع،<br class="brk"> ثم نجعل عملاءك <span class="hl">يجدونه</span>',
       lead: 'لا نعمل على مواقع بناها غيرنا. الأساس التقني هو ما يحدد النتيجة، ولذلك نصمم الموقع ونبنيه بأنفسنا، ثم نتحمل مسؤولية ظهوره في نتائج البحث وفي إجابات الذكاء الاصطناعي.',
+      slides: {
+        label: 'أمثلة من Search Console',
+        stamp: 'مشروع جديد',
+        alt: 'مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن',
+        altNew: 'مخطط من Search Console يعرض نقرات مشروع جديد ومرات ظهوره عبر الزمن',
+      },
       blocks: [
         { title: 'نصمم ونبني', body: 'تصميم وبرمجة موقع كامل من الصفر، بصفحة مستقلة لكل خدمة ولكل منطقة تخدمها، بسرعة تحميل عالية وبنية تقنية سليمة.' },
         { title: 'نجعل عملاءك يجدونك', body: 'تهيئة داخلية وتقنية، ومحتوى محلي مكتوب لكل صفحة، حتى تظهر صفحاتك للعميل في نتائج بحث جوجل، وتصبح قابلة للاقتباس في إجابات مساعدات الذكاء الاصطناعي.' },
@@ -888,6 +894,12 @@ export const COPY = {
       eyebrow: 'What we do',
       h2: 'We build the site.<br class="brk"> We <span class="hl">get it found.</span>',
       lead: 'We do not work on websites other people built. The technical foundation decides the result, so we design and build the site ourselves, then we take responsibility for it being found in search and in AI answers.',
+      slides: {
+        label: 'Search Console examples',
+        stamp: 'New project',
+        alt: 'Search Console chart of clicks and impressions over time',
+        altNew: 'Search Console chart of clicks and impressions for a new project',
+      },
       blocks: [
         { title: 'We design and build', body: 'A full website designed and coded from scratch, with a separate page for every service and every area you serve, fast to load and technically sound.' },
         { title: 'We get you found', body: 'On page and technical work, and local content written for every page, so your pages come up for the customer in Google search and become quotable in the answers AI assistants give.' },

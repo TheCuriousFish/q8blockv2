@@ -4321,3 +4321,16 @@ runs, and the three added cards are `fetchpriority="low"` images, which cost byt
   one thing a section removal could not break but is cheap to prove, was re-measured anyway.
 
 **Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+
+## 29. §4 gets an auto-sliding strip of Search Console shots, 2026-10-08
+
+Ahmad: a slideshow in the "what we do" section, under the lead, above the three blocks; two new projects carry a "new project" stamp; one slide every 2 seconds, never swiping back to the start.
+
+* **Sources** `design/proof-shots/slideshow/{ss1..ss4,new1,new2}.png`, untouched. `derive-slideshow.mjs` converts to `src/img/slide-*.webp` at native size (q92, no crop or retouch; 24 to 45 kB each). Order `ss1, new1, ss2, ss3, new2, ss4`.
+* **Frame** one uniform 960x417 (2.3:1) slide, image `object-fit: contain` on white with the site hairline. The tallest shot (ss2, 2.28:1) fits with no crop. Explicit width and height on every image. `fetchpriority="low"` and `decoding="async"`, never lazy.
+* **Stamp** HTML/CSS on `new1` and `new2` only: `#FF5F29` fill, `#141415` text and 2px border (6.07:1), 800 weight, rotated -7deg, pinned at the physical top right (`right`, not `inset-inline-end`) under the Daily dropdown, clear of the tiles and the chart. Sized in `cqw` with a 10px floor. Arabic letter-spacing is 0 so the letters join.
+* **Behaviour** (`src/app.js`, function `strip`, own names) `overflow: hidden` frame, flex track moved by `translate3d`, 560 ms ease, one step per 2000 ms. The six slides are cloned once (clones `aria-hidden`, empty alt); after the step onto the first clone the track jumps with no transition to slide one. RTL starts at the right edge and moves left. 2 slides visible at 768px and up, 1 below. Pauses on `mousemove` (not `mouseenter`), focus within, hidden tab, and off screen (IntersectionObserver threshold 0). `prefers-reduced-motion`: no clones, no timer, static row that scrolls sideways, frame focusable.
+* **Measured** (headless Chrome, cursor parked, 250 ms samples, 1440): en `0 -20 -564 -672 ... -1344 ... -2016 ... -2688 ... -3360 ... -4025 0 -20 -564 -672`; ar the same with positive signs. One step per 2 s, one direction, wrap 4032 to 0 with no backwards step. Frame screenshot just before and just after the wrap is byte identical in both locales. Reduced motion: nothing moves over 6 s.
+* **Gates** first screen 900/900, 1200/1200, 844/844 both locales; seo-audit 0 high; site-audit 0 failing; Lighthouse `/` and `/en/` performance 100, accessibility 100, CLS 0.
+* **Flag** `new1.png` has a hover tooltip ("Friday, Sep 4 ... add an annotation") across the chart; shipped as exported.
