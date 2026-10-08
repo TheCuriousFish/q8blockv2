@@ -852,19 +852,27 @@ html[lang="ar"] #pricing {
   font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
   color: var(--muted-on-light);
 }
-.plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
+
+.plan-spec {
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
-  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
-  color: var(--muted-on-light);
+  display: grid;
 }
-.plan-features li { position: relative; padding-inline-start: 40px; }
-.plan-features li::before {
-  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
-  width: 20px; height: 15px;
+.ps-row { padding-block: 10px; border-block-end: 1px solid var(--hairline-light); }
+.ps-row:last-child { border-block-end: 0; }
+.ps-row dt { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.35; color: var(--muted-on-light); }
+.ps-row dd { margin: 3px 0 0; min-height: 1.5em; }
+.pv { position: relative; display: block; font-size: var(--pl-check); font-weight: 700; line-height: 1.4; color: var(--ink); padding-inline-start: 30px; font-variant-numeric: lining-nums; }
+.pv::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.32em;
+  width: 18px; height: 14px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
+.pv-empty::before { inset-block-start: 0.7em; width: 14px; height: 2px; background: var(--hairline-light); }
+.pv-empty { min-height: 1.4em; }
+.pv-m, .pv-l { display: none; }
+#pricing:has(#psize-m:checked) .pv-s, #pricing:has(#psize-l:checked) .pv-s { display: none; }
+#pricing:has(#psize-m:checked) .pv-m, #pricing:has(#psize-l:checked) .pv-l { display: block; }
 .plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
@@ -1249,7 +1257,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Q8 block","alternateName":"شركة كويت بلوك","url":"https://q8block.com/","telephone":"+965 94139666","address":{"@type":"PostalAddress","streetAddress":"محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9","addressCountry":"KW"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"لماذا العرض مجاني؟","acceptedAnswer":{"@type":"Answer","text":"نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول."}},{"@type":"Question","name":"هل أدفع شيئًا خلال الأشهر الستة؟","acceptedAnswer":{"@type":"Answer","text":"لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من 997 ر.س شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار."}},{"@type":"Question","name":"هل هناك عقد أو التزام؟","acceptedAnswer":{"@type":"Answer","text":"لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها."}},{"@type":"Question","name":"هل يشترط وجود سجل تجاري؟","acceptedAnswer":{"@type":"Answer","text":"سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل."}},{"@type":"Question","name":"لدي موقع قائم، هل أنا مؤهل؟","acceptedAnswer":{"@type":"Answer","text":"العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك."}},{"@type":"Question","name":"ماذا يحدث بعد ستة أشهر؟","acceptedAnswer":{"@type":"Answer","text":"القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار."}},{"@type":"Question","name":"هل تديرون ملف نشاطي على جوجل خلال العرض؟","acceptedAnswer":{"@type":"Answer","text":"لا، لا في العرض ولا خارجه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"لماذا العرض مجاني؟","acceptedAnswer":{"@type":"Answer","text":"نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول."}},{"@type":"Question","name":"هل أدفع شيئًا خلال الأشهر الستة؟","acceptedAnswer":{"@type":"Answer","text":"لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من 997 ر.س شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار."}},{"@type":"Question","name":"هل هناك عقد أو التزام؟","acceptedAnswer":{"@type":"Answer","text":"لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها."}},{"@type":"Question","name":"هل يشترط وجود سجل تجاري؟","acceptedAnswer":{"@type":"Answer","text":"سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل."}},{"@type":"Question","name":"لدي موقع قائم، هل أنا مؤهل؟","acceptedAnswer":{"@type":"Answer","text":"العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك."}},{"@type":"Question","name":"ماذا يحدث بعد ستة أشهر؟","acceptedAnswer":{"@type":"Answer","text":"القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله موضح حسب حجم شركتك في الصفحة الرئيسية. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار."}},{"@type":"Question","name":"هل تديرون ملف نشاطي على جوجل خلال العرض؟","acceptedAnswer":{"@type":"Answer","text":"لا، لا في العرض ولا خارجه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث."}}]}</script>
 </head>
 <body class="theme-dark">
 <div class="fl fl-dark" aria-hidden="true"><svg viewBox="0 0 67 56" focusable="false"><g class="fl-m"><rect width="67" height="56" fill="#FF5F29"/><g fill="none" stroke="#fff" stroke-width="5.4"><ellipse cx="20.5" cy="27" rx="7.6" ry="9.2"/><path d="M24 32.5 30.5 40"/><circle cx="46" cy="21.4" r="5"/><circle cx="46" cy="33.6" r="6.6"/></g></g></svg></div>
@@ -1384,7 +1392,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <dl class="tier-sizes"><div><dt>شركة صغيرة</dt><dd><span class="tier-price">4,997</span></dd></div><div><dt>شركة متوسطة</dt><dd><span class="tier-price">9,997</span></dd></div><div><dt>شركة كبيرة</dt><dd><span class="tier-price">15,997</span></dd></div></dl>
       <span class="tier-unit">ر.س شهريًا</span>
     </li></ul>
-      <div class="tier-notes"><p>ما تشمله كل باقة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة.</p><p>وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.</p></div>
+      <div class="tier-notes"><p>ما تشمله كل باقة، من الروابط والصفحات والأدلة المحلية إلى التقارير، موضح حسب حجم شركتك في قسم الأسعار بالصفحة الرئيسية.</p><p>وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.</p></div>
     </div>
   </section>
 <section id="offer-faq" class="sec on-dark">
@@ -1419,7 +1427,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="ofaq-a5">
         <span>ماذا يحدث بعد ستة أشهر؟</span><span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a" id="ofaq-a5">القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار.</div>
+      <div class="faq-a" id="ofaq-a5">القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله موضح حسب حجم شركتك في الصفحة الرئيسية. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار.</div>
     </div><div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="ofaq-a6">
         <span>هل تديرون ملف نشاطي على جوجل خلال العرض؟</span><span class="faq-icon" aria-hidden="true"></span>

@@ -852,19 +852,27 @@ html[lang="ar"] #pricing {
   font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
   color: var(--muted-on-light);
 }
-.plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
+
+.plan-spec {
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
-  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
-  color: var(--muted-on-light);
+  display: grid;
 }
-.plan-features li { position: relative; padding-inline-start: 40px; }
-.plan-features li::before {
-  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
-  width: 20px; height: 15px;
+.ps-row { padding-block: 10px; border-block-end: 1px solid var(--hairline-light); }
+.ps-row:last-child { border-block-end: 0; }
+.ps-row dt { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.35; color: var(--muted-on-light); }
+.ps-row dd { margin: 3px 0 0; min-height: 1.5em; }
+.pv { position: relative; display: block; font-size: var(--pl-check); font-weight: 700; line-height: 1.4; color: var(--ink); padding-inline-start: 30px; font-variant-numeric: lining-nums; }
+.pv::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.32em;
+  width: 18px; height: 14px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
+.pv-empty::before { inset-block-start: 0.7em; width: 14px; height: 2px; background: var(--hairline-light); }
+.pv-empty { min-height: 1.4em; }
+.pv-m, .pv-l { display: none; }
+#pricing:has(#psize-m:checked) .pv-s, #pricing:has(#psize-l:checked) .pv-s { display: none; }
+#pricing:has(#psize-m:checked) .pv-m, #pricing:has(#psize-l:checked) .pv-l { display: block; }
 .plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;

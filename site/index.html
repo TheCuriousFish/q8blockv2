@@ -852,19 +852,27 @@ html[lang="ar"] #pricing {
   font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
   color: var(--muted-on-light);
 }
-.plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
+
+.plan-spec {
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
-  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
-  color: var(--muted-on-light);
+  display: grid;
 }
-.plan-features li { position: relative; padding-inline-start: 40px; }
-.plan-features li::before {
-  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
-  width: 20px; height: 15px;
+.ps-row { padding-block: 10px; border-block-end: 1px solid var(--hairline-light); }
+.ps-row:last-child { border-block-end: 0; }
+.ps-row dt { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.35; color: var(--muted-on-light); }
+.ps-row dd { margin: 3px 0 0; min-height: 1.5em; }
+.pv { position: relative; display: block; font-size: var(--pl-check); font-weight: 700; line-height: 1.4; color: var(--ink); padding-inline-start: 30px; font-variant-numeric: lining-nums; }
+.pv::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.32em;
+  width: 18px; height: 14px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
+.pv-empty::before { inset-block-start: 0.7em; width: 14px; height: 2px; background: var(--hairline-light); }
+.pv-empty { min-height: 1.4em; }
+.pv-m, .pv-l { display: none; }
+#pricing:has(#psize-m:checked) .pv-s, #pricing:has(#psize-l:checked) .pv-s { display: none; }
+#pricing:has(#psize-m:checked) .pv-m, #pricing:has(#psize-l:checked) .pv-l { display: block; }
 .plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
@@ -1537,7 +1545,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">⁦x1⁩</span></p>
       <h3 class="plan-name">باقة الحفاظ</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">997</span><span class="pa pa-m">1,997</span><span class="pa pa-l">2,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
-      <ul class="plan-features"><li>تثبيت نتائجك والاتصالات الحالية</li><li>حماية موقعك من المنافسين</li><li>الحفاظ على قوة ظهورك</li></ul>
+      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى (العدد ومجموع قوة النطاق DR)</dt><dd><span class="pv pv-s">⁦1⁩ رابط · ⁦DR 10⁩</span><span class="pv pv-m">⁦2-3⁩ روابط · ⁦DR 60⁩</span><span class="pv pv-l">⁦3-4⁩ روابط · ⁦DR 120⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">3</span><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">4</span><span class="pv pv-l">6</span></dd></div><div class="ps-row"><dt>عبارات يبحث بها عملاؤك</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m">5</span><span class="pv pv-l">10</span></dd></div><div class="ps-row"><dt>أسئلة عملائك التي نتابعها في الذكاء الاصطناعي</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m">3</span><span class="pv pv-l">6</span></dd></div><div class="ps-row"><dt>منافسون نراقبهم</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-l">3</span></dd></div><div class="ps-row"><dt>صفحات جديدة نضيفها</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-l">2</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
@@ -1545,7 +1553,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">⁦x3⁩</span></p>
       <h3 class="plan-name">باقة التوسع</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">2,497</span><span class="pa pa-m">4,997</span><span class="pa pa-l">6,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
-      <ul class="plan-features"><li>استهداف كلمات وخدمات أكثر</li><li>تكثيف الشغل والجهد شهريًا</li><li>تحسين فرص طلبات الواتساب</li></ul>
+      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى (العدد ومجموع قوة النطاق DR)</dt><dd><span class="pv pv-s">⁦1-2⁩ روابط · ⁦DR 30⁩</span><span class="pv pv-m">⁦3-4⁩ روابط · ⁦DR 100⁩</span><span class="pv pv-l">⁦5-7⁩ روابط · ⁦DR 220⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">9</span><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">12</span><span class="pv pv-l">18</span></dd></div><div class="ps-row"><dt>عبارات يبحث بها عملاؤك</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m">15</span><span class="pv pv-l">30</span></dd></div><div class="ps-row"><dt>أسئلة عملائك التي نتابعها في الذكاء الاصطناعي</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m">9</span><span class="pv pv-l">18</span></dd></div><div class="ps-row"><dt>منافسون نراقبهم</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-l">9</span></dd></div><div class="ps-row"><dt>صفحات جديدة نضيفها</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-l">6</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
@@ -1553,7 +1561,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">⁦x10⁩</span></p>
       <h3 class="plan-name">باقة السيطرة</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">4,997</span><span class="pa pa-m">9,997</span><span class="pa pa-l">15,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
-      <ul class="plan-features"><li>أقصى جهد وطاقة تشغيلية</li><li>منافسة أقوى الشركات بالسوق</li><li>أولوية قصوى ودعم مباشر</li></ul>
+      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى (العدد ومجموع قوة النطاق DR)</dt><dd><span class="pv pv-s">⁦2-3⁩ روابط · ⁦DR 50⁩</span><span class="pv pv-m">⁦4-6⁩ روابط · ⁦DR 160⁩</span><span class="pv pv-l">⁦8-12⁩ روابط · ⁦DR 400⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">30</span><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">40</span><span class="pv pv-l">60</span></dd></div><div class="ps-row"><dt>عبارات يبحث بها عملاؤك</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m">50</span><span class="pv pv-l">100</span></dd></div><div class="ps-row"><dt>أسئلة عملائك التي نتابعها في الذكاء الاصطناعي</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m">30</span><span class="pv pv-l">60</span></dd></div><div class="ps-row"><dt>منافسون نراقبهم</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-l">30</span></dd></div><div class="ps-row"><dt>صفحات جديدة نضيفها</dt><dd><span class="pv pv-s pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-m pv-empty"><span class="vh">غير مشمول</span></span><span class="pv pv-l">20</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
