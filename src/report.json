@@ -1,0 +1,265 @@
+{
+  "source": "../../ops/reports/kwtclean/2026-09.html",
+  "label": {
+    "site": "kwtclean.com",
+    "month": "Sep 2026"
+  },
+  "conversions": {
+    "total": 88,
+    "wa": 56,
+    "waPct": 64,
+    "call": 32,
+    "callPct": 36
+  },
+  "services": [
+    {
+      "n": "01",
+      "ar": "عاملات بالساعة",
+      "calls": 11,
+      "wa": 21,
+      "total": 32
+    },
+    {
+      "n": "02",
+      "ar": "غسيل سجاد",
+      "calls": 7,
+      "wa": 8,
+      "total": 15
+    },
+    {
+      "n": "03",
+      "ar": "تنظيف منازل",
+      "calls": 1,
+      "wa": 6,
+      "total": 7
+    },
+    {
+      "n": "04",
+      "ar": "الصفحة الرئيسية",
+      "calls": 0,
+      "wa": 6,
+      "total": 6
+    },
+    {
+      "n": "05",
+      "ar": "مكافحة حشرات",
+      "calls": 2,
+      "wa": 2,
+      "total": 4
+    },
+    {
+      "n": "06",
+      "ar": "تنظيف مسابح",
+      "calls": 1,
+      "wa": 2,
+      "total": 3
+    },
+    {
+      "n": "07",
+      "ar": "غسيل كنب",
+      "calls": 1,
+      "wa": 2,
+      "total": 3
+    },
+    {
+      "n": "08",
+      "ar": "تنظيف مكاتب",
+      "calls": 1,
+      "wa": 1,
+      "total": 2
+    }
+  ],
+  "keywords": [
+    {
+      "text": "مكافحة حشرات الفحيحيل",
+      "lang": "ar",
+      "hot": true
+    },
+    {
+      "text": "مكافحة حشرات صباح السالم",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "خدم بالساعات الفحيحيل",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "carpet cleaning kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "خادمات بالساعة",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "عاملات بالساعة",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "hourly cleaning service kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "خدم بالساعات المهبولة",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "خدم بالساعات صباح الاحمد",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "تنظيف كنب",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "sofa cleaning kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "ac duct cleaning kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "غسيل تانكي",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "غسيل سجاد الجهراء",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "water tank cleaning kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "شركة تنظيف",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "غسيل سجاد المهبولة",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "تنظيف سجاد الجهراء",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "خادمات بالساعات الجهراء",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "غسيل سجاد حولي",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "غسيل سجاد السالمية",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "شركة تنظيف حمامات",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "maids in kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "pest control salmiya",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "مكاتب خدم العقيلة",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "cleaning service kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "cleaning companies in kuwait",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "text": "جلي رخام الكويت",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "شركة تنظيف بالجهراء",
+      "lang": "ar",
+      "hot": false
+    },
+    {
+      "text": "مكتب خدم العقيلة",
+      "lang": "ar",
+      "hot": false
+    }
+  ],
+  "traffic": {
+    "clicks": 525,
+    "impressions": 29797,
+    "peakDay": 14,
+    "peakVisits": 27,
+    "valueLo": 500,
+    "valueHi": 600,
+    "daily": [
+      11,
+      21,
+      22,
+      20,
+      17,
+      22,
+      26,
+      18,
+      23,
+      13,
+      23,
+      25,
+      16,
+      27,
+      13,
+      17,
+      11,
+      11,
+      22,
+      13,
+      19,
+      16,
+      17,
+      12,
+      14,
+      19,
+      16,
+      15,
+      15,
+      11
+    ],
+    "dailySum": 525
+  }
+}

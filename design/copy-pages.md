@@ -48,9 +48,9 @@ Recorded so the next agent does not try to fill these gaps with something invent
 * **`بدون عقد` / `No contract` on Terms.** It is an offer term from `copy.md` B4 and nobody has confirmed it
   is true of Q8Block outside the promotion. The same question was already resolved the safe way in the
   homepage trust row. Terms therefore points at `/offer` for it and states nothing itself.
-* **Any price, on Terms or anywhere else on these four pages.** The offer's price changed on 2026-09-30
-  ($500 once for six months, then a monthly tier) and `copy.md` Part B is its only reference. T5 names
-  `what it costs and how it is paid` as something the offer page covers, and prints no figure. Nothing on
+* **Any price, on Terms or anywhere else on these four pages.** The offer is six months free again since
+  2026-10-08 (build-spec §33; the $500-once version of 2026-09-30 is gone) and `copy.md` Part B is its only
+  reference. T5 prints no figure. Nothing on
   About, Contact or the blog states a price either.
 * **A refund policy.** Money now changes hands at the start of the offer, and nobody has decided what
   happens to it if either side stops. T6 already says the money terms are agreed directly, and neither
@@ -504,7 +504,13 @@ so instead of inventing it.
 
 ## T5. The six month offer
 
-**Updated 2026-09-30.** The offer is no longer free: one payment of $500 covers the first six months, and
+**Updated 2026-10-08 (build-spec §33): the offer is FREE again**, six months, no payment. The 2026-09-30
+clause `وسعره وكيف يُدفع` / `what it costs and how it is paid` is deleted (it is no longer true), and the six
+months are named `الأشهر الستة المجانية` / `the six free months`. The page's "last updated" date moved to
+8 October 2026. The current body is the table below; the paragraph that follows is the paid version's
+history.
+
+**Updated 2026-09-30 (superseded).** The offer is no longer free: one payment of $500 covers the first six months, and
 after them the client picks a monthly tier. The body gained `وسعره وكيف يُدفع` / `what it costs and how it
 is paid` to the list of things the offer page owns. **This page still prints no price itself** — Terms
 describes the service, `/offer` is the single reference for the promotion's own terms, and duplicating a
@@ -513,7 +519,7 @@ price across two pages is how the two drift apart.
 | Element | Arabic | English |
 |---|---|---|
 | Block title | العرض المحدود | The limited offer |
-| Body | العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة، وسعره وكيف يُدفع، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض. | The limited offer has its own conditions: who can register, what the six months cover, what it costs and how it is paid, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion. |
+| Body | العرض المحدود له شروطه الخاصة: من يحق له التسجيل، وما تشمله الأشهر الستة المجانية، والخيارات المتاحة بعدها. هذه الشروط مكتوبة كاملة في صفحة العرض، وهي المرجع الوحيد لها. ما في هذه الصفحة يصف الخدمة نفسها، لا العرض. | The limited offer has its own conditions: who can register, what the six free months cover, and the options available afterwards. Those conditions are written in full on the offer page, which is the only reference for them. This page describes the service itself, not the promotion. |
 | Link, a text link | اقرأ شروط العرض | Read the offer terms |
 
 ## T6. What we agree directly

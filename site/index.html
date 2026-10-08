@@ -412,23 +412,134 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .icon-card .h3 { margin-block-start: 20px; min-height: calc(2em * var(--lh-h3)); }
 .icon-card .body { margin-block-start: 16px; }
 
-#journey { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
-
-.journey-graph { margin-block-start: 40px; }
-.journey-graph .proof-pan { max-width: 1320px; margin-inline: auto; }
-
-.journey-beats {
-  margin-block-start: 48px; list-style: none; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;
+#report { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
+.rp-grid {
+  list-style: none; margin: 40px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px;
 }
-.journey-beat { display: flex; align-items: flex-start; gap: 18px; }
-.journey-beat img {
-  flex: none; width: 104px; height: auto; aspect-ratio: 343 / 296; object-fit: contain;
-  margin-block-start: -6px;
+.rp-item { display: flex; flex-direction: column; min-width: 0; }
+.rp-card {
+  flex: 1; display: flex; flex-direction: column; container-type: inline-size;
+  background: #17181B; border: 1px solid #3B3E45; border-radius: 0; color: #fff;
 }
-.journey-beat .h3 { font-size: var(--fs-h3-s6); }
-.journey-beat .body { margin-block-start: 10px; }
-.journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
+.rp-cap { margin: 12px 0 0; font-size: 15px; line-height: 1.3; color: var(--muted-on-dark); }
+
+.rp-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: clamp(52px, 10.4cqi, 67px); padding-inline: clamp(16px, 3.9cqi, 25px);
+  background: #000; border-block-end: 1px solid #3B3E45;
+}
+.rp-logo { display: inline-flex; align-items: center; gap: clamp(8px, 1.9cqi, 12px); direction: ltr; line-height: 1; }
+.rp-logo-box {
+  width: clamp(32px, 6.5cqi, 42px); height: clamp(29px, 5.9cqi, 38px); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: #fff; font-weight: 800; letter-spacing: -0.02em;
+  font-size: clamp(16px, 3.3cqi, 21px);
+}
+.rp-logo-word { font-weight: 800; color: #fff; font-size: clamp(19px, 3.9cqi, 25px); }
+.rp-tag {
+  font-size: clamp(11px, 1.85cqi, 12px); font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #A3A9B2; white-space: nowrap;
+}
+
+.rp-body {
+  flex: 1; display: flex; flex-direction: column;
+  padding: clamp(22px, 5.3cqi, 34px) clamp(20px, 5.1cqi, 33px) clamp(24px, 5cqi, 32px);
+}
+.rp-card .rp-label {
+  margin: 0; font-size: clamp(17px, 3.1cqi, 20px); font-weight: 600; line-height: 1.3;
+  color: var(--orange);
+}
+
+.rp-hero {
+  margin: clamp(10px, 2.5cqi, 16px) 0 0; display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: 0 clamp(12px, 3.4cqi, 22px); line-height: 1;
+}
+.rp-big { font-size: min(23.6cqi, 152px); font-weight: 800; line-height: 0.92; letter-spacing: -0.02em; }
+.rp-unit { font-size: clamp(28px, 8.1cqi, 52px); font-weight: 700; }
+.rp-bar { display: flex; height: clamp(8px, 1.6cqi, 10px); margin-block-start: clamp(22px, 5.7cqi, 37px); background: #26282D; }
+.rp-seg { display: block; height: 100%; transform-origin: left center; }
+html[dir="rtl"] .rp-seg { transform-origin: right center; }
+.rp-seg-wa { background: var(--orange); }
+.rp-seg-call { background: #fff; }
+.rp-barnums {
+  display: flex; justify-content: space-between; margin-block-start: 10px;
+  font-size: clamp(15px, 3.1cqi, 20px); font-weight: 500;
+}
+.rp-split {
+  margin-block-start: auto; padding-block-start: clamp(24px, 6cqi, 40px);
+  display: grid; grid-template-columns: 56fr 44fr; gap: 16px;
+}
+.rp-sp { margin: 0; display: flex; flex-direction: column; }
+.rp-n { font-size: clamp(44px, 10.1cqi, 65px); font-weight: 800; line-height: 1; }
+.rp-sp-wa .rp-n { color: var(--orange); }
+.rp-k { margin-block-start: 8px; font-size: clamp(17px, 3.4cqi, 22px); font-weight: 500; line-height: 1.3; }
+.rp-pc { margin-block-start: 4px; font-size: clamp(16px, 3.1cqi, 20px); color: var(--muted-on-dark); }
+
+.rp-rows { list-style: none; margin: clamp(8px, 2cqi, 14px) 0 0; padding: 0; }
+.rp-row {
+  display: grid; grid-template-columns: clamp(38px, 10.5cqi, 68px) minmax(0, 1fr) auto;
+  align-items: center; gap: 0 12px; min-height: clamp(44px, 7.1cqi, 46px);
+  padding-block: 6px; border-block-end: 1px solid #34373E;
+}
+.rp-rk { font-size: clamp(15px, 3cqi, 19px); font-weight: 600; color: var(--orange); }
+.rp-name {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px;
+  font-size: clamp(16px, 3.3cqi, 21px); font-weight: 500; line-height: 1.3;
+}
+.rp-mix { font-size: clamp(14px, 2.2cqi, 15px); font-weight: 400; color: var(--muted-on-dark); white-space: nowrap; }
+.rp-tot { min-width: 2ch; text-align: end; font-size: clamp(22px, 4.7cqi, 30px); font-weight: 800; line-height: 1; padding-inline-start: 6px; }
+
+.rp-sub { margin: 6px 0 0; font-size: clamp(15px, 2.65cqi, 17px); color: var(--muted-on-dark); line-height: 1.4; }
+.rp-tags {
+  list-style: none; margin: clamp(16px, 3.7cqi, 24px) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: clamp(8px, 1.6cqi, 10px);
+}
+.rp-tagk {
+  border: 1px solid #4A4E57; border-radius: 0; padding: 7px 13px;
+  font-size: clamp(15px, 2.65cqi, 17px); font-weight: 500; line-height: 1.35;
+}
+.rp-tagk.hot { border-color: var(--orange); }
+
+.rp-stats {
+  margin-block-start: clamp(10px, 2.5cqi, 16px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(16px, 4cqi, 26px);
+}
+.rp-stat { padding-block: 12px; border-block-start: 1px solid #34373E; min-width: 0; }
+.rp-stat.key { border-block-start-color: var(--orange); }
+.rp-stat p { margin: 0; }
+.rp-sk { font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
+.rp-sv { margin-block-start: 6px !important; font-size: clamp(28px, 6.2cqi, 40px); font-weight: 800; line-height: 1.1; }
+.rp-stat.key .rp-sv { color: var(--orange); }
+.rp-stat.small .rp-sv { font-size: clamp(22px, 4.7cqi, 30px); line-height: 1.25; }
+.rp-ss { margin-block-start: 4px !important; font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
+.rp-chart { margin: auto 0 0; padding-block-start: 14px; }
+.rp-plot { position: relative; width: 100%; aspect-ratio: 600 / 120; }
+.rp-chart-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.rp-area { fill: rgba(255, 95, 41, 0.16); stroke: none; }
+.rp-line { fill: none; stroke: var(--orange); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.rp-axis { stroke: rgba(255, 255, 255, 0.16); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rp-peak {
+  position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--orange); box-sizing: border-box;
+}
+html[dir="rtl"] .rp-peak { margin: -5px; }
+.rp-axisl { display: flex; justify-content: space-between; margin-block-start: 6px; font-size: 13px; color: var(--muted-on-dark); }
+
+.rp-anim .rp-seg { transform: scaleX(0); }
+.rp-anim.rp-in .rp-seg { transform: none; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.rp-anim.rp-in .rp-seg-call { transition-delay: 0.35s; }
+@media (prefers-reduced-motion: reduce) {
+  .rp-anim .rp-seg, .rp-anim.rp-in .rp-seg { transform: none; transition: none; }
+}
+@media (max-width: 767px) {
+  .rp-grid { grid-template-columns: 1fr; gap: 32px; margin-block-start: 32px; }
+}
+
+@container (max-width: 480px) {
+  .rp-name { flex-direction: column; align-items: flex-start; }
+  .rp-stats { grid-template-columns: 1fr; }
+}
 
 #work { background: var(--bg-white); padding-block: clamp(52px, calc(100/14.4 * 1vw), 110px); }
 
@@ -512,7 +623,7 @@ html[dir="rtl"] .work-link .arrow { transform: scaleX(-1); }
 .final .btn-row { margin-block-start: 40px; }
 
 .site-footer { background: var(--bg-footer); color: var(--ink-invert); padding-block: 48px 40px; }
-.footer-top { display: grid; grid-template-columns: minmax(240px, 1.2fr) repeat(4, 1fr); gap: 32px 40px; }
+.footer-top { display: grid; grid-template-columns: minmax(240px, 1.4fr) repeat(3, 1fr); gap: 32px 40px; }  
 .footer-tag { font-size: var(--fs-foot-tag); font-weight: 400; line-height: 1.5; color: var(--muted-on-dark); margin-block-start: 18px; max-width: 280px; }
 .footer-col h3 { font-size: var(--fs-foot-h); font-weight: 600; line-height: 1.2; color: var(--ink-invert); margin-block-end: 10px; }
 .footer-col a, .footer-col p { font-size: var(--fs-foot-l); font-weight: 400; line-height: 1.9; color: var(--muted-on-dark); text-decoration: none; display: block; }
@@ -632,6 +743,19 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
   color: var(--orange); direction: ltr; unicode-bidi: isolate;
 }
 .tier-unit { font-size: var(--fs-strip); font-weight: 400; color: var(--muted-on-dark); }
+
+.tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
+.tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
+.tier-tag { font-size: var(--fs-strip); font-weight: 500; color: var(--muted-on-dark); unicode-bidi: isolate; }
+.tier-sizes { margin: 0; display: grid; }
+.tier-sizes > div {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-block: 12px; border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tier-sizes dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
+.tier-sizes dd { margin: 0; }
+.tier-pkg .tier-price { font-size: clamp(26px, calc(34/14.4 * 1vw), 38px); font-weight: 700; }
 .tier-notes { margin-block-start: 30px; display: grid; gap: 12px; max-width: 900px; }
 .tier-notes p {
   font-size: var(--fs-body); font-weight: var(--w-body);
@@ -639,60 +763,99 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
 }
 
 #pricing { background: var(--bg-white); text-align: center; }
-#pricing .lead { margin-inline: auto; }
+
+#pricing {
+  --pl-tag: clamp(16px, calc(24/14.4 * 1vw), 26px);
+  --pl-name: clamp(28px, calc(44/14.4 * 1vw), 48px);
+  --pl-price: clamp(44px, calc(68/14.4 * 1vw), 74px);
+  --pl-unit: clamp(14px, calc(18/14.4 * 1vw), 20px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+  --pl-pill: clamp(15px, calc(17/14.4 * 1vw), 19px);
+}
+html[lang="ar"] #pricing {
+  --pl-name: clamp(24px, calc(34/14.4 * 1vw), 37px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+}
+
+.psw {
+  position: relative; border: 0; padding: 0; min-inline-size: 0;
+  margin: clamp(18px, calc(20/14.4 * 1vw), 22px) 0 0;
+  display: flex; justify-content: center; gap: 7px;
+}
+.psw-in {
+  position: absolute; inset-block-start: 0; inset-inline-start: 0;
+  width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none;
+}
+.psw-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 47px; padding: 0 clamp(18px, calc(36/14.4 * 1vw), 38px);
+  border: 1px solid var(--hairline-light); border-radius: 999px;
+  background: var(--bg-white); color: var(--ink);
+  font-size: var(--pl-pill); font-weight: 600; line-height: 1.1; white-space: nowrap;
+  cursor: pointer; transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.psw-pill:hover { border-color: var(--ink); }
+.psw-in:checked + .psw-pill { background: var(--ink); border-color: var(--ink); color: #fff; }
+.psw-in:focus-visible + .psw-pill { outline: 3px solid var(--orange); outline-offset: 3px; }
 
 .plan-row {
-  margin: clamp(32px, calc(54/14.4 * 1vw), 58px) 0 0; padding: 0; list-style: none;
+  margin: clamp(28px, calc(40/14.4 * 1vw), 44px) 0 0; padding: 0; list-style: none;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, calc(21/14.4 * 1vw), 23px);
+  gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
   align-items: stretch;
 }
 
 .plan {
   display: flex; flex-direction: column;
+  container-type: inline-size;
   border: 1px solid var(--hairline-light);
   background: var(--bg-white);
-  
   padding: clamp(36px, calc(66/14.4 * 1vw), 72px) clamp(22px, calc(40/14.4 * 1vw), 44px)
            clamp(28px, calc(42/14.4 * 1vw), 46px);
   text-align: start;
 }
-
-.plan-featured { box-shadow: inset 0 5px 0 var(--orange); }
-.plan-head { margin: 0; }
-.plan-price { margin: 0; }
-
-.plan-amount {
-  font-size: clamp(44px, calc(81/14.4 * 1vw), 88px); font-weight: 600; line-height: 1;
-  color: var(--ink); direction: ltr; unicode-bidi: isolate;
-  font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;
-}
-
-.plan-unit {
-  margin: clamp(11px, calc(20/14.4 * 1vw), 22px) 0 0;
-  font-size: clamp(15px, calc(21/14.4 * 1vw), 23px); font-weight: 400; line-height: 1.2;
+.plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
+.plan-tag {
+  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
   color: var(--muted-on-light);
 }
-
+.plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
+.plan-name {
+  margin: 2px 0 0; font-size: var(--pl-name); font-weight: 800; line-height: 1.1;
+  color: var(--ink); letter-spacing: 0;
+}
+.plan-price {
+  margin: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: nowrap; white-space: nowrap;
+}
+.plan-amount {
+  font-size: min(var(--pl-price), 20.5cqi); font-weight: 800; line-height: 1;
+  color: var(--ink); direction: ltr; unicode-bidi: isolate;
+}
+.pa-m, .pa-l { display: none; }
+#pricing:has(#psize-m:checked) .pa-s, #pricing:has(#psize-l:checked) .pa-s { display: none; }
+#pricing:has(#psize-m:checked) .pa-m, #pricing:has(#psize-l:checked) .pa-l { display: inline; }
+.plan-unit {
+  font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
+  color: var(--muted-on-light);
+}
 .plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: 0; list-style: none;
-  display: grid; gap: 10px;
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--ink);
-}
-
-.plan-size {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
-  padding-block-start: clamp(20px, calc(31/14.4 * 1vw), 34px);
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--muted-on-light);
+  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
+  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
+  color: var(--muted-on-light);
 }
-
-.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(53/14.4 * 1vw), 58px); }
+.plan-features li { position: relative; padding-inline-start: 40px; }
+.plan-features li::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
+  width: 20px; height: 15px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
-  padding-block: clamp(13px, calc(19/14.4 * 1vw), 21px);
+  padding-block: clamp(13px, calc(16/14.4 * 1vw), 18px);
 }
 
 #offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
@@ -960,8 +1123,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .nav .nav-close { display: block; position: absolute; inset-block-start: 18px; inset-inline-end: 18px; width: 44px; height: 44px; color: #fff; font-size: 30px; line-height: 1; }
   .header-cta { display: none; }
   .problem-grid { grid-template-columns: 1fr; }
-  
-  .journey-beats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
   .wwd-grid { grid-template-columns: 1fr; row-gap: 44px; }
   .wwd-block + .wwd-block::before { display: none; }
   .icons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1004,10 +1165,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   #hero .btn-row .btn-primary { padding: 15px 40px; }
   #hero .btn-row .btn-outline { padding: 13px 38px; }
   .problem-card, .icon-card { padding: 24px; }
-  
-  .journey-beats { grid-template-columns: 1fr; gap: 24px; margin-block-start: 36px; }
-  .journey-beat { gap: 14px; }
-  .journey-beat img { width: 76px; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
   .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
@@ -1018,8 +1175,13 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     text-align: start; padding: 18px 20px; gap: 16px;
   }
   
-  .plan-row { margin-block-start: 32px; grid-template-columns: 1fr; gap: 14px; }
+  .tier.tier-pkg { grid-auto-flow: row; justify-content: stretch; align-items: start; padding: 22px 20px; gap: 12px; }
+  
+  .plan-row { margin-block-start: 28px; grid-template-columns: 1fr; gap: 14px; }
   .plan { padding: 40px 24px 32px; }
+  .psw { gap: 6px; }
+  .psw-pill { min-height: 46px; padding: 0 20px; }
+  html[lang="ar"] .psw-pill { font-size: 14px; padding: 0 12px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  
@@ -1035,6 +1197,31 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .post-step.next { text-align: start; }
   .reach-card .btn, .map-closed .btn { width: 100%; }
 }
+
+.ss { --ss-n: 2; --ss-gap: 24px; margin-block-start: 40px; overflow: hidden; direction: inherit; }
+.ss-track { display: flex; gap: var(--ss-gap); transition: transform 560ms cubic-bezier(.45, 0, .2, 1); will-change: transform; }
+.ss-track.nojump { transition: none; }
+.ss-slide {
+  flex: 0 0 calc((100% - (var(--ss-n) - 1) * var(--ss-gap)) / var(--ss-n));
+  aspect-ratio: 960 / 417; position: relative; background: #FFFFFF;
+  border: 1px solid var(--hairline-light); container-type: inline-size; overflow: hidden;
+}
+.ss-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.ss-stamp {
+  position: absolute; top: 21%; right: 3%; left: auto;
+  transform: rotate(-7deg); transform-origin: center;
+  background: var(--orange); color: #141415; border: 2px solid #141415; border-radius: 4px;
+  font-weight: 800; line-height: 1; letter-spacing: .04em; text-transform: uppercase;
+  font-size: clamp(10px, 2.3cqw, 15px); padding: .38em .6em; white-space: nowrap; pointer-events: none;
+}
+@media (max-width: 767px) { .ss { --ss-n: 1; margin-block-start: 28px; } }
+@media (prefers-reduced-motion: reduce) {
+  .ss { overflow-x: auto; overscroll-behavior-inline: contain; }
+  .ss-track { transition: none; transform: none !important; }
+}
+.ss:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
 .fl{display:none}
 .js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .35s ease}
 .js:not(.open) body>:not(.fl){visibility:hidden}
@@ -1049,7 +1236,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Q8 block","alternateName":"شركة كويت بلوك","url":"https://q8block.com/","telephone":"+965 94139666","address":{"@type":"PostalAddress","streetAddress":"محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9","addressCountry":"KW"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل تعملون على موقعي الحالي؟","acceptedAnswer":{"@type":"Answer","text":"لا. نعمل فقط على المواقع التي نبنيها بأنفسنا. الأساس التقني والبنية الداخلية هما ما يحدد الترتيب، ولا يمكننا أن نتحمل مسؤولية نتيجة مبنية على أساس وضعه غيرنا."}},{"@type":"Question","name":"لمن يعود الموقع؟","acceptedAnswer":{"@type":"Answer","text":"الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. وشروط ما بعد انتهاء فترة العرض مكتوبة كاملة في صفحة العرض."}},{"@type":"Question","name":"هل تديرون ملف نشاطي على جوجل؟","acceptedAnswer":{"@type":"Answer","text":"لا. لا نطلب صلاحية الدخول إلى ملفك. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث. الملف يبقى بالكامل تحت سيطرتك."}},{"@type":"Question","name":"متى تظهر النتائج؟","acceptedAnswer":{"@type":"Answer","text":"لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما حدث فعلًا: قسم كيف نعمل في هذه الصفحة يعرض أشهرًا متتالية لموقع واحد بنيناه، كما صدّرها Google Search Console."}},{"@type":"Question","name":"لدي موقع بالفعل، فماذا يحدث؟","acceptedAnswer":{"@type":"Answer","text":"نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. أما شروط العرض المحدود فتختلف عن ذلك، وهي مكتوبة في صفحة العرض."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل تعملون على موقعي الحالي؟","acceptedAnswer":{"@type":"Answer","text":"لا. نعمل فقط على المواقع التي نبنيها بأنفسنا. الأساس التقني والبنية الداخلية هما ما يحدد الترتيب، ولا يمكننا أن نتحمل مسؤولية نتيجة مبنية على أساس وضعه غيرنا."}},{"@type":"Question","name":"لمن يعود الموقع؟","acceptedAnswer":{"@type":"Answer","text":"الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها."}},{"@type":"Question","name":"هل تديرون ملف نشاطي على جوجل؟","acceptedAnswer":{"@type":"Answer","text":"لا. لا نطلب صلاحية الدخول إلى ملفك. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث. الملف يبقى بالكامل تحت سيطرتك."}},{"@type":"Question","name":"متى تظهر النتائج؟","acceptedAnswer":{"@type":"Answer","text":"لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة."}},{"@type":"Question","name":"لدي موقع بالفعل، فماذا يحدث؟","acceptedAnswer":{"@type":"Answer","text":"نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد."}}]}</script>
 </head>
 <body>
 <div class="fl fl-light" aria-hidden="true"><svg viewBox="0 0 67 56" focusable="false"><g class="fl-m"><rect width="67" height="56" fill="#FF5F29"/><g fill="none" stroke="#fff" stroke-width="5.4"><ellipse cx="20.5" cy="27" rx="7.6" ry="9.2"/><path d="M24 32.5 30.5 40"/><circle cx="46" cy="21.4" r="5"/><circle cx="46" cy="33.6" r="6.6"/></g></g></svg></div>
@@ -1073,8 +1260,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 <div class="first-screen">
 <section id="hero" class="sec-wide">
     <div class="wrap-wide">
-      <h1 class="hero-h1">تبي عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟</h1>
-      <p class="lead">نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك</p>
+      <h1 class="hero-h1">تبي عميلك <span class="hl">يلقاك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟</h1>
+      <p class="lead">نضع خدماتك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك</p>
       <div class="btn-row centred">
       <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       <a class="btn btn-outline" href="https://wa.me/96594139666" rel="noopener" target="_blank">واتساب</a>
@@ -1083,8 +1270,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     </div>
   </section>
 <div class="strip-slot">
-    <a id="offer-strip" class="sec on-dark" href="/offer/">
-      <span class="wrap strip-row"><span class="strip-pill">عرض محدود</span><span class="strip-line">ستة أشهر بـ⁦$500⁩ مرة واحدة</span><span class="strip-sep" aria-hidden="true">&middot;</span><span class="strip-spots"><span dir="ltr">9</span> مقاعد متبقية</span><span class="strip-spots" data-countdown-fallback>التسجيل مفتوح الآن</span><span class="strip-cta">اطلع على العرض<span class="chev" aria-hidden="true">&rsaquo;</span></span></span>
+    <a id="offer-strip" class="sec on-dark" href="/offer/" data-countdown-end="2026-10-12T23:59:59+03:00">
+      <span class="wrap strip-row"><span class="strip-pill">عرض محدود</span><span class="strip-line">ستة أشهر مجانية</span><span class="strip-sep" data-countdown-part aria-hidden="true">&middot;</span><span class="strip-label" data-countdown-part>يغلق التسجيل خلال</span><span class="countdown" data-countdown data-countdown-part>&nbsp;</span><span class="strip-sep" aria-hidden="true">&middot;</span><span class="strip-spots"><span dir="ltr">9</span> مقاعد متبقية</span><span class="strip-spots" data-countdown-fallback hidden>التسجيل مفتوح الآن</span><span class="strip-cta">اطلع على العرض<span class="chev" aria-hidden="true">&rsaquo;</span></span></span>
     </a>
   </div>
 </div>
@@ -1113,6 +1300,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       <p class="eyebrow">ما نقدمه</p>
       <h2 class="h2">نبني الموقع،<br class="brk"> ثم نجعل عملاءك <span class="hl">يجدونه</span></h2>
       <p class="lead">لا نعمل على مواقع بناها غيرنا. الأساس التقني هو ما يحدد النتيجة، ولذلك نصمم الموقع ونبنيه بأنفسنا، ثم نتحمل مسؤولية ظهوره في نتائج البحث وفي إجابات الذكاء الاصطناعي.</p>
+      <div class="ss" role="group" aria-roledescription="carousel" aria-label="أمثلة من Search Console" data-ss><div class="ss-track" data-ss-track><div class="ss-slide"><img src="/assets/img/slide-ss1.webp" width="960" height="417" alt="مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن" decoding="async" fetchpriority="low"></div><div class="ss-slide"><img src="/assets/img/slide-new1.webp" width="960" height="417" alt="مخطط من Search Console يعرض نقرات مشروع جديد ومرات ظهوره عبر الزمن" decoding="async" fetchpriority="low"><span class="ss-stamp">مشروع جديد</span></div><div class="ss-slide"><img src="/assets/img/slide-ss2.webp" width="960" height="417" alt="مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن" decoding="async" fetchpriority="low"></div><div class="ss-slide"><img src="/assets/img/slide-ss3.webp" width="960" height="417" alt="مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن" decoding="async" fetchpriority="low"></div><div class="ss-slide"><img src="/assets/img/slide-new2.webp" width="960" height="417" alt="مخطط من Search Console يعرض نقرات مشروع جديد ومرات ظهوره عبر الزمن" decoding="async" fetchpriority="low"><span class="ss-stamp">مشروع جديد</span></div><div class="ss-slide"><img src="/assets/img/slide-ss4.webp" width="960" height="417" alt="مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن" decoding="async" fetchpriority="low"></div></div></div>
       <div class="wwd-grid"><article class="wwd-block">
       <div class="wwd-num" aria-hidden="true">01</div>
       <h3 class="h3">نصمم ونبني</h3>
@@ -1128,43 +1316,119 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     </article></div>
     </div>
   </section>
-<section id="journey" class="sec on-dark">
+<section id="report" class="sec on-dark">
     <div class="wrap">
-      <p class="eyebrow">كيف نعمل</p>
-      <h2 class="h2">هكذا يبدأ موقع جديد <span class="hl">في الظهور</span></h2>
-      <p class="lead">هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console.</p>
-      <figure class="proof-shot journey-graph">
-        <div class="proof-pan" tabindex="0" role="group" aria-label="لوحة أداء في Google Search Console لموقع بنيناه">
-          <img src="/assets/img/proof-kwtclean-gsc.webp" width="2243" height="582"
-               alt="لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى." loading="lazy" decoding="async">
+      <p class="eyebrow">تقريرك الشهري</p>
+      <h2 class="h2">ما تحصل عليه <span class="hl">كل شهر</span></h2>
+      <ul class="rp-grid" aria-label="أربع صفحات من تقرير شهري حقيقي لأحد عملائنا">
+        <li class="rp-item">
+      <article class="rp-card rp-conv" aria-labelledby="rp-h0">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
+      </div>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h0">تواصل العملاء</h3>
+          <p class="rp-hero"><span class="rp-big"><bdi dir="ltr">88</bdi></span> <span class="rp-unit">تحويل</span></p>
+          <div class="rp-bar" role="img" aria-label="نسبة الواتساب والاتصال: 64% / 36%">
+            <i class="rp-seg rp-seg-wa" style="width:64%"></i><i class="rp-seg rp-seg-call" style="width:36%"></i>
+          </div>
+          <div class="rp-barnums" aria-hidden="true"><span><bdi dir="ltr">64%</bdi></span><span><bdi dir="ltr">36%</bdi></span></div>
+          <div class="rp-split">
+            <p class="rp-sp rp-sp-wa"><span class="rp-n"><bdi dir="ltr">56</bdi></span><span class="rp-k">محادثة واتساب</span><span class="rp-pc"><bdi dir="ltr">64%</bdi></span></p>
+            <p class="rp-sp rp-sp-call"><span class="rp-n"><bdi dir="ltr">32</bdi></span><span class="rp-k">اتصال هاتفي</span><span class="rp-pc"><bdi dir="ltr">36%</bdi></span></p>
+          </div>
         </div>
-        <p class="proof-hint" aria-hidden="true">اسحب الصورة أفقيًا لقراءتها كاملة</p>
-      </figure>
-      <ul class="journey-beats"><li class="journey-beat">
-      <img src="/assets/img/journey-1.webp" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">البناء</h3>
-        <p class="body">يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة.</p>
+      </article>
+      <p class="rp-cap">الصفحة 1</p>
+    </li>
+        <li class="rp-item">
+      <article class="rp-card rp-svc" aria-labelledby="rp-h1">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
-    </li><li class="journey-beat">
-      <img src="/assets/img/journey-2.webp" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">الظهور</h3>
-        <p class="body">تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه.</p>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h1">التواصل حسب الخدمة</h3>
+          <ol class="rp-rows"><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">01</bdi></span>
+            <span class="rp-name">عاملات بالساعة<span class="rp-mix"><bdi dir="ltr">11</bdi> اتصال · <bdi dir="ltr">21</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">32</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">02</bdi></span>
+            <span class="rp-name">غسيل سجاد<span class="rp-mix"><bdi dir="ltr">7</bdi> اتصال · <bdi dir="ltr">8</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">15</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">03</bdi></span>
+            <span class="rp-name">تنظيف منازل<span class="rp-mix"><bdi dir="ltr">1</bdi> اتصال · <bdi dir="ltr">6</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">7</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">04</bdi></span>
+            <span class="rp-name">الصفحة الرئيسية<span class="rp-mix"><bdi dir="ltr">6</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">6</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">05</bdi></span>
+            <span class="rp-name">مكافحة حشرات<span class="rp-mix"><bdi dir="ltr">2</bdi> اتصال · <bdi dir="ltr">2</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">4</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">06</bdi></span>
+            <span class="rp-name">تنظيف مسابح<span class="rp-mix"><bdi dir="ltr">1</bdi> اتصال · <bdi dir="ltr">2</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">3</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">07</bdi></span>
+            <span class="rp-name">غسيل كنب<span class="rp-mix"><bdi dir="ltr">1</bdi> اتصال · <bdi dir="ltr">2</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">3</bdi></span>
+          </li><li class="rp-row">
+            <span class="rp-rk" aria-hidden="true"><bdi dir="ltr">08</bdi></span>
+            <span class="rp-name">تنظيف مكاتب<span class="rp-mix"><bdi dir="ltr">1</bdi> اتصال · <bdi dir="ltr">1</bdi> واتساب</span></span>
+            <span class="rp-tot"><bdi dir="ltr">2</bdi></span>
+          </li></ol>
+        </div>
+      </article>
+      <p class="rp-cap">الصفحة 2</p>
+    </li>
+        <li class="rp-item">
+      <article class="rp-card rp-kw" aria-labelledby="rp-h2">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
-    </li><li class="journey-beat">
-      <img src="/assets/img/journey-3.webp" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">النمو</h3>
-        <p class="body">يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها.</p>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h2">كلمات البحث</h3>
+          <p class="rp-sub">ما يبحث عنه عملاؤكم في جوجل</p>
+          <ul class="rp-tags"><li class="rp-tagk hot">مكافحة حشرات الفحيحيل</li><li class="rp-tagk">مكافحة حشرات صباح السالم</li><li class="rp-tagk">خدم بالساعات الفحيحيل</li><li class="rp-tagk" lang="en" dir="ltr">carpet cleaning kuwait</li><li class="rp-tagk">خادمات بالساعة</li><li class="rp-tagk">عاملات بالساعة</li><li class="rp-tagk" lang="en" dir="ltr">hourly cleaning service kuwait</li><li class="rp-tagk">خدم بالساعات المهبولة</li><li class="rp-tagk">خدم بالساعات صباح الاحمد</li><li class="rp-tagk">تنظيف كنب</li><li class="rp-tagk" lang="en" dir="ltr">sofa cleaning kuwait</li><li class="rp-tagk" lang="en" dir="ltr">ac duct cleaning kuwait</li></ul>
+        </div>
+      </article>
+      <p class="rp-cap">الصفحة 3</p>
+    </li>
+        <li class="rp-item">
+      <article class="rp-card rp-traffic" aria-labelledby="rp-h3">
+        <div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
-    </li></ul>
-        <!-- Call and WhatsApp always ship as a pair. This block had WhatsApp alone,
-             which read as an unfinished row beside every other CTA on the site. -->
-      <div class="journey-foot btn-row">
-        <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
-        <a class="btn btn-outline" href="https://wa.me/96594139666" rel="noopener" target="_blank">واتساب</a>
-      </div>
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h3">الزيارات من نتائج البحث</h3>
+          <div class="rp-stats">
+            <div class="rp-stat key"><p class="rp-sk">النقرات من نتائج البحث</p><p class="rp-sv"><bdi dir="ltr">525</bdi></p><p class="rp-ss">نقرة وصلت للموقع من نتائج جوجل</p></div>
+            <div class="rp-stat "><p class="rp-sk">ظهور الموقع في النتائج</p><p class="rp-sv"><bdi dir="ltr">29,797</bdi></p><p class="rp-ss">مرة ظهور في صفحات نتائج جوجل</p></div>
+            <div class="rp-stat small"><p class="rp-sk">أعلى يوم</p><p class="rp-sv"><bdi dir="ltr">14</bdi> سبتمبر</p><p class="rp-ss"><bdi dir="ltr">27</bdi> زيارة في يوم واحد</p></div>
+            <div class="rp-stat small"><p class="rp-sk">القيمة التقديرية</p><p class="rp-sv"><bdi dir="ltr">500</bdi> إلى <bdi dir="ltr">600</bdi> د.ك</p><p class="rp-ss">لو جاءت هذه الزيارات من إعلانات جوجل</p></div>
+          </div>
+          <figure class="rp-chart" role="img" aria-label="الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 27 زيارة يوم 14 سبتمبر">
+            <div class="rp-plot"><svg class="rp-chart-svg" viewBox="0 0 600 120" width="600" height="120" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+          <path d="M600,70.4 L579.3,32.7 L558.6,28.9 L537.9,36.4 L517.2,47.8 L496.6,28.9 L475.9,13.8 L455.2,44 L434.5,25.1 L413.8,62.9 L393.1,25.1 L372.4,17.6 L351.7,51.6 L331,10 L310.3,62.9 L289.7,47.8 L269,70.4 L248.3,70.4 L227.6,28.9 L206.9,62.9 L186.2,40.2 L165.5,51.6 L144.8,47.8 L124.1,66.7 L103.4,59.1 L82.8,40.2 L62.1,51.6 L41.4,55.3 L20.7,55.3 L0,70.4 L0,112 L600,112 Z" class="rp-area"/>
+          <path d="M600,70.4 L579.3,32.7 L558.6,28.9 L537.9,36.4 L517.2,47.8 L496.6,28.9 L475.9,13.8 L455.2,44 L434.5,25.1 L413.8,62.9 L393.1,25.1 L372.4,17.6 L351.7,51.6 L331,10 L310.3,62.9 L289.7,47.8 L269,70.4 L248.3,70.4 L227.6,28.9 L206.9,62.9 L186.2,40.2 L165.5,51.6 L144.8,47.8 L124.1,66.7 L103.4,59.1 L82.8,40.2 L62.1,51.6 L41.4,55.3 L20.7,55.3 L0,70.4" class="rp-line"/>
+          <line x1="0" y1="112" x2="600" y2="112" class="rp-axis"/>
+        </svg>
+        <span class="rp-peak" style="inset-inline-start:44.83333333333333%;top:8.333333333333332%" aria-hidden="true"></span></div>
+            <figcaption class="rp-axisl" aria-hidden="true"><span><bdi dir="ltr">1</bdi> سبتمبر</span><span><bdi dir="ltr">30</bdi> سبتمبر</span></figcaption>
+          </figure>
+        </div>
+      </article>
+      <p class="rp-cap">الصفحة 4</p>
+    </li>
+      </ul>
     </div>
   </section>
 <section id="work" class="sec">
@@ -1255,34 +1519,28 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     <div class="wrap">
       <p class="eyebrow">الأسعار</p>
       <h2 class="h2">اختر خطتك</h2>
-      <p class="lead">كل خطة هدفها واحد: عملاء يتصلون بك.</p>
+      <fieldset class="psw"><legend class="vh">حجم شركتك</legend><input class="psw-in" type="radio" name="psize" id="psize-s" value="s" checked><label class="psw-pill" for="psize-s">شركة صغيرة</label><input class="psw-in" type="radio" name="psize" id="psize-m" value="m"><label class="psw-pill" for="psize-m">شركة متوسطة</label><input class="psw-in" type="radio" name="psize" id="psize-l" value="l"><label class="psw-pill" for="psize-l">شركة كبيرة</label></fieldset>
       <ul class="plan-row"><li class="plan">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">⁦$500⁩</span></p>
-        <p class="plan-unit">شهريًا</p>
-      </div>
-      
-      <p class="plan-size">للشركات الصغيرة</p>
+      <p class="plan-tag">⁦x1⁩</p>
+      <h3 class="plan-name">باقة الحفاظ</h3>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">⁦$997⁩</span><span class="pa pa-m">⁦$1,997⁩</span><span class="pa pa-l">⁦$2,997⁩</span></span> <span class="plan-unit">شهريًا</span></p>
+      <ul class="plan-features"><li>تثبيت نتائجك والاتصالات الحالية</li><li>حماية موقعك من المنافسين</li><li>الحفاظ على قوة ظهورك</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
     </li><li class="plan plan-featured">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">⁦$1,000⁩</span></p>
-        <p class="plan-unit">شهريًا</p>
-      </div>
-      
-      <p class="plan-size">للشركات الصغيرة والمتوسطة</p>
+      <p class="plan-tag">⁦x3⁩</p>
+      <h3 class="plan-name">باقة التوسع</h3>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">⁦$2,497⁩</span><span class="pa pa-m">⁦$4,997⁩</span><span class="pa pa-l">⁦$6,997⁩</span></span> <span class="plan-unit">شهريًا</span></p>
+      <ul class="plan-features"><li>استهداف كلمات وخدمات أكثر</li><li>تكثيف الشغل والجهد شهريًا</li><li>تحسين فرص طلبات الواتساب</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
     </li><li class="plan">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">⁦$1,500⁩</span></p>
-        <p class="plan-unit">شهريًا</p>
-      </div>
-      
-      <p class="plan-size">للشركات المتوسطة والكبيرة</p>
+      <p class="plan-tag">⁦x10⁩</p>
+      <h3 class="plan-name">باقة السيطرة</h3>
+      <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">⁦$4,997⁩</span><span class="pa pa-m">⁦$9,997⁩</span><span class="pa pa-l">⁦$15,997⁩</span></span> <span class="plan-unit">شهريًا</span></p>
+      <ul class="plan-features"><li>أقصى جهد وطاقة تشغيلية</li><li>منافسة أقوى الشركات بالسوق</li><li>أولوية قصوى ودعم مباشر</li></ul>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
@@ -1302,7 +1560,7 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a1">
         <span>لمن يعود الموقع؟</span><span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a" id="faq-a1">الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. وشروط ما بعد انتهاء فترة العرض مكتوبة كاملة في صفحة العرض.</div>
+      <div class="faq-a" id="faq-a1">الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها.</div>
     </div><div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a2">
         <span>هل تديرون ملف نشاطي على جوجل؟</span><span class="faq-icon" aria-hidden="true"></span>
@@ -1312,12 +1570,12 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a3">
         <span>متى تظهر النتائج؟</span><span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a" id="faq-a3">لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما حدث فعلًا: قسم كيف نعمل في هذه الصفحة يعرض أشهرًا متتالية لموقع واحد بنيناه، كما صدّرها Google Search Console.</div>
+      <div class="faq-a" id="faq-a3">لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة.</div>
     </div><div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a4">
         <span>لدي موقع بالفعل، فماذا يحدث؟</span><span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a" id="faq-a4">نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. أما شروط العرض المحدود فتختلف عن ذلك، وهي مكتوبة في صفحة العرض.</div>
+      <div class="faq-a" id="faq-a4">نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد.</div>
     </div></div>
     </div>
   </section>
@@ -1343,15 +1601,11 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
         </div>
         <div class="footer-col">
       <h3>الشركة</h3>
-      <a href="/">الرئيسية</a><a href="/about/">من نحن</a><a href="/contact/">تواصل معنا</a>
+      <a href="/">الرئيسية</a><a href="/about/">من نحن</a><a href="/contact/">تواصل معنا</a><a href="/terms/">الشروط والأحكام</a>
       
     </div><div class="footer-col">
       <h3>الموارد</h3>
       <a href="/blog/">المدونة</a><a href="/google-business-profile-checklist.html">قائمة ملف جوجل</a>
-      
-    </div><div class="footer-col">
-      <h3>العرض</h3>
-      <a href="/offer/">العرض</a><a href="/terms/">الشروط والأحكام</a>
       
     </div><div class="footer-col">
       <h3>تواصل</h3>

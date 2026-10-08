@@ -128,11 +128,17 @@ MSA `هل تريد`) and **deliberately a question**. It is the hook, and it is 
 on the site: every other Arabic line in this file stays professional MSA. **Do not "correct" it.**
 The highlight stays on `يجدونك`. The English headline is unchanged.
 
+**REPLACED 2026-10-08 (build-spec §32): Ahmad picked option 9 of ten.** The headline is now
+`تبي عميلك يلقاك في جوجل وفي الذكاء الاصطناعي؟`. Only the first three words changed; the tail is
+untouched. The whole opening is now Gulf (`تبي`, `يلقاك`), which resolves the old register clash. It is
+still the only colloquial string on the site. **Do not "correct" it to MSA.** The highlight moved to the
+finding word, `يلقاك`. The English headline is unchanged.
+
 | Element | Arabic | English |
 |---|---|---|
-| Headline | تبي عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي؟ | Customers find you on Google and in AI. |
-| Highlighted word | يجدونك | find you |
-| Subhead | نضعك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put you in Google's results and in AI's answers, where your customer is looking. |
+| Headline | تبي عميلك يلقاك في جوجل وفي الذكاء الاصطناعي؟ | Customers find you on Google and in AI. |
+| Highlighted word | يلقاك | find you |
+| Subhead | نضع خدماتك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put you in Google's results and in AI's answers, where your customer is looking. |
 | CTA primary | اتصل الآن | Call now |
 | CTA secondary | واتساب | WhatsApp |
 
@@ -271,14 +277,26 @@ thing should be clickable. Also there should be a CTA somewhere. But no new rows
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
+| Line | ستة أشهر مجانية | Six months free |
 | Countdown label | يغلق التسجيل خلال | Registration closes in |
 | Countdown | `[COUNTDOWN]` | `[COUNTDOWN]` |
 | Countdown units | يوم · ساعة · دقيقة · ثانية | Days · Hours · Minutes · Seconds |
 | Spots line | `[SPOTS]` مقاعد متبقية | `[SPOTS]` seats left |
 | CTA, same row | اطلع على العرض | See the offer |
 
-**Rewritten 2026-09-30 (build-spec §25): the line now carries the PRICE, and the "service firms"
+**Rewritten 2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN.** Ahmad: the offer "was absolutely
+free. So make sure our offer reflects that." The line is `ستة أشهر مجانية` / `Six months free`. The long
+form `ستة أشهر مجانية لشركات الخدمات` / `Six months free for service companies` was built and measured
+first: one row at 1440 and 1920 in both locales, but at 390 the English strip went to **four rows** (band
+139.6px) and the Arabic line dropped off the pill row. Shortened as the brief allowed. Measured after: one
+row at 1440 and 1920 (band 78 / 79px), **3 rows at 390 in Arabic (114.8px) and 2 in English (90px)**, line
+on the pill row in every case, `#problem` exactly at the fold at 1440x900, 1920x1200 and 390x844. Service
+companies are still named on the offer page (subhead, B3 intro, condition 1). **This strip is the ONLY
+offer mention on the homepage** and its link is the sole route into `/offer/` from there: the footer's
+"The offer" column and the two FAQ references were removed the same day. Everything below about the $500
+line is history.
+
+**Rewritten 2026-09-30 (build-spec §25, superseded 2026-10-08): the line now carries the PRICE, and the "service firms"
 qualifier came off it.** The offer is no longer free, and the one thing the strip must not do is leave a
 reader thinking the price is monthly, so `مرة واحدة` / `paid once` is on the line beside the number. There
 is no room for both that and the qualifier: at 390 the pill and the line share row 1 inside a 350px inner
@@ -300,7 +318,7 @@ now. Anything added to it has to be measured at 390 in both locales before it sh
 | Element | Arabic | English |
 |---|---|---|
 | Label pill | عرض محدود | Limited offer |
-| Line | ستة أشهر بـ$500 مرة واحدة | 6 months for $500, paid once |
+| Line | ستة أشهر مجانية | Six months free |
 | Status line | التسجيل مفتوح الآن | Registration is open now |
 | CTA, same row | اطلع على العرض | See the offer |
 
@@ -409,6 +427,16 @@ Section 5, items 5 and 6.
 | Highlighted word | يجدونه | get it found |
 | Subhead | لا نعمل على مواقع بناها غيرنا. الأساس التقني هو ما يحدد النتيجة، ولذلك نصمم الموقع ونبنيه بأنفسنا، ثم نتحمل مسؤولية ظهوره في نتائج البحث وفي إجابات الذكاء الاصطناعي. | We do not work on websites other people built. The technical foundation decides the result, so we design and build the site ourselves, then we take responsibility for it being found in search and in AI answers. |
 
+
+**Slide strip (added 2026-10-08), between the subhead and the three blocks.** Only new copy in the section.
+
+| Element | Arabic | English |
+|---|---|---|
+| Frame label (accessible name) | أمثلة من Search Console | Search Console examples |
+| Stamp, on the two new projects only | مشروع جديد | New project (rendered uppercase) |
+| Alt, established slides | مخطط من Search Console يعرض نقرات موقع ومرات ظهوره عبر الزمن | Search Console chart of clicks and impressions over time |
+| Alt, new projects | مخطط من Search Console يعرض نقرات مشروع جديد ومرات ظهوره عبر الزمن | Search Console chart of clicks and impressions for a new project |
+
 **Block A**
 
 | | Arabic | English |
@@ -451,100 +479,90 @@ homepage.** Build-spec §28.3 has the record.
 
 ---
 
-## 6. The journey
+## 6. Your monthly report
 
-**Background** dark `#141415`, full bleed band.
+**Background** dark `#101012`, full bleed band. Section id `report` (was `journey`).
 
-**REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).** The Search Console graph is the section's
-centrepiece and the three illustrations that used to head three large cards are now small icons under it
-carrying the story. The shape is: eyebrow, headline, one short subhead, the graph, a row of three compact
-beats, the WhatsApp CTA. Nothing else.
-
-**THE FORENSIC DETAIL IS GONE ON PURPOSE AND MAY NOT BE RESTORED.** Ahmad, in his own words:
-*"don't use details like kwtclean or from what month to what month."* Removed from this section's copy:
-
-* the client name (`kwtclean.com`, the old site label),
-* the date range and the three month labels,
-* the three click figures (`7` / `165` / `531`),
-* the precision note about April being the first data month and August the fifth full one,
-* the carwashkw.com baseline paragraph,
-* the Search Console source caption.
-
-**This is a deliberate reversal of the earlier checkability framing and he has now made it twice**, on the
-grounds that prospects do not verify and the detail costs more than it earns. The long argument for the
-opposite that used to live in this section is not an instruction to a later agent; build-spec §26.1 records
-the decision. **Nothing became unverifiable**: the offer page's B2b still names the client and both dates,
-and the derivation tables at the end of this file are untouched.
-
-**The numbers printed inside the graph image stay exactly as they are.** `1.99K`, `114K`, `1.7%`, `10.9`
-and the dated x axis are the image's own axis, not our copy, and no number in it is ever altered.
-
-**The graph is the same asset as offer B2b**, `src/img/proof-kwtclean-gsc.webp`, reused and never
-re-derived or re-cropped. It keeps B2b's behaviour: below 1000px it **pans instead of shrinking** and its
-wrapper forces `direction: ltr`, so both locales open on the four headline figures at the panel's left
-edge. Build-spec §25.6 and §26.1 have the measurements.
+**REBUILT 2026-10-08 (build-spec §31).** Ahmad: "lets redo the how we work section completely, remove
+everything. instead, i want to show a report". Board `design/boards/report-A.png` (B and C are dead), then
+"lets add 4 pages, the 2 extra are the keyword page and traffic page." Everything the old section carried is
+deleted: the old eyebrow and headline, the subhead, the Search Console graph, the three icon beats and the
+Call/WhatsApp pair. The shape is now eyebrow, headline, four report pages. No lead, no CTA.
 
 | Element | Arabic | English |
 |---|---|---|
-| Eyebrow | كيف نعمل | How it works |
-| Headline | هكذا يبدأ موقع جديد في الظهور | How a new site gets found. |
-| Highlighted word | في الظهور | gets found |
-| Subhead | هذه أرقام موقع واحد بنيناه، كما صدّرها Google Search Console. | These are the numbers of one site we built, exactly as Google Search Console exported them. |
+| Eyebrow | تقريرك الشهري | Your monthly report |
+| Headline | ما تحصل عليه كل شهر | What you get every month. |
+| Highlighted words | كل شهر | every month. |
+| Grid accessible name | أربع صفحات من تقرير شهري حقيقي لأحد عملائنا | Four pages from a real monthly report for one of our clients |
+| Caption under each page | الصفحة 1 / 2 / 4 / 5 | Page 1 / 2 / 4 / 5 |
 
-**The graph's accessible text.** It names no client and no date range. It describes the panel, which is a
-description of an image and not a claim — the same reasoning that lets `متوسط الموضع` / `average position`
-appear in it where the `rank` register forbids position as a selling word anywhere else.
+The captions carry the report's own page numbers (1, 2, 4, 5), not 1 to 4: the pages are real and pages 3 and 6
+were left out. Header strip on every page: the Q8 box, `block`, and the report's own tag `kwtclean.com · Sep 2026`
+(uppercase by CSS; the report's em dash became a middle dot, no dashes in copy).
+
+**Every figure comes from the report, never from this file.** `scripts/derive-report.mjs` reads
+`ops/reports/kwtclean/2026-09.html` and writes `src/report.json`; the renderer prints only that. Re-run the
+script for a new month; do not type numbers.
+
+### Page 1, conversions
 
 | Element | Arabic | English |
 |---|---|---|
-| Alt | لوحة أداء في Google Search Console لموقع بنيناه: إجمالي النقرات 1.99 ألف، وإجمالي مرات الظهور 114 ألفًا، ومعدل النقر 1.7 بالمئة، ومتوسط الموضع 10.9، ومنحنى يومي يبدأ عند الصفر ثم يرتفع ويستقر في نطاق أعلى. | A Google Search Console performance panel for a site we built: total clicks 1.99K, total impressions 114K, average CTR 1.7 percent, average position 10.9, and a daily curve that starts at zero, lifts and settles into a higher band. |
-| Pan region accessible name | لوحة أداء في Google Search Console لموقع بنيناه | A Google Search Console performance panel for a site we built |
-| Pan hint, phone only | اسحب الصورة أفقيًا لقراءتها كاملة | Swipe the panel sideways to read all of it |
+| Label | تواصل العملاء | Client conversions |
+| Figure + unit | 88 تحويل | 88 conversions |
+| Split bar | 64% orange (WhatsApp) / 36% white (calls) | same |
+| Left figure | 56 محادثة واتساب 64% | 56 WhatsApp chats 64% |
+| Right figure | 32 اتصال هاتفي 36% | 32 Phone calls 36% |
 
-**The three beats, under the graph.** Same three story beats as before, and the titles are still the
-approved board's — `Build / Get discovered / Get traction`, and the MSA triad `البناء / الظهور / النمو`
-(Ahmad, 2026-09-24: *"I like the messaging that was used, use the same exact messaging. So get discovered,
-get traction, get more customers."*). `الظهور` is the same register word the headline uses, so nothing here
-reaches for the banned `ترتيب`. **The bodies are the ones the cards already carried, kept because they
-contain no invented claim, duration or figure** — which is now the only thing holding this section, since
-the figures that used to support them are gone. Each beat carries its icon, its title and its body. No
-month label, no figure.
+Dropped: the report's date range sentence under the number, and its "من إجمالي التواصل" suffix (the board has none).
 
-| # | Icon | Arabic title | Arabic body | English title | English body |
+### Page 2, conversions by service (top 8, the report's order)
+
+| # | Arabic | English | Calls | WhatsApp | Total |
 |---|---|---|---|---|---|
-| 1 | Build (`journey-1.webp`) | البناء | يُصمَّم الموقع ويُبنى ويُنشر، وتُرسل صفحاته إلى جوجل للفهرسة. | Build | The site is designed, built and published, and sent to Google. |
-| 2 | Get discovered (`journey-2.webp`) | الظهور | تدخل صفحات الخدمات والمناطق الفهرس، ويبدأ العميل يجدها في بحثه. | Get discovered | Service and area pages enter the index. Customers find them. |
-| 3 | Get traction (`journey-3.webp`) | النمو | يجد العميل صفحة الخدمة في منطقته، وتأتي المكالمة منها. | Get traction | A customer finds the page for his area, and calls you from it. |
+| 01 | عاملات بالساعة | Hourly maids | 11 | 21 | 32 |
+| 02 | غسيل سجاد | Carpet washing | 7 | 8 | 15 |
+| 03 | تنظيف منازل | House cleaning | 1 | 6 | 7 |
+| 04 | الصفحة الرئيسية | Home page | 0 | 6 | 6 |
+| 05 | مكافحة حشرات | Pest control | 2 | 2 | 4 |
+| 06 | تنظيف مسابح | Pool cleaning | 1 | 2 | 3 |
+| 07 | غسيل كنب | Sofa washing | 1 | 2 | 3 |
+| 08 | تنظيف مكاتب | Office cleaning | 1 | 1 | 2 |
 
-**CTA strip closing the section**, now centred on its own row because the source line it used to share
-that row with is gone.
+Label `التواصل حسب الخدمة` / `Conversions by service`. Muted line `11 اتصال · 21 واتساب` / `11 calls · 21 WhatsApp`
+(`1 call` singular; a zero part is omitted). Dropped: rows 09 to 15 and the "and 3 more services" line. No ترتيب.
 
-| Arabic | English |
-|---|---|
-| واتساب | WhatsApp |
+### Page 3, search keywords (report page 4)
 
-**Build data kept on file, printed nowhere.** The five real Google Search Console rows for kwtclean.com
-stay in `src/data.mjs` as `JOURNEY_ROWS` and in `design/proof-data.md`. Nothing on the page prints them
-any more and no chart is drawn from them — the graph is the export image.
+Label `كلمات البحث` / `Search keywords`, line `ما يبحث عنه عملاؤكم في جوجل` / `What your customers search for on Google`.
+The first 12 phrases in the report's order, exactly as written, the report's `( إنجليزي )` marker stripped. Arabic
+phrases stay Arabic on `/en/` (marked `lang="ar" dir="rtl"`); English ones carry `lang="en"`. The first is the
+report's highlighted one (orange outline):
+مكافحة حشرات الفحيحيل · مكافحة حشرات صباح السالم · خدم بالساعات الفحيحيل · carpet cleaning kuwait · خادمات بالساعة ·
+عاملات بالساعة · hourly cleaning service kuwait · خدم بالساعات المهبولة · خدم بالساعات صباح الاحمد · تنظيف كنب ·
+sofa cleaning kuwait · ac duct cleaning kuwait.
 
-| Month | Clicks | Impressions |
+### Page 4, visits from search (report page 5)
+
+| Label | Value | Line under it |
 |---|---|---|
-| April 2026 | 7 | 956 |
-| May 2026 | 165 | 11,155 |
-| June 2026 | 354 | 22,101 |
-| July 2026 | 452 | 25,564 |
-| August 2026 | 531 | 27,932 |
+| النقرات من نتائج البحث / Clicks from search results | 525 (orange) | نقرة وصلت للموقع من نتائج جوجل / clicks that reached the site from Google results |
+| ظهور الموقع في النتائج / Appearances in results | 29,797 | مرة ظهور في صفحات نتائج جوجل / times the site showed on Google results pages |
+| أعلى يوم / Best day | 14 سبتمبر / 14 September | 27 زيارة في يوم واحد / 27 visits in one day |
+| القيمة التقديرية / Estimated value | 500 إلى 600 د.ك / 500 to 600 KWD | لو جاءت هذه الزيارات من إعلانات جوجل / if these visits had come from Google Ads |
 
-**Retired from this section, 2026-09-30.** Kept here so nobody hunts for them or puts them back:
+Page label `الزيارات من نتائج البحث` / `Visits from search results`. The report's first panel label
+`الزيارات / النقرات من نتائج البحث` was shortened to `النقرات من نتائج البحث`. The range dash became `إلى` / `to`.
+Under the figures, the daily visits chart (30 days, recovered from the report's own chart, sums to 525), axis
+`1 سبتمبر` to `30 سبتمبر` / `1 Sep` to `30 Sep`, accessible name
+`الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 27 زيارة يوم 14 سبتمبر` /
+`Daily visits from Google search, 1 to 30 September, peaking at 27 visits on 14 September`.
+Dropped: the report's h2 `حجم الزيارات / النقرات من جوجل` and the long methodology note (`تقدير: جوجل يذكر...`).
 
-| What it said | Where it went |
-|---|---|
-| `الشهر الأول، أبريل 2026` / `Month one, April 2026` and the two other month labels | deleted |
-| `7 نقرات في الشهر` / `165` / `531` | deleted from the page; the rows are in the table above |
-| The precision note about April and the fifth full data month | deleted |
-| The carwashkw.com baseline pair (199 to 440 clicks over thirteen months, plus the Google profile checklist condition) | deleted |
-| `المصدر: Google Search Console، بيانات حتى 24 سبتمبر 2026` | deleted; the subhead still names the source |
-| `kwtclean.com` site label | deleted |
+**Retired 2026-10-08.** `كيف نعمل` / `How it works`, `هكذا يبدأ موقع جديد في الظهور` / `How a new site gets found.`,
+the Search Console subhead, the graph (still on the offer page B2b), the beats `البناء / الظهور / النمو` and the
+closing Call/WhatsApp pair. `JOURNEY_ROWS` stays in `src/data.mjs`, printed nowhere.
 
 ---
 
@@ -721,7 +739,7 @@ any figure on the page can be traced in one step.
 
 ## 7b. The price
 
-**REWRITTEN 2026-10-01, twice (build-spec §27). THE OFFER IS NOT MENTIONED IN THIS SECTION.**
+**REWRITTEN 2026-10-01 (build-spec §27) and REBUILT 2026-10-08 (build-spec §30). THE OFFER IS NOT MENTIONED IN THIS SECTION.**
 Placed **after Section 7 Our work and before Section 8 FAQ**, keeping its `#pricing` id, so the page
 runs problem, solution, what you get, proof, **price**, objections, close.
 
@@ -738,86 +756,45 @@ Nothing in this section may say `$500 one time`, `دفعة واحدة`, `مرة 
 `ستة أشهر`, a countdown, spots left, a limited anything, or any other promotion wording. No anchor
 row, no normal-price-versus-offer pair, no link to the offer page.
 
-### What separates the three plans: COMPANY SIZE, and nothing else
+### REBUILT 2026-10-08: a company-size switch and three packages (build-spec §30)
 
-Ahmad, 2026-10-01, verbatim:
-
-> "We're selling phone calls. We're obviously not going to mention number of phone calls because in
-> SEO that's unpredictable. My suggestion is mention the size of the company. So a 500 is for small
-> companies, 1,000 is small to medium, $1,500 is medium to large."
-
-So a card is a **price, a period and who the plan is for**, and that is a **complete card**. The
-earlier stand-in line, `what each plan covers is agreed with you on the call`, is gone along with the
-gap it was covering.
-
-**Never invented, and this axis is rejected on purpose**, because it is exactly what SEO agencies
-conventionally print on tiers: hours, page counts, numbers of services or areas, blog post volume,
-link quantities, reporting frequency, support levels, and above all **any promise about how many
-calls a plan produces**. None of that goes on a card. Neither does a `most popular` badge.
-
-### The message is the business outcome, not SEO
-
-Ahmad: *"we're selling SEO, so the messaging is not really SEO... we're selling phone calls."* The
-head sits on customers calling and on picking by the size of the business. No feature language, no
-packages framing, no jargon, and the standing ban on `rank` / `ترتيب` / `يتصدر` holds.
+Built to `design/boards/pricing-v2-A.png`. **pricing-v2-B, pricing-v2-C, pricing-light and pricing-dark
+are dead boards.** The "company size is the only differentiator" rule of 2026-10-01 is superseded: company
+size now lives in the switch, and the three cards are Ahmad's named packages with his own check lines.
+The old per-card "who it is for" line and the lead under the headline are deleted (Ahmad keeps asking for
+less explanatory text, and the board draws no lead).
 
 ### The copy
 
 | Element | Arabic | English |
 |---|---|---|
 | Eyebrow | الأسعار | Pricing |
-| Headline | اختر خطتك | Choose your plan. |
-| Highlighted phrase | اختر خطتك — the whole headline | Choose your plan. — the whole headline |
-| Subhead | كل خطة هدفها واحد: عملاء يتصلون بك. | Every plan has one goal: customers calling you. |
+| Headline | اختر خطتك (plain, no highlight) | Choose your plan. (plain, no highlight) |
+| Lead | DELETED | DELETED |
+| Switch, accessible name only | حجم شركتك | Your company size |
+| Switch pills | شركة صغيرة · شركة متوسطة · شركة كبيرة | Small · Medium · Large |
+| Period | شهريًا | /month |
+| CTA, every card | اتصل الآن → `tel:` | Call now → `tel:` |
 
-**THE QUALIFIER IS CUT, 2026-10-01.** The headline read `اختر خطتك حسب حجم شركتك` /
-`Pick your plan by your company size.` Ahmad: `just leave it, choose your plan, remove company size.`
-The highlighted phrase was already exactly `اختر خطتك` / `Pick your plan`, so what is left **is** the
-highlight, unchanged — nothing was added around it and the highlight was not invented. The English
-`<br class="brk">` / `<span class="nb">` break treatment went with the qualifier: three words need no
-planned break.
+| Card | Tag | Arabic name | English name | Check lines, Arabic (Ahmad's own, verbatim) | Check lines, English |
+|---|---|---|---|---|---|
+| 1 | x1 | باقة الحفاظ | Maintain | تثبيت نتائجك والاتصالات الحالية / حماية موقعك من المنافسين / الحفاظ على قوة ظهورك | Lock in your current results and calls / Protect your site from competitors / Keep your visibility strong |
+| 2 | x3 | باقة التوسع | Expand | استهداف كلمات وخدمات أكثر / تكثيف الشغل والجهد شهريًا / تحسين فرص طلبات الواتساب | Target more keywords and services / More work and effort every month / Better chances of WhatsApp requests |
+| 3 | x10 | باقة السيطرة | Dominate | أقصى جهد وطاقة تشغيلية / منافسة أقوى الشركات بالسوق / أولوية قصوى ودعم مباشر | Maximum effort and operating power / Compete with the strongest companies in the market / Top priority and direct support |
 
-**THE SUBHEAD LOST ITS SECOND SENTENCE WITH IT.** `والفرق بينها هو حجم شركتك` /
-`What changes is the size of your company.` was the headline's qualifier said twice, and each of the
-three cards already prints who it is for. What is left is the one thing the section sells: customers
-calling. Build-spec §28.1.
+The only change to Ahmad's lines: `شهرياً` is written `شهريًا`, the site's spelling. Prices are in the price
+register below. **Small is selected by default.** Cards read low to high: left to right on `/en/`, right to
+left on `/`.
 
-**Three cards, `$500` / `$1,000` / `$1,500` per month, low to high in reading order**, which is left
-to right on `/en/` and **right to left on `/`**. Same order in the source, both languages; the page
-direction does the mirroring.
+**Hard rules on this section.**
 
-| Card | Price | Period, ar / en | Who it is for, ar / en |
-|---|---|---|---|
-| 1 | $500 | شهريًا / monthly | للشركات الصغيرة / For small companies |
-| 2 | $1,000 | شهريًا / monthly | للشركات الصغيرة والمتوسطة / For small to medium companies |
-| 3 | $1,500 | شهريًا / monthly | للشركات المتوسطة والكبيرة / For medium to large companies |
+1. **NO OFFER.** No `$500 one time`, `دفعة واحدة`, six months, countdown, spots or link to `/offer/`.
+2. **NEVER ADD, SOFTEN OR INVENT A LINE.** No hours, page counts, call counts, guarantees or extra
+   features. `x1` / `x3` / `x10` are Ahmad's labels and are not explained.
+3. **No `most popular` marker.** The middle card's orange top edge is the board's only weighting.
+4. **NO SAVINGS FIGURE, NO STRUCK-THROUGH PRICE, NO PERCENTAGE, NO GEOGRAPHY.**
 
-**The CTA on each card is the site's existing call CTA, and no third label is introduced.**
-
-| Arabic | English |
-|---|---|
-| اتصل الآن → `tel:` | Call now → `tel:` |
-
-**Four hard rules on this section.**
-
-1. **NO OFFER.** See above. This is the rule the section exists to obey and it is the one a future
-   agent will break first, because the copy for the offer is sitting right there in Part B.
-2. **COMPANY SIZE IS THE ONLY DIFFERENTIATOR.** No hours, no page counts, no service or area counts,
-   no blog volume, no link quantities, no reporting frequency, no support levels, no `most popular`
-   marker, and no promise about how many calls a plan produces.
-3. **NO SAVINGS FIGURE, NO STRUCK-THROUGH PRICE, NO PERCENTAGE.** Three prices are three prices.
-4. **NO GEOGRAPHY.** The homepage names no country anywhere. The geography register at the end of
-   this file is unchanged.
-
-**Every Arabic price still goes through `ltr()`, the Unicode LTR isolate** — never a bare `$` inside an
-Arabic string.
-
-**The section is built to `design/boards/pricing-light.png`.** Ahmad picked `pricing-dark.png` first
-and then replaced it: *"you are right make it light because dark follows."* **`pricing-dark.png` is
-the dead board.** Either way the board's own words are placeholders and are **not** used: it draws
-`$2,000`, `Get Started` and `More features for growing teams`, and all three are wrong here — the
-last is exactly the invented feature language rule 2 bans. The board is the layout and the type,
-never the copy. See build-spec §27.5 and §27.6.
+**Every Arabic price and tag still goes through `ltr()`.**
 
 ---
 
@@ -846,7 +823,10 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | لمن يعود الموقع؟ | Who owns the website? |
-| Answer | الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. وشروط ما بعد انتهاء فترة العرض مكتوبة كاملة في صفحة العرض. | The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. The terms for what happens when the offer period ends are written in full on the offer page. |
+| Answer | الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها. | The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it. |
+
+The offer-page sentence was cut from this answer on 2026-10-08 (build-spec §33): the homepage mentions the
+offer in the strip only.
 
 **Q3**
 
@@ -860,14 +840,16 @@ These are brand objections. Every offer question, `is the $500 per month`, `why 
 | | Arabic | English |
 |---|---|---|
 | Question | متى تظهر النتائج؟ | How long before results show? |
-| Answer | لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما حدث فعلًا: قسم كيف نعمل في هذه الصفحة يعرض أشهرًا متتالية لموقع واحد بنيناه، كما صدّرها Google Search Console. | We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what actually happened. The How it works section on this page shows consecutive months from one single site we built, exactly as Google Search Console exported them. |
+| Answer | لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة. | We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page. |
 
 **Q5**
 
 | | Arabic | English |
 |---|---|---|
 | Question | لدي موقع بالفعل، فماذا يحدث؟ | What if I already have a website? |
-| Answer | نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. أما شروط العرض المحدود فتختلف عن ذلك، وهي مكتوبة في صفحة العرض. | We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. The conditions of the limited offer are different, and they are written on the offer page. |
+| Answer | نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد. | We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work. |
+
+The limited-offer sentence was cut from this answer on 2026-10-08 (build-spec §33), same reason as Q2.
 
 ---
 
@@ -901,18 +883,20 @@ The address is the only place on the homepage where a location appears, and it i
 | Brand strapline | نبني المواقع ونجعل العملاء يجدونها | We build websites and get them found |
 | Column 1 title | الشركة | Company |
 | Column 2 title | الموارد | Resources |
-| Column 3 title | العرض | The offer |
-| Column 4 title | تواصل | Contact |
+| Column 3 title | تواصل | Contact |
+
+**2026-10-08 (build-spec §33): the "العرض / The offer" column is removed.** The offer is temporary and the
+homepage mentions it in the strip only; the footer is shared, so it is gone from every page. Terms moved
+into column 1. The desktop grid is brand + three columns.
 
 **Footer links, rebuilt 2026-09-24 under the same no-scrollies rule as the header.** Every `#section`
 link is gone; every link below is a page.
 
 | Column | Arabic | English | Href (ar / en) |
 |---|---|---|---|
-| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا | Home · About us · Contact us | `/` · `/about/` · `/contact/` |
+| 1 الشركة / Company | الرئيسية · من نحن · تواصل معنا · الشروط والأحكام | Home · About us · Contact us · Terms and conditions | `/` · `/about/` · `/contact/` · `/terms/` |
 | 2 الموارد / Resources | المدونة · قائمة ملف جوجل | Blog · Google profile checklist | `/blog/` · `/google-business-profile-checklist.html` |
-| 3 العرض / The offer | العرض · الشروط والأحكام | The offer · Terms and conditions | `/offer/` · `/terms/` |
-| 4 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
+| 3 تواصل / Contact | اتصل الآن · واتساب + NAP | Call now · WhatsApp + NAP | `tel:` · `wa:` |
 | Address label | العنوان | Address |
 | Address value | محافظة الأحمدي، المنقف، قطعة 004، شارع 14، مبنى ناصر فالح شناز السبيعي، الدور الأول، محل 9 | Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9 |
 | Phone label | الهاتف | Phone |
@@ -925,13 +909,49 @@ link is gone; every link below is a page.
 
 # PART B. The offer page
 
-Arabic at `/offer`, English at `/en/offer`. Reached from the Section 2 strip, the header nav item
-`العرض` / `The offer`, and footer column 3.
+Arabic at `/offer`, English at `/en/offer`. Since 2026-10-08 reached from the Section 2 strip ONLY (the
+header nav item left on 2026-09-24 and the footer column on 2026-10-08, build-spec §33).
 
 **This is the only part of the site where a country is named**, because being in Saudi Arabia is a
 condition of this specific promotion, not a description of who Q8Block sells to.
 
-## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE.
+## 2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. THIS BLOCK OVERRIDES EVERY $500 LINE BELOW.
+
+Ahmad: *"we had an offer for $500 for six months. We're going to change that. It was absolutely free."*
+So the offer is **six months, free**. The prices AFTER the six months are unchanged (the nine packages,
+anchor "from $997 per month"). Every "$500", "one payment", "paid once", "no monthly bill" statement is off
+the site; `P.six` is deleted from `src/data.mjs`. Kept as decided: the H1 and its highlight, the countdown and
+fallback, the seats line, the four eligibility items, the six included items, the proof graph, the final call,
+the anchor block as the sales device (no savings claim). The current strings, which replace the cells of the
+same name in the sections below:
+
+| Element | Arabic | English |
+|---|---|---|
+| Meta description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. أول ستة أشهر مجانًا. السعر المعتاد يبدأ من 997 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. The first six months are free. Normal price from $997 a month. |
+| B1 subhead | هذا العرض مخصص لشركات الخدمات في السعودية. أول ستة أشهر من العمل الكامل مجانًا. نجعل عملاءك يجدونك في جوجل وفي الذكاء الاصطناعي، فتتحول هذه الزيارات إلى مكالمات وعملاء لنشاطك. | This offer is for service companies in Saudi Arabia. Your first six months of the full work are free. We get your business found on Google and in AI, turning those visits into calls and customers. |
+| B1b anchor row (unchanged) | السعر المعتاد / يبدأ من $997 شهريًا | Normal price / from $997 per month |
+| B1b offer row | هذا العرض / ستة أشهر مجانًا | This offer / free for six months |
+| B1b note | DELETED | DELETED |
+| B2 intro | الأشهر الستة مجانية، وتشمل العمل كاملًا لا جزءًا منه. | The six months are free, and they cover the full work, not a part of it. |
+| B2b caption | ستة أشهر من هذا العمل هي ما يشمله هذا العرض. | Six months of that work is what this offer covers. |
+| B4 body | لا يوجد عقد ولا التزام ولا رسوم. تستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | There is no contract, no commitment and no fee. You can stop at any time, during the six months or after them. |
+| B5 intro | حين تنتهي الأشهر الستة لديك ثلاثة خيارات: تستمر على إحدى الباقات أدناه، ويتحدد سعرها بالباقة وبحجم شركتك. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة. | When the six months end you have three choices. Continue on one of the packages below, priced by the package and the size of your company. Stop the search work and keep your website live for a small monthly fee. Or stop. You decide. The prices below are monthly and only start once the six months are over. |
+| B5 boxes and notes | unchanged | unchanged |
+
+**B6 FAQ, in order** (Q4 commercial registration, Q5 existing website, Q7 Google profile unchanged):
+
+| # | Arabic | English |
+|---|---|---|
+| Q1 | لماذا العرض مجاني؟ / نختار عددًا محدودًا من الشركات ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. هذه النتيجة هي ما يجعل العميل يقرر الاستمرار، وهي ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول. | Why is this free? / We take a limited number of companies and work on them for the full six months, until the result shows. That result is what makes a client decide to continue, and it is what we show the next client. That is why there are eligibility conditions. |
+| Q2 | هل أدفع شيئًا خلال الأشهر الستة؟ / لا. الأشهر الستة مجانية بالكامل. السعر المعتاد لهذه الخدمة يبدأ من $997 شهريًا، والأسعار الشهرية على هذه الصفحة لا تبدأ إلا بعد انتهاء الأشهر الستة، وفقط إن اخترت الاستمرار. | Do I pay anything during the six months? / No. The six months are entirely free. The normal price for this service starts at $997 a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue. |
+| Q3 | هل هناك عقد أو التزام؟ / لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها. | Is there a contract or a commitment? / No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them. |
+| Q6 | ماذا يحدث بعد ستة أشهر؟ / القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار. | What happens after six months? / You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice. |
+
+Removed: "Is the $500 per month?", "Why is it $500 for six months?". There is no payment, so there is no
+refund question. "per city" stays out (Ahmad dropped it). The "small monthly fee" option is not priced:
+no figure was given, so none is printed.
+
+## THE OFFER CHANGED ON 2026-09-30. IT IS NOT FREE. (SUPERSEDED 2026-10-08, SEE ABOVE)
 
 Ahmad, in his own words: *"It's actually $500 for six months. And we anchor the actual price starts from
 $500 a month. But for the first six months, they don't actually need to pay monthly. They just pay one
@@ -943,6 +963,15 @@ So, and every line in Part B is written off these three facts:
 2. **The offer.** **$500 ONE TIME**, and that single payment covers the first six months. Not $500 a
    month. Not $500 a month for six months. One payment of $500 buys six months.
 3. **After six months** the client picks one of three monthly tiers: **$500, $1,000 or $1,500 a month.**
+
+**SUPERSEDED 2026-10-08 (build-spec §32): facts 1 and 3 changed, fact 2 did not.** Ahmad locked new
+pricing (three packages x three company sizes, nine monthly prices, see the price register) and confirmed
+they are the offer page's prices too: *"the ones you used were the real things."* So: (1) the anchor is now
+**from $997 per month**, the lowest of the nine, computed from the data; (2) the offer is unchanged, **$500
+one time for the first six months**; (3) after six months the client picks one of the three packages, priced
+by company size. The anchor is no longer the same number as the offer, so the "same number, two units"
+argument below is history; the two rows still sit side by side with nothing between them, and still no
+savings line. Which package or size the six months covers is NOT stated anywhere, because Ahmad has not said.
 
 **THE SINGLE BIGGEST RISK ON THIS PAGE IS CONFUSION**, and it is worth more than any other consideration
 here. If a reader leaves thinking it is $500 per month for six months, the offer is dead and so is the
@@ -977,7 +1006,7 @@ half of the market.
 | Field | Arabic (`/offer`) | English (`/en/offer`) |
 |---|---|---|
 | Title | عملاء جدد من محركات البحث والذكاء الاصطناعي \| Q8 block | New customers from search engines and AI \| Q8 block |
-| Description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من 500 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from $500 a month. |
+| Description | عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من 997 دولار شهريًا. | New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from $997 a month. |
 
 **The Arabic meta writes `500 دولار`, not `$500`, and that is deliberate.** Inside page copy the price is
 `$500` wrapped in a Unicode LTR isolate (see the price register at the end of this file); a title and a
@@ -1057,7 +1086,7 @@ nothing competes with it: two rows, the **same number**, **different units**, an
 
 | Row | Label, ar / en | Value, ar / en |
 |---|---|---|
-| Anchor | السعر المعتاد / Normal price | يبدأ من $500 شهريًا / from $500 per month |
+| Anchor | السعر المعتاد / Normal price | يبدأ من $997 شهريًا / from $997 per month (since 2026-10-08; the minimum of the nine package prices, computed in `src/data.mjs`, never typed) |
 | Offer | هذا العرض / This offer | $500 دفعة واحدة، تغطي ستة أشهر / $500 one time, covers six months |
 
 | Note under the pair | Arabic | English |
@@ -1208,23 +1237,28 @@ sentence from the image model. The heading is the cell below and nothing else, i
 
 | Element | Arabic | English |
 |---|---|---|
-| Block title | ماذا يحدث بعد ستة أشهر | What happens after six months |
-| Intro | حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك. | When the six months end you pick one of three monthly plans, or you stop. You decide. |
+**REBUILT 2026-10-08 (build-spec §32). The three tiers are now Ahmad's three packages, priced by company size.**
+Three boxes (one per package, low to high in reading order, stacked on a phone). Each box: the package name
+and its x1 / x3 / x10 label, then three rows, company size and its monthly price, then the unit. **Names and
+prices only:** the homepage check lines are NOT repeated here, no "most popular". The boxes are rendered from
+the homepage §7b data (`pricing.plans`, `pricing.sizes`), so no price is typed in the offer copy.
 
-| Tier | Price | Unit, ar / en |
+| Element | Arabic | English |
 |---|---|---|
-| 1 | $500 | شهريًا / per month |
-| 2 | $1,000 | شهريًا / per month |
-| 3 | $1,500 | شهريًا / per month |
+| Block title | ماذا يحدث بعد ستة أشهر | What happens after six months |
+| Intro | حين تنتهي الأشهر الستة تختار باقة شهرية من ثلاث، أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة. | When the six months end you pick one of three monthly packages, or you stop. You decide. The prices below are monthly and only start once the six months are over. |
+| Box | name, label, then شركة صغيرة / شركة متوسطة / شركة كبيرة with the price, then شهريًا | name, label, then Small / Medium / Large with the price, then per month |
+
+The intro's last sentence is new and it is there for one reason: with nine real monthly prices on the same
+page, the reader must never take the $500 for a monthly price or for the price of a package.
 
 | Note | Arabic | English |
 |---|---|---|
-| 1 | ما تشمله كل خطة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة. | What each plan covers is agreed with you on the call, against your industry and what the six months produced. |
+| 1 | ما تشمله كل باقة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة. | What each package covers is agreed with you on the call, against your industry and what the six months produced. |
 | 2 | وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار. | If you choose to stop, you stop completely, with no fee and no notice. |
 
-**Tier 1 is the same $500 as the anchor in B1b, on purpose.** The anchor is not a struck-through "was"
-price; it is the real ongoing price, and it reappears here as the entry tier. The two blocks have to agree,
-and they do.
+The old version (three tiles, $500 / $1,000 / $1,500 per month, "tier 1 is the same $500 as the anchor") is
+superseded and must not come back.
 
 ## B6. Offer FAQ
 
@@ -1235,7 +1269,7 @@ The offer questions live here and only here.
 | | Arabic | English |
 |---|---|---|
 | Question | هل الـ$500 شهريًا؟ | Is the $500 per month? |
-| Answer | لا. الـ$500 دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من $500 شهريًا، وبعد انتهاء الأشهر الستة تختار خطة شهرية من ثلاث: $500 أو $1,000 أو $1,500. | No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at $500 a month, and after the six months end you pick one of three monthly plans: $500, $1,000 or $1,500. |
+| Answer | لا. الـ$500 دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من $997 شهريًا، وبعد انتهاء الأشهر الستة تختار باقة شهرية من ثلاث، ويتحدد سعرها بحجم شركتك. | No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at $997 a month, and after the six months end you pick one of three monthly packages, priced by the size of your company. |
 
 **Q1 is the confusion question and it is deliberately first.** It is the single most likely reason a
 qualified prospect walks away from this page, so it is answered before anything else is, in the plainest
@@ -1274,7 +1308,7 @@ possible words, and the anchor is restated inside the answer.
 | | Arabic | English |
 |---|---|---|
 | Question | ماذا يحدث بعد ستة أشهر؟ | What happens after six months? |
-| Answer | القرار لك. حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، $500 أو $1,000 أو $1,500، وما تشمله كل خطة يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار. | You decide. When the six months end you pick one of three monthly plans, $500, $1,000 or $1,500, and what each plan covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice. |
+| Answer | القرار لك. حين تنتهي الأشهر الستة تختار باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعر كل باقة بحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار. | You decide. When the six months end you pick one of three monthly packages, Maintain, Expand or Dominate, each priced by the size of your company, and what each package covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice. |
 
 **Q7**
 
@@ -1329,8 +1363,9 @@ Search Console export image** — its own axis, not our copy, and never altered.
 | `1.99K` clicks, `114K` impressions, `1.7%` CTR, `10.9` average position, and the dated x axis | Section 6 and offer B2b, printed **inside the image** | the unedited Search Console export, `design/proof-shots/` |
 | Seven impression totals and **seven** `New project` tags | Section 7, the **fourteen** cards | derivation table below |
 
-Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **The homepage carries a price in exactly two
-places: the Section 2 strip line and Section 7b.** The strip is the offer teaser. **Since 2026-10-01,
+Sections 0, 1, 2, 3, 4, 8, 9 and 10 carry no figures (there is no Section 5 any more). **Since 2026-10-08 (§33) the homepage carries
+prices in Section 7b only; the strip says `ستة أشهر مجانية` / `Six months free` and has no figure.** Before
+that it carried a price in exactly two places: the Section 2 strip line and Section 7b. The strip is the offer teaser. **Since 2026-10-01,
 §7b carries only the three monthly prices and never the offer** — it was the offer a second time until
 Ahmad ruled it out. Neither place invents a figure. (Until 2026-09-30 the strip was the only one.) Part B
 carries prices (the price register below) and exactly one performance figure block, B2b. Every other number
@@ -1338,33 +1373,59 @@ that renders in Part B comes from the `[COUNTDOWN]` and `[SPOTS]` build slots, w
 not claims. Every figure behind Section 7 comes from `clients/q8block/design/proof-data.md`, pulled from
 the Search Console API on 24 September 2026.
 
-## Price register, 2026-09-30
+## Price register, updated 2026-10-08
 
-Every price printed anywhere on the site, and there are only three distinct figures. Nothing else may be
-added and no figure here may be changed without Ahmad.
+Every price printed anywhere on the site. Nothing may be added and no figure changed without Ahmad.
+
+**Homepage §7b packages, locked by Ahmad 2026-10-08, USD per month** (currency assumed, kept in ONE place:
+`money()` in `src/data.mjs`):
+
+| Package | Small | Medium | Large |
+|---|---|---|---|
+| باقة الحفاظ / Maintain (x1) | $997 | $1,997 | $2,997 |
+| باقة التوسع / Expand (x3) | $2,497 | $4,997 | $6,997 |
+| باقة السيطرة / Dominate (x10) | $4,997 | $9,997 | $15,997 |
+
+**Since 2026-10-08 (build-spec §32) these nine are ALSO the offer page's prices** (Ahmad: "the ones you used
+were the real things"). They appear in homepage §7b and offer B5, both rendered from the same data. The
+offer anchor prints **from $997 per month**, computed as the minimum of the nine.
 
 | Figure | What it is | Where it appears |
 |---|---|---|
-| **$500 per month** | The anchor. What the service normally starts at, and tier 1 after the six months | **Homepage §7b card 1**, offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 |
-| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line ONLY on the homepage (§7b no longer mentions the offer), offer meta, B1 subhead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
-| **$1,000 and $1,500 per month** | Tiers 2 and 3 after the six months | **Homepage §7b cards 2 and 3**, B5, offer FAQ Q1 and Q6 |
+| ~~$500 one time~~ | REMOVED 2026-10-08 (build-spec §33): the offer is six months FREE. No `$500` anywhere on the site | nowhere |
+| **from $997 per month** | The anchor, lowest package price | Offer B1b anchor row, offer meta description (ar `997 دولار`), offer FAQ Q2 |
+| **the nine package prices** | Ongoing monthly price after the six months | Homepage §7b, offer B5 |
+
+Swept programmatically on 2026-10-08 over `/`, `/en/`, `/offer/`, `/en/offer/`, `/terms/`, `/en/terms/`
+and `llms.txt`, visible text, JSON-LD and meta: every `$` figure is one of the three rows above. No
+`$1,000`, no `$1,500`, no "from $500 per month" remains. Terms and llms.txt carry no price.
+
+**SUPERSEDED 2026-10-08, kept for the record.** The OLD offer figures, which are now off the site:
+
+| Figure | What it is | Where it appears |
+|---|---|---|
+| **$500 per month** | The old anchor and old tier 1 | Offer B1b anchor row, B5 tier 1, offer FAQ Q1 and Q6 (no longer on the homepage) |
+| **$500 one time** | The offer. One payment covering the first six months | Homepage §2 strip line, offer meta, B1 lead, B1b offer row and note, B2 intro, B2b caption, B4, offer FAQ Q1, Q2 and Q3 |
+| **$1,000 and $1,500 per month** | Old tiers 2 and 3 | Offer B5, offer FAQ Q1 and Q6 (no longer on the homepage) |
 
 **The offer B1 headline is no longer in this register.** It carried `$500` until 2026-09-30, when it was
 replaced with `عملاء جدد من محركات البحث والذكاء الاصطناعي` / `New customers from search engines and AI.`
 (build-spec §26.4). The price it dropped is carried by B1b directly beneath it, which was strengthened for
 exactly that reason.
 
-**The one-payment wording is mandatory beside the number, every time.** `دفعة واحدة` / `one payment`,
-`مرة واحدة` / `one time`, `تُدفع مرة واحدة` / `paid once`. A price on this site never appears next to
-"six months" without one of them.
+**SUPERSEDED 2026-10-08: the one-payment wording rule no longer applies.** It existed to stop a reader
+taking the old `$500` for a monthly price. The offer is free again and no `$500` exists, so no price on this
+site sits beside "six months" now. The only prices left are the nine monthly package prices and the
+"from $997 per month" anchor, and the offer page says in one sentence that they only start once the six
+months are over.
 
-**`$500` in Arabic needs a Unicode LTR isolate and this is not optional.** Written plainly inside an Arabic
+**A price in Arabic needs a Unicode LTR isolate and this is not optional.** Written plainly inside an Arabic
 sentence it renders as `500$`: the bidi algorithm resolves European digits following an Arabic letter to
 Arabic-Number, which leaves the `$` as a neutral and pushes it to the wrong side of the run. `src/data.mjs`
 exports `ltr()`, which wraps the price in U+2066 / U+2069, and every Arabic price string goes through it.
 Invisible characters were chosen over `<span dir="ltr">` because they survive `esc()`, so the strings stay
 ordinary escaped copy. **Never write a bare `$` price into an Arabic string.** The two exceptions are the
-Arabic `<title>` and meta description, which write `500 دولار` instead — a control character in a search
+Arabic `<title>` and meta description, which write `997 دولار` instead — a control character in a search
 result snippet is not worth the risk.
 
 **No savings figure is derived from these anywhere**, and none may be. See the Part B preamble.

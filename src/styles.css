@@ -243,7 +243,7 @@ section[id], .site-footer { scroll-margin-block-start: calc(var(--header-h) + 72
   color: var(--orange-ink-light); margin: 0 0 16px;  /* §5.3 eyebrow → H2 = 16 */
 }
 html[lang="en"] .eyebrow { text-transform: uppercase; letter-spacing: 0.06em; }
-/* The one eyebrow on a dark surface (§6 journey) keeps the brand orange:
+/* The eyebrow on a dark surface (§6 report) keeps the brand orange:
    #FF5F29 on #101012 is 6.26:1+, no contrast fix needed there. */
 .on-dark .eyebrow { color: var(--orange); }
 
@@ -568,36 +568,147 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .icon-card .h3 { margin-block-start: 20px; min-height: calc(2em * var(--lh-h3)); }
 .icon-card .body { margin-block-start: 16px; }
 
-/* ══ §6 row 6 — The journey. #101012 full bleed, 3 cards. No sparkline under
-      them any more — removed at Ahmad's instruction, 2026-09-25 (build-spec
-      §21): "there is this orange graph under the three images... it looks
-      ugly." Removing it also deleted the 72px block that used to sit between
-      the cards and the notes below (33px gap + 39px of svg), so the band
-      closed up by that much. padding-block-end is widened past the shared
-      --pad-sec, +24px, so the band still closes with the same weight it had
-      against the approved board rather than reading as a hole where the
-      graphic used to be; see build-spec §21. ══ */
-#journey { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
-/* The graph is the section. It reuses the offer page's .proof-shot/.proof-pan
-   pair wholesale, so the pan behaviour and the direction:ltr wrapper come with
-   it and cannot drift apart between the two pages. Only the spacing and the
-   ceiling are set here. */
-.journey-graph { margin-block-start: 40px; }
-.journey-graph .proof-pan { max-width: 1320px; margin-inline: auto; }
-/* Three compact beats under the graph: an icon and two or three lines each.
-   They are not cards any more, so no plate, no padding block, no min-height. */
-.journey-beats {
-  margin-block-start: 48px; list-style: none; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;
+/* ══ §6 row 6 — Your monthly report (build-spec §31, board report-A.png).
+      A dark band holding four report pages as live HTML: 2 x 2 at 768 and up,
+      one column below. Each page is a container, so its type scales with the
+      page width (cqi) and stays large on a phone. Board px x 0.5357 = CSS px;
+      the cqi values are the 1440 sizes over the 644px page. Hard corners, no
+      shadow, no gradient. ══ */
+#report { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
+.rp-grid {
+  list-style: none; margin: 40px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px;
 }
-.journey-beat { display: flex; align-items: flex-start; gap: 18px; }
-.journey-beat img {
-  flex: none; width: 104px; height: auto; aspect-ratio: 343 / 296; object-fit: contain;
-  margin-block-start: -6px;
+.rp-item { display: flex; flex-direction: column; min-width: 0; }
+.rp-card {
+  flex: 1; display: flex; flex-direction: column; container-type: inline-size;
+  background: #17181B; border: 1px solid #3B3E45; border-radius: 0; color: #fff;
 }
-.journey-beat .h3 { font-size: var(--fs-h3-s6); }
-.journey-beat .body { margin-block-start: 10px; }
-.journey-foot { margin-block-start: 48px; display: flex; justify-content: center; }
+.rp-cap { margin: 12px 0 0; font-size: 15px; line-height: 1.3; color: var(--muted-on-dark); }
+
+/* header strip: black, the orange Q8 box and the word, the report's own tag */
+.rp-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: clamp(52px, 10.4cqi, 67px); padding-inline: clamp(16px, 3.9cqi, 25px);
+  background: #000; border-block-end: 1px solid #3B3E45;
+}
+.rp-logo { display: inline-flex; align-items: center; gap: clamp(8px, 1.9cqi, 12px); direction: ltr; line-height: 1; }
+.rp-logo-box {
+  width: clamp(32px, 6.5cqi, 42px); height: clamp(29px, 5.9cqi, 38px); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: #fff; font-weight: 800; letter-spacing: -0.02em;
+  font-size: clamp(16px, 3.3cqi, 21px);
+}
+.rp-logo-word { font-weight: 800; color: #fff; font-size: clamp(19px, 3.9cqi, 25px); }
+.rp-tag {
+  font-size: clamp(11px, 1.85cqi, 12px); font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #A3A9B2; white-space: nowrap;
+}
+
+.rp-body {
+  flex: 1; display: flex; flex-direction: column;
+  padding: clamp(22px, 5.3cqi, 34px) clamp(20px, 5.1cqi, 33px) clamp(24px, 5cqi, 32px);
+}
+.rp-card .rp-label {
+  margin: 0; font-size: clamp(17px, 3.1cqi, 20px); font-weight: 600; line-height: 1.3;
+  color: var(--orange);
+}
+
+/* page 1: conversions */
+.rp-hero {
+  margin: clamp(10px, 2.5cqi, 16px) 0 0; display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: 0 clamp(12px, 3.4cqi, 22px); line-height: 1;
+}
+.rp-big { font-size: min(23.6cqi, 152px); font-weight: 800; line-height: 0.92; letter-spacing: -0.02em; }
+.rp-unit { font-size: clamp(28px, 8.1cqi, 52px); font-weight: 700; }
+.rp-bar { display: flex; height: clamp(8px, 1.6cqi, 10px); margin-block-start: clamp(22px, 5.7cqi, 37px); background: #26282D; }
+.rp-seg { display: block; height: 100%; transform-origin: left center; }
+html[dir="rtl"] .rp-seg { transform-origin: right center; }
+.rp-seg-wa { background: var(--orange); }
+.rp-seg-call { background: #fff; }
+.rp-barnums {
+  display: flex; justify-content: space-between; margin-block-start: 10px;
+  font-size: clamp(15px, 3.1cqi, 20px); font-weight: 500;
+}
+.rp-split {
+  margin-block-start: auto; padding-block-start: clamp(24px, 6cqi, 40px);
+  display: grid; grid-template-columns: 56fr 44fr; gap: 16px;
+}
+.rp-sp { margin: 0; display: flex; flex-direction: column; }
+.rp-n { font-size: clamp(44px, 10.1cqi, 65px); font-weight: 800; line-height: 1; }
+.rp-sp-wa .rp-n { color: var(--orange); }
+.rp-k { margin-block-start: 8px; font-size: clamp(17px, 3.4cqi, 22px); font-weight: 500; line-height: 1.3; }
+.rp-pc { margin-block-start: 4px; font-size: clamp(16px, 3.1cqi, 20px); color: var(--muted-on-dark); }
+
+/* page 2: conversions by service */
+.rp-rows { list-style: none; margin: clamp(8px, 2cqi, 14px) 0 0; padding: 0; }
+.rp-row {
+  display: grid; grid-template-columns: clamp(38px, 10.5cqi, 68px) minmax(0, 1fr) auto;
+  align-items: center; gap: 0 12px; min-height: clamp(44px, 7.1cqi, 46px);
+  padding-block: 6px; border-block-end: 1px solid #34373E;
+}
+.rp-rk { font-size: clamp(15px, 3cqi, 19px); font-weight: 600; color: var(--orange); }
+.rp-name {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px;
+  font-size: clamp(16px, 3.3cqi, 21px); font-weight: 500; line-height: 1.3;
+}
+.rp-mix { font-size: clamp(14px, 2.2cqi, 15px); font-weight: 400; color: var(--muted-on-dark); white-space: nowrap; }
+.rp-tot { min-width: 2ch; text-align: end; font-size: clamp(22px, 4.7cqi, 30px); font-weight: 800; line-height: 1; padding-inline-start: 6px; }
+
+/* page 3: search keywords */
+.rp-sub { margin: 6px 0 0; font-size: clamp(15px, 2.65cqi, 17px); color: var(--muted-on-dark); line-height: 1.4; }
+.rp-tags {
+  list-style: none; margin: clamp(16px, 3.7cqi, 24px) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: clamp(8px, 1.6cqi, 10px);
+}
+.rp-tagk {
+  border: 1px solid #4A4E57; border-radius: 0; padding: 7px 13px;
+  font-size: clamp(15px, 2.65cqi, 17px); font-weight: 500; line-height: 1.35;
+}
+.rp-tagk.hot { border-color: var(--orange); }
+
+/* page 4: visits from search */
+.rp-stats {
+  margin-block-start: clamp(10px, 2.5cqi, 16px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(16px, 4cqi, 26px);
+}
+.rp-stat { padding-block: 12px; border-block-start: 1px solid #34373E; min-width: 0; }
+.rp-stat.key { border-block-start-color: var(--orange); }
+.rp-stat p { margin: 0; }
+.rp-sk { font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
+.rp-sv { margin-block-start: 6px !important; font-size: clamp(28px, 6.2cqi, 40px); font-weight: 800; line-height: 1.1; }
+.rp-stat.key .rp-sv { color: var(--orange); }
+.rp-stat.small .rp-sv { font-size: clamp(22px, 4.7cqi, 30px); line-height: 1.25; }
+.rp-ss { margin-block-start: 4px !important; font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
+.rp-chart { margin: auto 0 0; padding-block-start: 14px; }
+.rp-plot { position: relative; width: 100%; aspect-ratio: 600 / 120; }
+.rp-chart-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.rp-area { fill: rgba(255, 95, 41, 0.16); stroke: none; }
+.rp-line { fill: none; stroke: var(--orange); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.rp-axis { stroke: rgba(255, 255, 255, 0.16); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rp-peak {
+  position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--orange); box-sizing: border-box;
+}
+html[dir="rtl"] .rp-peak { margin: -5px; }
+.rp-axisl { display: flex; justify-content: space-between; margin-block-start: 6px; font-size: 13px; color: var(--muted-on-dark); }
+
+/* one-time grow-in of the split bar, set up by app.js only when motion is allowed */
+.rp-anim .rp-seg { transform: scaleX(0); }
+.rp-anim.rp-in .rp-seg { transform: none; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.rp-anim.rp-in .rp-seg-call { transition-delay: 0.35s; }
+@media (prefers-reduced-motion: reduce) {
+  .rp-anim .rp-seg, .rp-anim.rp-in .rp-seg { transform: none; transition: none; }
+}
+@media (max-width: 767px) {
+  .rp-grid { grid-template-columns: 1fr; gap: 32px; margin-block-start: 32px; }
+}
+/* a narrow page (a phone): the call/WhatsApp line always sits under the
+   service name, and the four traffic figures stack one per row */
+@container (max-width: 480px) {
+  .rp-name { flex-direction: column; align-items: flex-start; }
+  .rp-stats { grid-template-columns: 1fr; }
+}
 
 /* ══ §6 row 7 — Our work. A SLIDESHOW since 2026-09-24, not a 4-up grid.
       Ahmad's list: sorted biggest number first (the order lives in data.mjs),
@@ -717,7 +828,7 @@ html[dir="rtl"] .work-link .arrow { transform: scaleX(-1); }
 /* ══ §6 row 10 — Footer. #030303, on the same 1320px column as every section
       above it: the board's 1294 is its divider, not a content edge. ══ */
 .site-footer { background: var(--bg-footer); color: var(--ink-invert); padding-block: 48px 40px; }
-.footer-top { display: grid; grid-template-columns: minmax(240px, 1.2fr) repeat(4, 1fr); gap: 32px 40px; }
+.footer-top { display: grid; grid-template-columns: minmax(240px, 1.4fr) repeat(3, 1fr); gap: 32px 40px; }  /* 3 link columns since 2026-10-08: "The offer" column removed (build-spec §33) */
 .footer-tag { font-size: var(--fs-foot-tag); font-weight: 400; line-height: 1.5; color: var(--muted-on-dark); margin-block-start: 18px; max-width: 280px; }
 .footer-col h3 { font-size: var(--fs-foot-h); font-weight: 600; line-height: 1.2; color: var(--ink-invert); margin-block-end: 10px; }
 .footer-col a, .footer-col p { font-size: var(--fs-foot-l); font-weight: 400; line-height: 1.9; color: var(--muted-on-dark); text-decoration: none; display: block; }
@@ -869,176 +980,163 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
   color: var(--orange); direction: ltr; unicode-bidi: isolate;
 }
 .tier-unit { font-size: var(--fs-strip); font-weight: 400; color: var(--muted-on-dark); }
+/* 2026-10-08 (build-spec §32): each tile is now a package with three prices by
+   company size. Same border, ground and orange numerals as the old tiles; the
+   price steps down from the single-figure size so three fit a box. */
+.tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
+.tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
+.tier-tag { font-size: var(--fs-strip); font-weight: 500; color: var(--muted-on-dark); unicode-bidi: isolate; }
+.tier-sizes { margin: 0; display: grid; }
+.tier-sizes > div {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-block: 12px; border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tier-sizes dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
+.tier-sizes dd { margin: 0; }
+.tier-pkg .tier-price { font-size: clamp(26px, calc(34/14.4 * 1vw), 38px); font-weight: 700; }
 .tier-notes { margin-block-start: 30px; display: grid; gap: 12px; max-width: 900px; }
 .tier-notes p {
   font-size: var(--fs-body); font-weight: var(--w-body);
   line-height: var(--lh-body); color: var(--muted-on-dark);
 }
 
-/* ══ §7b The price, homepage. Build-spec §27 ═══════════════════════════════
+/* ══ §7b The price, homepage. Build-spec §30 ═══════════════════════════════
 
-   THE OFFER IS NOT IN THIS SECTION and never comes back. .price-anchor,
-   .pa-note, .pricing-after and .tier-row are gone FROM HERE. They are NOT
-   deleted from the stylesheet — the offer page still renders .price-anchor
-   (B1b) and .tier-row (B5). Nothing here may ever say $500 one time,
-   دفعة واحدة, six months, or any promotion wording.
+   BUILT TO design/boards/pricing-v2-A.png (Ahmad picked A of three on
+   2026-10-08). pricing-v2-B, pricing-v2-C, pricing-light and pricing-dark are
+   DEAD boards. Board canvas 2688px for a 1440px viewport: board px x 0.5357 =
+   css px, written as calc(N/14.4 * 1vw) so it is exact at 1440. Full table in
+   build-spec §30.
 
-   BUILT TO design/boards/pricing-light.png. Ahmad, 2026-10-01: "you are right
-   make it light because dark follows." pricing-dark.png is the DEAD BOARD —
-   this section was built to it for one pass and is not any more; do not rebuild
-   against it. The canvas is 2688px wide for a 1440px viewport, so every value
-   below is a board measurement at board px × 0.5357, written as
-   calc(N/14.4 * 1vw) so it is exact at 1440. Do not adjust any of it by eye.
-   The full table is in build-spec §27.6.
+   Measured (board px → css at 1440):
+     pills          ~123/134/123 x 47, gap 13 → 7, label 17px/600
+     pills → cards  74 → 40
+     card span      118 → 2571 = 1314 (the site's 1320 wrap), gap 37 → 20
+     card height    541 → 1405 = 463
+     middle edge    533 → 545 = 6.4 → 6px orange at the card top
+     tag (x1)       ~22px / 500, muted
+     name           ~44px / 800
+     price          ~70px / 800, ink; period ~18px / 400 muted, gap 7.5
+     price → rule   27; rule → checks 31
+     check lines    17px, pitch 43 (line-height 1.35, gap 20), icon 20 wide,
+                    text starts 40 from the content edge
+     checks → button 39; button 58 tall, full inner width
 
-   Measured off pricing-light (board px → css px at 1440):
-     card row span   118 → 2570      = 1313 css   (the site's own 1320px wrap)
-     card width      790             = 423.2
-     card gap        40              = 21.4  → 21
-     card height     551 → 1345      = 423.7
-     card padding    inline 67       = 35.9  → 36
-     card border     2, #DADEE3      = 1px, --hairline-light
-     price glyph     149 × 404       = 79.8 × 216.4 → font-size 81 (calibrated)
-     price → period  —               = 20.4
-     period glyph    38 (=monthly)   = 20.4  → font-size 21
-     period → rule   —               = 26.8
-     rule → size     —               = 31
-     size line       2 lines, 96     = 51.4  → --fs-body
-     size → button   —               = 53.6
-     button          118 × 667       = 63.2 × 357.3, full card inner width
-     middle rule     542 → 552       = 5.4   → 5px, --orange, at the card top
-     head → cards    241.1 → 295.2   = 54.1
+   APPROVED OVERRIDES OF THE BOARD:
+     1. card padding stays 66/40/42 at 1440 (the board draws ~28/32/26). Ahmad,
+        2026-10-01: content "just stuck to the upper section border".
+     2. tag, period and check lines take --muted-on-light (#686F79, 5.0:1), not
+        the board's grey (~2.3:1 on white, fails AA).
+     3. eyebrow and h2 keep the site tokens (--fs-eyebrow, --fs-h2).
+     4. buttons are the site's .btn-primary (white on --orange passes only at
+        this large bold size, §17).
 
-   THE PRICE IS NEAR-BLACK ON THIS BOARD, not orange: sampled #0B0C0E, which is
-   --ink. That is what removes the contrast problem the dark board created — an
-   85px orange numeral had to lean on the large-text threshold, and this one
-   does not lean on anything (#0A0A0C on #FEFEFE is 19.6:1).
+   THE MIDDLE CARD IS WEIGHTED BY THE ORANGE TOP EDGE AND NOTHING ELSE. No
+   badge, no ribbon, no scale, no heavier shadow. Same height as the others.
 
-   The price font-size was not guessed off the glyph box: the build renders $500
-   at a known 62px and measures 61 tall × 163 wide, so this board's 79.8 × 216.4
-   solves to 81px. The independent width check agrees (163 × 1.308 = 213.2
-   against 216.4, inside 1.5%), and that agreement is also what confirms the
-   weight as 600 rather than a heavier cut.
-
-   FOUR DELIBERATE DEVIATIONS FROM THE BOARD, all of them site tokens winning
-   over a generated mock that is not accessibility checked:
-     1. the period and the size line take --muted-on-light (#686F79), not the
-        board's #A1A9B6 / #9EA6B0. Those measure about 2.3:1 on #FEFEFE and fail
-        AA outright. This is the same correction §3.2 already recorded for the
-        board grey, for the same reason.
-     2. the eyebrow stays --fs-eyebrow (22px at 1440) against the board's ~26px,
-        because that token carries the 19px/700 floor that keeps #E85319
-        qualified as large text (§17).
-     3. the h2 stays --fs-h2 (80px) against the board's ~76px, and the lead
-        stays --fs-lead (29px) against ~27px. Every other section head on this
-        page is those two tokens and one section a few px off would read as a
-        mistake, not a design.
-     4. the buttons are the site's .btn-primary in sentence case, not the
-        board's "Get Started". The CTA labels are the site's existing two and no
-        third label was invented. White on --orange is 3.03:1, which is AA as
-        large text at 700 weight and 18.66px+, which --fs-btn's 19px floor
-        guarantees — the same reasoning already recorded in §17.
-   Everything else on the board is matched.
-
-   THE MIDDLE CARD IS WEIGHTED BY AN ORANGE TOP RULE AND NOTHING ELSE. That is
-   the board's own device. There is NO badge, NO ribbon, NO "most popular"
-   label, NO scale change and NO heavier shadow, and none may be added: those
-   would be a recommendation nobody has made. All three cards carry the same
-   solid orange button, the same border, the same padding and the same height.
-   The rule is painted as an inset box-shadow, not a thicker border, so the
-   middle card stays exactly as tall as the other two.
-
-   THE CARD IS FINISHED AS IT STANDS. The plans differ by COMPANY SIZE and by
-   nothing else (Ahmad, 2026-10-01): a price, a period, who it is for. No hours,
-   no page counts, no service or area counts, no blog volume, no link
-   quantities, no reporting frequency, no support levels, and no promise about
-   how many calls a plan produces.
-
-   FEATURE LISTS: .plan-features is styled below and render.mjs renders it when
-   data.mjs supplies `features`. .plan is a flex column with the size line and
-   the CTA pinned to the foot, so a list of any length drops in between the
-   price block and the size line without touching this file. Neither board draws
-   a feature list and the card does not need one. ═══════════════════════════ */
+   THE SWITCH. Native radios (render.mjs §7b), visually hidden; the labels are
+   the pills. The checked size's prices show via :has(). With no :has() support
+   or no script the Small prices (checked in the HTML) are what shows. All three
+   amounts share one line box, so a card never changes height. ═══════════ */
 #pricing { background: var(--bg-white); text-align: center; }
-#pricing .lead { margin-inline: auto; }
+
+#pricing {
+  --pl-tag: clamp(16px, calc(24/14.4 * 1vw), 26px);
+  --pl-name: clamp(28px, calc(44/14.4 * 1vw), 48px);
+  --pl-price: clamp(44px, calc(68/14.4 * 1vw), 74px);
+  --pl-unit: clamp(14px, calc(18/14.4 * 1vw), 20px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+  --pl-pill: clamp(15px, calc(17/14.4 * 1vw), 19px);
+}
+html[lang="ar"] #pricing {
+  --pl-name: clamp(24px, calc(34/14.4 * 1vw), 37px);
+  --pl-check: clamp(15px, calc(16/14.4 * 1vw), 18px);
+}
+
+.psw {
+  position: relative; border: 0; padding: 0; min-inline-size: 0;
+  margin: clamp(18px, calc(20/14.4 * 1vw), 22px) 0 0;
+  display: flex; justify-content: center; gap: 7px;
+}
+.psw-in {
+  position: absolute; inset-block-start: 0; inset-inline-start: 0;
+  width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none;
+}
+.psw-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 47px; padding: 0 clamp(18px, calc(36/14.4 * 1vw), 38px);
+  border: 1px solid var(--hairline-light); border-radius: 999px;
+  background: var(--bg-white); color: var(--ink);
+  font-size: var(--pl-pill); font-weight: 600; line-height: 1.1; white-space: nowrap;
+  cursor: pointer; transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.psw-pill:hover { border-color: var(--ink); }
+.psw-in:checked + .psw-pill { background: var(--ink); border-color: var(--ink); color: #fff; }
+.psw-in:focus-visible + .psw-pill { outline: 3px solid var(--orange); outline-offset: 3px; }
 
 /* Equal columns, equal heights. DOM order is low to high and the grid follows
-   the document direction, so /en/ reads $500 → $1,500 left to right and / reads
-   it right to left. NEVER reorder the cards in CSS. */
+   the document direction. NEVER reorder the cards in CSS. */
 .plan-row {
-  margin: clamp(32px, calc(54/14.4 * 1vw), 58px) 0 0; padding: 0; list-style: none;
+  margin: clamp(28px, calc(40/14.4 * 1vw), 44px) 0 0; padding: 0; list-style: none;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, calc(21/14.4 * 1vw), 23px);
+  gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
   align-items: stretch;
 }
-/* FLEX COLUMN, NOT A GRID WITH FIXED ROWS. It was `grid-template-rows: auto
-   auto 1fr auto` and that silently broke the moment the size lines wrapped to
-   different heights: with no feature list the card has three children, so the
-   1fr landed on .plan-cta instead of the line above it and card 1 on /en/ sat
-   31px above the other two. A flex column with `margin-block-start: auto` on
-   the CTA holds the baseline whatever the card contains, including a feature
-   list added later. */
+/* Flex column with the CTA pinned by margin-block-start: auto, so all three
+   buttons share a baseline whatever wraps. container-type lets the price cap
+   itself to the card width, so the widest amount never wraps the period. */
 .plan {
   display: flex; flex-direction: column;
+  container-type: inline-size;
   border: 1px solid var(--hairline-light);
   background: var(--bg-white);
-  /* Deliberately more generous than the board measured (44/36/31 at 1440).
-     Ahmad, 2026-10-01: the price was "just stuck to the upper section border".
-     He is right, and the price is the cause: 81px at line-height 1 puts the cap
-     almost on the padding edge, so a value that looks fine on a drawn mock reads
-     cramped once real type renders. Top is now about 0.8x the price size, with
-     the sides and foot brought up so the card stays balanced, not top heavy.
-     An approved override of the board. */
   padding: clamp(36px, calc(66/14.4 * 1vw), 72px) clamp(22px, calc(40/14.4 * 1vw), 44px)
            clamp(28px, calc(42/14.4 * 1vw), 46px);
   text-align: start;
 }
-/* The board's weighting, and the whole of it. Inset rather than a 5px border so
-   the middle card is exactly as tall as the other two. */
-.plan-featured { box-shadow: inset 0 5px 0 var(--orange); }
-.plan-head { margin: 0; }
-.plan-price { margin: 0; }
-/* 81px at 1440, measured. Near-black on this board, not orange. The 44px floor
-   is a phone number the board does not specify: at 390 the fluid value would be
-   22px, and "$1,000" has to stay the loudest thing in a stacked card. */
-.plan-amount {
-  font-size: clamp(44px, calc(81/14.4 * 1vw), 88px); font-weight: 600; line-height: 1;
-  color: var(--ink); direction: ltr; unicode-bidi: isolate;
-  font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;
-}
-/* The board writes the period as one quiet lowercase word directly under the
-   price: 21px at 1440, no uppercase and no letter spacing. The board's own grey
-   fails AA on white, so this takes --muted-on-light. */
-.plan-unit {
-  margin: clamp(11px, calc(20/14.4 * 1vw), 22px) 0 0;
-  font-size: clamp(15px, calc(21/14.4 * 1vw), 23px); font-weight: 400; line-height: 1.2;
+.plan-featured { border-top-color: var(--orange); box-shadow: inset 0 5px 0 var(--orange); }
+.plan-tag {
+  margin: 0; font-size: var(--pl-tag); font-weight: 500; line-height: 1;
   color: var(--muted-on-light);
 }
-/* Inert until somebody supplies lists — see render.mjs §7b. */
+.plan-tag, .plan-amount, .plan-unit { font-variant-numeric: lining-nums; }
+.plan-name {
+  margin: 2px 0 0; font-size: var(--pl-name); font-weight: 800; line-height: 1.1;
+  color: var(--ink); letter-spacing: 0;
+}
+.plan-price {
+  margin: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: nowrap; white-space: nowrap;
+}
+.plan-amount {
+  font-size: min(var(--pl-price), 20.5cqi); font-weight: 800; line-height: 1;
+  color: var(--ink); direction: ltr; unicode-bidi: isolate;
+}
+.pa-m, .pa-l { display: none; }
+#pricing:has(#psize-m:checked) .pa-s, #pricing:has(#psize-l:checked) .pa-s { display: none; }
+#pricing:has(#psize-m:checked) .pa-m, #pricing:has(#psize-l:checked) .pa-l { display: inline; }
+.plan-unit {
+  font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
+  color: var(--muted-on-light);
+}
 .plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: 0; list-style: none;
-  display: grid; gap: 10px;
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--ink);
-}
-/* Who the plan is for. This is the card's content, not a caption and not a
-   stand-in: the plans differ by company size and by nothing else. The rule over
-   it is the card's only internal division and it is on the board. */
-.plan-size {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
-  padding-block-start: clamp(20px, calc(31/14.4 * 1vw), 34px);
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--muted-on-light);
+  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
+  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
+  color: var(--muted-on-light);
 }
-/* Board: the button is the full card inner width and 63px tall at 1440, solid
-   orange on all three cards. `margin-block-start: auto` pushes it to the foot
-   of every card, so all three share a baseline however the size lines wrap; the
-   padding is the board's 53.6px gap, kept as a floor for the tallest card. */
-.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(53/14.4 * 1vw), 58px); }
+.plan-features li { position: relative; padding-inline-start: 40px; }
+.plan-features li::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
+  width: 20px; height: 15px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
-  padding-block: clamp(13px, calc(19/14.4 * 1vw), 21px);
+  padding-block: clamp(13px, calc(16/14.4 * 1vw), 18px);
 }
 
 #offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
@@ -1501,8 +1599,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .nav .nav-close { display: block; position: absolute; inset-block-start: 18px; inset-inline-end: 18px; width: 44px; height: 44px; color: #fff; font-size: 30px; line-height: 1; }
   .header-cta { display: none; }
   .problem-grid { grid-template-columns: 1fr; }
-  /* Two beats across on a tablet, the third full width under them. */
-  .journey-beats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
   .wwd-grid { grid-template-columns: 1fr; row-gap: 44px; }
   .wwd-block + .wwd-block::before { display: none; }
   .icons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1572,11 +1668,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   #hero .btn-row .btn-primary { padding: 15px 40px; }
   #hero .btn-row .btn-outline { padding: 13px 38px; }
   .problem-card, .icon-card { padding: 24px; }
-  /* One beat per row on a phone, the icon a size down so the two or three
-     lines beside it still set on a sensible measure inside 350px. */
-  .journey-beats { grid-template-columns: 1fr; gap: 24px; margin-block-start: 36px; }
-  .journey-beat { gap: 14px; }
-  .journey-beat img { width: 76px; }
   .count-boxes { gap: 8px; }
   .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
   .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
@@ -1588,6 +1679,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     grid-auto-flow: column; justify-content: space-between; align-items: baseline;
     text-align: start; padding: 18px 20px; gap: 16px;
   }
+  /* The package boxes keep their stacked inside: name, three size rows, unit. */
+  .tier.tier-pkg { grid-auto-flow: row; justify-content: stretch; align-items: start; padding: 22px 20px; gap: 12px; }
   /* §7b's own cards stack full width rather than collapsing into rows the way
      B5's tiles above do: each one keeps a real CTA, so it needs the whole
      column. Three ~106px columns cannot hold "$1,000" and a button. The board
@@ -1595,8 +1688,11 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
      the same collapsing strategy every other section uses, with the board's
      own proportions kept: price loudest, quiet period, hairline, size line,
      full-width button. */
-  .plan-row { margin-block-start: 32px; grid-template-columns: 1fr; gap: 14px; }
+  .plan-row { margin-block-start: 28px; grid-template-columns: 1fr; gap: 14px; }
   .plan { padding: 40px 24px 32px; }
+  .psw { gap: 6px; }
+  .psw-pill { min-height: 46px; padding: 0 20px; }
+  html[lang="ar"] .psw-pill { font-size: 14px; padding: 0 12px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .footer-col a, .footer-mini a { padding-block: 13px; line-height: 1.4; }  /* 44.2px tap target, DESIGN.md §8 */
@@ -1614,3 +1710,29 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   .post-step.next { text-align: start; }
   .reach-card .btn, .map-closed .btn { width: 100%; }
 }
+
+/* ══ §4 slide strip: transform-driven, forward only (build-spec §29). ══ */
+.ss { --ss-n: 2; --ss-gap: 24px; margin-block-start: 40px; overflow: hidden; direction: inherit; }
+.ss-track { display: flex; gap: var(--ss-gap); transition: transform 560ms cubic-bezier(.45, 0, .2, 1); will-change: transform; }
+.ss-track.nojump { transition: none; }
+.ss-slide {
+  flex: 0 0 calc((100% - (var(--ss-n) - 1) * var(--ss-gap)) / var(--ss-n));
+  aspect-ratio: 960 / 417; position: relative; background: #FFFFFF;
+  border: 1px solid var(--hairline-light); container-type: inline-size; overflow: hidden;
+}
+.ss-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* the screenshots are left-to-right images in both locales, so the stamp sits at the physical top right */
+.ss-stamp {
+  position: absolute; top: 21%; right: 3%; left: auto;
+  transform: rotate(-7deg); transform-origin: center;
+  background: var(--orange); color: #141415; border: 2px solid #141415; border-radius: 4px;
+  font-weight: 800; line-height: 1; letter-spacing: .04em; text-transform: uppercase;
+  font-size: clamp(10px, 2.3cqw, 15px); padding: .38em .6em; white-space: nowrap; pointer-events: none;
+}
+@media (max-width: 767px) { .ss { --ss-n: 1; margin-block-start: 28px; } }
+@media (prefers-reduced-motion: reduce) {
+  .ss { overflow-x: auto; overscroll-behavior-inline: contain; }
+  .ss-track { transition: none; transform: none !important; }
+}
+.ss:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+html[dir="rtl"] .ss-stamp { letter-spacing: 0; }

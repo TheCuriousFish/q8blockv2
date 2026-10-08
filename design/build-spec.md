@@ -4321,3 +4321,295 @@ runs, and the three added cards are `fetchpriority="low"` images, which cost byt
   one thing a section removal could not break but is cheap to prove, was re-measured anyway.
 
 **Nothing in this pass was committed, pushed or deployed.** The local server on 8823 is left running.
+
+
+## 29. §4 gets an auto-sliding strip of Search Console shots, 2026-10-08
+
+Ahmad: a slideshow in the "what we do" section, under the lead, above the three blocks; two new projects carry a "new project" stamp; one slide every 2 seconds, never swiping back to the start.
+
+* **Sources** `design/proof-shots/slideshow/{ss1..ss4,new1,new2}.png`, untouched. `derive-slideshow.mjs` converts to `src/img/slide-*.webp` at native size (q92, no crop or retouch; 24 to 45 kB each). Order `ss1, new1, ss2, ss3, new2, ss4`.
+* **Frame** one uniform 960x417 (2.3:1) slide, image `object-fit: contain` on white with the site hairline. The tallest shot (ss2, 2.28:1) fits with no crop. Explicit width and height on every image. `fetchpriority="low"` and `decoding="async"`, never lazy.
+* **Stamp** HTML/CSS on `new1` and `new2` only: `#FF5F29` fill, `#141415` text and 2px border (6.07:1), 800 weight, rotated -7deg, pinned at the physical top right (`right`, not `inset-inline-end`) under the Daily dropdown, clear of the tiles and the chart. Sized in `cqw` with a 10px floor. Arabic letter-spacing is 0 so the letters join.
+* **Behaviour** (`src/app.js`, function `strip`, own names) `overflow: hidden` frame, flex track moved by `translate3d`, 560 ms ease, one step per 2000 ms. The six slides are cloned once (clones `aria-hidden`, empty alt); after the step onto the first clone the track jumps with no transition to slide one. RTL starts at the right edge and moves left. 2 slides visible at 768px and up, 1 below. Pauses on `mousemove` (not `mouseenter`), focus within, hidden tab, and off screen (IntersectionObserver threshold 0). `prefers-reduced-motion`: no clones, no timer, static row that scrolls sideways, frame focusable.
+* **Measured** (headless Chrome, cursor parked, 250 ms samples, 1440): en `0 -20 -564 -672 ... -1344 ... -2016 ... -2688 ... -3360 ... -4025 0 -20 -564 -672`; ar the same with positive signs. One step per 2 s, one direction, wrap 4032 to 0 with no backwards step. Frame screenshot just before and just after the wrap is byte identical in both locales. Reduced motion: nothing moves over 6 s.
+* **Gates** first screen 900/900, 1200/1200, 844/844 both locales; seo-audit 0 high; site-audit 0 failing; Lighthouse `/` and `/en/` performance 100, accessibility 100, CLS 0.
+* **Flag** `new1.png` has a hover tooltip ("Friday, Sep 4 ... add an annotation") across the chart; shipped as exported.
+
+## 30. §7b rebuilt to `pricing-v2-A.png`: a size switch and three packages, 2026-10-08
+
+Ahmad picked **A** of three boards. **`design/boards/pricing-v2-A.png` is the board.** `pricing-v2-B.png`,
+`pricing-v2-C.png` and `pricing-v2-options.png` are **DEAD boards**, as are `pricing-light.png` and
+`pricing-dark.png` (§27). The board's lettering is a generated render (one malformed letter in
+"Dominate"); real type is set in Alexandria. This section supersedes §27.3 to §27.8: the plans no longer
+differ by company size alone, the `.plan-size` line is gone, and `.plan-features` is live.
+
+### 30.1 What the section is now
+
+Eyebrow `الأسعار` / `PRICING`, headline `اختر خطتك` / `Choose your plan.` (plain, no highlight), **no lead**
+(the board draws none; the old lead was deleted), a centred three-pill switch, three cards. Each card:
+muted tag (`x1` / `x3` / `x10`), bold name, very large price with a muted period, hairline, three check
+lines, the site's call button (`اتصل الآن` / `Call now`, `tel:`). The middle card is weighted by a 6px
+orange top edge and nothing else. No offer, no link to `/offer/`, no badge.
+
+### 30.2 The nine prices (locked by Ahmad), USD per month
+
+| Package | Tag | Small | Medium | Large |
+|---|---|---|---|---|
+| باقة الحفاظ / Maintain | x1 | $997 | $1,997 | $2,997 |
+| باقة التوسع / Expand | x3 | $2,497 | $4,997 | $6,997 |
+| باقة السيطرة / Dominate | x10 | $4,997 | $9,997 | $15,997 |
+
+Currency was never stated; dollars are assumed. It lives in ONE place: `money()` in `src/data.mjs`, next
+to the `PKG` table. The offer's `P` figures ($500 / $1,000 / $1,500) are untouched (§30.6).
+
+### 30.3 The switch
+
+Native radios, no script. `render.mjs` emits a `<fieldset class="psw">` (visually hidden legend `حجم شركتك` /
+`Your company size`) holding three `name="psize"` radios, each followed by its `<label class="psw-pill">`.
+The inputs are visually hidden; the labels are the pills. Radio-group semantics, arrow-key movement and
+the checked state come from the browser. Every card carries all three amounts (`.pa-s/.pa-m/.pa-l`);
+`styles.css` shows the checked one with `#pricing:has(#psize-m:checked)`. `Small` is `checked` in the HTML,
+so with JS off (or without `:has()`) the Small prices show and are correct. All three amounts share one
+line box, so a card's height never changes with the size. The price caps itself at `20.5cqi` of the card
+(`container-type: inline-size`), so `$15,997` and the period never wrap. Focus ring: 3px `--orange` outline,
+3px offset, on the pill.
+
+### 30.4 Measurement table, `pricing-v2-A.png` (board px × 0.5357 = CSS px at 1440)
+
+| Element | Board px | CSS at 1440 | Built as |
+|---|---|---|---|
+| pills | 231 / 250 / 230 × 89 | 123 / 134 / 123 × 47 | intrinsic, padding 36, `min-height: 47px`; built 123 / 146 / 122 × 47 |
+| pill gap | 13 | 7 | `gap: 7px` |
+| pill label | 82 × 24 (`Small`) | ~17px / 600 | `clamp(15px, 17/14.4vw, 19px)`, 600 |
+| selected pill | near-black fill, white | | `--ink` fill, `#fff` |
+| other pills | 2px `#D5DAE1` outline | 1px | `1px solid var(--hairline-light)` |
+| headline ink → pills | 345 → 380 | 19 | `.psw` margin `clamp(18px, 20/14.4vw, 22px)` |
+| pills → cards | 467 → 541 | 40 | `.plan-row` margin `clamp(28px, 40/14.4vw, 44px)` |
+| card span / gap | 118 → 2571 / 37 | 1314 / 20 | 1320 `.wrap` / `clamp(14px, 20/14.4vw, 22px)` |
+| card height | 541 → 1405 | 463 | content-derived: **544** `/en/`, **512** `/` (see 30.5) |
+| middle edge | 533 → 545, `#F6A386`… `#FD5926` | 6.4 | `border-top-color: --orange` + `inset 0 5px 0` = 6px, no height change |
+| tag `x1` | 37 × 32 | ~24px | `clamp(16px, 24/14.4vw, 26px)` / 500, `--muted-on-light` |
+| name `Maintain` | 351 × 68 | 36 cap → ~44px | `clamp(28px, 44/14.4vw, 48px)` / 800 (Arabic 34px) |
+| price `$997` | 329 × 123 | 176 × 66 → ~68px | `min(clamp(44px, 68/14.4vw, 74px), 20.5cqi)` / 800, `--ink` |
+| price → `/month` | 14 | 7.5 | `gap: 8px`, baseline aligned |
+| `/month` | 128 × 31 | ~18px | `clamp(14px, 18/14.4vw, 20px)` / 400, muted |
+| price → hairline | 871 → 923 | 28 | margin 27 |
+| hairline → check 1 | 923 → 981 | 31 | padding 27 (ink measured 30) |
+| check lines | 33 tall, pitch 80 | 16 to 17px, pitch 43 | `clamp(15px, 16/14.4vw, 18px)`, lh 1.35, gap 20 |
+| check icon | 37 × 25, orange | 20 × 14 | inline SVG background, 20 × 15, text at 40 |
+| button | 679 × 108 | 364 × 58 | full width, built 56 tall |
+| button → card foot | 1355 → 1405 | 27 | padding 42 (override) |
+
+Built ink offsets inside card 1 at 1440 `/en/`, minus the 38px extra top padding, against the board: tag
+28 (28), name 55 (52.5), price 113 to 182 (111 to 177), hairline 209 (205), check 1 239 (236), button 56
+tall (57). Type was sized by rendering Alexandria on a canvas and solving each board glyph box for height
+and width; the board lettering is wider than Alexandria, so sizes sit between the two solutions.
+
+### 30.5 Approved overrides and what still differs
+
+1. **Card padding stays 66/40/42 at 1440 (40/24/32 on a phone)**, against the board's ~28/32/26. Ahmad,
+   2026-10-01: the content was "just stuck to the upper section border". Approved override.
+2. **Grey text uses `--muted-on-light` (#686F79, 5.03:1)**, not the board grey (~#8B909F / #95949A,
+   about 2.3 to 3:1 on white). Tag, period and check lines.
+3. **Eyebrow and h2 keep `--fs-eyebrow` and `--fs-h2`**, as in §27.6.
+4. **Cards are ~80px taller than the board at 1440** (544 vs 463): 54 of it is override 1, the rest is
+   real Alexandria wrapping "Compete with the strongest companies in the market" to two lines in a column
+   the side padding override narrowed. Buttons still share one baseline.
+5. **The Medium pill is 12px wider** (Alexandria is wider than the board's lettering).
+6. **The period follows the price horizontally** when the size changes (`$997` to `$2,997` pushes
+   `/month` right). Nothing moves vertically; card heights are identical across sizes.
+
+### 30.6 The old figures, deliberately left
+
+Ahmad has not said what the offer becomes under the new prices, so these still carry the OLD figures and
+were not touched: the homepage §2 offer strip (`$500` paid once), and `/offer/` and `/en/offer/`: meta
+title and description (`500 دولار` in Arabic), B1 lead, B1b anchor (`from $500 per month`) and offer row,
+B2 intro, B2b caption, B4, B5 tiers (`$500 / $1,000 / $1,500`), offer FAQ Q1, Q2, Q3 and Q6.
+
+### 30.7 Verification
+
+| Check | Result |
+|---|---|
+| Nine prices, by clicking each pill in headless Chrome, both locales, 1440 and 390 | all nine match 30.2 |
+| No JS | Small prices shown, both locales |
+| Keyboard | arrows move the checked radio and the prices follow; focus ring 3px solid |
+| Card heights across sizes | 544/544/544 `/en/`, 511.5 ×3 `/` at 1440; unchanged by size at 390 |
+| Overflow, 1440 and 390 | none; switch one row at 390 (EN 85/105/84, AR 109/126/98, all 46 tall) |
+| Band order | hero, problem, what-we-do, journey DARK, work, pricing, faq, final DARK |
+| First screen 1440x900, 1920x1200, 390x844, both locales | unchanged (900, 1200, 844) |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/en/` and `/` | perf 100, accessibility 100, best practices 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.
+
+## 31. §6 becomes the monthly report: four live pages to `report-A.png`, 2026-10-08
+
+Ahmad: "lets redo the how we work section completely, remove everything. instead, i want to show a report",
+picked **A** of three boards (`report-B.png`, `report-C.png`, `report-options.png` are DEAD), then "lets add 4
+pages, the 2 extra are the keyword page and traffic page." This supersedes §26.1 and §21.2 for §6.
+
+### 31.1 What the section is now
+
+`<section id="report" class="sec on-dark">` (renamed from `journey`; `scripts/compare.mjs` and `scripts/shots.mjs`
+updated). Eyebrow, h2 with the `.hl` block on the last words, then `ul.rp-grid` of four `article.rp-card`, each
+with an `h3` label and a caption carrying the report's page number (1, 2, 4, 5). Deleted: subhead, graph,
+`.journey-*` rules, the three beat icons (files stay on disk, unreferenced by the homepage; `proof-kwtclean-gsc.webp`
+is still used by `/offer/`), the Call/WhatsApp pair.
+
+### 31.2 Data path, no hand-typed numbers
+
+`scripts/derive-report.mjs` parses `ops/reports/kwtclean/2026-09.html` (pages 1, 2, 4, 5) into `src/report.json`.
+It asserts the split adds up to the total, each service row's calls + WhatsApp = total, and the traffic panels
+count is four. **The daily series is not stored in the report as numbers**, only as the chart's SVG path; the
+script recovers it from the path (baseline y=196, peak marker = 27 visits, day 1 at the right) and refuses any
+point that is not a whole visit count. The 30 recovered values sum to **525**, the report's click total, so the
+chart is real. `render.mjs` `report()` reads the JSON; labels live in `data.mjs` `report` (ar/en).
+
+### 31.3 Frame and layout
+
+| Element | Board px | CSS at 1440 | Built |
+|---|---|---|---|
+| page width / gutter | 880 / 43 (2000 view) | 634 / 31 | 644 / 32 (1320 wrap) |
+| page height | 730 | 526 | 564 (rows equal per grid row) |
+| header strip | 93 | 67 | min-height `clamp(52px, 10.4cqi, 67px)`, `#000` |
+| Q8 box | 58 x 53 | 42 x 38 | `clamp` to 42 x 38 |
+| page border | lighter hairline | 1px | `1px solid #3B3E45` on `#17181B`, band `#101012` |
+| label | ~20px orange 600 | | `clamp(17px, 3.1cqi, 20px)` |
+| 88 | 152 cap px | ~152px | `min(23.6cqi, 152px)` / 800 (82px at 390) |
+| "conversions" | | ~52px | `clamp(28px, 8.1cqi, 52px)` / 700 |
+| split bar | 17 | ~10 | 10px, 64/36 widths from the JSON |
+| 56 / 32 | 65 cap | ~65px | `clamp(44px, 10.1cqi, 65px)`, columns 56fr / 44fr |
+| service row pitch | 64 | 46 | min-height 46, hairline `#34373E` |
+| row count | | ~30px / 800 | `clamp(22px, 4.7cqi, 30px)` |
+
+Every page is `container-type: inline-size`, so type scales with the page, not the viewport. 2 x 2 at 768 and up
+(DOM order 1, 2, 4, 5, so page 1 sits at the right in Arabic); one column below 768. Under a 480px page
+(`@container`) the call/WhatsApp line drops under the service name and the four traffic figures stack.
+Keywords are hard-cornered tags (1px `#4A4E57`, first one orange). Traffic chart: inline SVG, `viewBox 0 0 600 120`,
+`preserveAspectRatio="none"` with `vector-effect: non-scaling-stroke`, flat 16% orange fill, the peak dot an HTML
+span so it stays round; mirrored for Arabic (day 1 at the right, as in the report). `role="img"` with a label.
+
+### 31.4 Motion
+
+`app.js` (report bars): if IntersectionObserver exists and reduced motion is off, adds `rp-anim` (segments
+`scaleX(0)`), then `rp-in` once on first intersection (`threshold: 0`), 0.9 s, the call segment 0.35 s later.
+Transform only. Without JS or under reduced motion the bar is drawn full.
+
+### 31.5 What differs from `report-A.png`
+
+1. A muted call/WhatsApp line in each service row, where the board draws a decorative leader line (Ahmad's spec).
+2. Pages are 38px taller than the board (564 vs 526): real Alexandria line heights.
+3. Header tag uses a middle dot, not the board's dash (no dashes in copy).
+4. Pages 3 and 4 have no board; they reuse the frame and type scale. Page 3 has spare space at its foot at 1440
+   because grid rows are equal height.
+
+### 31.6 Verification
+
+| Check | Result |
+|---|---|
+| Data, both locales, headless Chrome against the report HTML parsed independently | 45/45 pass: 88, 56, 32, 64/36, 8 rows with call/WhatsApp splits, 12 keywords in order, 525, 29,797, 14 / 27, 500 to 600, 30 chart points; no dashes, no (إنجليزي), no ترتيب/rank in the section |
+| Board compare at 1440 | 2 passes (second moved the 56/32 columns to 56/44) |
+| Overflow 1440 and 390, both locales | none; no element outside its page |
+| Band order | hero, problem, what-we-do, report DARK, work, pricing, faq, final DARK |
+| First screen 1440x900, 1920x1200, 390x844, both locales | unchanged (900, 1200, 844) |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/en/` and `/` | perf 100, accessibility 100, best practices 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.
+
+## 32. The offer page takes the locked package pricing, the hero H1 becomes option 9, and the report label, 2026-10-08
+
+### 32.1 Offer pricing
+
+Ahmad confirmed the nine §30 package prices are the offer page's real prices ("the ones you used were the
+real things"). The offer itself is unchanged: **$500 one time covers the first six months**. Changed:
+
+| Where | Was | Now |
+|---|---|---|
+| B1b anchor | from $500 per month | **from $997 per month** / يبدأ من $997 شهريًا, computed as `Math.min` of `PKG` in `src/data.mjs` (`P.from`, `FROM_EN`, `FROM_NUM`) |
+| Offer meta description, ar / en | 500 دولار شهريًا / from $500 a month | 997 دولار شهريًا / from $997 a month (same computed figure) |
+| B5 | three tiles $500 / $1,000 / $1,500 per month | three package boxes (name, x1 / x3 / x10, then Small / Medium / Large rows with the price, then the unit), rendered by `offerAfter()` from `t.pricing.plans` and `t.pricing.sizes`, the homepage §7b data. No check lines, no "most popular" |
+| B5 intro | ...خطة شهرية من ثلاث... | ...باقة شهرية من ثلاث... plus `الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة.` / `The prices below are monthly and only start once the six months are over.` so the $500 can never read as a monthly or package price |
+| B5 note 1 | كل خطة / each plan | كل باقة / each package |
+| FAQ Q1, Q6 | quoted $500 / $1,000 / $1,500 | anchor from $997; three packages priced by company size (Q6 names them) |
+
+Q2 and Q3 quoted only the one-time $500 and were left as they were. `P.month`, `P.t2`, `P.t3` are deleted;
+`money()` and `PKG` moved above `P` so the offer reads the same data as §7b. Not touched: the $500, the
+homepage strip, eligibility, B4, countdown, seats, proof graph and caption, the offer H1, homepage §7b.
+
+CSS: `.tier-pkg` and children (`.tier-head`, `.tier-name`, `.tier-tag`, `.tier-sizes`) restyle the existing
+`.tier` (same border, dark ground, orange numerals); prices step to `clamp(26px, 34/14.4vw, 38px)` so three fit
+a box. At 999px and below the boxes stack and keep their stacked inside (`.tier.tier-pkg` overrides the old
+row-flow tile rule). Prices are LRI/PDI isolated in Arabic, read left to right.
+
+### 32.2 Hero H1, option 9
+
+Arabic H1 `تبي عميلك <span class="hl">يلقاك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟` (was
+`تبي عملاءك يجدونك ...`). Gulf colloquial on purpose; do not correct to MSA. English unchanged. The H1 is not
+quoted in any title, meta, Open Graph, JSON-LD or `llms.txt` (checked), so nothing else changed. The Arabic
+highlight rule (1.66em at 21%, §9 / §24) holds for `يلقاك`: the ل ascender and the ي dots both sit inside the
+block (dots about flush with the bottom edge, inside the measured 0.57em descent budget), nothing clipped.
+
+### 32.3 Report label
+
+`REPORT_LABEL = 'clean.com'` (render.mjs, director's edit). Rendered `CLEAN.COM` on all four report pages on
+`/` and `/en/`; no `kwtclean` and no `SEP 2026` left inside `#report`.
+
+### 32.4 Verification
+
+| Check | Result |
+|---|---|
+| Price sweep (`/`, `/en/`, `/offer/`, `/en/offer/`, terms both, `llms.txt`; text, JSON-LD, meta) | every `$` figure is the $500 one-time offer, the from $997 anchor or one of the nine; no $1,000, no $1,500, no "from $500 per month" |
+| Offer anchor + B5 at 1440 and 390, both locales | looked at; legible, no overflow (0 elements outside the viewport), stacks at 390 |
+| H1 lines | 2 at 1440 and 1920 (`تبي عميلك يلقاك / في جوجل وفي الذكاء الاصطناعي؟`), 3 at 390 |
+| First screen, `#problem` top | 900 / 1200 / 844 at 1440x900, 1920x1200, 390x844, both locales; hero scroll 0, page scroll-x 0 |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/offer/`, `/en/offer/` | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.
+
+## 33. The offer is free again, and the homepage mentions it in the strip only, 2026-10-08
+
+Ahmad: "we had an offer for $500 for six months. We're going to change that. It was absolutely free... The
+only place it should mention is just the banners because it's temporary." Prices after the six months are
+unchanged (the nine packages, anchor from $997). Copy is in `copy.md` Part B (the 2026-10-08 block at the top),
+§2, §8, §10 and the price register; Terms in `copy-pages.md` T5.
+
+### 33.1 What changed
+
+| Where | Was | Now |
+|---|---|---|
+| §2 strip line | ستة أشهر بـ$500 مرة واحدة / 6 months for $500, paid once | **ستة أشهر مجانية / Six months free**. The long form "...لشركات الخدمات / ...for service companies" was built and measured first: 4 rows at 390 en (139.6px), so shortened per the brief |
+| Offer meta, B1 subhead, B2 intro, B2b caption | "one payment of $500..." | "first six months free" wording, no figure |
+| B1b offer row | $500 one time, covers six months | ستة أشهر مجانًا / free for six months. Anchor row unchanged (computed from $997) |
+| B1b note | "One payment, not monthly..." | deleted; `priceAnchor()` now prints the note only if `price.note` is set (it is not) |
+| B4 | one payment, nothing further due | no contract, no commitment, no fee, stop at any time |
+| B5 intro | packages or stop | three choices: a package (priced by package and size), keep the site live for a small monthly fee, or stop. Boxes unchanged |
+| B6 FAQ | Q1 "Is the $500 per month?", Q2 "Why is it $500?", Q3 paid | Q1 "Why is this free?" (no "per city"), Q2 "Do I pay anything during the six months?", Q3 no contract/no fee; Q6 the three choices; Q4, Q5, Q7 unchanged |
+| `src/data.mjs` | `P.six = ltr('$500')` | deleted, so `$500` cannot come back through `P` |
+| Homepage FAQ Q2, Q5 | pointed at the offer page / limited offer | sentence cut; answers otherwise unchanged |
+| Footer (all pages) | 4 columns, "العرض / The offer" = offer + terms | 3 columns: terms moved into Company. `footer()` puts the NAP in the LAST column (was `cols[3]`); `.footer-top` desktop grid `minmax(240px,1.4fr) repeat(3,1fr)` |
+| Terms T5 (both) | "what it costs and how it is paid" | "what the six free months cover"; last updated 8 October 2026 |
+
+Not touched: hero, §7b pricing, report, slideshow, clients carousel, the offer H1, countdown, seats, eligibility,
+included items, proof graph, final call. `llms.txt` still lists the offer page among the site's pages (an index,
+not offer copy) and the 404 keeps its existing offer link; neither is the homepage.
+
+### 33.2 Verification
+
+| Check | Result |
+|---|---|
+| Sweep `/`, `/en/` (text, meta, JSON-LD, footer) for $500, free/مجان, six months/ستة أشهر, limited offer, عرض, offer, /offer, countdown, seats | **0 hits outside `#offer-strip`**; the strip's link is the only route to `/offer/` from the homepage |
+| `$500` / `500 دولار` / paid once / one payment across the whole built site | 0 (remaining دفعة واحدة / مرة واحدة hits are "at once" in blog prose and the about page, unrelated) |
+| `$` figures left | `$997` anchor and the nine package prices only (offer ar meta `997 دولار`) |
+| Strip rows | 1 at 1440 and 1920 both locales (band 78 / 79px); 390: ar 3 rows (114.8px), en 2 rows (90px); line on the pill row everywhere |
+| First screen, `#problem` top | 900 / 1200 / 844 at 1440x900, 1920x1200, 390x844, both locales; no horizontal scroll |
+| Offer top + footer, 1440 and 390, both locales | looked at: anchor reads "from $997 per month" over "free for six months", no note; footer three columns, no offer link |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/`, `/offer/` (desktop config) | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.

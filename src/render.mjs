@@ -2,6 +2,7 @@
 // the offer-page build both import from this module, so a change is made in
 // one place. Layout numbers come from design/build-spec.md.
 
+import fs from 'node:fs';
 import { CONFIG, NAP, WORK, ICONS } from './data.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -56,7 +57,7 @@ export function footer(t, self) {
   const cols = t.footer.cols.map((c) => `<div class="footer-col">
       <h3>${esc(c.title)}</h3>
       ${c.links.map((l) => `<a href="${resolveHref(l.href)}">${esc(l.label)}</a>`).join('')}
-      ${c.title === t.footer.cols[3].title
+      ${c === t.footer.cols[t.footer.cols.length - 1]
         ? `<div class="footer-nap">
              <p>${esc(t.footer.phoneLabel)}: <span dir="ltr">${esc(NAP.phoneDisplay)}</span></p>
              <p>${esc(t.footer.addressLabel)}: ${esc(t.footer.address)}</p>
@@ -239,7 +240,13 @@ export function problem(t) {
 }
 
 /* ── §4 What we do ───────────────────────────────────────────────────────── */
+const SLIDE_ORDER = ['ss1', 'new1', 'ss2', 'ss3', 'new2', 'ss4'];
 export function whatWeDo(t) {
+  const sl = t.wwd.slides;
+  const slides = SLIDE_ORDER.map((n) => {
+    const isNew = n.startsWith('new');
+    return `<div class="ss-slide"><img src="/assets/img/slide-${n}.webp" width="960" height="417" alt="${esc(isNew ? sl.altNew : sl.alt)}" decoding="async" fetchpriority="low">${isNew ? `<span class="ss-stamp">${esc(sl.stamp)}</span>` : ''}</div>`;
+  }).join('');
   const blocks = t.wwd.blocks.map((b, i) => `<article class="wwd-block">
       <div class="wwd-num" aria-hidden="true">0${i + 1}</div>
       <h3 class="h3">${esc(b.title)}</h3>
@@ -250,6 +257,7 @@ export function whatWeDo(t) {
       <p class="eyebrow">${esc(t.wwd.eyebrow)}</p>
       <h2 class="h2">${t.wwd.h2}</h2>
       <p class="lead">${esc(t.wwd.lead)}</p>
+      <div class="ss" role="group" aria-roledescription="carousel" aria-label="${esc(sl.label)}" data-ss><div class="ss-track" data-ss-track>${slides}</div></div>
       <div class="wwd-grid">${blocks}</div>
     </div>
   </section>`;
@@ -260,7 +268,7 @@ export function whatWeDo(t) {
       is what we present, which is the same thing. So remove that. What we
       present, immediately what follows is the how we work." There is no
       `included()` renderer, no `#included` section and no `included` copy block
-      any more; §4 `whatWeDo()` is followed directly by §6 `journey()`.
+      any more; §4 `whatWeDo()` is followed directly by §6 `report()`.
 
       `ICONS` is still imported and still used TWICE below — offer B2
       (`offerIncluded`) and About A3 (`aboutDeliver`) — so none of the six icon
@@ -268,63 +276,122 @@ export function whatWeDo(t) {
       `.icon-card` and `.icon-card.compact` stay in styles.css for the same
       reason; only the `#included`-scoped rules came out. ── */
 
-/* ── §6 The journey. REBUILT AROUND THE GRAPH, 2026-09-30 (build-spec §26.1).
-      Ahmad: the Search Console graph is the centrepiece and the three
-      illustrations become small icons underneath it that tell the story. What
-      was three large charcoal cards — illustration, month label, title, body
-      and a click figure each, then a precision note, a baseline paragraph and a
-      source caption — is now headline, graph, three compact beats.
+/* ── §6 Your monthly report. REBUILT 2026-10-08 (build-spec §31).
+      Ahmad: "remove everything", show the report. The graph, the three icon
+      beats and the CTA pair are gone. Four pages of a real monthly report are
+      drawn as live HTML in a 2 x 2 grid (one column on a phone), each a framed
+      dark page with a black header strip, built to design/boards/report-A.png;
+      pages 3 and 4 have no board and reuse the same frame and type scale.
+      Every figure comes from src/report.json, written by
+      scripts/derive-report.mjs out of the report HTML. Never type one here. ── */
+const REPORT = JSON.parse(fs.readFileSync(new URL('./report.json', import.meta.url), 'utf8'));
+// The header label on every report card. Ahmad, 2026-10-08: "change it to clean.com", so the
+// real client and the month are not named. The figures underneath are still the real report's.
+const REPORT_LABEL = 'clean.com';
+const REPORT_PAGES = [1, 2, 3, 4];   // shown 1 to 4: the report's own numbers skip 3, which read as a missing page
+const KW_COUNT = 12;
+const fmt = (n) => n.toLocaleString('en-US');
+const fill = (str, map) => str.replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : m));
+const ltr = (v) => `<bdi dir="ltr">${v}</bdi>`;
 
-      THE FORENSIC DETAIL IS GONE ON PURPOSE AND MUST NOT BE RESTORED. Ahmad,
-      twice: "don't use details like kwtclean or from what month to what month."
-      The client name, the date range, the "fifth full data month" note, the
-      carwashkw baseline and the source caption are all out of THIS section's
-      copy. It is a deliberate reversal of the earlier checkability framing, on
-      the grounds that prospects do not verify and the detail costs more than it
-      earns. The figures printed inside the image stay exactly as exported:
-      that is the image's own axis, not our copy. The offer page's B2b still
-      carries the full provenance, which is where a reader who wants it looks.
+function reportChart(daily, rtl) {
+  const W = 600, H = 120, top = 10, base = 112;
+  const max = Math.max(...daily);
+  const step = W / (daily.length - 1);
+  const pts = daily.map((v, i) => {
+    const x = rtl ? W - i * step : i * step;
+    return [Math.round(x * 10) / 10, Math.round((base - (v / max) * (base - top)) * 10) / 10];
+  });
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0] + ',' + p[1]).join(' ');
+  const peak = pts[daily.indexOf(max)];
+  return `<svg class="rp-chart-svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+          <path d="${line} L${pts[pts.length - 1][0]},${base} L${pts[0][0]},${base} Z" class="rp-area"/>
+          <path d="${line}" class="rp-line"/>
+          <line x1="0" y1="${base}" x2="${W}" y2="${base}" class="rp-axis"/>
+        </svg>
+        <span class="rp-peak" style="inset-inline-start:${(rtl ? (W - peak[0]) : peak[0]) / W * 100}%;top:${peak[1] / H * 100}%" aria-hidden="true"></span>`;
+}
 
-      THE GRAPH IS THE SAME ASSET AS B2b — one unedited export, never
-      re-derived or re-cropped — and it keeps B2b's behaviour exactly: below
-      1000px it pans inside `.proof-pan` instead of shrinking (scaled into a
-      350px box its headline figures render about 5px tall), and the wrapper is
-      `direction: ltr` so an RTL scroller cannot open on the tail of the chart
-      instead of on the four figures at its left edge. See §25.6.
+function reportHead() {
+  return `<div class="rp-top">
+        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
+        <span class="rp-tag" dir="ltr">${esc(REPORT_LABEL)}</span>
+      </div>`;
+}
 
-      The section still diverges from journey-D.png, which draws three cards and
-      a sparkline. That divergence is Ahmad-instructed, the same status as
-      §21.2's sparkline removal. ─────────────────────────────────────────── */
-const JOURNEY_ART = ['/assets/img/journey-1.webp', '/assets/img/journey-2.webp', '/assets/img/journey-3.webp'];
-
-export function journey(t) {
-  const g = t.journey.graph;
-  const beats = t.journey.stages.map((s, i) => `<li class="journey-beat">
-      <img src="${JOURNEY_ART[i]}" width="343" height="296" alt="" loading="lazy" decoding="async">
-      <div class="journey-beat-text">
-        <h3 class="h3">${esc(s.title)}</h3>
-        <p class="body">${esc(s.body)}</p>
-      </div>
-    </li>`).join('');
-  return `<section id="journey" class="sec on-dark">
-    <div class="wrap">
-      <p class="eyebrow">${esc(t.journey.eyebrow)}</p>
-      <h2 class="h2">${t.journey.h2}</h2>
-      <p class="lead">${esc(t.journey.lead)}</p>
-      <figure class="proof-shot journey-graph">
-        <div class="proof-pan" tabindex="0" role="group" aria-label="${esc(g.panLabel)}">
-          <img src="/assets/img/proof-kwtclean-gsc.webp" width="${PROOF_W}" height="${PROOF_H}"
-               alt="${esc(g.alt)}" loading="lazy" decoding="async">
+function reportCard(t, i, label, body, cls) {
+  return `<li class="rp-item">
+      <article class="rp-card ${cls}" aria-labelledby="rp-h${i}">
+        ${reportHead()}
+        <div class="rp-body">
+          <h3 class="rp-label" id="rp-h${i}">${esc(label)}</h3>
+          ${body}
         </div>
-        <p class="proof-hint" aria-hidden="true">${esc(g.hint)}</p>
-      </figure>
-      <ul class="journey-beats">${beats}</ul>
-        <!-- Call and WhatsApp always ship as a pair. This block had WhatsApp alone,
-             which read as an unfinished row beside every other CTA on the site. -->
-      <div class="journey-foot btn-row">
-        <a class="btn btn-primary" href="${telHref}">${esc(t.cta.call)}</a>
-        <a class="btn btn-outline" href="${waHref}" rel="noopener" target="_blank">${esc(t.cta.whatsapp)}</a>
-      </div>
+      </article>
+      <p class="rp-cap">${esc(t.page)} ${REPORT_PAGES[i]}</p>
+    </li>`;
+}
+
+export function report(t) {
+  const r = t.report;
+  const rtl = t.lang === 'ar';
+  const C = REPORT.conversions;
+  const T = REPORT.traffic;
+
+  const conv = `<p class="rp-hero"><span class="rp-big">${ltr(C.total)}</span> <span class="rp-unit">${esc(r.conv.unit)}</span></p>
+          <div class="rp-bar" role="img" aria-label="${esc(r.conv.barLabel)}: ${C.waPct}% / ${C.callPct}%">
+            <i class="rp-seg rp-seg-wa" style="width:${C.waPct}%"></i><i class="rp-seg rp-seg-call" style="width:${C.callPct}%"></i>
+          </div>
+          <div class="rp-barnums" aria-hidden="true"><span>${ltr(C.waPct + '%')}</span><span>${ltr(C.callPct + '%')}</span></div>
+          <div class="rp-split">
+            <p class="rp-sp rp-sp-wa"><span class="rp-n">${ltr(C.wa)}</span><span class="rp-k">${esc(r.conv.wa)}</span><span class="rp-pc">${ltr(C.waPct + '%')}</span></p>
+            <p class="rp-sp rp-sp-call"><span class="rp-n">${ltr(C.call)}</span><span class="rp-k">${esc(r.conv.call)}</span><span class="rp-pc">${ltr(C.callPct + '%')}</span></p>
+          </div>`;
+
+  const mix = (row) => {
+    const parts = [];
+    if (row.calls) {
+      const w = Array.isArray(r.svc.calls) ? r.svc.calls[row.calls === 1 ? 0 : 1] : r.svc.calls;
+      parts.push(`${ltr(row.calls)} ${esc(w)}`);
+    }
+    if (row.wa) parts.push(`${ltr(row.wa)} ${esc(r.svc.wa)}`);
+    return parts.join(' · ');
+  };
+  const svc = `<ol class="rp-rows">${REPORT.services.map((row) => `<li class="rp-row">
+            <span class="rp-rk" aria-hidden="true">${ltr(row.n)}</span>
+            <span class="rp-name">${esc(rtl ? row.ar : r.svc.names[row.ar])}<span class="rp-mix">${mix(row)}</span></span>
+            <span class="rp-tot">${ltr(row.total)}</span>
+          </li>`).join('')}</ol>`;
+
+  const kw = `<p class="rp-sub">${esc(r.kw.sub)}</p>
+          <ul class="rp-tags">${REPORT.keywords.slice(0, KW_COUNT).map((k) =>
+            `<li class="rp-tagk${k.hot ? ' hot' : ''}"${k.lang === 'en' ? ' lang="en" dir="ltr"' : (rtl ? '' : ' lang="ar" dir="rtl"')}>${esc(k.text)}</li>`).join('')}</ul>`;
+
+  const last = T.daily.length;
+  const m = { d: T.peakDay, n: T.peakVisits, lo: fmt(T.valueLo), hi: fmt(T.valueHi), last };
+  const stat = (k, v, sub, cls = '') => `<div class="rp-stat ${cls}"><p class="rp-sk">${esc(k)}</p><p class="rp-sv">${v}</p><p class="rp-ss">${sub}</p></div>`;
+  const withNums = (str) => esc(fill(str, m)).replace(/(\d[\d,]*)/g, (d) => ltr(d));
+  const traffic = `<div class="rp-stats">
+            ${stat(r.traffic.clicksK, ltr(fmt(T.clicks)), esc(r.traffic.clicksS), 'key')}
+            ${stat(r.traffic.imprK, ltr(fmt(T.impressions)), esc(r.traffic.imprS))}
+            ${stat(r.traffic.peakK, withNums(r.traffic.peakV), withNums(r.traffic.peakS), 'small')}
+            ${stat(r.traffic.valueK, withNums(r.traffic.valueV), esc(r.traffic.valueS), 'small')}
+          </div>
+          <figure class="rp-chart" role="img" aria-label="${esc(fill(r.traffic.chartLabel, m))}">
+            <div class="rp-plot">${reportChart(T.daily, rtl)}</div>
+            <figcaption class="rp-axisl" aria-hidden="true"><span>${withNums(r.traffic.start)}</span><span>${withNums(fill(r.traffic.end, m))}</span></figcaption>
+          </figure>`;
+
+  return `<section id="report" class="sec on-dark">
+    <div class="wrap">
+      <p class="eyebrow">${esc(r.eyebrow)}</p>
+      <h2 class="h2">${r.h2}</h2>
+      <ul class="rp-grid" aria-label="${esc(r.gridLabel)}">
+        ${reportCard(r, 0, r.conv.label, conv, 'rp-conv')}
+        ${reportCard(r, 1, r.svc.label, svc, 'rp-svc')}
+        ${reportCard(r, 2, r.kw.label, kw, 'rp-kw')}
+        ${reportCard(r, 3, r.traffic.label, traffic, 'rp-traffic')}
+      </ul>
     </div>
   </section>`;
 }
@@ -433,75 +500,43 @@ export function work(t) {
   </section>`;
 }
 
-/* ── §7b The price. Between §7 Our work and §8 FAQ: problem, solution, what
-      you get, proof, PRICE, objections, close. Keeps its `#pricing` id and its
-      position; both are linked to and neither moves.
+/* ── §7b The price. Between §7 Our work and §8 FAQ. Keeps its `#pricing` id
+      and its position; both are linked to and neither moves.
 
-      BUILT TO design/boards/pricing-dark.png (build-spec §27.6). Ahmad picked
-      that board over pricing-light.png. Board canvas is 2688px for a 1440px
-      viewport, so every number in styles.css came off it at board px x 0.5357.
-      The board's own placeholder copy is NOT used: it draws $2,000, GET STARTED
-      and "More features for growing teams", and all three are wrong here. The
-      board is the LAYOUT and the TYPE, never the words.
+      BUILT TO design/boards/pricing-v2-A.png (build-spec §30). pricing-v2-B,
+      pricing-v2-C, pricing-light and pricing-dark are DEAD boards.
+      Eyebrow, headline, a company-size switch (Small / Medium / Large), then
+      three packages: label, name, price + period, hairline, three check lines,
+      the site's call button. The middle card is weighted by an orange top edge
+      and NOTHING else: no badge, no ribbon, no scale, no "most popular".
 
-      THE OFFER IS NOT IN THIS SECTION. No priceAnchor() call, no "$500 one
-      time", no دفعة واحدة, no six months, no countdown, no spots, no promotion
-      wording. It has exactly two homes and this is not one of them: the §2 dark
-      strip under the hero, and /offer/. priceAnchor() below still exists and is
-      still called by the offer page. It is simply not called from here.
+      THE SWITCH IS NATIVE RADIO INPUTS, NOT SCRIPT. A fieldset of three
+      `name="psize"` radios with visible labels as the pills: radio-group
+      semantics, arrow-key operation and the checked state come from the
+      browser. All nine prices are in the markup; CSS shows the checked size
+      via :has() (styles.css §7b). Small is `checked` in the HTML, so with no
+      script, and in a browser without :has(), the Small prices show and are
+      correct. Every size's price occupies the same line box, so switching
+      never changes a card's height.
 
-      THREE CARDS, DIFFERING BY COMPANY SIZE AND BY NOTHING ELSE. Ahmad,
-      2026-10-01: "We're selling phone calls. We're obviously not going to
-      mention number of phone calls because in SEO that's unpredictable. My
-      suggestion is mention the size of the company." So each card is a price, a
-      period and who it is for. That is a FINISHED card. Nothing else may be
-      added to it: no hours, no page counts, no numbers of services or areas, no
-      blog volume, no link quantities, no reporting frequency, no support levels,
-      and no promise about how many calls a plan produces. That is the exact axis
-      every other SEO agency prints on its tiers and Ahmad rejected it on purpose.
+      THE OFFER IS NOT IN THIS SECTION. No $500 one time, no six months, no
+      countdown, no link to /offer/. The CTA is the site's existing call label
+      on the site's tel: href.
 
-      DOM ORDER IS ALWAYS LOW TO HIGH, and the grid follows the document
-      direction, so the same markup reads low to high in reading order in both
-      locales: left to right on /en/, right to left on /.
-
-      THE MIDDLE CARD'S SOLID CTA IS THE BOARD, NOT A CLAIM. pricing-dark draws
-      cards 1 and 3 with an outline button and card 2 with a solid orange one.
-      There is no badge, no ribbon, no "most popular" label, no scale change and
-      no heavier border, and none may be added: those would be a recommendation
-      nobody has made. The cards are otherwise identical in size and weight.
-
-      >>> IF A FEATURE LIST IS EVER ADDED: put `features: ['…', '…']` on each entry
-      of data.mjs `pricing.plans`, both locales, and fill offer B5 in the same
-      edit. The branch below renders it between the price block and the size
-      line, .plan-features is already styled, and .plan is a grid with the CTA
-      pinned to the foot, so a list of any length drops in without a redesign.
-      The board deliberately draws no feature list and the card does not need
-      one. <<<
-
-      NO SAVINGS FIGURE, NO GEOGRAPHY. The CTA is the site's existing call label
-      on the site's existing tel: href; no third CTA label was invented and this
-      section does not link to /offer/. */
+      DOM ORDER IS ALWAYS LOW TO HIGH; the grid follows the document direction,
+      so the cards read low to high left to right on /en/ and right to left on /. */
+const PSIZE = ['s', 'm', 'l'];
 export function pricing(t) {
   const p = t.pricing;
+  const sw = p.sizes.map((label, i) => `<input class="psw-in" type="radio" name="psize" id="psize-${PSIZE[i]}" value="${PSIZE[i]}"${i === 0 ? ' checked' : ''}><label class="psw-pill" for="psize-${PSIZE[i]}">${esc(label)}</label>`).join('');
   const cards = p.plans.map((plan, i) => {
-    /* Inert until somebody supplies lists — see the note above. */
-    const features = Array.isArray(plan.features) && plan.features.length
-      ? `<ul class="plan-features">${plan.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`
-      : '';
-    /* pricing-light weights the middle card with an ORANGE TOP RULE and gives
-       all three cards the same solid orange button. (pricing-dark, the board
-       Ahmad first picked and then replaced, did the opposite: one solid button
-       in the middle, outlines either side. That board is dead — see
-       build-spec §27.5.) There is still NO badge, NO ribbon, NO "most popular"
-       label, NO scale change: the rule is the board's own weighting and it
-       makes no claim in words. Do not add one. */
+    const amounts = plan.prices.map((v, k) => `<span class="pa pa-${PSIZE[k]}">${esc(v)}</span>`).join('');
+    const features = `<ul class="plan-features">${plan.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`;
     return `<li class="plan${i === 1 ? ' plan-featured' : ''}">
-      <div class="plan-head">
-        <p class="plan-price"><span class="plan-amount">${esc(plan.price)}</span></p>
-        <p class="plan-unit">${esc(p.tierUnit)}</p>
-      </div>
+      <p class="plan-tag">${esc(plan.tag)}</p>
+      <h3 class="plan-name">${esc(plan.name)}</h3>
+      <p class="plan-price"><span class="plan-amount">${amounts}</span> <span class="plan-unit">${esc(p.tierUnit)}</span></p>
       ${features}
-      <p class="plan-size">${esc(plan.size)}</p>
       <div class="plan-cta">
         <a class="btn btn-primary" href="${telHref}">${esc(t.cta.call)}</a>
       </div>
@@ -511,7 +546,7 @@ export function pricing(t) {
     <div class="wrap">
       <p class="eyebrow">${esc(p.eyebrow)}</p>
       <h2 class="h2">${p.h2}</h2>
-      <p class="lead">${esc(p.lead)}</p>
+      <fieldset class="psw"><legend class="vh">${esc(p.sizesLabel)}</legend>${sw}</fieldset>
       <ul class="plan-row">${cards}</ul>
     </div>
   </section>`;
@@ -555,11 +590,16 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
 
 /* The anchor, added 2026-09-30 when the offer stopped being free.
 
+   2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. The second row now reads
+   "This offer / free for six months" and there is NO note: the "one payment, not
+   monthly" line only existed to stop $500 reading as monthly, and there is no
+   $500 any more. `p.note` is optional; leave it unset. The history below is the
+   paid version's reasoning, kept for the record.
+
    Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
-   and no third element competing: "Normal price / from $500 per month" over
-   "This offer / $500 one time, covers six months". Ahmad has a competitor
-   pitching his prospects at $500 a month, so the arithmetic is the argument and
-   the reader does it himself in about a second.
+   and no third element competing: "Normal price / from $997 per month" (since
+   2026-10-08 the lowest package price, computed in data.mjs, build-spec §32) over
+   "This offer / $500 one time, covers six months".
 
    THERE IS NO "you save $2,500" LINE AND THERE NEVER WILL BE. A savings claim
    reads as a discount gimmick and it makes the reader argue with the figure
@@ -585,7 +625,7 @@ function priceAnchor(p) {
           <dt>${esc(p.offerLabel)}</dt><dd>${esc(p.offerValue)}</dd>
         </div>
       </dl>
-      <p class="pa-note">${esc(p.note)}</p>
+      ${p.note ? `<p class="pa-note">${esc(p.note)}</p>` : ''}
     </div>`;
 }
 
@@ -713,10 +753,17 @@ export function offerNoContract(t) {
    worst possible place to make something up. `notes[0]` says what is true instead:
    the contents are agreed on the call, which is also what copy-pages.md T6 says of
    everything project specific. Fill these in only when Ahmad supplies them. */
+/* REBUILT 2026-10-08 (build-spec §32). The three tiers became Ahmad's three
+   packages, each priced by company size. Built from `t.pricing.plans` and
+   `t.pricing.sizes` (the homepage §7b data) so no price is retyped. Names, tags
+   and prices only: the check lines stay on the homepage. Each box is a <dl> of
+   size / price pairs, low to high in reading order. */
 export function offerAfter(t) {
   const b = t.offerPage.b5;
-  const tiers = b.tiers.map((price) => `<li class="tier">
-      <span class="tier-price">${esc(price)}</span>
+  const sizes = t.pricing.sizes;
+  const tiers = t.pricing.plans.map((p) => `<li class="tier tier-pkg">
+      <p class="tier-head"><span class="tier-name">${esc(p.name)}</span> <span class="tier-tag" dir="ltr">${esc(p.tag)}</span></p>
+      <dl class="tier-sizes">${p.prices.map((price, i) => `<div><dt>${esc(sizes[i])}</dt><dd><span class="tier-price">${esc(price)}</span></dd></div>`).join('')}</dl>
       <span class="tier-unit">${esc(b.tierUnit)}</span>
     </li>`).join('');
   const notes = b.notes.map((n) => `<p>${esc(n)}</p>`).join('');
