@@ -180,11 +180,13 @@ export const WORK = [
   { site: 'skyscraperkw.com', url: 'https://skyscraperkw.com/', logo: 'skyscraperkw', isNew: true },
 ];
 
-/* ── PRICES. The offer changed on 2026-09-30: it is no longer free.
-      $500 ONE TIME buys the first six months. The service's normal price starts
-      at $500 PER MONTH, and that anchor is the point — a prospect comparing this
-      against a competitor charging $500 a month has to see the two numbers side
-      by side. After the six months the client picks $500, $1,000 or $1,500 a month.
+/* ── PRICES.
+      THE OFFER (2026-09-30, unchanged): $500 ONE TIME buys the first six months.
+      THE ONGOING PRICE (locked by Ahmad 2026-10-08, build-spec §30 and §32): three
+      packages x three company sizes, nine monthly prices in PKG below. Ahmad
+      confirmed on 2026-10-08 that these nine are also the offer page's prices,
+      so the offer anchor is "from" the lowest of them, computed, never typed,
+      and B5 prints the same nine through `pricing.plans`.
 
       WHY EVERY PRICE GOES THROUGH `ltr()`. `$500` written plainly inside an Arabic
       sentence renders as `500$`: the Unicode bidi algorithm resolves European digits
@@ -192,23 +194,11 @@ export const WORK = [
       pushes it to the wrong side of the run. U+2066 / U+2069 (LRI / PDI) isolate the
       run so it renders `$500` — and, unlike a `<span dir="ltr">`, invisible characters
       survive `esc()`, so these strings can still be escaped like any other copy.
-      Never write a bare `$` price into an Arabic string. ── */
+      Never write a bare `$` price into an Arabic string.
+
+      CURRENCY LIVES IN `money` AND ONLY THERE. It was never stated; US dollars are
+      assumed because the old pricing was in dollars and the board prints "$". ── */
 export const ltr = (s) => `⁦${s}⁩`;
-const P = {
-  six: ltr('$500'),          // the one-time price of the six months
-  month: ltr('$500'),        // the anchor, and tier 1
-  t2: ltr('$1,000'),
-  t3: ltr('$1,500'),
-};
-
-/* ── Homepage §7b package prices, locked by Ahmad 2026-10-08 (build-spec §30).
-      Nine numbers: three packages × three company sizes, per month. These are
-      NOT the offer's figures above (P stays on the offer page and the strip
-      until Ahmad says what the offer becomes).
-
-      CURRENCY LIVES HERE AND ONLY HERE. It was never stated; US dollars are
-      assumed because the old pricing was in dollars and the board prints "$".
-      To change it, edit `money` below and nothing else. ── */
 const money = (n) => `$${n.toLocaleString('en-US')}`;
 //                         [ Small, Medium, Large ]
 const PKG = {
@@ -217,6 +207,14 @@ const PKG = {
   dominate: [4997, 9997, 15997],
 };
 const pkgPrices = (key, wrap = (s) => s) => PKG[key].map((n) => wrap(money(n)));
+// The offer anchor: the lowest of the nine. Computed so it can never drift.
+const FROM = Math.min(...Object.values(PKG).flat());
+const P = {
+  six: ltr('$500'),          // the one-time price of the six months (the offer)
+  from: ltr(money(FROM)),    // the anchor, "from" the lowest monthly package price
+};
+const FROM_EN = money(FROM);
+const FROM_NUM = FROM.toLocaleString('en-US'); // for the meta text, "997 دولار"
 
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
       files are design/icons/v2/<name>-sq.png (512x512, transparent, trimmed to
@@ -260,7 +258,7 @@ export const COPY = {
       },
       offer: {
         title: 'عملاء جدد من محركات البحث والذكاء الاصطناعي | Q8 block',
-        description: 'عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من 500 دولار شهريًا.',
+        description: `عملاء جدد من محركات البحث والذكاء الاصطناعي لشركات الخدمات في السعودية. دفعة واحدة 500 دولار تغطي أول ستة أشهر. السعر المعتاد يبدأ من ${FROM_NUM} دولار شهريًا.`,
         ogAlt: 'عرض Q8 block: عملاء جدد من محركات البحث والذكاء الاصطناعي',
       },
       about: {
@@ -307,8 +305,10 @@ export const COPY = {
       /* Ahmad's own hook line, 2026-09-24. Deliberately Gulf colloquial —
          `تبي` not `هل تريد` — and it ends on a question mark. It is the ONLY
          colloquial line on the site; every other Arabic string stays MSA.
-         Do not "correct" this to MSA. The highlight stays on `يجدونك`. */
-      h1: 'تبي عملاءك <span class="hl">يجدونك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
+         Do not "correct" this to MSA. 2026-10-08 (build-spec §32): Ahmad picked
+         option 9, `تبي عميلك يلقاك`, the whole opening now Gulf (`تبي`, `يلقاك`).
+         The highlight moved to the finding word, `يلقاك`. */
+      h1: 'تبي عميلك <span class="hl">يلقاك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
       /* Ahmad's own line, 2026-09-25, verbatim. It replaces the three-clause
          paragraph that stood here: NP Digital's hero runs ONE line and this one
          was a paragraph. Do not lengthen it back. */
@@ -668,7 +668,8 @@ export const COPY = {
 
     /* ═══ PART B. The offer page ═══
        Rewritten 2026-09-30: the offer is NOT free any more. One payment of $500
-       buys the first six months; the normal price starts at $500 a month. The
+       buys the first six months; the normal price starts at the lowest package
+       price (build-spec §32, computed from PKG). The
        single biggest risk on this page is a reader thinking it is $500 monthly,
        so "دفعة واحدة" sits beside the number everywhere the number appears and
        `price.note` says it in the shortest words there are. */
@@ -692,7 +693,7 @@ export const COPY = {
          a savings claim reads as a discount gimmick. */
       price: {
         anchorLabel: 'السعر المعتاد',
-        anchorValue: `يبدأ من ${P.month} شهريًا`,
+        anchorValue: `يبدأ من ${P.from} شهريًا`,
         offerLabel: 'هذا العرض',
         offerValue: `${P.six} دفعة واحدة، تغطي ستة أشهر`,
         note: 'دفعة واحدة، وليست شهرية. لا فاتورة شهرية خلال الأشهر الستة.',
@@ -753,26 +754,27 @@ export const COPY = {
          copy-pages.md T6 already says the money terms are agreed directly. */
       b4: { title: 'بدون عقد', body: `لا يوجد عقد ولا التزام ولا فترة إشعار. الدفعة ${P.six} مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، القرار لك وحدك، ولا يُطلب منك شيء إن قررت التوقف.` },
 
-      /* The three tiers. Ahmad gave the PRICES and not what differs between them,
-         so this block prints prices only. Do NOT invent service levels, page counts,
-         hours or feature lists for them: what each plan covers is agreed on the call,
-         exactly as copy-pages.md T6 already says of everything project specific. */
-      b5: { title: 'ماذا يحدث بعد ستة أشهر', intro: 'حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، أو تتوقف. القرار لك.',
-        tiers: [P.month, P.t2, P.t3],
+      /* B5, rebuilt 2026-10-08 (build-spec §32). The three packages and their
+         nine prices by company size. The boxes are rendered from `pricing.plans`
+         and `pricing.sizes` above (the homepage §7b data), so no price is typed
+         here. Prices and names only: NO check lines / feature lists on this page,
+         no "most popular". The intro's last sentence keeps the $500 from ever
+         reading as one of these monthly prices. */
+      b5: { title: 'ماذا يحدث بعد ستة أشهر', intro: 'حين تنتهي الأشهر الستة تختار باقة شهرية من ثلاث، أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة.',
         tierUnit: 'شهريًا',
         notes: [
-          'ما تشمله كل خطة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة.',
+          'ما تشمله كل باقة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة.',
           'وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.',
         ] },
 
       b6: { title: 'أسئلة شائعة',
         items: [
-          { q: `هل الـ${P.six} شهريًا؟`, a: `لا. الـ${P.six} دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من ${P.month} شهريًا، وبعد انتهاء الأشهر الستة تختار خطة شهرية من ثلاث: ${P.month} أو ${P.t2} أو ${P.t3}.` },
+          { q: `هل الـ${P.six} شهريًا؟`, a: `لا. الـ${P.six} دفعة واحدة تغطي الأشهر الستة كاملة، ولا توجد فاتورة شهرية خلالها. السعر المعتاد لهذه الخدمة يبدأ من ${P.from} شهريًا، وبعد انتهاء الأشهر الستة تختار باقة شهرية من ثلاث، ويتحدد سعرها بحجم شركتك.` },
           { q: `لماذا السعر ${P.six} لستة أشهر؟`, a: 'نختار عددًا محدودًا من الشركات في كل مدينة ونعمل عليها ستة أشهر كاملة حتى تظهر النتيجة. النتيجة نفسها هي ما يجعل العميل يقرر الاستمرار، وهي أيضًا ما نعرضه على العميل التالي. ولهذا وُضعت شروط القبول: العرض لا ينجح إلا مع نشاط قائم وموثق فعلًا.' },
           { q: 'هل هناك عقد أو التزام؟', a: `لا. لا يوجد عقد ولا فترة إشعار. الدفعة ${P.six} مرة واحدة، ولا توجد فاتورة شهرية خلال الأشهر الستة، ولا يتجدد شيء تلقائيًا. وحين تنتهي المدة، إن قررت التوقف فلا يُطلب منك شيء.` },
           { q: 'هل يشترط وجود سجل تجاري؟', a: 'سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل.' },
           { q: 'لدي موقع قائم، هل أنا مؤهل؟', a: 'العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك.' },
-          { q: 'ماذا يحدث بعد ستة أشهر؟', a: `القرار لك. حين تنتهي الأشهر الستة تختار خطة شهرية من ثلاث، ${P.month} أو ${P.t2} أو ${P.t3}، وما تشمله كل خطة يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.` },
+          { q: 'ماذا يحدث بعد ستة أشهر؟', a: `القرار لك. حين تنتهي الأشهر الستة تختار باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعر كل باقة بحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة حسب قطاعك وحسب ما حققته الأشهر الستة. وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.` },
           { q: 'هل تديرون ملف نشاطي على جوجل خلال العرض؟', a: 'لا، لا في العرض ولا خارجه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث.' },
         ] },
 
@@ -806,7 +808,7 @@ export const COPY = {
       },
       offer: {
         title: 'New customers from search engines and AI | Q8 block',
-        description: 'New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from $500 a month.',
+        description: `New customers from search engines and AI, for service companies in Saudi Arabia. One payment of $500 covers the first six months. Normal price from ${FROM_EN} a month.`,
         ogAlt: 'The Q8 block offer: new customers from search engines and AI',
       },
       about: {
@@ -1118,9 +1120,9 @@ export const COPY = {
     },
 
     /* The English mirror of Part B. Rewritten 2026-09-30 with the Arabic: ONE
-       payment of $500 buys the first six months, the normal price starts at $500
-       PER MONTH, and after the six months the client picks $500, $1,000 or $1,500
-       a month. "paid once" / "one payment" sits beside the number every single
+       payment of $500 buys the first six months. Since 2026-10-08 (build-spec §32)
+       the normal price is "from" the lowest of the nine package prices (computed)
+       and B5 prints the three packages by company size from `pricing.plans`. "paid once" / "one payment" sits beside the number every single
        time the number appears. Do not shorten it away. */
     offerPage: {
       pill: 'Limited offer',
@@ -1130,7 +1132,7 @@ export const COPY = {
 
       price: {
         anchorLabel: 'Normal price',
-        anchorValue: 'from $500 per month',
+        anchorValue: `from ${FROM_EN} per month`,
         offerLabel: 'This offer',
         offerValue: '$500 one time, covers six months',
         note: 'One payment, not monthly. No monthly bill during the six months.',
@@ -1173,22 +1175,21 @@ export const COPY = {
 
       b4: { title: 'No contract', body: 'There is no contract, no commitment and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends the decision is yours alone, and nothing further is due if you stop.' },
 
-      b5: { title: 'What happens after six months', intro: 'When the six months end you pick one of three monthly plans, or you stop. You decide.',
-        tiers: ['$500', '$1,000', '$1,500'],
+      b5: { title: 'What happens after six months', intro: 'When the six months end you pick one of three monthly packages, or you stop. You decide. The prices below are monthly and only start once the six months are over.',
         tierUnit: 'per month',
         notes: [
-          'What each plan covers is agreed with you on the call, against your industry and what the six months produced.',
+          'What each package covers is agreed with you on the call, against your industry and what the six months produced.',
           'If you choose to stop, you stop completely, with no fee and no notice.',
         ] },
 
       b6: { title: 'Common questions',
         items: [
-          { q: 'Is the $500 per month?', a: 'No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at $500 a month, and after the six months end you pick one of three monthly plans: $500, $1,000 or $1,500.' },
+          { q: 'Is the $500 per month?', a: `No. The $500 is one payment and it covers all six months, with no monthly bill during them. The normal price for this service starts at ${FROM_EN} a month, and after the six months end you pick one of three monthly packages, priced by the size of your company.` },
           { q: 'Why is it $500 for six months?', a: 'We take a limited number of companies in each city and work on them for a full six months until the result shows. That result is what makes a client decide to continue, and it is also what we show the next client. That is why the eligibility conditions exist. The offer only works with a business that is already running and already documented.' },
           { q: 'Is there a contract or a commitment?', a: 'No. There is no contract and no notice period. The $500 is one payment, there is no monthly bill during the six months, and nothing renews by itself. When the period ends, nothing further is due if you stop.' },
           { q: 'Do I need a commercial registration?', a: 'A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile.' },
           { q: 'I already have a website. Do I qualify?', a: 'The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you.' },
-          { q: 'What happens after six months?', a: 'You decide. When the six months end you pick one of three monthly plans, $500, $1,000 or $1,500, and what each plan covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice.' },
+          { q: 'What happens after six months?', a: 'You decide. When the six months end you pick one of three monthly packages, Maintain, Expand or Dominate, each priced by the size of your company, and what each package covers is agreed with you on the call, against your industry and what the six months produced. If you choose to stop, you stop completely, with no fee and no notice.' },
           { q: 'Do you manage my Google Business Profile during the offer?', a: 'No, neither during the offer nor outside it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results.' },
         ] },
 

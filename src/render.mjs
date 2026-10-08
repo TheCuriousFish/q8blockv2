@@ -285,6 +285,9 @@ export function whatWeDo(t) {
       Every figure comes from src/report.json, written by
       scripts/derive-report.mjs out of the report HTML. Never type one here. ── */
 const REPORT = JSON.parse(fs.readFileSync(new URL('./report.json', import.meta.url), 'utf8'));
+// The header label on every report card. Ahmad, 2026-10-08: "change it to clean.com", so the
+// real client and the month are not named. The figures underneath are still the real report's.
+const REPORT_LABEL = 'clean.com';
 const REPORT_PAGES = [1, 2, 3, 4];   // shown 1 to 4: the report's own numbers skip 3, which read as a missing page
 const KW_COUNT = 12;
 const fmt = (n) => n.toLocaleString('en-US');
@@ -312,7 +315,7 @@ function reportChart(daily, rtl) {
 function reportHead() {
   return `<div class="rp-top">
         <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
-        <span class="rp-tag" dir="ltr">${esc(REPORT.label.site)} · ${esc(REPORT.label.month)}</span>
+        <span class="rp-tag" dir="ltr">${esc(REPORT_LABEL)}</span>
       </div>`;
 }
 
@@ -588,10 +591,9 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
 /* The anchor, added 2026-09-30 when the offer stopped being free.
 
    Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
-   and no third element competing: "Normal price / from $500 per month" over
-   "This offer / $500 one time, covers six months". Ahmad has a competitor
-   pitching his prospects at $500 a month, so the arithmetic is the argument and
-   the reader does it himself in about a second.
+   and no third element competing: "Normal price / from $997 per month" (since
+   2026-10-08 the lowest package price, computed in data.mjs, build-spec §32) over
+   "This offer / $500 one time, covers six months".
 
    THERE IS NO "you save $2,500" LINE AND THERE NEVER WILL BE. A savings claim
    reads as a discount gimmick and it makes the reader argue with the figure
@@ -745,10 +747,17 @@ export function offerNoContract(t) {
    worst possible place to make something up. `notes[0]` says what is true instead:
    the contents are agreed on the call, which is also what copy-pages.md T6 says of
    everything project specific. Fill these in only when Ahmad supplies them. */
+/* REBUILT 2026-10-08 (build-spec §32). The three tiers became Ahmad's three
+   packages, each priced by company size. Built from `t.pricing.plans` and
+   `t.pricing.sizes` (the homepage §7b data) so no price is retyped. Names, tags
+   and prices only: the check lines stay on the homepage. Each box is a <dl> of
+   size / price pairs, low to high in reading order. */
 export function offerAfter(t) {
   const b = t.offerPage.b5;
-  const tiers = b.tiers.map((price) => `<li class="tier">
-      <span class="tier-price">${esc(price)}</span>
+  const sizes = t.pricing.sizes;
+  const tiers = t.pricing.plans.map((p) => `<li class="tier tier-pkg">
+      <p class="tier-head"><span class="tier-name">${esc(p.name)}</span> <span class="tier-tag" dir="ltr">${esc(p.tag)}</span></p>
+      <dl class="tier-sizes">${p.prices.map((price, i) => `<div><dt>${esc(sizes[i])}</dt><dd><span class="tier-price">${esc(price)}</span></dd></div>`).join('')}</dl>
       <span class="tier-unit">${esc(b.tierUnit)}</span>
     </li>`).join('');
   const notes = b.notes.map((n) => `<p>${esc(n)}</p>`).join('');

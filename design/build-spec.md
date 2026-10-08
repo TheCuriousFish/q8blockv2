@@ -4518,3 +4518,55 @@ Transform only. Without JS or under reduced motion the bar is drawn full.
 | Lighthouse `/en/` and `/` | perf 100, accessibility 100, best practices 100, SEO 100, CLS 0 |
 
 Nothing committed, pushed or deployed.
+
+## 32. The offer page takes the locked package pricing, the hero H1 becomes option 9, and the report label, 2026-10-08
+
+### 32.1 Offer pricing
+
+Ahmad confirmed the nine §30 package prices are the offer page's real prices ("the ones you used were the
+real things"). The offer itself is unchanged: **$500 one time covers the first six months**. Changed:
+
+| Where | Was | Now |
+|---|---|---|
+| B1b anchor | from $500 per month | **from $997 per month** / يبدأ من $997 شهريًا, computed as `Math.min` of `PKG` in `src/data.mjs` (`P.from`, `FROM_EN`, `FROM_NUM`) |
+| Offer meta description, ar / en | 500 دولار شهريًا / from $500 a month | 997 دولار شهريًا / from $997 a month (same computed figure) |
+| B5 | three tiles $500 / $1,000 / $1,500 per month | three package boxes (name, x1 / x3 / x10, then Small / Medium / Large rows with the price, then the unit), rendered by `offerAfter()` from `t.pricing.plans` and `t.pricing.sizes`, the homepage §7b data. No check lines, no "most popular" |
+| B5 intro | ...خطة شهرية من ثلاث... | ...باقة شهرية من ثلاث... plus `الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة.` / `The prices below are monthly and only start once the six months are over.` so the $500 can never read as a monthly or package price |
+| B5 note 1 | كل خطة / each plan | كل باقة / each package |
+| FAQ Q1, Q6 | quoted $500 / $1,000 / $1,500 | anchor from $997; three packages priced by company size (Q6 names them) |
+
+Q2 and Q3 quoted only the one-time $500 and were left as they were. `P.month`, `P.t2`, `P.t3` are deleted;
+`money()` and `PKG` moved above `P` so the offer reads the same data as §7b. Not touched: the $500, the
+homepage strip, eligibility, B4, countdown, seats, proof graph and caption, the offer H1, homepage §7b.
+
+CSS: `.tier-pkg` and children (`.tier-head`, `.tier-name`, `.tier-tag`, `.tier-sizes`) restyle the existing
+`.tier` (same border, dark ground, orange numerals); prices step to `clamp(26px, 34/14.4vw, 38px)` so three fit
+a box. At 999px and below the boxes stack and keep their stacked inside (`.tier.tier-pkg` overrides the old
+row-flow tile rule). Prices are LRI/PDI isolated in Arabic, read left to right.
+
+### 32.2 Hero H1, option 9
+
+Arabic H1 `تبي عميلك <span class="hl">يلقاك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟` (was
+`تبي عملاءك يجدونك ...`). Gulf colloquial on purpose; do not correct to MSA. English unchanged. The H1 is not
+quoted in any title, meta, Open Graph, JSON-LD or `llms.txt` (checked), so nothing else changed. The Arabic
+highlight rule (1.66em at 21%, §9 / §24) holds for `يلقاك`: the ل ascender and the ي dots both sit inside the
+block (dots about flush with the bottom edge, inside the measured 0.57em descent budget), nothing clipped.
+
+### 32.3 Report label
+
+`REPORT_LABEL = 'clean.com'` (render.mjs, director's edit). Rendered `CLEAN.COM` on all four report pages on
+`/` and `/en/`; no `kwtclean` and no `SEP 2026` left inside `#report`.
+
+### 32.4 Verification
+
+| Check | Result |
+|---|---|
+| Price sweep (`/`, `/en/`, `/offer/`, `/en/offer/`, terms both, `llms.txt`; text, JSON-LD, meta) | every `$` figure is the $500 one-time offer, the from $997 anchor or one of the nine; no $1,000, no $1,500, no "from $500 per month" |
+| Offer anchor + B5 at 1440 and 390, both locales | looked at; legible, no overflow (0 elements outside the viewport), stacks at 390 |
+| H1 lines | 2 at 1440 and 1920 (`تبي عميلك يلقاك / في جوجل وفي الذكاء الاصطناعي؟`), 3 at 390 |
+| First screen, `#problem` top | 900 / 1200 / 844 at 1440x900, 1920x1200, 390x844, both locales; hero scroll 0, page scroll-x 0 |
+| `node scripts/seo-audit.mjs` | 0 high, 18 medium, 9 low (pre-existing) |
+| `ops/firstload/site-audit.mjs` | 0 failing pages |
+| Lighthouse `/offer/`, `/en/offer/` | perf 100, a11y 100, BP 100, SEO 100, CLS 0 |
+
+Nothing committed, pushed or deployed.

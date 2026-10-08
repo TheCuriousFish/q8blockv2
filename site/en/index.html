@@ -742,6 +742,19 @@ html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
   color: var(--orange); direction: ltr; unicode-bidi: isolate;
 }
 .tier-unit { font-size: var(--fs-strip); font-weight: 400; color: var(--muted-on-dark); }
+
+.tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
+.tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
+.tier-tag { font-size: var(--fs-strip); font-weight: 500; color: var(--muted-on-dark); unicode-bidi: isolate; }
+.tier-sizes { margin: 0; display: grid; }
+.tier-sizes > div {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-block: 12px; border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tier-sizes dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
+.tier-sizes dd { margin: 0; }
+.tier-pkg .tier-price { font-size: clamp(26px, calc(34/14.4 * 1vw), 38px); font-weight: 700; }
 .tier-notes { margin-block-start: 30px; display: grid; gap: 12px; max-width: 900px; }
 .tier-notes p {
   font-size: var(--fs-body); font-weight: var(--w-body);
@@ -1161,6 +1174,8 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
     text-align: start; padding: 18px 20px; gap: 16px;
   }
   
+  .tier.tier-pkg { grid-auto-flow: row; justify-content: stretch; align-items: start; padding: 22px 20px; gap: 12px; }
+  
   .plan-row { margin-block-start: 28px; grid-template-columns: 1fr; gap: 14px; }
   .plan { padding: 40px 24px 32px; }
   .psw { gap: 6px; }
@@ -1309,7 +1324,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <article class="rp-card rp-conv" aria-labelledby="rp-h0">
         <div class="rp-top">
         <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
-        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
         <div class="rp-body">
           <h3 class="rp-label" id="rp-h0">Client conversions</h3>
@@ -1330,7 +1345,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <article class="rp-card rp-svc" aria-labelledby="rp-h1">
         <div class="rp-top">
         <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
-        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
         <div class="rp-body">
           <h3 class="rp-label" id="rp-h1">Conversions by service</h3>
@@ -1375,7 +1390,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <article class="rp-card rp-kw" aria-labelledby="rp-h2">
         <div class="rp-top">
         <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
-        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
         <div class="rp-body">
           <h3 class="rp-label" id="rp-h2">Search keywords</h3>
@@ -1389,7 +1404,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <article class="rp-card rp-traffic" aria-labelledby="rp-h3">
         <div class="rp-top">
         <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
-        <span class="rp-tag" dir="ltr">kwtclean.com · Sep 2026</span>
+        <span class="rp-tag" dir="ltr">clean.com</span>
       </div>
         <div class="rp-body">
           <h3 class="rp-label" id="rp-h3">Visits from search results</h3>
