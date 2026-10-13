@@ -874,7 +874,7 @@ offer in the strip only.
 | | Arabic | English |
 |---|---|---|
 | Question | متى تظهر النتائج؟ | How long before results show? |
-| Answer | لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة. | We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page. |
+| Answer | تختلف المدة بحسب قطاعك وحجم المنافسة، وتظهر النتائج عادةً خلال شهر إلى أربعة أشهر. | It varies with your sector and your competition. Results usually start to show within 1 to 4 months. |
 
 **Q5**
 
