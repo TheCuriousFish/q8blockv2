@@ -224,15 +224,15 @@ const REP = {
   ar: { monthly: 'تقرير شهري', biweekly: 'تقرير كل أسبوعين', live: 'تقارير مباشرة' },
   en: { monthly: 'Monthly reporting', biweekly: 'Bi-weekly reporting', live: 'Live reporting' },
 };
-// Technical work and on-page audit: same frequency for every x of one size, like reporting.
+// Technical audit and on-page audit: same frequency for every x of one size, like reporting.
 const TECH = {
-  ar: { monthly: 'أعمال تقنية شهرية', biweekly: 'أعمال تقنية كل أسبوعين', weekly: 'أعمال تقنية أسبوعية' },
-  en: { monthly: 'Monthly technical work', biweekly: 'Bi-weekly technical work', weekly: 'Weekly technical work' },
+  ar: { monthly: 'تدقيق تقني شهري', biweekly: 'تدقيق تقني كل أسبوعين', weekly: 'تدقيق تقني أسبوعي' },
+  en: { monthly: 'Monthly technical audit', biweekly: 'Bi-weekly technical audit', weekly: 'Weekly technical audit' },
 };
 const PRIO = { ar: 'مشمول', en: 'Included' };
 const AUDIT = {
-  ar: { monthly: 'تدقيق الصفحات والعمل عليها شهريًا', biweekly: 'تدقيق الصفحات والعمل عليها كل أسبوعين', weekly: 'تدقيق الصفحات والعمل عليها أسبوعيًا' },
-  en: { monthly: 'Monthly on-page audit and work', biweekly: 'Bi-weekly on-page audit and work', weekly: 'Weekly on-page audit and work' },
+  ar: { monthly: 'تدقيق صفحات شهري', biweekly: 'تدقيق صفحات كل أسبوعين', weekly: 'تدقيق صفحات أسبوعي' },
+  en: { monthly: 'Monthly on-page audit', biweekly: 'Bi-weekly on-page audit', weekly: 'Weekly on-page audit' },
 };
 /* specFor('ar'|'en', x) -> [Small, Medium, Big], each an array of the 8 row values (string or null). */
 const specFor = (lang, x) => ['s', 'm', 'l'].map((sz) => {
@@ -537,7 +537,7 @@ export const COPY = {
       sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
       /* The eight rows every card shows (Ahmad 2026-10-08), per month. */
-      rowLabels: ['روابط من مواقع أخرى، مجموع قوة النطاق DR', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'كلمات مفتاحية مستهدفة', 'إجابات الذكاء الاصطناعي المتابَعة', 'منافسون متابَعون', 'صفحات جديدة', 'التقارير', 'الأعمال التقنية', 'تدقيق الصفحات والعمل عليها', 'دعم ذو أولوية'],
+      rowLabels: ['روابط من مواقع أخرى، مجموع قوة النطاق DR', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'كلمات مفتاحية مستهدفة', 'إجابات الذكاء الاصطناعي المتابَعة', 'منافسون متابَعون', 'صفحات جديدة', 'التقارير', 'التدقيق التقني', 'تدقيق الصفحات', 'دعم ذو أولوية'],
       plans: [
         { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain'), spec: specFor('ar', 0) },
         { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand'), spec: specFor('ar', 1) },
@@ -903,7 +903,7 @@ export const COPY = {
       sizesLabel: 'Your company size',
       contract: [{ a: '', pct: '10%', b: ' off 6 month contracts' }, { a: '', pct: '20%', b: ' off 12 month contracts' }],
       sizes: ['Small', 'Medium', 'Large'],
-      rowLabels: ['Links from other websites, total DR', 'Pages optimized', 'Local directory listings', 'Target keywords', 'AI answers tracked', 'Tracked competitors', 'New pages', 'Reporting', 'Technical work', 'On-page audit and work', 'Priority support'],
+      rowLabels: ['Links from other websites, total DR', 'Pages optimized', 'Local directory listings', 'Target keywords', 'AI answers tracked', 'Tracked competitors', 'New pages', 'Reporting', 'Technical audit', 'On-page audit', 'Priority support'],
       plans: [
         { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'), spec: specFor('en', 0) },
         { tag: 'x3', name: 'Expand', prices: pkgPrices('expand'), spec: specFor('en', 1) },

@@ -1598,8 +1598,8 @@ Company `شركة نموذجية` / `Sample company`, month `سبتمبر 2026` 
 
 | Row | Small | Medium | Big |
 |---|---|---|---|
-| Technical work / الأعمال التقنية | Monthly technical work / أعمال تقنية شهرية | Bi-weekly technical work / أعمال تقنية كل أسبوعين | Weekly technical work / أعمال تقنية أسبوعية |
-| On-page audit and work / تدقيق الصفحات والعمل عليها | not included (row removed) | Monthly on-page audit and work / تدقيق الصفحات والعمل عليها شهريًا | Bi-weekly on-page audit and work / ... كل أسبوعين |
+| Technical audit / التدقيق التقني | Monthly technical audit / تدقيق تقني شهري | Bi-weekly technical audit / تدقيق تقني كل أسبوعين | Weekly technical audit / تدقيق تقني أسبوعي |
+| On-page audit / تدقيق الصفحات | not included (row removed) | Monthly on-page audit / تدقيق صفحات شهري | Bi-weekly on-page audit / تدقيق صفحات كل أسبوعين |
 | Priority support / دعم ذو أولوية | not included | not included | Included / مشمول |
 
 The report band's text column is NOT changed for these rows (Ahmad: the band must not get taller).
