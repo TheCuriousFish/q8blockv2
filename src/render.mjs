@@ -3,7 +3,7 @@
 // one place. Layout numbers come from design/build-spec.md.
 
 import fs from 'node:fs';
-import { CONFIG, NAP, WORK, ICONS, SAMPLE } from './data.mjs';
+import { CONFIG, NAP, WORK, ICONS, SAMPLE, sampleValue } from './data.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -241,6 +241,8 @@ function checkSample() {
   if (sum(S.services.map((r) => r[0])) !== S.total) throw new Error('sample: services do not sum to total');
   S.services.forEach((r, i) => { if (r[1] + r[2] !== r[0]) throw new Error('sample: service ' + i + ' split != total'); });
   if (sum(S.daily) !== S.clicks) throw new Error('sample: daily does not sum to clicks');
+  const want = sampleValue(S.clicks);
+  if (S.value[0] !== want[0] || S.value[1] !== want[1]) throw new Error('sample: estimated value is not derived from clicks');
 }
 
 function reportChart(daily, rtl) {

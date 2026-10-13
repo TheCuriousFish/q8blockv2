@@ -261,10 +261,16 @@ export const SAMPLE = {
   total: 125, wa: 80, calls: 45,                       // 64% / 36%
   // [total, whatsapp, calls], same order as the names in each language
   services: [[30, 19, 11], [22, 14, 8], [18, 11, 7], [16, 10, 6], [14, 9, 5], [12, 8, 4], [8, 5, 3], [5, 4, 1]],
-  clicks: 2480, impressions: 61200,
-  daily: [49, 54, 61, 53, 67, 74, 63, 58, 70, 79, 84, 72, 68, 82, 91, 88, 77, 86, 96, 102, 89, 81, 95, 105, 110, 100, 91, 105, 116, 114],
-  value: [12000, 14000],                               // SAR, illustrative
+  clicks: 480, impressions: 26500,                    // about 1.8% CTR, as in the real report
+  daily: [10, 10, 12, 10, 13, 14, 12, 12, 14, 15, 16, 14, 13, 16, 18, 17, 15, 17, 19, 20, 17, 16, 18, 20, 21, 19, 18, 20, 22, 22],
+  // Estimated value is DERIVED from the clicks: the real report's basis (500 to 600 KWD for 525 clicks =
+  // 0.95 to 1.14 KWD per click) at 12.2 SAR per KWD, rounded to the nearest 100. See sampleValue().
 };
+
+export const CLICK_KWD = [0.95, 1.14];   // KWD per click, low and high
+export const KWD_TO_SAR = 12.2;
+export const sampleValue = (clicks) => CLICK_KWD.map((k) => Math.round((clicks * k * KWD_TO_SAR) / 100) * 100);
+SAMPLE.value = sampleValue(SAMPLE.clicks);   // [5600, 6700] at 480 clicks
 
 export const COPY = {
   /* ═══════════════════════════ ARABIC ═══════════════════════════ */
