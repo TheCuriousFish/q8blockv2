@@ -410,6 +410,7 @@ export const COPY = {
         ] },
         { title: 'ما تستلمه', items: [
           'تقرير بأرقام حقيقية من موقعك: المكالمات والمحادثات والزيارات من نتائج البحث',
+          'القيمة التقديرية لزياراتك من نتائج البحث بالريال السعودي',
           'شهريًا أو كل أسبوعين أو مباشرة، بحسب حجم شركتك',
         ] },
         { title: 'ما نعمله كل شهر', items: [
@@ -747,7 +748,7 @@ export const COPY = {
     hero: {
       h1: 'Customers <span class="hl">find you</span><br class="brk"> on Google and in AI.',
       // Ahmad's own line, 2026-09-25, verbatim. One line, not a paragraph.
-      lead: "We put you in Google's results and in AI's answers, where your customer is looking.",
+      lead: "We put your services in Google's results and in AI's answers, where your customer is looking.",
       // §24: the tools strip is gone; only the Google mark's accessible name
       // remains. See the Arabic note above.
       cred: {
@@ -805,6 +806,7 @@ export const COPY = {
         ] },
         { title: 'What you receive', items: [
           'A report with real figures from your site: calls, chats and visits from search results',
+          'The estimated value of your search visits, in riyals',
           'Monthly, bi-weekly or live, depending on your company size',
         ] },
         { title: 'What we do every month', items: [

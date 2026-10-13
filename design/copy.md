@@ -158,7 +158,7 @@ finding word, `يلقاك`. The English headline is unchanged.
 |---|---|---|
 | Headline | تبي عميلك يلقاك في جوجل وفي الذكاء الاصطناعي؟ | Customers find you on Google and in AI. |
 | Highlighted word | يلقاك | find you |
-| Subhead | نضع خدماتك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put you in Google's results and in AI's answers, where your customer is looking. |
+| Subhead | نضع خدماتك في نتائج جوجل وفي إجابات الذكاء الاصطناعي، حيث يبحث عميلك | We put your services in Google's results and in AI's answers, where your customer is looking. |
 | CTA primary | اتصل الآن | Call now |
 | CTA secondary | واتساب | WhatsApp |
 

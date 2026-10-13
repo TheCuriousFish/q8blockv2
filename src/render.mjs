@@ -241,6 +241,13 @@ const fmt = (n) => n.toLocaleString('en-US');
 const fill = (str, map) => str.replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : m));
 const ltr = (v) => `<bdi dir="ltr">${v}</bdi>`;
 
+/* The report's estimated click value is in Kuwaiti dinars (the source report is a Kuwait site);
+   the page prints it in Saudi riyals. 1 KWD is about 3.26 USD and the riyal is pegged at 3.75,
+   so about 12.2. Applied HERE, not in report.json. Rounded to the nearest 100: 500 to 600 KWD
+   prints 6,100 to 7,300. */
+const KWD_TO_SAR = 12.2;
+const toSar = (kwd) => Math.round((kwd * KWD_TO_SAR) / 100) * 100;
+
 function reportChart(daily, rtl) {
   const W = 600, H = 120, top = 10, base = 112;
   const max = Math.max(...daily);
@@ -287,7 +294,7 @@ export function report(t) {
     `<li class="rs-kw"${k.lang === 'en' ? ' lang="en" dir="ltr"' : (rtl ? '' : ' lang="ar" dir="rtl"')}>${esc(k.text)}</li>`).join('');
 
   const last = T.daily.length;
-  const m = { d: T.peakDay, n: T.peakVisits, last };
+  const m = { d: T.peakDay, n: T.peakVisits, last, lo: fmt(toSar(T.valueLo)), hi: fmt(toSar(T.valueHi)) };
   const withNums = (str) => esc(fill(str, m)).replace(/(\d[\d,]*)/g, (d) => ltr(d));
 
   return `<section id="report" class="sec on-dark">
@@ -328,6 +335,7 @@ export function report(t) {
                 <p><span class="rs-n">${ltr(fmt(T.clicks))}</span> <span class="rs-k">${esc(r.traffic.clicksK)}</span></p>
                 <p><span class="rs-n">${ltr(fmt(T.impressions))}</span> <span class="rs-k">${esc(r.traffic.imprK)}</span></p>
               </div>
+              <p class="rs-value"><span class="rs-vk">${esc(r.traffic.valueK)}</span> <span class="rs-vv">${withNums(r.traffic.valueV)}</span> <span class="rs-vs">${esc(r.traffic.valueS)}</span></p>
               <div class="rp-chart" role="img" aria-label="${esc(fill(r.traffic.chartLabel, m))}">
                 <div class="rp-plot">${reportChart(T.daily, rtl)}</div>
                 <p class="rp-axisl" aria-hidden="true"><span>${withNums(r.traffic.start)}</span><span>${withNums(fill(r.traffic.end, m))}</span></p>

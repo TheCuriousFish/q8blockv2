@@ -441,6 +441,13 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .rs-tot { order: -1; min-width: 2.2ch; font-size: 18px; font-weight: 800; }
 .rs-kws { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
 .rs-kw { border: 1px solid #B9BEC6; padding: 5px 10px; font-size: 14px; font-weight: 500; line-height: 1.35; }
+.rs-value {
+  margin: 12px 0 0; padding: 10px 12px; background: #FFF1EB; border-inline-start: 4px solid var(--orange);
+  font-size: 15px; line-height: 1.5; color: var(--muted-on-light);
+}
+.rs-vs { display: block; }
+.rs-vk { display: block; font-weight: 700; color: var(--ink); }
+.rs-vv { font-size: 22px; font-weight: 800; color: var(--orange-ink-light); }
 .rp-chart { margin: 12px 0 0; }
 .rp-plot { position: relative; width: 100%; aspect-ratio: 600 / 120; }
 .rp-chart-svg { display: block; width: 100%; height: 100%; overflow: visible; }
@@ -1115,7 +1122,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
           <ul class="rs-list"><li>المكالمات ومحادثات واتساب القادمة من موقعك، حسب الخدمة</li><li>مواقع صفحاتك في نتائج البحث للكلمات المفتاحية المستهدفة</li><li>الروابط من مواقع أخرى ومجموع قوة النطاق DR</li><li>الصفحات المحسّنة والصفحات الجديدة</li><li>إجابات الذكاء الاصطناعي</li><li>المنافسون</li></ul>
         </div><div class="rs-group">
           <h3 class="rs-gh">ما تستلمه</h3>
-          <ul class="rs-list"><li>تقرير بأرقام حقيقية من موقعك: المكالمات والمحادثات والزيارات من نتائج البحث</li><li>شهريًا أو كل أسبوعين أو مباشرة، بحسب حجم شركتك</li></ul>
+          <ul class="rs-list"><li>تقرير بأرقام حقيقية من موقعك: المكالمات والمحادثات والزيارات من نتائج البحث</li><li>القيمة التقديرية لزياراتك من نتائج البحث بالريال السعودي</li><li>شهريًا أو كل أسبوعين أو مباشرة، بحسب حجم شركتك</li></ul>
         </div><div class="rs-group">
           <h3 class="rs-gh">ما نعمله كل شهر</h3>
           <ul class="rs-list"><li>نحسّن صفحاتك ونكتب محتوى محليًا لكل صفحة</li><li>نسجّل نشاطك في أدلة محلية</li><li>نبني الروابط وسلطة النطاق شهرًا بعد شهر</li><li>نتولى الاستضافة والنطاق والحماية والتحديثات التقنية</li></ul>
@@ -1163,6 +1170,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
                 <p><span class="rs-n"><bdi dir="ltr">525</bdi></span> <span class="rs-k">النقرات من نتائج البحث</span></p>
                 <p><span class="rs-n"><bdi dir="ltr">29,797</bdi></span> <span class="rs-k">ظهور الموقع في النتائج</span></p>
               </div>
+              <p class="rs-value"><span class="rs-vk">القيمة التقديرية</span> <span class="rs-vv"><bdi dir="ltr">6,100</bdi> إلى <bdi dir="ltr">7,300</bdi> ر.س</span> <span class="rs-vs">لو جاءت هذه الزيارات من إعلانات جوجل</span></p>
               <div class="rp-chart" role="img" aria-label="الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 27 زيارة يوم 14 سبتمبر">
                 <div class="rp-plot"><svg class="rp-chart-svg" viewBox="0 0 600 120" width="600" height="120" aria-hidden="true" focusable="false" preserveAspectRatio="none">
           <path d="M600,70.4 L579.3,32.7 L558.6,28.9 L537.9,36.4 L517.2,47.8 L496.6,28.9 L475.9,13.8 L455.2,44 L434.5,25.1 L413.8,62.9 L393.1,25.1 L372.4,17.6 L351.7,51.6 L331,10 L310.3,62.9 L289.7,47.8 L269,70.4 L248.3,70.4 L227.6,28.9 L206.9,62.9 L186.2,40.2 L165.5,51.6 L144.8,47.8 L124.1,66.7 L103.4,59.1 L82.8,40.2 L62.1,51.6 L41.4,55.3 L20.7,55.3 L0,70.4 L0,112 L600,112 Z" class="rp-area"/>
