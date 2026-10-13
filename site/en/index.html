@@ -357,7 +357,7 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .rs-grid {
   margin-block-start: 40px;
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px clamp(36px, calc(80/14.4 * 1vw), 88px); align-items: start;
+  gap: 40px clamp(36px, calc(80/14.4 * 1vw), 88px); align-items: center;
 }
 
 .rs-text { display: grid; gap: clamp(26px, calc(36/14.4 * 1vw), 40px); }
@@ -412,15 +412,9 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 }
 .rs-logo-word { font-weight: 800; font-size: 20px; color: var(--ink); }
 .rs-client {
-  display: flex; flex-direction: column; align-items: flex-end; text-align: end;
-  font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--ink);
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted-on-light); white-space: nowrap;
 }
-.rs-month { font-size: 13px; font-weight: 400; color: var(--muted-on-light); }
-.rs-tiles { margin: 10px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.rs-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid #D9DCE1; }
-.rs-tv { font-size: 22px; font-weight: 800; line-height: 1.1; }
-.rs-tl { font-size: 13px; line-height: 1.35; color: var(--muted-on-light); }
-
 .rs-sheet-body { padding: 18px 22px 18px; }
 .rs-label {
   margin: 0; font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--muted-on-light);
@@ -430,7 +424,7 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .rs-big { font-size: 64px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
 .rs-unit { font-size: 20px; font-weight: 700; }
 .rs-bar { display: flex; height: 10px; margin-block-start: 14px; background: #E6E8EC; }
-.rs-bar i { display: block; height: 100%; }
+.rp-seg { display: block; height: 100%; }
 .rs-seg-wa { background: var(--orange); }
 .rs-seg-call { background: var(--ink); }
 .rs-split, .rs-stats { margin-block-start: 10px; display: flex; flex-wrap: wrap; gap: 6px 22px; }
@@ -438,20 +432,12 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .rs-n { font-size: 20px; font-weight: 800; }
 .rs-k { color: var(--muted-on-light); }
 .rs-rows { margin: 4px 0 0; padding: 0; list-style: none; }
-.rs-rows.rs-gap { margin-block-start: 22px; }
 .rs-row {
-  display: grid; grid-template-columns: minmax(0, 12em) 3.4em minmax(0, 1fr); align-items: baseline; gap: 0 12px;
+  display: flex; align-items: baseline; gap: 14px;
   padding-block: 7px; border-block-end: 1px solid #E6E8EC; font-size: 16px; font-weight: 600; line-height: 1.3;
 }
 .rs-row:last-child { border-block-end: 0; }
-.rs-row-h { padding-block: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-on-light); }
-.rs-tot { font-size: 18px; font-weight: 800; text-align: start; }
-.rs-row-h .rs-tot { font-size: 12px; font-weight: 700; }
-.rs-split2 { display: flex; flex-direction: column; font-size: 13px; font-weight: 400; line-height: 1.35; color: var(--muted-on-light); }
-.rs-row-h .rs-split2 { font-size: 12px; font-weight: 700; }
-.rs-kwrows .rs-row { grid-template-columns: minmax(0, 12em) 4em minmax(0, 1fr); }
-.rs-split2.rs-gain { flex-direction: row; flex-wrap: wrap; gap: 0 5px; align-items: baseline; }
-.rs-kwrows .rs-tot { font-size: 16px; }
+.rs-tot { order: -1; min-width: 2.2ch; font-size: 18px; font-weight: 800; }
 .rs-kws { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
 .rs-kw { border: 1px solid #B9BEC6; padding: 5px 10px; font-size: 14px; font-weight: 500; line-height: 1.35; }
 .rs-value {
@@ -484,11 +470,6 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
   .rs-paper { transform: rotate(-2deg); }
   .rs-paper::before { transform: translate(8px, 7px) rotate(3.5deg); }
   .rs-big { font-size: 52px; }
-  .rs-row { grid-template-columns: minmax(0, 1fr) 3.2em minmax(0, 6.6em); gap: 0 8px; font-size: 15px; }
-  .rs-kwrows .rs-row { grid-template-columns: minmax(0, 1fr) 3.2em 5.2em; }
-  .rs-row-h { letter-spacing: 0; font-size: 11px; }
-  .rs-row-h .rs-tot, .rs-row-h .rs-split2 { font-size: 11px; }
-  .rs-split2 { font-size: 12px; }
   .rs-head { padding: 18px 16px 12px; }
   .rs-sheet-body { padding-inline: 16px; }
 }
@@ -1040,6 +1021,15 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 .ss:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
+
+.rs-rows2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: 20px; }
+.rs-rows2 .rs-row:nth-child(4) { border-block-end: 0; }
+.rs-rows2 .rs-row { gap: 10px; font-size: 15px; }
+@media (max-width: 767px) {
+  .rs-rows2 { column-gap: 14px; }
+  .rs-rows2 .rs-row { gap: 6px; font-size: 13px; line-height: 1.25; }
+  .rs-rows2 .rs-tot { font-size: 15px; min-width: 1.6ch; }
+}
 .fl{display:none}
 .js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .35s ease}
 .js:not(.open) body>:not(.fl){visibility:hidden}
@@ -1152,83 +1142,48 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
             <p class="rs-tag">Sample report</p>
             <div class="rs-head">
               <span class="rs-logo" dir="ltr" aria-hidden="true"><span class="rs-logo-box">Q8</span><span class="rs-logo-word">block</span></span>
-              <span class="rs-client">Sample company <span class="rs-month">September <bdi dir="ltr">2026</bdi></span></span>
+              <span class="rs-client">Sample company</span>
             </div>
             <div class="rs-sheet-body">
               <p class="rs-label">Client conversions</p>
               <p class="rs-hero"><span class="rs-big"><bdi dir="ltr">125</bdi></span> <span class="rs-unit">conversions</span></p>
               <div class="rs-bar" role="img" aria-label="WhatsApp and call share: 64% / 36%">
-                <i class="rs-seg-wa" style="width:64%"></i><i class="rs-seg-call" style="width:36%"></i>
+                <i class="rp-seg rs-seg-wa" style="width:64%"></i><i class="rp-seg rs-seg-call" style="width:36%"></i>
               </div>
               <div class="rs-split">
-                <p><span class="rs-n"><bdi dir="ltr">80</bdi></span> <span class="rs-k">WhatsApp chats (<bdi dir="ltr">64%</bdi>)</span></p>
-                <p><span class="rs-n"><bdi dir="ltr">45</bdi></span> <span class="rs-k">Phone calls (<bdi dir="ltr">36%</bdi>)</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">80</bdi></span> <span class="rs-k">WhatsApp chats</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">45</bdi></span> <span class="rs-k">Phone calls</span></p>
               </div>
 
-              <ul class="rs-rows rs-gap"><li class="rs-row rs-row-h" aria-hidden="true"><span class="rs-svc">Top services</span><span class="rs-tot">Leads</span><span class="rs-split2">Split</span></li><li class="rs-row">
+              <p class="rs-label rs-gap">Top services</p>
+              <ul class="rs-rows rs-rows2"><li class="rs-row">
               <span class="rs-svc">Home cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">34</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">22</bdi> WhatsApp</span><span><bdi dir="ltr">12</bdi> calls</span></span>
+              <span class="rs-tot"><bdi dir="ltr">30</bdi></span>
             </li><li class="rs-row">
               <span class="rs-svc">Sofa cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">24</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">15</bdi> WhatsApp</span><span><bdi dir="ltr">9</bdi> calls</span></span>
+              <span class="rs-tot"><bdi dir="ltr">22</bdi></span>
             </li><li class="rs-row">
               <span class="rs-svc">Carpet cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">19</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">12</bdi> WhatsApp</span><span><bdi dir="ltr">7</bdi> calls</span></span>
+              <span class="rs-tot"><bdi dir="ltr">18</bdi></span>
             </li><li class="rs-row">
               <span class="rs-svc">Pest control</span>
-              <span class="rs-tot"><bdi dir="ltr">15</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">10</bdi> WhatsApp</span><span><bdi dir="ltr">5</bdi> calls</span></span>
+              <span class="rs-tot"><bdi dir="ltr">16</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">Water tank cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">12</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">7</bdi> WhatsApp</span><span><bdi dir="ltr">5</bdi> calls</span></span>
+              <span class="rs-svc">Tank cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">14</bdi></span>
             </li><li class="rs-row">
               <span class="rs-svc">Office cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">11</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">7</bdi> WhatsApp</span><span><bdi dir="ltr">4</bdi> calls</span></span>
+              <span class="rs-tot"><bdi dir="ltr">12</bdi></span>
             </li><li class="rs-row">
               <span class="rs-svc">Pool cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">10</bdi></span>
-              <span class="rs-split2"><span><bdi dir="ltr">7</bdi> WhatsApp</span><span><bdi dir="ltr">3</bdi> calls</span></span>
+              <span class="rs-tot"><bdi dir="ltr">8</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">Facade cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">5</bdi></span>
             </li></ul>
 
-              <p class="rs-label rs-gap">Target keywords</p>
-              <ul class="rs-rows rs-kwrows"><li class="rs-row rs-row-h" aria-hidden="true"><span class="rs-svc">Keyword</span><span class="rs-tot">Rank</span><span class="rs-split2">Change</span></li><li class="rs-row">
-              <span class="rs-svc">home cleaning Riyadh</span>
-              <span class="rs-tot"><bdi dir="ltr">3</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">2</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">sofa cleaning Riyadh</span>
-              <span class="rs-tot"><bdi dir="ltr">4</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">1</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">pest control Riyadh</span>
-              <span class="rs-tot"><bdi dir="ltr">5</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">2</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">carpet cleaning Jeddah</span>
-              <span class="rs-tot"><bdi dir="ltr">6</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">3</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">water tank cleaning Dammam</span>
-              <span class="rs-tot"><bdi dir="ltr">7</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">4</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">cleaning company Riyadh</span>
-              <span class="rs-tot"><bdi dir="ltr">8</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">5</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">office cleaning Riyadh</span>
-              <span class="rs-tot"><bdi dir="ltr">9</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">1</bdi></span>
-            </li><li class="rs-row">
-              <span class="rs-svc">villa cleaning Jeddah</span>
-              <span class="rs-tot"><bdi dir="ltr">11</bdi></span>
-              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> up <bdi dir="ltr">6</bdi></span>
-            </li></ul>
+              <p class="rs-label rs-gap">Search keywords</p>
+              <ul class="rs-kws"><li class="rs-kw">home cleaning</li><li class="rs-kw">sofa cleaning</li><li class="rs-kw">pest control</li><li class="rs-kw">carpet washing</li><li class="rs-kw">cleaning Riyadh</li><li class="rs-kw">office cleaning</li></ul>
 
               <p class="rs-label rs-gap">Visits from search results</p>
               <div class="rs-stats">
@@ -1245,9 +1200,6 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
         <span class="rp-peak" style="inset-inline-start:96.55%;top:8.333333333333332%" aria-hidden="true"></span></div>
                 <p class="rp-axisl" aria-hidden="true"><span><bdi dir="ltr">1</bdi> Sep</span><span><bdi dir="ltr">30</bdi> Sep</span></p>
               </div>
-
-              <p class="rs-label rs-gap">Done this month</p>
-              <ul class="rs-tiles"><li class="rs-tile"><span class="rs-tv"><bdi dir="ltr">DR 90</bdi></span><span class="rs-tl">Links from other websites, total DR</span></li><li class="rs-tile"><span class="rs-tv"><bdi dir="ltr">15</bdi></span><span class="rs-tl">Pages optimized</span></li><li class="rs-tile"><span class="rs-tv"><bdi dir="ltr">18</bdi></span><span class="rs-tl">Local directory listings</span></li><li class="rs-tile"><span class="rs-tv"><bdi dir="ltr">18</bdi></span><span class="rs-tl">AI answers tracked</span></li><li class="rs-tile"><span class="rs-tv"><bdi dir="ltr">15</bdi></span><span class="rs-tl">Tracked competitors</span></li><li class="rs-tile"><span class="rs-tv"><bdi dir="ltr">15</bdi></span><span class="rs-tl">New pages</span></li></ul>
             </div>
           </div>
           <figcaption class="rs-note">A sample report with illustrative figures. They are not a client’s real numbers and not a promise of results.</figcaption>

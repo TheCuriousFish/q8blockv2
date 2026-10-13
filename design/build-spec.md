@@ -4731,3 +4731,10 @@ accessibility 100, CLS 0.
   total, or daily != clicks. Arithmetic also re-read from the built HTML in both locales.
 - Caption: "A sample report with illustrative figures. They are not a client's real numbers and not a promise of results."
   (AR mirror). The `Sample report` / `نموذج تقرير` tag stays. `report.json` and `derive-report.mjs` remain as history only.
+
+### 36.6 Sheet layout reverted to the 7a4aa71 design (same day, supersedes 36.5's layout parts)
+- Layout, header, chip keywords, estimated value block, chart and tilt are the 7a4aa71 sheet again. The rank/change
+  table, the Leads/Split header, the stacked WhatsApp/calls second line and the "Done this month" tiles are removed.
+- Only structural change: the top services (8, totals 30/22/18/16/14/12/8/5 = 125) run in two columns of four.
+- Kept: page-language-pure strings, "Sample company" / "شركة نموذجية", sample caption, 125 = 80 + 45, `checkSample()`.
+- Band heights (#report, before = 7a4aa71, after): AR 1440 1410 -> 1383, AR 390 2326 -> 2229, EN 1440 1633 -> 1633, EN 390 2524 -> 2427.
