@@ -1,5 +1,5 @@
 // Q8Block — every section renderer lives here, once. The homepage build and
-// the offer-page build both import from this module, so a change is made in
+// the homepage and the secondary pages all import from this module, so a change is made in
 // one place. Layout numbers come from design/build-spec.md.
 
 import fs from 'node:fs';
@@ -35,9 +35,9 @@ export function ctaRow(t, { centred = false } = {}) {
 // Omitted, it falls back to the two pages that existed before the secondary
 // pages were built.
 export function header(t, page, self) {
-  const home = self || (page === 'offer' ? t.offer : t.home);
+  const home = self || t.home;
   const links = t.nav.map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join('');
-  return `<header class="site-header${page === 'offer' ? ' over-dark' : ''}">
+  return `<header class="site-header">
     <div class="sec-wide"><div class="wrap-wide header-row">
       ${logo(t.lang === 'ar' ? '/' : '/en/')}
       <nav class="nav" id="nav">
@@ -82,54 +82,6 @@ export function footer(t, self) {
       </div>
     </div></div>
   </footer>`;
-}
-
-/* ── §2 offer strip and the countdown.
-      Both states are written: full (countdown running) and static
-      (countdown removed / spots empty). app.js swaps to the static state
-      the moment the end date passes. ────────────────────────────────────── */
-const hasCountdown = () => {
-  if (!CONFIG.COUNTDOWN_END) return false;
-  const t = Date.parse(CONFIG.COUNTDOWN_END);
-  return !!t && !isNaN(t) && t > Date.now();
-};
-const hasSpots = () => CONFIG.SPOTS !== null && CONFIG.SPOTS !== undefined && CONFIG.SPOTS !== '' && Number(CONFIG.SPOTS) > 0;
-
-// Rebuilt 2026-09-24 to Ahmad's three instructions:
-//   1. the separate "Terms and details" row is DELETED — it took a whole row;
-//   2. everything sits on ONE row: pill, line, countdown, spots, CTA;
-//   3. the WHOLE bar is the link to /offer/, so `#offer-strip` is itself the
-//      <a> and the full-bleed band is the hit area, not a 1320px centre.
-// The pill stays (he likes it) but is restyled as a label, because the row now
-// carries a real CTA and two things could not both read as the action.
-// Both degraded states still produce one complete row: with the countdown
-// removed (app.js strips every [data-countdown-part]) and with SPOTS empty.
-export function offerStrip(t) {
-  const s = t.strip;
-  const live = hasCountdown();
-  const parts = [`<span class="strip-pill">${esc(s.pill)}</span>`, `<span class="strip-line">${esc(s.line)}</span>`];
-
-  if (live) {
-    parts.push(`<span class="strip-sep" data-countdown-part aria-hidden="true">&middot;</span>`);
-    parts.push(`<span class="strip-label" data-countdown-part>${esc(s.countdownLabel)}</span>`);
-    parts.push(`<span class="countdown" data-countdown data-countdown-part>&nbsp;</span>`);
-  }
-  if (hasSpots()) {
-    parts.push(`<span class="strip-sep" aria-hidden="true">&middot;</span>`);
-    parts.push(`<span class="strip-spots">${s.spots(CONFIG.SPOTS)}</span>`);
-  }
-  // shown when there is no countdown, and revealed by app.js when one expires
-  parts.push(`<span class="strip-spots" data-countdown-fallback${live ? ' hidden' : ''}>${esc(s.statusLine)}</span>`);
-  parts.push(`<span class="strip-cta">${esc(s.cta)}<span class="chev" aria-hidden="true">&rsaquo;</span></span>`);
-
-  // .strip-slot holds the bar's height in the flow. When app.js pins the bar
-  // under the header it goes position:fixed and the slot keeps its measured
-  // height, so the document never changes height and CLS stays 0.
-  return `<div class="strip-slot">
-    <a id="offer-strip" class="sec on-dark" href="${t.offer.path}"${live ? ` data-countdown-end="${CONFIG.COUNTDOWN_END}"` : ''}>
-      <span class="wrap strip-row">${parts.join('')}</span>
-    </a>
-  </div>`;
 }
 
 /* ── §1 Hero ─────────────────────────────────────────────────────────────── */
@@ -202,17 +154,14 @@ export function hero(t) {
   </section>`;
 }
 
-/* ── §1 + §2 together: the first screen ──────────────────────────────────
-   On a large monitor the hero used to be sized by its content, so it ended
-   early, the offer strip stranded itself mid-screen and §3 peeked through
-   underneath. The two now share one `min-height: 100svh` flex column: the hero
-   grows to fill whatever is left and the strip is pinned to the bottom of it,
-   so the first viewport is exactly header, hero, strip and nothing else.
+/* ── §1 the first screen ─────────────────────────────────────────────────
+   The hero fills exactly one viewport: a `min-height: 100svh` flex column.
+   The offer strip that used to share it was removed 2026-10-13, so the hero
+   is now the whole column and §3 starts at the fold.
    `svh`, not `vh`, so mobile browser chrome cannot clip it. ─────────────── */
 export function firstScreen(t) {
   return `<div class="first-screen">
 ${hero(t)}
-${offerStrip(t)}
 </div>`;
 }
 
@@ -288,18 +237,14 @@ const REPORT = JSON.parse(fs.readFileSync(new URL('./report.json', import.meta.u
 // The header label on every report card. Ahmad, 2026-10-08: "change it to clean.com", so the
 // real client and the month are not named. The figures underneath are still the real report's.
 const REPORT_LABEL = 'clean.com';
-const REPORT_PAGES = [1, 2, 3, 4];   // shown 1 to 4: the report's own numbers skip 3, which read as a missing page
-const KW_COUNT = 12;
 const fmt = (n) => n.toLocaleString('en-US');
 const fill = (str, map) => str.replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : m));
 const ltr = (v) => `<bdi dir="ltr">${v}</bdi>`;
-/* The report's estimated click value is in Kuwaiti dinars (the source report is a
-   Kuwait site). The homepage prints it in Saudi riyals (Ahmad, 2026-10-08).
-   KWD_TO_SAR, set 2026-10-08: 1 KWD is about 3.26 USD and the riyal is pegged at
-   3.75 to the dollar, so 3.26 x 3.75 = about 12.2. One-line change when the rate
-   moves. Applied HERE, not in report.json, so re-running derive-report.mjs keeps
-   the dinar range it reads from the report and can never undo the conversion.
-   Rounded to the nearest 100: 500 to 600 KWD prints 6,100 to 7,300. */
+
+/* The report's estimated click value is in Kuwaiti dinars (the source report is a Kuwait site);
+   the page prints it in Saudi riyals. 1 KWD is about 3.26 USD and the riyal is pegged at 3.75,
+   so about 12.2. Applied HERE, not in report.json. Rounded to the nearest 100: 500 to 600 KWD
+   prints 6,100 to 7,300. */
 const KWD_TO_SAR = 12.2;
 const toSar = (kwd) => Math.round((kwd * KWD_TO_SAR) / 100) * 100;
 
@@ -321,86 +266,85 @@ function reportChart(daily, rtl) {
         <span class="rp-peak" style="inset-inline-start:${(rtl ? (W - peak[0]) : peak[0]) / W * 100}%;top:${peak[1] / H * 100}%" aria-hidden="true"></span>`;
 }
 
-function reportHead() {
-  return `<div class="rp-top">
-        <span class="rp-logo" dir="ltr" aria-hidden="true"><span class="rp-logo-box">Q8</span><span class="rp-logo-word">block</span></span>
-        <span class="rp-tag" dir="ltr">${esc(REPORT_LABEL)}</span>
-      </div>`;
-}
-
-function reportCard(t, i, label, body, cls) {
-  return `<li class="rp-item">
-      <article class="rp-card ${cls}" aria-labelledby="rp-h${i}">
-        ${reportHead()}
-        <div class="rp-body">
-          <h3 class="rp-label" id="rp-h${i}">${esc(label)}</h3>
-          ${body}
-        </div>
-      </article>
-      <p class="rp-cap">${esc(t.page)} ${REPORT_PAGES[i]}</p>
-    </li>`;
-}
+/* The paper sheet. Built from the real report's own figures (src/report.json), tagged as a
+   sample, so the 88 on it can never read as the visitor's own result. It is one white sheet,
+   tilted, with a second sheet peeking out behind it. Everything on it is real text. */
+const SHEET_SERVICES = 4;
+const SHEET_KEYWORDS = 6;
 
 export function report(t) {
   const r = t.report;
+  const s = r.sample;
   const rtl = t.lang === 'ar';
   const C = REPORT.conversions;
   const T = REPORT.traffic;
 
-  const conv = `<p class="rp-hero"><span class="rp-big">${ltr(C.total)}</span> <span class="rp-unit">${esc(r.conv.unit)}</span></p>
-          <div class="rp-bar" role="img" aria-label="${esc(r.conv.barLabel)}: ${C.waPct}% / ${C.callPct}%">
-            <i class="rp-seg rp-seg-wa" style="width:${C.waPct}%"></i><i class="rp-seg rp-seg-call" style="width:${C.callPct}%"></i>
-          </div>
-          <div class="rp-barnums" aria-hidden="true"><span>${ltr(C.waPct + '%')}</span><span>${ltr(C.callPct + '%')}</span></div>
-          <div class="rp-split">
-            <p class="rp-sp rp-sp-wa"><span class="rp-n">${ltr(C.wa)}</span><span class="rp-k">${esc(r.conv.wa)}</span><span class="rp-pc">${ltr(C.waPct + '%')}</span></p>
-            <p class="rp-sp rp-sp-call"><span class="rp-n">${ltr(C.call)}</span><span class="rp-k">${esc(r.conv.call)}</span><span class="rp-pc">${ltr(C.callPct + '%')}</span></p>
-          </div>`;
+  const groups = r.groups.map((g) => `<div class="rs-group">
+          <h3 class="rs-gh">${esc(g.title)}</h3>
+          <ul class="rs-list">${g.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+        </div>`).join('');
 
-  const mix = (row) => {
-    const parts = [];
-    if (row.calls) {
-      const w = Array.isArray(r.svc.calls) ? r.svc.calls[row.calls === 1 ? 0 : 1] : r.svc.calls;
-      parts.push(`${ltr(row.calls)} ${esc(w)}`);
-    }
-    if (row.wa) parts.push(`${ltr(row.wa)} ${esc(r.svc.wa)}`);
-    return parts.join(' · ');
-  };
-  const svc = `<ol class="rp-rows">${REPORT.services.map((row) => `<li class="rp-row">
-            <span class="rp-rk" aria-hidden="true">${ltr(row.n)}</span>
-            <span class="rp-name">${esc(rtl ? row.ar : r.svc.names[row.ar])}<span class="rp-mix">${mix(row)}</span></span>
-            <span class="rp-tot">${ltr(row.total)}</span>
-          </li>`).join('')}</ol>`;
+  const svcName = (row) => esc(rtl ? row.ar : r.svc.names[row.ar]);
+  const services = REPORT.services.slice(0, SHEET_SERVICES).map((row) => `<li class="rs-row">
+              <span class="rs-svc">${svcName(row)}</span>
+              <span class="rs-tot">${ltr(row.total)}</span>
+            </li>`).join('');
 
-  const kw = `<p class="rp-sub">${esc(r.kw.sub)}</p>
-          <ul class="rp-tags">${REPORT.keywords.slice(0, KW_COUNT).map((k) =>
-            `<li class="rp-tagk${k.hot ? ' hot' : ''}"${k.lang === 'en' ? ' lang="en" dir="ltr"' : (rtl ? '' : ' lang="ar" dir="rtl"')}>${esc(k.text)}</li>`).join('')}</ul>`;
+  const kws = REPORT.keywords.slice(0, SHEET_KEYWORDS).map((k) =>
+    `<li class="rs-kw"${k.lang === 'en' ? ' lang="en" dir="ltr"' : (rtl ? '' : ' lang="ar" dir="rtl"')}>${esc(k.text)}</li>`).join('');
 
   const last = T.daily.length;
-  const m = { d: T.peakDay, n: T.peakVisits, lo: fmt(toSar(T.valueLo)), hi: fmt(toSar(T.valueHi)), last };
-  const stat = (k, v, sub, cls = '') => `<div class="rp-stat ${cls}"><p class="rp-sk">${esc(k)}</p><p class="rp-sv">${v}</p><p class="rp-ss">${sub}</p></div>`;
+  const m = { d: T.peakDay, n: T.peakVisits, last, lo: fmt(toSar(T.valueLo)), hi: fmt(toSar(T.valueHi)) };
   const withNums = (str) => esc(fill(str, m)).replace(/(\d[\d,]*)/g, (d) => ltr(d));
-  const traffic = `<div class="rp-stats">
-            ${stat(r.traffic.clicksK, ltr(fmt(T.clicks)), esc(r.traffic.clicksS), 'key')}
-            ${stat(r.traffic.imprK, ltr(fmt(T.impressions)), esc(r.traffic.imprS))}
-            ${stat(r.traffic.peakK, withNums(r.traffic.peakV), withNums(r.traffic.peakS), 'small')}
-            ${stat(r.traffic.valueK, withNums(r.traffic.valueV), esc(r.traffic.valueS), 'small')}
-          </div>
-          <figure class="rp-chart" role="img" aria-label="${esc(fill(r.traffic.chartLabel, m))}">
-            <div class="rp-plot">${reportChart(T.daily, rtl)}</div>
-            <figcaption class="rp-axisl" aria-hidden="true"><span>${withNums(r.traffic.start)}</span><span>${withNums(fill(r.traffic.end, m))}</span></figcaption>
-          </figure>`;
 
   return `<section id="report" class="sec on-dark">
     <div class="wrap">
       <p class="eyebrow">${esc(r.eyebrow)}</p>
       <h2 class="h2">${r.h2}</h2>
-      <ul class="rp-grid" aria-label="${esc(r.gridLabel)}">
-        ${reportCard(r, 0, r.conv.label, conv, 'rp-conv')}
-        ${reportCard(r, 1, r.svc.label, svc, 'rp-svc')}
-        ${reportCard(r, 2, r.kw.label, kw, 'rp-kw')}
-        ${reportCard(r, 3, r.traffic.label, traffic, 'rp-traffic')}
-      </ul>
+      <div class="rs-grid">
+        <div class="rs-text">
+          ${groups}
+          <p class="rs-foot">${esc(r.groupsNote)}</p>
+        </div>
+        <figure class="rs-stage">
+          <div class="rs-paper">
+            <p class="rs-tag">${esc(s.tag)}</p>
+            <div class="rs-head">
+              <span class="rs-logo" dir="ltr" aria-hidden="true"><span class="rs-logo-box">Q8</span><span class="rs-logo-word">block</span></span>
+              <span class="rs-client" dir="ltr">${esc(REPORT_LABEL)}</span>
+            </div>
+            <div class="rs-sheet-body">
+              <p class="rs-label">${esc(r.conv.label)}</p>
+              <p class="rs-hero"><span class="rs-big">${ltr(C.total)}</span> <span class="rs-unit">${esc(r.conv.unit)}</span></p>
+              <div class="rs-bar" role="img" aria-label="${esc(r.conv.barLabel)}: ${C.waPct}% / ${C.callPct}%">
+                <i class="rp-seg rs-seg-wa" style="width:${C.waPct}%"></i><i class="rp-seg rs-seg-call" style="width:${C.callPct}%"></i>
+              </div>
+              <div class="rs-split">
+                <p><span class="rs-n">${ltr(C.wa)}</span> <span class="rs-k">${esc(r.conv.wa)}</span></p>
+                <p><span class="rs-n">${ltr(C.call)}</span> <span class="rs-k">${esc(r.conv.call)}</span></p>
+              </div>
+
+              <p class="rs-label rs-gap">${esc(s.topServices)}</p>
+              <ul class="rs-rows">${services}</ul>
+
+              <p class="rs-label rs-gap">${esc(r.kw.label)}</p>
+              <ul class="rs-kws">${kws}</ul>
+
+              <p class="rs-label rs-gap">${esc(r.traffic.label)}</p>
+              <div class="rs-stats">
+                <p><span class="rs-n">${ltr(fmt(T.clicks))}</span> <span class="rs-k">${esc(r.traffic.clicksK)}</span></p>
+                <p><span class="rs-n">${ltr(fmt(T.impressions))}</span> <span class="rs-k">${esc(r.traffic.imprK)}</span></p>
+              </div>
+              <p class="rs-value"><span class="rs-vk">${esc(r.traffic.valueK)}</span> <span class="rs-vv">${withNums(r.traffic.valueV)}</span> <span class="rs-vs">${esc(r.traffic.valueS)}</span></p>
+              <div class="rp-chart" role="img" aria-label="${esc(fill(r.traffic.chartLabel, m))}">
+                <div class="rp-plot">${reportChart(T.daily, rtl)}</div>
+                <p class="rp-axisl" aria-hidden="true"><span>${withNums(r.traffic.start)}</span><span>${withNums(fill(r.traffic.end, m))}</span></p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="rs-note">${esc(s.note)}</figcaption>
+        </figure>
+      </div>
     </div>
   </section>`;
 }
@@ -540,11 +484,15 @@ export function pricing(t) {
   const sw = p.sizes.map((label, i) => `<input class="psw-in" type="radio" name="psize" id="psize-${PSIZE[i]}" value="${PSIZE[i]}"${i === 0 ? ' checked' : ''}><label class="psw-pill" for="psize-${PSIZE[i]}">${esc(label)}</label>`).join('');
   const cards = p.plans.map((plan, i) => {
     const amounts = plan.prices.map((v, k) => `<span class="pa pa-${PSIZE[k]}">${esc(v)}</span>`).join('');
-    /* All 8 rows on every card; all 3 sizes' values are in the markup and CSS shows the checked one.
-       A row the size does not include is an empty, greyed cell with no tick. */
-    const features = `<dl class="plan-spec">${p.rowLabels.map((label, r) => `<div class="ps-row"><dt>${esc(label)}</dt><dd>${plan.spec.map((sz, k) => sz[r] == null
-      ? `<span class="pv pv-${PSIZE[k]} pv-empty"><span class="vh">${esc(p.notIncluded)}</span></span>`
-      : `<span class="pv pv-${PSIZE[k]}">${esc(sz[r])}</span>`).join('')}</dd></div>`).join('')}</dl>`;
+    /* Up to 8 rows per card; all 3 sizes' values are in the markup and CSS shows the checked one.
+       A row a size does not include carries `no-<size>` and is NOT DRAWN for that size
+       (display:none: no greyed cell, no dash, not in the accessibility tree either). */
+    const features = `<dl class="plan-spec">${p.rowLabels.map((label, r) => {
+      const no = plan.spec.map((sz, k) => (sz[r] == null ? ` no-${PSIZE[k]}` : '')).join('');
+      return `<div class="ps-row${no}"><dt>${esc(label)}</dt><dd>${plan.spec.map((sz, k) => (sz[r] == null
+        ? ''
+        : `<span class="pv pv-${PSIZE[k]}">${esc(sz[r])}</span>`)).join('')}</dd></div>`;
+    }).join('')}</dl>`;
     return `<li class="plan${i === 1 ? ' plan-featured' : ''}">
       <p class="plan-tag"><span class="xtag" dir="ltr">${esc(plan.tag)}</span></p>
       <h3 class="plan-name">${esc(plan.name)}</h3>
@@ -595,208 +543,6 @@ export function finalCall(t, { id = 'final', h2, lead } = {}) {
       <h2>${h2 || t.final.h2}</h2>
       <p class="lead">${esc(lead || t.final.lead)}</p>
       ${ctaRow(t, { centred: true })}
-    </div>
-  </section>`;
-}
-
-/* ══ Offer page sections — built from design/boards/offer-1..3.png with the
-     homepage's tokens, type scale and components. ══════════════════════════ */
-
-/* The anchor, added 2026-09-30 when the offer stopped being free.
-
-   2026-10-08 (build-spec §33): THE OFFER IS FREE AGAIN. The second row now reads
-   "This offer / free for six months" and there is NO note: the "one payment, not
-   monthly" line only existed to stop 500 reading as monthly, and there is no
-   500 any more. `p.note` is optional; leave it unset. The history below is the
-   paid version's reasoning, kept for the record.
-
-   Two rows carrying the SAME NUMBER with DIFFERENT UNITS, nothing between them
-   and no third element competing: "Normal price / from 997 per month" (since
-   2026-10-08 the lowest package price, computed in data.mjs, build-spec §32) over
-   "This offer / 500 one time, covers six months".
-
-   THERE IS NO "you save 2,500" LINE AND THERE NEVER WILL BE. A savings claim
-   reads as a discount gimmick and it makes the reader argue with the figure
-   instead of with the competitor's quote. Two numbers, side by side, nothing else.
-
-   `price.note` is the anti-confusion line and it is the reason this block exists
-   at all: if a reader leaves thinking it is 500 a MONTH for six months, the offer
-   and the trust both die. It is written in the shortest words there are and it is
-   repeated wherever the number appears (hero, B2 intro, B4, two FAQ answers).
-
-   The two pairs are a <dl>, not a table: they are label/value pairs, and that is
-   also what gives a screen reader the pairing without any ARIA. The note sits
-   OUTSIDE the <dl> on purpose — a <dl> may only contain dt, dd and div, so a <p>
-   inside it is invalid HTML. */
-function priceAnchor(p) {
-  if (!p) return '';
-  return `<div class="price-anchor">
-      <dl class="pa-pair">
-        <div class="pa-row pa-was">
-          <dt>${esc(p.anchorLabel)}</dt><dd>${esc(p.anchorValue)}</dd>
-        </div>
-        <div class="pa-row pa-now">
-          <dt>${esc(p.offerLabel)}</dt><dd>${esc(p.offerValue)}</dd>
-        </div>
-      </dl>
-      ${p.note ? `<p class="pa-note">${esc(p.note)}</p>` : ''}
-    </div>`;
-}
-
-export function offerHero(t) {
-  const o = t.offerPage;
-  const live = hasCountdown();
-  const boxes = ['d', 'h', 'm', 's'].map((k, i) => `<div class="count-box">
-      <b data-count="${k}">&nbsp;</b><span>${esc(o.units[i])}</span>
-    </div>`).join('');
-  return `<section id="offer-hero" class="sec-wide on-dark"${live ? ` data-countdown-end="${CONFIG.COUNTDOWN_END}"` : ''}>
-    <div class="wrap-wide">
-      <span class="strip-pill">${esc(o.pill)}</span>
-      <h1>${o.h1}</h1>
-      <p class="lead">${esc(o.lead)}</p>
-      ${priceAnchor(o.price)}
-      ${live ? `<p class="count-label" data-countdown-part>${esc(o.countdownLabel)}</p>
-      <div class="count-boxes" data-countdown-part>${boxes}</div>` : ''}
-      <p class="offer-spots" data-countdown-fallback${live ? ' hidden' : ''}>${esc(o.statusLine)}</p>
-      ${hasSpots() ? `<p class="offer-spots">${o.spots(CONFIG.SPOTS)}</p>` : ''}
-      ${ctaRow(t, { centred: true })}
-    </div>
-  </section>`;
-}
-
-export function offerIncluded(t) {
-  const b = t.offerPage.b2;
-  const rows = b.items.map((label, i) => `<li class="offer-row">
-      <img src="/assets/img/icon-${ICONS[i]}.webp" width="60" height="60" alt="" loading="lazy" decoding="async">
-      <span class="t">${esc(label)}</span>
-    </li>`).join('');
-  return `<section id="offer-included" class="sec offer-sec plain on-dark">
-    <div class="wrap">
-      <h2>${esc(b.title)}</h2>
-      <p class="lead">${esc(b.intro)}</p>
-      <ul class="offer-rows">${rows}</ul>
-    </div>
-  </section>`;
-}
-
-/* B2b, the proof block. Added 2026-09-30, and it is the one place on this page
-   where a performance figure appears — copy.md Part B used to forbid them here
-   outright. Ahmad overrode that when the offer stopped being free: a reader who
-   is being asked for money wants to see what the six months do before he pays.
-
-   The image is an UNEDITED Google Search Console export for kwtclean.com, a real
-   client site, kept byte-for-byte at design/proof-shots/ and converted to WebP at
-   its own pixel size by that folder's derive.mjs. It is never cropped further,
-   retouched or recoloured, and no number in it is altered — see SOURCES.md there.
-
-   Explicit width and height on the image element, so the box is reserved before
-   the file decodes and CLS stays 0. It is `loading="lazy"`: it sits well below
-   the fold, which is the opposite of §20.6's first-viewport rule and right here.
-
-   IT PANS ON A PHONE INSTEAD OF SHRINKING, AND THAT IS THE WHOLE POINT OF IT.
-   The export is 2243px of a wide chart. Scaled to fit a 350px phone box it
-   renders "1.99K" about 5px tall, which makes the one piece of evidence on the
-   page unreadable on the device 99% of the traffic uses — a proof nobody can
-   read is not proof. So below 1000px the image keeps a 1000px floor inside a
-   horizontally scrollable wrapper and the reader swipes it. It is NEVER cropped
-   to fit: this is a real export and the crop it has is the one Ahmad supplied.
-
-   The wrapper is `tabindex="0"` with a role and a label, because axe requires a
-   scrollable region to be keyboard reachable (`scrollable-region-focusable`);
-   that also gives arrow-key panning for free. The hint line is `aria-hidden`:
-   it tells a sighted phone reader the panel scrolls, and a screen reader
-   already has the whole panel described in the image's alt.
-
-   The section names the client and both dates, because the page's credibility
-   rests on a reader being able to go and check. Nothing beside it averages the
-   figures, projects them, promises them to the reader or calls them typical. */
-const PROOF_W = 2243, PROOF_H = 582;
-export function offerProof(t) {
-  const b = t.offerPage.proof;
-  return `<section id="offer-proof" class="sec offer-sec plain on-dark">
-    <div class="wrap">
-      <h2>${esc(b.title)}</h2>
-      <p class="lead">${esc(b.intro)}</p>
-      <figure class="proof-shot">
-        <div class="proof-pan" tabindex="0" role="group" aria-label="${esc(b.panLabel)}">
-          <img src="/assets/img/proof-kwtclean-gsc.webp" width="${PROOF_W}" height="${PROOF_H}"
-               alt="${esc(b.alt)}" loading="lazy" decoding="async">
-        </div>
-        <p class="proof-hint" aria-hidden="true">${esc(b.hint)}</p>
-        <p class="proof-meta">${esc(b.meta)}</p>
-        <figcaption>${esc(b.caption)}</figcaption>
-      </figure>
-      <p class="proof-source">${esc(b.source)}</p>
-    </div>
-  </section>`;
-}
-
-export function offerEligibility(t) {
-  const b = t.offerPage.b3;
-  const rows = b.items.map((label, i) => `<li class="offer-row ruled">
-      <span class="n" aria-hidden="true">${i + 1}</span><span class="t">${esc(label)}</span>
-    </li>`).join('');
-  return `<section id="offer-eligibility" class="sec offer-sec tint on-dark">
-    <div class="wrap">
-      <h2>${esc(b.title)}</h2>
-      <p class="lead">${esc(b.intro)}</p>
-      <ul class="offer-rows">${rows}</ul>
-      ${hasSpots() ? `<p class="offer-spots">${t.offerPage.spots(CONFIG.SPOTS)}</p>` : ''}
-    </div>
-  </section>`;
-}
-
-export function offerNoContract(t) {
-  const b = t.offerPage.b4;
-  return `<section id="offer-nocontract" class="sec">
-    <div class="wrap">
-      <h2>${esc(b.title)}</h2>
-      <p>${esc(b.body)}</p>
-    </div>
-  </section>`;
-}
-
-/* B5, rebuilt 2026-09-30. It used to be three numbered options (continue on a
-   plan / keep the site on a small fee / stop). It is now the three monthly tiers
-   Ahmad named, 500, 1,000 and 1,500, plus stopping.
-
-   PRICES ONLY, AND THAT IS DELIBERATE. Ahmad gave the three figures and NOT what
-   differs between them. Nothing here invents a service level, a page count, an
-   hours figure or a feature list to fill the tiles out, because an invented tier
-   spec on a page whose whole argument is that its figures are checkable is the
-   worst possible place to make something up. `notes[0]` says what is true instead:
-   the contents are agreed on the call, which is also what copy-pages.md T6 says of
-   everything project specific. Fill these in only when Ahmad supplies them. */
-/* REBUILT 2026-10-08 (build-spec §32). The three tiers became Ahmad's three
-   packages, each priced by company size. Built from `t.pricing.plans` and
-   `t.pricing.sizes` (the homepage §7b data) so no price is retyped. Names, tags
-   and prices only: the check lines stay on the homepage. Each box is a <dl> of
-   size / price pairs, low to high in reading order. */
-export function offerAfter(t) {
-  const b = t.offerPage.b5;
-  const sizes = t.pricing.sizes;
-  const tiers = t.pricing.plans.map((p) => `<li class="tier tier-pkg">
-      <p class="tier-head"><span class="tier-name">${esc(p.name)}</span> <span class="tier-tag xtag" dir="ltr">${esc(p.tag)}</span></p>
-      <dl class="tier-sizes">${p.prices.map((price, i) => `<div><dt>${esc(sizes[i])}</dt><dd><span class="tier-price">${esc(price)}</span></dd></div>`).join('')}</dl>
-      <span class="tier-unit">${esc(b.tierUnit)}</span>
-    </li>`).join('');
-  const notes = b.notes.map((n) => `<p>${esc(n)}</p>`).join('');
-  return `<section id="offer-after" class="sec offer-sec tint on-dark">
-    <div class="wrap">
-      <h2>${esc(b.title)}</h2>
-      <p class="lead">${esc(b.intro)}</p>
-      <ul class="tier-row">${tiers}</ul>
-      <div class="tier-notes">${notes}</div>
-    </div>
-  </section>`;
-}
-
-export function offerFaq(t) {
-  const b = t.offerPage.b6;
-  return `<section id="offer-faq" class="sec on-dark">
-    <div class="wrap">
-      <h2>${esc(b.title)}</h2>
-      ${accordion(b.items, 'ofaq')}
     </div>
   </section>`;
 }
@@ -1122,4 +868,4 @@ if(p.dataset.bg){var b=new Image();b.src=p.dataset.bg;if(b.decode)w.push(b.decod
 if(d.fonts&&d.fonts.load)f.forEach(function(s){w.push(d.fonts.load(s,t||'a'))});
 Promise.all(w).then(open,open)})()</script>`;
 
-export { esc, telHref, waHref, hasCountdown, hasSpots };
+export { esc, telHref, waHref };

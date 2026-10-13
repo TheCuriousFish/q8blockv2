@@ -22,6 +22,33 @@
   status = 301
   force = true
 
+# --- The offer was removed (2026-10-13) -----------------------------------------
+# /offer/ and /en/offer/ (and anything under them) go to the matching homepage.
+# They sit above the /ar/* wildcard, like the checklist rule.
+[[redirects]]
+  from = "/offer/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/offer/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/offer/"
+  to = "/en/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/offer/*"
+  to = "/en/"
+  status = 301
+  force = true
+
 # --- Language flip -----------------------------------------------------------
 # The old site served English at / and Arabic at /ar/. The new site is Arabic
 # first at / with the English mirror at /en/. 478 links from client sites point

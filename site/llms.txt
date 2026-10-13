@@ -8,8 +8,6 @@
 
 - [Home, Arabic](https://q8block.com/)
 - [Home, English](https://q8block.com/en/)
-- [The offer, Arabic](https://q8block.com/offer/)
-- [The offer, English](https://q8block.com/en/offer/)
 - [About us, Arabic](https://q8block.com/about/)
 - [About us, English](https://q8block.com/en/about/)
 - [Blog, Arabic](https://q8block.com/blog/)
