@@ -436,87 +436,6 @@ html[lang="ar"] .nav a { font-weight: 400; }
    Measured in Chrome with getBBox, not guessed — build-spec §24. */
 .cred-word { display: block; height: clamp(23px, calc(30/14.4 * 1vw), 33px); width: auto; margin-block-start: 6px; }
 
-/* ══ §6 row 2 — Offer strip. 78px tall, ONE centred row, and the whole band is
-      the link to /offer/. Rebuilt 2026-09-24 to Ahmad's instruction: the
-      separate "Terms and details" row is deleted, everything lives on one row,
-      the entire bar is clickable and the row carries a real CTA. Must still
-      read correctly with the countdown removed and the spots line absent. ══ */
-.strip-slot { flex: none; }        /* holds the bar's height in the flow while it is pinned */
-#offer-strip {
-  background: var(--bg-strip); color: var(--ink-invert);
-  padding-block: 19.5px; min-height: 78px;
-  display: flex; align-items: center;
-  text-decoration: none; cursor: pointer;
-  transition: background 0.2s ease;
-}
-#offer-strip:hover { background: #1C1D22; }
-#offer-strip:hover .strip-cta { opacity: 0.9; }
-#offer-strip:focus-visible { box-shadow: none; outline: 3px solid var(--orange); outline-offset: -3px; }
-
-/* Pinned state. app.js adds .stuck once the bar's own top passes under the
-   header; .strip-slot keeps the 78px in the flow, so the document height never
-   changes and CLS stays 0. Slim when stuck — it must not eat the page. */
-#offer-strip.stuck {
-  position: fixed; inset-block-start: var(--header-h); inset-inline: 0; z-index: 80;
-  min-height: 0; padding-block: 9px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
-}
-#offer-strip.stuck .strip-row { gap: 8px 18px; }
-#offer-strip.stuck .strip-pill { padding: 6px 14px; }
-#offer-strip.stuck .strip-cta { padding: 6px 16px; }
-
-/* The strip belongs to the first screen, so its row runs on the header + hero
-   1500px column, not the 1320px body column. At 1920 the one row measures
-   1326px: inside 1320 it wrapped to two rows and the band doubled to 129px,
-   which broke "one row" and pushed the fold. */
-#offer-strip > .wrap { max-width: 1500px; }
-.strip-row {
-  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
-  gap: 12px 22px; width: 100%;
-  font-size: var(--fs-strip); font-weight: 400; line-height: 1.2;
-}
-/* The pill is a LABEL, not the action. Ahmad likes it and it stays, but he
-   noted it read like a CTA — so the fill moved to the CTA beside it and the
-   pill became an outline. Same size, same 100px radius, same 700 weight, same
-   brand orange. #FF5F29 on #121215 is 6.23:1, so this also clears the one
-   contrast node that used to hold the homepage at 96. The offer page's own
-   hero pill is NOT touched: that is an approved board. */
-#offer-strip .strip-pill {
-  background: transparent; color: var(--orange);
-  border: 1px solid rgba(255, 95, 41, 0.6);
-  padding: 9px 18px;
-}
-/* The offer page's own hero pill, the last white-on-orange text on the site:
-   white on #FF5F29 is 3.03:1 and 18px is the board-locked size, under the
-   18.66px large-text floor even at weight 700. #141415 measures 6.07:1 on
-   the same fill — black on orange, fill unchanged — matching how the
-   homepage strip pill was already fixed (§15.3). Ahmad's decision,
-   2026-09-24 (build-spec.md §17). */
-.strip-pill {
-  background: var(--orange); color: #141415; border-radius: 100px;
-  padding: 10px 18px; font-size: var(--fs-strip); font-weight: 700; line-height: 1;
-}
-.strip-line { font-weight: 600; }
-.strip-sep { color: rgba(255, 255, 255, 0.25); }
-.strip-label { color: var(--muted-on-dark); }
-.countdown {
-  color: var(--orange); font-weight: 600; font-size: var(--fs-count);
-  font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;
-  direction: ltr; unicode-bidi: isolate; min-width: 132px; text-align: center;
-}
-.strip-spots { color: var(--ink-invert); }
-/* The action. Orange fill with near-black text, which is the site's own
-   black-on-orange rule (§4) and 6.52:1 rather than white's 3.03:1. */
-.strip-cta {
-  background: var(--orange); color: var(--ink);
-  font-size: var(--fs-strip); font-weight: 700; line-height: 1;
-  padding: 9px 20px; border-radius: 3px; white-space: nowrap;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: opacity 0.3s ease-in-out;
-}
-.strip-cta .chev { display: inline-block; }
-html[dir="rtl"] .strip-cta .chev { transform: scaleX(-1); }
-
 /* ══ §6 row 3 — The problem. 3 cards, 18px gaps. ══ */
 #problem { background: var(--bg-white); padding-block: var(--pad-sec); }
 .problem-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-block-start: 40px; }
@@ -568,146 +487,126 @@ html[dir="rtl"] .icon-card img { object-position: right center; }
 .icon-card .h3 { margin-block-start: 20px; min-height: calc(2em * var(--lh-h3)); }
 .icon-card .body { margin-block-start: 16px; }
 
-/* ══ §6 row 6 — Your monthly report (build-spec §31, board report-A.png).
-      A dark band holding four report pages as live HTML: 2 x 2 at 768 and up,
-      one column below. Each page is a container, so its type scales with the
-      page width (cqi) and stays large on a phone. Board px x 0.5357 = CSS px;
-      the cqi values are the 1440 sizes over the 644px page. Hard corners, no
-      shadow, no gradient. ══ */
-#report { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); }
-.rp-grid {
-  list-style: none; margin: 40px 0 0; padding: 0;
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px;
-}
-.rp-item { display: flex; flex-direction: column; min-width: 0; }
-.rp-card {
-  flex: 1; display: flex; flex-direction: column; container-type: inline-size;
-  background: #17181B; border: 1px solid #3B3E45; border-radius: 0; color: #fff;
-}
-.rp-cap { margin: 12px 0 0; font-size: 15px; line-height: 1.3; color: var(--muted-on-dark); }
-
-/* header strip: black, the orange Q8 box and the word, the report's own tag */
-.rp-top {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  min-height: clamp(52px, 10.4cqi, 67px); padding-inline: clamp(16px, 3.9cqi, 25px);
-  background: #000; border-block-end: 1px solid #3B3E45;
-}
-.rp-logo { display: inline-flex; align-items: center; gap: clamp(8px, 1.9cqi, 12px); direction: ltr; line-height: 1; }
-.rp-logo-box {
-  width: clamp(32px, 6.5cqi, 42px); height: clamp(29px, 5.9cqi, 38px); flex: none;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--orange); color: #fff; font-weight: 800; letter-spacing: -0.02em;
-  font-size: clamp(16px, 3.3cqi, 21px);
-}
-.rp-logo-word { font-weight: 800; color: #fff; font-size: clamp(19px, 3.9cqi, 25px); }
-.rp-tag {
-  font-size: clamp(11px, 1.85cqi, 12px); font-weight: 600; letter-spacing: 0.16em;
-  text-transform: uppercase; color: #A3A9B2; white-space: nowrap;
+/* ══ §6 row 6 — Your monthly report, REDESIGNED 2026-10-13.
+      Dark band, two columns from 768 up: plain statements of what is tracked,
+      received and done on one side, a paper sample report on the other. Below
+      768 the text comes first and the sheet follows with a smaller tilt. The
+      sheet is tagged as a sample. The only decoration is the tilt and the
+      sheet peeking out behind. Hard corners everywhere else, no script. ══ */
+#report { background: var(--bg-dark); padding-block: var(--pad-sec); padding-block-end: calc(var(--pad-sec) + 24px); overflow-x: clip; }
+.rs-grid {
+  margin-block-start: 40px;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px clamp(36px, calc(80/14.4 * 1vw), 88px); align-items: center;
 }
 
-.rp-body {
-  flex: 1; display: flex; flex-direction: column;
-  padding: clamp(22px, 5.3cqi, 34px) clamp(20px, 5.1cqi, 33px) clamp(24px, 5cqi, 32px);
-}
-.rp-card .rp-label {
-  margin: 0; font-size: clamp(17px, 3.1cqi, 20px); font-weight: 600; line-height: 1.3;
+/* the statements */
+.rs-text { display: grid; gap: clamp(26px, calc(36/14.4 * 1vw), 40px); }
+.rs-gh {
+  margin: 0; font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3);
   color: var(--orange);
 }
+.rs-list { margin: 12px 0 0; padding: 0; list-style: none; }
+.rs-list li {
+  position: relative; padding-block: 11px; padding-inline-start: 24px;
+  border-block-end: 1px solid #2E3138;
+  font-size: var(--fs-body); font-weight: var(--w-body); line-height: 1.55; color: #fff;
+}
+.rs-list li:first-child { border-block-start: 1px solid #2E3138; }
+.rs-list li::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 1.05em;
+  width: 8px; height: 8px; background: var(--orange);
+}
+.rs-foot { margin: 0; font-size: var(--fs-caption); line-height: 1.6; color: var(--muted-on-dark); }
 
-/* page 1: conversions */
-.rp-hero {
-  margin: clamp(10px, 2.5cqi, 16px) 0 0; display: flex; align-items: baseline; flex-wrap: wrap;
-  gap: 0 clamp(12px, 3.4cqi, 22px); line-height: 1;
+/* the sample sheet */
+.rs-stage { margin: 0; padding: 14px 18px 0; min-width: 0; }
+.rs-paper {
+  position: relative; isolation: isolate;
+  width: 100%; max-width: 560px; margin-inline: auto;
+  color: var(--ink);
+  transform: rotate(-3deg); transform-origin: 50% 50%;
+  padding-block-end: 8px;
 }
-.rp-big { font-size: min(23.6cqi, 152px); font-weight: 800; line-height: 0.92; letter-spacing: -0.02em; }
-.rp-unit { font-size: clamp(28px, 8.1cqi, 52px); font-weight: 700; }
-.rp-bar { display: flex; height: clamp(8px, 1.6cqi, 10px); margin-block-start: clamp(22px, 5.7cqi, 37px); background: #26282D; }
-.rp-seg { display: block; height: 100%; transform-origin: left center; }
-html[dir="rtl"] .rp-seg { transform-origin: right center; }
-.rp-seg-wa { background: var(--orange); }
-.rp-seg-call { background: #fff; }
-.rp-barnums {
-  display: flex; justify-content: space-between; margin-block-start: 10px;
-  font-size: clamp(15px, 3.1cqi, 20px); font-weight: 500;
+/* the front sheet and, behind it, a second sheet peeking out the other way round */
+.rs-paper::after {
+  content: ''; position: absolute; z-index: -1; inset: 0; background: #FFFFFF;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38), 0 2px 6px rgba(0, 0, 0, 0.3);
 }
-.rp-split {
-  margin-block-start: auto; padding-block-start: clamp(24px, 6cqi, 40px);
-  display: grid; grid-template-columns: 56fr 44fr; gap: 16px;
+.rs-paper::before {
+  content: ''; position: absolute; z-index: -2; inset: 0;
+  background: #D4D8DE; transform: translate(14px, 10px) rotate(4.5deg); transform-origin: 50% 50%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
-.rp-sp { margin: 0; display: flex; flex-direction: column; }
-.rp-n { font-size: clamp(44px, 10.1cqi, 65px); font-weight: 800; line-height: 1; }
-.rp-sp-wa .rp-n { color: var(--orange); }
-.rp-k { margin-block-start: 8px; font-size: clamp(17px, 3.4cqi, 22px); font-weight: 500; line-height: 1.3; }
-.rp-pc { margin-block-start: 4px; font-size: clamp(16px, 3.1cqi, 20px); color: var(--muted-on-dark); }
-
-/* page 2: conversions by service */
-.rp-rows { list-style: none; margin: clamp(8px, 2cqi, 14px) 0 0; padding: 0; }
-.rp-row {
-  display: grid; grid-template-columns: clamp(38px, 10.5cqi, 68px) minmax(0, 1fr) auto;
-  align-items: center; gap: 0 12px; min-height: clamp(44px, 7.1cqi, 46px);
-  padding-block: 6px; border-block-end: 1px solid #34373E;
+.rs-tag {
+  position: absolute; inset-block-start: -14px; inset-inline-end: 16px; z-index: 2; margin: 0;
+  background: var(--orange); color: #141415; font-weight: 800; line-height: 1;
+  font-size: 16px; padding: 9px 14px; letter-spacing: 0.02em;
 }
-.rp-rk { font-size: clamp(15px, 3cqi, 19px); font-weight: 600; color: var(--orange); }
-.rp-name {
-  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 14px;
-  font-size: clamp(16px, 3.3cqi, 21px); font-weight: 500; line-height: 1.3;
+.rs-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 20px 22px 14px; border-block-end: 2px solid var(--ink);
 }
-.rp-mix { font-size: clamp(14px, 2.2cqi, 15px); font-weight: 400; color: var(--muted-on-dark); white-space: nowrap; }
-.rp-tot { min-width: 2ch; text-align: end; font-size: clamp(22px, 4.7cqi, 30px); font-weight: 800; line-height: 1; padding-inline-start: 6px; }
-
-/* page 3: search keywords */
-.rp-sub { margin: 6px 0 0; font-size: clamp(15px, 2.65cqi, 17px); color: var(--muted-on-dark); line-height: 1.4; }
-.rp-tags {
-  list-style: none; margin: clamp(16px, 3.7cqi, 24px) 0 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: clamp(8px, 1.6cqi, 10px);
+.rs-logo { display: inline-flex; align-items: center; gap: 8px; direction: ltr; line-height: 1; }
+.rs-logo-box {
+  width: 34px; height: 30px; display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: #141415; font-weight: 800; font-size: 17px; letter-spacing: -0.02em;
 }
-.rp-tagk {
-  border: 1px solid #4A4E57; border-radius: 0; padding: 7px 13px;
-  font-size: clamp(15px, 2.65cqi, 17px); font-weight: 500; line-height: 1.35;
+.rs-logo-word { font-weight: 800; font-size: 20px; color: var(--ink); }
+.rs-client {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted-on-light); white-space: nowrap;
 }
-.rp-tagk.hot { border-color: var(--orange); }
-
-/* page 4: visits from search */
-.rp-stats {
-  margin-block-start: clamp(10px, 2.5cqi, 16px);
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(16px, 4cqi, 26px);
+.rs-sheet-body { padding: 18px 22px 18px; }
+.rs-label {
+  margin: 0; font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--muted-on-light);
 }
-.rp-stat { padding-block: 12px; border-block-start: 1px solid #34373E; min-width: 0; }
-.rp-stat.key { border-block-start-color: var(--orange); }
-.rp-stat p { margin: 0; }
-.rp-sk { font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
-.rp-sv { margin-block-start: 6px !important; font-size: clamp(28px, 6.2cqi, 40px); font-weight: 800; line-height: 1.1; }
-.rp-stat.key .rp-sv { color: var(--orange); }
-.rp-stat.small .rp-sv { font-size: clamp(22px, 4.7cqi, 30px); line-height: 1.25; }
-.rp-ss { margin-block-start: 4px !important; font-size: 14px; line-height: 1.35; color: var(--muted-on-dark); }
-.rp-chart { margin: auto 0 0; padding-block-start: 14px; }
+.rs-gap { margin-block-start: 22px; padding-block-start: 14px; border-block-start: 1px solid #D9DCE1; }
+.rs-hero { margin: 6px 0 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px; line-height: 1; }
+.rs-big { font-size: 64px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.rs-unit { font-size: 20px; font-weight: 700; }
+.rs-bar { display: flex; height: 10px; margin-block-start: 14px; background: #E6E8EC; }
+.rp-seg { display: block; height: 100%; }
+.rs-seg-wa { background: var(--orange); }
+.rs-seg-call { background: var(--ink); }
+.rs-split, .rs-stats { margin-block-start: 10px; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.rs-split p, .rs-stats p { margin: 0; font-size: 15px; line-height: 1.4; }
+.rs-n { font-size: 20px; font-weight: 800; }
+.rs-k { color: var(--muted-on-light); }
+.rs-rows { margin: 4px 0 0; padding: 0; list-style: none; }
+.rs-row {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-block: 7px; border-block-end: 1px solid #E6E8EC; font-size: 16px; font-weight: 600; line-height: 1.3;
+}
+.rs-row:last-child { border-block-end: 0; }
+.rs-tot { order: -1; min-width: 2.2ch; font-size: 18px; font-weight: 800; }
+.rs-kws { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.rs-kw { border: 1px solid #B9BEC6; padding: 5px 10px; font-size: 14px; font-weight: 500; line-height: 1.35; }
+.rp-chart { margin: 12px 0 0; }
 .rp-plot { position: relative; width: 100%; aspect-ratio: 600 / 120; }
 .rp-chart-svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.rp-area { fill: rgba(255, 95, 41, 0.16); stroke: none; }
-.rp-line { fill: none; stroke: var(--orange); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.rp-axis { stroke: rgba(255, 255, 255, 0.16); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rp-area { fill: rgba(255, 95, 41, 0.18); stroke: none; }
+.rp-line { fill: none; stroke: var(--orange); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.rp-axis { stroke: #C9CDD3; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .rp-peak {
   position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%;
   background: #fff; border: 2px solid var(--orange); box-sizing: border-box;
 }
-html[dir="rtl"] .rp-peak { margin: -5px; }
-.rp-axisl { display: flex; justify-content: space-between; margin-block-start: 6px; font-size: 13px; color: var(--muted-on-dark); }
+.rp-axisl { margin: 6px 0 0; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted-on-light); }
+.rs-note {
+  margin-block-start: 26px; max-width: 560px; margin-inline: auto;
+  font-size: var(--fs-caption); line-height: 1.6; color: var(--muted-on-dark);
+}
 
-/* one-time grow-in of the split bar, set up by app.js only when motion is allowed */
-.rp-anim .rp-seg { transform: scaleX(0); }
-.rp-anim.rp-in .rp-seg { transform: none; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.rp-anim.rp-in .rp-seg-call { transition-delay: 0.35s; }
-@media (prefers-reduced-motion: reduce) {
-  .rp-anim .rp-seg, .rp-anim.rp-in .rp-seg { transform: none; transition: none; }
-}
 @media (max-width: 767px) {
-  .rp-grid { grid-template-columns: 1fr; gap: 32px; margin-block-start: 32px; }
-}
-/* a narrow page (a phone): the call/WhatsApp line always sits under the
-   service name, and the four traffic figures stack one per row */
-@container (max-width: 480px) {
-  .rp-name { flex-direction: column; align-items: flex-start; }
-  .rp-stats { grid-template-columns: 1fr; }
+  .rs-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; margin-block-start: 28px; }
+  .rs-stage { padding-inline: 10px; }
+  .rs-paper { max-width: calc(100% - 12px); }
+  .rs-paper { transform: rotate(-2deg); }
+  .rs-paper::before { transform: translate(8px, 7px) rotate(3.5deg); }
+  .rs-big { font-size: 52px; }
+  .rs-head { padding: 18px 16px 12px; }
+  .rs-sheet-body { padding-inline: 16px; }
 }
 
 /* ══ §6 row 7 — Our work. A SLIDESHOW since 2026-09-24, not a 4-up grid.
@@ -845,163 +744,6 @@ html[dir="rtl"] .work-link .arrow { transform: scaleX(-1); }
 .footer-mini a { font-size: var(--fs-foot-l); color: var(--muted-on-dark); text-decoration: none; }
 .footer-mini a:hover { color: var(--orange); }
 
-/* ══════════════════════════ The offer page ══════════════════════════
-   build-spec.md covers the homepage. The offer page is built from the
-   approved offer boards (design/boards/offer-1..3.png) with the same
-   tokens, the same type scale and the same components as the homepage. */
-body.theme-dark { background: var(--bg-dark); }
-
-#offer-hero {
-  background: var(--bg-dark); text-align: center;
-  padding-block-start: calc(var(--header-h) + clamp(40px, calc(96/14.4 * 1vw), 106px));
-  padding-block-end: clamp(40px, calc(76/14.4 * 1vw), 84px);
-}
-#offer-hero .strip-pill { display: inline-block; margin-block-end: 28px; }
-#offer-hero h1 { font-size: var(--fs-h1); }
-#offer-hero .lead { max-width: 860px; margin-inline: auto; font-size: var(--fs-hero-lead); margin-block-start: 28px; }
-
-/* The price anchor, 2026-09-30. Two rows, the SAME number, DIFFERENT units.
-   No third element competes with them and there is no savings line: the reader
-   does the arithmetic himself, which is the whole point.
-   The "now" row is the only thing on this page that uses --orange at this size
-   above the CTAs, and it earns it. The note under it is the anti-confusion line
-   and it is bold on purpose. */
-.price-anchor { margin-block-start: 40px; margin-inline: auto; max-width: 760px; text-align: start; }
-.pa-pair { display: grid; border: 1px solid rgba(255, 255, 255, 0.16); }
-.pa-row {
-  display: flex; flex-wrap: wrap; align-items: baseline;
-  justify-content: space-between; column-gap: 24px; row-gap: 4px;
-  padding: 18px clamp(18px, calc(28/14.4 * 1vw), 30px);
-}
-.pa-row + .pa-row { border-block-start: 1px solid rgba(255, 255, 255, 0.16); }
-.pa-row dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
-.pa-row dd { margin: 0; font-weight: 700; line-height: 1.25; }
-.pa-was dd { font-size: var(--fs-count); color: var(--muted-on-dark); }
-/* STRENGTHENED 2026-09-30, second pass. The offer H1 used to print the price
-   and no longer does — it sells the outcome now — so this block carries the
-   whole price message alone. The "now" row gets a size step and a left orange
-   edge, and the note gets a boxed treatment, because a reader who takes one
-   thing off this page has to take away that the 500 is paid ONCE. */
-.pa-now { background: rgba(255, 95, 41, 0.12); box-shadow: inset 3px 0 0 var(--orange); }
-html[dir="rtl"] .pa-now { box-shadow: inset -3px 0 0 var(--orange); }
-.pa-now dt { color: var(--ink-invert); }
-.pa-now dd { font-size: clamp(22px, calc(36/14.4 * 1vw), 40px); color: var(--orange); }
-.pa-note {
-  margin-block-start: 16px; text-align: center;
-  border: 1px solid rgba(255, 95, 41, 0.45); padding: 12px 18px;
-  font-size: var(--fs-count); font-weight: 700; line-height: 1.45; color: var(--ink-invert);
-}
-
-.count-label { margin-block-start: 44px; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
-.count-boxes { display: flex; justify-content: center; gap: 16px; margin-block-start: 16px; direction: ltr; }
-.count-box {
-  border: 2px solid var(--orange); border-radius: 3px; padding: 14px 10px 10px;
-  min-width: 96px; text-align: center;
-}
-.count-box b {
-  display: block; font-size: var(--fs-numeral); font-weight: 600; line-height: 1; color: var(--orange);
-  font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1;
-}
-.count-box span { display: block; font-size: var(--fs-foot-l); font-weight: 400; color: var(--muted-on-dark); margin-block-start: 8px; }
-.offer-spots { margin-block-start: 28px; font-size: var(--fs-lead); font-weight: 600; color: var(--ink-invert); }
-.offer-spots .num, .offer-spots span[dir="ltr"] { color: var(--orange); }
-#offer-hero .btn-row { margin-block-start: 40px; }
-
-.offer-sec { padding-block: var(--pad-sec); }
-.offer-sec.tint { background: var(--bg-card-dark); }
-.offer-sec.plain { background: var(--bg-dark); }
-.offer-sec h2 { font-size: var(--fs-h2); }
-.offer-rows { margin-block-start: 40px; display: grid; gap: 16px; }
-.offer-row {
-  background: var(--bg-card-dark); padding: 22px 28px; border-radius: 0;
-  display: flex; align-items: center; gap: 24px;
-}
-.offer-sec.tint .offer-row { background: rgba(255, 255, 255, 0.05); }
-.offer-row img { width: 76px; height: 76px; padding: 8px; flex: none; object-fit: contain; background: #FEFEFE; }
-.offer-row .t { font-size: var(--fs-h3); font-weight: 600; line-height: var(--lh-h3); color: var(--ink-invert); }
-.offer-row.ruled { background: transparent; border: 1px solid rgba(255, 255, 255, 0.12); }
-.offer-row .n {
-  flex: none; min-width: 64px; font-size: var(--fs-numeral); font-weight: 600; line-height: 1;
-  color: transparent; -webkit-text-stroke: 2.5px var(--orange); direction: ltr;
-}
-
-/* B2b, the proof block. The image is an unedited Google Search Console export
-   (design/proof-shots/SOURCES.md) and it is a screenshot of a light, LTR
-   interface: it keeps its own white ground on this dark section and it is never
-   mirrored under an RTL direction. Explicit width and height attributes on the
-   image element, plus width:100% and height:auto here, mean the browser reserves
-   the box from the attribute ratio before the file decodes, so CLS stays 0. */
-.proof-shot { margin: 40px 0 0; }
-/* direction:ltr is not cosmetic. The panel is a screenshot of an LTR interface
-   whose four headline figures sit at its LEFT edge. Left in an RTL container a
-   horizontal scroller opens at the content's RIGHT, so an Arabic reader would
-   land on the tail of the chart and never see the numbers. This opens both
-   locales on the figures. The image itself is never mirrored. */
-.proof-pan { background: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.12); direction: ltr; }
-.proof-pan:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
-.proof-shot img { display: block; width: 100%; height: auto; }
-/* The hint only means anything while the panel actually pans. */
-.proof-hint { display: none; }
-@media (max-width: 999px) {
-  /* The export is 2243px of wide chart. Scaled into a 350px phone box its
-     headline figures render about 5px tall, so the panel keeps a 1000px floor
-     and the reader swipes it instead. It is never cropped to fit. */
-  .proof-pan { overflow-x: auto; overscroll-behavior-inline: contain; }
-  .proof-shot img { width: 1000px; max-width: none; }
-  .proof-hint {
-    display: block; margin-block-start: 10px;
-    font-size: var(--fs-caption); color: var(--muted-on-dark);
-  }
-}
-/* Provenance, moved here 2026-09-30 from the block's lead. Ahmad: the lead over
-   explained the graph. The client name and the date range are not gone — they
-   are fine print under the image, which is where provenance belongs. */
-.proof-meta {
-  margin-block-start: 14px; font-size: var(--fs-caption);
-  line-height: 1.5; color: var(--muted-on-dark);
-}
-.proof-shot figcaption {
-  margin-block-start: 24px; font-size: var(--fs-lead); font-weight: 600;
-  line-height: var(--lh-h3); color: var(--ink-invert); max-width: 900px;
-}
-.proof-source { margin-block-start: 16px; font-size: var(--fs-caption); color: var(--muted-on-dark); }
-
-/* B5's three monthly tiers. PRICES ONLY — see render.mjs: nobody has decided
-   what differs between them and nothing here invents a feature list to fill the
-   tiles. Its own size clamp rather than --fs-numeral, whose 44px floor puts
-   "1,000" straight through the side of a 390px column. */
-.tier-row { margin-block-start: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.tier {
-  border: 1px solid rgba(255, 255, 255, 0.16); padding: 30px 16px;
-  text-align: center; display: grid; align-content: center; gap: 12px;
-}
-.tier-price {
-  font-size: clamp(30px, calc(58/14.4 * 1vw), 64px); font-weight: 600; line-height: 1;
-  color: var(--orange); direction: ltr; unicode-bidi: isolate;
-}
-.tier-unit { font-size: var(--fs-strip); font-weight: 400; color: var(--muted-on-dark); }
-/* 2026-10-08 (build-spec §32): each tile is now a package with three prices by
-   company size. Same border, ground and orange numerals as the old tiles; the
-   price steps down from the single-figure size so three fit a box. */
-.tier-pkg { align-content: start; padding: 28px clamp(18px, calc(26/14.4 * 1vw), 28px); text-align: start; gap: 16px; }
-.tier-head { margin: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.tier-name { font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); color: var(--ink-invert); }
-.tier-tag.xtag { font-size: var(--fs-strip); flex: none; }
-.tier-head { align-items: center; }
-.tier-sizes { margin: 0; display: grid; }
-.tier-sizes > div {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-  padding-block: 12px; border-block-start: 1px solid rgba(255, 255, 255, 0.12);
-}
-.tier-sizes dt { margin: 0; font-size: var(--fs-strip); font-weight: 600; color: var(--muted-on-dark); }
-.tier-sizes dd { margin: 0; }
-.tier-pkg .tier-price { font-size: clamp(26px, calc(34/14.4 * 1vw), 38px); font-weight: 700; }
-.tier-notes { margin-block-start: 30px; display: grid; gap: 12px; max-width: 900px; }
-.tier-notes p {
-  font-size: var(--fs-body); font-weight: var(--w-body);
-  line-height: var(--lh-body); color: var(--muted-on-dark);
-}
-
 /* ══ §7b The price, homepage. Build-spec §30 ═══════════════════════════════
 
    BUILT TO design/boards/pricing-v2-A.png (Ahmad picked A of three on
@@ -1138,15 +880,13 @@ html[lang="ar"] #pricing {
   color: var(--muted-on-light);
 }
 /* The eight rows (Ahmad 2026-10-08). dt = label, dd = the three sizes' values, CSS shows the
-   checked size. Included: bold ink value with the orange tick. Not included: an empty cell with a
-   faint dash and no tick (a drawn line, not text, so it carries no contrast claim). */
+   checked size. Included: bold ink value with the orange tick. Rows a size does not include are removed from that size's card. */
 .plan-spec {
   margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
   display: grid;
 }
 .ps-row { padding-block: 10px; border-block-end: 1px solid var(--hairline-light); }
-.ps-row:last-child { border-block-end: 0; }
 .ps-row dt { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.35; color: var(--muted-on-light); }
 .ps-row dd { margin: 3px 0 0; min-height: 1.5em; }
 .pv { position: relative; display: block; font-size: var(--pl-check); font-weight: 700; line-height: 1.4; color: var(--ink); padding-inline-start: 30px; font-variant-numeric: lining-nums; }
@@ -1155,8 +895,13 @@ html[lang="ar"] #pricing {
   width: 18px; height: 14px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
-.pv-empty::before { inset-block-start: 0.7em; width: 14px; height: 2px; background: var(--hairline-light); }
-.pv-empty { min-height: 1.4em; }
+/* A row the checked size does not include is not drawn at all: no cell, no dash.
+   Small is the default and the no-:has() state, so its missing rows are hidden
+   outright; Medium and Large reveal what they include. */
+.ps-row.no-s { display: none; }
+#pricing:has(#psize-m:checked) .ps-row.no-s, #pricing:has(#psize-l:checked) .ps-row.no-s { display: block; }
+#pricing:has(#psize-m:checked) .ps-row.no-m { display: none; }
+#pricing:has(#psize-l:checked) .ps-row.no-l { display: none; }
 .pv-m, .pv-l { display: none; }
 #pricing:has(#psize-m:checked) .pv-s, #pricing:has(#psize-l:checked) .pv-s { display: none; }
 #pricing:has(#psize-m:checked) .pv-m, #pricing:has(#psize-l:checked) .pv-l { display: block; }
@@ -1166,16 +911,6 @@ html[lang="ar"] #pricing {
   padding-block: clamp(13px, calc(16/14.4 * 1vw), 18px);
 }
 
-#offer-nocontract { background: var(--orange); color: var(--ink); padding-block: var(--pad-sec); }
-#offer-nocontract h2 { font-size: var(--fs-h2-final); color: var(--ink); }
-#offer-nocontract p { margin-block-start: 22px; font-size: var(--fs-lead); font-weight: var(--w-body); line-height: var(--lh-lead); color: var(--ink); max-width: 900px; }
-
-#offer-faq .faq-item { background: var(--bg-card-dark); border-color: rgba(255, 255, 255, 0.08); }
-#offer-faq .faq-q { color: var(--ink-invert); }
-#offer-faq .faq-a { color: var(--muted-on-dark); }
-#offer-faq { background: var(--bg-dark); text-align: start; padding-block: var(--pad-sec); }
-#offer-faq h2 { font-size: var(--fs-h2); }
-#offer-faq .faq-list { max-width: 900px; margin-inline: 0; }
 
 /* ══════════════════════════════════════════════════════════════════════════
    THE FOUR SECONDARY PAGES — about, contact, blog and terms.
@@ -1653,38 +1388,17 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
      into every built page, so a comment that merely repeats a line of copy puts
      that line into all 82 HTML files — build-spec §23.3 and §24.2 are both this
      same bug, caught by grepping the BUILT output. The reasoning lives in
-     src/render.mjs and in design/build-spec.md, which are never served.
-
-     One row is impossible at 390; the band packs into four and is kept as tight
-     as it can be, because hero + strip still have to be the whole first screen.
-     Mobile is not board-measured (build-spec §11). It packed into THREE until
-     2026-09-25, when a longer strip line stopped the line sharing row 1 with the
-     pill: at 390 the inner box is 350px and pill + line overran it. Every way
-     back to three drops an element or splits the countdown label from its own
-     clock, so the fourth row stands — build-spec §18 and §25. The first screen
-     still measures exactly 844 in both locales with zero hero scroll. */
-  #offer-strip { padding-block: 12px; }
-  .strip-row { gap: 8px 16px; }
-  #offer-strip .strip-pill { padding: 7px 14px; }
-  .strip-cta { padding: 7px 16px; }
-  .strip-sep { display: none; }
+     src/render.mjs and in design/build-spec.md, which are never served. */
   /* Phone hero: the board does not specify this layout, and the first screen
-     has to hold header + hero + strip at 390x844 in both locales. */
+     has to hold header + hero at 390x844 in both locales. */
   #hero { padding-block-start: calc(var(--header-h) + 28px); padding-block-end: 24px; }
   #hero .lead { margin-block-start: 20px; }
   #hero .btn-row { margin-block-start: 28px; }
-  /* Pinned on a phone the bar keeps only the label, the clock and the action,
-     so it stays one slim row instead of three. */
-  #offer-strip.stuck .strip-line,
-  #offer-strip.stuck .strip-label,
-  #offer-strip.stuck .strip-spots { display: none; }
-  #offer-strip.stuck .strip-row { flex-wrap: nowrap; justify-content: space-between; gap: 10px; }
-  #offer-strip.stuck .countdown { min-width: 0; }
   .icons-grid { grid-template-columns: 1fr; }
   .work-card { flex-basis: 84%; padding: 24px; }
   .slide-btn { width: 48px; height: 48px; }
   .btn-row .btn { flex: 1 1 100%; }
-  /* The phone hero is the tightest box on the site: header + hero + strip have
+  /* The phone hero is the tightest box on the site: header + hero have
      to be exactly 844 at 390. §23 needed two stacked bands here (stars +
      Google, then a label and four logos, ~90px tall); §24's mark is one 29px
      row, so the air above it goes UP rather than down and the hero still fits
@@ -1695,19 +1409,6 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
   #hero .btn-row .btn-primary { padding: 15px 40px; }
   #hero .btn-row .btn-outline { padding: 13px 38px; }
   .problem-card, .icon-card { padding: 24px; }
-  .count-boxes { gap: 8px; }
-  .count-box { min-width: 0; flex: 1 1 0; padding: 10px 4px 8px; }
-  .offer-row { flex-direction: row; gap: 16px; padding: 18px 18px; }
-  /* Three tier tiles do not fit a 390px row: each column is ~106px and "1,000"
-     is wider than that at any size worth reading. They stack, and each tile
-     becomes one row with the price and its unit side by side. */
-  .tier-row { grid-template-columns: 1fr; gap: 12px; }
-  .tier {
-    grid-auto-flow: column; justify-content: space-between; align-items: baseline;
-    text-align: start; padding: 18px 20px; gap: 16px;
-  }
-  /* The package boxes keep their stacked inside: name, three size rows, unit. */
-  .tier.tier-pkg { grid-auto-flow: row; justify-content: stretch; align-items: start; padding: 22px 20px; gap: 12px; }
   /* §7b's own cards stack full width rather than collapsing into rows the way
      B5's tiles above do: each one keeps a real CTA, so it needs the whole
      column. Three ~106px columns cannot hold "1,000" and a button. The board

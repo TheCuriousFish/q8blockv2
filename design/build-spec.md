@@ -4681,3 +4681,40 @@ Ahmad (owner, approved client-facing claim): "mention 10% discount for 6 month c
 - **Verified:** sweep of `free|مجان|six months|ستة أشهر|limited offer|/offer|seats|مقاعد` outside `#offer-strip` on `/` and `/en/` at 1440 and 390: nothing. Prices after clicking Small/Medium/Large: 997/2,497/4,997; 1,997/4,997/9,997; 2,997/6,997/15,997 (both locales). `#problem` top at the fold unchanged (900 / 844), no horizontal scroll. seo-audit 0 high; site-audit 0 failing; Lighthouse `/` perf 100, a11y 100, CLS 0.
 
 Nothing committed, pushed or deployed.
+
+## 36. The offer is removed, the pricing grid shows only what a size includes, and the report becomes a sample, 2026-10-13
+
+Ahmad's three-part change list. Branch `development`, nothing pushed or deployed.
+
+### 36.1 Offer removed
+- Deleted: `#offer-strip` and `.strip-slot` (render, CSS, app.js pin), the countdown and seats (app.js, CONFIG
+  `COUNTDOWN_END` / `SPOTS`), `strip` and `offerPage` copy, `meta.offer`, `offer` path keys, the offer builders in
+  render.mjs, `offerPage()` and both PAGES entries in build.mjs, the terms block about the offer, the 404 link, the
+  llms.txt lines, the offer CSS (strip, hero, anchor, tiers, proof, no-contract, faq) and `FROM` price anchor.
+- `netlify.toml`: `/offer/`, `/offer/*`, `/en/offer/`, `/en/offer/*` 301 to `/` and `/en/`, above the `/ar/*` wildcard.
+- First screen is now the hero alone in a `min-height: 100svh` column; `#problem` starts exactly at the fold.
+  Measured: 1440x900, 1920x1200, 390x844, both locales, first-screen height equals viewport, no horizontal scroll.
+  The header is not offset by any banner (the `.stuck` pin logic is gone).
+- Leftover sweep of the built site for `مجان|free|six months|ستة أشهر|offer|countdown`: only the legacy checklist
+  pages (excluded), the verb "offer" in the contact and terms copy ("the service you offer"), and blog prose
+  ("offers you a hundred citations", the Arabic blog line that the Google profile itself is free). No promotion text.
+
+### 36.2 Pricing grid
+- SPEC in data.mjs now holds `dr` (total DR) instead of links + DR; `specFor` returns `DR n` as the links-row value.
+- Each `.ps-row` carries `no-s` / `no-m` / `no-l` for sizes that lack it; CSS hides those rows (`display:none`), Small
+  being the default and the no-`:has()` state. Cards in a size share one row set, so they stay equal height with no gaps.
+- Verified by clicking the size pills (scripts: scratchpad `img/grid-verify2.mjs`): 216 included-row cells, 0 mismatches,
+  AR and EN at 1440 and 390.
+
+### 36.3 `#report` redesign
+- Markup: `.rs-grid` two columns (statements `.rs-text`, sample `.rs-stage`); below 768 one column, text first.
+- The sheet: white `.rs-paper` tilted -3deg (-2deg on phones) with a second grey sheet behind (`::before`), orange
+  `Sample report` tag, real figures from report.json (88 conversions with split, top 4 services, 6 keywords, clicks,
+  impressions, daily chart), caption under the sheet saying they are another client's figures. No JS (the old bar
+  grow-in was removed from app.js). `#report` has `overflow-x: clip` so the tilt cannot add horizontal scroll.
+- Colours on the sheet: ink on white, `--muted-on-light` for labels, orange only as fills and the tag (ink text, 6.07:1).
+- Band order and dark band unchanged.
+
+### 36.4 Gates
+`seo-audit.mjs` 0 high; `ops/firstload/site-audit.mjs` 0 failing pages; Lighthouse desktop `/` and `/en/`:
+accessibility 100, CLS 0.

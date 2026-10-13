@@ -50,6 +50,26 @@ Only two slots remain anywhere in this file: `[COUNTDOWN]` and `[SPOTS]`, both b
 
 ---
 
+## 2026-10-13 OVERRIDE (Ahmad, build-spec §36). THE OFFER IS GONE. READ THIS BEFORE ANY SECTION BELOW.
+
+- **No offer anywhere.** Section 2 (strip, countdown, seats), all of PART B (`/offer/`, `/en/offer/`), the terms
+  paragraph about the offer, the 404 link to the offer and the offer lines in llms.txt and the sitemap are removed.
+  Every section, table and register below that still mentions them is HISTORY. The two old URLs 301 to `/` and `/en/`.
+- **Section 6 (report) is now a sample.** Two columns: three plain statement groups (what we track, what you receive,
+  what we do every month) beside one tilted paper sheet tagged `نموذج تقرير` / `Sample report`, with the caption
+  `من تقرير شهري حقيقي لأحد عملائنا. هذه أرقام ذلك العميل، وليست أرقام نشاطك.` /
+  `From a real monthly report of one of our clients. These are that client's figures, not figures for your business.`
+  Copy lives in `report.sample`, `report.groups`, `report.groupsNote` in src/data.mjs. Figures on the sheet still come
+  from src/report.json. The four-page grid and its `page` / `gridLabel` strings are gone.
+- **Section 7b (pricing) grid, revised.** Rows a size does not include are NOT drawn for that size (no grey cell, no
+  dash). Labels: `Links from other websites, total DR` / `روابط من مواقع أخرى، مجموع قوة النطاق DR` (value `DR 30`, never a
+  link count); `Target keywords` / `كلمات مفتاحية مستهدفة`; `AI answers tracked` / `إجابات الذكاء الاصطناعي المتابَعة`;
+  `Tracked competitors` / `منافسون متابَعون`; `New pages` / `صفحات جديدة`. Values (x1 / x3 / x10):
+  DR total Small 10/30/100, Medium 20/60/200, Big 30/90/300; pages optimized 2/6/20, 3/9/30, 5/15/50; directories
+  2/6/20, 4/12/40, 6/18/60; target keywords (Medium, Big) 5/15/50, 10/30/100; AI answers (Medium, Big) 3/9/30, 6/18/60;
+  tracked competitors (Big) 5/15/50; new pages (Big) 5/15/50; reporting monthly / bi-weekly / live. Prices unchanged.
+  The 10% / 20% contract line stays.
+
 # PART A. Homepage
 
 ## Page meta

@@ -4,44 +4,23 @@
 
      node build.mjs            writes clients/q8block/site/
 
-   Four pages out of one template and one stylesheet:
-     /            Arabic homepage   (primary)
-     /en/         English homepage
-     /offer/      Arabic offer page
-     /en/offer/   English offer page
-
    Arabic is primary and ships at the root: the client sites already carry
-   478 links to q8block.com/ and 478 to q8block.com/en/.
+   478 links to q8block.com/ and 478 to q8block.com/en/. The offer (strip,
+   countdown, /offer/ and /en/offer/) was removed 2026-10-13; netlify.toml
+   redirects the two old URLs to the homepages.
 
    Node only. No framework, no toolchain, no dependencies.
    Words come from design/copy.md via src/data.mjs.
    Sizes, colours and spacing come from design/build-spec.md via src/styles.css.
-
-   ── THE TWO BUILD SLOTS AHMAD SETS ──────────────────────────────────────
-   `[COUNTDOWN]` and `[SPOTS]` in copy.md are build config, not copy. Both
-   live in CONFIG at the top of src/data.mjs:
-
-       COUNTDOWN_END   registration close date, ISO 8601 +03:00.
-                       null or a past date  ->  no countdown anywhere, and
-                       the strip and the offer hero fall back to
-                       "التسجيل مفتوح الآن / Registration is open now".
-       SPOTS           seats left (Ahmad's working number is around 9). "per city"
-                       came off the line 2026-09-25 on his instruction.
-                       null or 0  ->  every "N seats left" line is
-                       dropped and both pages still read correctly.
-
-   Change them there, re-run this file, and all three places that print them
-   (the homepage strip, offer B1, offer B3) move together.
    ══════════════════════════════════════════════════════════════════════════ */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { COPY, NAP, CONFIG, INDEXNOW_KEY } from './src/data.mjs';
+import { COPY, NAP, INDEXNOW_KEY } from './src/data.mjs';
 import {
   header, footer, firstScreen, problem, whatWeDo, report, work, pricing,
-  faq, finalCall, offerHero, offerIncluded, offerProof, offerEligibility, offerNoContract,
-  offerAfter, offerFaq, esc,
+  faq, finalCall, esc,
   pageHead, aboutPrinciple, aboutDeliver, aboutNotDo, aboutCompany,
   contactBlocks, contactOffice, termsBody, blogList, postArticle,
   FL_CSS, FL_HEAD, FL_START, flPanel, flBoot,
@@ -250,15 +229,15 @@ function loadPosts(t) {
 
 /* ── the one page shell both pages use ──────────────────────────────────── */
 function shell({ t, page, meta, body, bodyClass = '', jsonLd = [], self }) {
-  self = self || (page === 'offer' ? t.offer : t.home);
+  self = self || t.home;
   const abs = (p) => NAP.origin + p;
   const arPath = t.lang === 'ar' ? self.path : self.otherPath;
   const enPath = t.lang === 'en' ? self.path : self.otherPath;
 
   // /en/ never needs the Arabic subset; / carries Latin brand names and digits.
-  // the first-load panel takes the first screen's own colour: the offer hero is
-  // dark, the blog list and posts open on white, every other page on the grey band
-  const tone = page === 'offer' ? 'dark' : (page === 'blog' || page === 'post') ? 'white' : 'light';
+  // the first-load panel takes the first screen's own colour: the blog list and
+  // posts open on white, every other page on the grey band
+  const tone = (page === 'blog' || page === 'post') ? 'white' : 'light';
 
   const preload = t.lang === 'ar'
     ? ['alexandria-arabic.woff2', 'alexandria-latin.woff2']
@@ -398,18 +377,6 @@ function homePage(t) {
   return shell({ t, page: 'home', meta: t.meta.home, body, jsonLd: [orgLd(t), faqLd(t.faq.items)] });
 }
 
-function offerPage(t) {
-  const body = [
-    offerHero(t), offerIncluded(t), offerProof(t), offerEligibility(t), offerNoContract(t),
-    offerAfter(t), offerFaq(t),
-    finalCall(t, { id: 'offer-final', h2: t.offerPage.b7.h2, lead: t.offerPage.b7.lead }),
-  ].join('\n');
-  return shell({
-    t, page: 'offer', meta: t.meta.offer, body, bodyClass: 'theme-dark',
-    jsonLd: [orgLd(t), faqLd(t.offerPage.b6.items)],
-  });
-}
-
 /* ── the four secondary pages ───────────────────────────────────────────── */
 
 function aboutPage(t) {
@@ -455,7 +422,6 @@ function notFoundPage() {
   const description = 'هذا الرابط غير متاح على موقع Q8 block. عد إلى الصفحة الرئيسية أو تواصل معنا مباشرة.';
   const links = [
     { label: t.nav[0].label, href: t.paths.home.path },   // الرئيسية
-    { label: t.strip.cta, href: t.offer.path },            // اطلع على العرض
     { label: t.nav[2].label, href: t.paths.blog.path },    // المدونة
     { label: t.nav[4].label, href: t.paths.contact.path }, // تواصل معنا
   ];
@@ -578,8 +544,6 @@ const POSTS = { ar: loadPosts(COPY.ar), en: loadPosts(COPY.en) };
 const PAGES = [
   { path: '/', file: 'index.html', build: () => homePage(COPY.ar), priority: '1.0' },
   { path: '/en/', file: 'en/index.html', build: () => homePage(COPY.en), priority: '1.0' },
-  { path: '/offer/', file: 'offer/index.html', build: () => offerPage(COPY.ar), priority: '0.9' },
-  { path: '/en/offer/', file: 'en/offer/index.html', build: () => offerPage(COPY.en), priority: '0.9' },
   { path: '/about/', file: 'about/index.html', build: () => aboutPage(COPY.ar), priority: '0.8' },
   { path: '/en/about/', file: 'en/about/index.html', build: () => aboutPage(COPY.en), priority: '0.8' },
   { path: '/blog/', file: 'blog/index.html', build: () => blogPage(COPY.ar, POSTS.ar), priority: '0.8' },
@@ -652,8 +616,6 @@ function llms() {
 
 - [Home, Arabic](${NAP.origin}/)
 - [Home, English](${NAP.origin}/en/)
-- [The offer, Arabic](${NAP.origin}/offer/)
-- [The offer, English](${NAP.origin}/en/offer/)
 - [About us, Arabic](${NAP.origin}/about/)
 - [About us, English](${NAP.origin}/en/about/)
 - [Blog, Arabic](${NAP.origin}/blog/)
@@ -730,7 +692,7 @@ write('assets/img/favicon.svg', favicon);
 // browsers and crawlers ask for /favicon.ico by habit; the Q8 box, drawn from the logo (see ops/firstload/_q8block-ico.mjs in the hub)
 copy(path.join(SRC, 'static', 'favicon.ico'), 'favicon.ico');
 
-// preserved from the old site: the checklist page is referenced in the offer.
+// preserved from the old site: the Google Business Profile checklist page.
 // Arabic-first, same convention as the four main pages: ar at the root, en at /en/.
 const CHECKLIST_AR = path.join(SRC, 'static', 'google-business-profile-checklist.ar.html');
 const CHECKLIST_EN = path.join(SRC, 'static', 'google-business-profile-checklist.en.html');
@@ -758,9 +720,5 @@ write('404.html', notFoundPage());
 write(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
 write('_headers', '/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 
-const c = CONFIG;
-const live = c.COUNTDOWN_END && Date.parse(c.COUNTDOWN_END) > Date.now();
 console.log(`built ${written.length} files into ${OUT}`);
-console.log(`  countdown: ${live ? c.COUNTDOWN_END : 'off (static state)'}`);
-console.log(`  spots:     ${c.SPOTS || 'off (line dropped)'}`);
 for (const p of PAGES) console.log(`  ${p.path.padEnd(12)} -> ${p.file}`);

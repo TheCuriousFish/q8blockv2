@@ -1,7 +1,6 @@
-/* Q8Block — one deferred script, eight jobs and no more:
-   the countdown, the FAQ accordion, the scroll-solidified header, the mobile
-   nav, the offer strip pinning under the header, the §7 slideshow, the §4 slide strip, and the
-   contact page's tap-to-load map.
+/* Q8Block — one deferred script: the FAQ accordion, the scroll-solidified header, the
+   mobile nav, the §7 slideshow, the §4 slide strip and the contact page's tap-to-load map. */
+/*
    No library, no framework.
 
    Every job in this file shares one function scope, so a `var` declared in one
@@ -63,55 +62,6 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
   }
 
-  /* ── the offer strip pins under the header ────────────────────────────────
-     The strip sits at the bottom of the first screen. Once its own top would
-     pass under the fixed header it goes position:fixed and slims down, and
-     stays there for the rest of the page. `.strip-slot` is given the bar's
-     measured height at that moment, so the document never changes height and
-     the pin costs zero layout shift. ──────────────────────────────────────── */
-  var slot = document.querySelector('.strip-slot');
-  var strip = document.getElementById('offer-strip');
-  if (slot && strip) {
-    var stuck = false, threshold = 0;
-    var headerH = function () {
-      var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h'));
-      return isNaN(v) ? 112 : v;
-    };
-    var measure = function () {
-      if (stuck) return;
-      threshold = slot.getBoundingClientRect().top + window.pageYOffset - headerH();
-    };
-    var place = function () {
-      var y = window.pageYOffset;
-      if (!stuck && y > threshold) {
-        slot.style.height = strip.offsetHeight + 'px';
-        strip.classList.add('stuck');
-        stuck = true;
-      } else if (stuck && y <= threshold) {
-        strip.classList.remove('stuck');
-        stuck = false;
-        slot.style.height = '';
-        measure();
-      }
-    };
-    var release = function () {
-      if (!stuck) return;
-      strip.classList.remove('stuck');
-      stuck = false;
-      slot.style.height = '';
-    };
-    measure();
-    place();
-    window.addEventListener('scroll', place, { passive: true });
-    window.addEventListener('resize', function () { release(); measure(); place(); }, { passive: true });
-    // the hero is type, and `font-display: swap` moves it: re-measure after the
-    // webfont lands, or the threshold is a stale number from the fallback font.
-    window.addEventListener('load', function () { if (!stuck) { measure(); place(); } });
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { if (!stuck) { measure(); place(); } });
-    }
-  }
-
   /* ── §7 slideshow ─────────────────────────────────────────────────────────
      Plain scroll-snap plus this. Roughly three cards visible, auto-advancing.
      Swipe works because the track is a native overflow container; keyboard
@@ -130,10 +80,8 @@
     var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     var rtl = getComputedStyle(track).direction === 'rtl';
     var sign = rtl ? -1 : 1;
-    // `autoTimer`, not `timer`. Every job in this file shares one function
-    // scope, so a second `var timer` here is the SAME binding as the
-    // countdown's below: the slideshow's stop() silently killed the countdown's
-    // interval and leaked its own. Keep every name in this block unique.
+    // `autoTimer`, not `timer`: every job in this file shares one function scope, so a
+    // generic `timer` name could be overwritten by another block. Keep every name in this block unique.
     var autoTimer = null, idleTimer = null, onScreen = true;
     // Three independent reasons to pause, each with its own flag. One flag
     // could not express them: `focusout` used to set `hold = false` while the
@@ -401,70 +349,5 @@
     });
   });
 
-  /* ── report bars ──────────────────────────────────────────────────────────
-     The split bar on the first report page grows in once, the first time the
-     section enters the viewport. Without JS, without IntersectionObserver or
-     under prefers-reduced-motion the bar is simply drawn full. Transform only,
-     so nothing shifts layout. ─────────────────────────────────────────────── */
-  (function () {
-    var sec = document.getElementById('report');
-    if (!sec || !('IntersectionObserver' in window)) return;
-    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (still) return;
-    sec.classList.add('rp-anim');
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        sec.classList.add('rp-in');
-        io.disconnect();
-      });
-    }, { threshold: 0 });
-    io.observe(sec);
-  })();
 
-  /* ── countdown ────────────────────────────────────────────────────────────
-     Renders "DD : HH : MM : SS" in the strip and fills the four boxes on the
-     offer page. When the end date is absent or already past, every element
-     tagged data-countdown-part is removed and the elements tagged
-     data-countdown-fallback are shown instead, so both pages still read as a
-     complete band. ─────────────────────────────────────────────────────── */
-  var root = document.querySelector('[data-countdown-end]');
-  var pad = function (n) { return n < 10 ? '0' + n : String(n); };
-
-  function expire() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-countdown-part]'), function (el) {
-      el.remove();
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-countdown-fallback]'), function (el) {
-      el.hidden = false;
-    });
-  }
-
-  if (!root) {
-    // nothing to do: the build shipped with no countdown at all
-  } else {
-    var end = Date.parse(root.getAttribute('data-countdown-end'));
-    if (!end || isNaN(end)) {
-      expire();
-    } else {
-      var inline = document.querySelector('[data-countdown]');
-      var boxes = document.querySelectorAll('[data-count]');
-      var tick = function () {
-        var ms = end - Date.now();
-        if (ms <= 0) { expire(); clearInterval(timer); return; }
-        var s = Math.floor(ms / 1000);
-        var d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600),
-            m = Math.floor((s % 3600) / 60), sec = s % 60;
-        if (inline) inline.textContent = d + ' : ' + pad(h) + ' : ' + pad(m) + ' : ' + pad(sec);
-        if (boxes.length) {
-          var v = { d: d, h: pad(h), m: pad(m), s: pad(sec) };
-          Array.prototype.forEach.call(boxes, function (b) {
-            b.textContent = v[b.getAttribute('data-count')];
-          });
-        }
-      };
-      tick();
-      var timer = setInterval(tick, 1000);
-    }
-  }
 })();
