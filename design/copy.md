@@ -874,7 +874,7 @@ offer in the strip only.
 | | Arabic | English |
 |---|---|---|
 | Question | متى تظهر النتائج؟ | How long before results show? |
-| Answer | لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة. | We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page. |
+| Answer | تختلف المدة بحسب قطاعك وحجم المنافسة، وتظهر النتائج عادةً خلال شهر إلى أربعة أشهر. | It varies with your sector and your competition. Results usually start to show within 1 to 4 months. |
 
 **Q5**
 
@@ -1598,8 +1598,8 @@ Company `شركة نموذجية` / `Sample company`, month `سبتمبر 2026` 
 
 | Row | Small | Medium | Big |
 |---|---|---|---|
-| Technical work / الأعمال التقنية | Monthly technical work / أعمال تقنية شهرية | Bi-weekly technical work / أعمال تقنية كل أسبوعين | Weekly technical work / أعمال تقنية أسبوعية |
-| On-page audit and work / تدقيق الصفحات والعمل عليها | not included (row removed) | Monthly on-page audit and work / تدقيق الصفحات والعمل عليها شهريًا | Bi-weekly on-page audit and work / ... كل أسبوعين |
+| Technical audit / التدقيق التقني | Monthly technical audit / تدقيق تقني شهري | Bi-weekly technical audit / تدقيق تقني كل أسبوعين | Weekly technical audit / تدقيق تقني أسبوعي |
+| On-page audit / تدقيق الصفحات | not included (row removed) | Monthly on-page audit / تدقيق صفحات شهري | Bi-weekly on-page audit / تدقيق صفحات كل أسبوعين |
 | Priority support / دعم ذو أولوية | not included | not included | Included / مشمول |
 
 The report band's text column is NOT changed for these rows (Ahmad: the band must not get taller).

@@ -224,15 +224,15 @@ const REP = {
   ar: { monthly: 'تقرير شهري', biweekly: 'تقرير كل أسبوعين', live: 'تقارير مباشرة' },
   en: { monthly: 'Monthly reporting', biweekly: 'Bi-weekly reporting', live: 'Live reporting' },
 };
-// Technical work and on-page audit: same frequency for every x of one size, like reporting.
+// Technical audit and on-page audit: same frequency for every x of one size, like reporting.
 const TECH = {
-  ar: { monthly: 'أعمال تقنية شهرية', biweekly: 'أعمال تقنية كل أسبوعين', weekly: 'أعمال تقنية أسبوعية' },
-  en: { monthly: 'Monthly technical work', biweekly: 'Bi-weekly technical work', weekly: 'Weekly technical work' },
+  ar: { monthly: 'تدقيق تقني شهري', biweekly: 'تدقيق تقني كل أسبوعين', weekly: 'تدقيق تقني أسبوعي' },
+  en: { monthly: 'Monthly technical audit', biweekly: 'Bi-weekly technical audit', weekly: 'Weekly technical audit' },
 };
 const PRIO = { ar: 'مشمول', en: 'Included' };
 const AUDIT = {
-  ar: { monthly: 'تدقيق الصفحات والعمل عليها شهريًا', biweekly: 'تدقيق الصفحات والعمل عليها كل أسبوعين', weekly: 'تدقيق الصفحات والعمل عليها أسبوعيًا' },
-  en: { monthly: 'Monthly on-page audit and work', biweekly: 'Bi-weekly on-page audit and work', weekly: 'Weekly on-page audit and work' },
+  ar: { monthly: 'تدقيق صفحات شهري', biweekly: 'تدقيق صفحات كل أسبوعين', weekly: 'تدقيق صفحات أسبوعي' },
+  en: { monthly: 'Monthly on-page audit', biweekly: 'Bi-weekly on-page audit', weekly: 'Weekly on-page audit' },
 };
 /* specFor('ar'|'en', x) -> [Small, Medium, Big], each an array of the 8 row values (string or null). */
 const specFor = (lang, x) => ['s', 'm', 'l'].map((sz) => {
@@ -261,10 +261,16 @@ export const SAMPLE = {
   total: 125, wa: 80, calls: 45,                       // 64% / 36%
   // [total, whatsapp, calls], same order as the names in each language
   services: [[30, 19, 11], [22, 14, 8], [18, 11, 7], [16, 10, 6], [14, 9, 5], [12, 8, 4], [8, 5, 3], [5, 4, 1]],
-  clicks: 2480, impressions: 61200,
-  daily: [49, 54, 61, 53, 67, 74, 63, 58, 70, 79, 84, 72, 68, 82, 91, 88, 77, 86, 96, 102, 89, 81, 95, 105, 110, 100, 91, 105, 116, 114],
-  value: [12000, 14000],                               // SAR, illustrative
+  clicks: 480, impressions: 26500,                    // about 1.8% CTR, as in the real report
+  daily: [10, 10, 12, 10, 13, 14, 12, 12, 14, 15, 16, 14, 13, 16, 18, 17, 15, 17, 19, 20, 17, 16, 18, 20, 21, 19, 18, 20, 22, 22],
+  // Estimated value is DERIVED from the clicks: the real report's basis (500 to 600 KWD for 525 clicks =
+  // 0.95 to 1.14 KWD per click) at 12.2 SAR per KWD, rounded to the nearest 100. See sampleValue().
 };
+
+export const CLICK_KWD = [0.95, 1.14];   // KWD per click, low and high
+export const KWD_TO_SAR = 12.2;
+export const sampleValue = (clicks) => CLICK_KWD.map((k) => Math.round((clicks * k * KWD_TO_SAR) / 100) * 100);
+SAMPLE.value = sampleValue(SAMPLE.clicks);   // [5600, 6700] at 480 clicks
 
 export const COPY = {
   /* ═══════════════════════════ ARABIC ═══════════════════════════ */
@@ -531,7 +537,7 @@ export const COPY = {
       sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
       /* The eight rows every card shows (Ahmad 2026-10-08), per month. */
-      rowLabels: ['روابط من مواقع أخرى، مجموع قوة النطاق DR', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'كلمات مفتاحية مستهدفة', 'إجابات الذكاء الاصطناعي المتابَعة', 'منافسون متابَعون', 'صفحات جديدة', 'التقارير', 'الأعمال التقنية', 'تدقيق الصفحات والعمل عليها', 'دعم ذو أولوية'],
+      rowLabels: ['روابط من مواقع أخرى، مجموع قوة النطاق DR', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'كلمات مفتاحية مستهدفة', 'إجابات الذكاء الاصطناعي المتابَعة', 'منافسون متابَعون', 'صفحات جديدة', 'التقارير', 'التدقيق التقني', 'تدقيق الصفحات', 'دعم ذو أولوية'],
       plans: [
         { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain'), spec: specFor('ar', 0) },
         { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand'), spec: specFor('ar', 1) },
@@ -548,7 +554,7 @@ export const COPY = {
         { q: 'هل تعملون على موقعي الحالي؟', a: 'لا. نعمل فقط على المواقع التي نبنيها بأنفسنا. الأساس التقني والبنية الداخلية هما ما يحدد الترتيب، ولا يمكننا أن نتحمل مسؤولية نتيجة مبنية على أساس وضعه غيرنا.' },
         { q: 'لمن يعود الموقع؟', a: 'الموقع يُبنى لنشاطك التجاري وحده. الاستضافة والنطاق والحماية والتحديثات التقنية جزء مما نتولاه لك ضمن العمل، فلا تحتاج إلى إدارتها.' },
         { q: 'هل تديرون ملف نشاطي على جوجل؟', a: 'لا. لا نطلب صلاحية الدخول إلى ملفك. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث. الملف يبقى بالكامل تحت سيطرتك.' },
-        { q: 'متى تظهر النتائج؟', a: 'لا نعطي جدولًا زمنيًا، لأن الترتيب يعتمد على قطاعك وعلى منافسيك في نتائج البحث. ما نستطيع عرضه هو ما يصلك فعلًا: تقرير شهري بأرقام حقيقية، كما في قسم تقريرك الشهري في هذه الصفحة.' },
+        { q: 'متى تظهر النتائج؟', a: 'تختلف المدة بحسب قطاعك وحجم المنافسة، وتظهر النتائج عادةً خلال شهر إلى أربعة أشهر.' },
         { q: 'لدي موقع بالفعل، فماذا يحدث؟', a: 'نستبدله بموقع نبنيه نحن من الصفر. لا نعمل على موقع قائم بناه غيرنا، لكن الاستبدال الكامل وارد ضمن عملنا المعتاد.' },
       ],
     },
@@ -897,7 +903,7 @@ export const COPY = {
       sizesLabel: 'Your company size',
       contract: [{ a: '', pct: '10%', b: ' off 6 month contracts' }, { a: '', pct: '20%', b: ' off 12 month contracts' }],
       sizes: ['Small', 'Medium', 'Large'],
-      rowLabels: ['Links from other websites, total DR', 'Pages optimized', 'Local directory listings', 'Target keywords', 'AI answers tracked', 'Tracked competitors', 'New pages', 'Reporting', 'Technical work', 'On-page audit and work', 'Priority support'],
+      rowLabels: ['Links from other websites, total DR', 'Pages optimized', 'Local directory listings', 'Target keywords', 'AI answers tracked', 'Tracked competitors', 'New pages', 'Reporting', 'Technical audit', 'On-page audit', 'Priority support'],
       plans: [
         { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'), spec: specFor('en', 0) },
         { tag: 'x3', name: 'Expand', prices: pkgPrices('expand'), spec: specFor('en', 1) },
@@ -913,7 +919,7 @@ export const COPY = {
         { q: 'Do you work on my current website?', a: 'No. We only work on websites we build ourselves. The technical foundation and the internal structure are what decide the ranking, and we cannot take responsibility for a result built on somebody else’s foundation.' },
         { q: 'Who owns the website?', a: 'The website is built for your business alone. Hosting, the domain, security and the technical updates are part of what we run for you, so you do not have to manage any of it.' },
         { q: 'Do you manage my Google Business Profile?', a: 'No. We do not ask for access to your profile. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results. The profile stays entirely under your control.' },
-        { q: 'How long before results show?', a: 'We do not give a timeline, because ranking depends on your sector and on your competitors in the search results. What we can show you is what you actually get: a monthly report with real numbers, as in the monthly report section on this page.' },
+        { q: 'How long before results show?', a: 'It varies with your sector and your competition. Results usually start to show within 1 to 4 months.' },
         { q: 'What if I already have a website?', a: 'We replace it with a website we build from scratch. We do not work on an existing site somebody else built, but a full replacement is part of our normal work.' },
       ],
     },
