@@ -1593,3 +1593,13 @@ The sheet is NOT a client's report and never says so. Caption: `نموذج تق�
 `A sample report with illustrative figures. They are not a client’s real numbers and not a promise of results.`
 Company `شركة نموذجية` / `Sample company`, month `سبتمبر 2026` / `September 2026`. Names, labels and figures: `SAMPLE` and
 `report.sample` in src/data.mjs. Headline 125 = 80 WhatsApp + 45 calls.
+
+## 2026-10-13 (later): rows under Reporting in the pricing grid (same value for x1/x3/x10 of one size)
+
+| Row | Small | Medium | Big |
+|---|---|---|---|
+| Technical work / الأعمال التقنية | Monthly technical work / أعمال تقنية شهرية | Bi-weekly technical work / أعمال تقنية كل أسبوعين | Weekly technical work / أعمال تقنية أسبوعية |
+| On-page audit and work / تدقيق الصفحات والعمل عليها | not included (row removed) | Monthly on-page audit and work / تدقيق الصفحات والعمل عليها شهريًا | Bi-weekly on-page audit and work / ... كل أسبوعين |
+| Priority support / دعم ذو أولوية | not included | not included | Included / مشمول |
+
+The report band's "What we do every month" carries one line for technical work and the on-page audit (`report.groups`).

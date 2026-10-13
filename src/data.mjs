@@ -216,19 +216,29 @@ const pkgPrices = (key) => PKG[key].map(num);
       Reporting is the same for every x of one size. ── */
 const SPEC = {
   // dr, pages, directories, target keywords, AI answers tracked, tracked competitors, new pages; one entry per x1/x3/x10
-  s: { dr: [10, 30, 100], pages: [2, 6, 20], dirs: [2, 6, 20], phrases: null, ai: null, comps: null, newp: null, rep: 'monthly' },
-  m: { dr: [20, 60, 200], pages: [3, 9, 30], dirs: [4, 12, 40], phrases: [5, 15, 50], ai: [3, 9, 30], comps: null, newp: null, rep: 'biweekly' },
-  l: { dr: [30, 90, 300], pages: [5, 15, 50], dirs: [6, 18, 60], phrases: [10, 30, 100], ai: [6, 18, 60], comps: [5, 15, 50], newp: [5, 15, 50], rep: 'live' },
+  s: { dr: [10, 30, 100], pages: [2, 6, 20], dirs: [2, 6, 20], phrases: null, ai: null, comps: null, newp: null, rep: 'monthly', tech: 'monthly', audit: null, prio: false },
+  m: { dr: [20, 60, 200], pages: [3, 9, 30], dirs: [4, 12, 40], phrases: [5, 15, 50], ai: [3, 9, 30], comps: null, newp: null, rep: 'biweekly', tech: 'biweekly', audit: 'monthly', prio: false },
+  l: { dr: [30, 90, 300], pages: [5, 15, 50], dirs: [6, 18, 60], phrases: [10, 30, 100], ai: [6, 18, 60], comps: [5, 15, 50], newp: [5, 15, 50], rep: 'live', tech: 'weekly', audit: 'biweekly', prio: true },
 };
 const REP = {
   ar: { monthly: 'تقرير شهري', biweekly: 'تقرير كل أسبوعين', live: 'تقارير مباشرة' },
   en: { monthly: 'Monthly reporting', biweekly: 'Bi-weekly reporting', live: 'Live reporting' },
 };
+// Technical work and on-page audit: same frequency for every x of one size, like reporting.
+const TECH = {
+  ar: { monthly: 'أعمال تقنية شهرية', biweekly: 'أعمال تقنية كل أسبوعين', weekly: 'أعمال تقنية أسبوعية' },
+  en: { monthly: 'Monthly technical work', biweekly: 'Bi-weekly technical work', weekly: 'Weekly technical work' },
+};
+const PRIO = { ar: 'مشمول', en: 'Included' };
+const AUDIT = {
+  ar: { monthly: 'تدقيق الصفحات والعمل عليها شهريًا', biweekly: 'تدقيق الصفحات والعمل عليها كل أسبوعين', weekly: 'تدقيق الصفحات والعمل عليها أسبوعيًا' },
+  en: { monthly: 'Monthly on-page audit and work', biweekly: 'Bi-weekly on-page audit and work', weekly: 'Weekly on-page audit and work' },
+};
 /* specFor('ar'|'en', x) -> [Small, Medium, Big], each an array of the 8 row values (string or null). */
 const specFor = (lang, x) => ['s', 'm', 'l'].map((sz) => {
   const c = SPEC[sz];
   const v = (a) => (a ? String(a[x]) : null);
-  return [ltr('DR ' + c.dr[x]), v(c.pages), v(c.dirs), v(c.phrases), v(c.ai), v(c.comps), v(c.newp), REP[lang][c.rep]];
+  return [ltr('DR ' + c.dr[x]), v(c.pages), v(c.dirs), v(c.phrases), v(c.ai), v(c.comps), v(c.newp), REP[lang][c.rep], TECH[lang][c.tech], c.audit ? AUDIT[lang][c.audit] : null, c.prio ? PRIO[lang] : null];
 });
 
 /* ── Section 5 / offer B2: the six deliverables, in copy.md's order. Icon
@@ -432,6 +442,7 @@ export const COPY = {
           'نحسّن صفحاتك ونكتب محتوى محليًا لكل صفحة',
           'نسجّل نشاطك في أدلة محلية',
           'نبني الروابط وسلطة النطاق شهرًا بعد شهر',
+          'ننفذ الأعمال التقنية شهريًا أو كل أسبوعين أو أسبوعيًا، ونُدقّق الصفحات ونعمل عليها في أحجام الشركات التي تشمله',
           'نتولى الاستضافة والنطاق والحماية والتحديثات التقنية',
         ] },
       ],
@@ -521,7 +532,7 @@ export const COPY = {
       sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
       /* The eight rows every card shows (Ahmad 2026-10-08), per month. */
-      rowLabels: ['روابط من مواقع أخرى، مجموع قوة النطاق DR', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'كلمات مفتاحية مستهدفة', 'إجابات الذكاء الاصطناعي المتابَعة', 'منافسون متابَعون', 'صفحات جديدة', 'التقارير'],
+      rowLabels: ['روابط من مواقع أخرى، مجموع قوة النطاق DR', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'كلمات مفتاحية مستهدفة', 'إجابات الذكاء الاصطناعي المتابَعة', 'منافسون متابَعون', 'صفحات جديدة', 'التقارير', 'الأعمال التقنية', 'تدقيق الصفحات والعمل عليها', 'دعم ذو أولوية'],
       plans: [
         { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain'), spec: specFor('ar', 0) },
         { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand'), spec: specFor('ar', 1) },
@@ -830,6 +841,7 @@ export const COPY = {
           'Optimize your pages and write local content for every page',
           'List your business in local directories',
           'Keep building links and domain authority, month after month',
+          'Do the technical work monthly, bi-weekly or weekly, and audit and work on your pages for the company sizes that include it',
           'Run the hosting, domain, security and technical updates',
         ] },
       ],
@@ -887,7 +899,7 @@ export const COPY = {
       sizesLabel: 'Your company size',
       contract: [{ a: '', pct: '10%', b: ' off 6 month contracts' }, { a: '', pct: '20%', b: ' off 12 month contracts' }],
       sizes: ['Small', 'Medium', 'Large'],
-      rowLabels: ['Links from other websites, total DR', 'Pages optimized', 'Local directory listings', 'Target keywords', 'AI answers tracked', 'Tracked competitors', 'New pages', 'Reporting'],
+      rowLabels: ['Links from other websites, total DR', 'Pages optimized', 'Local directory listings', 'Target keywords', 'AI answers tracked', 'Tracked competitors', 'New pages', 'Reporting', 'Technical work', 'On-page audit and work', 'Priority support'],
       plans: [
         { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'), spec: specFor('en', 0) },
         { tag: 'x3', name: 'Expand', prices: pkgPrices('expand'), spec: specFor('en', 1) },
