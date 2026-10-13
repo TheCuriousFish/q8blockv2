@@ -1471,3 +1471,13 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 .ss:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
+
+/* Top services run in two columns on the sample sheet (the list continues into the second column). */
+.rs-rows2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: 20px; }
+.rs-rows2 .rs-row:nth-child(4) { border-block-end: 0; }
+.rs-rows2 .rs-row { gap: 10px; font-size: 15px; }
+@media (max-width: 767px) {
+  .rs-rows2 { column-gap: 14px; }
+  .rs-rows2 .rs-row { gap: 6px; font-size: 13px; line-height: 1.25; }
+  .rs-rows2 .rs-tot { font-size: 15px; min-width: 1.6ch; }
+}

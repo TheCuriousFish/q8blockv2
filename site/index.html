@@ -1022,6 +1022,15 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 .ss:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
+
+.rs-rows2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: 20px; }
+.rs-rows2 .rs-row:nth-child(4) { border-block-end: 0; }
+.rs-rows2 .rs-row { gap: 10px; font-size: 15px; }
+@media (max-width: 767px) {
+  .rs-rows2 { column-gap: 14px; }
+  .rs-rows2 .rs-row { gap: 6px; font-size: 13px; line-height: 1.25; }
+  .rs-rows2 .rs-tot { font-size: 15px; min-width: 1.6ch; }
+}
 .fl{display:none}
 .js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .35s ease}
 .js:not(.open) body>:not(.fl){visibility:hidden}
@@ -1134,55 +1143,67 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
             <p class="rs-tag">نموذج تقرير</p>
             <div class="rs-head">
               <span class="rs-logo" dir="ltr" aria-hidden="true"><span class="rs-logo-box">Q8</span><span class="rs-logo-word">block</span></span>
-              <span class="rs-client" dir="ltr">clean.com</span>
+              <span class="rs-client">شركة نموذجية</span>
             </div>
             <div class="rs-sheet-body">
               <p class="rs-label">تواصل العملاء</p>
-              <p class="rs-hero"><span class="rs-big"><bdi dir="ltr">88</bdi></span> <span class="rs-unit">تحويل</span></p>
+              <p class="rs-hero"><span class="rs-big"><bdi dir="ltr">125</bdi></span> <span class="rs-unit">تحويل</span></p>
               <div class="rs-bar" role="img" aria-label="نسبة الواتساب والاتصال: 64% / 36%">
                 <i class="rp-seg rs-seg-wa" style="width:64%"></i><i class="rp-seg rs-seg-call" style="width:36%"></i>
               </div>
               <div class="rs-split">
-                <p><span class="rs-n"><bdi dir="ltr">56</bdi></span> <span class="rs-k">محادثة واتساب</span></p>
-                <p><span class="rs-n"><bdi dir="ltr">32</bdi></span> <span class="rs-k">اتصال هاتفي</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">80</bdi></span> <span class="rs-k">محادثة واتساب</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">45</bdi></span> <span class="rs-k">اتصال هاتفي</span></p>
               </div>
 
               <p class="rs-label rs-gap">أعلى الخدمات</p>
-              <ul class="rs-rows"><li class="rs-row">
-              <span class="rs-svc">عاملات بالساعة</span>
-              <span class="rs-tot"><bdi dir="ltr">32</bdi></span>
+              <ul class="rs-rows rs-rows2"><li class="rs-row">
+              <span class="rs-svc">تنظيف المنازل</span>
+              <span class="rs-tot"><bdi dir="ltr">30</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">غسيل سجاد</span>
-              <span class="rs-tot"><bdi dir="ltr">15</bdi></span>
+              <span class="rs-svc">تنظيف الكنب</span>
+              <span class="rs-tot"><bdi dir="ltr">22</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">تنظيف منازل</span>
-              <span class="rs-tot"><bdi dir="ltr">7</bdi></span>
+              <span class="rs-svc">غسيل السجاد</span>
+              <span class="rs-tot"><bdi dir="ltr">18</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">الصفحة الرئيسية</span>
-              <span class="rs-tot"><bdi dir="ltr">6</bdi></span>
+              <span class="rs-svc">مكافحة الحشرات</span>
+              <span class="rs-tot"><bdi dir="ltr">16</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">تنظيف الخزانات</span>
+              <span class="rs-tot"><bdi dir="ltr">14</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">تنظيف المكاتب</span>
+              <span class="rs-tot"><bdi dir="ltr">12</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">تنظيف المسابح</span>
+              <span class="rs-tot"><bdi dir="ltr">8</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">تنظيف الواجهات</span>
+              <span class="rs-tot"><bdi dir="ltr">5</bdi></span>
             </li></ul>
 
               <p class="rs-label rs-gap">كلمات البحث</p>
-              <ul class="rs-kws"><li class="rs-kw">مكافحة حشرات الفحيحيل</li><li class="rs-kw">مكافحة حشرات صباح السالم</li><li class="rs-kw">خدم بالساعات الفحيحيل</li><li class="rs-kw" lang="en" dir="ltr">carpet cleaning kuwait</li><li class="rs-kw">خادمات بالساعة</li><li class="rs-kw">عاملات بالساعة</li></ul>
+              <ul class="rs-kws"><li class="rs-kw">تنظيف منازل</li><li class="rs-kw">تنظيف كنب</li><li class="rs-kw">مكافحة حشرات</li><li class="rs-kw">غسيل سجاد</li><li class="rs-kw">شركة تنظيف الرياض</li><li class="rs-kw">تنظيف مكاتب</li></ul>
 
               <p class="rs-label rs-gap">الزيارات من نتائج البحث</p>
               <div class="rs-stats">
-                <p><span class="rs-n"><bdi dir="ltr">525</bdi></span> <span class="rs-k">النقرات من نتائج البحث</span></p>
-                <p><span class="rs-n"><bdi dir="ltr">29,797</bdi></span> <span class="rs-k">ظهور الموقع في النتائج</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">2,480</bdi></span> <span class="rs-k">النقرات من نتائج البحث</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">61,200</bdi></span> <span class="rs-k">ظهور الموقع في النتائج</span></p>
               </div>
-              <p class="rs-value"><span class="rs-vk">القيمة التقديرية</span> <span class="rs-vv"><bdi dir="ltr">6,100</bdi> إلى <bdi dir="ltr">7,300</bdi> ر.س</span> <span class="rs-vs">لو جاءت هذه الزيارات من إعلانات جوجل</span></p>
-              <div class="rp-chart" role="img" aria-label="الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 27 زيارة يوم 14 سبتمبر">
+              <p class="rs-value"><span class="rs-vk">القيمة التقديرية</span> <span class="rs-vv"><bdi dir="ltr">12,000</bdi> إلى <bdi dir="ltr">14,000</bdi> ر.س</span> <span class="rs-vs">لو جاءت هذه الزيارات من إعلانات جوجل</span></p>
+              <div class="rp-chart" role="img" aria-label="الزيارات اليومية من بحث جوجل، من 1 إلى 30 سبتمبر، وأعلاها 116 زيارة يوم 29 سبتمبر">
                 <div class="rp-plot"><svg class="rp-chart-svg" viewBox="0 0 600 120" width="600" height="120" aria-hidden="true" focusable="false" preserveAspectRatio="none">
-          <path d="M600,70.4 L579.3,32.7 L558.6,28.9 L537.9,36.4 L517.2,47.8 L496.6,28.9 L475.9,13.8 L455.2,44 L434.5,25.1 L413.8,62.9 L393.1,25.1 L372.4,17.6 L351.7,51.6 L331,10 L310.3,62.9 L289.7,47.8 L269,70.4 L248.3,70.4 L227.6,28.9 L206.9,62.9 L186.2,40.2 L165.5,51.6 L144.8,47.8 L124.1,66.7 L103.4,59.1 L82.8,40.2 L62.1,51.6 L41.4,55.3 L20.7,55.3 L0,70.4 L0,112 L600,112 Z" class="rp-area"/>
-          <path d="M600,70.4 L579.3,32.7 L558.6,28.9 L537.9,36.4 L517.2,47.8 L496.6,28.9 L475.9,13.8 L455.2,44 L434.5,25.1 L413.8,62.9 L393.1,25.1 L372.4,17.6 L351.7,51.6 L331,10 L310.3,62.9 L289.7,47.8 L269,70.4 L248.3,70.4 L227.6,28.9 L206.9,62.9 L186.2,40.2 L165.5,51.6 L144.8,47.8 L124.1,66.7 L103.4,59.1 L82.8,40.2 L62.1,51.6 L41.4,55.3 L20.7,55.3 L0,70.4" class="rp-line"/>
+          <path d="M600,68.9 L579.3,64.5 L558.6,58.4 L537.9,65.4 L517.2,53.1 L496.6,46.9 L475.9,56.6 L455.2,61 L434.5,50.4 L413.8,42.5 L393.1,38.1 L372.4,48.7 L351.7,52.2 L331,39.9 L310.3,32 L289.7,34.6 L269,44.3 L248.3,36.4 L227.6,27.6 L206.9,22.3 L186.2,33.7 L165.5,40.8 L144.8,28.5 L124.1,19.7 L103.4,15.3 L82.8,24.1 L62.1,32 L41.4,19.7 L20.7,10 L0,11.8 L0,112 L600,112 Z" class="rp-area"/>
+          <path d="M600,68.9 L579.3,64.5 L558.6,58.4 L537.9,65.4 L517.2,53.1 L496.6,46.9 L475.9,56.6 L455.2,61 L434.5,50.4 L413.8,42.5 L393.1,38.1 L372.4,48.7 L351.7,52.2 L331,39.9 L310.3,32 L289.7,34.6 L269,44.3 L248.3,36.4 L227.6,27.6 L206.9,22.3 L186.2,33.7 L165.5,40.8 L144.8,28.5 L124.1,19.7 L103.4,15.3 L82.8,24.1 L62.1,32 L41.4,19.7 L20.7,10 L0,11.8" class="rp-line"/>
           <line x1="0" y1="112" x2="600" y2="112" class="rp-axis"/>
         </svg>
-        <span class="rp-peak" style="inset-inline-start:44.83333333333333%;top:8.333333333333332%" aria-hidden="true"></span></div>
+        <span class="rp-peak" style="inset-inline-start:96.55%;top:8.333333333333332%" aria-hidden="true"></span></div>
                 <p class="rp-axisl" aria-hidden="true"><span><bdi dir="ltr">1</bdi> سبتمبر</span><span><bdi dir="ltr">30</bdi> سبتمبر</span></p>
               </div>
             </div>
           </div>
-          <figcaption class="rs-note">من تقرير شهري حقيقي لأحد عملائنا. هذه أرقام ذلك العميل، وليست أرقام نشاطك.</figcaption>
+          <figcaption class="rs-note">نموذج تقرير بأرقام توضيحية، وليست أرقام عميل حقيقي ولا وعدًا بنتيجة.</figcaption>
         </figure>
       </div>
     </div>
@@ -1280,7 +1301,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">⁦x1⁩</span></p>
       <h3 class="plan-name">باقة الحفاظ</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">997</span><span class="pa pa-m">1,997</span><span class="pa pa-l">2,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
-      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى، مجموع قوة النطاق DR</dt><dd><span class="pv pv-s">⁦DR 10⁩</span><span class="pv pv-m">⁦DR 20⁩</span><span class="pv pv-l">⁦DR 30⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">3</span><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">4</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s"><dt>كلمات مفتاحية مستهدفة</dt><dd><span class="pv pv-m">5</span><span class="pv pv-l">10</span></dd></div><div class="ps-row no-s"><dt>إجابات الذكاء الاصطناعي المتابَعة</dt><dd><span class="pv pv-m">3</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s no-m"><dt>منافسون متابَعون</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row no-s no-m"><dt>صفحات جديدة</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div></dl>
+      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى، مجموع قوة النطاق DR</dt><dd><span class="pv pv-s">⁦DR 10⁩</span><span class="pv pv-m">⁦DR 20⁩</span><span class="pv pv-l">⁦DR 30⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">3</span><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">4</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s"><dt>كلمات مفتاحية مستهدفة</dt><dd><span class="pv pv-m">5</span><span class="pv pv-l">10</span></dd></div><div class="ps-row no-s"><dt>إجابات الذكاء الاصطناعي المتابَعة</dt><dd><span class="pv pv-m">3</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s no-m"><dt>منافسون متابَعون</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row no-s no-m"><dt>صفحات جديدة</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div><div class="ps-row"><dt>الأعمال التقنية</dt><dd><span class="pv pv-s">أعمال تقنية شهرية</span><span class="pv pv-m">أعمال تقنية كل أسبوعين</span><span class="pv pv-l">أعمال تقنية أسبوعية</span></dd></div><div class="ps-row no-s"><dt>تدقيق الصفحات والعمل عليها</dt><dd><span class="pv pv-m">تدقيق الصفحات والعمل عليها شهريًا</span><span class="pv pv-l">تدقيق الصفحات والعمل عليها كل أسبوعين</span></dd></div><div class="ps-row no-s no-m"><dt>دعم ذو أولوية</dt><dd><span class="pv pv-l">مشمول</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
@@ -1288,7 +1309,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">⁦x3⁩</span></p>
       <h3 class="plan-name">باقة التوسع</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">2,497</span><span class="pa pa-m">4,997</span><span class="pa pa-l">6,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
-      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى، مجموع قوة النطاق DR</dt><dd><span class="pv pv-s">⁦DR 30⁩</span><span class="pv pv-m">⁦DR 60⁩</span><span class="pv pv-l">⁦DR 90⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">9</span><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">12</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s"><dt>كلمات مفتاحية مستهدفة</dt><dd><span class="pv pv-m">15</span><span class="pv pv-l">30</span></dd></div><div class="ps-row no-s"><dt>إجابات الذكاء الاصطناعي المتابَعة</dt><dd><span class="pv pv-m">9</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s no-m"><dt>منافسون متابَعون</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row no-s no-m"><dt>صفحات جديدة</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div></dl>
+      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى، مجموع قوة النطاق DR</dt><dd><span class="pv pv-s">⁦DR 30⁩</span><span class="pv pv-m">⁦DR 60⁩</span><span class="pv pv-l">⁦DR 90⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">9</span><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">12</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s"><dt>كلمات مفتاحية مستهدفة</dt><dd><span class="pv pv-m">15</span><span class="pv pv-l">30</span></dd></div><div class="ps-row no-s"><dt>إجابات الذكاء الاصطناعي المتابَعة</dt><dd><span class="pv pv-m">9</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s no-m"><dt>منافسون متابَعون</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row no-s no-m"><dt>صفحات جديدة</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div><div class="ps-row"><dt>الأعمال التقنية</dt><dd><span class="pv pv-s">أعمال تقنية شهرية</span><span class="pv pv-m">أعمال تقنية كل أسبوعين</span><span class="pv pv-l">أعمال تقنية أسبوعية</span></dd></div><div class="ps-row no-s"><dt>تدقيق الصفحات والعمل عليها</dt><dd><span class="pv pv-m">تدقيق الصفحات والعمل عليها شهريًا</span><span class="pv pv-l">تدقيق الصفحات والعمل عليها كل أسبوعين</span></dd></div><div class="ps-row no-s no-m"><dt>دعم ذو أولوية</dt><dd><span class="pv pv-l">مشمول</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>
@@ -1296,7 +1317,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">⁦x10⁩</span></p>
       <h3 class="plan-name">باقة السيطرة</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">4,997</span><span class="pa pa-m">9,997</span><span class="pa pa-l">15,997</span></span> <span class="plan-unit">ر.س شهريًا</span></p>
-      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى، مجموع قوة النطاق DR</dt><dd><span class="pv pv-s">⁦DR 100⁩</span><span class="pv pv-m">⁦DR 200⁩</span><span class="pv pv-l">⁦DR 300⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">30</span><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">40</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s"><dt>كلمات مفتاحية مستهدفة</dt><dd><span class="pv pv-m">50</span><span class="pv pv-l">100</span></dd></div><div class="ps-row no-s"><dt>إجابات الذكاء الاصطناعي المتابَعة</dt><dd><span class="pv pv-m">30</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s no-m"><dt>منافسون متابَعون</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row no-s no-m"><dt>صفحات جديدة</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div></dl>
+      <dl class="plan-spec"><div class="ps-row"><dt>روابط من مواقع أخرى، مجموع قوة النطاق DR</dt><dd><span class="pv pv-s">⁦DR 100⁩</span><span class="pv pv-m">⁦DR 200⁩</span><span class="pv pv-l">⁦DR 300⁩</span></dd></div><div class="ps-row"><dt>صفحات محسّنة</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">30</span><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>تسجيل في أدلة محلية</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">40</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s"><dt>كلمات مفتاحية مستهدفة</dt><dd><span class="pv pv-m">50</span><span class="pv pv-l">100</span></dd></div><div class="ps-row no-s"><dt>إجابات الذكاء الاصطناعي المتابَعة</dt><dd><span class="pv pv-m">30</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s no-m"><dt>منافسون متابَعون</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row no-s no-m"><dt>صفحات جديدة</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>التقارير</dt><dd><span class="pv pv-s">تقرير شهري</span><span class="pv pv-m">تقرير كل أسبوعين</span><span class="pv pv-l">تقارير مباشرة</span></dd></div><div class="ps-row"><dt>الأعمال التقنية</dt><dd><span class="pv pv-s">أعمال تقنية شهرية</span><span class="pv pv-m">أعمال تقنية كل أسبوعين</span><span class="pv pv-l">أعمال تقنية أسبوعية</span></dd></div><div class="ps-row no-s"><dt>تدقيق الصفحات والعمل عليها</dt><dd><span class="pv pv-m">تدقيق الصفحات والعمل عليها شهريًا</span><span class="pv pv-l">تدقيق الصفحات والعمل عليها كل أسبوعين</span></dd></div><div class="ps-row no-s no-m"><dt>دعم ذو أولوية</dt><dd><span class="pv pv-l">مشمول</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">اتصل الآن</a>
       </div>

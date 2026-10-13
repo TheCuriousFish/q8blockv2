@@ -1021,6 +1021,15 @@ html[lang="ar"] #hero .lead { line-height: 1.55; }
 }
 .ss:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
+
+.rs-rows2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: 20px; }
+.rs-rows2 .rs-row:nth-child(4) { border-block-end: 0; }
+.rs-rows2 .rs-row { gap: 10px; font-size: 15px; }
+@media (max-width: 767px) {
+  .rs-rows2 { column-gap: 14px; }
+  .rs-rows2 .rs-row { gap: 6px; font-size: 13px; line-height: 1.25; }
+  .rs-rows2 .rs-tot { font-size: 15px; min-width: 1.6ch; }
+}
 .fl{display:none}
 .js .fl{display:flex;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;transition:opacity .35s ease}
 .js:not(.open) body>:not(.fl){visibility:hidden}
@@ -1133,55 +1142,67 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
             <p class="rs-tag">Sample report</p>
             <div class="rs-head">
               <span class="rs-logo" dir="ltr" aria-hidden="true"><span class="rs-logo-box">Q8</span><span class="rs-logo-word">block</span></span>
-              <span class="rs-client" dir="ltr">clean.com</span>
+              <span class="rs-client">Sample company</span>
             </div>
             <div class="rs-sheet-body">
               <p class="rs-label">Client conversions</p>
-              <p class="rs-hero"><span class="rs-big"><bdi dir="ltr">88</bdi></span> <span class="rs-unit">conversions</span></p>
+              <p class="rs-hero"><span class="rs-big"><bdi dir="ltr">125</bdi></span> <span class="rs-unit">conversions</span></p>
               <div class="rs-bar" role="img" aria-label="WhatsApp and call share: 64% / 36%">
                 <i class="rp-seg rs-seg-wa" style="width:64%"></i><i class="rp-seg rs-seg-call" style="width:36%"></i>
               </div>
               <div class="rs-split">
-                <p><span class="rs-n"><bdi dir="ltr">56</bdi></span> <span class="rs-k">WhatsApp chats</span></p>
-                <p><span class="rs-n"><bdi dir="ltr">32</bdi></span> <span class="rs-k">Phone calls</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">80</bdi></span> <span class="rs-k">WhatsApp chats</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">45</bdi></span> <span class="rs-k">Phone calls</span></p>
               </div>
 
               <p class="rs-label rs-gap">Top services</p>
-              <ul class="rs-rows"><li class="rs-row">
-              <span class="rs-svc">Hourly maids</span>
-              <span class="rs-tot"><bdi dir="ltr">32</bdi></span>
+              <ul class="rs-rows rs-rows2"><li class="rs-row">
+              <span class="rs-svc">Home cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">30</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">Carpet washing</span>
-              <span class="rs-tot"><bdi dir="ltr">15</bdi></span>
+              <span class="rs-svc">Sofa cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">22</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">House cleaning</span>
-              <span class="rs-tot"><bdi dir="ltr">7</bdi></span>
+              <span class="rs-svc">Carpet cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">18</bdi></span>
             </li><li class="rs-row">
-              <span class="rs-svc">Home page</span>
-              <span class="rs-tot"><bdi dir="ltr">6</bdi></span>
+              <span class="rs-svc">Pest control</span>
+              <span class="rs-tot"><bdi dir="ltr">16</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">Tank cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">14</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">Office cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">12</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">Pool cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">8</bdi></span>
+            </li><li class="rs-row">
+              <span class="rs-svc">Facade cleaning</span>
+              <span class="rs-tot"><bdi dir="ltr">5</bdi></span>
             </li></ul>
 
               <p class="rs-label rs-gap">Search keywords</p>
-              <ul class="rs-kws"><li class="rs-kw" lang="ar" dir="rtl">مكافحة حشرات الفحيحيل</li><li class="rs-kw" lang="ar" dir="rtl">مكافحة حشرات صباح السالم</li><li class="rs-kw" lang="ar" dir="rtl">خدم بالساعات الفحيحيل</li><li class="rs-kw" lang="en" dir="ltr">carpet cleaning kuwait</li><li class="rs-kw" lang="ar" dir="rtl">خادمات بالساعة</li><li class="rs-kw" lang="ar" dir="rtl">عاملات بالساعة</li></ul>
+              <ul class="rs-kws"><li class="rs-kw">home cleaning</li><li class="rs-kw">sofa cleaning</li><li class="rs-kw">pest control</li><li class="rs-kw">carpet washing</li><li class="rs-kw">cleaning Riyadh</li><li class="rs-kw">office cleaning</li></ul>
 
               <p class="rs-label rs-gap">Visits from search results</p>
               <div class="rs-stats">
-                <p><span class="rs-n"><bdi dir="ltr">525</bdi></span> <span class="rs-k">Clicks from search results</span></p>
-                <p><span class="rs-n"><bdi dir="ltr">29,797</bdi></span> <span class="rs-k">Appearances in results</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">2,480</bdi></span> <span class="rs-k">Clicks from search results</span></p>
+                <p><span class="rs-n"><bdi dir="ltr">61,200</bdi></span> <span class="rs-k">Appearances in results</span></p>
               </div>
-              <p class="rs-value"><span class="rs-vk">Estimated value</span> <span class="rs-vv"><bdi dir="ltr">6,100</bdi> to <bdi dir="ltr">7,300</bdi> SAR</span> <span class="rs-vs">if these visits had come from Google Ads</span></p>
-              <div class="rp-chart" role="img" aria-label="Daily visits from Google search, 1 to 30 September, peaking at 27 visits on 14 September">
+              <p class="rs-value"><span class="rs-vk">Estimated value</span> <span class="rs-vv"><bdi dir="ltr">12,000</bdi> to <bdi dir="ltr">14,000</bdi> SAR</span> <span class="rs-vs">if these visits had come from Google Ads</span></p>
+              <div class="rp-chart" role="img" aria-label="Daily visits from Google search, 1 to 30 September, peaking at 116 visits on 29 September">
                 <div class="rp-plot"><svg class="rp-chart-svg" viewBox="0 0 600 120" width="600" height="120" aria-hidden="true" focusable="false" preserveAspectRatio="none">
-          <path d="M0,70.4 L20.7,32.7 L41.4,28.9 L62.1,36.4 L82.8,47.8 L103.4,28.9 L124.1,13.8 L144.8,44 L165.5,25.1 L186.2,62.9 L206.9,25.1 L227.6,17.6 L248.3,51.6 L269,10 L289.7,62.9 L310.3,47.8 L331,70.4 L351.7,70.4 L372.4,28.9 L393.1,62.9 L413.8,40.2 L434.5,51.6 L455.2,47.8 L475.9,66.7 L496.6,59.1 L517.2,40.2 L537.9,51.6 L558.6,55.3 L579.3,55.3 L600,70.4 L600,112 L0,112 Z" class="rp-area"/>
-          <path d="M0,70.4 L20.7,32.7 L41.4,28.9 L62.1,36.4 L82.8,47.8 L103.4,28.9 L124.1,13.8 L144.8,44 L165.5,25.1 L186.2,62.9 L206.9,25.1 L227.6,17.6 L248.3,51.6 L269,10 L289.7,62.9 L310.3,47.8 L331,70.4 L351.7,70.4 L372.4,28.9 L393.1,62.9 L413.8,40.2 L434.5,51.6 L455.2,47.8 L475.9,66.7 L496.6,59.1 L517.2,40.2 L537.9,51.6 L558.6,55.3 L579.3,55.3 L600,70.4" class="rp-line"/>
+          <path d="M0,68.9 L20.7,64.5 L41.4,58.4 L62.1,65.4 L82.8,53.1 L103.4,46.9 L124.1,56.6 L144.8,61 L165.5,50.4 L186.2,42.5 L206.9,38.1 L227.6,48.7 L248.3,52.2 L269,39.9 L289.7,32 L310.3,34.6 L331,44.3 L351.7,36.4 L372.4,27.6 L393.1,22.3 L413.8,33.7 L434.5,40.8 L455.2,28.5 L475.9,19.7 L496.6,15.3 L517.2,24.1 L537.9,32 L558.6,19.7 L579.3,10 L600,11.8 L600,112 L0,112 Z" class="rp-area"/>
+          <path d="M0,68.9 L20.7,64.5 L41.4,58.4 L62.1,65.4 L82.8,53.1 L103.4,46.9 L124.1,56.6 L144.8,61 L165.5,50.4 L186.2,42.5 L206.9,38.1 L227.6,48.7 L248.3,52.2 L269,39.9 L289.7,32 L310.3,34.6 L331,44.3 L351.7,36.4 L372.4,27.6 L393.1,22.3 L413.8,33.7 L434.5,40.8 L455.2,28.5 L475.9,19.7 L496.6,15.3 L517.2,24.1 L537.9,32 L558.6,19.7 L579.3,10 L600,11.8" class="rp-line"/>
           <line x1="0" y1="112" x2="600" y2="112" class="rp-axis"/>
         </svg>
-        <span class="rp-peak" style="inset-inline-start:44.83333333333333%;top:8.333333333333332%" aria-hidden="true"></span></div>
+        <span class="rp-peak" style="inset-inline-start:96.55%;top:8.333333333333332%" aria-hidden="true"></span></div>
                 <p class="rp-axisl" aria-hidden="true"><span><bdi dir="ltr">1</bdi> Sep</span><span><bdi dir="ltr">30</bdi> Sep</span></p>
               </div>
             </div>
           </div>
-          <figcaption class="rs-note">From a real monthly report of one of our clients. These are that client’s figures, not figures for your business.</figcaption>
+          <figcaption class="rs-note">A sample report with illustrative figures. They are not a client’s real numbers and not a promise of results.</figcaption>
         </figure>
       </div>
     </div>
@@ -1279,7 +1300,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">x1</span></p>
       <h3 class="plan-name">Maintain</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">997</span><span class="pa pa-m">1,997</span><span class="pa pa-l">2,997</span></span> <span class="plan-unit">SAR / month</span></p>
-      <dl class="plan-spec"><div class="ps-row"><dt>Links from other websites, total DR</dt><dd><span class="pv pv-s">⁦DR 10⁩</span><span class="pv pv-m">⁦DR 20⁩</span><span class="pv pv-l">⁦DR 30⁩</span></dd></div><div class="ps-row"><dt>Pages optimized</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">3</span><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>Local directory listings</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">4</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s"><dt>Target keywords</dt><dd><span class="pv pv-m">5</span><span class="pv pv-l">10</span></dd></div><div class="ps-row no-s"><dt>AI answers tracked</dt><dd><span class="pv pv-m">3</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s no-m"><dt>Tracked competitors</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row no-s no-m"><dt>New pages</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>Reporting</dt><dd><span class="pv pv-s">Monthly reporting</span><span class="pv pv-m">Bi-weekly reporting</span><span class="pv pv-l">Live reporting</span></dd></div></dl>
+      <dl class="plan-spec"><div class="ps-row"><dt>Links from other websites, total DR</dt><dd><span class="pv pv-s">⁦DR 10⁩</span><span class="pv pv-m">⁦DR 20⁩</span><span class="pv pv-l">⁦DR 30⁩</span></dd></div><div class="ps-row"><dt>Pages optimized</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">3</span><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>Local directory listings</dt><dd><span class="pv pv-s">2</span><span class="pv pv-m">4</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s"><dt>Target keywords</dt><dd><span class="pv pv-m">5</span><span class="pv pv-l">10</span></dd></div><div class="ps-row no-s"><dt>AI answers tracked</dt><dd><span class="pv pv-m">3</span><span class="pv pv-l">6</span></dd></div><div class="ps-row no-s no-m"><dt>Tracked competitors</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row no-s no-m"><dt>New pages</dt><dd><span class="pv pv-l">5</span></dd></div><div class="ps-row"><dt>Reporting</dt><dd><span class="pv pv-s">Monthly reporting</span><span class="pv pv-m">Bi-weekly reporting</span><span class="pv pv-l">Live reporting</span></dd></div><div class="ps-row"><dt>Technical work</dt><dd><span class="pv pv-s">Monthly technical work</span><span class="pv pv-m">Bi-weekly technical work</span><span class="pv pv-l">Weekly technical work</span></dd></div><div class="ps-row no-s"><dt>On-page audit and work</dt><dd><span class="pv pv-m">Monthly on-page audit and work</span><span class="pv pv-l">Bi-weekly on-page audit and work</span></dd></div><div class="ps-row no-s no-m"><dt>Priority support</dt><dd><span class="pv pv-l">Included</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
       </div>
@@ -1287,7 +1308,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">x3</span></p>
       <h3 class="plan-name">Expand</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">2,497</span><span class="pa pa-m">4,997</span><span class="pa pa-l">6,997</span></span> <span class="plan-unit">SAR / month</span></p>
-      <dl class="plan-spec"><div class="ps-row"><dt>Links from other websites, total DR</dt><dd><span class="pv pv-s">⁦DR 30⁩</span><span class="pv pv-m">⁦DR 60⁩</span><span class="pv pv-l">⁦DR 90⁩</span></dd></div><div class="ps-row"><dt>Pages optimized</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">9</span><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>Local directory listings</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">12</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s"><dt>Target keywords</dt><dd><span class="pv pv-m">15</span><span class="pv pv-l">30</span></dd></div><div class="ps-row no-s"><dt>AI answers tracked</dt><dd><span class="pv pv-m">9</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s no-m"><dt>Tracked competitors</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row no-s no-m"><dt>New pages</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>Reporting</dt><dd><span class="pv pv-s">Monthly reporting</span><span class="pv pv-m">Bi-weekly reporting</span><span class="pv pv-l">Live reporting</span></dd></div></dl>
+      <dl class="plan-spec"><div class="ps-row"><dt>Links from other websites, total DR</dt><dd><span class="pv pv-s">⁦DR 30⁩</span><span class="pv pv-m">⁦DR 60⁩</span><span class="pv pv-l">⁦DR 90⁩</span></dd></div><div class="ps-row"><dt>Pages optimized</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">9</span><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>Local directory listings</dt><dd><span class="pv pv-s">6</span><span class="pv pv-m">12</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s"><dt>Target keywords</dt><dd><span class="pv pv-m">15</span><span class="pv pv-l">30</span></dd></div><div class="ps-row no-s"><dt>AI answers tracked</dt><dd><span class="pv pv-m">9</span><span class="pv pv-l">18</span></dd></div><div class="ps-row no-s no-m"><dt>Tracked competitors</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row no-s no-m"><dt>New pages</dt><dd><span class="pv pv-l">15</span></dd></div><div class="ps-row"><dt>Reporting</dt><dd><span class="pv pv-s">Monthly reporting</span><span class="pv pv-m">Bi-weekly reporting</span><span class="pv pv-l">Live reporting</span></dd></div><div class="ps-row"><dt>Technical work</dt><dd><span class="pv pv-s">Monthly technical work</span><span class="pv pv-m">Bi-weekly technical work</span><span class="pv pv-l">Weekly technical work</span></dd></div><div class="ps-row no-s"><dt>On-page audit and work</dt><dd><span class="pv pv-m">Monthly on-page audit and work</span><span class="pv pv-l">Bi-weekly on-page audit and work</span></dd></div><div class="ps-row no-s no-m"><dt>Priority support</dt><dd><span class="pv pv-l">Included</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
       </div>
@@ -1295,7 +1316,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <p class="plan-tag"><span class="xtag" dir="ltr">x10</span></p>
       <h3 class="plan-name">Dominate</h3>
       <p class="plan-price"><span class="plan-amount"><span class="pa pa-s">4,997</span><span class="pa pa-m">9,997</span><span class="pa pa-l">15,997</span></span> <span class="plan-unit">SAR / month</span></p>
-      <dl class="plan-spec"><div class="ps-row"><dt>Links from other websites, total DR</dt><dd><span class="pv pv-s">⁦DR 100⁩</span><span class="pv pv-m">⁦DR 200⁩</span><span class="pv pv-l">⁦DR 300⁩</span></dd></div><div class="ps-row"><dt>Pages optimized</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">30</span><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>Local directory listings</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">40</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s"><dt>Target keywords</dt><dd><span class="pv pv-m">50</span><span class="pv pv-l">100</span></dd></div><div class="ps-row no-s"><dt>AI answers tracked</dt><dd><span class="pv pv-m">30</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s no-m"><dt>Tracked competitors</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row no-s no-m"><dt>New pages</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>Reporting</dt><dd><span class="pv pv-s">Monthly reporting</span><span class="pv pv-m">Bi-weekly reporting</span><span class="pv pv-l">Live reporting</span></dd></div></dl>
+      <dl class="plan-spec"><div class="ps-row"><dt>Links from other websites, total DR</dt><dd><span class="pv pv-s">⁦DR 100⁩</span><span class="pv pv-m">⁦DR 200⁩</span><span class="pv pv-l">⁦DR 300⁩</span></dd></div><div class="ps-row"><dt>Pages optimized</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">30</span><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>Local directory listings</dt><dd><span class="pv pv-s">20</span><span class="pv pv-m">40</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s"><dt>Target keywords</dt><dd><span class="pv pv-m">50</span><span class="pv pv-l">100</span></dd></div><div class="ps-row no-s"><dt>AI answers tracked</dt><dd><span class="pv pv-m">30</span><span class="pv pv-l">60</span></dd></div><div class="ps-row no-s no-m"><dt>Tracked competitors</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row no-s no-m"><dt>New pages</dt><dd><span class="pv pv-l">50</span></dd></div><div class="ps-row"><dt>Reporting</dt><dd><span class="pv pv-s">Monthly reporting</span><span class="pv pv-m">Bi-weekly reporting</span><span class="pv pv-l">Live reporting</span></dd></div><div class="ps-row"><dt>Technical work</dt><dd><span class="pv pv-s">Monthly technical work</span><span class="pv pv-m">Bi-weekly technical work</span><span class="pv pv-l">Weekly technical work</span></dd></div><div class="ps-row no-s"><dt>On-page audit and work</dt><dd><span class="pv pv-m">Monthly on-page audit and work</span><span class="pv pv-l">Bi-weekly on-page audit and work</span></dd></div><div class="ps-row no-s no-m"><dt>Priority support</dt><dd><span class="pv pv-l">Included</span></dd></div></dl>
       <div class="plan-cta">
         <a class="btn btn-primary" href="tel:+96594139666">Call now</a>
       </div>
