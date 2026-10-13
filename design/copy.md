@@ -1602,4 +1602,4 @@ Company `شركة نموذجية` / `Sample company`, month `سبتمبر 2026` 
 | On-page audit and work / تدقيق الصفحات والعمل عليها | not included (row removed) | Monthly on-page audit and work / تدقيق الصفحات والعمل عليها شهريًا | Bi-weekly on-page audit and work / ... كل أسبوعين |
 | Priority support / دعم ذو أولوية | not included | not included | Included / مشمول |
 
-The report band's "What we do every month" carries one line for technical work and the on-page audit (`report.groups`).
+The report band's text column is NOT changed for these rows (Ahmad: the band must not get taller).
