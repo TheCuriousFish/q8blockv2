@@ -243,6 +243,23 @@ export const ICONS = [
   'ai-visibility', 'backlinks-authority', 'hosting-security',
 ];
 
+/* ── THE SAMPLE REPORT (2026-10-13). A TEMPLATE with ILLUSTRATIVE figures, not a client's
+      data. The numbers live here once; the names live per language in COPY.<lang>.report.sample.
+      Arithmetic is checked by build.mjs: whatsapp + calls = total, services sum to total,
+      daily sums to clicks. ── */
+export const SAMPLE = {
+  total: 125, wa: 80, calls: 45,                       // 64% / 36%
+  // [total, whatsapp, calls], same order as the names in each language
+  services: [[34, 22, 12], [24, 15, 9], [19, 12, 7], [15, 10, 5], [12, 7, 5], [11, 7, 4], [10, 7, 3]],
+  // [position, places gained] for each keyword, same order as the names
+  keywords: [[3, 2], [4, 1], [5, 2], [6, 3], [7, 4], [8, 5], [9, 1], [11, 6]],
+  clicks: 2480, impressions: 61200,
+  daily: [49, 54, 61, 53, 67, 74, 63, 58, 70, 79, 84, 72, 68, 82, 91, 88, 77, 86, 96, 102, 89, 81, 95, 105, 110, 100, 91, 105, 116, 114],
+  value: [12000, 14000],                               // SAR, illustrative
+  // plan items, mirroring the pricing grid (Big, x3): total DR, pages, directories, AI answers, competitors, new pages
+  plan: ['DR 90', '15', '18', '18', '15', '15'],
+};
+
 export const COPY = {
   /* ═══════════════════════════ ARABIC ═══════════════════════════ */
   ar: {
@@ -395,9 +412,18 @@ export const COPY = {
          pricing rows, the report's own labels and the "what we do" blocks: none invented. */
       sample: {
         tag: 'نموذج تقرير',
-        figLabel: 'نموذج تقرير شهري',
-        note: 'من تقرير شهري حقيقي لأحد عملائنا. هذه أرقام ذلك العميل، وليست أرقام نشاطك.',
+        company: 'شركة نموذجية',
+        month: 'سبتمبر 2026',
+        note: 'نموذج تقرير بأرقام توضيحية، وليست أرقام عميل حقيقي ولا وعدًا بنتيجة.',
         topServices: 'أعلى الخدمات',
+        leadsH: 'التواصل',
+        splitH: 'التوزيع',
+        kwLabel: 'الكلمات المفتاحية المستهدفة',
+        kwH: ['الكلمة', 'الترتيب', 'التغيّر'],
+        planLabel: 'ما أُنجز هذا الشهر',
+        services: ['تنظيف المنازل', 'تنظيف الكنب', 'غسيل السجاد', 'مكافحة الحشرات', 'تنظيف خزانات المياه', 'تنظيف المكاتب', 'تنظيف المسابح'],
+        keywords: ['تنظيف منازل الرياض', 'تنظيف كنب الرياض', 'مكافحة حشرات الرياض', 'غسيل سجاد جدة', 'تنظيف خزانات الدمام', 'شركة تنظيف الرياض', 'تنظيف مكاتب الرياض', 'تنظيف فلل جدة'],
+        gain: 'ارتفع {n}',
       },
       groups: [
         { title: 'ما نتابعه', items: [
@@ -791,9 +817,18 @@ export const COPY = {
       h2: 'What you get <span class="hl">every month.</span>',
       sample: {
         tag: 'Sample report',
-        figLabel: 'Sample monthly report',
-        note: 'From a real monthly report of one of our clients. These are that client’s figures, not figures for your business.',
+        company: 'Sample company',
+        month: 'September 2026',
+        note: 'A sample report with illustrative figures. They are not a client’s real numbers and not a promise of results.',
         topServices: 'Top services',
+        leadsH: 'Leads',
+        splitH: 'Split',
+        kwLabel: 'Target keywords',
+        kwH: ['Keyword', 'Rank', 'Change'],
+        planLabel: 'Done this month',
+        services: ['Home cleaning', 'Sofa cleaning', 'Carpet cleaning', 'Pest control', 'Water tank cleaning', 'Office cleaning', 'Pool cleaning'],
+        keywords: ['home cleaning Riyadh', 'sofa cleaning Riyadh', 'pest control Riyadh', 'carpet cleaning Jeddah', 'water tank cleaning Dammam', 'cleaning company Riyadh', 'office cleaning Riyadh', 'villa cleaning Jeddah'],
+        gain: 'up {n}',
       },
       groups: [
         { title: 'What we track', items: [

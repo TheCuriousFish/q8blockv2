@@ -1586,3 +1586,10 @@ nothing on the page is a reproduction any more.
 
 Nowhere else. The homepage never states who Q8Block sells to by location. The audience phrase is
 `شركات الخدمات المحلية` / `local service businesses`, and it carries no country.
+
+## 2026-10-13 (later): the sample sheet is a template (build-spec §36.5). Supersedes the "real client report" wording above.
+
+The sheet is NOT a client's report and never says so. Caption: `نموذج تقرير بأرقام توضيحية، وليست أرقام عميل حقيقي ولا وعدًا بنتيجة.` /
+`A sample report with illustrative figures. They are not a client’s real numbers and not a promise of results.`
+Company `شركة نموذجية` / `Sample company`, month `سبتمبر 2026` / `September 2026`. Names, labels and figures: `SAMPLE` and
+`report.sample` in src/data.mjs. Headline 125 = 80 WhatsApp + 45 calls.

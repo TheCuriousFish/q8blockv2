@@ -4718,3 +4718,16 @@ Ahmad's three-part change list. Branch `development`, nothing pushed or deployed
 ### 36.4 Gates
 `seo-audit.mjs` 0 high; `ops/firstload/site-audit.mjs` 0 failing pages; Lighthouse desktop `/` and `/en/`:
 accessibility 100, CLS 0.
+
+### 36.5 Sample sheet is a template, not client data (later the same day, supersedes the "real figures" wording in 36.3)
+- The sheet no longer reads `src/report.json` and says nothing about a real client. It is a TEMPLATE with illustrative
+  figures: `SAMPLE` in `src/data.mjs` (numbers, once) plus `report.sample` per language (company "Sample company" /
+  "شركة نموذجية", month September 2026, service and keyword names). 100% English on `/en/`, 100% Arabic on `/`.
+- Figures: 125 conversions = 80 WhatsApp (64%) + 45 calls (36%); 7 top services 34/24/19/15/12/11/10 (sum 125, each
+  WhatsApp + calls = total, shown in a second "split" column); 8 target keywords with rank and places gained;
+  2,480 clicks (daily series sums to it), 61,200 impressions; estimated value 12,000 to 14,000 SAR; six plan tiles that
+  mirror the pricing grid (DR 90, 15 pages, 18 directories, 18 AI answers, 15 competitors, 15 new pages).
+- `checkSample()` in render.mjs throws on build if wa + calls != total, services != total, a service split != its
+  total, or daily != clicks. Arithmetic also re-read from the built HTML in both locales.
+- Caption: "A sample report with illustrative figures. They are not a client's real numbers and not a promise of results."
+  (AR mirror). The `Sample report` / `نموذج تقرير` tag stays. `report.json` and `derive-report.mjs` remain as history only.

@@ -3,7 +3,7 @@
 // one place. Layout numbers come from design/build-spec.md.
 
 import fs from 'node:fs';
-import { CONFIG, NAP, WORK, ICONS } from './data.mjs';
+import { CONFIG, NAP, WORK, ICONS, SAMPLE } from './data.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -225,28 +225,23 @@ export function whatWeDo(t) {
       `.icon-card` and `.icon-card.compact` stay in styles.css for the same
       reason; only the `#included`-scoped rules came out. ── */
 
-/* ── §6 Your monthly report. REBUILT 2026-10-08 (build-spec §31).
-      Ahmad: "remove everything", show the report. The graph, the three icon
-      beats and the CTA pair are gone. Four pages of a real monthly report are
-      drawn as live HTML in a 2 x 2 grid (one column on a phone), each a framed
-      dark page with a black header strip, built to design/boards/report-A.png;
-      pages 3 and 4 have no board and reuse the same frame and type scale.
-      Every figure comes from src/report.json, written by
-      scripts/derive-report.mjs out of the report HTML. Never type one here. ── */
-const REPORT = JSON.parse(fs.readFileSync(new URL('./report.json', import.meta.url), 'utf8'));
-// The header label on every report card. Ahmad, 2026-10-08: "change it to clean.com", so the
-// real client and the month are not named. The figures underneath are still the real report's.
-const REPORT_LABEL = 'clean.com';
+/* ── §6 Your monthly report. REDESIGNED 2026-10-13 (build-spec §36): plain statements beside ONE
+      tilted paper sample sheet. The sheet is a template with illustrative figures (SAMPLE in
+      data.mjs and the per-language names in report.sample), never a real client's data. ── */
+/* The sample sheet's figures are ILLUSTRATIVE (SAMPLE in data.mjs), never a client's data. */
 const fmt = (n) => n.toLocaleString('en-US');
 const fill = (str, map) => str.replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : m));
 const ltr = (v) => `<bdi dir="ltr">${v}</bdi>`;
 
-/* The report's estimated click value is in Kuwaiti dinars (the source report is a Kuwait site);
-   the page prints it in Saudi riyals. 1 KWD is about 3.26 USD and the riyal is pegged at 3.75,
-   so about 12.2. Applied HERE, not in report.json. Rounded to the nearest 100: 500 to 600 KWD
-   prints 6,100 to 7,300. */
-const KWD_TO_SAR = 12.2;
-const toSar = (kwd) => Math.round((kwd * KWD_TO_SAR) / 100) * 100;
+/* The sheet must add up. Checked on every build; a drift throws. */
+function checkSample() {
+  const S = SAMPLE;
+  const sum = (a) => a.reduce((x, y) => x + y, 0);
+  if (S.wa + S.calls !== S.total) throw new Error('sample: whatsapp + calls != total');
+  if (sum(S.services.map((r) => r[0])) !== S.total) throw new Error('sample: services do not sum to total');
+  S.services.forEach((r, i) => { if (r[1] + r[2] !== r[0]) throw new Error('sample: service ' + i + ' split != total'); });
+  if (sum(S.daily) !== S.clicks) throw new Error('sample: daily does not sum to clicks');
+}
 
 function reportChart(daily, rtl) {
   const W = 600, H = 120, top = 10, base = 112;
@@ -266,35 +261,43 @@ function reportChart(daily, rtl) {
         <span class="rp-peak" style="inset-inline-start:${(rtl ? (W - peak[0]) : peak[0]) / W * 100}%;top:${peak[1] / H * 100}%" aria-hidden="true"></span>`;
 }
 
-/* The paper sheet. Built from the real report's own figures (src/report.json), tagged as a
-   sample, so the 88 on it can never read as the visitor's own result. It is one white sheet,
-   tilted, with a second sheet peeking out behind it. Everything on it is real text. */
-const SHEET_SERVICES = 4;
-const SHEET_KEYWORDS = 6;
-
+/* The paper sheet: a TEMPLATE report with illustrative figures, one white sheet, tilted, with a
+   second sheet peeking out behind. Every string on it is in the page's own language. */
 export function report(t) {
+  checkSample();
+  const S = SAMPLE;
   const r = t.report;
   const s = r.sample;
   const rtl = t.lang === 'ar';
-  const C = REPORT.conversions;
-  const T = REPORT.traffic;
+  const waPct = Math.round((S.wa / S.total) * 100);
+  const callPct = 100 - waPct;
 
   const groups = r.groups.map((g) => `<div class="rs-group">
           <h3 class="rs-gh">${esc(g.title)}</h3>
           <ul class="rs-list">${g.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
         </div>`).join('');
 
-  const svcName = (row) => esc(rtl ? row.ar : r.svc.names[row.ar]);
-  const services = REPORT.services.slice(0, SHEET_SERVICES).map((row) => `<li class="rs-row">
-              <span class="rs-svc">${svcName(row)}</span>
-              <span class="rs-tot">${ltr(row.total)}</span>
+  const callsWord = (n) => (Array.isArray(r.svc.calls) ? r.svc.calls[n === 1 ? 0 : 1] : r.svc.calls);
+  const head3 = (a, b, c) => `<li class="rs-row rs-row-h" aria-hidden="true"><span class="rs-svc">${esc(a)}</span><span class="rs-tot">${esc(b)}</span><span class="rs-split2">${esc(c)}</span></li>`;
+
+  const services = head3(s.topServices, s.leadsH, s.splitH) + S.services.map(([tot, wa, calls], i) => `<li class="rs-row">
+              <span class="rs-svc">${esc(s.services[i])}</span>
+              <span class="rs-tot">${ltr(tot)}</span>
+              <span class="rs-split2"><span>${ltr(wa)} ${esc(r.svc.wa)}</span><span>${ltr(calls)} ${esc(callsWord(calls))}</span></span>
             </li>`).join('');
 
-  const kws = REPORT.keywords.slice(0, SHEET_KEYWORDS).map((k) =>
-    `<li class="rs-kw"${k.lang === 'en' ? ' lang="en" dir="ltr"' : (rtl ? '' : ' lang="ar" dir="rtl"')}>${esc(k.text)}</li>`).join('');
+  const keywords = head3(s.kwH[0], s.kwH[1], s.kwH[2]) + S.keywords.map(([pos, gain], i) => `<li class="rs-row">
+              <span class="rs-svc">${esc(s.keywords[i])}</span>
+              <span class="rs-tot">${ltr(pos)}</span>
+              <span class="rs-split2 rs-gain"><span aria-hidden="true">&#9650;</span> ${esc(s.gain).replace('{n}', ltr(gain))}</span>
+            </li>`).join('');
 
-  const last = T.daily.length;
-  const m = { d: T.peakDay, n: T.peakVisits, last, lo: fmt(toSar(T.valueLo)), hi: fmt(toSar(T.valueHi)) };
+  const planLabels = [0, 1, 2, 4, 5, 6].map((k) => t.pricing.rowLabels[k]);
+  const plan = S.plan.map((v, i) => `<li class="rs-tile"><span class="rs-tv">${ltr(v)}</span><span class="rs-tl">${esc(planLabels[i])}</span></li>`).join('');
+
+  const last = S.daily.length;
+  const max = Math.max(...S.daily);
+  const m = { d: S.daily.indexOf(max) + 1, n: max, last, lo: fmt(S.value[0]), hi: fmt(S.value[1]) };
   const withNums = (str) => esc(fill(str, m)).replace(/(\d[\d,]*)/g, (d) => ltr(d));
 
   return `<section id="report" class="sec on-dark">
@@ -311,35 +314,37 @@ export function report(t) {
             <p class="rs-tag">${esc(s.tag)}</p>
             <div class="rs-head">
               <span class="rs-logo" dir="ltr" aria-hidden="true"><span class="rs-logo-box">Q8</span><span class="rs-logo-word">block</span></span>
-              <span class="rs-client" dir="ltr">${esc(REPORT_LABEL)}</span>
+              <span class="rs-client">${esc(s.company)} <span class="rs-month">${withNums(s.month)}</span></span>
             </div>
             <div class="rs-sheet-body">
               <p class="rs-label">${esc(r.conv.label)}</p>
-              <p class="rs-hero"><span class="rs-big">${ltr(C.total)}</span> <span class="rs-unit">${esc(r.conv.unit)}</span></p>
-              <div class="rs-bar" role="img" aria-label="${esc(r.conv.barLabel)}: ${C.waPct}% / ${C.callPct}%">
-                <i class="rp-seg rs-seg-wa" style="width:${C.waPct}%"></i><i class="rp-seg rs-seg-call" style="width:${C.callPct}%"></i>
+              <p class="rs-hero"><span class="rs-big">${ltr(S.total)}</span> <span class="rs-unit">${esc(r.conv.unit)}</span></p>
+              <div class="rs-bar" role="img" aria-label="${esc(r.conv.barLabel)}: ${waPct}% / ${callPct}%">
+                <i class="rs-seg-wa" style="width:${waPct}%"></i><i class="rs-seg-call" style="width:${callPct}%"></i>
               </div>
               <div class="rs-split">
-                <p><span class="rs-n">${ltr(C.wa)}</span> <span class="rs-k">${esc(r.conv.wa)}</span></p>
-                <p><span class="rs-n">${ltr(C.call)}</span> <span class="rs-k">${esc(r.conv.call)}</span></p>
+                <p><span class="rs-n">${ltr(S.wa)}</span> <span class="rs-k">${esc(r.conv.wa)} (${ltr(waPct + '%')})</span></p>
+                <p><span class="rs-n">${ltr(S.calls)}</span> <span class="rs-k">${esc(r.conv.call)} (${ltr(callPct + '%')})</span></p>
               </div>
 
-              <p class="rs-label rs-gap">${esc(s.topServices)}</p>
-              <ul class="rs-rows">${services}</ul>
+              <ul class="rs-rows rs-gap">${services}</ul>
 
-              <p class="rs-label rs-gap">${esc(r.kw.label)}</p>
-              <ul class="rs-kws">${kws}</ul>
+              <p class="rs-label rs-gap">${esc(s.kwLabel)}</p>
+              <ul class="rs-rows rs-kwrows">${keywords}</ul>
 
               <p class="rs-label rs-gap">${esc(r.traffic.label)}</p>
               <div class="rs-stats">
-                <p><span class="rs-n">${ltr(fmt(T.clicks))}</span> <span class="rs-k">${esc(r.traffic.clicksK)}</span></p>
-                <p><span class="rs-n">${ltr(fmt(T.impressions))}</span> <span class="rs-k">${esc(r.traffic.imprK)}</span></p>
+                <p><span class="rs-n">${ltr(fmt(S.clicks))}</span> <span class="rs-k">${esc(r.traffic.clicksK)}</span></p>
+                <p><span class="rs-n">${ltr(fmt(S.impressions))}</span> <span class="rs-k">${esc(r.traffic.imprK)}</span></p>
               </div>
               <p class="rs-value"><span class="rs-vk">${esc(r.traffic.valueK)}</span> <span class="rs-vv">${withNums(r.traffic.valueV)}</span> <span class="rs-vs">${esc(r.traffic.valueS)}</span></p>
               <div class="rp-chart" role="img" aria-label="${esc(fill(r.traffic.chartLabel, m))}">
-                <div class="rp-plot">${reportChart(T.daily, rtl)}</div>
+                <div class="rp-plot">${reportChart(S.daily, rtl)}</div>
                 <p class="rp-axisl" aria-hidden="true"><span>${withNums(r.traffic.start)}</span><span>${withNums(fill(r.traffic.end, m))}</span></p>
               </div>
+
+              <p class="rs-label rs-gap">${esc(s.planLabel)}</p>
+              <ul class="rs-tiles">${plan}</ul>
             </div>
           </div>
           <figcaption class="rs-note">${esc(s.note)}</figcaption>
@@ -348,6 +353,7 @@ export function report(t) {
     </div>
   </section>`;
 }
+
 
 /* ── §7 Our work.
       THE PLATE IS THE CLIENT'S OWN LOGO (Ahmad, 2026-09-25). It used to be
