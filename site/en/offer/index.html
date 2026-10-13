@@ -851,19 +851,27 @@ html[lang="ar"] #pricing {
   font-size: var(--pl-unit); font-weight: 400; line-height: 1.2;
   color: var(--muted-on-light);
 }
-.plan-features {
-  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0;
+
+.plan-spec {
+  margin: clamp(18px, calc(27/14.4 * 1vw), 29px) 0 0; padding: clamp(10px, calc(14/14.4 * 1vw), 16px) 0 0;
   border-block-start: 1px solid var(--hairline-light);
-  list-style: none; display: grid; gap: clamp(14px, calc(20/14.4 * 1vw), 22px);
-  font-size: var(--pl-check); font-weight: 400; line-height: 1.35;
-  color: var(--muted-on-light);
+  display: grid;
 }
-.plan-features li { position: relative; padding-inline-start: 40px; }
-.plan-features li::before {
-  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.18em;
-  width: 20px; height: 15px;
+.ps-row { padding-block: 10px; border-block-end: 1px solid var(--hairline-light); }
+.ps-row:last-child { border-block-end: 0; }
+.ps-row dt { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.35; color: var(--muted-on-light); }
+.ps-row dd { margin: 3px 0 0; min-height: 1.5em; }
+.pv { position: relative; display: block; font-size: var(--pl-check); font-weight: 700; line-height: 1.4; color: var(--ink); padding-inline-start: 30px; font-variant-numeric: lining-nums; }
+.pv::before {
+  content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.32em;
+  width: 18px; height: 14px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 15'%3E%3Cpath d='M2 7.5l5.5 5.5L18 2' fill='none' stroke='%23FF5F29' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
 }
+.pv-empty::before { inset-block-start: 0.7em; width: 14px; height: 2px; background: var(--hairline-light); }
+.pv-empty { min-height: 1.4em; }
+.pv-m, .pv-l { display: none; }
+#pricing:has(#psize-m:checked) .pv-s, #pricing:has(#psize-l:checked) .pv-s { display: none; }
+#pricing:has(#psize-m:checked) .pv-m, #pricing:has(#psize-l:checked) .pv-l { display: block; }
 .plan-cta { margin-block-start: auto; padding-block-start: clamp(26px, calc(39/14.4 * 1vw), 42px); }
 .plan-cta .btn {
   width: 100%; padding-inline: 12px;
@@ -1248,7 +1256,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
 <script defer src="/assets/app.js"></script>
 <script src="https://leafy-brigadeiros-60e3ff.netlify.app/t.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Q8 block","alternateName":"Kuwait Block","url":"https://q8block.com/","telephone":"+965 94139666","address":{"@type":"PostalAddress","streetAddress":"Al Ahmadi Governorate, Mangaf, Block 004, Street 14, Nasser Falih Shnaz Al Subaie Building, Floor 1, Unit 9","addressCountry":"KW"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is this free?","acceptedAnswer":{"@type":"Answer","text":"We take a limited number of companies and work on them for the full six months, until the result shows. That result is what makes a client decide to continue, and it is what we show the next client. That is why there are eligibility conditions."}},{"@type":"Question","name":"Do I pay anything during the six months?","acceptedAnswer":{"@type":"Answer","text":"No. The six months are entirely free. The normal price for this service starts at 997 SAR a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue."}},{"@type":"Question","name":"Is there a contract or a commitment?","acceptedAnswer":{"@type":"Answer","text":"No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them."}},{"@type":"Question","name":"Do I need a commercial registration?","acceptedAnswer":{"@type":"Answer","text":"A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile."}},{"@type":"Question","name":"I already have a website. Do I qualify?","acceptedAnswer":{"@type":"Answer","text":"The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you."}},{"@type":"Question","name":"What happens after six months?","acceptedAnswer":{"@type":"Answer","text":"You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice."}},{"@type":"Question","name":"Do you manage my Google Business Profile during the offer?","acceptedAnswer":{"@type":"Answer","text":"No, neither during the offer nor outside it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is this free?","acceptedAnswer":{"@type":"Answer","text":"We take a limited number of companies and work on them for the full six months, until the result shows. That result is what makes a client decide to continue, and it is what we show the next client. That is why there are eligibility conditions."}},{"@type":"Question","name":"Do I pay anything during the six months?","acceptedAnswer":{"@type":"Answer","text":"No. The six months are entirely free. The normal price for this service starts at 997 SAR a month, and the monthly prices on this page only start once the six months are over, and only if you choose to continue."}},{"@type":"Question","name":"Is there a contract or a commitment?","acceptedAnswer":{"@type":"Answer","text":"No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them."}},{"@type":"Question","name":"Do I need a commercial registration?","acceptedAnswer":{"@type":"Answer","text":"A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile."}},{"@type":"Question","name":"I already have a website. Do I qualify?","acceptedAnswer":{"@type":"Answer","text":"The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you."}},{"@type":"Question","name":"What happens after six months?","acceptedAnswer":{"@type":"Answer","text":"You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what each includes set out by company size on the home page. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice."}},{"@type":"Question","name":"Do you manage my Google Business Profile during the offer?","acceptedAnswer":{"@type":"Answer","text":"No, neither during the offer nor outside it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results."}}]}</script>
 </head>
 <body class="theme-dark">
 <div class="fl fl-dark" aria-hidden="true"><svg viewBox="0 0 67 56" focusable="false"><g class="fl-m"><rect width="67" height="56" fill="#FF5F29"/><g fill="none" stroke="#fff" stroke-width="5.4"><ellipse cx="20.5" cy="27" rx="7.6" ry="9.2"/><path d="M24 32.5 30.5 40"/><circle cx="46" cy="21.4" r="5"/><circle cx="46" cy="33.6" r="6.6"/></g></g></svg></div>
@@ -1383,7 +1391,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <dl class="tier-sizes"><div><dt>Small</dt><dd><span class="tier-price">4,997</span></dd></div><div><dt>Medium</dt><dd><span class="tier-price">9,997</span></dd></div><div><dt>Large</dt><dd><span class="tier-price">15,997</span></dd></div></dl>
       <span class="tier-unit">SAR per month</span>
     </li></ul>
-      <div class="tier-notes"><p>What each package covers is agreed with you on the call, against your industry and what the six months produced.</p><p>If you choose to stop, you stop completely, with no fee and no notice.</p></div>
+      <div class="tier-notes"><p>What each package includes, from links and pages to directories and reporting, is set out by company size in the pricing section of the home page.</p><p>If you choose to stop, you stop completely, with no fee and no notice.</p></div>
     </div>
   </section>
 <section id="offer-faq" class="sec on-dark">
@@ -1418,7 +1426,7 @@ html[dir="rtl"] .ss-stamp { letter-spacing: 0; }
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="ofaq-a5">
         <span>What happens after six months?</span><span class="faq-icon" aria-hidden="true"></span>
       </button>
-      <div class="faq-a" id="ofaq-a5">You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice.</div>
+      <div class="faq-a" id="ofaq-a5">You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what each includes set out by company size on the home page. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice.</div>
     </div><div class="faq-item">
       <button class="faq-q" type="button" aria-expanded="false" aria-controls="ofaq-a6">
         <span>Do you manage my Google Business Profile during the offer?</span><span class="faq-icon" aria-hidden="true"></span>

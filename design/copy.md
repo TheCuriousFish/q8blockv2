@@ -779,15 +779,26 @@ less explanatory text, and the board draws no lead).
 | CTA, every card | اتصل الآن → `tel:` | Call now → `tel:` |
 | Contract discounts, one muted line under the cards (2026-10-08, Ahmad; build-spec §35) | خصم 10% على عقد 6 أشهر · خصم 20% على عقد 12 شهرًا | 10% off 6 month contracts · 20% off 12 month contracts |
 
-| Card | Tag | Arabic name | English name | Check lines, Arabic (Ahmad's own, verbatim) | Check lines, English |
-|---|---|---|---|---|---|
-| 1 | x1 | باقة الحفاظ | Maintain | تثبيت نتائجك والاتصالات الحالية / حماية موقعك من المنافسين / الحفاظ على قوة ظهورك | Lock in your current results and calls / Protect your site from competitors / Keep your visibility strong |
-| 2 | x3 | باقة التوسع | Expand | استهداف كلمات وخدمات أكثر / تكثيف الشغل والجهد شهريًا / تحسين فرص طلبات الواتساب | Target more keywords and services / More work and effort every month / Better chances of WhatsApp requests |
-| 3 | x10 | باقة السيطرة | Dominate | أقصى جهد وطاقة تشغيلية / منافسة أقوى الشركات بالسوق / أولوية قصوى ودعم مباشر | Maximum effort and operating power / Compete with the strongest companies in the market / Top priority and direct support |
+| Card | Tag | Arabic name | English name |
+|---|---|---|---|
+| 1 | x1 | باقة الحفاظ | Maintain |
+| 2 | x3 | باقة التوسع | Expand |
+| 3 | x10 | باقة السيطرة | Dominate |
 
-The only change to Ahmad's lines: `شهرياً` is written `شهريًا`, the site's spelling. Prices are in the price
-register below. **Small is selected by default.** Cards read low to high: left to right on `/en/`, right to
-left on `/`.
+**Check lines REPLACED 2026-10-08 by the confirmed grid.** Every card shows all 8 rows, per month; a row the size does not include is shown greyed and empty, with no tick. Prices unchanged. Values for x1 / x3 / x10:
+
+| Row (Arabic / English) | Small | Medium | Big |
+|---|---|---|---|
+| 1 روابط من مواقع أخرى (العدد ومجموع قوة النطاق DR) / Links from other websites (links, total DR) | 1 link DR 10 / 1-2 DR 30 / 2-3 DR 50 | 2-3 DR 60 / 3-4 DR 100 / 4-6 DR 160 | 3-4 DR 120 / 5-7 DR 220 / 8-12 DR 400 |
+| 2 صفحات محسّنة / Pages optimized | 2 / 6 / 20 | 3 / 9 / 30 | 5 / 15 / 50 |
+| 3 تسجيل في أدلة محلية / Local directory listings | 2 / 6 / 20 | 4 / 12 / 40 | 6 / 18 / 60 |
+| 4 عبارات يبحث بها عملاؤك / Phrases your customers search | none | 5 / 15 / 50 | 10 / 30 / 100 |
+| 5 أسئلة عملائك التي نتابعها في الذكاء الاصطناعي / Customer questions we track in AI answers | none | 3 / 9 / 30 | 6 / 18 / 60 |
+| 6 منافسون نراقبهم / Competitors we watch | none | none | 3 / 9 / 30 |
+| 7 صفحات جديدة نضيفها / New pages we add | none | none | 2 / 6 / 20 |
+| 8 التقارير / Reporting (same for all x) | تقرير شهري / Monthly reporting | تقرير كل أسبوعين / Bi-weekly reporting | تقارير مباشرة / Live reporting |
+
+Source of truth for the values: `SPEC` in `src/data.mjs`. **Small is selected by default.** Cards read low to high: left to right on `/en/`, right to left on `/`.
 
 **Hard rules on this section.**
 
@@ -1257,7 +1268,7 @@ page, the reader must never take the $500 for a monthly price or for the price o
 
 | Note | Arabic | English |
 |---|---|---|
-| 1 | ما تشمله كل باقة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة. | What each package covers is agreed with you on the call, against your industry and what the six months produced. |
+| 1 | ما تشمله كل باقة، من الروابط والصفحات والأدلة المحلية إلى التقارير، موضح حسب حجم شركتك في قسم الأسعار بالصفحة الرئيسية. | What each package includes, from links and pages to directories and reporting, is set out by company size in the pricing section of the home page. |
 | 2 | وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار. | If you choose to stop, you stop completely, with no fee and no notice. |
 
 The old version (three tiles, $500 / $1,000 / $1,500 per month, "tier 1 is the same $500 as the anchor") is

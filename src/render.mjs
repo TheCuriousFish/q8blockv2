@@ -540,7 +540,11 @@ export function pricing(t) {
   const sw = p.sizes.map((label, i) => `<input class="psw-in" type="radio" name="psize" id="psize-${PSIZE[i]}" value="${PSIZE[i]}"${i === 0 ? ' checked' : ''}><label class="psw-pill" for="psize-${PSIZE[i]}">${esc(label)}</label>`).join('');
   const cards = p.plans.map((plan, i) => {
     const amounts = plan.prices.map((v, k) => `<span class="pa pa-${PSIZE[k]}">${esc(v)}</span>`).join('');
-    const features = `<ul class="plan-features">${plan.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`;
+    /* All 8 rows on every card; all 3 sizes' values are in the markup and CSS shows the checked one.
+       A row the size does not include is an empty, greyed cell with no tick. */
+    const features = `<dl class="plan-spec">${p.rowLabels.map((label, r) => `<div class="ps-row"><dt>${esc(label)}</dt><dd>${plan.spec.map((sz, k) => sz[r] == null
+      ? `<span class="pv pv-${PSIZE[k]} pv-empty"><span class="vh">${esc(p.notIncluded)}</span></span>`
+      : `<span class="pv pv-${PSIZE[k]}">${esc(sz[r])}</span>`).join('')}</dd></div>`).join('')}</dl>`;
     return `<li class="plan${i === 1 ? ' plan-featured' : ''}">
       <p class="plan-tag"><span class="xtag" dir="ltr">${esc(plan.tag)}</span></p>
       <h3 class="plan-name">${esc(plan.name)}</h3>

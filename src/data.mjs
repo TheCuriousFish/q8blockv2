@@ -224,6 +224,31 @@ const PKG = {
 };
 // The bare numerals for the big price slots; the currency is in CUR.unit beside them.
 const pkgPrices = (key) => PKG[key].map(num);
+
+/* ── WHAT EACH CELL INCLUDES (Ahmad, confirmed 2026-10-08). Eight rows, per month, for each
+      package (x1 / x3 / x10) in each company size (Small / Medium / Big). A row the size does
+      not include is null: it is drawn greyed and empty, with no tick. Prices above are
+      unchanged. Reporting is the same for every x of one size. ── */
+const SPEC = {
+  // [links, DR], pages, directories, phrases, AI questions, competitors, new pages; one entry per x1/x3/x10
+  s: { links: [['1', 10], ['1-2', 30], ['2-3', 50]], pages: [2, 6, 20], dirs: [2, 6, 20], phrases: null, ai: null, comps: null, newp: null, rep: 'monthly' },
+  m: { links: [['2-3', 60], ['3-4', 100], ['4-6', 160]], pages: [3, 9, 30], dirs: [4, 12, 40], phrases: [5, 15, 50], ai: [3, 9, 30], comps: null, newp: null, rep: 'biweekly' },
+  l: { links: [['3-4', 120], ['5-7', 220], ['8-12', 400]], pages: [5, 15, 50], dirs: [6, 18, 60], phrases: [10, 30, 100], ai: [6, 18, 60], comps: [3, 9, 30], newp: [2, 6, 20], rep: 'live' },
+};
+const REP = {
+  ar: { monthly: 'تقرير شهري', biweekly: 'تقرير كل أسبوعين', live: 'تقارير مباشرة' },
+  en: { monthly: 'Monthly reporting', biweekly: 'Bi-weekly reporting', live: 'Live reporting' },
+};
+/* specFor('ar'|'en', x) -> [Small, Medium, Big], each an array of the 8 row values (string or null). */
+const specFor = (lang, x) => ['s', 'm', 'l'].map((sz) => {
+  const c = SPEC[sz];
+  const [n, dr] = c.links[x];
+  const links = lang === 'ar'
+    ? `${ltr(n)} ${n === '1' ? 'رابط' : 'روابط'} · ${ltr('DR ' + dr)}`
+    : `${ltr(n)} ${n === '1' ? 'link' : 'links'} · ${ltr('DR ' + dr)}`;
+  const v = (a) => (a ? String(a[x]) : null);
+  return [links, v(c.pages), v(c.dirs), v(c.phrases), v(c.ai), v(c.comps), v(c.newp), REP[lang][c.rep]];
+});
 // The offer anchor: the lowest of the nine. Computed so it can never drift.
 const FROM = Math.min(...Object.values(PKG).flat());
 const FROM_AR = money(FROM, 'ar');                // "997 ر.س"
@@ -497,13 +522,13 @@ export const COPY = {
       contract: [{ a: 'خصم ', pct: '10%', b: ' على عقد 6 أشهر' }, { a: 'خصم ', pct: '20%', b: ' على عقد 12 شهرًا' }],
       sizes: ['شركة صغيرة', 'شركة متوسطة', 'شركة كبيرة'],
       /* Low to high. This order never changes; direction handles the mirror. */
+      /* The eight rows every card shows (Ahmad 2026-10-08), per month. */
+      rowLabels: ['روابط من مواقع أخرى (العدد ومجموع قوة النطاق DR)', 'صفحات محسّنة', 'تسجيل في أدلة محلية', 'عبارات يبحث بها عملاؤك', 'أسئلة عملائك التي نتابعها في الذكاء الاصطناعي', 'منافسون نراقبهم', 'صفحات جديدة نضيفها', 'التقارير'],
+      notIncluded: 'غير مشمول',
       plans: [
-        { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain'),
-          features: ['تثبيت نتائجك والاتصالات الحالية', 'حماية موقعك من المنافسين', 'الحفاظ على قوة ظهورك'] },
-        { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand'),
-          features: ['استهداف كلمات وخدمات أكثر', 'تكثيف الشغل والجهد شهريًا', 'تحسين فرص طلبات الواتساب'] },
-        { tag: ltr('x10'), name: 'باقة السيطرة', prices: pkgPrices('dominate'),
-          features: ['أقصى جهد وطاقة تشغيلية', 'منافسة أقوى الشركات بالسوق', 'أولوية قصوى ودعم مباشر'] },
+        { tag: ltr('x1'), name: 'باقة الحفاظ', prices: pkgPrices('maintain'), spec: specFor('ar', 0) },
+        { tag: ltr('x3'), name: 'باقة التوسع', prices: pkgPrices('expand'), spec: specFor('ar', 1) },
+        { tag: ltr('x10'), name: 'باقة السيطرة', prices: pkgPrices('dominate'), spec: specFor('ar', 2) },
       ],
       tierUnit: CUR.unit.ar,
     },
@@ -784,7 +809,7 @@ export const COPY = {
       b5: { title: 'ماذا يحدث بعد ستة أشهر', intro: 'حين تنتهي الأشهر الستة لديك ثلاثة خيارات: تستمر على إحدى الباقات أدناه، ويتحدد سعرها بالباقة وبحجم شركتك. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف. القرار لك. الأسعار أدناه شهرية، ولا تبدأ إلا بعد انتهاء الأشهر الستة.',
         tierUnit: CUR.unit.ar,
         notes: [
-          'ما تشمله كل باقة يُتفق عليه معك في المكالمة، حسب قطاعك وحسب ما حققته الأشهر الستة.',
+          'ما تشمله كل باقة، من الروابط والصفحات والأدلة المحلية إلى التقارير، موضح حسب حجم شركتك في قسم الأسعار بالصفحة الرئيسية.',
           'وإن اخترت التوقف، فالتوقف نهائي، دون رسوم ودون إشعار.',
         ] },
 
@@ -795,7 +820,7 @@ export const COPY = {
           { q: 'هل هناك عقد أو التزام؟', a: 'لا. لا يوجد عقد ولا التزام ولا رسوم، وتستطيع التوقف في أي وقت، خلال الأشهر الستة أو بعدها.' },
           { q: 'هل يشترط وجود سجل تجاري؟', a: 'سجل تجاري أو وثيقة عمل حر. أي منهما يكفي. الشرط الوحيد أن يطابق العنوان المسجل في الوثيقة عنوان ملف نشاطك على جوجل.' },
           { q: 'لدي موقع قائم، هل أنا مؤهل؟', a: 'العرض مخصص لمن لا يملك موقعًا قائمًا. إن كان لديك موقع وتريد استبداله بالكامل، فهذا عمل نقوم به خارج هذا العرض، واتصل بنا لنراجعه معك.' },
-          { q: 'ماذا يحدث بعد ستة أشهر؟', a: 'القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله يُتفق عليه معك في المكالمة. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار.' },
+          { q: 'ماذا يحدث بعد ستة أشهر؟', a: 'القرار لك، ولديك ثلاثة خيارات. تستمر على باقة شهرية من ثلاث، الحفاظ أو التوسع أو السيطرة، ويتحدد سعرها بالباقة وبحجم شركتك، وما تشمله موضح حسب حجم شركتك في الصفحة الرئيسية. أو توقف عمل الظهور في البحث وتُبقي موقعك قائمًا مقابل رسوم شهرية بسيطة. أو تتوقف نهائيًا، دون رسوم ودون إشعار.' },
           { q: 'هل تديرون ملف نشاطي على جوجل خلال العرض؟', a: 'لا، لا في العرض ولا خارجه. نسلمك قائمة تعليمات واضحة ينفذها من يدير الملف عندك، ثم نتابع أثرها في نتائج البحث.' },
         ] },
 
@@ -976,13 +1001,12 @@ export const COPY = {
       sizesLabel: 'Your company size',
       contract: [{ a: '', pct: '10%', b: ' off 6 month contracts' }, { a: '', pct: '20%', b: ' off 12 month contracts' }],
       sizes: ['Small', 'Medium', 'Large'],
+      rowLabels: ['Links from other websites (links, total DR)', 'Pages optimized', 'Local directory listings', 'Phrases your customers search', 'Customer questions we track in AI answers', 'Competitors we watch', 'New pages we add', 'Reporting'],
+      notIncluded: 'Not included',
       plans: [
-        { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'),
-          features: ['Lock in your current results and calls', 'Protect your site from competitors', 'Keep your visibility strong'] },
-        { tag: 'x3', name: 'Expand', prices: pkgPrices('expand'),
-          features: ['Target more keywords and services', 'More work and effort every month', 'Better chances of WhatsApp requests'] },
-        { tag: 'x10', name: 'Dominate', prices: pkgPrices('dominate'),
-          features: ['Maximum effort and operating power', 'Compete with the strongest companies in the market', 'Top priority and direct support'] },
+        { tag: 'x1', name: 'Maintain', prices: pkgPrices('maintain'), spec: specFor('en', 0) },
+        { tag: 'x3', name: 'Expand', prices: pkgPrices('expand'), spec: specFor('en', 1) },
+        { tag: 'x10', name: 'Dominate', prices: pkgPrices('dominate'), spec: specFor('en', 2) },
       ],
       tierUnit: CUR.unit.en,
     },
@@ -1197,7 +1221,7 @@ export const COPY = {
       b5: { title: 'What happens after six months', intro: 'When the six months end you have three choices. Continue on one of the packages below, priced by the package and the size of your company. Stop the search work and keep your website live for a small monthly fee. Or stop. You decide. The prices below are monthly and only start once the six months are over.',
         tierUnit: CUR.unit.enLong,
         notes: [
-          'What each package covers is agreed with you on the call, against your industry and what the six months produced.',
+          'What each package includes, from links and pages to directories and reporting, is set out by company size in the pricing section of the home page.',
           'If you choose to stop, you stop completely, with no fee and no notice.',
         ] },
 
@@ -1208,7 +1232,7 @@ export const COPY = {
           { q: 'Is there a contract or a commitment?', a: 'No. There is no contract, no commitment and no fee, and you can stop at any time, during the six months or after them.' },
           { q: 'Do I need a commercial registration?', a: 'A commercial registration or a freelance certificate. Either one is enough. The only requirement is that the address on the certificate matches the address on your Google Business Profile.' },
           { q: 'I already have a website. Do I qualify?', a: 'The offer is for businesses with no existing website. If you have one and you want it replaced entirely, that is work we do outside this offer. Call us and we will look at it with you.' },
-          { q: 'What happens after six months?', a: 'You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what it covers agreed with you on the call. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice.' },
+          { q: 'What happens after six months?', a: 'You decide, and you have three choices. Continue on one of three monthly packages, Maintain, Expand or Dominate, priced by the package and the size of your company, with what each includes set out by company size on the home page. Stop the search work and keep your website live for a small monthly fee. Or stop completely, with no fee and no notice.' },
           { q: 'Do you manage my Google Business Profile during the offer?', a: 'No, neither during the offer nor outside it. We hand you a clear checklist for whoever manages the profile, then we track its effect in the search results.' },
         ] },
 
