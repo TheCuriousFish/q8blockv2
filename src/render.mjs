@@ -711,13 +711,13 @@ export function contactOffice(t) {
 }
 
 /* ── Terms T1–T7: seven plain blocks on hairlines, measure capped. ── */
-export function termsBody(t) {
-  const blocks = t.terms.blocks.map((b) => `<section class="term">
+export function termsBody(t, page = 'terms') {
+  const blocks = t[page].blocks.map((b) => `<section class="term">
       <h2 class="h3">${esc(b.title)}</h2>
       <p class="body">${esc(b.body)}</p>
       ${b.link ? `<p class="under-link"><a class="text-link" href="${b.link.href}">${esc(b.link.label)}<span class="chev" aria-hidden="true">&rsaquo;</span></a></p>` : ''}
     </section>`).join('');
-  return `<section id="terms" class="sec">
+  return `<section id="${page}" class="sec">
     <div class="wrap"><div class="terms-body">${blocks}</div></div>
   </section>`;
 }
