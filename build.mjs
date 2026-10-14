@@ -398,6 +398,14 @@ function contactPage(t) {
   return shell({ t, page: 'contact', self: t.paths.contact, meta: t.meta.contact, body, jsonLd: [orgLd(t)] });
 }
 
+function privacyPage(t) {
+  const body = [
+    pageHead(t, { h1: t.privacy.h1, lead: t.privacy.lead, note: t.privacy.updated }),
+    termsBody(t, 'privacy'),
+  ].join('\n');
+  return shell({ t, page: 'privacy', self: t.paths.privacy, meta: t.meta.privacy, body, jsonLd: [orgLd(t)] });
+}
+
 function termsPage(t) {
   const body = [
     pageHead(t, { h1: t.terms.h1, lead: t.terms.lead, note: t.terms.updated }),
@@ -423,7 +431,7 @@ function notFoundPage() {
   const links = [
     { label: t.nav[0].label, href: t.paths.home.path },   // الرئيسية
     { label: t.nav[2].label, href: t.paths.blog.path },    // المدونة
-    { label: t.nav[4].label, href: t.paths.contact.path }, // تواصل معنا
+    { label: t.nav[3].label, href: t.paths.contact.path }, // تواصل معنا
   ];
   const body = `<section id="notfound" class="sec page-head">
     <div class="wrap">
@@ -552,6 +560,8 @@ const PAGES = [
   { path: '/en/contact/', file: 'en/contact/index.html', build: () => contactPage(COPY.en), priority: '0.8' },
   { path: '/terms/', file: 'terms/index.html', build: () => termsPage(COPY.ar), priority: '0.4' },
   { path: '/en/terms/', file: 'en/terms/index.html', build: () => termsPage(COPY.en), priority: '0.4' },
+  { path: '/privacy/', file: 'privacy/index.html', build: () => privacyPage(COPY.ar), priority: '0.4' },
+  { path: '/en/privacy/', file: 'en/privacy/index.html', build: () => privacyPage(COPY.en), priority: '0.4' },
   // one page per post per language, from content/blog/, in POST_ORDER
   ...['ar', 'en'].flatMap((lang) => POSTS[lang].map((p, i) => ({
     path: p.path,
@@ -624,6 +634,8 @@ function llms() {
 - [Contact us, English](${NAP.origin}/en/contact/)
 - [Terms and conditions, Arabic](${NAP.origin}/terms/)
 - [Terms and conditions, English](${NAP.origin}/en/terms/)
+- [Privacy policy, Arabic](${NAP.origin}/privacy/)
+- [Privacy policy, English](${NAP.origin}/en/privacy/)
 - [Google Business Profile checklist, Arabic](${NAP.origin}/google-business-profile-checklist.html)
 - [Google Business Profile checklist, English](${NAP.origin}/en/google-business-profile-checklist.html)
 

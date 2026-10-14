@@ -4738,3 +4738,15 @@ accessibility 100, CLS 0.
 - Only structural change: the top services (8, totals 30/22/18/16/14/12/8/5 = 125) run in two columns of four.
 - Kept: page-language-pure strings, "Sample company" / "شركة نموذجية", sample caption, 125 = 80 + 45, `checkSample()`.
 - Band heights (#report, before = 7a4aa71, after): AR 1440 1410 -> 1383, AR 390 2326 -> 2229, EN 1440 1633 -> 1633, EN 390 2524 -> 2427.
+
+## 37. Privacy policy page and Terms and Services, 2026-10-14
+
+- New pages `/privacy/` and `/en/privacy/` on the terms template (`termsBody(t, 'privacy')`), in the sitemap, with
+  canonical, hreflang and Organization JSON-LD. Copy in `COPY.<lang>.privacy`. Only what the site does: no forms,
+  call and WhatsApp click records (page, type, position, device, referrer host, campaign ids; no name or number),
+  campaign ids kept 30 days in browser storage, Netlify hosting, Google Maps only on tap, self-hosted fonts.
+- `/terms/` and `/en/terms/` became a fuller Terms and Services (packages and prices, what a package includes,
+  payment and contract options 10% / 20%, what we need from you, no guarantee of results with 1 to 4 months from the FAQ,
+  third-party platforms, limits of responsibility, company details, link to privacy). Updated 14 October 2026.
+- Header and drawer nav: Terms left it (home, about, blog, contact only). Footer Company column: Terms and Services
+  and Privacy policy.
