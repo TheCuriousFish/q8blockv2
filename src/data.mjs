@@ -54,6 +54,12 @@ export const NAP = {
   // the English NAP from company.md and nothing else — no coordinates, no
   // place id, nothing invented. Google is not contacted until the reader taps.
   mapQuery: 'Nasser Falih Shnaz Al Subaie Building, Street 14, Block 004, Mangaf, Al Ahmadi Governorate, Kuwait',
+  // Organization JSON-LD only (on-page pass 2026-11-17), never printed on a page.
+  // sameAs: the Google Business Profile share link verified in CONFIG above; no
+  // social profile exists anywhere in this repo, so none is listed. areaServed:
+  // Kuwait, as company.md states it. Add a country only when it is stated here.
+  sameAs: ['https://share.google/JMWP620SaaXf2GqNL'],
+  areaServed: { ar: 'الكويت', en: 'Kuwait' },
 };
 
 /* ── Section 6 build data: the five real Google Search Console rows for
@@ -301,7 +307,7 @@ export const COPY = {
       },
       about: {
         title: 'نبني المواقع التي نتحمل مسؤوليتها | Q8 block',
-        description: 'نبني لشركات الخدمات المحلية موقعًا كاملًا، ولا نعمل إلا على المواقع التي نبنيها بأنفسنا، لأن الأساس التقني هو ما يحدد ظهور الموقع في بحث جوجل وفي إجابات الذكاء الاصطناعي.',
+        description: 'نبني لشركات الخدمات المحلية موقعًا كاملًا، ولا نعمل إلا على المواقع التي نبنيها بأنفسنا، لأن الأساس التقني يحدد ظهورها في جوجل والذكاء الاصطناعي.',
         ogAlt: 'Q8 block، بناء المواقع لشركات الخدمات المحلية',
       },
       contact: {
@@ -712,7 +718,8 @@ export const COPY = {
     /* ── Terms and conditions, /terms/. Only what is already true and already
           stated somewhere else on this site. ── */
     terms: {
-      h1: 'الشروط والأحكام',
+      /* The H1 differs from the title `الشروط والأحكام` (on-page pass 2026-11-17). */
+      h1: 'شروط العمل معنا',
       lead: 'هذه الصفحة مكتوبة لتُقرأ. تشرح ما نقدمه وما لا نقدمه، بنفس اللغة التي نتحدث بها معك في المكالمة. ولا تحتوي على بنود لم نقلها لك مباشرة.',
       updated: 'آخر تحديث: <span dir="ltr">14</span> أكتوبر <span dir="ltr">2026</span>',
       blocks: [
@@ -735,7 +742,8 @@ export const COPY = {
     },
 
     privacy: {
-      h1: 'سياسة الخصوصية',
+      /* Same wording as the terms page's privacy block (on-page pass 2026-11-17). */
+      h1: 'كيف نتعامل مع بياناتك',
       lead: 'نشرح هنا ما نجمعه من بيانات عند زيارتك هذا الموقع أو تواصلك معنا، ولماذا نجمعه. لا نذكر إلا ما يحدث فعلًا.',
       updated: 'آخر تحديث: <span dir="ltr">14</span> أكتوبر <span dir="ltr">2026</span>',
       blocks: [
@@ -773,12 +781,12 @@ export const COPY = {
     meta: {
       home: {
         title: 'We build your website and get you found | Q8 block',
-        description: 'We build local service businesses a full website with a dedicated page for every service and every area, then get it found in Google search and in AI answers.',
+        description: 'We build local service businesses a full website with a page for every service and every area, then get it found in Google search and in AI answers.',
         ogAlt: 'A website found in local search and in AI answers',
       },
       about: {
         title: 'We build the websites we take responsibility for | Q8 block',
-        description: 'We build local service businesses a full website, and we only work on the websites we build ourselves, because the technical foundation decides whether a site is found in Google search and in AI answers.',
+        description: 'We build local service businesses a full website and only work on sites we build ourselves: the foundation decides if a site is found in Google and AI.',
         ogAlt: 'Q8 block, building websites for local service businesses',
       },
       contact: {
@@ -793,7 +801,7 @@ export const COPY = {
       },
       terms: {
         title: 'Terms and Services | Q8 block',
-        description: 'Packages and prices, what the service includes, payment and the limits of our responsibility, in plain language, and what stays yours on your Google profile.',
+        description: 'Packages and prices, what the service includes, payment and the limits of our responsibility, and what stays yours on your Google profile.',
         ogAlt: 'The terms and services of Q8 block',
       },
       privacy: {
@@ -1090,7 +1098,7 @@ export const COPY = {
     },
 
     terms: {
-      h1: 'Terms and Services',
+      h1: 'The terms of working with us',
       lead: 'This page is written to be read. It says what we provide and what we do not, in the same language we use with you on the phone, and it contains nothing we have not already said to you directly.',
       updated: 'Last updated: 14 October 2026',
       blocks: [
@@ -1113,7 +1121,7 @@ export const COPY = {
     },
 
     privacy: {
-      h1: 'Privacy policy',
+      h1: 'How we handle your data',
       lead: 'This page explains what data we collect when you visit this website or contact us, and why. It says only what actually happens.',
       updated: 'Last updated: 14 October 2026',
       blocks: [

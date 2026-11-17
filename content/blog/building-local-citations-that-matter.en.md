@@ -1,5 +1,6 @@
 ---
 title: Building Local Citations That Matter
+h1: Local citations: which are worth your time, and which are noise
 description: A citation is your business name, address and phone written on someone else’s site. Which ones are worth having and which are noise.
 excerpt: A citation is your name, address and phone written somewhere that is not your site. Most of them are noise.
 category: SEO

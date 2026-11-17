@@ -809,7 +809,7 @@ export function postArticle(t, post, { prev, next }) {
       <nav class="crumbs" aria-label="${esc(t.blog.crumbLabel)}">
         <a href="${t.paths.home.path}">${esc(t.blog.home)}</a><span class="chev" aria-hidden="true">&rsaquo;</span><a href="${t.paths.blog.path}">${esc(t.blog.blog)}</a>
       </nav>
-      <h1 class="post-title">${esc(post.title)}</h1>
+      <h1 class="post-title">${esc(post.h1 || post.title)}</h1>
       ${cardMeta(t, post)}
       <img class="post-art" src="${post.art.src}" width="${post.art.w}" height="${post.art.h}" alt="" fetchpriority="high" decoding="async">
       <div class="prose">${post.html}</div>

@@ -1,5 +1,6 @@
 ---
 title: Measuring Local SEO Success
+h1: The numbers that show local SEO is working, and the ones that mean nothing
 description: Which numbers tell you the work is paying off, which ones look good and mean nothing, and the one number a service business should lead on.
 excerpt: Most reports lead on numbers that cannot be spent. Here is the short list actually worth watching.
 category: SEO
