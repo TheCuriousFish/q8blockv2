@@ -1,5 +1,6 @@
 ---
 title: Keyword Research for Local SEO
+h1: How to find the words your customers type before they call
 description: How to find the words your customers actually type before they call, using only what you already have, without paying for software.
 excerpt: The words your customers type are not the words you use for your trade. Here is how to find the real ones.
 category: SEO

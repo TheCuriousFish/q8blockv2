@@ -296,12 +296,16 @@ function orgLd(t) {
     name: 'Q8 block',
     alternateName: t.lang === 'ar' ? 'شركة كويت بلوك' : 'Kuwait Block',
     url: NAP.origin + '/',
+    // the About page's own lead, word for word: one wording per fact
+    description: t.about.lead,
     telephone: NAP.phoneDisplay,
     address: {
       '@type': 'PostalAddress',
       streetAddress: t.footer.address,
       addressCountry: 'KW',
     },
+    areaServed: { '@type': 'Country', name: NAP.areaServed[t.lang] },
+    sameAs: NAP.sameAs,
   };
 }
 function faqLd(items) {
@@ -337,7 +341,7 @@ function postLd(t, p) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: p.title,
+    headline: p.h1 || p.title,   // the headline the page prints
     description: p.description,
     url: NAP.origin + p.path,
     mainEntityOfPage: NAP.origin + p.path,
@@ -400,7 +404,8 @@ function contactPage(t) {
 
 function privacyPage(t) {
   const body = [
-    pageHead(t, { h1: t.privacy.h1, lead: t.privacy.lead, note: t.privacy.updated }),
+    // The page's name rides as the eyebrow; the H1 says it differently (on-page 2026-11-17).
+    pageHead(t, { eyebrow: t.meta.privacy.title.split(' | ')[0], h1: t.privacy.h1, lead: t.privacy.lead, note: t.privacy.updated }),
     termsBody(t, 'privacy'),
   ].join('\n');
   return shell({ t, page: 'privacy', self: t.paths.privacy, meta: t.meta.privacy, body, jsonLd: [orgLd(t)] });
@@ -408,7 +413,7 @@ function privacyPage(t) {
 
 function termsPage(t) {
   const body = [
-    pageHead(t, { h1: t.terms.h1, lead: t.terms.lead, note: t.terms.updated }),
+    pageHead(t, { eyebrow: t.meta.terms.title.split(' | ')[0], h1: t.terms.h1, lead: t.terms.lead, note: t.terms.updated }),
     termsBody(t),
   ].join('\n');
   return shell({ t, page: 'terms', self: t.paths.terms, meta: t.meta.terms, body, jsonLd: [orgLd(t)] });
@@ -524,7 +529,9 @@ function postPage(t, posts, i) {
     // the post's own illustration is a real image of this page, so it is the
     // one og:image on the site; no other page has a picture to point at.
     meta: {
-      title: `${post.title} | Q8 block`, description: post.description,
+      // `seoTitle` (optional frontmatter) shortens the <title> where `title` is
+      // too long for it; `title` stays the card and breadcrumb name.
+      title: `${post.seoTitle || post.title} | Q8 block`, description: post.description,
       ogAlt: post.title, ogImage: post.art.src,
     },
     body, jsonLd: [postLd(t, post), crumbLd(t, post)],
@@ -615,12 +622,38 @@ Sitemap: ${NAP.origin}/sitemap.xml
 `;
 }
 
+/* llms.txt: facts only, each in the wording the site already prints (terms,
+   FAQ, about, company.md). Revised in the on-page pass of 2026-11-17: location,
+   registered name, how the service works, packages, and no em dashes. */
 function llms() {
+  const en = COPY.en;
   return `# Q8 block
 
-> Q8 block builds local service businesses a full website with a dedicated page for every
-> service and every area, then works on it being found in Google search and in the answers
-> AI assistants give.
+> Q8 block (registered name Kuwait Block, in Arabic شركة كويت بلوك) is a local SEO agency
+> based in Mangaf, Al Ahmadi Governorate, Kuwait. It builds local service businesses a full
+> website with a dedicated page for every service and every area, then works on it being
+> found in Google search and in the answers AI assistants give.
+
+The site is Arabic first at ${NAP.origin}/ with the English mirror at ${NAP.origin}/en/.
+
+## How the service works
+
+- We only work on websites we build ourselves. We do not work on an existing site somebody
+  else built; replacing it with a site we build from scratch is part of our normal work.
+- Hosting, the domain, security and the technical updates are part of what we run for the client.
+- We do not manage the client's Google Business Profile and do not ask for access to it. We hand
+  over a clear checklist for whoever manages the profile, then track its effect in search results.
+- Results usually start to show within 1 to 4 months, depending on the sector and the competition.
+  We do not guarantee a specific ranking or a specific number of calls or customers.
+- Three packages: ${en.pricing.plans.map((p) => `${p.name} (${p.tag})`).join(', ')}, each priced by company
+  size (small, medium or large). Prices are monthly, in Saudi riyals, and are shown in the pricing
+  section of the homepage. 10% off 6 month contracts and 20% off 12 month contracts.
+
+## What is included on every project
+
+${en.about.deliver.items.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+
+Details: [Home, English](${NAP.origin}/en/) and [About us, English](${NAP.origin}/en/about/).
 
 ## Pages
 
@@ -641,34 +674,26 @@ function llms() {
 
 ## Articles
 
-Six articles, each published in Arabic at /blog/<slug>/ and in English at
-/en/blog/<slug>/. All were published on 2026-09-24, written by Ahmad Owaihan
-(${COPY.en.blog.by.replace('By ', '')}, https://ahmadowaihan.com/).
+${POSTS.en.length} articles, each published in Arabic at /blog/<slug>/ and in English at
+/en/blog/<slug>/, written by ${POSTS.en[0].author} (${POSTS.en[0].authorUrl}).
 
-${POSTS.en.map((p, i) => `- [${p.title}](${NAP.origin}${p.path}) — ${p.description}
-  Arabic: [${POSTS.ar[i].title}](${NAP.origin}${POSTS.ar[i].path})`).join('\n')}
-
-## What is included on every project
-
-1. Custom website design and development
-2. A dedicated page for every service and area
-3. Google Search visibility
-4. AI platform visibility
-5. Backlinks and authority building
-6. Hosting, domain and security
+${POSTS.en.map((p, i) => `- [${p.title}](${NAP.origin}${p.path}): ${p.description}
+  Published ${p.date}. Arabic: [${POSTS.ar[i].title}](${NAP.origin}${POSTS.ar[i].path})`).join('\n')}
 
 ## Contact
 
 - Phone: ${NAP.phoneDisplay}
-- Address: ${COPY.en.footer.address}
+- WhatsApp: ${NAP.whatsapp}
+- Address: ${en.footer.address}, Kuwait
 - Website: ${NAP.origin}
 
 ## Notes for AI
 
-Every performance figure on this site comes from Google Search Console exports for the named
-client and named complete months. Section 7's figure is the total number of times that client's
-site appeared in Google search results, added up across every complete month Google has recorded
-for it. Nothing is averaged across clients and no partial month is used.
+The figure on each card in the homepage's "Our clients" section is the total number of times
+that client's site appeared in Google search results, added up from Google Search Console across
+every complete month Google has recorded for it. Nothing is averaged across clients and no partial
+month is used. The monthly report shown on the homepage is a sample with illustrative figures,
+not a real client's numbers and not a promised result.
 `;
 }
 

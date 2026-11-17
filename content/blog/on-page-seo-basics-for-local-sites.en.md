@@ -1,5 +1,6 @@
 ---
 title: On-Page SEO Basics for Local Sites
+h1: What belongs on a service page of a local website
 description: What belongs on a service page so Google and an AI assistant can both tell what it is, who it is for and where you work.
 excerpt: On-page SEO is making one page answer one question clearly. These are the parts that decide whether it does.
 category: SEO

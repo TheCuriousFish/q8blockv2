@@ -1,5 +1,6 @@
 ---
 title: Google Business Profile Optimization
+h1: The Google Business Profile fields that change how often you appear
 description: The fields inside your Google Business Profile that change how often you appear, and the ones that only change how you look.
 excerpt: Most of a Google Business Profile is decoration. A small part of it decides how often you appear at all.
 category: SEO

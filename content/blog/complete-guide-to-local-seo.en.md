@@ -1,5 +1,7 @@
 ---
 title: The Complete Guide to Local SEO for Small Businesses
+h1: Local SEO for a small business: what it is, what it rests on, and where to start
+seoTitle: Complete Guide to Local SEO for Small Businesses
 description: Local SEO explained for a small service business: what it actually is, the three things it depends on, and the order to do them in.
 excerpt: Local SEO without the jargon: what it actually is, the three things it depends on, and the order to do them in so each one makes the next one work.
 category: SEO
