@@ -39,8 +39,8 @@ export const CONFIG = {
    and locked here so a rebuild can never issue a second, different key — IndexNow
    keys must stay stable at the same filename for as long as the site pings that
    endpoint. build.mjs writes it to site/<key>.txt verbatim. Recorded in
-   design/build-spec.md §17. The site is not deployed and IndexNow is never pinged
-   by this build; the key file is only prepared for when Ahmad decides to go live. */
+   design/build-spec.md §17. The build itself never pings; after each production
+   deploy is ready, run `node scripts/indexnow.mjs` (all sitemap URLs) from this machine. */
 export const INDEXNOW_KEY = '57376d59e41f6fbe081224d68d86aa8e';
 
 /* ── NAP, from company.md. Fills slots only; never a source of copy. ── */
