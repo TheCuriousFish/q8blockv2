@@ -306,6 +306,13 @@ function orgLd(t) {
     },
     areaServed: { '@type': 'Country', name: NAP.areaServed[t.lang] },
     sameAs: NAP.sameAs,
+    logo: NAP.origin + '/assets/img/favicon.svg',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: NAP.phoneDisplay,
+      availableLanguage: ['Arabic', 'English'],
+    },
   };
 }
 function faqLd(items) {
@@ -556,19 +563,22 @@ function copy(from, rel) {
 /* ── the page set, in one place, so the sitemap cannot drift from it ────── */
 const POSTS = { ar: loadPosts(COPY.ar), en: loadPosts(COPY.en) };
 
+// Real dates, not the build date: the day each page's copy last changed. Bump a page's date when its content changes.
+const PAGE_LASTMOD = '2026-11-17';
+const EXTRA_LASTMOD = '2026-11-17';
 const PAGES = [
-  { path: '/', file: 'index.html', build: () => homePage(COPY.ar), priority: '1.0' },
-  { path: '/en/', file: 'en/index.html', build: () => homePage(COPY.en), priority: '1.0' },
-  { path: '/about/', file: 'about/index.html', build: () => aboutPage(COPY.ar), priority: '0.8' },
-  { path: '/en/about/', file: 'en/about/index.html', build: () => aboutPage(COPY.en), priority: '0.8' },
-  { path: '/blog/', file: 'blog/index.html', build: () => blogPage(COPY.ar, POSTS.ar), priority: '0.8' },
-  { path: '/en/blog/', file: 'en/blog/index.html', build: () => blogPage(COPY.en, POSTS.en), priority: '0.8' },
-  { path: '/contact/', file: 'contact/index.html', build: () => contactPage(COPY.ar), priority: '0.8' },
-  { path: '/en/contact/', file: 'en/contact/index.html', build: () => contactPage(COPY.en), priority: '0.8' },
-  { path: '/terms/', file: 'terms/index.html', build: () => termsPage(COPY.ar), priority: '0.4' },
-  { path: '/en/terms/', file: 'en/terms/index.html', build: () => termsPage(COPY.en), priority: '0.4' },
-  { path: '/privacy/', file: 'privacy/index.html', build: () => privacyPage(COPY.ar), priority: '0.4' },
-  { path: '/en/privacy/', file: 'en/privacy/index.html', build: () => privacyPage(COPY.en), priority: '0.4' },
+  { path: '/', file: 'index.html', build: () => homePage(COPY.ar), priority: '1.0', lastmod: PAGE_LASTMOD },
+  { path: '/en/', file: 'en/index.html', build: () => homePage(COPY.en), priority: '1.0', lastmod: PAGE_LASTMOD },
+  { path: '/about/', file: 'about/index.html', build: () => aboutPage(COPY.ar), priority: '0.8', lastmod: PAGE_LASTMOD },
+  { path: '/en/about/', file: 'en/about/index.html', build: () => aboutPage(COPY.en), priority: '0.8', lastmod: PAGE_LASTMOD },
+  { path: '/blog/', file: 'blog/index.html', build: () => blogPage(COPY.ar, POSTS.ar), priority: '0.8', lastmod: PAGE_LASTMOD },
+  { path: '/en/blog/', file: 'en/blog/index.html', build: () => blogPage(COPY.en, POSTS.en), priority: '0.8', lastmod: PAGE_LASTMOD },
+  { path: '/contact/', file: 'contact/index.html', build: () => contactPage(COPY.ar), priority: '0.8', lastmod: PAGE_LASTMOD },
+  { path: '/en/contact/', file: 'en/contact/index.html', build: () => contactPage(COPY.en), priority: '0.8', lastmod: PAGE_LASTMOD },
+  { path: '/terms/', file: 'terms/index.html', build: () => termsPage(COPY.ar), priority: '0.4', lastmod: PAGE_LASTMOD },
+  { path: '/en/terms/', file: 'en/terms/index.html', build: () => termsPage(COPY.en), priority: '0.4', lastmod: PAGE_LASTMOD },
+  { path: '/privacy/', file: 'privacy/index.html', build: () => privacyPage(COPY.ar), priority: '0.4', lastmod: PAGE_LASTMOD },
+  { path: '/en/privacy/', file: 'en/privacy/index.html', build: () => privacyPage(COPY.en), priority: '0.4', lastmod: PAGE_LASTMOD },
   // one page per post per language, from content/blog/, in POST_ORDER
   ...['ar', 'en'].flatMap((lang) => POSTS[lang].map((p, i) => ({
     path: p.path,
@@ -581,7 +591,6 @@ const PAGES = [
 const EXTRA_URLS = ['/google-business-profile-checklist.html', '/en/google-business-profile-checklist.html'];
 
 function sitemap() {
-  const today = new Date().toISOString().slice(0, 10);
   const alt = (p) => {
     const ar = p.startsWith('/en/') ? p.replace('/en/', '/') : p;
     const en = p.startsWith('/en/') ? p : '/en' + p;
@@ -594,14 +603,14 @@ function sitemap() {
   const urls = PAGES.map((p) => `  <url>
     <loc>${NAP.origin}${p.path}</loc>
 ${alt(p.path)}
-    <lastmod>${p.lastmod || today}</lastmod>
+    <lastmod>${p.lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${p.priority}</priority>
   </url>`).join('\n');
   const extra = EXTRA_URLS.map((u) => `  <url>
     <loc>${NAP.origin}${u}</loc>
 ${alt(u)}
-    <lastmod>${today}</lastmod>
+    <lastmod>${EXTRA_LASTMOD}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>`).join('\n');
@@ -755,7 +764,9 @@ write('sitemap.xml', sitemap());
 write('llms.txt', llms());
 write('404.html', notFoundPage());
 write(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
-write('_headers', '/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n');
+// Fonts and images keep their file names when their content changes, so they are NOT immutable: 7 days.
+// app.js and the CSS are not content-hashed either and stay on the default revalidate rule.
+write('_headers', '/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n\n/assets/fonts/*\n  Cache-Control: public, max-age=604800\n\n/assets/img/*\n  Cache-Control: public, max-age=604800\n');
 
 console.log(`built ${written.length} files into ${OUT}`);
 for (const p of PAGES) console.log(`  ${p.path.padEnd(12)} -> ${p.file}`);

@@ -2,3 +2,9 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
+
+/assets/fonts/*
+  Cache-Control: public, max-age=604800
+
+/assets/img/*
+  Cache-Control: public, max-age=604800
