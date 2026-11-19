@@ -350,11 +350,13 @@ export const COPY = {
 
     /* ── 1. Hero ── */
     hero: {
-      /* Ahmad's hook line (2026-09-24, option 9 on 2026-10-08) was Gulf colloquial,
-         `تبي عميلك يلقاك`. 2026-11-19 on-page leftovers: converted to formal Arabic
-         (hub rule: content Arabic is formal, never dialect). Same shape and length,
-         still a question, highlight still on the finding word. */
-      h1: 'أتريد أن <span class="hl">يجدك</span> عميلك<br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
+      /* Ahmad's own hook line, 2026-09-24. Deliberately Gulf colloquial —
+         `تبي` not `هل تريد` — and it ends on a question mark. It is the ONLY
+         colloquial line on the site; every other Arabic string stays MSA.
+         Do not "correct" this to MSA. 2026-10-08 (build-spec §32): Ahmad picked
+         option 9, `تبي عميلك يلقاك`, the whole opening now Gulf (`تبي`, `يلقاك`).
+         The highlight moved to the finding word, `يلقاك`. */
+      h1: 'تبي عميلك <span class="hl">يلقاك</span><br class="brk"> في جوجل وفي الذكاء الاصطناعي؟',
       /* Ahmad's own line, 2026-09-25, verbatim. It replaces the three-clause
          paragraph that stood here: NP Digital's hero runs ONE line and this one
          was a paragraph. Do not lengthen it back. */
@@ -379,7 +381,7 @@ export const COPY = {
     /* ── 3. The problem ── */
     problem: {
       eyebrow: 'المشكلة',
-      h2: 'ملفك على جوجل يعمل<br class="brk"> <span class="hl">وليس لديك موقع إلكتروني؟</span>',
+      h2: 'ملفك على جوجل يعمل<br class="brk"> <span class="hl">وما عندك موقع إلكتروني؟</span>',
       lead: 'ملفك على جوجل يضعك على الخريطة داخل نطاق ضيق حول عنوانك، وهذا كل ما يستطيعه. الموقع يأخذ الطلب نفسه ويوسعه: كل منطقة تخدمها، وكل سؤال يكتبه العميل قبل أن يتصل، وكل إجابة تقدمها مساعدات الذكاء الاصطناعي. الفارق بين الاثنين هو عمل قائم لا يصلك اليوم.',
       cards: [
         { title: 'الخريطة تتوقف عند حدود حيّك', body: 'ملف النشاط التجاري يظهر في نطاق ضيق حول عنوانك المسجل. الموقع الإلكتروني يظهر في كل مدينة وكل حي تستهدفه بصفحة مخصصة.' },
