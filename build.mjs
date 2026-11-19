@@ -752,7 +752,7 @@ else console.warn('!! google-business-profile-checklist.en.html not found in src
 // never copied into site/ at all, so every img 404'd. Vendored once here from
 // _old/img/blog/, at the absolute path both HTML files now point at.
 const CHECKLIST_IMG_SRC = path.join(ROOT, '_old', 'img', 'blog');
-const CHECKLIST_IMGS = ['gbp-setup.webp', 'gbp-reviews.png', 'gbp-engagement.webp', 'gbp-website.webp', 'gbp-citations.webp', 'gbp-blueprint.webp'];
+const CHECKLIST_IMGS = ['gbp-setup.webp', 'gbp-reviews.webp', 'gbp-engagement.webp', 'gbp-website.webp', 'gbp-citations.webp', 'gbp-blueprint.webp'];
 for (const f of CHECKLIST_IMGS) {
   const from = path.join(CHECKLIST_IMG_SRC, f);
   if (fs.existsSync(from)) copy(from, `assets/img/checklist/${f}`);
